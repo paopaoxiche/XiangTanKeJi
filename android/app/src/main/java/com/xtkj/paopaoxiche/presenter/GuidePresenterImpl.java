@@ -29,6 +29,6 @@ public class GuidePresenterImpl implements IGuideContract.IGuidePresenter {
     public void autoLogin() {
         // TODO 这里需要http去判断TOKEN是否生效
         Intent intent = new Intent();
-        new Handler().postDelayed(() -> guideView.startActivityForIntent(intent, LoginActivity.class), 3000);
+        new Handler().postDelayed(() -> guideView.startActivityForIntent(intent, LoginActivity.class), 2000);
     }
 }

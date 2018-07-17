@@ -26,7 +26,7 @@ public class GuideActivity extends BaseActivity implements IGuideContract.IGuide
     }
 
     @Override
-    protected void initViews(View view) {
+    protected void initViews() {
 
     }
 

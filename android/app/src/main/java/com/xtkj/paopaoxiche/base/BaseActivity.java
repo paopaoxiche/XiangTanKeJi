@@ -8,7 +8,7 @@ import android.view.View;
  */
 public abstract class BaseActivity extends AppCompatActivity {
 
-    protected abstract void initViews(View view);
+    protected abstract void initViews();
 
     protected abstract void initValues();
 
