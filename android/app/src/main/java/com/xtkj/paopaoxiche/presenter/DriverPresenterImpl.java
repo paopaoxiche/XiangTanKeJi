@@ -8,6 +8,8 @@ import com.xtkj.paopaoxiche.http.ApiField;
 import com.xtkj.paopaoxiche.http.RetrofitClient;
 import com.xtkj.paopaoxiche.service.WeatherService;
 
+import java.util.Observable;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -23,7 +25,7 @@ public class DriverPresenterImpl implements IDriverContract.IDriverPresenter {
 
     @Override
     public void onCreate() {
-        RetrofitClient.newInstence(ApiField.BASEURL)
+        RetrofitClient.newInstance(ApiField.BASEURL)
                 .create(WeatherService.class)
                 .getWeatherLive("101280601")
                 .enqueue(new Callback<WeatherLiveBean>() {
