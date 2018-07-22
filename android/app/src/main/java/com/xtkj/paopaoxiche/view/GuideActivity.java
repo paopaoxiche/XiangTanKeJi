@@ -1,9 +1,7 @@
-package com.xtkj.paopaoxiche.activity;
+package com.xtkj.paopaoxiche.view;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 
 import com.xtkj.paopaoxiche.R;
 import com.xtkj.paopaoxiche.base.BaseActivity;

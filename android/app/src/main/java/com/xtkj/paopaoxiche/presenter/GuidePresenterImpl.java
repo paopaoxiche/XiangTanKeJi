@@ -3,7 +3,7 @@ package com.xtkj.paopaoxiche.presenter;
 import android.content.Intent;
 import android.os.Handler;
 
-import com.xtkj.paopaoxiche.activity.LoginActivity;
+import com.xtkj.paopaoxiche.view.LoginActivity;
 import com.xtkj.paopaoxiche.contract.IGuideContract;
 
 public class GuidePresenterImpl implements IGuideContract.IGuidePresenter {
