@@ -1,7 +1,5 @@
 package com.xtkj.paopaoxiche.contract;
 
-import android.content.Intent;
-
 import com.xtkj.paopaoxiche.base.IBasePresenter;
 import com.xtkj.paopaoxiche.base.IBaseView;
 

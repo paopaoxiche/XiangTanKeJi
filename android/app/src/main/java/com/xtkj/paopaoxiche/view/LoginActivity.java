@@ -13,6 +13,7 @@ import com.xtkj.paopaoxiche.R;
 import com.xtkj.paopaoxiche.base.BaseActivity;
 import com.xtkj.paopaoxiche.contract.ILoginContract;
 import com.xtkj.paopaoxiche.presenter.LoginPresenterImpl;
+import com.xtkj.paopaoxiche.view.CarWashMain.CarWashMainActivity;
 import com.xtkj.paopaoxiche.view.DriverMain.DriverMainActivity;
 
 /**
@@ -65,7 +66,8 @@ public class LoginActivity extends BaseActivity implements OnClickListener, Radi
                     Intent intent = new Intent(this, DriverMainActivity.class);
                     startActivity(intent);
                 } else {
-
+                    Intent intent = new Intent(this, CarWashMainActivity.class);
+                    startActivity(intent);
                 }
                 break;
 
