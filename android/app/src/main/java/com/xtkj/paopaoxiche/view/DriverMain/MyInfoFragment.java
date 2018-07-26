@@ -7,8 +7,11 @@ import android.view.ViewGroup;
 
 import com.xtkj.paopaoxiche.R;
 import com.xtkj.paopaoxiche.base.BaseFragmemt;
+import com.xtkj.paopaoxiche.contract.IDriverContract;
 
-public class MyInfoFragment extends BaseFragmemt{
+public class MyInfoFragment extends BaseFragmemt implements IDriverContract.IMyInfoView{
+
+    private IDriverContract.IMyInfoPresenter myInfoPresenter;
 
     public MyInfoFragment() {
         // Required empty public constructor
@@ -33,4 +36,8 @@ public class MyInfoFragment extends BaseFragmemt{
     }
 
 
+    @Override
+    public void setPresenter(IDriverContract.IMyInfoPresenter iMyInfoPresenter) {
+        myInfoPresenter = iMyInfoPresenter;
+    }
 }

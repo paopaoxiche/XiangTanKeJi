@@ -7,7 +7,7 @@ import android.content.DialogInterface;
 
 import com.xtkj.paopaoxiche.R;
 
-public class LoadingUtil {
+public class DialogUtil {
     private static Dialog dialog;
 
     public static void showDialogForLoading(final Context context, String tipContext){

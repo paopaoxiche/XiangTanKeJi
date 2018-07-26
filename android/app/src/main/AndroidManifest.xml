@@ -35,7 +35,7 @@
             android:name=".view.LoginActivity"
             android:label="@string/title_activity_login" />
         <activity android:name=".view.DriverMain.DriverMainActivity" />
-        <activity android:name=".view.WashCarMap.WashCarMapActivity" />
+        <activity android:name=".view.DriverMap.DriverMapActivity" />
         <activity android:name=".view.CarWashMain.CarWashMainActivity"></activity>
     </application>
 

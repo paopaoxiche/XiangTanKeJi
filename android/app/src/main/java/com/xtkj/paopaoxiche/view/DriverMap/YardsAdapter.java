@@ -1,4 +1,4 @@
-package com.xtkj.paopaoxiche.view.WashCarMap;
+package com.xtkj.paopaoxiche.view.DriverMap;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;

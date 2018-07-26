@@ -25,11 +25,12 @@ public class SimpleFragmentPagerAdapter extends FragmentPagerAdapter {
     private ArrayList<Fragment> fragments = new ArrayList<>();
     private Context context;
 
-    public SimpleFragmentPagerAdapter(FragmentManager fm, Context context) {
+    public SimpleFragmentPagerAdapter(FragmentManager fm, Context context,ArrayList<Fragment> fragmentArrayList) {
         super(fm);
         this.context = context;
-        fragments.add(HomeFragment.newInstance());
-        fragments.add(MyInfoFragment.newInstance());
+        for(int i  = 0 ; i < fragmentArrayList.size();i ++ ){
+            fragments.add(fragmentArrayList.get(i));
+        }
     }
 
     @Override
