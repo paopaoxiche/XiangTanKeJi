@@ -1,45 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.CarWashMain.CarWashMainActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".view.DriverMain.DriverMainActivity">
 
-    <RadioGroup
-        android:id="@+id/check_radio_group"
+
+
+    <com.xtkj.paopaoxiche.widget.NoScrollViewPager
+        android:id="@+id/driver_viewpager"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_alignParentBottom="true"
-        android:orientation="horizontal">
+        app:elevation="0dp"
+        android:layout_height="match_parent"/>
 
-        <RadioButton
-            android:id="@+id/main_radio_button"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:button="@null"
-            android:checked="true"
-            android:textColor="@android:color/black"
-            android:text="首页"
-            android:textSize="16sp"
-            android:gravity="center" />
-
-        <RadioButton
-            android:id="@+id/mine_radio_button"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:button="@null"
-            android:text="我的"
-            android:textSize="16sp"
-            android:textColor="@android:color/darker_gray"
-            android:gravity="center" />
-    </RadioGroup>
-
-    <FrameLayout
-        android:id="@+id/fragment_frame_layout"
+    <android.support.design.widget.TabLayout
+        android:id="@+id/driver_tab"
+        android:layout_gravity="bottom"
+        android:background="@drawable/background_top_shadow_border"
+        app:tabIndicatorHeight="0dp"
+        app:elevation="10dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/check_radio_button"/>
+        android:layout_height="48dp"/>
 
-</RelativeLayout>
+
+</android.support.design.widget.CoordinatorLayout>

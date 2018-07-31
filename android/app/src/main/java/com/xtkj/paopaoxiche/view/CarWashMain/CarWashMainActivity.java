@@ -1,13 +1,10 @@
 package com.xtkj.paopaoxiche.view.CarWashMain;
 
-import android.graphics.Color;
 import android.net.Uri;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 
 import com.xtkj.paopaoxiche.R;
 import com.xtkj.paopaoxiche.base.BaseActivity;
@@ -17,17 +14,19 @@ import com.xtkj.paopaoxiche.presenter.CarWashInfoPresenterImpl;
 import com.xtkj.paopaoxiche.presenter.CarWashMainPresenterImpl;
 import com.xtkj.paopaoxiche.presenter.CarWashMinePresenterImpl;
 
+import java.util.ArrayList;
+
 public class CarWashMainActivity extends BaseActivity implements BaseFragmemt.OnFragmentInteractionListener,
-        ICarWashContract.IMainView, RadioGroup.OnCheckedChangeListener{
+        ICarWashContract.IMainView{
 
     ICarWashContract.IMainPresenter mainPresenter;
 
-    CarWashInfoFragment infoFragment;
+    CarWashHomeFragment homeFragment;
     CarWashMineFragment mineFragment;
 
-    RadioGroup changeFragmentRadioGroup;
-    RadioButton mainRadioButton;
-    RadioButton mineRadioButton;
+    private SimpleFragmentPagerAdapter pagerAdapter;
+    private ViewPager viewPager;
+    private TabLayout tabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,62 +43,56 @@ public class CarWashMainActivity extends BaseActivity implements BaseFragmemt.On
 
     @Override
     protected void initViews() {
-        changeFragmentRadioGroup = findViewById(R.id.check_radio_group);
-        mainRadioButton = findViewById(R.id.main_radio_button);
-        mineRadioButton = findViewById(R.id.mine_radio_button);
+        pagerAdapter = new SimpleFragmentPagerAdapter(getSupportFragmentManager(), this, initFragment());
+        viewPager = (ViewPager) findViewById(R.id.driver_viewpager);
+        viewPager.setAdapter(pagerAdapter);
+        tabLayout =  findViewById(R.id.driver_tab);
+        tabLayout.setupWithViewPager(viewPager);
+        tabLayout.setTabMode(TabLayout.MODE_FIXED);
+        tabLayout.getTabAt(0).setCustomView(pagerAdapter.getTabView(0,true,null));
+        tabLayout.getTabAt(1).setCustomView(pagerAdapter.getTabView(1,false,null));
+        viewPager.setCurrentItem(0);
     }
 
     @Override
     protected void initValues() {
-        initFragment();
+
     }
 
     @Override
     protected void initListeners() {
-        changeFragmentRadioGroup.setOnCheckedChangeListener(this);
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                int position = tab.getPosition();
+                tab.setCustomView(pagerAdapter.getTabView(position,true,tab.getCustomView()));
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+                int position = tab.getPosition();
+                tab.setCustomView(pagerAdapter.getTabView(position,false,tab.getCustomView()));
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
     }
 
-    private void initFragment() {
-        infoFragment = new CarWashInfoFragment();
+    private ArrayList<Fragment> initFragment() {
+        homeFragment = new CarWashHomeFragment();
         mineFragment = new CarWashMineFragment();
 
-        new CarWashInfoPresenterImpl(infoFragment);
+        new CarWashInfoPresenterImpl(homeFragment);
         new CarWashMinePresenterImpl(mineFragment);
 
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.add(R.id.fragment_frame_layout, mineFragment).hide(mineFragment);
-        transaction.add(R.id.fragment_frame_layout, infoFragment);
-        transaction.commit();
-    }
+        ArrayList<Fragment> fragments = new ArrayList<>();
+        fragments.add(homeFragment);
+        fragments.add(mineFragment);
 
-    @Override
-    public void onCheckedChanged(RadioGroup group, int checkedId) {
-        switch (checkedId) {
-            case R.id.main_radio_button:
-                changeFragment(mineFragment, infoFragment);
-                mainRadioButton.setTextColor(Color.BLACK);
-                mineRadioButton.setTextColor(Color.DKGRAY);
-                break;
-
-            case R.id.mine_radio_button:
-                changeFragment(infoFragment, mineFragment);
-                mainRadioButton.setTextColor(Color.DKGRAY);
-                mineRadioButton.setTextColor(Color.BLACK);
-                break;
-
-            default:
-                break;
-        }
-    }
-
-    private void changeFragment(Fragment hideFragment, Fragment showFragment) {
-        if (!showFragment.isHidden() && hideFragment.isHidden()) {
-            return;
-        }
-
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.hide(hideFragment);
-        transaction.show(showFragment).commitAllowingStateLoss(); // 显示新的Fragment
+        return fragments;
     }
 
     @Override
