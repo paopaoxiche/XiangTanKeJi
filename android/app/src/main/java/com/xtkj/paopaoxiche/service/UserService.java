@@ -1,6 +1,8 @@
 package com.xtkj.paopaoxiche.service;
 
 import com.xtkj.paopaoxiche.bean.DemoBean;
+import com.xtkj.paopaoxiche.bean.LoginBean;
+import com.xtkj.paopaoxiche.bean.NoDataBean;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -10,13 +12,21 @@ import retrofit2.http.Query;
 
 public interface UserService {
 
-    /**
+       /**
      * @param phone
      * @param code
      * @param type
      * */
     @GET("user/login")
-    Call<DemoBean> Login(@Query("phone") String phone,@Query("code") String code,@Query("type") String type ) ;
+    Call<LoginBean> Login(@Query("phone") String phone, @Query("code") long code, @Query("type") int type ) ;
+
+
+    /**
+     * @param phone
+     * */
+    @GET("user/getMessageCode")
+    Call<NoDataBean> getMessageCode(@Query("phone") String phone) ;
+
 
 
     /**

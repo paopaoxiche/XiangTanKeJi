@@ -51,7 +51,7 @@ public class SimpleFragmentPagerAdapter extends FragmentPagerAdapter {
 
     public View getTabView(int position,Boolean isActive,View view){
         if(null==view)
-            view = LayoutInflater.from(context).inflate(R.layout.fragment_driver_tab_item, null);
+            view = LayoutInflater.from(context).inflate(R.layout.item_driver_tab, null);
         TextView tv=  view.findViewById(R.id.driver_tab_text);
         tv.setText(tabTitles[position]);
         ImageView img =  view.findViewById(R.id.driver_tab_image);

@@ -32,7 +32,7 @@ public class DriverMainActivity extends BaseActivity implements IDriverContract.
     IDriverContract.IDriverPresenter driverPresenter;
     private SimpleFragmentPagerAdapter pagerAdapter;
     private ViewPager viewPager;
-    private ArrayList<Fragment> fragmentArrayList;
+    private ArrayList<Fragment> fragmentArrayList = new ArrayList<>();
     private HomeFragment homeFragment ;
     private MyInfoFragment myInfoFragment;
     private TabLayout tabLayout;

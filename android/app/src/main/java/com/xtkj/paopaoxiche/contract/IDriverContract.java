@@ -29,4 +29,12 @@ public class IDriverContract {
     public interface IMyInfoView extends IBaseView<IMyInfoPresenter> {
 
     }
+
+    public interface IShopPresenter extends IBasePresenter {
+
+    }
+
+    public interface IShopView extends IBaseView<IShopPresenter> {
+
+    }
 }
