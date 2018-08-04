@@ -9,7 +9,9 @@ public class ILoginContract {
 
     public interface ILoginPresenter extends IBasePresenter {
         void getMessageCode(String phone);
-        void doLogin(String name,long code,int type);
+        void doLogin(String name,long code);
+        void checkToken(Boolean isDriver);
+        void setIsDriver(boolean isDriver);
     }
 
     public interface ILoginView extends IBaseView<ILoginPresenter> {
@@ -17,6 +19,6 @@ public class ILoginContract {
         void initAccount(String name);
         void showToast(String msg);
         void resetSentMsgButton();
-        void login();
+
     }
 }

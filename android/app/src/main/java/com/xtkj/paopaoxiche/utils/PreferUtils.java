@@ -27,6 +27,27 @@ public class PreferUtils {
 
 
     /**
+     * 存整数
+     * @param String    key
+     * @param value  value
+     */
+    public void putInt(String key, int value) {
+        mPref.edit().putInt(key, value).apply();
+    }
+
+
+    /**
+     * 取整数
+     * @param String   key
+     * @return      value
+     */
+    public int getInt(String key) {
+        return mPref.getInt(key,0);
+    }
+
+
+
+    /**
      * 存字符串
      * @param String    key
      * @param value  value

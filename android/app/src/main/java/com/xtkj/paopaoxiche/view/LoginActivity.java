@@ -33,10 +33,6 @@ public class LoginActivity extends BaseActivity implements OnClickListener, Radi
     TextInputEditText accountText;
     TextInputEditText codeText;
     CountdownButton sendMsgButton;
-
-
-    boolean isDriver = true;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,11 +74,9 @@ public class LoginActivity extends BaseActivity implements OnClickListener, Radi
 
                 String account = accountText.getEditableText().toString() + "";
                 Long code = Long.valueOf(codeText.getEditableText().toString());
-                if (isDriver) {
-                    loginPresenter.doLogin(account,code,0);
-                } else {
-                    loginPresenter.doLogin(account,code,1);
-                }
+
+                loginPresenter.doLogin(account,code);
+
                 break;
             case R.id.send_msg:
                 String phone = accountText.getEditableText().toString() + "";
@@ -101,11 +95,11 @@ public class LoginActivity extends BaseActivity implements OnClickListener, Radi
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         switch (checkedId) {
             case R.id.driver_radio_button:
-                isDriver = true;
+                loginPresenter.setIsDriver(true);
                 break;
 
             case R.id.cleaner_radio_button:
-                isDriver = false;
+                loginPresenter.setIsDriver(true);
                 break;
 
             default:
@@ -138,15 +132,6 @@ public class LoginActivity extends BaseActivity implements OnClickListener, Radi
         sendMsgButton.reset();
     }
 
-    @Override
-    public void login() {
-        if (isDriver) {
-            Intent intent = new Intent(this, DriverMainActivity.class);
-            startActivity(intent);
-        } else {
-            Intent intent = new Intent(this, CarWashMainActivity.class);
-            startActivity(intent);
-        }
-    }
+
 }
 

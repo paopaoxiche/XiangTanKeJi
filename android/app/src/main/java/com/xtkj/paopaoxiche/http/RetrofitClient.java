@@ -19,16 +19,16 @@ public class RetrofitClient {
     private static Retrofit mRetrofit ;
 
     public static Retrofit newInstance(String url) {
-        OkHttpClient client = clientBuilder("") ;//初始化一个client,不然retrofit会自己默认添加一个
+        OkHttpClient client = clientBuilder(null) ;//初始化一个client,不然retrofit会自己默认添加一个
         return retrofitBuilder(url,client);
     }
 
-    public static Retrofit newInstance(String url, String token) {
-        OkHttpClient client = clientBuilder(token) ;//初始化一个client,不然retrofit会自己默认添加一个
+    public static Retrofit newInstance(String url, String authentication) {
+        OkHttpClient client = clientBuilder(authentication) ;//初始化一个client,不然retrofit会自己默认添加一个
         return retrofitBuilder(url,client);
     }
 
-    private static OkHttpClient clientBuilder(String token){
+    private static OkHttpClient clientBuilder(String authentication){
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder()
                 .connectTimeout(READ_TIMEOUT, TimeUnit.MINUTES)
                 .readTimeout(CONN_TIMEOUT, TimeUnit.SECONDS)
@@ -36,11 +36,19 @@ public class RetrofitClient {
                     @Override
                     public Response intercept(Interceptor.Chain chain) throws IOException {
                         Request original = chain.request();
-                        Request request = original.newBuilder()
-                                .header("Content-Type", "application/json ")
-                                .header("token",token)
-                                .method(original.method(), original.body())
-                                .build();
+                        Request request ;
+                        if(authentication==null){
+                            request = original.newBuilder()
+                                    .header("Content-Type", "application/json ")
+                                    .method(original.method(), original.body())
+                                    .build();
+                        }else {
+                            request = original.newBuilder()
+                                    .header("Content-Type", "application/json ")
+                                    .header("authentication",authentication)
+                                    .method(original.method(), original.body())
+                                    .build();
+                        }
                         return chain.proceed(request);
                     }
                 });

@@ -33,14 +33,29 @@ public interface UserService {
      * @param id
      * */
     @GET("user/info")
-    Call<DemoBean> Login(@Query("id") String id ) ;
+    Call<NoDataBean> Login(@Query("id") String id ) ;
 
 
     /**
      * @param demoBean
      * */
     @POST("user/update")
-    Call<DemoBean> Update(@Body DemoBean demoBean);
+    Call<NoDataBean> Update(@Body DemoBean demoBean);
+
+
+
+    /**
+     * 验证是否为车主TOKEN
+     * */
+    @GET("user/checkCarOwner")
+    Call<NoDataBean> checkCarOwner() ;
+
+    /**
+     * 验证是否为洗车场TOKEN
+     * */
+    @GET("user/checkCarWash")
+    Call<NoDataBean> checkCarWash() ;
+
 
 
 }

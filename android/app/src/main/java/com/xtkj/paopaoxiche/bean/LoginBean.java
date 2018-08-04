@@ -49,7 +49,7 @@ public class LoginBean {
          */
 
         private String avatar;
-        private int id;
+        private String id;
         private String nickName;
         private long regTime;
         private int score;
@@ -65,11 +65,11 @@ public class LoginBean {
             this.avatar = avatar;
         }
 
-        public int getId() {
+        public String getId() {
             return id;
         }
 
-        public void setId(int id) {
+        public void setId(String id) {
             this.id = id;
         }
 
