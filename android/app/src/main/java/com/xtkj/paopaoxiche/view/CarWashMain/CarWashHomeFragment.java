@@ -10,14 +10,14 @@ import com.xtkj.paopaoxiche.R;
 import com.xtkj.paopaoxiche.base.BaseFragmemt;
 import com.xtkj.paopaoxiche.contract.ICarWashContract;
 
-public class CarWashInfoFragment extends BaseFragmemt implements ICarWashContract.IInfoView{
+public class CarWashHomeFragment extends BaseFragmemt implements ICarWashContract.IInfoView{
 
     ICarWashContract.IInfoPresenter infoPresenter;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View carWashView = inflater.inflate(R.layout.fragment_car_wash_main, null);
+        View carWashView = inflater.inflate(R.layout.fragment_car_wash_home, null);
         return carWashView;
     }
 

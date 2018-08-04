@@ -1,27 +1,27 @@
-package com.xtkj.paopaoxiche.view.WashCarMap;
+package com.xtkj.paopaoxiche.view.DriverMap;
 
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.ImageButton;
 import android.widget.Toolbar;
 
-import com.amap.api.maps.AMap;
 import com.amap.api.maps.MapView;
 import com.xtkj.paopaoxiche.R;
 import com.xtkj.paopaoxiche.base.BaseActivity;
 
-import java.util.ArrayList;
-
-public class WashCarMapActivity extends BaseActivity {
+public class DriverMapActivity extends BaseActivity {
 
     Toolbar toolbar;
     RecyclerView mRecyclerView;
     YardsAdapter yardsAdapter;
     MapView mMapView = null;
+    ImageButton backButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_wash_car_map);
+        setContentView(R.layout.activity_driver_map);
 
         mMapView = (MapView) findViewById(R.id.map);
         //在activity执行onCreate时执行mMapView.onCreate(savedInstanceState)，创建地图
@@ -37,6 +37,7 @@ public class WashCarMapActivity extends BaseActivity {
     protected void initViews() {
         mRecyclerView = (RecyclerView)findViewById(R.id.wash_yard_recyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        backButton = findViewById(R.id.back_button);
     }
 
     @Override
@@ -48,7 +49,9 @@ public class WashCarMapActivity extends BaseActivity {
 
     @Override
     protected void initListeners() {
-
+        backButton.setOnClickListener(view -> {
+            finish();
+        });
     }
 
     @Override

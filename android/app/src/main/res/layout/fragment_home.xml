@@ -54,35 +54,21 @@
                     android:layout_height="match_parent"
                     android:textSize="16sp"
                     android:textColor="#999999"
-                    android:text="更多"
-                    />
+                    android:text="更多" />
 
             </RelativeLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:text="hello"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:text="hello"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:text="hello"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:text="hello"/>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/wash_yard_recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <android.support.v4.view.ViewPager
+                android:background="@drawable/background_white_radius4dp"
+                android:id="@+id/shop_viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
         </LinearLayout>
 
     </ScrollView>

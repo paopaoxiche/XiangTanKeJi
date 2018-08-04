@@ -1,4 +1,4 @@
-package com.xtkj.paopaoxiche.view.DriverMain;
+package com.xtkj.paopaoxiche.view.CarWashMain;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.xtkj.paopaoxiche.R;
+import com.xtkj.paopaoxiche.view.DriverMain.HomeFragment;
+import com.xtkj.paopaoxiche.view.DriverMain.MyInfoFragment;
 
 import java.util.ArrayList;
 
@@ -25,12 +27,11 @@ public class SimpleFragmentPagerAdapter extends FragmentPagerAdapter {
     private ArrayList<Fragment> fragments = new ArrayList<>();
     private Context context;
 
-    public SimpleFragmentPagerAdapter(FragmentManager fm, Context context,ArrayList<Fragment> fragmentArrayList) {
+    public SimpleFragmentPagerAdapter(FragmentManager fm, Context context, ArrayList<Fragment> fragmentArrayList) {
         super(fm);
         this.context = context;
-        for(int i  = 0 ; i < fragmentArrayList.size();i ++ ){
-            fragments.add(fragmentArrayList.get(i));
-        }
+
+        fragments.addAll(fragmentArrayList);
     }
 
     @Override
@@ -51,7 +52,7 @@ public class SimpleFragmentPagerAdapter extends FragmentPagerAdapter {
 
     public View getTabView(int position,Boolean isActive,View view){
         if(null==view)
-            view = LayoutInflater.from(context).inflate(R.layout.item_driver_tab, null);
+            view = LayoutInflater.from(context).inflate(R.layout.fragment_driver_tab_item, null);
         TextView tv=  view.findViewById(R.id.driver_tab_text);
         tv.setText(tabTitles[position]);
         ImageView img =  view.findViewById(R.id.driver_tab_image);

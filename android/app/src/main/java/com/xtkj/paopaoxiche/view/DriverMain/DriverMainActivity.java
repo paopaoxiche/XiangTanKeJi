@@ -1,20 +1,26 @@
 package com.xtkj.paopaoxiche.view.DriverMain;
 
 import android.Manifest;
+import android.net.ProxyInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 
 import com.xtkj.paopaoxiche.R;
+import com.xtkj.paopaoxiche.presenter.DriverHomePresenterImpl;
+import com.xtkj.paopaoxiche.presenter.DriverMyInfoPresenterImpl;
 import com.xtkj.paopaoxiche.view.DriverMain.SimpleFragmentPagerAdapter;
 import com.xtkj.paopaoxiche.base.BaseActivity;
 import com.xtkj.paopaoxiche.base.BaseFragmemt;
 import com.xtkj.paopaoxiche.bean.WeatherLiveBean;
 import com.xtkj.paopaoxiche.contract.IDriverContract;
 import com.xtkj.paopaoxiche.presenter.DriverPresenterImpl;
+
+import java.util.ArrayList;
 
 
 public class DriverMainActivity extends BaseActivity implements IDriverContract.IDriverView,BaseFragmemt.OnFragmentInteractionListener {
@@ -26,7 +32,9 @@ public class DriverMainActivity extends BaseActivity implements IDriverContract.
     IDriverContract.IDriverPresenter driverPresenter;
     private SimpleFragmentPagerAdapter pagerAdapter;
     private ViewPager viewPager;
-
+    private ArrayList<Fragment> fragmentArrayList = new ArrayList<>();
+    private HomeFragment homeFragment ;
+    private MyInfoFragment myInfoFragment;
     private TabLayout tabLayout;
 
     @Override
@@ -51,7 +59,15 @@ public class DriverMainActivity extends BaseActivity implements IDriverContract.
 
     @Override
     protected void initViews() {
-        pagerAdapter = new SimpleFragmentPagerAdapter(getSupportFragmentManager(), this);
+
+        homeFragment = HomeFragment.newInstance();
+        myInfoFragment = MyInfoFragment.newInstance();
+        new DriverMyInfoPresenterImpl(myInfoFragment);
+        new DriverHomePresenterImpl(homeFragment);
+        fragmentArrayList.add(homeFragment);
+        fragmentArrayList.add(myInfoFragment);
+        pagerAdapter = new SimpleFragmentPagerAdapter(getSupportFragmentManager(), this,fragmentArrayList);
+
         viewPager = (ViewPager) findViewById(R.id.driver_viewpager);
         viewPager.setAdapter(pagerAdapter);
         tabLayout =  findViewById(R.id.driver_tab);

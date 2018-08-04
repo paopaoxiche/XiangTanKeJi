@@ -9,16 +9,17 @@ import com.xtkj.paopaoxiche.R;
 import com.xtkj.paopaoxiche.base.BaseFragmemt;
 import com.xtkj.paopaoxiche.contract.IDriverContract;
 
-public class MyInfoFragment extends BaseFragmemt implements IDriverContract.IMyInfoView{
+public class ShopFragment extends BaseFragmemt implements IDriverContract.IShopView{
 
-    private IDriverContract.IMyInfoPresenter myInfoPresenter;
+    private IDriverContract.IShopPresenter shopPresenter;
 
-    public MyInfoFragment() {
+
+    public ShopFragment() {
         // Required empty public constructor
     }
 
-    public static MyInfoFragment newInstance() {
-        MyInfoFragment fragment = new MyInfoFragment();
+    public static ShopFragment newInstance() {
+        ShopFragment fragment = new ShopFragment();
         return fragment;
     }
 
@@ -32,12 +33,11 @@ public class MyInfoFragment extends BaseFragmemt implements IDriverContract.IMyI
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_my_info, container, false);
+        return inflater.inflate(R.layout.fragment_driver_shop, container, false);
     }
 
-
     @Override
-    public void setPresenter(IDriverContract.IMyInfoPresenter iMyInfoPresenter) {
-        myInfoPresenter = iMyInfoPresenter;
+    public void setPresenter(IDriverContract.IShopPresenter iShopPresenter) {
+        this.shopPresenter = iShopPresenter;
     }
 }

@@ -10,7 +10,8 @@ import android.widget.TextView;
 
 import com.xtkj.paopaoxiche.R;
 import com.xtkj.paopaoxiche.base.BaseFragmemt;
-import com.xtkj.paopaoxiche.view.WashCarMap.WashCarMapActivity;
+import com.xtkj.paopaoxiche.contract.IDriverContract;
+import com.xtkj.paopaoxiche.view.DriverMap.DriverMapActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -20,8 +21,10 @@ import com.xtkj.paopaoxiche.view.WashCarMap.WashCarMapActivity;
  * Use the {@link HomeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HomeFragment extends BaseFragmemt {
+public class HomeFragment extends BaseFragmemt implements IDriverContract.IHomeView{
 
+
+    IDriverContract.IHomePresenter homePresenter;
 
     TextView moreWashYard;
 
@@ -54,9 +57,14 @@ public class HomeFragment extends BaseFragmemt {
     private void initViews(View view){
         moreWashYard = view.findViewById((R.id.more_wash_yard));
         moreWashYard.setOnClickListener(view1 -> {
-            Intent intent = new Intent(getActivity(),WashCarMapActivity.class);
+            Intent intent = new Intent(getActivity(),DriverMapActivity.class);
             startActivity(intent);
         });
 
+    }
+
+    @Override
+    public void setPresenter(IDriverContract.IHomePresenter iHomePresenter) {
+        homePresenter = iHomePresenter;
     }
 }

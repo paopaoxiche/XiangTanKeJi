@@ -13,4 +13,28 @@ public class IDriverContract {
     public interface IDriverView extends IBaseView<IDriverPresenter> {
         void setWeather(WeatherLiveBean weatherLiveBean);
     }
+
+    public interface IHomePresenter extends IBasePresenter {
+
+    }
+
+    public interface IHomeView extends IBaseView<IHomePresenter> {
+
+    }
+
+    public interface IMyInfoPresenter extends IBasePresenter {
+
+    }
+
+    public interface IMyInfoView extends IBaseView<IMyInfoPresenter> {
+
+    }
+
+    public interface IShopPresenter extends IBasePresenter {
+
+    }
+
+    public interface IShopView extends IBaseView<IShopPresenter> {
+
+    }
 }
