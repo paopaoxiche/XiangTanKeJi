@@ -71,6 +71,18 @@
                                         <a href="#e37772d3af0e830cf76f24c46a814b10">发布洗车服务</a>
                                     </li><li>
                                         <a href="#f2f455a85c520e6ae4378d2b56d9cfd7">获取工商认证状态</a>
+                                    </li><li>
+                                        <a href="#ae73db639474497c8d927acfd2840bd9">获取洗车服务列表</a>
+                                    </li><li>
+                                        <a href="#1826c9c4081d4301827d4ef85bdf982c">获取洗车场商品列表</a>
+                                    </li><li>
+                                        <a href="#feff65d310e3458e9054bf6e1922b93e">获取附近洗车场服务列表</a>
+                                    </li><li>
+                                        <a href="#8f2efc1cdb4f4ef392851f7145d97d5d">获取洗车场推荐商品列表</a>
+                                    </li><li>
+                                        <a href="#aa4c3cf9610f4682a2a9773979e23722">获取洗车场详细信息</a>
+                                    </li><li>
+                                        <a href="#5672902b01ff4aa48cf2f89122865406">获取洗车场评价列表</a>
                                     </li>
                                 </ul><span>car</span>
                                 <ul class="nav list-group">
@@ -962,7 +974,7 @@
                         </p>
                         <p>请求方式：POST</p>
                         <p>
-                            请求地址：http://localhost:8080/wash/deleteService                        </p>
+                            请求地址：http://101.200.63.245:8080/wash/deleteService                        </p>
                         
                         <table class="table table-hover">
                                 <colgroup>
@@ -1044,7 +1056,7 @@
                         </p>
                         <p>请求方式：GET</p>
                         <p>
-                            请求地址：http://localhost:8080/wash/getServiceDetail                        </p>
+                            请求地址：http://101.200.63.245:8080/wash/getServiceDetail                        </p>
                         
                         
                         <table class="table table-hover">
@@ -1137,7 +1149,7 @@
                         </p>
                         <p>请求方式：GET</p>
                         <p>
-                            请求地址：http://localhost:8080/wash/getRecentWashList                        </p>
+                            请求地址：http://101.200.63.245:8080/wash/getRecentWashList                        </p>
                         
                         <table class="table table-hover">
                                 <colgroup>
@@ -1210,7 +1222,7 @@
                         </p>
                         <p>请求方式：POST</p>
                         <p>
-                            请求地址：http://localhost:8080/wash/publishService                        </p>
+                            请求地址：http://101.200.63.245:8080/wash/publishService                        </p>
                         
                         <table class="table table-hover">
                                 <colgroup>
@@ -1444,6 +1456,347 @@
                                     <th>string</th>
                                 </tr>                            </tbody>
                         </table>
+                    </div><div class="api-one">
+                        <h3 id="ae73db639474497c8d927acfd2840bd9">获取洗车服务列表</h3>
+                        <p>
+                            <a target="_blank" href="http://apizza.cc/console/project/829ba0a1c0fb6675eabcbb0391df72f4/browse?api=ae73db639474497c8d927acfd2840bd9" class="label label-warning">在线测试</a>
+                            <a target="_blank" href="http://apizza.cc/console/project/829ba0a1c0fb6675eabcbb0391df72f4/browse?api=ae73db639474497c8d927acfd2840bd9" class="label label-warning">在线浏览</a>
+                        </p>
+                        <p>请求方式：GET</p>
+                        <p>
+                            请求地址：http://101.200.63.245:8080/wash/getServiceList?washId=4&amp;pageIndex&amp;pageSize                        </p>
+                        
+                        
+                        <table class="table table-hover">
+                                <colgroup>
+                                    <col class="col-xs-2">
+                                    <col class="col-xs-1">
+                                    <col class="col-xs-1">
+                                    <col class="col-xs-7">
+                                    <col class="col-xs-2">
+                                </colgroup>
+                                <thead>
+                                <tr>
+                                    <th><span class="label label-success">Query参数名</span></th>
+                                    <th>类型</th>
+                                    <th>必需</th>
+                                    <th>描述</th>
+                                    <th>示例 e.g.</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                        <td>washId</td>
+                                        <td>number</td>
+                                        <td>是</td>
+                                        <td>洗车场id</td>
+                                        <td></td>
+                                    </tr><tr>
+                                        <td>pageIndex</td>
+                                        <td>number</td>
+                                        <td>是</td>
+                                        <td>页码</td>
+                                        <td></td>
+                                    </tr><tr>
+                                        <td>pageSize</td>
+                                        <td>number</td>
+                                        <td>是</td>
+                                        <td>分页大小（默认20）</td>
+                                        <td></td>
+                                    </tr>                                </tbody>
+                            </table>
+
+                                                
+                        
+                                                
+                        
+                    </div><div class="api-one">
+                        <h3 id="1826c9c4081d4301827d4ef85bdf982c">获取洗车场商品列表</h3>
+                        <p>
+                            <a target="_blank" href="http://apizza.cc/console/project/829ba0a1c0fb6675eabcbb0391df72f4/browse?api=1826c9c4081d4301827d4ef85bdf982c" class="label label-warning">在线测试</a>
+                            <a target="_blank" href="http://apizza.cc/console/project/829ba0a1c0fb6675eabcbb0391df72f4/browse?api=1826c9c4081d4301827d4ef85bdf982c" class="label label-warning">在线浏览</a>
+                        </p>
+                        <p>请求方式：GET</p>
+                        <p>
+                            请求地址：http://101.200.63.245:8080/wash/getCommodityList                        </p>
+                        
+                        
+                        <table class="table table-hover">
+                                <colgroup>
+                                    <col class="col-xs-2">
+                                    <col class="col-xs-1">
+                                    <col class="col-xs-1">
+                                    <col class="col-xs-7">
+                                    <col class="col-xs-2">
+                                </colgroup>
+                                <thead>
+                                <tr>
+                                    <th><span class="label label-success">Query参数名</span></th>
+                                    <th>类型</th>
+                                    <th>必需</th>
+                                    <th>描述</th>
+                                    <th>示例 e.g.</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                        <td>washId</td>
+                                        <td>number</td>
+                                        <td>是</td>
+                                        <td>洗车场id</td>
+                                        <td></td>
+                                    </tr><tr>
+                                        <td>pageIndex</td>
+                                        <td>number</td>
+                                        <td>是</td>
+                                        <td>页码</td>
+                                        <td>0</td>
+                                    </tr><tr>
+                                        <td>pageSize</td>
+                                        <td>number</td>
+                                        <td>是</td>
+                                        <td>分页大小（默认20）</td>
+                                        <td>20</td>
+                                    </tr>                                </tbody>
+                            </table>
+
+                                                
+                        
+                                                
+                        
+                    </div><div class="api-one">
+                        <h3 id="feff65d310e3458e9054bf6e1922b93e">获取附近洗车场服务列表</h3>
+                        <p>
+                            <a target="_blank" href="http://apizza.cc/console/project/829ba0a1c0fb6675eabcbb0391df72f4/browse?api=feff65d310e3458e9054bf6e1922b93e" class="label label-warning">在线测试</a>
+                            <a target="_blank" href="http://apizza.cc/console/project/829ba0a1c0fb6675eabcbb0391df72f4/browse?api=feff65d310e3458e9054bf6e1922b93e" class="label label-warning">在线浏览</a>
+                        </p>
+                        <p>请求方式：GET</p>
+                        <p>
+                            请求地址：http://101.200.63.245:8080/wash/getNearbyWashServiceList                        </p>
+                        
+                        
+                        <table class="table table-hover">
+                                <colgroup>
+                                    <col class="col-xs-2">
+                                    <col class="col-xs-1">
+                                    <col class="col-xs-1">
+                                    <col class="col-xs-7">
+                                    <col class="col-xs-2">
+                                </colgroup>
+                                <thead>
+                                <tr>
+                                    <th><span class="label label-success">Query参数名</span></th>
+                                    <th>类型</th>
+                                    <th>必需</th>
+                                    <th>描述</th>
+                                    <th>示例 e.g.</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                        <td>lng</td>
+                                        <td>number</td>
+                                        <td>是</td>
+                                        <td>经度</td>
+                                        <td>114.0311</td>
+                                    </tr><tr>
+                                        <td>lat</td>
+                                        <td>number</td>
+                                        <td>是</td>
+                                        <td>纬度</td>
+                                        <td>22.3622</td>
+                                    </tr><tr>
+                                        <td>count</td>
+                                        <td>number</td>
+                                        <td>是</td>
+                                        <td>个数</td>
+                                        <td>4</td>
+                                    </tr><tr>
+                                        <td>showAll</td>
+                                        <td>number</td>
+                                        <td>是</td>
+                                        <td>是否显示未营业的洗车场（0 - 否，1 - 是）</td>
+                                        <td>0</td>
+                                    </tr><tr>
+                                        <td>priceLimit</td>
+                                        <td>number</td>
+                                        <td>是</td>
+                                        <td>价格限制</td>
+                                        <td>5.0</td>
+                                    </tr>                                </tbody>
+                            </table>
+
+                                                
+                        
+                        <p>返回示例：</p>
+                        <div class="highlight">
+                            <pre>
+                                <code class="json hljs">{
+    "code": 200,
+    "data": [
+        {
+            "businessStatus": 1,
+            "distance": 25,
+            "honor": 3,
+            "id": 6,
+            "image": "http://localhost:8080/avatars/2018/07/15/c5fcaae570fa4114b809f2c66b5b510f.jpg",
+            "lat": 22.38,
+            "lng": 114.05,
+            "name": "林的洗车场",
+            "price": 23.49,
+            "washCount": 0,
+            "washId": 4
+        }
+    ],
+    "msg": "请求成功"
+}</code>
+                            </pre>
+                        </div>                        
+                        
+                    </div><div class="api-one">
+                        <h3 id="8f2efc1cdb4f4ef392851f7145d97d5d">获取洗车场推荐商品列表</h3>
+                        <p>
+                            <a target="_blank" href="http://apizza.cc/console/project/829ba0a1c0fb6675eabcbb0391df72f4/browse?api=8f2efc1cdb4f4ef392851f7145d97d5d" class="label label-warning">在线测试</a>
+                            <a target="_blank" href="http://apizza.cc/console/project/829ba0a1c0fb6675eabcbb0391df72f4/browse?api=8f2efc1cdb4f4ef392851f7145d97d5d" class="label label-warning">在线浏览</a>
+                        </p>
+                        <p>请求方式：GET</p>
+                        <p>
+                            请求地址：http://101.200.63.245:8080/wash/getRecommendCommodity                        </p>
+                        
+                        
+                        <table class="table table-hover">
+                                <colgroup>
+                                    <col class="col-xs-2">
+                                    <col class="col-xs-1">
+                                    <col class="col-xs-1">
+                                    <col class="col-xs-7">
+                                    <col class="col-xs-2">
+                                </colgroup>
+                                <thead>
+                                <tr>
+                                    <th><span class="label label-success">Query参数名</span></th>
+                                    <th>类型</th>
+                                    <th>必需</th>
+                                    <th>描述</th>
+                                    <th>示例 e.g.</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                        <td>washId</td>
+                                        <td>number</td>
+                                        <td>是</td>
+                                        <td>洗车场id</td>
+                                        <td></td>
+                                    </tr><tr>
+                                        <td>count</td>
+                                        <td>number</td>
+                                        <td>是</td>
+                                        <td>结果个数</td>
+                                        <td></td>
+                                    </tr>                                </tbody>
+                            </table>
+
+                                                
+                        
+                                                
+                        
+                    </div><div class="api-one">
+                        <h3 id="aa4c3cf9610f4682a2a9773979e23722">获取洗车场详细信息</h3>
+                        <p>
+                            <a target="_blank" href="http://apizza.cc/console/project/829ba0a1c0fb6675eabcbb0391df72f4/browse?api=aa4c3cf9610f4682a2a9773979e23722" class="label label-warning">在线测试</a>
+                            <a target="_blank" href="http://apizza.cc/console/project/829ba0a1c0fb6675eabcbb0391df72f4/browse?api=aa4c3cf9610f4682a2a9773979e23722" class="label label-warning">在线浏览</a>
+                        </p>
+                        <p>请求方式：GET</p>
+                        <p>
+                            请求地址：http://101.200.63.245:8080/wash/getCarWashDetail                        </p>
+                        
+                        
+                        <table class="table table-hover">
+                                <colgroup>
+                                    <col class="col-xs-2">
+                                    <col class="col-xs-1">
+                                    <col class="col-xs-1">
+                                    <col class="col-xs-7">
+                                    <col class="col-xs-2">
+                                </colgroup>
+                                <thead>
+                                <tr>
+                                    <th><span class="label label-success">Query参数名</span></th>
+                                    <th>类型</th>
+                                    <th>必需</th>
+                                    <th>描述</th>
+                                    <th>示例 e.g.</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                        <td>washId</td>
+                                        <td>number</td>
+                                        <td>是</td>
+                                        <td>洗车场id</td>
+                                        <td></td>
+                                    </tr>                                </tbody>
+                            </table>
+
+                                                
+                        
+                                                
+                        
+                    </div><div class="api-one">
+                        <h3 id="5672902b01ff4aa48cf2f89122865406">获取洗车场评价列表</h3>
+                        <p>
+                            <a target="_blank" href="http://apizza.cc/console/project/829ba0a1c0fb6675eabcbb0391df72f4/browse?api=5672902b01ff4aa48cf2f89122865406" class="label label-warning">在线测试</a>
+                            <a target="_blank" href="http://apizza.cc/console/project/829ba0a1c0fb6675eabcbb0391df72f4/browse?api=5672902b01ff4aa48cf2f89122865406" class="label label-warning">在线浏览</a>
+                        </p>
+                        <p>请求方式：GET</p>
+                        <p>
+                            请求地址：http://localhost:8080/wash/getCarWashEstimate                        </p>
+                        
+                        
+                        <table class="table table-hover">
+                                <colgroup>
+                                    <col class="col-xs-2">
+                                    <col class="col-xs-1">
+                                    <col class="col-xs-1">
+                                    <col class="col-xs-7">
+                                    <col class="col-xs-2">
+                                </colgroup>
+                                <thead>
+                                <tr>
+                                    <th><span class="label label-success">Query参数名</span></th>
+                                    <th>类型</th>
+                                    <th>必需</th>
+                                    <th>描述</th>
+                                    <th>示例 e.g.</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                        <td>washId</td>
+                                        <td>number</td>
+                                        <td>是</td>
+                                        <td>洗车场id</td>
+                                        <td></td>
+                                    </tr><tr>
+                                        <td>pageIndex</td>
+                                        <td>number</td>
+                                        <td>是</td>
+                                        <td>页码</td>
+                                        <td></td>
+                                    </tr><tr>
+                                        <td>pageSize</td>
+                                        <td>number</td>
+                                        <td>是</td>
+                                        <td>分页大小</td>
+                                        <td></td>
+                                    </tr>                                </tbody>
+                            </table>
+
+                                                
+                        
+                                                
+                        
                     </div><h1 id="t_api_doc">car</h1>
                     
                     <div class="api-one">
