@@ -11,6 +11,16 @@ public class UserInfo {
     private static int type;
     private static String userPhone;
 
+    private static boolean driver = true;
+
+    public static boolean isDriver() {
+        return driver;
+    }
+
+    public static void setDriver(boolean isDriver) {
+        UserInfo.driver = isDriver;
+    }
+
     public static String getAvatar() {
         return avatar;
     }

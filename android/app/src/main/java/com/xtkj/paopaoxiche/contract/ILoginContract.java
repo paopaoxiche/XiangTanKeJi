@@ -10,7 +10,7 @@ public class ILoginContract {
     public interface ILoginPresenter extends IBasePresenter {
         void getMessageCode(String phone);
         void doLogin(String name,long code);
-        void checkToken(Boolean isDriver);
+        void checkToken();
         void setIsDriver(boolean isDriver);
     }
 

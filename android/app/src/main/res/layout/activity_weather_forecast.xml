@@ -1,0 +1,138 @@
+<LinearLayout
+    android:id="@+id/bg_weather"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_weather_good_day">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/back_button"
+            android:paddingLeft="8dp"
+            android:paddingRight="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_chevron_left_white_36dp"/>
+        <LinearLayout
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@drawable/img_location"
+                android:layout_width="15dp"
+                android:layout_height="19dp" />
+            <com.xtkj.paopaoxiche.widget.MarqueeTextView
+                android:ellipsize="marquee"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:singleLine="true"
+                android:textSize="18sp"
+                android:textColor="#fff"
+                android:id="@+id/location_text"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <ImageView
+            android:visibility="invisible"
+            android:paddingLeft="8dp"
+            android:paddingRight="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_chevron_left_white_36dp"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_gravity="center_vertical"
+        android:paddingRight="28dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/temperature"
+            android:gravity="end"
+            android:textColor="#B2ffffff"
+            android:textSize="80sp"
+            android:paddingTop="32dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""/>
+
+        <LinearLayout
+            android:layout_marginTop="25dp"
+            android:gravity="end|center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="11dp"
+                android:layout_height="14dp"
+                android:src="@drawable/img_high"
+                />
+            <TextView
+                android:layout_marginStart="4dp"
+                android:id="@+id/temperature_high"
+                android:textSize="16sp"
+                android:textColor="#b2ffffff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:layout_marginStart="20dp"
+                android:layout_width="11dp"
+                android:layout_height="14dp"
+                android:src="@drawable/img_low"
+                />
+            <TextView
+                android:layout_marginStart="4dp"
+                android:id="@+id/temperature_low"
+                android:textSize="16sp"
+                android:textColor="#b2ffffff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="16dp"
+            android:gravity="end|center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:alpha="0.7"
+                android:layout_width="16dp"
+                android:layout_height="12dp"
+                android:src="@drawable/img_wind"/>
+            <TextView
+                android:layout_marginStart="4dp"
+                android:id="@+id/wind"
+                android:textSize="16sp"
+                android:textColor="#b2ffffff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:alpha="0.7"
+                android:layout_marginLeft="20dp"
+                android:layout_width="17dp"
+                android:layout_height="15dp"
+                android:src="@drawable/img_humidity"/>
+            <TextView
+                android:layout_marginStart="4dp"
+                android:id="@+id/humidity"
+                android:textSize="16sp"
+                android:textColor="#b2ffffff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

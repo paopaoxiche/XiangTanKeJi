@@ -10,10 +10,10 @@ import rx.Observable;
 public interface WeatherService {
 
     @GET("realtime.json")
-    Observable<WeatherRealTimeBean> getRealTime() ;
+    Call<WeatherRealTimeBean> getRealTime() ;
 
 
     @GET("forecast.json")
-    Observable<WeatherForecastBean> getRorecast() ;
+    Call<WeatherForecastBean> getRorecast() ;
 
 }

@@ -6,12 +6,12 @@ import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.xtkj.paopaoxiche.contract.IWeatherForecastContract;
+import com.xtkj.paopaoxiche.model.DriverHomeModel;
 
 public class WeatherForecastPresenterImpl implements IWeatherForecastContract.IWeatherForecastPresenter {
 
 
     private IWeatherForecastContract.IWeatherForecastView weatherForecastView;
-    private AMapLocationClient mLocationClient =null;
 
     public WeatherForecastPresenterImpl(IWeatherForecastContract.IWeatherForecastView iWeatherForecastView) {
         weatherForecastView = iWeatherForecastView;
@@ -19,34 +19,13 @@ public class WeatherForecastPresenterImpl implements IWeatherForecastContract.IW
     }
     @Override
     public void onCreate() {
-        initLocation();
+        DriverHomeModel driverHomeModel = DriverHomeModel.getInstance();
+        weatherForecastView.setAddress(driverHomeModel.getAddress());
+        weatherForecastView.setForecastWeather(driverHomeModel.getWeatherForecastBean());
+        weatherForecastView.setRealTimeWeather(driverHomeModel.getWeatherRealTimeBean());
     }
 
-    private void initLocation(){
-        AMapLocationListener mLocationListener = aMapLocation -> {
-            if (aMapLocation != null) {
-                if (aMapLocation.getErrorCode() == 0) {
-                    weatherForecastView.setAddress(aMapLocation.getAddress());
-                } else {
-                    Log.e("AmapError", "location Error, ErrCode:"
-                            + aMapLocation.getErrorCode() + ", errInfo:"
-                            + aMapLocation.getErrorInfo());
-                }
-            }
-        };
-        mLocationClient = new AMapLocationClient(weatherForecastView.getActivityContext());
-        mLocationClient.setLocationListener(mLocationListener);
-        AMapLocationClientOption mLocationOption = new AMapLocationClientOption();
 
-        mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
-        mLocationOption.setOnceLocation(true);
-
-        mLocationOption.setOnceLocationLatest(true);
-        mLocationOption.setNeedAddress(true);
-        mLocationClient.setLocationOption(mLocationOption);
-
-        mLocationClient.startLocation();
-    }
 
     @Override
     public void onDestroy() {

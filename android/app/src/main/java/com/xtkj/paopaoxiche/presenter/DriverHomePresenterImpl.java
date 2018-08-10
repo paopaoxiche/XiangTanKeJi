@@ -8,29 +8,16 @@ import com.xtkj.paopaoxiche.bean.WashServicesBean;
 import com.xtkj.paopaoxiche.bean.WeatherForecastBean;
 import com.xtkj.paopaoxiche.bean.WeatherRealTimeBean;
 import com.xtkj.paopaoxiche.contract.IDriverContract;
-import com.xtkj.paopaoxiche.http.ApiField;
-import com.xtkj.paopaoxiche.http.RetrofitClient;
-import com.xtkj.paopaoxiche.model.DriverMainModel;
-import com.xtkj.paopaoxiche.service.WashService;
-import com.xtkj.paopaoxiche.service.WeatherService;
+import com.xtkj.paopaoxiche.model.DriverHomeModel;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import rx.Observable;
-import rx.Scheduler;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
-
-public class DriverHomePresenterImpl implements IDriverContract.IHomePresenter {
+public class DriverHomePresenterImpl implements IDriverContract.IHomePresenter,DriverHomeModel.DriverHomeListener {
 
     private IDriverContract.IHomeView homeView;
-    private AMapLocationClient mLocationClient =null;
-    private DriverMainModel viewModel;
+
+    private DriverHomeModel viewModel;
 
     public DriverHomePresenterImpl(IDriverContract.IHomeView iHomeView) {
-        viewModel = DriverMainModel.getInstance();
+        viewModel = DriverHomeModel.getInstance();
         homeView = iHomeView;
         homeView.setPresenter(this);
     }
@@ -38,115 +25,60 @@ public class DriverHomePresenterImpl implements IDriverContract.IHomePresenter {
 
     @Override
     public void onCreate() {
-
+        viewModel = DriverHomeModel.getInstance();
         initLocation();
-
-
+        viewModel.addListener(this);
     }
 
     @Override
     public void onDestroy() {
-
+        DriverHomeModel.getInstance().removeListener(this);
+        DriverHomeModel.release();
     }
 
     private void initLocation(){
-        AMapLocationListener mLocationListener = aMapLocation -> {
-            if (aMapLocation != null) {
-                if (aMapLocation.getErrorCode() == 0) {
-                    homeView.setAddress(aMapLocation.getAddress());
-                    getNearWashServices(aMapLocation.getLongitude(),aMapLocation.getLatitude());
-                    getRealTimeWeather(aMapLocation.getLongitude(),aMapLocation.getLatitude());
-                    getForecastWeather(aMapLocation.getLongitude(),aMapLocation.getLatitude());
-                } else {
-                    Log.e("AmapError", "location Error, ErrCode:"
-                            + aMapLocation.getErrorCode() + ", errInfo:"
-                            + aMapLocation.getErrorInfo());
-                }
-            }
-        };
-        mLocationClient = new AMapLocationClient(homeView.getActivityContext());
-        mLocationClient.setLocationListener(mLocationListener);
-        AMapLocationClientOption mLocationOption = new AMapLocationClientOption();
-
-        mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
-        mLocationOption.setOnceLocation(true);
-
-        mLocationOption.setOnceLocationLatest(true);
-        mLocationOption.setNeedAddress(true);
-        mLocationClient.setLocationOption(mLocationOption);
-
-        mLocationClient.startLocation();
+        viewModel.initLocation(homeView.getActivityContext());
     }
 
 
     @Override
     public void updateLocation() {
-        if(mLocationClient!=null)
-            mLocationClient.startLocation();
+        viewModel.updateLocation();
     }
 
-    private void getNearWashServices(Double lng,Double lat){
 
-
-        RetrofitClient.newInstance(ApiField.BASEURL)
-                .create(WashService.class)
-                .getNearbyWashServiceList(lng,lat,4,1,9999)
-                .enqueue(new Callback<WashServicesBean>() {
-                    @Override
-                    public void onResponse(Call<WashServicesBean> call, Response<WashServicesBean> response) {
-                       homeView.setWashService(response.body());
-                    }
-
-                    @Override
-                    public void onFailure(Call<WashServicesBean> call, Throwable t) {
-
-                    }
-                });
+    @Override
+    public void getLocationSuccess(String address) {
+        homeView.setAddress(address);
     }
 
-    private void getRealTimeWeather(double j,double w){
+    @Override
+    public void getWashServicesSuccess(WashServicesBean washServicesBean) {
+        homeView.setWashService(washServicesBean);
+    }
 
-        viewModel.getRealTimeWeather(j,w)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<WeatherRealTimeBean>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onNext(WeatherRealTimeBean weatherRealTimeBean) {
-                        homeView.setRealTimeWeather(weatherRealTimeBean);
-                    }
-                });
+    @Override
+    public void getWashServicesFail() {
 
     }
-    private void getForecastWeather(double j,double w){
 
-        viewModel.getForecastWeather(j,w)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<WeatherForecastBean>() {
-                    @Override
-                    public void onCompleted() {
+    @Override
+    public void getRealTimeWeatherSuccess(WeatherRealTimeBean weatherRealTimeBean) {
+        homeView.setRealTimeWeather(weatherRealTimeBean);
+    }
 
-                    }
+    @Override
+    public void getRealTimeWeatherFailed() {
 
-                    @Override
-                    public void onError(Throwable e) {
+    }
 
-                    }
+    @Override
+    public void getForecastWeatherSuccess(WeatherForecastBean weatherForecastBean) {
+        homeView.setForecastWeather(weatherForecastBean);
+    }
 
-                    @Override
-                    public void onNext(WeatherForecastBean weatherForecastBean) {
-                        homeView.setForecastWeather(weatherForecastBean);
-                    }
-                });
+    @Override
+    public void getForecastWeatherFailed() {
+
     }
 }

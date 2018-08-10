@@ -3,28 +3,19 @@ package com.xtkj.paopaoxiche.presenter;
 import android.content.Intent;
 
 import com.xtkj.paopaoxiche.application.UserInfo;
-import com.xtkj.paopaoxiche.bean.LoginBean;
-import com.xtkj.paopaoxiche.bean.NoDataBean;
 import com.xtkj.paopaoxiche.application.AppConstant;
 import com.xtkj.paopaoxiche.contract.ILoginContract;
-import com.xtkj.paopaoxiche.http.ApiField;
 import com.xtkj.paopaoxiche.application.Authentication;
-import com.xtkj.paopaoxiche.http.RetrofitClient;
 import com.xtkj.paopaoxiche.model.LoginModel;
-import com.xtkj.paopaoxiche.service.UserService;
 import com.xtkj.paopaoxiche.utils.PreferUtils;
 import com.xtkj.paopaoxiche.view.CarWashMain.CarWashMainActivity;
 import com.xtkj.paopaoxiche.view.DriverMain.DriverMainActivity;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class LoginPresenterImpl implements ILoginContract.ILoginPresenter, LoginModel.LoginListener {
 
     ILoginContract.ILoginView loginView;
     PreferUtils preferUtils;
-    boolean isDriver = true;
 
     public LoginPresenterImpl(ILoginContract.ILoginView iLoginView) {
         loginView = iLoginView;
@@ -34,8 +25,7 @@ public class LoginPresenterImpl implements ILoginContract.ILoginPresenter, Login
 
     private void init() {
         preferUtils = PreferUtils.getInstance(loginView.getContext());
-        UserInfo.setToken(preferUtils.getString(AppConstant.TOKEN));
-        UserInfo.setId(preferUtils.getString(AppConstant.USER_ID));
+        initAutoLandingUser();
         Authentication.setUser_id(UserInfo.getId());
         Authentication.setToken(UserInfo.getToken());
     }
@@ -44,10 +34,8 @@ public class LoginPresenterImpl implements ILoginContract.ILoginPresenter, Login
     public void onCreate() {
         String account = PreferUtils.getInstance(loginView.getContext()).getString(AppConstant.ACCOUNT);
         loginView.initAccount(account);
-
         LoginModel.getInstance().addListener(this);
-
-        checkToken(isDriver);
+        checkToken();
     }
 
     @Override
@@ -64,7 +52,7 @@ public class LoginPresenterImpl implements ILoginContract.ILoginPresenter, Login
     @Override
     public void doLogin(String account, long code) {
         int type = 1;
-        if (isDriver) type = 0;
+        if (UserInfo.isDriver()) type = 0;
 
         LoginModel.getInstance().doLogin(account, code, type);
 
@@ -72,63 +60,28 @@ public class LoginPresenterImpl implements ILoginContract.ILoginPresenter, Login
     }
 
     @Override
-    public void checkToken(Boolean isDriver) {
-
-        if (isDriver) {
-            RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
-                    .create(UserService.class)
-                    .checkCarOwner()
-                    .enqueue(new Callback<NoDataBean>() {
-                        @Override
-                        public void onResponse(Call<NoDataBean> call, Response<NoDataBean> response) {
-                            if (response.body().getCode() != 401) {
-                                initAutoLandingUser();
-                                login();
-                            }
-
-                        }
-
-                        @Override
-                        public void onFailure(Call<NoDataBean> call, Throwable t) {
-                            loginView.showToast(AppConstant.NET_ERROR);
-                        }
-                    });
+    public void checkToken() {
+        if (UserInfo.isDriver()) {
+            LoginModel.getInstance().checkDriverToken();
         } else {
-            RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
-                    .create(UserService.class)
-                    .checkCarWash()
-                    .enqueue(new Callback<NoDataBean>() {
-                        @Override
-                        public void onResponse(Call<NoDataBean> call, Response<NoDataBean> response) {
-                            if (response.body().getCode() != 401) {
-                                initAutoLandingUser();
-                                login();
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<NoDataBean> call, Throwable t) {
-                            loginView.showToast(AppConstant.NET_ERROR);
-                        }
-                    });
+            LoginModel.getInstance().checkCarWashToken();
         }
-
     }
 
     @Override
     public void setIsDriver(boolean driver) {
-        isDriver = driver;
+        UserInfo.setDriver(driver);
     }
 
     private void initAutoLandingUser() {
-
         UserInfo.setToken(preferUtils.getString(AppConstant.TOKEN));
         UserInfo.setId(preferUtils.getString(AppConstant.USER_ID));
+        UserInfo.setDriver(preferUtils.getBoolean(AppConstant.IS_DRIVER,true));
     }
 
     private void login() {
         Intent intent;
-        if (isDriver) {
+        if (UserInfo.isDriver()) {
             intent = new Intent(loginView.getContext(), DriverMainActivity.class);
         } else {
             intent = new Intent(loginView.getContext(), CarWashMainActivity.class);
@@ -153,6 +106,7 @@ public class LoginPresenterImpl implements ILoginContract.ILoginPresenter, Login
 
         PreferUtils.getInstance(loginView.getContext()).putString(AppConstant.TOKEN, token);
         PreferUtils.getInstance(loginView.getContext()).putString(AppConstant.USER_ID, id);
+        PreferUtils.getInstance(loginView.getContext()).putBoolean(AppConstant.IS_DRIVER, UserInfo.isDriver());
 
         UserInfo.setToken(token);
         UserInfo.setId(id);
@@ -167,6 +121,17 @@ public class LoginPresenterImpl implements ILoginContract.ILoginPresenter, Login
 
     @Override
     public void timeOut() {
+        loginView.showToast(AppConstant.NET_ERROR);
+    }
+
+    @Override
+    public void checkTokenSuccess() {
+        initAutoLandingUser();
+        login();
+    }
+
+    @Override
+    public void checkTokenFail() {
         loginView.showToast(AppConstant.NET_ERROR);
     }
 }

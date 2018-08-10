@@ -1,6 +1,7 @@
 package com.xtkj.paopaoxiche.model;
 
 import com.xtkj.paopaoxiche.application.AppConstant;
+import com.xtkj.paopaoxiche.application.Authentication;
 import com.xtkj.paopaoxiche.application.UserInfo;
 import com.xtkj.paopaoxiche.bean.LoginBean;
 import com.xtkj.paopaoxiche.bean.NoDataBean;
@@ -43,14 +44,73 @@ public class LoginModel {
 
     public interface LoginListener {
         void getCodeSuccess();
-
         void getCodeFail();
-
         void loginSuccess(String token, String id);
-
         void loginFail();
-
         void timeOut();
+        void checkTokenSuccess();
+        void checkTokenFail();
+    }
+
+    public void checkCarWashToken(){
+        RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
+                .create(UserService.class)
+                .checkCarWash()
+                .enqueue(new Callback<NoDataBean>() {
+                    @Override
+                    public void onResponse(Call<NoDataBean> call, Response<NoDataBean> response) {
+                        if (response.body().getCode() != 401) {
+                            if (loginListenerList == null) {
+                                return;
+                            }
+                            if (response.body().getCode() != 401) {
+                                for (LoginListener loginListener : loginListenerList) {
+                                    loginListener.checkTokenSuccess();
+                                }
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<NoDataBean> call, Throwable t) {
+                        if (loginListenerList == null) {
+                            return;
+                        }
+                        for (LoginListener loginListener : loginListenerList) {
+                            loginListener.checkTokenFail();
+                        }
+                    }
+                });
+    }
+
+    public void checkDriverToken(){
+        RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
+                .create(UserService.class)
+                .checkCarOwner()
+                .enqueue(new Callback<NoDataBean>() {
+                    @Override
+                    public void onResponse(Call<NoDataBean> call, Response<NoDataBean> response) {
+                        if (loginListenerList == null) {
+                            return;
+                        }
+                        if (response.body().getCode() != 401) {
+                            for (LoginListener loginListener : loginListenerList) {
+                                loginListener.checkTokenSuccess();
+                            }
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<NoDataBean> call, Throwable t) {
+                        if (loginListenerList == null) {
+                            return;
+                        }
+                        for (LoginListener loginListener : loginListenerList) {
+                            loginListener.checkTokenFail();
+                        }
+                    }
+                });
     }
 
     public void getMessageCode(String phone) {

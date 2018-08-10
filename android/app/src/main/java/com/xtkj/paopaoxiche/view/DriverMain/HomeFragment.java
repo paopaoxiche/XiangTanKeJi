@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.xtkj.paopaoxiche.R;
@@ -22,6 +23,7 @@ import com.xtkj.paopaoxiche.bean.WeatherForecastBean;
 import com.xtkj.paopaoxiche.bean.WeatherRealTimeBean;
 import com.xtkj.paopaoxiche.contract.IDriverContract;
 import com.xtkj.paopaoxiche.view.DriverMap.DriverMapActivity;
+import com.xtkj.paopaoxiche.view.WeatherForecast.WeatherForecastActivity;
 
 import java.text.DecimalFormat;
 
@@ -70,6 +72,12 @@ public class HomeFragment extends BaseFragmemt implements IDriverContract.IHomeV
     ImageView bgWeather;
     @BindView(R.id.wash_service_recyclerView)
     RecyclerView washServiceRecyclerView;
+    @BindView(R.id.home_weather_bg)
+    ScrollView homeWeatherBg;
+    @BindView(R.id.weather_details1)
+    LinearLayout weatherDetails1;
+    @BindView(R.id.weather_details2)
+    LinearLayout weatherDetails2;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -98,7 +106,7 @@ public class HomeFragment extends BaseFragmemt implements IDriverContract.IHomeV
         return view;
     }
 
-    void initView(){
+    void initView() {
         washServiceRecyclerView.setLayoutManager(new LinearLayoutManager(getActivityContext()));
     }
 
@@ -114,9 +122,6 @@ public class HomeFragment extends BaseFragmemt implements IDriverContract.IHomeV
 
     @Override
     public void setAddress(String address) {
-        if (address.length() > 10) {
-            address = address.substring(0, 10) + "...";
-        }
         locationText.setText(address);
     }
 
@@ -126,9 +131,10 @@ public class HomeFragment extends BaseFragmemt implements IDriverContract.IHomeV
         DecimalFormat myformat2 = new DecimalFormat("0");
         temperature.setText(String.format("%s°", Math.round(weatherRealTimeBean.getResult().getTemperature())));
         skycon.setText(SkyconValues.cnNameMap.get(weatherRealTimeBean.getResult().getSkycon()));
-        wind.setText(myformat.format(weatherRealTimeBean.getResult().getWind().getSpeed()));
-        humidity.setText(String.format("%s%%", myformat2.format(weatherRealTimeBean.getResult().getHumidity() * 100)));
-        bgWeather.setImageResource(SkyconValues.homeBgMap.get(weatherRealTimeBean.getResult().getSkycon()));
+        wind.setText(String.format("风速%s", myformat.format(weatherRealTimeBean.getResult().getWind().getSpeed())));
+        humidity.setText(String.format("湿度%s%%", myformat2.format(weatherRealTimeBean.getResult().getHumidity() * 100)));
+        bgWeather.setImageResource(SkyconValues.homeIconMap.get(weatherRealTimeBean.getResult().getSkycon()));
+        homeWeatherBg.setBackgroundResource(SkyconValues.weatherBgMap.get(weatherRealTimeBean.getResult().getSkycon()));
     }
 
     @Override
@@ -149,7 +155,7 @@ public class HomeFragment extends BaseFragmemt implements IDriverContract.IHomeV
         super.onDestroyView();
     }
 
-    @OnClick({R.id.location, R.id.more_wash_yard})
+    @OnClick({R.id.location, R.id.more_wash_yard, R.id.weather_details1, R.id.weather_details2})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.location:
@@ -158,6 +164,11 @@ public class HomeFragment extends BaseFragmemt implements IDriverContract.IHomeV
             case R.id.more_wash_yard:
                 Intent intent = new Intent(getActivity(), DriverMapActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.weather_details1:
+            case R.id.weather_details2:
+                Intent intent2 = new Intent(getActivity(), WeatherForecastActivity.class);
+                startActivity(intent2);
                 break;
         }
     }

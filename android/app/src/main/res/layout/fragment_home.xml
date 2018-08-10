@@ -1,173 +1,182 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    android:id="@+id/home_weather_bg"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_weather_bg"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@drawable/bg_weather_good_day"
+    android:orientation="vertical"
     tools:context=".view.DriverMain.HomeFragment">
 
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="100dp">
 
             <ImageView
-                android:layout_gravity="center"
                 android:id="@+id/bg_weather"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/bg_cloudy"/>
+                android:layout_gravity="center" />
+
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="100dp">
+                android:layout_height="100dp"
+                android:orientation="horizontal">
 
                 <LinearLayout
-                    android:gravity="center_vertical"
+                    android:id="@+id/weather_details1"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical">
+
                     <TextView
                         android:id="@+id/temperature"
-                        android:layout_marginStart="20dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:text="16°"
                         android:textColor="#fff"
-                        android:textSize="40sp"
-                        android:text="16°"/>
+                        android:textSize="40sp" />
                 </LinearLayout>
+
                 <LinearLayout
-                    android:layout_marginStart="8dp"
-                    android:orientation="vertical"
-                    android:gravity="center_vertical"
+                    android:id="@+id/weather_details2"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
 
                     <com.xtkj.paopaoxiche.widget.MarqueeTextView
+                        android:id="@+id/describe"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="marquee"
+                        android:focusable="true"
                         android:focusableInTouchMode="true"
                         android:marqueeRepeatLimit="marquee_forever"
                         android:singleLine="true"
-                        android:focusable="true"
-                        android:ellipsize="marquee"
-                        android:id="@+id/describe"
+                        android:text="近期无雨"
                         android:textColor="#fff"
-                        android:textSize="12sp"
-                        android:layout_width="120dp"
-                        android:layout_height="wrap_content"
-                        android:text="近期无雨"/>
+                        android:textSize="12sp" />
 
                     <LinearLayout
-                        android:layout_marginTop="8dp"
-                        android:gravity="center_vertical"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center_vertical">
 
                         <TextView
                             android:id="@+id/skycon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="阴"
                             android:textColor="#fff"
-                            android:textSize="12sp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="阴"/>
+                            android:textSize="12sp" />
+
                         <ImageView
-                            android:src="@drawable/img_low"
-                            android:layout_marginStart="12dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            />
+                            android:layout_marginStart="12dp"
+                            android:src="@drawable/img_low" />
+
                         <TextView
                             android:id="@+id/temperature_low"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="20"
                             android:textColor="#fff"
-                            android:textSize="12sp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="20"/>
+                            android:textSize="12sp" />
+
                         <ImageView
-                            android:src="@drawable/img_high"
-                            android:layout_marginStart="12dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            />
+                            android:layout_marginStart="12dp"
+                            android:src="@drawable/img_high" />
+
                         <TextView
                             android:id="@+id/temperature_high"
-                            android:textColor="#fff"
-                            android:textSize="12sp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="28"/>
+                            android:text="28"
+                            android:textColor="#fff"
+                            android:textSize="12sp" />
                     </LinearLayout>
 
 
                 </LinearLayout>
+
                 <LinearLayout
-                    android:paddingEnd="12dp"
-                    android:layout_marginStart="20dp"
-                    android:orientation="vertical"
-                    android:gravity="center_vertical"
-                    android:layout_weight="1"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="20dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical"
+                    android:paddingEnd="12dp">
 
                     <LinearLayout
-                        android:gravity="center_vertical|end"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical|end">
 
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/img_wind"
-                            />
+                            android:src="@drawable/img_wind" />
+
                         <TextView
-                            android:layout_marginRight="12dp"
                             android:id="@+id/wind"
-                            android:layout_gravity="end"
-                            android:textColor="#fff"
-                            android:textSize="12sp"
-                            android:text=""
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:layout_marginRight="12dp"
+                            android:text=""
+                            android:textColor="#fff"
+                            android:textSize="12sp" />
 
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/img_humidity"
-                            />
+                            android:src="@drawable/img_humidity" />
+
                         <TextView
                             android:id="@+id/humidity"
-                            android:layout_gravity="end"
-                            android:textColor="#fff"
-                            android:textSize="12sp"
-                            android:text=""
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:text=""
+                            android:textColor="#fff"
+                            android:textSize="12sp" />
                     </LinearLayout>
 
 
                     <LinearLayout
                         android:id="@+id/location"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:gravity="end"
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                        <TextView
-                            android:ellipsize="end"
-                            android:singleLine="true"
-                            android:gravity="end"
+                        android:orientation="horizontal">
+
+                        <com.xtkj.paopaoxiche.widget.MarqueeTextView
                             android:id="@+id/location_text"
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:singleLine="true"
+                            android:text="近期无雨"
                             android:textColor="#fff"
-                            android:textSize="12sp"
-                            android:maxWidth="200dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:textSize="12sp" />
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -180,68 +189,73 @@
 
 
         <LinearLayout
-            android:layout_marginLeft="12dp"
-            android:layout_marginRight="12dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@drawable/background_white_radius4dp">
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:background="@drawable/background_white_radius4dp"
+            android:orientation="vertical">
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <TextView
-                    android:layout_margin="16dp"
-                    android:layout_alignParentStart="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="18sp"
+                    android:layout_alignParentStart="true"
+                    android:layout_margin="16dp"
+                    android:text="附近洗车场"
                     android:textColor="#333333"
-                    android:text="附近洗车场"/>
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/more_wash_yard"
-                    android:focusable="true"
-                    android:clickable="true"
-                    android:background="@drawable/ripple_bg_white"
-                    android:layout_margin="8dp"
-                    android:padding="8dp"
-                    android:layout_alignParentEnd="true"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:textSize="16sp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_margin="8dp"
+                    android:background="@drawable/ripple_bg_white"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:padding="8dp"
+                    android:text="更多"
                     android:textColor="#999999"
-                    android:text="更多" />
+                    android:textSize="16sp" />
 
             </RelativeLayout>
 
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/wash_service_recyclerView"
                     android:layout_width="match_parent"
-                    android:minHeight="200dp"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:minHeight="200dp" />
+
                 <LinearLayout
                     android:id="@+id/no_wash_service"
-                    android:visibility="gone"
-                    android:gravity="center"
-                    android:background="#fff"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:background="#fff"
+                    android:gravity="center"
+                    android:visibility="gone">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="抱歉，附近没有洗车场服务"/>
+                        android:text="抱歉，附近没有洗车场服务" />
                 </LinearLayout>
             </FrameLayout>
         </LinearLayout>
 
         <android.support.v4.view.ViewPager
-            android:background="@drawable/background_white_radius4dp"
             android:id="@+id/shop_viewpager"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_white_radius4dp" />
 
     </LinearLayout>
 
