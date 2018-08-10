@@ -45,13 +45,15 @@ public class LoginPresenterImpl implements ILoginContract.ILoginPresenter, Login
         String account = PreferUtils.getInstance(loginView.getContext()).getString(AppConstant.ACCOUNT);
         loginView.initAccount(account);
 
+        LoginModel.getInstance().addListener(this);
 
         checkToken(isDriver);
     }
 
     @Override
     public void onDestroy() {
-
+        LoginModel.getInstance().removeListener(this);
+        LoginModel.release();
     }
 
     @Override
