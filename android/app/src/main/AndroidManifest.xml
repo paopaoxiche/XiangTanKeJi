@@ -38,11 +38,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <service android:name="com.amap.api.location.APSService"/>
-
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="2f569a7bc367d0752e943cb83af7117b" />
+
+        <service android:name="com.amap.api.location.APSService"/>
 
         <activity android:name=".view.GuideActivity">
             <intent-filter>

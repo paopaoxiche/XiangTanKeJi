@@ -1,7 +1,6 @@
 package com.xtkj.paopaoxiche.http;
 
 import java.io.IOException;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Interceptor;
@@ -64,5 +63,14 @@ public class RetrofitClient {
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
         return mRetrofit;
+    }
+
+    static class ServiceInterceptor implements Interceptor {
+        @Override
+        public Response intercept(Chain chain) throws IOException {
+            Request request = chain.request();
+            Response response = chain.proceed(request);
+            return response;
+        }
     }
 }

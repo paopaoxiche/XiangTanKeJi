@@ -1,29 +1,29 @@
 package com.xtkj.paopaoxiche.view.DriverMain;
 
 import android.Manifest;
-import android.net.ProxyInfo;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 
 import com.xtkj.paopaoxiche.R;
+import com.xtkj.paopaoxiche.base.BaseGaodeActivity;
 import com.xtkj.paopaoxiche.presenter.DriverHomePresenterImpl;
 import com.xtkj.paopaoxiche.presenter.DriverMyInfoPresenterImpl;
-import com.xtkj.paopaoxiche.view.DriverMain.SimpleFragmentPagerAdapter;
-import com.xtkj.paopaoxiche.base.BaseActivity;
 import com.xtkj.paopaoxiche.base.BaseFragmemt;
-import com.xtkj.paopaoxiche.bean.WeatherLiveBean;
+import com.xtkj.paopaoxiche.bean.WeatherRealTimeBean;
 import com.xtkj.paopaoxiche.contract.IDriverContract;
 import com.xtkj.paopaoxiche.presenter.DriverPresenterImpl;
 
 import java.util.ArrayList;
 
 
-public class DriverMainActivity extends BaseActivity implements IDriverContract.IDriverView,BaseFragmemt.OnFragmentInteractionListener {
+public class DriverMainActivity extends BaseGaodeActivity implements IDriverContract.IDriverView,BaseFragmemt.OnFragmentInteractionListener {
 
     private final String TAG = "DriverMainActivity";
 
@@ -55,6 +55,13 @@ public class DriverMainActivity extends BaseActivity implements IDriverContract.
 
         new DriverPresenterImpl(this);
         driverPresenter.onCreate();
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            //申请WRITE_EXTERNAL_STORAGE权限
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
+                    0);
+        }
     }
 
     @Override
@@ -106,7 +113,7 @@ public class DriverMainActivity extends BaseActivity implements IDriverContract.
     }
 
     @Override
-    public void setWeather(WeatherLiveBean weatherLiveBean) {
+    public void setWeather(WeatherRealTimeBean weatherRealTimeBean) {
 
     }
 

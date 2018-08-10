@@ -1,32 +1,75 @@
 package com.xtkj.paopaoxiche.view.DriverMain;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.xtkj.paopaoxiche.R;
+import com.xtkj.paopaoxiche.application.SkyconValues;
 import com.xtkj.paopaoxiche.base.BaseFragmemt;
+import com.xtkj.paopaoxiche.bean.WashServicesBean;
+import com.xtkj.paopaoxiche.bean.WeatherForecastBean;
+import com.xtkj.paopaoxiche.bean.WeatherRealTimeBean;
 import com.xtkj.paopaoxiche.contract.IDriverContract;
 import com.xtkj.paopaoxiche.view.DriverMap.DriverMapActivity;
+
+import java.text.DecimalFormat;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link HomeFragment.OnFragmentInteractionListener} interface
+ * {@link OnFragmentInteractionListener} interface
  * to handle interaction events.
  * Use the {@link HomeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HomeFragment extends BaseFragmemt implements IDriverContract.IHomeView{
+public class HomeFragment extends BaseFragmemt implements IDriverContract.IHomeView {
 
 
     IDriverContract.IHomePresenter homePresenter;
 
+    @BindView(R.id.temperature)
+    TextView temperature;
+    @BindView(R.id.describe)
+    TextView describe;
+    @BindView(R.id.skycon)
+    TextView skycon;
+    @BindView(R.id.temperature_low)
+    TextView temperatureLow;
+    @BindView(R.id.temperature_high)
+    TextView temperatureHigh;
+    @BindView(R.id.wind)
+    TextView wind;
+    @BindView(R.id.location_text)
+    TextView locationText;
+    @BindView(R.id.location)
+    LinearLayout location;
+    @BindView(R.id.more_wash_yard)
     TextView moreWashYard;
+    @BindView(R.id.no_wash_service)
+    LinearLayout noWashService;
+    @BindView(R.id.shop_viewpager)
+    ViewPager shopViewpager;
+    @BindView(R.id.humidity)
+    TextView humidity;
+    @BindView(R.id.bg_weather)
+    ImageView bgWeather;
+    @BindView(R.id.wash_service_recyclerView)
+    RecyclerView washServiceRecyclerView;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -48,23 +91,76 @@ public class HomeFragment extends BaseFragmemt implements IDriverContract.IHomeV
         // Inflate the layout for this fragment
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+        homePresenter.onCreate();
+        ButterKnife.bind(this, view);
 
-        initViews(view);
-
+        initView();
         return view;
     }
 
-    private void initViews(View view){
-        moreWashYard = view.findViewById((R.id.more_wash_yard));
-        moreWashYard.setOnClickListener(view1 -> {
-            Intent intent = new Intent(getActivity(),DriverMapActivity.class);
-            startActivity(intent);
-        });
-
+    void initView(){
+        washServiceRecyclerView.setLayoutManager(new LinearLayoutManager(getActivityContext()));
     }
 
     @Override
     public void setPresenter(IDriverContract.IHomePresenter iHomePresenter) {
         homePresenter = iHomePresenter;
     }
+
+    @Override
+    public Context getActivityContext() {
+        return getContext();
+    }
+
+    @Override
+    public void setAddress(String address) {
+        if (address.length() > 10) {
+            address = address.substring(0, 10) + "...";
+        }
+        locationText.setText(address);
+    }
+
+    @Override
+    public void setRealTimeWeather(WeatherRealTimeBean weatherRealTimeBean) {
+        DecimalFormat myformat = new DecimalFormat("0.0");
+        DecimalFormat myformat2 = new DecimalFormat("0");
+        temperature.setText(String.format("%s°", Math.round(weatherRealTimeBean.getResult().getTemperature())));
+        skycon.setText(SkyconValues.cnNameMap.get(weatherRealTimeBean.getResult().getSkycon()));
+        wind.setText(myformat.format(weatherRealTimeBean.getResult().getWind().getSpeed()));
+        humidity.setText(String.format("%s%%", myformat2.format(weatherRealTimeBean.getResult().getHumidity() * 100)));
+        bgWeather.setImageResource(SkyconValues.homeBgMap.get(weatherRealTimeBean.getResult().getSkycon()));
+    }
+
+    @Override
+    public void setForecastWeather(WeatherForecastBean weatherForecastBean) {
+        DecimalFormat myformat = new DecimalFormat("0.0");
+        temperatureHigh.setText(myformat.format(weatherForecastBean.getResult().getDaily().getTemperature().get(0).getMax()));
+        temperatureLow.setText(myformat.format(weatherForecastBean.getResult().getDaily().getTemperature().get(0).getMin()));
+        describe.setText(weatherForecastBean.getResult().getForecast_keypoint());
+    }
+
+    @Override
+    public void setWashService(WashServicesBean washServicesBean) {
+
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+    }
+
+    @OnClick({R.id.location, R.id.more_wash_yard})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.location:
+                homePresenter.updateLocation();
+                break;
+            case R.id.more_wash_yard:
+                Intent intent = new Intent(getActivity(), DriverMapActivity.class);
+                startActivity(intent);
+                break;
+        }
+    }
+
+
 }

@@ -1,19 +1,19 @@
 package com.xtkj.paopaoxiche.service;
 
-import com.xtkj.paopaoxiche.bean.DemoBean;
-import com.xtkj.paopaoxiche.bean.WeatherLiveBean;
+import com.xtkj.paopaoxiche.bean.WeatherForecastBean;
+import com.xtkj.paopaoxiche.bean.WeatherRealTimeBean;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
-import retrofit2.http.Query;
+import rx.Observable;
 
 public interface WeatherService {
 
-    /**
-     *  @param city
-     * */
-    @GET("weather/live")
-    Call<WeatherLiveBean> getWeatherLive(@Query("city") String city) ;
+    @GET("realtime.json")
+    Observable<WeatherRealTimeBean> getRealTime() ;
 
+
+    @GET("forecast.json")
+    Observable<WeatherForecastBean> getRorecast() ;
 
 }
