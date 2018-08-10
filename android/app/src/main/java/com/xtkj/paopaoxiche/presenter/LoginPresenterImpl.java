@@ -10,6 +10,7 @@ import com.xtkj.paopaoxiche.contract.ILoginContract;
 import com.xtkj.paopaoxiche.http.ApiField;
 import com.xtkj.paopaoxiche.application.Authentication;
 import com.xtkj.paopaoxiche.http.RetrofitClient;
+import com.xtkj.paopaoxiche.model.LoginModel;
 import com.xtkj.paopaoxiche.service.UserService;
 import com.xtkj.paopaoxiche.utils.PreferUtils;
 import com.xtkj.paopaoxiche.view.CarWashMain.CarWashMainActivity;
@@ -19,11 +20,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LoginPresenterImpl implements ILoginContract.ILoginPresenter {
+public class LoginPresenterImpl implements ILoginContract.ILoginPresenter, LoginModel.LoginListener {
 
     ILoginContract.ILoginView loginView;
     PreferUtils preferUtils;
-    boolean isDriver = true ;
+    boolean isDriver = true;
 
     public LoginPresenterImpl(ILoginContract.ILoginView iLoginView) {
         loginView = iLoginView;
@@ -31,7 +32,7 @@ public class LoginPresenterImpl implements ILoginContract.ILoginPresenter {
         init();
     }
 
-    private void init(){
+    private void init() {
         preferUtils = PreferUtils.getInstance(loginView.getContext());
         UserInfo.setToken(preferUtils.getString(AppConstant.TOKEN));
         UserInfo.setId(preferUtils.getString(AppConstant.USER_ID));
@@ -41,9 +42,8 @@ public class LoginPresenterImpl implements ILoginContract.ILoginPresenter {
 
     @Override
     public void onCreate() {
-        String account= PreferUtils.getInstance(loginView.getContext()).getString(AppConstant.ACCOUNT);
+        String account = PreferUtils.getInstance(loginView.getContext()).getString(AppConstant.ACCOUNT);
         loginView.initAccount(account);
-
 
 
         checkToken(isDriver);
@@ -56,70 +56,30 @@ public class LoginPresenterImpl implements ILoginContract.ILoginPresenter {
 
     @Override
     public void getMessageCode(String phone) {
-        RetrofitClient.newInstance(ApiField.BASEURL)
-                .create(UserService.class)
-                .getMessageCode(phone)
-                .enqueue(new Callback<NoDataBean>() {
-                    @Override
-                    public void onResponse(Call<NoDataBean> call, Response<NoDataBean> response) {
-                        if(response.body().getCode()==200){
-                            loginView.showToast(response.body().getMsg());
-                        }else {
-                            loginView.showToast(response.body().getMsg());
-                            loginView.resetSentMsgButton();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<NoDataBean> call, Throwable t) {
-                        loginView.showToast(AppConstant.NET_ERROR);
-                    }
-                });
-
+        LoginModel.getInstance().getMessageCode(phone);
     }
 
     @Override
     public void doLogin(String account, long code) {
         int type = 1;
-        if(isDriver) type = 0;
-        RetrofitClient.newInstance(ApiField.BASEURL)
-                .create(UserService.class)
-                .Login(account,code,type)
-                .enqueue(new Callback<LoginBean>() {
-                    @Override
-                    public void onResponse(Call<LoginBean> call, Response<LoginBean> response) {
-                        loginView.showToast("登陆成功");
+        if (isDriver) type = 0;
 
-                        PreferUtils.getInstance(loginView.getContext()).putString(AppConstant.TOKEN,response.body().getData().getToken());
-                        PreferUtils.getInstance(loginView.getContext()).putString(AppConstant.USER_ID,response.body().getData().getId());
+        LoginModel.getInstance().doLogin(account, code, type);
 
-                        UserInfo.setToken(response.body().getData().getToken());
-                        UserInfo.setId(response.body().getData().getId());
-
-                        login();
-                    }
-
-                    @Override
-                    public void onFailure(Call<LoginBean> call, Throwable t) {
-                        loginView.showToast(AppConstant.NET_ERROR);
-                    }
-                });
-
-
-        PreferUtils.getInstance(loginView.getContext()).putString(AppConstant.ACCOUNT,account);
+        PreferUtils.getInstance(loginView.getContext()).putString(AppConstant.ACCOUNT, account);
     }
 
     @Override
     public void checkToken(Boolean isDriver) {
 
-        if (isDriver){
-            RetrofitClient.newInstance(ApiField.BASEURL,Authentication.getAuthentication())
+        if (isDriver) {
+            RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
                     .create(UserService.class)
                     .checkCarOwner()
                     .enqueue(new Callback<NoDataBean>() {
                         @Override
                         public void onResponse(Call<NoDataBean> call, Response<NoDataBean> response) {
-                            if(response.body().getCode()!=401){
+                            if (response.body().getCode() != 401) {
                                 initAutoLandingUser();
                                 login();
                             }
@@ -132,13 +92,13 @@ public class LoginPresenterImpl implements ILoginContract.ILoginPresenter {
                         }
                     });
         } else {
-            RetrofitClient.newInstance(ApiField.BASEURL,Authentication.getAuthentication())
+            RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
                     .create(UserService.class)
                     .checkCarWash()
                     .enqueue(new Callback<NoDataBean>() {
                         @Override
                         public void onResponse(Call<NoDataBean> call, Response<NoDataBean> response) {
-                            if(response.body().getCode()!=401){
+                            if (response.body().getCode() != 401) {
                                 initAutoLandingUser();
                                 login();
                             }
@@ -158,19 +118,53 @@ public class LoginPresenterImpl implements ILoginContract.ILoginPresenter {
         isDriver = driver;
     }
 
-    private void initAutoLandingUser(){
+    private void initAutoLandingUser() {
 
         UserInfo.setToken(preferUtils.getString(AppConstant.TOKEN));
         UserInfo.setId(preferUtils.getString(AppConstant.USER_ID));
     }
 
-    private void login(){
+    private void login() {
         Intent intent;
-        if(isDriver){
+        if (isDriver) {
             intent = new Intent(loginView.getContext(), DriverMainActivity.class);
-        }else {
+        } else {
             intent = new Intent(loginView.getContext(), CarWashMainActivity.class);
         }
         loginView.getContext().startActivity(intent);
+    }
+
+    @Override
+    public void getCodeSuccess() {
+        loginView.showToast("获取验证码成功");
+    }
+
+    @Override
+    public void getCodeFail() {
+        loginView.showToast("获取验证码失败， 请稍后再试");
+        loginView.resetSentMsgButton();
+    }
+
+    @Override
+    public void loginSuccess(String token, String id) {
+        loginView.showToast("登陆成功");
+
+        PreferUtils.getInstance(loginView.getContext()).putString(AppConstant.TOKEN, token);
+        PreferUtils.getInstance(loginView.getContext()).putString(AppConstant.USER_ID, id);
+
+        UserInfo.setToken(token);
+        UserInfo.setId(id);
+
+        login();
+    }
+
+    @Override
+    public void loginFail() {
+        loginView.showToast("登录失败，请检查账号或验证码");
+    }
+
+    @Override
+    public void timeOut() {
+        loginView.showToast(AppConstant.NET_ERROR);
     }
 }
