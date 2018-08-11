@@ -1,6 +1,7 @@
 package com.xtkj.paopaoxiche.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -168,6 +169,12 @@ public class LoginActivity extends BaseActivity implements RadioGroup.OnCheckedC
         sendMsgButton.reset();
     }
 
+    @Override
+    public void login(Intent intent) {
+        startActivity(intent);
+        finish();
+    }
+
 
     @OnClick({R.id.send_msg, R.id.role_radio_group, R.id.login_button})
     public void onClick(View view) {
@@ -185,7 +192,13 @@ public class LoginActivity extends BaseActivity implements RadioGroup.OnCheckedC
                 break;
             case R.id.login_button:
                 String account = accountText.getEditableText().toString() + "";
-                Long code = Long.valueOf(codeText.getEditableText().toString());
+                String codeString = codeText.getEditableText().toString() + "";
+                if (account == null || !PhoneCheckUtils.isChinaPhoneLegal(account)
+                        || codeString == null || codeString.length() < 6) {
+                    showToast("电话号码或验证码输入不正确");
+                    return;
+                }
+                Long code = Long.valueOf(codeText.getEditableText().toString() + "");
 
                 loginPresenter.doLogin(account, code);
 
