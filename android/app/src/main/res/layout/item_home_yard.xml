@@ -1,14 +1,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_margin="12dp"
+    android:paddingLeft="12dp"
+    android:paddingRight="12dp"
+    android:paddingTop="6dp"
+    android:paddingBottom="6dp"
     android:orientation="horizontal"
-    android:layout_height="wrap_content">
+    android:clickable="true"
+    android:background="@drawable/ripple_bg_white"
+    android:layout_height="wrap_content"
+    android:focusable="true">
     <ImageView
+        android:id="@+id/user_img"
         android:layout_marginStart="4dp"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:background="#000"/>
+        android:background="#fff"/>
 
     <LinearLayout
         android:layout_marginStart="18dp"
@@ -21,6 +28,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent">
             <TextView
+                android:id="@+id/user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"

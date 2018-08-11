@@ -26,6 +26,7 @@ public class DriverHomeModel {
     private static DriverHomeModel instance;
     private List<DriverHomeListener> driverHomeListenerList = null;
     private AMapLocationClient mLocationClient =null;
+    private WashServicesBean washServicesBean = null;
 
     private double longitude = 0;
     private double latitude = 0;
@@ -69,6 +70,7 @@ public class DriverHomeModel {
                 .enqueue(new Callback<WashServicesBean>() {
                     @Override
                     public void onResponse(Call<WashServicesBean> call, Response<WashServicesBean> response) {
+                        washServicesBean = response.body();
                         for (DriverHomeListener driverHomeListener : driverHomeListenerList) {
                             driverHomeListener.getWashServicesSuccess(response.body());
                         }
@@ -113,6 +115,7 @@ public class DriverHomeModel {
                     @Override
                     public void onResponse(Call<WeatherForecastBean> call, Response<WeatherForecastBean> response) {
                         weatherForecastBean = response.body();
+
                         for (DriverHomeListener driverHomeListener : driverHomeListenerList) {
                             driverHomeListener.getForecastWeatherSuccess(response.body());
                         }
@@ -164,6 +167,9 @@ public class DriverHomeModel {
         mLocationClient.startLocation();
     }
 
+    public WashServicesBean getWashServicesBean() {
+        return washServicesBean;
+    }
 
     public double getLongitude() {
         return longitude;

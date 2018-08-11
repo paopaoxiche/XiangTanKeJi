@@ -160,11 +160,11 @@ public class WeatherForecastActivity extends BaseGaodeActivity implements IWeath
         temperatureLow.setText(String.format("%s°", myformat0.format(weatherForecastBean.getResult().getDaily().getTemperature().get(0).getMin())));
         forecast.setText(weatherForecastBean.getResult().getForecast_keypoint());
 
-        date1.setText(weatherForecastBean.getResult().getDaily().getTemperature().get(0).getDate());
-        date2.setText(weatherForecastBean.getResult().getDaily().getTemperature().get(1).getDate());
-        date3.setText(weatherForecastBean.getResult().getDaily().getTemperature().get(2).getDate());
-        date4.setText(weatherForecastBean.getResult().getDaily().getTemperature().get(3).getDate());
-        date5.setText(weatherForecastBean.getResult().getDaily().getTemperature().get(4).getDate());
+        date1.setText(weatherForecastBean.getResult().getDaily().getTemperature().get(0).getDate().substring(5,10).replace("-","/"));
+        date2.setText(weatherForecastBean.getResult().getDaily().getTemperature().get(1).getDate().substring(5,10).replace("-","/"));
+        date3.setText(weatherForecastBean.getResult().getDaily().getTemperature().get(2).getDate().substring(5,10).replace("-","/"));
+        date4.setText(weatherForecastBean.getResult().getDaily().getTemperature().get(3).getDate().substring(5,10).replace("-","/"));
+        date5.setText(weatherForecastBean.getResult().getDaily().getTemperature().get(4).getDate().substring(5,10).replace("-","/"));
 
         Calendar cal = Calendar.getInstance();
         int i = cal.get(Calendar.DAY_OF_WEEK);

@@ -31,11 +31,11 @@ public class SkyconValues {
         homeIconMap.put("CLEAR_NIGHT", R.drawable.bg_goodnight);
         homeIconMap.put("PARTLY_CLOUDY_DAY", R.drawable.bg_cloudy);
         homeIconMap.put("PARTLY_CLOUDY_NIGHT", R.drawable.bg_cloudy);
-        homeIconMap.put("CLOUDY", null);
+        homeIconMap.put("CLOUDY", R.drawable.bg_nothing);
         homeIconMap.put("RAIN", R.drawable.bg_rainy);
         homeIconMap.put("SNOW", R.drawable.bg_snow);
         homeIconMap.put("WIND", R.drawable.bg_windy);
-        homeIconMap.put("HAZE",null);
+        homeIconMap.put("HAZE",R.drawable.bg_nothing);
 
 
         weatherBgMap.put("CLEAR_DAY", R.drawable.bg_weather_good_day);
@@ -57,7 +57,7 @@ public class SkyconValues {
         forecastBgMap.put("RAIN", R.drawable.bg_forecast_rain);
         forecastBgMap.put("SNOW", R.drawable.bg_forecast_snow);
         forecastBgMap.put("WIND", R.drawable.bg_forecast_wind);
-        forecastBgMap.put("HAZE", null);
+        forecastBgMap.put("HAZE", R.drawable.bg_nothing);
 
         forecastIconMap.put("CLEAR_DAY", R.drawable.forecast_good_day);
         forecastIconMap.put("CLEAR_NIGHT", R.drawable.forecast_good_night);

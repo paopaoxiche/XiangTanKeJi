@@ -186,7 +186,7 @@
             android:layout_marginLeft="28dp"
             android:layout_marginRight="28dp"
             android:layout_marginTop="14dp"
-            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
@@ -200,7 +200,7 @@
                 android:textColor="#fff"
                 android:layout_marginLeft="16dp"
                 android:id="@+id/week1"
-                android:layout_width="80dp"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content" />
             <ImageView
                 android:layout_marginLeft="56dp"
@@ -232,7 +232,7 @@
             android:layout_marginLeft="28dp"
             android:layout_marginRight="28dp"
             android:layout_marginTop="14dp"
-            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
@@ -251,7 +251,7 @@
             <ImageView
                 android:layout_marginLeft="56dp"
                 android:id="@+id/sky_img2"
-                android:layout_width="80dp"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content" />
             <View
                 android:layout_weight="1"
@@ -277,7 +277,7 @@
             android:layout_marginLeft="28dp"
             android:layout_marginRight="28dp"
             android:layout_marginTop="14dp"
-            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
@@ -291,7 +291,7 @@
                 android:textColor="#fff"
                 android:layout_marginLeft="16dp"
                 android:id="@+id/week3"
-                android:layout_width="80dp"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content" />
             <ImageView
                 android:layout_marginLeft="56dp"
@@ -322,7 +322,7 @@
             android:layout_marginLeft="28dp"
             android:layout_marginRight="28dp"
             android:layout_marginTop="14dp"
-            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
@@ -336,7 +336,7 @@
                 android:textColor="#fff"
                 android:layout_marginLeft="16dp"
                 android:id="@+id/week4"
-                android:layout_width="80dp"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content" />
             <ImageView
                 android:layout_marginLeft="56dp"
@@ -367,7 +367,7 @@
             android:layout_marginLeft="28dp"
             android:layout_marginRight="28dp"
             android:layout_marginTop="14dp"
-            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
@@ -381,7 +381,7 @@
                 android:textColor="#fff"
                 android:layout_marginLeft="16dp"
                 android:id="@+id/week5"
-                android:layout_width="80dp"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content" />
             <ImageView
                 android:layout_marginLeft="56dp"

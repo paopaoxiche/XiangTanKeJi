@@ -27,7 +27,7 @@ public class IDriverContract {
         void setAddress(String address);
         void setRealTimeWeather(WeatherRealTimeBean weatherRealTimeBean);
         void setForecastWeather(WeatherForecastBean weatherForecastBean);
-        void setWashService(WashServicesBean washServicesBean);
+        void updateWashServicesBean();
 
     }
 

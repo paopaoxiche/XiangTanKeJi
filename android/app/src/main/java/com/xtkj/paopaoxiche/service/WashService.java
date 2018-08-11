@@ -2,6 +2,7 @@ package com.xtkj.paopaoxiche.service;
 
 import com.xtkj.paopaoxiche.bean.LoginBean;
 import com.xtkj.paopaoxiche.bean.WashServicesBean;
+import com.xtkj.paopaoxiche.bean.WashShopBean;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -26,5 +27,7 @@ public interface WashService {
     Call<WashServicesBean> getNearbyWashServiceList(@Query("lng") Double lng, @Query("lat")Double lat, @Query("count")int count, @Query("showAll")int showAll, @Query("priceLimit")float priceLimit);
 
 
+    @GET("wash/getRecommendCommodity")
+    Call<WashShopBean> getRecommendCommodity(@Query("washId") String id,@Query("count") int count);
 
 }

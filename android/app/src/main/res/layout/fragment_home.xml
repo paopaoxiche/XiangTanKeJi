@@ -5,9 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_weather_good_day"
-    android:orientation="vertical"
     tools:context=".view.DriverMain.HomeFragment">
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -251,13 +249,26 @@
             </FrameLayout>
         </LinearLayout>
 
+
+
+        <LinearLayout
+            android:layout_marginTop="12dp"
+            android:id="@+id/indicator"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </LinearLayout>
+
         <android.support.v4.view.ViewPager
+            android:layout_marginTop="12dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginBottom="70dp"
             android:id="@+id/shop_viewpager"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="300dp"
             android:background="@drawable/background_white_radius4dp" />
-
     </LinearLayout>
-
-
 </ScrollView>

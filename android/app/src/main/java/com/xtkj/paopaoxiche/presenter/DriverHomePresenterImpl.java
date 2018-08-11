@@ -54,7 +54,7 @@ public class DriverHomePresenterImpl implements IDriverContract.IHomePresenter,D
 
     @Override
     public void getWashServicesSuccess(WashServicesBean washServicesBean) {
-        homeView.setWashService(washServicesBean);
+        homeView.updateWashServicesBean();
     }
 
     @Override

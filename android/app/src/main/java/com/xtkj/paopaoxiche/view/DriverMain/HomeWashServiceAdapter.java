@@ -1,11 +1,14 @@
 package com.xtkj.paopaoxiche.view.DriverMain;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.xtkj.paopaoxiche.R;
 import com.xtkj.paopaoxiche.bean.WashServicesBean;
 
@@ -14,11 +17,13 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class HomeYardsAdapter extends RecyclerView.Adapter<HomeYardsAdapter.ViewHolder> {
+public class HomeWashServiceAdapter extends RecyclerView.Adapter<HomeWashServiceAdapter.ViewHolder> {
     public ArrayList<WashServicesBean.DataBean> dataList = null;
+    public Context mContext;
 
-    public HomeYardsAdapter(WashServicesBean washServicesBean) {
+    public HomeWashServiceAdapter(WashServicesBean washServicesBean,Context context) {
         this.dataList = (ArrayList<WashServicesBean.DataBean>) washServicesBean.getData();
+        this.mContext = context;
     }
 
     @Override
@@ -31,6 +36,12 @@ public class HomeYardsAdapter extends RecyclerView.Adapter<HomeYardsAdapter.View
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
 
+        Glide.with(mContext).load(dataList.get(position).getImage()).into(viewHolder.userImg);
+        viewHolder.userName.setText(dataList.get(position).getName());
+        viewHolder.yardSpend.setText(String.format("%s", dataList.get(position).getPrice()));
+        viewHolder.honorTimes.setText(String.format("%s", dataList.get(position).getHonor()));
+        viewHolder.washTimes.setText(String.format("%s", dataList.get(position).getWashCount()));
+        viewHolder.yardDistance.setText(String.format("%s", dataList.get(position).getDistance()));
     }
 
     @Override
@@ -39,6 +50,10 @@ public class HomeYardsAdapter extends RecyclerView.Adapter<HomeYardsAdapter.View
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.user_img)
+        ImageView userImg;
+        @BindView(R.id.user_name)
+        TextView userName;
         @BindView(R.id.honor_times)
         TextView honorTimes;
         @BindView(R.id.wash_times)

@@ -18,10 +18,10 @@ import android.widget.TextView;
 import com.xtkj.paopaoxiche.R;
 import com.xtkj.paopaoxiche.application.SkyconValues;
 import com.xtkj.paopaoxiche.base.BaseFragmemt;
-import com.xtkj.paopaoxiche.bean.WashServicesBean;
 import com.xtkj.paopaoxiche.bean.WeatherForecastBean;
 import com.xtkj.paopaoxiche.bean.WeatherRealTimeBean;
 import com.xtkj.paopaoxiche.contract.IDriverContract;
+import com.xtkj.paopaoxiche.model.DriverHomeModel;
 import com.xtkj.paopaoxiche.view.DriverMap.DriverMapActivity;
 import com.xtkj.paopaoxiche.view.WeatherForecast.WeatherForecastActivity;
 
@@ -43,6 +43,9 @@ public class HomeFragment extends BaseFragmemt implements IDriverContract.IHomeV
 
 
     IDriverContract.IHomePresenter homePresenter;
+    HomeWashServiceAdapter homeWashServiceAdapter = null;
+    HomeShopFragmentAdapter homeShopFragmentAdapter = null;
+    private int  viewpager_index = 0 ;
 
     @BindView(R.id.temperature)
     TextView temperature;
@@ -78,6 +81,8 @@ public class HomeFragment extends BaseFragmemt implements IDriverContract.IHomeV
     LinearLayout weatherDetails1;
     @BindView(R.id.weather_details2)
     LinearLayout weatherDetails2;
+    @BindView(R.id.indicator)
+    LinearLayout indicator;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -146,9 +151,50 @@ public class HomeFragment extends BaseFragmemt implements IDriverContract.IHomeV
     }
 
     @Override
-    public void setWashService(WashServicesBean washServicesBean) {
+    public void updateWashServicesBean() {
+        if (homeWashServiceAdapter == null) {
+            homeWashServiceAdapter = new HomeWashServiceAdapter(DriverHomeModel.getInstance().getWashServicesBean(), getActivityContext());
+            washServiceRecyclerView.setAdapter(homeWashServiceAdapter);
+        }
 
+        homeShopFragmentAdapter = new HomeShopFragmentAdapter(getActivity().getSupportFragmentManager(), DriverHomeModel.getInstance().getWashServicesBean().getData());
+        shopViewpager.setAdapter(homeShopFragmentAdapter);
+        shopViewpager.setCurrentItem(0);
+
+        int num = DriverHomeModel.getInstance().getWashServicesBean().getData().size();
+        for (int i = 0; i < num; i++) {
+            View view = new View(getActivityContext());
+            view.setBackgroundResource(R.drawable.home_indicator);
+            view.setEnabled(false);
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(30, 30);
+            layoutParams.leftMargin = 10;
+            indicator.addView(view,layoutParams);
+        }
+        indicator.getChildAt(0).setEnabled(true);
+        shopViewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                indicator.getChildAt(viewpager_index).setEnabled(false);
+                indicator.getChildAt(position).setEnabled(true);
+                viewpager_index = position;
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+        shopViewpager.setCurrentItem(0);
+        homeShopFragmentAdapter.notifyDataSetChanged();
+        homeWashServiceAdapter.notifyDataSetChanged();
     }
+
 
     @Override
     public void onDestroyView() {
