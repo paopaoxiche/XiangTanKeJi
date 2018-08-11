@@ -15,19 +15,10 @@ import com.xtkj.paopaoxiche.view.DriverMain.DriverMainActivity;
 public class LoginPresenterImpl implements ILoginContract.ILoginPresenter, LoginModel.LoginListener {
 
     ILoginContract.ILoginView loginView;
-    PreferUtils preferUtils;
 
     public LoginPresenterImpl(ILoginContract.ILoginView iLoginView) {
         loginView = iLoginView;
         iLoginView.setPresenter(this);
-        init();
-    }
-
-    private void init() {
-        preferUtils = PreferUtils.getInstance(loginView.getContext());
-        initAutoLandingUser();
-        Authentication.setUser_id(UserInfo.getId());
-        Authentication.setToken(UserInfo.getToken());
     }
 
     @Override
@@ -35,7 +26,7 @@ public class LoginPresenterImpl implements ILoginContract.ILoginPresenter, Login
         String account = PreferUtils.getInstance(loginView.getContext()).getString(AppConstant.ACCOUNT);
         loginView.initAccount(account);
         LoginModel.getInstance().addListener(this);
-        checkToken();
+//        checkToken();
     }
 
     @Override
@@ -59,24 +50,18 @@ public class LoginPresenterImpl implements ILoginContract.ILoginPresenter, Login
         PreferUtils.getInstance(loginView.getContext()).putString(AppConstant.ACCOUNT, account);
     }
 
-    @Override
-    public void checkToken() {
-        if (UserInfo.isDriver()) {
-            LoginModel.getInstance().checkDriverToken();
-        } else {
-            LoginModel.getInstance().checkCarWashToken();
-        }
-    }
+//    @Override
+//    public void checkToken() {
+//        if (UserInfo.isDriver()) {
+//            LoginModel.getInstance().checkDriverToken();
+//        } else {
+//            LoginModel.getInstance().checkCarWashToken();
+//        }
+//    }
 
     @Override
     public void setIsDriver(boolean driver) {
         UserInfo.setDriver(driver);
-    }
-
-    private void initAutoLandingUser() {
-        UserInfo.setToken(preferUtils.getString(AppConstant.TOKEN));
-        UserInfo.setId(preferUtils.getString(AppConstant.USER_ID));
-        UserInfo.setDriver(preferUtils.getBoolean(AppConstant.IS_DRIVER,true));
     }
 
     private void login() {
@@ -86,7 +71,7 @@ public class LoginPresenterImpl implements ILoginContract.ILoginPresenter, Login
         } else {
             intent = new Intent(loginView.getContext(), CarWashMainActivity.class);
         }
-        loginView.getContext().startActivity(intent);
+        loginView.login(intent);
     }
 
     @Override
@@ -126,12 +111,6 @@ public class LoginPresenterImpl implements ILoginContract.ILoginPresenter, Login
 
     @Override
     public void checkTokenSuccess() {
-        initAutoLandingUser();
-        login();
-    }
 
-    @Override
-    public void checkTokenFail() {
-        loginView.showToast(AppConstant.NET_ERROR);
     }
 }

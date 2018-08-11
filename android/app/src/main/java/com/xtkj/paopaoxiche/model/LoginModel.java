@@ -49,7 +49,6 @@ public class LoginModel {
         void loginFail();
         void timeOut();
         void checkTokenSuccess();
-        void checkTokenFail();
     }
 
     public void checkCarWashToken(){
@@ -77,7 +76,7 @@ public class LoginModel {
                             return;
                         }
                         for (LoginListener loginListener : loginListenerList) {
-                            loginListener.checkTokenFail();
+                            loginListener.timeOut();
                         }
                     }
                 });
@@ -107,7 +106,7 @@ public class LoginModel {
                             return;
                         }
                         for (LoginListener loginListener : loginListenerList) {
-                            loginListener.checkTokenFail();
+                            loginListener.timeOut();
                         }
                     }
                 });

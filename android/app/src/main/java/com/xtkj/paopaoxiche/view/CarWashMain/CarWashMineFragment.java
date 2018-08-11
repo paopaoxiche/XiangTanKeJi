@@ -17,7 +17,7 @@ public class CarWashMineFragment extends BaseFragmemt implements ICarWashContrac
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view =  inflater.inflate(R.layout.fragment_car_wash_home, null);
+        View view =  inflater.inflate(R.layout.fragment_car_wash_mine, null);
         return view;
     }
 

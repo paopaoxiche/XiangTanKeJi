@@ -1,5 +1,6 @@
 package com.xtkj.paopaoxiche.view;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -7,6 +8,7 @@ import com.xtkj.paopaoxiche.R;
 import com.xtkj.paopaoxiche.base.BaseActivity;
 import com.xtkj.paopaoxiche.contract.IGuideContract;
 import com.xtkj.paopaoxiche.presenter.GuidePresenterImpl;
+import com.xtkj.paopaoxiche.view.CarWashMain.CarWashMainActivity;
 
 public class GuideActivity extends BaseActivity implements IGuideContract.IGuideView{
 
@@ -41,8 +43,14 @@ public class GuideActivity extends BaseActivity implements IGuideContract.IGuide
     @Override
     public void startActivityForIntent(Intent intent, Class clazz) {
         intent.setClass(this, clazz);
+//        intent.setClass(this, CarWashMainActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    public Context getContext() {
+        return this;
     }
 
     @Override
