@@ -112,8 +112,6 @@
                                 <ul class="nav list-group">
                                     
                                     <li>
-                                        <a href="#56b959f47e4d22b82c7b566d478b456d">获取我的商品列表</a>
-                                    </li><li>
                                         <a href="#5fd4e9cb545ec9f4dd0bba4002f39232">删除商品</a>
                                     </li><li>
                                         <a href="#d8d70c8c9ef897d2c7422e12ccd0fb79">增加或修改商品</a>
@@ -1508,8 +1506,72 @@
 
                                                 
                         
-                                                
-                        
+                        <p>返回示例：</p>
+                        <div class="highlight">
+                            <pre>
+                                <code class="json hljs">{
+    "code": 200,
+    "data": [
+        {
+            "carModel": 0,
+            "carWashId": 4,
+            "describe": "这是测试洗车服务的描述",
+            "id": 5,
+            "isActive": true,
+            "name": "测试洗车",
+            "price": 23.49
+        }
+    ],
+    "msg": "请求成功",
+    "pageIndex": 0,
+    "pageSize": 20,
+    "totalCount": 0
+}</code>
+                            </pre>
+                        </div>                        
+                        <table class="table table-hover" style="margin-top: 7px;">
+                            <colgroup>
+                            <col class="col-xs-4">
+                            <col class="col-xs-8">
+                          </colgroup>
+                            <thead>
+                                <tr>
+                                    <th style="padding-left: 0px;"><span class="label label-success">参数名</span></th>
+                                    <th>描述</th>
+                                    <th>类型</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>data.carModel</td>
+                                    <td>车型</td>
+                                    <th>number</th>
+                                </tr><tr>
+                                    <td>data.carWashId</td>
+                                    <td>洗车场ID</td>
+                                    <th>number</th>
+                                </tr><tr>
+                                    <td>data.describe</td>
+                                    <td>描述</td>
+                                    <th>string</th>
+                                </tr><tr>
+                                    <td>data.id</td>
+                                    <td>ID</td>
+                                    <th>number</th>
+                                </tr><tr>
+                                    <td>data.isActive</td>
+                                    <td>是否有效</td>
+                                    <th>boolean</th>
+                                </tr><tr>
+                                    <td>data.name</td>
+                                    <td>洗车场名称</td>
+                                    <th>string</th>
+                                </tr><tr>
+                                    <td>data.price</td>
+                                    <td>价格</td>
+                                    <th>number</th>
+                                </tr>                            </tbody>
+                        </table>
                     </div><div class="api-one">
                         <h3 id="1826c9c4081d4301827d4ef85bdf982c">获取洗车场商品列表</h3>
                         <p>
@@ -1562,8 +1624,64 @@
 
                                                 
                         
-                                                
-                        
+                        <p>返回示例：</p>
+                        <div class="highlight">
+                            <pre>
+                                <code class="json hljs">{
+    "code": 200,
+    "data": [
+        {
+            "currentPrice": 7.2,
+            "describe": "汽车用品批发车用伸缩拖把 除尘掸子擦车蜡拖 洗车带包装扁刷",
+            "id": 2,
+            "image": "http://101.200.63.245:8080/commodity/2018/08/09/11b6104b845c4cc684007a3505de3619.jpg",
+            "name": "车用伸缩拖把",
+            "originPrice": 8.2
+        }
+    ],
+    "msg": "请求成功"
+}</code>
+                            </pre>
+                        </div>                        
+                        <table class="table table-hover" style="margin-top: 7px;">
+                            <colgroup>
+                            <col class="col-xs-4">
+                            <col class="col-xs-8">
+                          </colgroup>
+                            <thead>
+                                <tr>
+                                    <th style="padding-left: 0px;"><span class="label label-success">参数名</span></th>
+                                    <th>描述</th>
+                                    <th>类型</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>data.describe</td>
+                                    <td>描述</td>
+                                    <th>string</th>
+                                </tr><tr>
+                                    <td>data.id</td>
+                                    <td>ID</td>
+                                    <th>number</th>
+                                </tr><tr>
+                                    <td>data.image</td>
+                                    <td>图片</td>
+                                    <th>string</th>
+                                </tr><tr>
+                                    <td>data.name</td>
+                                    <td>名称</td>
+                                    <th>string</th>
+                                </tr><tr>
+                                    <td>data.originPrice</td>
+                                    <td>原价</td>
+                                    <th>number</th>
+                                </tr><tr>
+                                    <td>data.currentPrice</td>
+                                    <td>当地价格</td>
+                                    <th>number</th>
+                                </tr>                            </tbody>
+                        </table>
                     </div><div class="api-one">
                         <h3 id="feff65d310e3458e9054bf6e1922b93e">获取附近洗车场服务列表</h3>
                         <p>
@@ -1699,8 +1817,64 @@
 
                                                 
                         
-                                                
-                        
+                        <p>返回示例：</p>
+                        <div class="highlight">
+                            <pre>
+                                <code class="json hljs">{
+    "code": 200,
+    "data": [
+        {
+            "currentPrice": 7.2,
+            "describe": "汽车用品批发车用伸缩拖把 除尘掸子擦车蜡拖 洗车带包装扁刷",
+            "id": 2,
+            "image": "http://101.200.63.245:8080/commodity/2018/08/09/11b6104b845c4cc684007a3505de3619.jpg",
+            "name": "车用伸缩拖把",
+            "originPrice": 8.2
+        }
+    ],
+    "msg": "请求成功"
+}</code>
+                            </pre>
+                        </div>                        
+                        <table class="table table-hover" style="margin-top: 7px;">
+                            <colgroup>
+                            <col class="col-xs-4">
+                            <col class="col-xs-8">
+                          </colgroup>
+                            <thead>
+                                <tr>
+                                    <th style="padding-left: 0px;"><span class="label label-success">参数名</span></th>
+                                    <th>描述</th>
+                                    <th>类型</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>data.currentPrice</td>
+                                    <td>当前价格</td>
+                                    <th>number</th>
+                                </tr><tr>
+                                    <td>data.describe</td>
+                                    <td>描述</td>
+                                    <th>string</th>
+                                </tr><tr>
+                                    <td>data.id</td>
+                                    <td>ID</td>
+                                    <th>number</th>
+                                </tr><tr>
+                                    <td>data.image</td>
+                                    <td>商品图片</td>
+                                    <th>string</th>
+                                </tr><tr>
+                                    <td>data.name</td>
+                                    <td>商品名称</td>
+                                    <th>string</th>
+                                </tr><tr>
+                                    <td>data.originPrice</td>
+                                    <td>商品原价</td>
+                                    <th>number</th>
+                                </tr>                            </tbody>
+                        </table>
                     </div><div class="api-one">
                         <h3 id="aa4c3cf9610f4682a2a9773979e23722">获取洗车场详细信息</h3>
                         <p>
@@ -1795,8 +1969,67 @@
 
                                                 
                         
-                                                
-                        
+                        <p>返回示例：</p>
+                        <div class="highlight">
+                            <pre>
+                                <code class="json hljs">{
+    "code": 200,
+    "data": [
+        {
+            "id": 1,
+            "avatar": "http://101.200.63.245:8080/avatars/2018/08/07/dc26e7cb08c34cd2bd45d32698a6ff6e.jpeg?1534063975980",
+            "nickname": "昵称",
+            "rating": 5,
+            "time": 1531526400000,
+            "content": "这里是评价内容"
+        }    
+    ],
+    "msg": "请求成功",
+    "pageIndex": 0,
+    "pageSize": 20,
+    "totalCount": 0
+}</code>
+                            </pre>
+                        </div>                        
+                        <table class="table table-hover" style="margin-top: 7px;">
+                            <colgroup>
+                            <col class="col-xs-4">
+                            <col class="col-xs-8">
+                          </colgroup>
+                            <thead>
+                                <tr>
+                                    <th style="padding-left: 0px;"><span class="label label-success">参数名</span></th>
+                                    <th>描述</th>
+                                    <th>类型</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>data.id</td>
+                                    <td>ID</td>
+                                    <th>number</th>
+                                </tr><tr>
+                                    <td>data.avatar</td>
+                                    <td>头像</td>
+                                    <th>string</th>
+                                </tr><tr>
+                                    <td>data.nickname</td>
+                                    <td>昵称</td>
+                                    <th>string</th>
+                                </tr><tr>
+                                    <td>data.rating</td>
+                                    <td>评分</td>
+                                    <th>number</th>
+                                </tr><tr>
+                                    <td>data.time</td>
+                                    <td>时间</td>
+                                    <th>number</th>
+                                </tr><tr>
+                                    <td>data.content</td>
+                                    <td>评价内容</td>
+                                    <th>string</th>
+                                </tr>                            </tbody>
+                        </table>
                     </div><h1 id="t_api_doc">car</h1>
                     
                     <div class="api-one">
@@ -2518,150 +2751,6 @@
                     </div><h1 id="t_api_doc">commodity</h1>
                     
                     <div class="api-one">
-                        <h3 id="56b959f47e4d22b82c7b566d478b456d">获取我的商品列表</h3>
-                        <p>
-                            <a target="_blank" href="http://apizza.cc/console/project/829ba0a1c0fb6675eabcbb0391df72f4/browse?api=56b959f47e4d22b82c7b566d478b456d" class="label label-warning">在线测试</a>
-                            <a target="_blank" href="http://apizza.cc/console/project/829ba0a1c0fb6675eabcbb0391df72f4/browse?api=56b959f47e4d22b82c7b566d478b456d" class="label label-warning">在线浏览</a>
-                        </p>
-                        <p>请求方式：GET</p>
-                        <p>
-                            请求地址：http://localhost:8080/commodity/getMyCommodityList                        </p>
-                        
-                        <table class="table table-hover">
-                                <colgroup>
-                                <col class="col-xs-2">
-                                <col class="col-xs-1">
-                                <col class="col-xs-1">
-                                <col class="col-xs-7">
-                                <col class="col-xs-2">
-                              </colgroup>
-                                <thead>
-                                    <tr>
-                                        <th><span class="label label-success">Header参数名</span></th>
-                                        <th>类型</th>
-                                        <th>必需</th>
-                                        <th>描述</th>
-                                        <th>示例 e.g.</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>authentication</td>
-                                        <td></td>
-                                        <td>否</td>
-                                        <td>鉴权头</td>
-                                        <td>user_id=100000018,token=e701af88a47b44e3bb3e9ff05a7a14ff</td>
-                                    </tr>                                </tbody>
-                            </table>
-                        <table class="table table-hover">
-                                <colgroup>
-                                    <col class="col-xs-2">
-                                    <col class="col-xs-1">
-                                    <col class="col-xs-1">
-                                    <col class="col-xs-7">
-                                    <col class="col-xs-2">
-                                </colgroup>
-                                <thead>
-                                <tr>
-                                    <th><span class="label label-success">Query参数名</span></th>
-                                    <th>类型</th>
-                                    <th>必需</th>
-                                    <th>描述</th>
-                                    <th>示例 e.g.</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                        <td>pageIndex</td>
-                                        <td>number</td>
-                                        <td>是</td>
-                                        <td>页码 从0开始</td>
-                                        <td>0</td>
-                                    </tr><tr>
-                                        <td>pageSize</td>
-                                        <td>number</td>
-                                        <td>是</td>
-                                        <td>数量</td>
-                                        <td>20</td>
-                                    </tr>                                </tbody>
-                            </table>
-
-                                                
-                        
-                        <p>返回示例：</p>
-                        <div class="highlight">
-                            <pre>
-                                <code class="json hljs">{
-    "code": 200,
-    "data": [
-        {
-            "currentPrice": 10,
-            "desc": "洗涤剂啊洗涤剂",
-            "id": 1,
-            "img": "http://localhost:8080/commodity/2018/07/15/c5fcaae570fa4114b809f2c66b5b510f.jpg",
-            "name": "洗涤剂111",
-            "originalPrice": 20
-        }
-    ],
-    "msg": "请求成功",
-    "pageIndex": 0,
-    "pageSize": 20,
-    "totalCount": 0
-}</code>
-                            </pre>
-                        </div>                        
-                        <table class="table table-hover" style="margin-top: 7px;">
-                            <colgroup>
-                            <col class="col-xs-4">
-                            <col class="col-xs-8">
-                          </colgroup>
-                            <thead>
-                                <tr>
-                                    <th style="padding-left: 0px;"><span class="label label-success">参数名</span></th>
-                                    <th>描述</th>
-                                    <th>类型</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>data.currentPrice</td>
-                                    <td>当前价格</td>
-                                    <th>number</th>
-                                </tr><tr>
-                                    <td>data.desc</td>
-                                    <td>描述</td>
-                                    <th>string</th>
-                                </tr><tr>
-                                    <td>data.id</td>
-                                    <td>商品ID</td>
-                                    <th>number</th>
-                                </tr><tr>
-                                    <td>data.img</td>
-                                    <td>商品图片</td>
-                                    <th>string</th>
-                                </tr><tr>
-                                    <td>data.name</td>
-                                    <td>商品名称</td>
-                                    <th>string</th>
-                                </tr><tr>
-                                    <td>data.originalPrice</td>
-                                    <td>原价</td>
-                                    <th>number</th>
-                                </tr><tr>
-                                    <td>pageIndex</td>
-                                    <td>页码</td>
-                                    <th>number</th>
-                                </tr><tr>
-                                    <td>totalCount</td>
-                                    <td>总数量</td>
-                                    <th>number</th>
-                                </tr><tr>
-                                    <td>pageSize</td>
-                                    <td>一页数量</td>
-                                    <th>number</th>
-                                </tr>                            </tbody>
-                        </table>
-                    </div><div class="api-one">
                         <h3 id="5fd4e9cb545ec9f4dd0bba4002f39232">删除商品</h3>
                         <p>
                             <a target="_blank" href="http://apizza.cc/console/project/829ba0a1c0fb6675eabcbb0391df72f4/browse?api=5fd4e9cb545ec9f4dd0bba4002f39232" class="label label-warning">在线测试</a>
