@@ -172,6 +172,7 @@ public class HomeFragment extends BaseFragmemt implements IDriverContract.IHomeV
             layoutParams.leftMargin = 10;
             indicator.addView(view, layoutParams);
         }
+        if(indicator.getChildAt(0)!=null)
         indicator.getChildAt(0).setEnabled(true);
         shopViewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
