@@ -45,7 +45,7 @@ public class HomeFragment extends BaseFragmemt implements IDriverContract.IHomeV
     IDriverContract.IHomePresenter homePresenter;
     HomeWashServiceAdapter homeWashServiceAdapter = null;
     HomeShopFragmentAdapter homeShopFragmentAdapter = null;
-    private int  viewpager_index = 0 ;
+    int viewpager_index = 0;
 
     @BindView(R.id.temperature)
     TextView temperature;
@@ -162,13 +162,15 @@ public class HomeFragment extends BaseFragmemt implements IDriverContract.IHomeV
         shopViewpager.setCurrentItem(0);
 
         int num = DriverHomeModel.getInstance().getWashServicesBean().getData().size();
+        if(num==0)noWashService.setVisibility(View.VISIBLE);
+        else noWashService.setVisibility(View.GONE);
         for (int i = 0; i < num; i++) {
             View view = new View(getActivityContext());
             view.setBackgroundResource(R.drawable.home_indicator);
             view.setEnabled(false);
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(30, 30);
             layoutParams.leftMargin = 10;
-            indicator.addView(view,layoutParams);
+            indicator.addView(view, layoutParams);
         }
         indicator.getChildAt(0).setEnabled(true);
         shopViewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {

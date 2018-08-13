@@ -191,6 +191,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="12dp"
             android:layout_marginRight="12dp"
+            android:paddingBottom="16dp"
             android:background="@drawable/background_white_radius4dp"
             android:orientation="vertical">
 
@@ -230,13 +231,12 @@
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/wash_service_recyclerView"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:minHeight="200dp" />
+                    android:layout_height="wrap_content" />
 
                 <LinearLayout
                     android:id="@+id/no_wash_service"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="200dp"
                     android:background="#fff"
                     android:gravity="center"
                     android:visibility="gone">

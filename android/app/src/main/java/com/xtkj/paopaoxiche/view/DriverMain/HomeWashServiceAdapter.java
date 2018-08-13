@@ -41,7 +41,7 @@ public class HomeWashServiceAdapter extends RecyclerView.Adapter<HomeWashService
         viewHolder.yardSpend.setText(String.format("%s", dataList.get(position).getPrice()));
         viewHolder.honorTimes.setText(String.format("%s", dataList.get(position).getHonor()));
         viewHolder.washTimes.setText(String.format("%s", dataList.get(position).getWashCount()));
-        viewHolder.yardDistance.setText(String.format("%s", dataList.get(position).getDistance()));
+        viewHolder.yardDistance.setText(String.format("%sm", dataList.get(position).getDistance()));
     }
 
     @Override
