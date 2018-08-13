@@ -6,4 +6,51 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!--全局对话框样式，其值和NormalDialog保持一致-->
+    <!--全局布局样式-->
+    <style name="dialog_global_style" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!--窗口背景透明-->
+        <item name="android:windowFrame">@null</item>
+        <!-- 无边框 -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 是否悬浮在activity上 -->
+        <item name="android:windowIsTranslucent">true</item>
+        <!-- 半透明 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 无标题 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- 模糊 -->
+        <!--<item name="android:windowAnimationStyle">@style/dialog_right_enter_left_exit_animation</item>-->
+    </style>
+
+    <!--全屏对话框样式-->
+    <style name="dialog_full_screen_with_status_bar_style">
+        <!--无标题-->
+        <item name="android:windowNoTitle">true</item>
+        <!--窗口背景透明-->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- 无边框-->
+        <item name="android:windowFrame">@null</item>
+        <!-- 是否悬浮在activity上 -->
+        <item name="android:windowIsFloating">false</item>
+        <!-- 半透明 -->
+        <item name="android:windowIsTranslucent">true</item>
+        <!-- 模糊 -->
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+    <style name="dialog_full_screen_style" parent="dialog_full_screen_with_status_bar_style">
+        <!--无actionbar-->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 全屏，添加以下窗口全屏会把系统的状态栏也给覆盖住-->
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <!--对话框从右边往左进入，从左往右滑出的动画-->
+    <style name="dialog_right_enter_left_exit_animation">
+        <item name="android:windowEnterAnimation">@anim/activity_right_to_left</item>
+        <item name="android:windowExitAnimation">@anim/activity_left_to_right</item>
+    </style>
+
 </resources>

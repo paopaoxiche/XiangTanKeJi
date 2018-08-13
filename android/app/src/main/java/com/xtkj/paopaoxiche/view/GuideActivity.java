@@ -43,7 +43,7 @@ public class GuideActivity extends BaseActivity implements IGuideContract.IGuide
     @Override
     public void startActivityForIntent(Intent intent, Class clazz) {
         intent.setClass(this, clazz);
-//        intent.setClass(this, CarWashMainActivity.class);
+        intent.setClass(this, CarWashMainActivity.class);
         startActivity(intent);
         finish();
     }

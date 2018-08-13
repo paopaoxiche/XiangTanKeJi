@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbarHeight"
+        android:background="@color/orange">
+
+        <ImageButton
+            android:id="@+id/back_arrow_image_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:layout_marginLeft="16dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/arrow" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="收入列表"
+            android:textSize="24sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/orange">
+
+        <TextView
+            android:id="@+id/year_income_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="12dp"
+            android:textSize="14sp"
+            android:text="2018年"/>
+
+        <TextView
+            android:id="@+id/month_income_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_below="@id/year_income_text_view"
+            android:layout_marginLeft="20dp"
+            android:textSize="28sp"
+            android:text="08月"/>
+
+        <TextView
+            android:id="@+id/tip_income_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="12dp"
+            android:textSize="14sp"
+            android:text="共计收入"/>
+
+        <TextView
+            android:id="@+id/total_income_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_below="@id/tip_income_text_view"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:textSize="28sp"
+            android:text="0元"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

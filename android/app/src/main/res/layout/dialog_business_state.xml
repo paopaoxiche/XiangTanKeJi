@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="240dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/background_orange_radius10dp"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/open_business_button"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center"
+        android:background="@color/white"
+        android:textSize="24dp"
+        android:textColor="@color/black"
+        android:text="开业"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#999" />
+
+    <Button
+        android:id="@+id/pause_business_button"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center"
+        android:background="@color/white"
+        android:textSize="24dp"
+        android:textColor="@color/black"
+        android:text="歇业"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#999" />
+
+    <Button
+        android:id="@+id/stop_business_button"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center"
+        android:background="@color/white"
+        android:textSize="24dp"
+        android:textColor="@color/black"
+        android:text="停业"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#999" />
+
+</LinearLayout>
