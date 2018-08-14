@@ -8,9 +8,6 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-
-
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -34,21 +31,66 @@
                     android:src="@drawable/bg_light"
                     android:background="#ee9d0e"/>
 
-
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="match_parent">
 
-                    <LinearLayout
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/portrait_image_view"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="52dp"
+
+                        android:src="@drawable/avatar_man"/>
+
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                        <ImageView
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/portrait_image_view"
+                        android:layout_marginLeft="24dp">
+
+                        <TextView
+                            android:id="@+id/username_text_view"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/back"/>
-                    </LinearLayout>
+                            android:textSize="24sp"
+                            android:textColor="@color/black"
+                            android:text="user name"/>
 
-                </LinearLayout>
+                        <ImageView
+                            android:id="@+id/phone_image_view"
+                            android:layout_width="12dp"
+                            android:layout_height="12dp"
+                            android:layout_below="@id/username_text_view"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/img_phone"/>
+
+                        <TextView
+                            android:id="@+id/phone_number_text_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/username_text_view"
+                            android:layout_toRightOf="@id/phone_image_view"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            android:text="123456789"/>
+
+                        <ImageButton
+                            android:id="@+id/modify_user_image_button"
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="16dp"
+                            android:layout_centerVertical="true"
+                            android:scaleType="center"
+                            android:background="@android:color/transparent"
+                            android:src="@drawable/btn_nextpag_white"/>
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
 
             </FrameLayout>
 

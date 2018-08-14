@@ -12,10 +12,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.xtkj.paopaoxiche.R;
+import com.xtkj.paopaoxiche.application.UserInfo;
 import com.xtkj.paopaoxiche.base.BaseFragmemt;
 import com.xtkj.paopaoxiche.contract.ICarWashContract;
 import com.xtkj.paopaoxiche.view.view.BusinessStateDialog;
 import com.xtkj.paopaoxiche.view.view.ExtensionDialog;
+import com.xtkj.paopaoxiche.view.view.IncomeListDialog;
 import com.xtkj.paopaoxiche.view.view.MyEvaluateDialog;
 
 import butterknife.BindView;
@@ -73,7 +75,14 @@ public class CarWashMineFragment extends BaseFragmemt implements ICarWashContrac
         View view = inflater.inflate(R.layout.fragment_car_wash_mine, null);
         unbinder = ButterKnife.bind(this, view);
 
+        initView(view);
+
         return view;
+    }
+
+    private void initView(View view) {
+        phoneNumberTextView.setText(UserInfo.getUserPhone());
+        usernameTextView.setText(UserInfo.getNickName());
     }
 
     @Override
@@ -105,6 +114,7 @@ public class CarWashMineFragment extends BaseFragmemt implements ICarWashContrac
             case R.id.goods_manager_linear_layout:
                 break;
             case R.id.income_linear_layout:
+                new IncomeListDialog(getContext(),true).show();
                 break;
             case R.id.my_evaluation:
                 new MyEvaluateDialog(getContext(), true).show();

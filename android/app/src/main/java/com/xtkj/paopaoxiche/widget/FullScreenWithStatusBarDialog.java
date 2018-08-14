@@ -23,8 +23,6 @@ public abstract class FullScreenWithStatusBarDialog extends Dialog {
         this(context, statusBarVisible
                 ? R.style.dialog_full_screen_with_status_bar_style
                 : R.style.dialog_full_screen_style);
-
-        ButterKnife.bind(this);
     }
 
     public FullScreenWithStatusBarDialog(Context context, int themeId) {

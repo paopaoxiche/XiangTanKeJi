@@ -45,7 +45,7 @@ public class LoginModel {
     public interface LoginListener {
         void getCodeSuccess();
         void getCodeFail();
-        void loginSuccess(String token, String id);
+        void loginSuccess(LoginBean.DataBean dataBean);
         void loginFail();
         void timeOut();
         void checkTokenSuccess();
@@ -158,7 +158,7 @@ public class LoginModel {
                         LoginBean.DataBean data = response.body().getData();
                         if (response.body().getCode() == 200) {
                             for (LoginListener loginListener : loginListenerList) {
-                                loginListener.loginSuccess(data.getToken(), data.getId());
+                                loginListener.loginSuccess(data);
                             }
                         } else {
                             for (LoginListener loginListener : loginListenerList) {

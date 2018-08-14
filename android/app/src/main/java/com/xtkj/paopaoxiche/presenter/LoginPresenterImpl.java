@@ -4,6 +4,7 @@ import android.content.Intent;
 
 import com.xtkj.paopaoxiche.application.UserInfo;
 import com.xtkj.paopaoxiche.application.AppConstant;
+import com.xtkj.paopaoxiche.bean.LoginBean;
 import com.xtkj.paopaoxiche.contract.ILoginContract;
 import com.xtkj.paopaoxiche.application.Authentication;
 import com.xtkj.paopaoxiche.model.LoginModel;
@@ -86,15 +87,24 @@ public class LoginPresenterImpl implements ILoginContract.ILoginPresenter, Login
     }
 
     @Override
-    public void loginSuccess(String token, String id) {
+    public void loginSuccess(LoginBean.DataBean dataBean) {
         loginView.showToast("登陆成功");
 
-        PreferUtils.getInstance(loginView.getContext()).putString(AppConstant.TOKEN, token);
-        PreferUtils.getInstance(loginView.getContext()).putString(AppConstant.USER_ID, id);
+        PreferUtils.getInstance(loginView.getContext()).putString(AppConstant.TOKEN, dataBean.getToken());
+        PreferUtils.getInstance(loginView.getContext()).putString(AppConstant.USER_ID, dataBean.getId());
         PreferUtils.getInstance(loginView.getContext()).putBoolean(AppConstant.IS_DRIVER, UserInfo.isDriver());
+        PreferUtils.getInstance(loginView.getContext()).putString(AppConstant.AVATAR, dataBean.getAvatar());
+        PreferUtils.getInstance(loginView.getContext()).putString(AppConstant.NICK_NAME, dataBean.getNickName());
+        PreferUtils.getInstance(loginView.getContext()).putString(AppConstant.PHONE, dataBean.getUserPhone());
+        PreferUtils.getInstance(loginView.getContext()).putString(AppConstant.SCORE, dataBean.getScore() + "");
 
-        UserInfo.setToken(token);
-        UserInfo.setId(id);
+
+        UserInfo.setToken(dataBean.getToken());
+        UserInfo.setId(dataBean.getId());
+        UserInfo.setAvatar(dataBean.getAvatar());
+        UserInfo.setNickName(dataBean.getNickName());
+        UserInfo.setUserPhone(dataBean.getUserPhone());
+        UserInfo.setScore(dataBean.getScore());
 
         login();
     }
