@@ -6,6 +6,7 @@ import android.os.Handler;
 import com.xtkj.paopaoxiche.application.AppConstant;
 import com.xtkj.paopaoxiche.application.Authentication;
 import com.xtkj.paopaoxiche.application.UserInfo;
+import com.xtkj.paopaoxiche.bean.LoginBean;
 import com.xtkj.paopaoxiche.model.LoginModel;
 import com.xtkj.paopaoxiche.utils.PreferUtils;
 import com.xtkj.paopaoxiche.view.CarWashMain.CarWashMainActivity;
@@ -48,6 +49,10 @@ public class GuidePresenterImpl implements IGuideContract.IGuidePresenter, Login
         UserInfo.setToken(preferUtils.getString(AppConstant.TOKEN));
         UserInfo.setId(preferUtils.getString(AppConstant.USER_ID));
         UserInfo.setDriver(preferUtils.getBoolean(AppConstant.IS_DRIVER,true));
+        UserInfo.setAvatar(preferUtils.getString(AppConstant.AVATAR));
+        UserInfo.setNickName(preferUtils.getString(AppConstant.NICK_NAME));
+        UserInfo.setUserPhone(preferUtils.getString(AppConstant.PHONE));
+        //UserInfo.setScore(Integer.valueOf(preferUtils.getString(AppConstant.SCORE)));
     }
 
     private void checkToken() {
@@ -76,7 +81,7 @@ public class GuidePresenterImpl implements IGuideContract.IGuidePresenter, Login
     }
 
     @Override
-    public void loginSuccess(String token, String id) {
+    public void loginSuccess(LoginBean.DataBean dataBean) {
 
     }
 

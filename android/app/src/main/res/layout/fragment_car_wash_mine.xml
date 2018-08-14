@@ -42,7 +42,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="52dp"
                         android:scaleType="fitCenter"
-                        android:src="@drawable/logo"/>
+                        android:src="@drawable/avatar_man"/>
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -55,14 +55,14 @@
                             android:id="@+id/username_text_view"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="32sp"
+                            android:textSize="24sp"
                             android:textColor="@color/black"
                             android:text="user name"/>
 
                         <ImageView
                             android:id="@+id/phone_image_view"
-                            android:layout_width="16dp"
-                            android:layout_height="16dp"
+                            android:layout_width="12dp"
+                            android:layout_height="12dp"
                             android:layout_below="@id/username_text_view"
                             android:scaleType="centerInside"
                             android:src="@drawable/img_phone"/>
@@ -74,7 +74,7 @@
                             android:layout_below="@id/username_text_view"
                             android:layout_toRightOf="@id/phone_image_view"
                             android:textColor="@color/black"
-                            android:textSize="16sp"
+                            android:textSize="12sp"
                             android:text="123456789"/>
 
                         <ImageButton
