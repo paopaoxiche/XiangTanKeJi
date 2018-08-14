@@ -30,10 +30,20 @@
     </RelativeLayout>
 
     <ImageView
+        android:id="@+id/extension_image_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scaleType="fitXY"
         android:layout_alignParentBottom="true"
         android:src="@drawable/extension"/>
+
+    <ImageView
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/extension_image_view"
+        android:layout_marginBottom="30dp"
+        android:src="@drawable/binary_code"
+        android:scaleType="fitCenter"
+        android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>
