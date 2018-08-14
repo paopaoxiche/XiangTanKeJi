@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
 
 android {
-    signingConfigs{
-        config{
+    signingConfigs {
+        config {
             keyAlias 'paopaokeji'
             keyPassword 'paopaokeji'
             storePassword 'paopaokeji'
@@ -34,7 +34,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
 
     //支持Java8
     compileOptions {

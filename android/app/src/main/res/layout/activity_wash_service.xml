@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.WashService.WashServiceActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+                <ImageView
+                    android:id="@+id/back_button"
+                    android:src="@drawable/ic_keyboard_arrow_left_black_36dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
+                <TextView
+                    android:id="@+id/title"
+                    android:gravity="center"
+                    android:text="洗车场详细信息"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content" />
+                <ImageView
+                    android:visibility="invisible"
+                    android:src="@drawable/ic_keyboard_arrow_left_black_36dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <ScrollView
+                android:padding="16dp"
+                android:background="#f4f4f4"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:textSize="15sp"
+                        android:text="洗车服务"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <LinearLayout
+                        android:id="@+id/service_items"
+                        android:layout_marginTop="12dp"
+                        android:background="#fff"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_marginTop="16dp"
+                        android:textSize="15sp"
+                        android:text="请选择你要洗的车型"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <LinearLayout
+                        android:layout_marginTop="16dp"
+                        android:background="#fff"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <RadioGroup
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent">
+                            <RadioButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="44dp" />
+                            <RadioButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="44dp" />
+                            <RadioButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="44dp" />
+                        </RadioGroup>
+
+                        <LinearLayout
+                            android:layout_marginStart="10dp"
+                            android:orientation="vertical"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="match_parent">
+                            <LinearLayout
+                                android:gravity="center"
+                                android:layout_width="wrap_content"
+                                android:layout_height="44dp">
+                                <ImageView
+                                    android:src="@drawable/img_car1"
+                                    android:layout_width="28dp"
+                                    android:layout_height="13dp" />
+                                <TextView
+                                    android:layout_marginLeft="12dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="大型车（九座以上）"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:gravity="center"
+                                android:layout_width="wrap_content"
+                                android:layout_height="44dp">
+
+                                <ImageView
+                                    android:layout_width="24dp"
+                                    android:layout_height="13dp"
+                                    android:src="@drawable/img_car2" />
+                                <TextView
+                                    android:layout_marginLeft="12dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="中型车（七座以上九座以下）"/>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:gravity="center"
+                                android:layout_width="wrap_content"
+                                android:layout_height="44dp">
+                                <ImageView
+                                    android:src="@drawable/img_car3"
+                                    android:layout_width="28dp"
+                                    android:layout_height="13dp" />
+                                <TextView
+                                    android:layout_marginLeft="12dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="小型车（七座及以下）"/>
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_marginTop="16dp"
+                        android:textSize="15sp"
+                        android:text="商品"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:id="@+id/ship_list"
+                        android:layout_marginTop="16dp"
+                        android:background="#fff"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </ScrollView>
+
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/pay_button"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/background_button_corner"
+            android:layout_gravity="bottom|center"
+            android:layout_width="375dp"
+            android:text="支付"
+            android:textColor="#fff"
+            android:textSize="20sp"
+            android:layout_height="52dp" />
+    </FrameLayout>
+
+
+
+</LinearLayout>
