@@ -6,6 +6,7 @@ import android.util.Log;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
+import com.xtkj.paopaoxiche.application.MyLocation;
 import com.xtkj.paopaoxiche.bean.WashServicesBean;
 import com.xtkj.paopaoxiche.bean.WeatherForecastBean;
 import com.xtkj.paopaoxiche.bean.WeatherRealTimeBean;
@@ -142,6 +143,8 @@ public class DriverHomeModel {
                 if (aMapLocation.getErrorCode() == 0) {
                     longitude = aMapLocation.getLongitude();
                     latitude = aMapLocation.getLatitude();
+                    MyLocation.lat = latitude+ "";
+                    MyLocation.lng = longitude+ "";
                     address = aMapLocation.getAddress();
                     for (DriverHomeListener driverHomeListener : driverHomeListenerList) {
                         driverHomeListener.getLocationSuccess(address);

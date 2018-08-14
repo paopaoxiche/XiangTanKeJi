@@ -28,6 +28,7 @@ public interface WashService {
 
 
     @GET("wash/getRecommendCommodity")
-    Call<WashShopBean> getRecommendCommodity(@Query("washId") String id,@Query("count") int count);
+    Call<WashShopBean> getRecommendCommodity(@Query("lng") String lng,@Query("lat") String lat,@Query("count") int count);
+
 
 }

@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.xtkj.paopaoxiche.R;
 import com.xtkj.paopaoxiche.application.Authentication;
+import com.xtkj.paopaoxiche.application.MyLocation;
 import com.xtkj.paopaoxiche.base.BaseFragmemt;
 import com.xtkj.paopaoxiche.bean.WashServicesBean;
 import com.xtkj.paopaoxiche.bean.WashShopBean;
@@ -62,7 +63,7 @@ public class ShopFragment extends BaseFragmemt implements IDriverContract.IShopV
 
         RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
                 .create(WashService.class)
-                .getRecommendCommodity("5", 6)
+                .getRecommendCommodity(MyLocation.lng +"",MyLocation.lng,3)
                 .enqueue(new Callback<WashShopBean>() {
                     @Override
                     public void onResponse(Call<WashShopBean> call, Response<WashShopBean> response) {
