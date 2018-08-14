@@ -123,7 +123,7 @@ public class ShopFragment extends BaseFragmemt implements IDriverContract.IShopV
 
         @Override
         public int getItemCount() {
-            if(data==null)return 0;
+            if(data==null||data.getData()==null)return 0;
             return data.getData().size();
         }
 

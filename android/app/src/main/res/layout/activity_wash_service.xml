@@ -157,7 +157,7 @@
 
                     <LinearLayout
                         android:orientation="vertical"
-                        android:id="@+id/ship_list"
+                        android:id="@+id/shop_list"
                         android:layout_marginTop="16dp"
                         android:background="#fff"
                         android:layout_width="match_parent"
@@ -180,7 +180,9 @@
             android:layout_marginBottom="20dp"
             android:background="@drawable/background_button_corner"
             android:layout_gravity="bottom|center"
-            android:layout_width="375dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_width="match_parent"
             android:text="支付"
             android:textColor="#fff"
             android:textSize="20sp"

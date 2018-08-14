@@ -1,6 +1,7 @@
 package com.xtkj.paopaoxiche.view.DriverMap;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import com.xtkj.paopaoxiche.R;
 import com.xtkj.paopaoxiche.bean.WashServicesBean;
 import com.xtkj.paopaoxiche.contract.IDriverMapContract;
 import com.xtkj.paopaoxiche.presenter.DriverMapPresenterImpl;
+import com.xtkj.paopaoxiche.view.WashService.WashServiceActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,6 +34,13 @@ public class WashServiceAdapter extends RecyclerView.Adapter<WashServiceAdapter.
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_wash_car_map, viewGroup, false);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, WashServiceActivity.class);
+                context.startActivity(intent);
+            }
+        });
         ViewHolder vh = new ViewHolder(view);
         return vh;
     }

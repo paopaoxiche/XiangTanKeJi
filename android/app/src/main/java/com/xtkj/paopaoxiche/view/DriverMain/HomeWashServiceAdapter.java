@@ -1,6 +1,7 @@
 package com.xtkj.paopaoxiche.view.DriverMain;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.xtkj.paopaoxiche.R;
 import com.xtkj.paopaoxiche.bean.WashServicesBean;
+import com.xtkj.paopaoxiche.view.WashService.WashServiceActivity;
 
 import java.util.ArrayList;
 
@@ -29,6 +31,15 @@ public class HomeWashServiceAdapter extends RecyclerView.Adapter<HomeWashService
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_home_yard, viewGroup, false);
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, WashServiceActivity.class);
+                mContext.startActivity(intent);
+            }
+        });
+
         ViewHolder vh = new ViewHolder(view);
         return vh;
     }

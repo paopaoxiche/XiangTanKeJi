@@ -16,6 +16,7 @@
         android:layout_height="56dp" />
     
     <ImageView
+        android:src="@drawable/comm_demo"
         android:id="@+id/shop_img"
         android:layout_width="52dp"
         android:layout_height="52dp" />
