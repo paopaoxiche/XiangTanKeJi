@@ -15,6 +15,7 @@ import com.xtkj.paopaoxiche.application.UserInfo;
 import com.xtkj.paopaoxiche.base.BaseFragmemt;
 import com.xtkj.paopaoxiche.contract.IDriverContract;
 import com.xtkj.paopaoxiche.view.view.ExtensionDialog;
+import com.xtkj.paopaoxiche.view.view.ModifyUserInfoDialog;
 import com.xtkj.paopaoxiche.view.view.MyCouponsDialog;
 import com.xtkj.paopaoxiche.view.view.MyCustomDialog;
 import com.xtkj.paopaoxiche.view.view.MyEvaluateDialog;
@@ -93,8 +94,14 @@ public class MyInfoFragment extends BaseFragmemt implements IDriverContract.IMyI
         unbinder.unbind();
     }
 
-    @OnClick({R.id.my_score, R.id.my_coupons, R.id.my_comsumption, R.id.my_evaluation, R.id.my_updatecf, R.id.my_customer_service, R.id.my_promote})
+    long time = 0;
+    @OnClick({R.id.my_score, R.id.my_coupons, R.id.my_comsumption, R.id.my_evaluation,
+            R.id.my_updatecf, R.id.my_customer_service, R.id.my_promote, R.id.modify_user_image_button})
     public void onViewClicked(View view) {
+        if (System.currentTimeMillis() - time < 500) {
+            return;
+        }
+        time = System.currentTimeMillis();
         switch (view.getId()) {
             case R.id.my_score:
                 break;
@@ -114,6 +121,11 @@ public class MyInfoFragment extends BaseFragmemt implements IDriverContract.IMyI
                 break;
             case R.id.my_promote:
                 new ExtensionDialog(getContext(), true).show();
+                break;
+            case R.id.modify_user_image_button:
+                new ModifyUserInfoDialog(getContext(), true).show();
+                break;
+            default:
                 break;
         }
     }

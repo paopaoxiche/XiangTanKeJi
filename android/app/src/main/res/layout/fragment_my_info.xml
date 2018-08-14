@@ -8,9 +8,6 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-
-
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -38,13 +35,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <ImageView
+                    <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/portrait_image_view"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="52dp"
-                        android:scaleType="fitCenter"
+
                         android:src="@drawable/avatar_man"/>
 
                     <RelativeLayout
@@ -82,11 +79,12 @@
 
                         <ImageButton
                             android:id="@+id/modify_user_image_button"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
                             android:layout_alignParentRight="true"
                             android:layout_marginRight="16dp"
                             android:layout_centerVertical="true"
+                            android:scaleType="center"
                             android:background="@android:color/transparent"
                             android:src="@drawable/btn_nextpag_white"/>
 
