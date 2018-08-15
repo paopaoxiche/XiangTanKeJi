@@ -4,12 +4,14 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.xtkj.paopaoxiche.R;
 import com.xtkj.paopaoxiche.base.BaseGaodeActivity;
@@ -23,10 +25,10 @@ import com.xtkj.paopaoxiche.presenter.DriverPresenterImpl;
 import java.util.ArrayList;
 
 
-public class DriverMainActivity extends BaseGaodeActivity implements IDriverContract.IDriverView,BaseFragmemt.OnFragmentInteractionListener {
+public class DriverMainActivity extends BaseGaodeActivity implements IDriverContract.IDriverView {
 
     private final String TAG = "DriverMainActivity";
-
+    private long firstPressedTime;
     private static final int PERMISSION_REQUEST_CODE = 1; //权限请求码
 
     IDriverContract.IDriverPresenter driverPresenter;
@@ -39,6 +41,10 @@ public class DriverMainActivity extends BaseGaodeActivity implements IDriverCont
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (savedInstanceState != null) {
+            savedInstanceState.remove("android:fragments");  //注意：基类是Activity时参数为android:fragments， 一定要在super.onCreate函数前执行！！！
+            savedInstanceState.remove("android:support:fragments");
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver_main);
 
@@ -62,6 +68,11 @@ public class DriverMainActivity extends BaseGaodeActivity implements IDriverCont
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
                     0);
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 
     @Override
@@ -123,7 +134,17 @@ public class DriverMainActivity extends BaseGaodeActivity implements IDriverCont
     }
 
     @Override
-    public void onFragmentInteraction(Uri uri) {
-        Log.e(TAG,"onFragmentInteraction");
+    protected void onSaveInstanceState(Bundle outState) {
+//        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (System.currentTimeMillis() - firstPressedTime < 2000) {
+            super.onBackPressed();
+        } else {
+            Toast.makeText(this, "再按一次退出", Toast.LENGTH_SHORT).show();
+            firstPressedTime = System.currentTimeMillis();
+        }
     }
 }

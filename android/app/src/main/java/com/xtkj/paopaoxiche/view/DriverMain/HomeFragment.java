@@ -1,10 +1,12 @@
 package com.xtkj.paopaoxiche.view.DriverMain;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.xtkj.paopaoxiche.R;
 import com.xtkj.paopaoxiche.application.SkyconValues;
@@ -30,6 +33,7 @@ import java.text.DecimalFormat;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -47,6 +51,7 @@ public class HomeFragment extends BaseFragmemt implements IDriverContract.IHomeV
     HomeShopFragmentAdapter homeShopFragmentAdapter = null;
     int viewpager_index = 0;
 
+    Unbinder unbinder;
     @BindView(R.id.temperature)
     TextView temperature;
     @BindView(R.id.describe)
@@ -105,7 +110,7 @@ public class HomeFragment extends BaseFragmemt implements IDriverContract.IHomeV
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         homePresenter.onCreate();
-        ButterKnife.bind(this, view);
+        unbinder = ButterKnife.bind(this, view);
 
         initView();
         return view;
@@ -156,14 +161,33 @@ public class HomeFragment extends BaseFragmemt implements IDriverContract.IHomeV
             homeWashServiceAdapter = new HomeWashServiceAdapter(DriverHomeModel.getInstance().getWashServicesBean(), getActivityContext());
             washServiceRecyclerView.setAdapter(homeWashServiceAdapter);
         }
-
-        homeShopFragmentAdapter = new HomeShopFragmentAdapter(getActivity().getSupportFragmentManager(), DriverHomeModel.getInstance().getWashServicesBean().getData());
-        shopViewpager.setAdapter(homeShopFragmentAdapter);
-        shopViewpager.setCurrentItem(0);
-
         int num = DriverHomeModel.getInstance().getWashServicesBean().getData().size();
         if(num==0)noWashService.setVisibility(View.VISIBLE);
-        else noWashService.setVisibility(View.GONE);
+        else{
+            noWashService.setVisibility(View.GONE);
+
+            homeShopFragmentAdapter = new HomeShopFragmentAdapter(getFragmentManager(), DriverHomeModel.getInstance().getWashServicesBean().getData());
+            shopViewpager.setAdapter(homeShopFragmentAdapter);
+            shopViewpager.setCurrentItem(0);
+
+            shopViewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                    @Override
+                    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) { }
+                    @Override
+                    public void onPageSelected(int position) {
+                        indicator.getChildAt(viewpager_index).setEnabled(false);
+                        indicator.getChildAt(position).setEnabled(true);
+                        viewpager_index = position;
+                    }
+                    @Override
+                    public void onPageScrollStateChanged(int state) { }
+                });
+
+        }
+        homeShopFragmentAdapter.notifyDataSetChanged();
+        homeWashServiceAdapter.notifyDataSetChanged();
+
+        indicator.removeAllViews();
         for (int i = 0; i < num; i++) {
             View view = new View(getActivityContext());
             view.setBackgroundResource(R.drawable.home_indicator);
@@ -174,34 +198,19 @@ public class HomeFragment extends BaseFragmemt implements IDriverContract.IHomeV
         }
         if(indicator.getChildAt(0)!=null)
         indicator.getChildAt(0).setEnabled(true);
-        shopViewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                indicator.getChildAt(viewpager_index).setEnabled(false);
-                indicator.getChildAt(position).setEnabled(true);
-                viewpager_index = position;
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
 
         shopViewpager.setCurrentItem(0);
-        homeShopFragmentAdapter.notifyDataSetChanged();
-        homeWashServiceAdapter.notifyDataSetChanged();
-    }
 
+    }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        homePresenter.onDestroy();
+        if (unbinder != null) {
+            unbinder.unbind();
+        }
     }
 
     @OnClick({R.id.location, R.id.more_wash_yard, R.id.weather_details1, R.id.weather_details2})
@@ -221,6 +230,7 @@ public class HomeFragment extends BaseFragmemt implements IDriverContract.IHomeV
                 break;
         }
     }
+
 
 
 }

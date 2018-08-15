@@ -63,7 +63,7 @@ public class ShopFragment extends BaseFragmemt implements IDriverContract.IShopV
 
         RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
                 .create(WashService.class)
-                .getRecommendCommodity(MyLocation.lng +"",MyLocation.lng,3)
+                .getRecommendCommodity(MyLocation.lng +"",MyLocation.lat + "",3)
                 .enqueue(new Callback<WashShopBean>() {
                     @Override
                     public void onResponse(Call<WashShopBean> call, Response<WashShopBean> response) {
