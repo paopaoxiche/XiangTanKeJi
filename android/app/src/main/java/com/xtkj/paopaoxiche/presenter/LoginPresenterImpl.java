@@ -93,7 +93,7 @@ public class LoginPresenterImpl implements ILoginContract.ILoginPresenter, UserM
     }
 
     @Override
-    public void ModifyUserInfo(String modifyType) {
+    public void modifyUserInfo(String modifyType) {
 
     }
 }

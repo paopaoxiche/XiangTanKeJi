@@ -16,6 +16,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import java.io.File;
+
 public class UserModel {
 
     private static UserModel instance = null;
@@ -51,7 +53,7 @@ public class UserModel {
         void timeOut();
         void checkTokenSuccess();
 
-        void ModifyUserInfo(String modifyType);
+        void modifyUserInfo(String modifyType);
     }
 
     public void checkCarWashToken(){
@@ -174,6 +176,39 @@ public class UserModel {
 
                     @Override
                     public void onFailure(Call<LoginBean> call, Throwable t) {
+                        if (loginListenerList == null) {
+                            return;
+                        }
+                        for (LoginListener loginListener : loginListenerList) {
+                            loginListener.timeOut();
+                        }
+                    }
+                });
+    }
+
+    public void updateUserInfo(String nickName, File file) {
+        RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
+                .create(UserService.class)
+                .update(nickName)
+                .enqueue(new Callback<NoDataBean>() {
+                    @Override
+                    public void onResponse(Call<NoDataBean> call, Response<NoDataBean> response) {
+                        if (loginListenerList == null) {
+                            return;
+                        }
+                        if (response.body().getCode() != 401) {
+                            for (LoginListener loginListener : loginListenerList) {
+                                loginListener.modifyUserInfo(AppConstant.NICK_NAME);
+                            }
+                        } else {
+                            for (LoginListener loginListener : loginListenerList) {
+                                loginListener.timeOut();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<NoDataBean> call, Throwable t) {
                         if (loginListenerList == null) {
                             return;
                         }

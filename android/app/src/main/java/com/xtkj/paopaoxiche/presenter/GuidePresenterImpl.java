@@ -100,7 +100,7 @@ public class GuidePresenterImpl implements IGuideContract.IGuidePresenter, UserM
     }
 
     @Override
-    public void ModifyUserInfo(String modifyType) {
+    public void modifyUserInfo(String modifyType) {
 
     }
 }
