@@ -241,7 +241,7 @@ public class UserModel {
         UserInfo.setAvatar(preferUtils.getString(AppConstant.AVATAR));
         UserInfo.setNickName(preferUtils.getString(AppConstant.NICK_NAME));
         UserInfo.setUserPhone(preferUtils.getString(AppConstant.PHONE));
-        UserInfo.setScore(preferUtils.getInt(AppConstant.SCORE));
+//        UserInfo.setScore(preferUtils.getInt(AppConstant.SCORE));
         UserInfo.setRegTime(preferUtils.getLong(AppConstant.REGISTER_TIME, 0));
     }
 

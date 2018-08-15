@@ -83,7 +83,8 @@ public class WashServiceActivity extends BaseActivity implements IWashServiceCon
                 }
             });
 
-            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 200);
+            layoutParams.setMargins(0,16,0,16);
             serviceItems.addView(linearLayout,layoutParams);
         }
 
@@ -118,7 +119,8 @@ public class WashServiceActivity extends BaseActivity implements IWashServiceCon
                     }
                 }
             });
-            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,150);
+            layoutParams.setMargins(0,16,0,16);
             shopList.addView(linearLayout,layoutParams);
         }
 
