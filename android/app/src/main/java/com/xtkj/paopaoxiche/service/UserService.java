@@ -6,9 +6,11 @@ import com.xtkj.paopaoxiche.bean.NoDataBean;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.Field;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
+import java.io.File;
 
 public interface UserService {
 
@@ -37,12 +39,14 @@ public interface UserService {
 
 
     /**
-     * @param demoBean
      * */
     @POST("user/update")
-    Call<NoDataBean> Update(@Body DemoBean demoBean);
+    Call<NoDataBean> update(@Body String nickName);
 
-
+    /**
+     * */
+    @POST("user/update")
+    Call<NoDataBean> update(@Field("file") File file);
 
     /**
      * 验证是否为车主TOKEN

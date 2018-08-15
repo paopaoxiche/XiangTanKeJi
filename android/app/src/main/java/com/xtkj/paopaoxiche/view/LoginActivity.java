@@ -69,6 +69,8 @@ public class LoginActivity extends BaseActivity implements RadioGroup.OnCheckedC
     @BindView(R.id.login_form)
     ScrollView loginForm;
 
+    int roletype = 0;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -132,11 +134,11 @@ public class LoginActivity extends BaseActivity implements RadioGroup.OnCheckedC
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         switch (checkedId) {
             case R.id.driver_radio_button:
-                loginPresenter.setIsDriver(true);
+                roletype = 0;
                 break;
 
             case R.id.cleaner_radio_button:
-                loginPresenter.setIsDriver(true);
+                roletype = 1;
                 break;
 
             default:
@@ -200,7 +202,7 @@ public class LoginActivity extends BaseActivity implements RadioGroup.OnCheckedC
                 }
                 Long code = Long.valueOf(codeText.getEditableText().toString() + "");
 
-                loginPresenter.doLogin(account, code);
+                loginPresenter.doLogin(account, roletype, code);
 
                 break;
         }

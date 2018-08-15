@@ -4,6 +4,8 @@ package com.xtkj.paopaoxiche.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.xtkj.paopaoxiche.application.BaseApplication;
+
 
 public class PreferUtils {
     private static PreferUtils sInstance;
@@ -11,15 +13,15 @@ public class PreferUtils {
 
     private final static String spName = "PAOPAOXICHE";
 
-    private PreferUtils(Context context) {
-        mPref = context.getSharedPreferences(spName, Context.MODE_PRIVATE);
+    private PreferUtils() {
+        mPref = BaseApplication.getContext().getSharedPreferences(spName, Context.MODE_PRIVATE);
     }
 
 
-    public static PreferUtils getInstance(Context context) {
+    public static PreferUtils getInstance() {
         if (sInstance == null) {
             synchronized (PreferUtils.class) {
-                sInstance = new PreferUtils(context);
+                sInstance = new PreferUtils();
             }
         }
         return sInstance;
@@ -28,7 +30,6 @@ public class PreferUtils {
 
     /**
      * 存整数
-     * @param String    key
      * @param value  value
      */
     public void putInt(String key, int value) {
@@ -38,7 +39,6 @@ public class PreferUtils {
 
     /**
      * 取整数
-     * @param String   key
      * @return      value
      */
     public int getInt(String key) {
@@ -49,7 +49,6 @@ public class PreferUtils {
 
     /**
      * 存字符串
-     * @param String    key
      * @param value  value
      */
     public void putString(String key, String value) {
@@ -59,7 +58,6 @@ public class PreferUtils {
 
     /**
      * 取字符串
-     * @param String   key
      * @return      value
      */
     public String getString(String key) {
@@ -69,7 +67,6 @@ public class PreferUtils {
 
     /**
      * 存boolean
-     * @param String    key
      * @param value  value
      */
     public void putBoolean(String key, boolean value) {
@@ -79,7 +76,6 @@ public class PreferUtils {
 
     /**
      * 取 boolean
-     * @param String       key
      * @param defValue  default value
      * @return    boolean
      */
@@ -87,10 +83,16 @@ public class PreferUtils {
         return mPref.getBoolean(key, defValue);
     }
 
+    public void putLong(String key, long value) {
+        mPref.edit().putLong(key, value);
+    }
+
+    public long getLong(String key, long defValue) {
+        return mPref.getLong(key, defValue);
+    }
 
     /**
      * 删除 key
-     * @param String   key
      */
     public static void remove(String key) {
         mPref.edit().remove(key).apply();

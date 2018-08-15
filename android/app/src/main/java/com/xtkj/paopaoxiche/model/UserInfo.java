@@ -1,4 +1,4 @@
-package com.xtkj.paopaoxiche.application;
+package com.xtkj.paopaoxiche.model;
 
 
 public class UserInfo {
@@ -17,7 +17,7 @@ public class UserInfo {
         return driver;
     }
 
-    public static void setDriver(boolean isDriver) {
+    protected static void setDriver(boolean isDriver) {
         UserInfo.driver = isDriver;
     }
 
@@ -25,7 +25,7 @@ public class UserInfo {
         return avatar;
     }
 
-    public static void setAvatar(String avatar) {
+    protected static void setAvatar(String avatar) {
         UserInfo.avatar = avatar;
     }
 
@@ -33,7 +33,7 @@ public class UserInfo {
         return id;
     }
 
-    public static void setId(String id) {
+    protected static void setId(String id) {
         UserInfo.id = id;
     }
 
@@ -41,7 +41,7 @@ public class UserInfo {
         return nickName;
     }
 
-    public static void setNickName(String nickName) {
+    protected static void setNickName(String nickName) {
         UserInfo.nickName = nickName;
     }
 
@@ -49,7 +49,7 @@ public class UserInfo {
         return regTime;
     }
 
-    public static void setRegTime(long regTime) {
+    protected static void setRegTime(long regTime) {
         UserInfo.regTime = regTime;
     }
 
@@ -57,7 +57,7 @@ public class UserInfo {
         return score;
     }
 
-    public static void setScore(int score) {
+    protected static void setScore(int score) {
         UserInfo.score = score;
     }
 
@@ -65,7 +65,7 @@ public class UserInfo {
         return token;
     }
 
-    public static void setToken(String token) {
+    protected static void setToken(String token) {
         UserInfo.token = token;
     }
 
@@ -73,7 +73,7 @@ public class UserInfo {
         return type;
     }
 
-    public static void setType(int type) {
+    protected static void setType(int type) {
         UserInfo.type = type;
     }
 
@@ -81,7 +81,7 @@ public class UserInfo {
         return userPhone;
     }
 
-    public static void setUserPhone(String userPhone) {
+    protected static void setUserPhone(String userPhone) {
         UserInfo.userPhone = userPhone;
     }
 }

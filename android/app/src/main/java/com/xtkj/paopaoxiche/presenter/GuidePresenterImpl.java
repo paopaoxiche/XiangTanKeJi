@@ -5,16 +5,16 @@ import android.os.Handler;
 
 import com.xtkj.paopaoxiche.application.AppConstant;
 import com.xtkj.paopaoxiche.application.Authentication;
-import com.xtkj.paopaoxiche.application.UserInfo;
+import com.xtkj.paopaoxiche.model.UserInfo;
 import com.xtkj.paopaoxiche.bean.LoginBean;
-import com.xtkj.paopaoxiche.model.LoginModel;
+import com.xtkj.paopaoxiche.model.UserModel;
 import com.xtkj.paopaoxiche.utils.PreferUtils;
 import com.xtkj.paopaoxiche.view.CarWashMain.CarWashMainActivity;
 import com.xtkj.paopaoxiche.view.DriverMain.DriverMainActivity;
 import com.xtkj.paopaoxiche.view.LoginActivity;
 import com.xtkj.paopaoxiche.contract.IGuideContract;
 
-public class GuidePresenterImpl implements IGuideContract.IGuidePresenter, LoginModel.LoginListener {
+public class GuidePresenterImpl implements IGuideContract.IGuidePresenter, UserModel.LoginListener {
 
     IGuideContract.IGuideView guideView;
 
@@ -28,8 +28,8 @@ public class GuidePresenterImpl implements IGuideContract.IGuidePresenter, Login
 
     @Override
     public void onCreate() {
-        LoginModel.getInstance().addListener(this);
-        preferUtils = PreferUtils.getInstance(guideView.getContext());
+        UserModel.getInstance().addListener(this);
+        preferUtils = PreferUtils.getInstance();
         init();
         checkToken();
     }
@@ -46,20 +46,14 @@ public class GuidePresenterImpl implements IGuideContract.IGuidePresenter, Login
     }
 
     private void initAutoLandingUser() {
-        UserInfo.setToken(preferUtils.getString(AppConstant.TOKEN));
-        UserInfo.setId(preferUtils.getString(AppConstant.USER_ID));
-        UserInfo.setDriver(preferUtils.getBoolean(AppConstant.IS_DRIVER,true));
-        UserInfo.setAvatar(preferUtils.getString(AppConstant.AVATAR));
-        UserInfo.setNickName(preferUtils.getString(AppConstant.NICK_NAME));
-        UserInfo.setUserPhone(preferUtils.getString(AppConstant.PHONE));
-        //UserInfo.setScore(Integer.valueOf(preferUtils.getString(AppConstant.SCORE)));
+        UserModel.getInstance().initData();
     }
 
     private void checkToken() {
         if (UserInfo.isDriver()) {
-            LoginModel.getInstance().checkDriverToken();
+            UserModel.getInstance().checkDriverToken();
         } else {
-            LoginModel.getInstance().checkCarWashToken();
+            UserModel.getInstance().checkCarWashToken();
         }
     }
 
@@ -103,5 +97,10 @@ public class GuidePresenterImpl implements IGuideContract.IGuidePresenter, Login
         } else {
             clazz = CarWashMainActivity.class;
         }
+    }
+
+    @Override
+    public void modifyUserInfo(String modifyType) {
+
     }
 }

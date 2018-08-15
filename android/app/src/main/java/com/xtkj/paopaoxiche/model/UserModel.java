@@ -2,7 +2,6 @@ package com.xtkj.paopaoxiche.model;
 
 import com.xtkj.paopaoxiche.application.AppConstant;
 import com.xtkj.paopaoxiche.application.Authentication;
-import com.xtkj.paopaoxiche.application.UserInfo;
 import com.xtkj.paopaoxiche.bean.LoginBean;
 import com.xtkj.paopaoxiche.bean.NoDataBean;
 import com.xtkj.paopaoxiche.http.ApiField;
@@ -17,19 +16,23 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LoginModel {
+import java.io.File;
 
-    private static LoginModel instance = null;
+public class UserModel {
+
+    private static UserModel instance = null;
+
+    private PreferUtils preferUtils = PreferUtils.getInstance();
 
     private List<LoginListener> loginListenerList = null;
 
-    private LoginModel() {
+    private UserModel() {
         loginListenerList = new ArrayList<>();
     }
 
-    public static LoginModel getInstance() {
+    public static UserModel getInstance() {
         if (instance == null) {
-            instance = new LoginModel();
+            instance = new UserModel();
         }
         return instance;
     }
@@ -49,6 +52,8 @@ public class LoginModel {
         void loginFail();
         void timeOut();
         void checkTokenSuccess();
+
+        void modifyUserInfo(String modifyType);
     }
 
     public void checkCarWashToken(){
@@ -157,6 +162,8 @@ public class LoginModel {
                         }
                         LoginBean.DataBean data = response.body().getData();
                         if (response.body().getCode() == 200) {
+                            saveData(data);
+                            initData();
                             for (LoginListener loginListener : loginListenerList) {
                                 loginListener.loginSuccess(data);
                             }
@@ -177,6 +184,65 @@ public class LoginModel {
                         }
                     }
                 });
+    }
+
+    public void updateUserInfo(String nickName, File file) {
+        RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
+                .create(UserService.class)
+                .update(nickName)
+                .enqueue(new Callback<NoDataBean>() {
+                    @Override
+                    public void onResponse(Call<NoDataBean> call, Response<NoDataBean> response) {
+                        if (loginListenerList == null) {
+                            return;
+                        }
+                        if (response.body().getCode() != 401) {
+                            for (LoginListener loginListener : loginListenerList) {
+                                loginListener.modifyUserInfo(AppConstant.NICK_NAME);
+                            }
+                        } else {
+                            for (LoginListener loginListener : loginListenerList) {
+                                loginListener.timeOut();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<NoDataBean> call, Throwable t) {
+                        if (loginListenerList == null) {
+                            return;
+                        }
+                        for (LoginListener loginListener : loginListenerList) {
+                            loginListener.timeOut();
+                        }
+                    }
+                });
+    }
+    
+    private void saveData(LoginBean.DataBean data) {
+        preferUtils.putString(AppConstant.TOKEN, data.getToken());
+        preferUtils.putString(AppConstant.USER_ID, data.getId());
+        if (data.getType() == 0) {
+            preferUtils.putBoolean(AppConstant.IS_DRIVER, true);
+        } else {
+            preferUtils.putBoolean(AppConstant.IS_DRIVER, false);
+        }
+        preferUtils.putString(AppConstant.AVATAR, data.getAvatar());
+        preferUtils.putString(AppConstant.NICK_NAME, data.getNickName());
+        preferUtils.putString(AppConstant.PHONE, data.getUserPhone());
+        preferUtils.putInt(AppConstant.SCORE, data.getScore());
+        preferUtils.putLong(AppConstant.REGISTER_TIME, data.getRegTime());
+    }
+
+    public void initData() {
+        UserInfo.setToken(preferUtils.getString(AppConstant.TOKEN));
+        UserInfo.setId(preferUtils.getString(AppConstant.USER_ID));
+        UserInfo.setDriver(preferUtils.getBoolean(AppConstant.IS_DRIVER,true));
+        UserInfo.setAvatar(preferUtils.getString(AppConstant.AVATAR));
+        UserInfo.setNickName(preferUtils.getString(AppConstant.NICK_NAME));
+        UserInfo.setUserPhone(preferUtils.getString(AppConstant.PHONE));
+        UserInfo.setScore(preferUtils.getInt(AppConstant.SCORE));
+        UserInfo.setRegTime(preferUtils.getLong(AppConstant.REGISTER_TIME, 0));
     }
 
     public static void release() {
