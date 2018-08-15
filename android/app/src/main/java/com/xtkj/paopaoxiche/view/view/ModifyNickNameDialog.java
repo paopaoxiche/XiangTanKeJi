@@ -6,7 +6,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.xtkj.paopaoxiche.R;
-import com.xtkj.paopaoxiche.application.UserInfo;
+import com.xtkj.paopaoxiche.model.UserInfo;
 import com.xtkj.paopaoxiche.widget.FullScreenWithStatusBarDialog;
 
 import butterknife.BindView;
@@ -32,7 +32,7 @@ public class ModifyNickNameDialog extends FullScreenWithStatusBarDialog {
         switch (view.getId()) {
             case R.id.complete_button:
                 if (nickNameTextView.getText().toString() != null) {
-                    UserInfo.setNickName(nickNameTextView.getText().toString());
+//                    UserInfo.setNickName(nickNameTextView.getText().toString());
                 }
                 dismiss();
                 break;

@@ -2,18 +2,17 @@ package com.xtkj.paopaoxiche.presenter;
 
 import android.content.Intent;
 
-import com.xtkj.paopaoxiche.application.UserInfo;
+import com.xtkj.paopaoxiche.model.UserInfo;
 import com.xtkj.paopaoxiche.application.AppConstant;
 import com.xtkj.paopaoxiche.bean.LoginBean;
 import com.xtkj.paopaoxiche.contract.ILoginContract;
-import com.xtkj.paopaoxiche.application.Authentication;
-import com.xtkj.paopaoxiche.model.LoginModel;
+import com.xtkj.paopaoxiche.model.UserModel;
 import com.xtkj.paopaoxiche.utils.PreferUtils;
 import com.xtkj.paopaoxiche.view.CarWashMain.CarWashMainActivity;
 import com.xtkj.paopaoxiche.view.DriverMain.DriverMainActivity;
 
 
-public class LoginPresenterImpl implements ILoginContract.ILoginPresenter, LoginModel.LoginListener {
+public class LoginPresenterImpl implements ILoginContract.ILoginPresenter, UserModel.LoginListener {
 
     ILoginContract.ILoginView loginView;
 
@@ -24,45 +23,31 @@ public class LoginPresenterImpl implements ILoginContract.ILoginPresenter, Login
 
     @Override
     public void onCreate() {
-        String account = PreferUtils.getInstance(loginView.getContext()).getString(AppConstant.ACCOUNT);
+        String account = PreferUtils.getInstance().getString(AppConstant.ACCOUNT);
         loginView.initAccount(account);
-        LoginModel.getInstance().addListener(this);
+        UserModel.getInstance().addListener(this);
 //        checkToken();
     }
 
     @Override
     public void onDestroy() {
-        LoginModel.getInstance().removeListener(this);
-        LoginModel.release();
+        UserModel.getInstance().removeListener(this);
+        UserModel.release();
     }
 
     @Override
     public void getMessageCode(String phone) {
-        LoginModel.getInstance().getMessageCode(phone);
+        UserModel.getInstance().getMessageCode(phone);
     }
 
     @Override
-    public void doLogin(String account, long code) {
+    public void doLogin(String account, int roleType, long code) {
         int type = 1;
         if (UserInfo.isDriver()) type = 0;
 
-        LoginModel.getInstance().doLogin(account, code, type);
+        UserModel.getInstance().doLogin(account, code, roleType);
 
-        PreferUtils.getInstance(loginView.getContext()).putString(AppConstant.ACCOUNT, account);
-    }
-
-//    @Override
-//    public void checkToken() {
-//        if (UserInfo.isDriver()) {
-//            LoginModel.getInstance().checkDriverToken();
-//        } else {
-//            LoginModel.getInstance().checkCarWashToken();
-//        }
-//    }
-
-    @Override
-    public void setIsDriver(boolean driver) {
-        UserInfo.setDriver(driver);
+        PreferUtils.getInstance().putString(AppConstant.ACCOUNT, account);
     }
 
     private void login() {
@@ -89,23 +74,6 @@ public class LoginPresenterImpl implements ILoginContract.ILoginPresenter, Login
     @Override
     public void loginSuccess(LoginBean.DataBean dataBean) {
         loginView.showToast("登陆成功");
-
-        PreferUtils.getInstance(loginView.getContext()).putString(AppConstant.TOKEN, dataBean.getToken());
-        PreferUtils.getInstance(loginView.getContext()).putString(AppConstant.USER_ID, dataBean.getId());
-        PreferUtils.getInstance(loginView.getContext()).putBoolean(AppConstant.IS_DRIVER, UserInfo.isDriver());
-        PreferUtils.getInstance(loginView.getContext()).putString(AppConstant.AVATAR, dataBean.getAvatar());
-        PreferUtils.getInstance(loginView.getContext()).putString(AppConstant.NICK_NAME, dataBean.getNickName());
-        PreferUtils.getInstance(loginView.getContext()).putString(AppConstant.PHONE, dataBean.getUserPhone());
-        PreferUtils.getInstance(loginView.getContext()).putString(AppConstant.SCORE, dataBean.getScore() + "");
-
-
-        UserInfo.setToken(dataBean.getToken());
-        UserInfo.setId(dataBean.getId());
-        UserInfo.setAvatar(dataBean.getAvatar());
-        UserInfo.setNickName(dataBean.getNickName());
-        UserInfo.setUserPhone(dataBean.getUserPhone());
-        UserInfo.setScore(dataBean.getScore());
-
         login();
     }
 
@@ -121,6 +89,11 @@ public class LoginPresenterImpl implements ILoginContract.ILoginPresenter, Login
 
     @Override
     public void checkTokenSuccess() {
+
+    }
+
+    @Override
+    public void ModifyUserInfo(String modifyType) {
 
     }
 }

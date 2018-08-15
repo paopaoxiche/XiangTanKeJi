@@ -6,7 +6,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.xtkj.paopaoxiche.R;
-import com.xtkj.paopaoxiche.application.UserInfo;
+import com.xtkj.paopaoxiche.model.UserInfo;
 import com.xtkj.paopaoxiche.widget.FullScreenWithStatusBarDialog;
 
 import butterknife.BindView;
