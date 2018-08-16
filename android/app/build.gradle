@@ -3,10 +3,10 @@ apply plugin: 'com.android.application'
 android {
     signingConfigs {
         config {
-            keyAlias 'paopaokeji'
-            keyPassword 'paopaokeji'
-            storePassword 'paopaokeji'
-            storeFile file('keystore.jks')
+            keyAlias 'paopaoxiche'
+            keyPassword 'paopaoxiche'
+            storePassword 'paopaoxiche'
+            storeFile file('../paopaoxiche.jks')
         }
     }
     compileSdkVersion 26
@@ -28,10 +28,12 @@ android {
             setZipAlignEnabled(true)
             debuggable true
             renderscriptDebuggable true
+            signingConfig signingConfigs.config
         }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
         }
     }
 
