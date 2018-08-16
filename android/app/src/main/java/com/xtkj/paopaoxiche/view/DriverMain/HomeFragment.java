@@ -180,11 +180,12 @@ public class HomeFragment extends BaseFragmemt implements IDriverContract.IHomeV
                         viewpager_index = position;
                     }
                     @Override
-                    public void onPageScrollStateChanged(int state) { }
+                    public void onPageScrollStateChanged(int state) {
+                        homeShopFragmentAdapter.notifyDataSetChanged();
+                    }
                 });
 
         }
-        homeShopFragmentAdapter.notifyDataSetChanged();
         homeWashServiceAdapter.notifyDataSetChanged();
 
         indicator.removeAllViews();
