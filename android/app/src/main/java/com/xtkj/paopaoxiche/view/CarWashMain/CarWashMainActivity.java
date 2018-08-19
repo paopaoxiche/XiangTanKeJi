@@ -1,8 +1,12 @@
 package com.xtkj.paopaoxiche.view.CarWashMain;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 
@@ -16,13 +20,14 @@ import com.xtkj.paopaoxiche.presenter.CarWashMinePresenterImpl;
 
 import java.util.ArrayList;
 
-public class CarWashMainActivity extends BaseActivity implements BaseFragmemt.OnFragmentInteractionListener,
-        ICarWashContract.IMainView{
+public class CarWashMainActivity extends BaseActivity implements ICarWashContract.IMainView{
 
     ICarWashContract.IMainPresenter mainPresenter;
 
     CarWashHomeFragment homeFragment;
     CarWashMineFragment mineFragment;
+
+    private static final int PERMISSION_REQUEST_CODE = 1; //权限请求码
 
     private SimpleFragmentPagerAdapter pagerAdapter;
     private ViewPager viewPager;
@@ -56,7 +61,18 @@ public class CarWashMainActivity extends BaseActivity implements BaseFragmemt.On
 
     @Override
     protected void initValues() {
+        ActivityCompat.requestPermissions(this,
+                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.READ_EXTERNAL_STORAGE
 
+                },
+                PERMISSION_REQUEST_CODE);
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
+                    0);
+        }
     }
 
     @Override
@@ -101,7 +117,8 @@ public class CarWashMainActivity extends BaseActivity implements BaseFragmemt.On
     }
 
     @Override
-    public void onFragmentInteraction(Uri uri) {
-
+    protected void onDestroy() {
+        super.onDestroy();
+        mainPresenter.onDestroy();
     }
 }

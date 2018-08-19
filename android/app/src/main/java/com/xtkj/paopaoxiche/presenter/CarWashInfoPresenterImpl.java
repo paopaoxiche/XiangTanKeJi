@@ -1,15 +1,20 @@
 package com.xtkj.paopaoxiche.presenter;
 
 import com.xtkj.paopaoxiche.bean.WashServicesBean;
+import com.xtkj.paopaoxiche.bean.WashShopBean;
 import com.xtkj.paopaoxiche.bean.WeatherForecastBean;
 import com.xtkj.paopaoxiche.bean.WeatherRealTimeBean;
 import com.xtkj.paopaoxiche.contract.ICarWashContract;
 import com.xtkj.paopaoxiche.model.DriverHomeModel;
+import com.xtkj.paopaoxiche.model.GoodsModel;
+import com.xtkj.paopaoxiche.model.UserInfo;
 
-public class CarWashInfoPresenterImpl implements ICarWashContract.IInfoPresenter, DriverHomeModel.DriverHomeListener {
+public class CarWashInfoPresenterImpl implements ICarWashContract.IInfoPresenter,
+        DriverHomeModel.DriverHomeListener, GoodsModel.GoodsListener {
 
     ICarWashContract.IInfoView infoView;
     DriverHomeModel driverHomeModel;
+    GoodsModel goodsModel;
 
     public CarWashInfoPresenterImpl(ICarWashContract.IInfoView iInfoView) {
         infoView = iInfoView;
@@ -19,18 +24,30 @@ public class CarWashInfoPresenterImpl implements ICarWashContract.IInfoPresenter
     @Override
     public void onCreate() {
         driverHomeModel = DriverHomeModel.getInstance();
-        initLocation();
+        goodsModel = GoodsModel.getInstance();
+
         driverHomeModel.addListener(this);
+        goodsModel.addListener(this);
+        initLocation();
+
+        goodsModel.getCarWashGoods(UserInfo.getWashId(), 0, 20);
     }
 
     @Override
     public void onDestroy() {
         DriverHomeModel.getInstance().removeListener(this);
         DriverHomeModel.release();
+        GoodsModel.getInstance().removeListener(this);
+        GoodsModel.release();
     }
 
     private void initLocation(){
         driverHomeModel.initLocation(infoView.getActivityContext());
+    }
+
+    @Override
+    public void updateLocation() {
+        driverHomeModel.updateLocation();
     }
 
 
@@ -67,5 +84,10 @@ public class CarWashInfoPresenterImpl implements ICarWashContract.IInfoPresenter
     @Override
     public void getForecastWeatherFailed() {
 
+    }
+
+    @Override
+    public void getCarWashGoodsSuccess(WashShopBean washShopBean) {
+        infoView.setGoodsInfoList(washShopBean);
     }
 }

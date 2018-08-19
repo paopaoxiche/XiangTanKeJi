@@ -57,4 +57,10 @@ public class GuideActivity extends BaseActivity implements IGuideContract.IGuide
     public void setPresenter(IGuideContract.IGuidePresenter iGuidePresenter) {
         guidePresenter = iGuidePresenter;
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        guidePresenter.onDestroy();
+    }
 }

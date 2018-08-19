@@ -3,13 +3,17 @@ package com.xtkj.paopaoxiche.model;
 
 public class UserInfo {
     private static String avatar;
-    private static String id = "";
+    private static int id;
     private static String nickName;
     private static long regTime;
     private static int score;
     private static String token = "";
     private static int type;
     private static String userPhone;
+
+    private static int authStatus;
+    private static int washId;
+    private static int washCount;
 
     private static boolean driver = true;
 
@@ -29,11 +33,11 @@ public class UserInfo {
         UserInfo.avatar = avatar;
     }
 
-    public static String getId() {
+    public static int getId() {
         return id;
     }
 
-    protected static void setId(String id) {
+    protected static void setId(int id) {
         UserInfo.id = id;
     }
 
@@ -83,6 +87,30 @@ public class UserInfo {
 
     protected static void setUserPhone(String userPhone) {
         UserInfo.userPhone = userPhone;
+    }
+
+    public static int getAuthStatus() {
+        return authStatus;
+    }
+
+    public static void setAuthStatus(int authStatus) {
+        UserInfo.authStatus = authStatus;
+    }
+
+    public static int getWashId() {
+        return washId;
+    }
+
+    public static void setWashId(int washId) {
+        UserInfo.washId = washId;
+    }
+
+    public static int getWashCount() {
+        return washCount;
+    }
+
+    public static void setWashCount(int washCount) {
+        UserInfo.washCount = washCount;
     }
 }
 

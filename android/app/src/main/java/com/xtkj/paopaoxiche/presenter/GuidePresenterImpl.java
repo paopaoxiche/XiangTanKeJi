@@ -36,7 +36,7 @@ public class GuidePresenterImpl implements IGuideContract.IGuidePresenter, UserM
 
     @Override
     public void onDestroy() {
-
+        UserModel.getInstance().removeListener(this);
     }
 
     private void init() {
@@ -95,8 +95,14 @@ public class GuidePresenterImpl implements IGuideContract.IGuidePresenter, UserM
         if (UserInfo.isDriver()) {
             clazz = DriverMainActivity.class;
         } else {
+            UserModel.getInstance().getCarWashInfo();
             clazz = CarWashMainActivity.class;
         }
+    }
+
+    @Override
+    public void getCarWashInfoSuccess() {
+        clazz = CarWashMainActivity.class;
     }
 
     @Override

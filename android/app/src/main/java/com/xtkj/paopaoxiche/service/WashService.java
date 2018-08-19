@@ -31,4 +31,6 @@ public interface WashService {
     Call<WashShopBean> getRecommendCommodity(@Query("lng") String lng,@Query("lat") String lat,@Query("count") int count);
 
 
+    @GET("wash/getCommodityList")
+    Call<WashShopBean> getGoodsList(@Query("washId") Integer washId,@Query("pageIndex") Integer pageIndex,@Query("pageSize") int pageSize);
 }

@@ -207,5 +207,11 @@ public class LoginActivity extends BaseActivity implements RadioGroup.OnCheckedC
                 break;
         }
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        loginPresenter.onDestroy();
+    }
 }
 

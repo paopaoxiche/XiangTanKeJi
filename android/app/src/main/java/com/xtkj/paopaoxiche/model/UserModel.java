@@ -2,6 +2,7 @@ package com.xtkj.paopaoxiche.model;
 
 import com.xtkj.paopaoxiche.application.AppConstant;
 import com.xtkj.paopaoxiche.application.Authentication;
+import com.xtkj.paopaoxiche.bean.CarWashInfoBean;
 import com.xtkj.paopaoxiche.bean.LoginBean;
 import com.xtkj.paopaoxiche.bean.NoDataBean;
 import com.xtkj.paopaoxiche.http.ApiField;
@@ -53,6 +54,7 @@ public class UserModel {
         void timeOut();
         void checkTokenSuccess();
 
+        void getCarWashInfoSuccess();
         void modifyUserInfo(String modifyType);
     }
 
@@ -218,10 +220,47 @@ public class UserModel {
                     }
                 });
     }
+
+    public void getCarWashInfo() {
+        RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
+                .create(UserService.class)
+                .getCarWashInfo()
+                .enqueue(new Callback<CarWashInfoBean>() {
+                    @Override
+                    public void onResponse(Call<CarWashInfoBean> call, Response<CarWashInfoBean> response) {
+                        if (loginListenerList == null) {
+                            return;
+                        }
+                        if (response.body().getCode() != 401) {
+                            CarWashInfoBean carWashInfoBean = response.body();
+                            UserInfo.setAuthStatus(carWashInfoBean.getData().getAuthStatus());
+                            UserInfo.setWashId(carWashInfoBean.getData().getId());
+                            UserInfo.setWashCount(carWashInfoBean.getData().getWashCount());
+                            for (LoginListener loginListener : loginListenerList) {
+                                loginListener.getCarWashInfoSuccess();
+                            }
+                        } else {
+                            for (LoginListener loginListener : loginListenerList) {
+                                loginListener.timeOut();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<CarWashInfoBean> call, Throwable t) {
+                        if (loginListenerList == null) {
+                            return;
+                        }
+                        for (LoginListener loginListener : loginListenerList) {
+                            loginListener.timeOut();
+                        }
+                    }
+                });
+    }
     
     private void saveData(LoginBean.DataBean data) {
         preferUtils.putString(AppConstant.TOKEN, data.getToken());
-        preferUtils.putString(AppConstant.USER_ID, data.getId());
+        preferUtils.putInt(AppConstant.USER_ID, data.getId());
         if (data.getType() == 0) {
             preferUtils.putBoolean(AppConstant.IS_DRIVER, true);
         } else {
@@ -236,7 +275,7 @@ public class UserModel {
 
     public void initData() {
         UserInfo.setToken(preferUtils.getString(AppConstant.TOKEN));
-        UserInfo.setId(preferUtils.getString(AppConstant.USER_ID));
+        UserInfo.setId(preferUtils.getInt(AppConstant.USER_ID));
         UserInfo.setDriver(preferUtils.getBoolean(AppConstant.IS_DRIVER,true));
         UserInfo.setAvatar(preferUtils.getString(AppConstant.AVATAR));
         UserInfo.setNickName(preferUtils.getString(AppConstant.NICK_NAME));

@@ -1,5 +1,6 @@
 package com.xtkj.paopaoxiche.service;
 
+import com.xtkj.paopaoxiche.bean.CarWashInfoBean;
 import com.xtkj.paopaoxiche.bean.DemoBean;
 import com.xtkj.paopaoxiche.bean.LoginBean;
 import com.xtkj.paopaoxiche.bean.NoDataBean;
@@ -60,6 +61,6 @@ public interface UserService {
     @GET("user/checkCarWash")
     Call<NoDataBean> checkCarWash() ;
 
-
-
+    @GET("wash/getWashInfo")
+    Call<CarWashInfoBean> getCarWashInfo() ;
 }

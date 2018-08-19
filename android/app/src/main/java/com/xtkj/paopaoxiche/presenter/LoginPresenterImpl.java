@@ -54,10 +54,11 @@ public class LoginPresenterImpl implements ILoginContract.ILoginPresenter, UserM
         Intent intent;
         if (UserInfo.isDriver()) {
             intent = new Intent(loginView.getContext(), DriverMainActivity.class);
+            loginView.login(intent);
         } else {
-            intent = new Intent(loginView.getContext(), CarWashMainActivity.class);
+            UserModel.getInstance().getCarWashInfo();
         }
-        loginView.login(intent);
+
     }
 
     @Override
@@ -90,6 +91,12 @@ public class LoginPresenterImpl implements ILoginContract.ILoginPresenter, UserM
     @Override
     public void checkTokenSuccess() {
 
+    }
+
+    @Override
+    public void getCarWashInfoSuccess() {
+        Intent intent = new Intent(loginView.getContext(), CarWashMainActivity.class);
+        loginView.login(intent);
     }
 
     @Override

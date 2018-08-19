@@ -2,10 +2,10 @@ package com.xtkj.paopaoxiche.application;
 
 public class Authentication {
 
-    private static String user_id ;
+    private static int user_id ;
     private static String token ;
 
-    public static void setUser_id(String user_id) {
+    public static void setUser_id(int user_id) {
         Authentication.user_id = user_id;
     }
 

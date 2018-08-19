@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.xtkj.paopaoxiche.base.IBasePresenter;
 import com.xtkj.paopaoxiche.base.IBaseView;
+import com.xtkj.paopaoxiche.bean.WashShopBean;
 import com.xtkj.paopaoxiche.bean.WeatherForecastBean;
 import com.xtkj.paopaoxiche.bean.WeatherRealTimeBean;
 
@@ -18,7 +19,7 @@ public class ICarWashContract {
     }
 
     public interface IInfoPresenter extends IBasePresenter {
-
+        void updateLocation();
     }
 
     public interface IInfoView extends IBaseView<IInfoPresenter> {
@@ -26,6 +27,8 @@ public class ICarWashContract {
         void setAddress(String address);
         void setRealTimeWeather(WeatherRealTimeBean weatherRealTimeBean);
         void setForecastWeather(WeatherForecastBean weatherForecastBean);
+
+        void setGoodsInfoList(WashShopBean washShopBean);
     }
 
     public interface IMinePresenter extends IBasePresenter {
