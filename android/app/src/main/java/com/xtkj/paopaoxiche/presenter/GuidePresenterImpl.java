@@ -41,8 +41,6 @@ public class GuidePresenterImpl implements IGuideContract.IGuidePresenter, UserM
 
     private void init() {
         initAutoLandingUser();
-        Authentication.setUser_id(UserInfo.getId());
-        Authentication.setToken(UserInfo.getToken());
     }
 
     private void initAutoLandingUser() {
@@ -103,10 +101,5 @@ public class GuidePresenterImpl implements IGuideContract.IGuidePresenter, UserM
     @Override
     public void getCarWashInfoSuccess() {
         clazz = CarWashMainActivity.class;
-    }
-
-    @Override
-    public void modifyUserInfo(String modifyType) {
-
     }
 }

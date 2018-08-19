@@ -1,13 +1,19 @@
 package com.xtkj.paopaoxiche.view.view;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.xtkj.paopaoxiche.R;
+import com.xtkj.paopaoxiche.event.BaseEvent;
 import com.xtkj.paopaoxiche.model.UserInfo;
 import com.xtkj.paopaoxiche.widget.FullScreenWithStatusBarDialog;
+
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -37,9 +43,12 @@ public class ModifyUserInfoDialog extends FullScreenWithStatusBarDialog {
         ButterKnife.bind(this);
 
         nickNameTextView.setText(UserInfo.getNickName());
+        if (UserInfo.avatarNotNull()) {
+            Glide.with(getContext()).load(UserInfo.getAvatar()).into(avatarImageView);
+        }
     }
 
-    @OnClick({R.id.back_arrow_image_button, R.id.modify_nick_name_image_button})
+    @OnClick({R.id.back_arrow_image_button, R.id.modify_nick_name_image_button, R.id.modify_avatar_image_button})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.back_arrow_image_button:
@@ -47,6 +56,10 @@ public class ModifyUserInfoDialog extends FullScreenWithStatusBarDialog {
             case R.id.modify_nick_name_image_button:
                 new ModifyNickNameDialog(getContext(), true).show();
                 break;
+            case R.id.modify_avatar_image_button:
+                EventBus.getDefault().post(new BaseEvent(BaseEvent.CAR_WASH_PICK_AVATAR));
+                break;
         }
+        dismiss();
     }
 }

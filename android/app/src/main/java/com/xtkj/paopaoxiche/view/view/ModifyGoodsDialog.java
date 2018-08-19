@@ -14,13 +14,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ModifyNickNameDialog extends FullScreenWithStatusBarDialog {
+public class ModifyGoodsDialog extends FullScreenWithStatusBarDialog {
     @BindView(R.id.complete_button)
     Button completeButton;
     @BindView(R.id.nick_name_text_view)
     EditText nickNameTextView;
 
-    public ModifyNickNameDialog(Context context, boolean statusBarVisible) {
+    public ModifyGoodsDialog(Context context, boolean statusBarVisible) {
         super(context, statusBarVisible);
         setContentView(R.layout.dialog_modify_nick_name);
         ButterKnife.bind(this);

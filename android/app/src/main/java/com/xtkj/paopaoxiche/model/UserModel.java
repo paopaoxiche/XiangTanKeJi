@@ -27,8 +27,11 @@ public class UserModel {
 
     private List<LoginListener> loginListenerList = null;
 
+    private List<UserInfoListener> userInfoListenerList = null;
+
     private UserModel() {
         loginListenerList = new ArrayList<>();
+        userInfoListenerList = new ArrayList<>();
     }
 
     public static UserModel getInstance() {
@@ -46,6 +49,14 @@ public class UserModel {
         loginListenerList.remove(loginListener);
     }
 
+    public void addListener(UserInfoListener userInfoListener) {
+        userInfoListenerList.add(userInfoListener);
+    }
+
+    public void removeListener(UserInfoListener userInfoListener) {
+        userInfoListenerList.remove(userInfoListener);
+    }
+
     public interface LoginListener {
         void getCodeSuccess();
         void getCodeFail();
@@ -55,7 +66,12 @@ public class UserModel {
         void checkTokenSuccess();
 
         void getCarWashInfoSuccess();
+    }
+
+    public interface UserInfoListener {
         void modifyUserInfo(String modifyType);
+
+        void timeOut(String modifyType);
     }
 
     public void checkCarWashToken(){
@@ -188,7 +204,7 @@ public class UserModel {
                 });
     }
 
-    public void updateUserInfo(String nickName, File file) {
+    public void updateUserInfo(String nickName) {
         RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
                 .create(UserService.class)
                 .update(nickName)
@@ -199,12 +215,14 @@ public class UserModel {
                             return;
                         }
                         if (response.body().getCode() != 401) {
-                            for (LoginListener loginListener : loginListenerList) {
-                                loginListener.modifyUserInfo(AppConstant.NICK_NAME);
+                            preferUtils.putString(AppConstant.NICK_NAME, nickName);
+                            UserInfo.setNickName(nickName);
+                            for (UserInfoListener userInfoListener : userInfoListenerList) {
+                                userInfoListener.modifyUserInfo(AppConstant.NICK_NAME);
                             }
                         } else {
-                            for (LoginListener loginListener : loginListenerList) {
-                                loginListener.timeOut();
+                            for (UserInfoListener userInfoListener : userInfoListenerList) {
+                                userInfoListener.timeOut(AppConstant.NICK_NAME);
                             }
                         }
                     }
@@ -214,8 +232,41 @@ public class UserModel {
                         if (loginListenerList == null) {
                             return;
                         }
-                        for (LoginListener loginListener : loginListenerList) {
-                            loginListener.timeOut();
+                        for (UserInfoListener userInfoListener : userInfoListenerList) {
+                            userInfoListener.timeOut(AppConstant.NICK_NAME);
+                        }
+                    }
+                });
+    }
+
+    public void updateUserInfo(File file) {
+        RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
+                .create(UserService.class)
+                .update(file)
+                .enqueue(new Callback<NoDataBean>() {
+                    @Override
+                    public void onResponse(Call<NoDataBean> call, Response<NoDataBean> response) {
+                        if (loginListenerList == null) {
+                            return;
+                        }
+                        if (response.body().getCode() != 401) {
+                            for (UserInfoListener userInfoListener : userInfoListenerList) {
+                                userInfoListener.modifyUserInfo(AppConstant.AVATAR);
+                            }
+                        } else {
+                            for (UserInfoListener userInfoListener : userInfoListenerList) {
+                                userInfoListener.timeOut(AppConstant.AVATAR);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<NoDataBean> call, Throwable t) {
+                        if (loginListenerList == null) {
+                            return;
+                        }
+                        for (UserInfoListener userInfoListener : userInfoListenerList) {
+                            userInfoListener.timeOut(AppConstant.AVATAR);
                         }
                     }
                 });
@@ -282,6 +333,8 @@ public class UserModel {
         UserInfo.setUserPhone(preferUtils.getString(AppConstant.PHONE));
 //        UserInfo.setScore(preferUtils.getInt(AppConstant.SCORE));
         UserInfo.setRegTime(preferUtils.getLong(AppConstant.REGISTER_TIME, 0));
+        Authentication.setUser_id(UserInfo.getId());
+        Authentication.setToken(UserInfo.getToken());
     }
 
     public static void release() {

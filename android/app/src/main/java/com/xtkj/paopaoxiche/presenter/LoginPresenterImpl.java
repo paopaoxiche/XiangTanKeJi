@@ -98,9 +98,4 @@ public class LoginPresenterImpl implements ILoginContract.ILoginPresenter, UserM
         Intent intent = new Intent(loginView.getContext(), CarWashMainActivity.class);
         loginView.login(intent);
     }
-
-    @Override
-    public void modifyUserInfo(String modifyType) {
-
-    }
 }

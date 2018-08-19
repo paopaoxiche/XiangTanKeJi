@@ -1,8 +1,11 @@
 package com.xtkj.paopaoxiche.view.CarWashMain;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -14,9 +17,13 @@ import com.xtkj.paopaoxiche.R;
 import com.xtkj.paopaoxiche.base.BaseActivity;
 import com.xtkj.paopaoxiche.base.BaseFragmemt;
 import com.xtkj.paopaoxiche.contract.ICarWashContract;
+import com.xtkj.paopaoxiche.event.BaseEvent;
 import com.xtkj.paopaoxiche.presenter.CarWashInfoPresenterImpl;
 import com.xtkj.paopaoxiche.presenter.CarWashMainPresenterImpl;
 import com.xtkj.paopaoxiche.presenter.CarWashMinePresenterImpl;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 
@@ -43,6 +50,7 @@ public class CarWashMainActivity extends BaseActivity implements ICarWashContrac
         initListeners();
 
         new CarWashMainPresenterImpl(this);
+        EventBus.getDefault().register(this);
         mainPresenter.onCreate();
     }
 
@@ -120,5 +128,44 @@ public class CarWashMainActivity extends BaseActivity implements ICarWashContrac
     protected void onDestroy() {
         super.onDestroy();
         mainPresenter.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+    private void pickAvatar() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            intent.setAction(Intent.ACTION_OPEN_DOCUMENT);
+        } else {
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+        }
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        startActivityForResult(intent, BaseEvent.CAR_WASH_PICK_AVATAR);
+    }
+
+    @Subscribe
+    public void onEventMainThread(BaseEvent baseEvent) {
+        switch (baseEvent.getType()) {
+            case BaseEvent.CAR_WASH_PICK_AVATAR:
+                pickAvatar();
+                break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == BaseEvent.CAR_WASH_PICK_AVATAR) {
+            if (data == null) {
+                return;
+            }
+                // Todo BUG-20580，获取图片时要进行压缩处理，并旋转之后保存到 Hst/cache 文件夹下
+//                String path = MediaUtils.getImagePath(this, data.getData());
+//                final BitmapFactory.Options options = new BitmapFactory.Options();
+//                options.inJustDecodeBounds = true;
+//                BitmapFactory.decodeFile(path, options);
+//                EventBus.getDefault().post(
+//                        new LocalFileDto(BaseDto.LOCAL_FILE_PATH, path, options.outWidth, options.outHeight));
+        }
     }
 }

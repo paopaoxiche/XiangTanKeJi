@@ -10,7 +10,7 @@
     android:background="@drawable/ripple_bg_white"
     android:layout_height="wrap_content"
     android:focusable="true">
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/user_img"
         android:layout_marginStart="4dp"
         android:layout_width="48dp"

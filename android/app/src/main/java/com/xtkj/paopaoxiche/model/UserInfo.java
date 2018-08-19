@@ -112,5 +112,9 @@ public class UserInfo {
     public static void setWashCount(int washCount) {
         UserInfo.washCount = washCount;
     }
+
+    public static boolean avatarNotNull() {
+        return avatar != null && avatar.length() > 0;
+    }
 }
 

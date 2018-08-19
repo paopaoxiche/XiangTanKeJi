@@ -18,6 +18,7 @@ import com.xtkj.paopaoxiche.contract.ICarWashContract;
 import com.xtkj.paopaoxiche.view.view.BusinessStateDialog;
 import com.xtkj.paopaoxiche.view.view.ExtensionDialog;
 import com.xtkj.paopaoxiche.view.view.IncomeListDialog;
+import com.xtkj.paopaoxiche.view.view.ModifyUserInfoDialog;
 import com.xtkj.paopaoxiche.view.view.MyEvaluateDialog;
 
 import butterknife.BindView;
@@ -65,7 +66,7 @@ public class CarWashMineFragment extends BaseFragmemt implements ICarWashContrac
     LinearLayout myCustomerService;
     @BindView(R.id.my_promote)
     LinearLayout myPromote;
-    @BindView(R.id.modify_user_image_button)
+    @BindView(R.id.wash_modify_user_image_button)
     ImageButton modifyUserImageButton;
 
 
@@ -102,7 +103,7 @@ public class CarWashMineFragment extends BaseFragmemt implements ICarWashContrac
 
     @OnClick({R.id.car_wash_manager_linear_layout, R.id.goods_manager_linear_layout, R.id.income_linear_layout,
             R.id.my_evaluation, R.id.state_linear_layout, R.id.my_updatecf, R.id.my_customer_service,
-            R.id.my_promote, R.id.modify_user_image_button})
+            R.id.my_promote, R.id.wash_modify_user_image_button})
     public void onViewClicked(View view) {
         if (System.currentTimeMillis() - time < 500) {
             return;
@@ -129,6 +130,11 @@ public class CarWashMineFragment extends BaseFragmemt implements ICarWashContrac
                 break;
             case R.id.my_promote:
                 new ExtensionDialog(getContext(), true).show();
+                break;
+            case R.id.wash_modify_user_image_button:
+                new ModifyUserInfoDialog(getContext(), true).show();
+                break;
+            default:
                 break;
         }
     }
