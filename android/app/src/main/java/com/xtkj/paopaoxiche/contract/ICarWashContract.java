@@ -36,6 +36,6 @@ public class ICarWashContract {
     }
 
     public interface IMineView extends IBaseView<IMinePresenter> {
-
+        void updateUserInfo(String modifyType);
     }
 }

@@ -5,6 +5,7 @@
     android:background="@color/white">
 
     <RelativeLayout
+        android:id="@+id/toolbar_relative_layout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/toolbarHeight"
         android:background="@color/orange">
@@ -39,19 +40,20 @@
 
     </RelativeLayout>
 
-    <ListView
+    <com.baoyz.swipemenulistview.SwipeMenuListView
         android:id="@+id/goods_list_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone">
-    </ListView>
+        android:layout_below="@id/toolbar_relative_layout"
+        android:layout_marginTop="12dp">
+    </com.baoyz.swipemenulistview.SwipeMenuListView>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="暂无商品"
-        android:textSize="32sp"
-        android:textColor="@color/black"/>
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerInParent="true"-->
+        <!--android:text="暂无商品"-->
+        <!--android:textSize="32sp"-->
+        <!--android:textColor="@color/black"/>-->
 
 </RelativeLayout>

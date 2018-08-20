@@ -79,9 +79,6 @@ public class CarWashHomeFragment extends BaseFragmemt implements ICarWashContrac
     RecyclerView goodsRecylerView;
 
     Unbinder unbinder;
-
-    private WashServicesBean.DataBean mData = null;
-    private WashShopBean washShopBean = null;
     private CarWashHomeFragment.ShopItemsAdapter shopItemsAdapter = null;
 
     @Nullable

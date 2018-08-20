@@ -11,12 +11,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.xtkj.paopaoxiche.R;
+import com.xtkj.paopaoxiche.application.AppConstant;
 import com.xtkj.paopaoxiche.model.UserInfo;
 import com.xtkj.paopaoxiche.base.BaseFragmemt;
 import com.xtkj.paopaoxiche.contract.ICarWashContract;
 import com.xtkj.paopaoxiche.view.view.BusinessStateDialog;
 import com.xtkj.paopaoxiche.view.view.ExtensionDialog;
+import com.xtkj.paopaoxiche.view.view.GoodsListDialog;
 import com.xtkj.paopaoxiche.view.view.IncomeListDialog;
 import com.xtkj.paopaoxiche.view.view.ModifyUserInfoDialog;
 import com.xtkj.paopaoxiche.view.view.MyEvaluateDialog;
@@ -78,12 +81,17 @@ public class CarWashMineFragment extends BaseFragmemt implements ICarWashContrac
 
         initView(view);
 
+        minePresenter.onCreate();
+
         return view;
     }
 
     private void initView(View view) {
         phoneNumberTextView.setText(UserInfo.getUserPhone());
         usernameTextView.setText(UserInfo.getNickName());
+        if (UserInfo.avatarNotNull()) {
+            Glide.with(getContext()).load(UserInfo.getAvatar()).into(portraitImageView);
+        }
     }
 
     @Override
@@ -97,6 +105,8 @@ public class CarWashMineFragment extends BaseFragmemt implements ICarWashContrac
         if (unbinder != null) {
             unbinder.unbind();
         }
+
+        minePresenter.onDestroy();
     }
 
     long time = 0;
@@ -113,6 +123,7 @@ public class CarWashMineFragment extends BaseFragmemt implements ICarWashContrac
             case R.id.car_wash_manager_linear_layout:
                 break;
             case R.id.goods_manager_linear_layout:
+                new GoodsListDialog(getContext(), true).show();
                 break;
             case R.id.income_linear_layout:
                 new IncomeListDialog(getContext(),true).show();
@@ -136,6 +147,16 @@ public class CarWashMineFragment extends BaseFragmemt implements ICarWashContrac
                 break;
             default:
                 break;
+        }
+    }
+
+    @Override
+    public void updateUserInfo(String modifyType) {
+        if (modifyType.equals(AppConstant.NICK_NAME)) {
+            usernameTextView.setText(UserInfo.getNickName());
+        }
+        if (modifyType.equals(AppConstant.AVATAR)) {
+            Glide.with(getContext()).load(UserInfo.getAvatar()).into(portraitImageView);
         }
     }
 }

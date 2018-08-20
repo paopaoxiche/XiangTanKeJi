@@ -9,8 +9,10 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.xtkj.paopaoxiche.R;
+import com.xtkj.paopaoxiche.application.AppConstant;
 import com.xtkj.paopaoxiche.event.BaseEvent;
 import com.xtkj.paopaoxiche.model.UserInfo;
+import com.xtkj.paopaoxiche.model.UserModel;
 import com.xtkj.paopaoxiche.widget.FullScreenWithStatusBarDialog;
 
 import org.greenrobot.eventbus.EventBus;
@@ -20,7 +22,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class ModifyUserInfoDialog extends FullScreenWithStatusBarDialog {
+public class ModifyUserInfoDialog extends FullScreenWithStatusBarDialog implements UserModel.UserInfoListener{
     @BindView(R.id.back_arrow_image_button)
     ImageButton backArrowImageButton;
     @BindView(R.id.modify_nick_name_image_button)
@@ -48,6 +50,18 @@ public class ModifyUserInfoDialog extends FullScreenWithStatusBarDialog {
         }
     }
 
+    @Override
+    public void show() {
+        super.show();
+        UserModel.getInstance().addListener(this);
+    }
+
+    @Override
+    public void dismiss() {
+        super.dismiss();
+        UserModel.getInstance().removeListener(this);
+    }
+
     @OnClick({R.id.back_arrow_image_button, R.id.modify_nick_name_image_button, R.id.modify_avatar_image_button})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -61,5 +75,20 @@ public class ModifyUserInfoDialog extends FullScreenWithStatusBarDialog {
                 break;
         }
         dismiss();
+    }
+
+    @Override
+    public void modifyUserInfo(String modifyType) {
+        if (modifyType.equals(AppConstant.NICK_NAME)) {
+            nickNameTextView.setText(UserInfo.getNickName());
+        }
+        if (modifyType.equals(AppConstant.AVATAR)) {
+            Glide.with(getContext()).load(UserInfo.getAvatar()).into(avatarImageView);
+        }
+    }
+
+    @Override
+    public void timeOut(String modifyType) {
+
     }
 }

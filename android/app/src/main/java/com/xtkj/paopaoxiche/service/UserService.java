@@ -47,7 +47,7 @@ public interface UserService {
     /**
      * */
     @POST("user/update")
-    Call<NoDataBean> update(@Field("file") File file);
+    Call<NoDataBean> update(@Body File file);
 
     /**
      * 验证是否为车主TOKEN

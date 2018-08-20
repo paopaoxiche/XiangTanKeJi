@@ -10,7 +10,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.xtkj.paopaoxiche.R;
+import com.xtkj.paopaoxiche.application.AppConstant;
 import com.xtkj.paopaoxiche.model.UserInfo;
 import com.xtkj.paopaoxiche.base.BaseFragmemt;
 import com.xtkj.paopaoxiche.contract.IDriverContract;
@@ -79,6 +81,12 @@ public class MyInfoFragment extends BaseFragmemt implements IDriverContract.IMyI
         phoneNumberTextView.setText(UserInfo.getUserPhone());
         usernameTextView.setText(UserInfo.getNickName());
 
+        if (UserInfo.avatarNotNull()) {
+            Glide.with(getContext()).load(UserInfo.getAvatar()).into(portraitImageView);
+        }
+
+        myInfoPresenter.onCreate();
+
         return view;
     }
 
@@ -92,6 +100,7 @@ public class MyInfoFragment extends BaseFragmemt implements IDriverContract.IMyI
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+        myInfoPresenter.onDestroy();
     }
 
     long time = 0;
@@ -127,6 +136,16 @@ public class MyInfoFragment extends BaseFragmemt implements IDriverContract.IMyI
                 break;
             default:
                 break;
+        }
+    }
+
+    @Override
+    public void updateUserInfo(String modifyType) {
+        if (modifyType.equals(AppConstant.NICK_NAME)) {
+            usernameTextView.setText(UserInfo.getNickName());
+        }
+        if (modifyType.equals(AppConstant.AVATAR)) {
+            Glide.with(getContext()).load(UserInfo.getAvatar()).into(portraitImageView);
         }
     }
 }

@@ -25,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="修改昵称"
+            android:text="添加商品"
             android:textColor="@color/black"
             android:textSize="24sp"/>
 
@@ -45,7 +45,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginTop="12dp"
         android:background="@color/white"
         android:orientation="vertical">
@@ -168,12 +168,12 @@
         <EditText
             android:id="@+id/describe_edit_text"
             android:layout_width="match_parent"
-            android:layout_height="160dp"
+            android:layout_height="120dp"
             android:gravity="left|top"
             android:layout_marginLeft="24dp"
             android:layout_marginRight="24dp"
             android:hint="请输入商品描述"
-            android:maxLength="200"
+            android:maxLength="20"
             android:padding="10dp"
             android:textColor="@color/black"
             android:textSize="16sp"/>
@@ -198,8 +198,10 @@
             android:textSize="16sp"/>
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:id="@+id/goods_image_view"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:scaleType="fitCenter"/>
 
     </LinearLayout>
 
