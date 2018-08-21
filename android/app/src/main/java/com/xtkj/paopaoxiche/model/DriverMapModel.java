@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.location.Location;
 import android.support.annotation.ArrayRes;
+import android.util.Log;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
@@ -11,6 +12,7 @@ import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
+import com.xtkj.paopaoxiche.application.MyLocation;
 import com.xtkj.paopaoxiche.bean.WashServicesBean;
 import com.xtkj.paopaoxiche.http.ApiField;
 import com.xtkj.paopaoxiche.http.RetrofitClient;
@@ -27,7 +29,6 @@ public class DriverMapModel implements AMapLocationListener {
 
     private ArrayList<DriverMapListener> driverMapListeners  = new ArrayList<>();
     private static DriverMapModel instance ;
-
     private WashServicesBean washServicesBean = new WashServicesBean();
 
     DriverMapModel(){
@@ -62,6 +63,8 @@ public class DriverMapModel implements AMapLocationListener {
     public interface DriverMapListener{
         void getWashServicesSuccess();
     }
+
+
 
     public void updateLocation(double j ,double w){
 

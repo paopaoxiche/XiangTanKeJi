@@ -52,7 +52,7 @@
                     android:orientation="vertical">
 
                     <com.xtkj.paopaoxiche.widget.MarqueeTextView
-                        android:id="@+id/describe"
+                        android:id="@+id/location_text"
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:ellipsize="marquee"
@@ -164,7 +164,7 @@
                         android:orientation="horizontal">
 
                         <com.xtkj.paopaoxiche.widget.MarqueeTextView
-                            android:id="@+id/location_text"
+                            android:id="@+id/describe"
                             android:layout_width="120dp"
                             android:layout_height="wrap_content"
                             android:ellipsize="marquee"

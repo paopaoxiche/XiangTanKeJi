@@ -3,9 +3,9 @@ package com.xtkj.paopaoxiche.view.WeatherForecast;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.xtkj.paopaoxiche.R;
@@ -22,18 +22,16 @@ import java.util.Calendar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class WeatherForecastActivity extends BaseGaodeActivity implements IWeatherForecastContract.IWeatherForecastView {
 
     IWeatherForecastContract.IWeatherForecastPresenter weatherForecastPresenterImpl = null;
     private static final String[] WEEK_NAME = {"星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"};
-
     @BindView(R.id.back_button)
     ImageView backButton;
     @BindView(R.id.location_text)
-    TextView locationText;
-    @BindView(R.id.bg_weather)
-    ScrollView bgWeather;
+    MarqueeTextView locationText;
     @BindView(R.id.temperature)
     TextView temperature;
     @BindView(R.id.temperature_high)
@@ -100,6 +98,9 @@ public class WeatherForecastActivity extends BaseGaodeActivity implements IWeath
     TextView low5;
     @BindView(R.id.forecast_bg)
     LinearLayout forecastBg;
+    @BindView(R.id.bg_weather)
+    LinearLayout bgWeather;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -160,19 +161,19 @@ public class WeatherForecastActivity extends BaseGaodeActivity implements IWeath
         temperatureLow.setText(String.format("%s°", myformat0.format(weatherForecastBean.getResult().getDaily().getTemperature().get(0).getMin())));
         forecast.setText(weatherForecastBean.getResult().getForecast_keypoint());
 
-        date1.setText(weatherForecastBean.getResult().getDaily().getTemperature().get(0).getDate().substring(5,10).replace("-","/"));
-        date2.setText(weatherForecastBean.getResult().getDaily().getTemperature().get(1).getDate().substring(5,10).replace("-","/"));
-        date3.setText(weatherForecastBean.getResult().getDaily().getTemperature().get(2).getDate().substring(5,10).replace("-","/"));
-        date4.setText(weatherForecastBean.getResult().getDaily().getTemperature().get(3).getDate().substring(5,10).replace("-","/"));
-        date5.setText(weatherForecastBean.getResult().getDaily().getTemperature().get(4).getDate().substring(5,10).replace("-","/"));
+        date1.setText(weatherForecastBean.getResult().getDaily().getTemperature().get(0).getDate().substring(5, 10).replace("-", "/"));
+        date2.setText(weatherForecastBean.getResult().getDaily().getTemperature().get(1).getDate().substring(5, 10).replace("-", "/"));
+        date3.setText(weatherForecastBean.getResult().getDaily().getTemperature().get(2).getDate().substring(5, 10).replace("-", "/"));
+        date4.setText(weatherForecastBean.getResult().getDaily().getTemperature().get(3).getDate().substring(5, 10).replace("-", "/"));
+        date5.setText(weatherForecastBean.getResult().getDaily().getTemperature().get(4).getDate().substring(5, 10).replace("-", "/"));
 
         Calendar cal = Calendar.getInstance();
         int i = cal.get(Calendar.DAY_OF_WEEK);
         week1.setText("今天");
-        week2.setText(WEEK_NAME[(i) % 7]);
-        week3.setText(WEEK_NAME[(i + 1) % 7]);
-        week4.setText(WEEK_NAME[(i + 2) % 7]);
-        week5.setText(WEEK_NAME[(i + 3) % 7]);
+        week2.setText(WEEK_NAME[(i) % 7 -1]);
+        week3.setText(WEEK_NAME[(i + 1) % 7 -1]);
+        week4.setText(WEEK_NAME[(i + 2) % 7 -1]);
+        week5.setText(WEEK_NAME[(i + 3) % 7 -1]);
 
         skyImg.setImageResource(SkyconValues.forecastIconMap.get(weatherForecastBean.getResult().getDaily().getSkycon().get(0).getValue()));
         skyImg2.setImageResource(SkyconValues.forecastIconMap.get(weatherForecastBean.getResult().getDaily().getSkycon().get(1).getValue()));
@@ -197,5 +198,14 @@ public class WeatherForecastActivity extends BaseGaodeActivity implements IWeath
     @Override
     public Context getActivityContext() {
         return this;
+    }
+
+    @OnClick({R.id.back_button, R.id.location_text, R.id.temperature})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.back_button:
+                finish();
+                break;
+        }
     }
 }

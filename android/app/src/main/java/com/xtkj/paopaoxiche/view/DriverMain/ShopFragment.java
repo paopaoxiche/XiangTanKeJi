@@ -20,6 +20,8 @@ import com.xtkj.paopaoxiche.bean.WashShopBean;
 import com.xtkj.paopaoxiche.contract.IDriverContract;
 import com.xtkj.paopaoxiche.http.ApiField;
 import com.xtkj.paopaoxiche.http.RetrofitClient;
+import com.xtkj.paopaoxiche.model.DriverHomeModel;
+import com.xtkj.paopaoxiche.model.DriverMapModel;
 import com.xtkj.paopaoxiche.service.WashService;
 
 import butterknife.BindView;

@@ -11,9 +11,11 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.xtkj.paopaoxiche.R;
+import com.xtkj.paopaoxiche.application.MyLocation;
 import com.xtkj.paopaoxiche.bean.WashServicesBean;
 import com.xtkj.paopaoxiche.contract.IDriverMapContract;
 import com.xtkj.paopaoxiche.presenter.DriverMapPresenterImpl;
+import com.xtkj.paopaoxiche.utils.LocationUtils;
 import com.xtkj.paopaoxiche.view.WashService.WashServiceActivity;
 
 import butterknife.BindView;
@@ -48,10 +50,14 @@ public class WashServiceAdapter extends RecyclerView.Adapter<WashServiceAdapter.
     //将数据与界面进行绑定的操作
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
+
         viewHolder.name.setText(datas.getData().get(position).getName());
         Glide.with(context).load(datas.getData().get(position).getImage()).into(viewHolder.image);
         viewHolder.price.setText(String.format("￥%s", datas.getData().get(position).getPrice()));
-        viewHolder.distance.setText(String.format("%sm", datas.getData().get(position).getDistance()));
+        int distance = (int) LocationUtils.getDistance(Double.parseDouble(MyLocation.lat),Double.parseDouble(MyLocation.lng),datas.getData().get(position).getLat(),datas.getData().get(position).getLng());
+        if(distance > 1000){
+            viewHolder.distance.setText(String.format("%skm", (distance * 1.0) / 1000));
+        }else  viewHolder.distance.setText(String.format("%sm", distance));
         viewHolder.location.setText(datas.getData().get(position).getName());
         viewHolder.navigation.setOnClickListener(new View.OnClickListener() {
             @Override
