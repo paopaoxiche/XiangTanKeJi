@@ -7,9 +7,11 @@ import com.xtkj.paopaoxiche.bean.WashShopBean;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.Field;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
+import retrofit2.http.FormUrlEncoded;
 import java.io.File;
 
 public interface WashService {
@@ -38,6 +40,8 @@ public interface WashService {
     @GET("wash/getCommodityList")
     Call<WashShopBean> getGoodsList(@Query("washId") Integer washId,@Query("pageIndex") Integer pageIndex,@Query("pageSize") int pageSize);
 
+    @FormUrlEncoded
     @POST("commodity/addCommodity")
-    Call<NoDataBean> addGoods(@Body Integer id, @Body String name, @Body String currentPrice, @Body String originalPrice, @Body String describe, @Body File commodityImg);
+    Call<NoDataBean> addGoods(@Field("id") int id, @Field("name") String name, @Field("currentPrice") String currentPrice,
+                              @Field("originalPrice") String originalPrice, @Field("describe") String describe, @Field("commodityImg") File commodityImg);
 }

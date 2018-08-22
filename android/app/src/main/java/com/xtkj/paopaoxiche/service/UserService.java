@@ -8,6 +8,7 @@ import com.xtkj.paopaoxiche.bean.NoDataBean;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
@@ -41,13 +42,15 @@ public interface UserService {
 
     /**
      * */
+    @FormUrlEncoded
     @POST("user/update")
-    Call<NoDataBean> update(@Body String nickName);
+    Call<NoDataBean> update(@Field("nickName") String nickName);
 
     /**
      * */
+    @FormUrlEncoded
     @POST("user/update")
-    Call<NoDataBean> update(@Body File file);
+    Call<NoDataBean> update(@Field("file") File file);
 
     /**
      * 验证是否为车主TOKEN

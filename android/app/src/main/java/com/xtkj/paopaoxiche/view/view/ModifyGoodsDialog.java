@@ -51,15 +51,16 @@ public class ModifyGoodsDialog extends FullScreenWithStatusBarDialog {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.complete_button:
-                if (TextUtils.isEmpty(describeEditText.getText().toString())
-                        && TextUtils.isEmpty(goodsName.getText().toString())
-                        && TextUtils.isEmpty(goodsCurrentPrice.getText().toString())
-                        && TextUtils.isEmpty(goodsOriginalPrice.getText().toString())) {
+                if (!TextUtils.isEmpty(describeEditText.getText().toString())
+                        && !TextUtils.isEmpty(goodsName.getText().toString())
+                        && !TextUtils.isEmpty(goodsCurrentPrice.getText().toString())
+                        && !TextUtils.isEmpty(goodsOriginalPrice.getText().toString())) {
                     GoodsModel.getInstance().addGoods(id, goodsName.getText().toString(),
                             goodsCurrentPrice.getText().toString(),
-                            goodsCurrentPrice.getText().toString(),
                             goodsOriginalPrice.getText().toString(),
+                            describeEditText.getText().toString(),
                             imageFile);
+                    dismiss();
                 }
                 break;
             case R.id.upload_button:

@@ -16,6 +16,7 @@ import android.os.Bundle;
 import com.xtkj.paopaoxiche.R;
 import com.xtkj.paopaoxiche.base.BaseActivity;
 import com.xtkj.paopaoxiche.base.BaseFragmemt;
+import com.xtkj.paopaoxiche.base.BaseGaodeActivity;
 import com.xtkj.paopaoxiche.contract.ICarWashContract;
 import com.xtkj.paopaoxiche.event.BaseEvent;
 import com.xtkj.paopaoxiche.presenter.CarWashInfoPresenterImpl;
@@ -27,7 +28,7 @@ import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 
-public class CarWashMainActivity extends BaseActivity implements ICarWashContract.IMainView{
+public class CarWashMainActivity extends BaseGaodeActivity implements ICarWashContract.IMainView{
 
     ICarWashContract.IMainPresenter mainPresenter;
 

@@ -1,5 +1,6 @@
 package com.xtkj.paopaoxiche.view.view;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -107,6 +108,7 @@ public class GoodsListDialog extends FullScreenWithStatusBarDialog {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.add_goods_image_button:
+                new ModifyGoodsDialog(getContext(), true).show();
                 break;
         }
     }
