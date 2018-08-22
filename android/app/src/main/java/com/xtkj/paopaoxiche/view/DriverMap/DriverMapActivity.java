@@ -166,7 +166,7 @@ public class DriverMapActivity extends BaseActivity implements IDriverMapContrac
             Glide.with(this).load(washServicesBean.getData().get(i).getImage()).into(new SimpleTarget<Drawable>() {
                 @Override
                 public void onResourceReady(Drawable resource, Transition<? super Drawable> transition) {
-                    Bitmap bitmap = BitmapUtil.getZoomImage(BitmapUtil.drawableToBitmap(resource),120,120);
+                    Bitmap bitmap = BitmapUtil.getZoomImage(BitmapUtil.drawableToBitmap(resource),100,100);
                     Marker marker = aMap.addMarker(new MarkerOptions().position(new LatLng(washServicesBean.getData().get(finalI).getLat(),washServicesBean.getData().get(finalI).getLng()))
                             .title(washServicesBean.getData().get(finalI).getName())
                             .snippet(washServicesBean.getData().get(finalI).getDistance() + "m")
