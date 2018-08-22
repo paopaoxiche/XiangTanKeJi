@@ -14,6 +14,9 @@ import com.xtkj.paopaoxiche.service.WashService;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -78,9 +81,19 @@ public class GoodsModel {
     }
 
     public void addGoods(int id, String name, String currentPrice, String originalPrice, String describe, File file) {
+        RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+//        final RequestBody requestFile = RequestBody.create(MediaType.parse("image/*"), file);
+
+        /**
+         * 创建多部分拿上面的请求体做参数
+         * img 是上传是的参数key,根据需要更改为自己的
+         */
+        MultipartBody.Part body =
+                MultipartBody.Part.createFormData("img", file.getName(), requestFile);
+
         RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
                 .create(WashService.class)
-                .addGoods(id, name, currentPrice, originalPrice, describe, file)
+                .addGoods(id, name, currentPrice, originalPrice, describe, body)
                 .enqueue(new Callback<NoDataBean>() {
                     @Override
                     public void onResponse(Call<NoDataBean> call, Response<NoDataBean> response) {

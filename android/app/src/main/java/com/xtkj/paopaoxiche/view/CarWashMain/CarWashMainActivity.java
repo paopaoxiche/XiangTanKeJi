@@ -3,8 +3,6 @@ package com.xtkj.paopaoxiche.view.CarWashMain;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Build;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
@@ -14,14 +12,13 @@ import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 
 import com.xtkj.paopaoxiche.R;
-import com.xtkj.paopaoxiche.base.BaseActivity;
-import com.xtkj.paopaoxiche.base.BaseFragmemt;
 import com.xtkj.paopaoxiche.base.BaseGaodeActivity;
 import com.xtkj.paopaoxiche.contract.ICarWashContract;
 import com.xtkj.paopaoxiche.event.BaseEvent;
 import com.xtkj.paopaoxiche.presenter.CarWashInfoPresenterImpl;
 import com.xtkj.paopaoxiche.presenter.CarWashMainPresenterImpl;
 import com.xtkj.paopaoxiche.presenter.CarWashMinePresenterImpl;
+import com.xtkj.paopaoxiche.utils.UriUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -132,7 +129,7 @@ public class CarWashMainActivity extends BaseGaodeActivity implements ICarWashCo
         EventBus.getDefault().unregister(this);
     }
 
-    private void pickAvatar() {
+    private void pickImage(int type) {
         Intent intent = new Intent();
         intent.setType("image/*");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -141,15 +138,17 @@ public class CarWashMainActivity extends BaseGaodeActivity implements ICarWashCo
             intent.setAction(Intent.ACTION_GET_CONTENT);
         }
         intent.addCategory(Intent.CATEGORY_OPENABLE);
-        startActivityForResult(intent, BaseEvent.CAR_WASH_PICK_AVATAR);
+        startActivityForResult(intent, type);
     }
 
     @Subscribe
     public void onEventMainThread(BaseEvent baseEvent) {
         switch (baseEvent.getType()) {
             case BaseEvent.CAR_WASH_PICK_AVATAR:
-                pickAvatar();
+                pickImage(BaseEvent.CAR_WASH_PICK_AVATAR);
                 break;
+            case BaseEvent.GOODS_IMAGE:
+                pickImage(BaseEvent.GOODS_IMAGE);
         }
     }
 
@@ -160,13 +159,15 @@ public class CarWashMainActivity extends BaseGaodeActivity implements ICarWashCo
             if (data == null) {
                 return;
             }
-                // Todo BUG-20580，获取图片时要进行压缩处理，并旋转之后保存到 Hst/cache 文件夹下
-//                String path = MediaUtils.getImagePath(this, data.getData());
-//                final BitmapFactory.Options options = new BitmapFactory.Options();
-//                options.inJustDecodeBounds = true;
-//                BitmapFactory.decodeFile(path, options);
-//                EventBus.getDefault().post(
-//                        new LocalFileDto(BaseDto.LOCAL_FILE_PATH, path, options.outWidth, options.outHeight));
+            String path = UriUtils.getImagePath(this, data.getData());
+            EventBus.getDefault().post(new BaseEvent(BaseEvent.SET_GOODS_IMAGE, path));
+        }
+        if(requestCode == BaseEvent.GOODS_IMAGE) {
+            if (data == null) {
+                return;
+            }
+            String path = UriUtils.getImagePath(this, data.getData());
+            EventBus.getDefault().post(new BaseEvent(BaseEvent.SET_GOODS_IMAGE, path));
         }
     }
 }

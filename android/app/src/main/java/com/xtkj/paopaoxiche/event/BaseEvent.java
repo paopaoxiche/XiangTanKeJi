@@ -3,6 +3,9 @@ package com.xtkj.paopaoxiche.event;
 public class BaseEvent {
 
     public static final int CAR_WASH_PICK_AVATAR = 100;
+    public static final int GOODS_IMAGE = 101;
+
+    public static final int SET_GOODS_IMAGE = 201;
 
     private int eventType;
 

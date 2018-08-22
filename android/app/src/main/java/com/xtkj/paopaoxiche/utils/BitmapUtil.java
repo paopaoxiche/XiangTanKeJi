@@ -1,5 +1,6 @@
 package com.xtkj.paopaoxiche.utils;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -7,6 +8,10 @@ import android.graphics.Matrix;
 import android.graphics.PixelFormat;
 import android.graphics.drawable.Drawable;
 import android.util.Base64;
+import android.util.DisplayMetrics;
+import android.view.WindowManager;
+
+import com.xtkj.paopaoxiche.application.BaseApplication;
 
 import java.io.ByteArrayOutputStream;
 
@@ -70,5 +75,40 @@ public class BitmapUtil {
         matrix.postScale(scaleWidth, scaleHeight);
         Bitmap bitmap = Bitmap.createBitmap(orgBitmap, 0, 0, (int) width, (int) height, matrix, true);
         return bitmap;
+    }
+
+    public static Bitmap decodeSampledBitmapFromFileForRect(String path, int width, int height) {
+
+        // First decode with inJustDecodeBounds=true to check dimensions
+
+        final BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(path, options);
+
+        // Calculate inSampleSize
+        options.inSampleSize
+                = calculateSampleForScreen(options.outWidth, options.outHeight, width, height);
+
+        // Decode bitmap with inSampleSize set
+        options.inJustDecodeBounds = false;
+        options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+        return BitmapFactory.decodeFile(path, options);
+    }
+
+    public static int calculateSampleForScreen(
+            int outWidth, int outHeight, int inWidth, int inHeight) {
+
+        int inSampleSize = 1;
+
+        long width = outWidth;
+        long height = outHeight;
+
+        while (height > inWidth || width > inHeight) {
+            width /= 2;
+            height /= 2;
+            inSampleSize *= 2;
+        }
+
+        return inSampleSize;
     }
 }
