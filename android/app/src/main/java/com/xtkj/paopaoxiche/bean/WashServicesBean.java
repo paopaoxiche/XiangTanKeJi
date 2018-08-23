@@ -58,6 +58,7 @@ public class WashServicesBean {
         private int honor;
         private int id;
         private String image;
+        private String address = "默认的地址";
         private double lat;
         private double lng;
         private String name;
@@ -151,6 +152,14 @@ public class WashServicesBean {
 
         public void setWashId(int washId) {
             this.washId = washId;
+        }
+
+        public String getAddress() {
+            return address;
+        }
+
+        public void setAddress(String address) {
+            this.address = address;
         }
     }
 }
