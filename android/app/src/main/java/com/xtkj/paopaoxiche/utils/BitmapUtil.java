@@ -5,7 +5,12 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
+import android.graphics.Paint;
 import android.graphics.PixelFormat;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.util.Base64;
 import android.util.DisplayMetrics;
@@ -111,4 +116,72 @@ public class BitmapUtil {
 
         return inSampleSize;
     }
+
+    public static Bitmap ToRoundBitmap(Bitmap bitmap) {
+        int width = bitmap.getWidth();
+        int height = bitmap.getHeight();
+        float roundPx;
+        float left,top,right,bottom,dst_left,dst_top,dst_right,dst_bottom;
+        if (width <= height) {
+            roundPx = width / 2;
+            top = 0;
+            bottom = width;
+            left = 0;
+            right = width;
+            height = width;
+            dst_left = 0;
+            dst_top = 0;
+            dst_right = width;
+            dst_bottom = width;
+        } else {
+            roundPx = height / 2;
+            float clip = (width - height) / 2;
+            left = clip;
+            right = width - clip;
+            top = 0;
+            bottom = height;
+            width = height;
+            dst_left = 0;
+            dst_top = 0;
+            dst_right = height;
+            dst_bottom = height;
+        }
+        Bitmap output = Bitmap.createBitmap(width,
+                height, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(output);
+        final int color = 0xff424242;
+        final Paint paint = new Paint();
+        final Rect src = new Rect((int)left, (int)top, (int)right, (int)bottom);
+        final Rect dst = new Rect((int)dst_left, (int)dst_top, (int)dst_right, (int)dst_bottom);
+        final RectF rectF = new RectF(dst);
+        paint.setAntiAlias(true);
+        canvas.drawARGB(0, 0, 0, 0);
+        paint.setColor(color);
+        canvas.drawRoundRect(rectF, roundPx, roundPx, paint);
+        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+        canvas.drawBitmap(bitmap, src, dst, paint);
+        return output;
+    }
+
+
+    public static Bitmap mergeBitmap(Bitmap backBitmap, Bitmap frontBitmap,int left , int top) {
+
+        int bgWidth = backBitmap.getWidth();
+        int bgHeight = backBitmap.getHeight();
+        //int fgWidth = foreground.getWidth();
+        //int fgHeight = foreground.getHeight();
+        //create the new blank bitmap 创建一个新的和SRC长度宽度一样的位图
+        Bitmap newbmp = Bitmap.createBitmap(bgWidth, bgHeight, Bitmap.Config.ARGB_8888);
+        Canvas cv = new Canvas(newbmp);
+        //draw bg into
+        cv.drawBitmap(backBitmap, 0, 0, null);//在 0，0坐标开始画入bg
+        //draw fg into
+        cv.drawBitmap(frontBitmap, left, top, null);//在 0，0坐标开始画入fg ，可以从任意位置画入
+        //save all clip
+        cv.save(Canvas.ALL_SAVE_FLAG);//保存
+        //store
+        cv.restore();//存储
+        return newbmp;
+    }
+
 }

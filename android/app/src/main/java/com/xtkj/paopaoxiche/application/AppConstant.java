@@ -15,4 +15,8 @@ public class AppConstant {
     public final static String NET_ERROR = "网络连接失败！";
 
 
+    public final static int STATE_CLOSED = -1;
+    public final static int STATE_STOPPING = -1;
+    public final static int STATE_OPENING = -1;
+
 }

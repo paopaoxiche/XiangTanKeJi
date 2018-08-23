@@ -2,13 +2,18 @@ package com.xtkj.paopaoxiche.view.DriverMap;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.amap.api.maps2d.AMap;
 import com.amap.api.maps2d.CameraUpdateFactory;
@@ -31,6 +36,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.xtkj.paopaoxiche.R;
+import com.xtkj.paopaoxiche.application.AppConstant;
+import com.xtkj.paopaoxiche.application.MyLocation;
 import com.xtkj.paopaoxiche.base.BaseActivity;
 import com.xtkj.paopaoxiche.bean.WashServicesBean;
 import com.xtkj.paopaoxiche.contract.IDriverMapContract;
@@ -49,6 +56,7 @@ public class DriverMapActivity extends BaseActivity implements IDriverMapContrac
     AMap aMap;
     RouteSearch mRouteSearch;
     DriveRouteResult mDriveRouteResult;
+    AMap.InfoWindowAdapter infoWindowAdapter;
 
     private IDriverMapContract.IDriverMapPresenter presenter = null;
 
@@ -87,8 +95,44 @@ public class DriverMapActivity extends BaseActivity implements IDriverMapContrac
         aMap.setOnCameraChangeListener(this);
         aMap.getUiSettings().setZoomGesturesEnabled(true);
         aMap.getUiSettings().setZoomControlsEnabled(false);
+        infoWindowAdapter = new AMap.InfoWindowAdapter() {
+            View infoWindow = null;
+            @Override
+            public View getInfoWindow(Marker marker) {
+                if(infoWindow == null) {
+                    infoWindow = LayoutInflater.from(getContext()).inflate(
+                            R.layout.item_anchor, null);
+                }
+                render(marker, infoWindow);
+                return infoWindow;
+            }
 
+            @Override
+            public View getInfoContents(Marker marker) {
+                return null;
+            }
 
+            public void render(Marker marker, View view) {
+                TextView price = view.findViewById(R.id.anchor_price);
+                TextView name = view.findViewById(R.id.anchor_name);
+                ImageView img = view.findViewById(R.id.anchor_img);
+                WashServicesBean.DataBean  data = (WashServicesBean.DataBean) marker.getObject();
+                price.setText(String.format("￥%s", data.getPrice()));
+                name.setText(data.getName());
+                if(data.getBusinessStatus()== AppConstant.STATE_CLOSED){
+                    img.setImageResource(R.drawable.img_close);
+                    img.setBackgroundColor(Color.rgb(183,196,203));
+                }else if(data.getBusinessStatus()== AppConstant.STATE_STOPPING){
+                    img.setImageResource(R.drawable.img_suspend);
+                    img.setBackgroundColor(Color.rgb(248,155,10));
+                }else{
+                    img.setImageResource(R.drawable.img_operation);
+                    img.setBackgroundColor(Color.rgb(17,176,242));
+                }
+            }
+
+        };
+        aMap.setInfoWindowAdapter(infoWindowAdapter);
 
         mRouteSearch = new RouteSearch(this);
         mRouteSearch.setRouteSearchListener(this);
@@ -160,17 +204,20 @@ public class DriverMapActivity extends BaseActivity implements IDriverMapContrac
         }
         mRecyclerView.setLayoutParams(lp);
         for(int i = 0 ; i < washServicesBean.getData().size() ; i ++ ){
-
-
             int finalI = i;
             Glide.with(this).load(washServicesBean.getData().get(i).getImage()).into(new SimpleTarget<Drawable>() {
                 @Override
                 public void onResourceReady(Drawable resource, Transition<? super Drawable> transition) {
-                    Bitmap bitmap = BitmapUtil.getZoomImage(BitmapUtil.drawableToBitmap(resource),100,100);
+                    Bitmap bitmap = BitmapUtil.getZoomImage(BitmapUtil.drawableToBitmap(resource),40,40);
+                    bitmap = BitmapUtil.ToRoundBitmap(bitmap);
+                    Bitmap bitmap2 = BitmapUtil.getZoomImage(BitmapUtil.drawableToBitmap( getResources().getDrawable(R.drawable.anchor)),80,80);
+                    bitmap = BitmapUtil.mergeBitmap(bitmap2,bitmap,20,10);
+
                     Marker marker = aMap.addMarker(new MarkerOptions().position(new LatLng(washServicesBean.getData().get(finalI).getLat(),washServicesBean.getData().get(finalI).getLng()))
                             .title(washServicesBean.getData().get(finalI).getName())
                             .snippet(washServicesBean.getData().get(finalI).getDistance() + "m")
                             .icon(BitmapDescriptorFactory.fromBitmap(bitmap)));
+                    marker.setObject(washServicesBean.getData().get(finalI));
                 }
             });
 
@@ -181,8 +228,7 @@ public class DriverMapActivity extends BaseActivity implements IDriverMapContrac
     @Override
     public void startNavigation(double j, double w) {
 
-
-        LatLonPoint mStartLatlng = new LatLonPoint(aMap.getMapScreenMarkers().get(0).getPosition().latitude, aMap.getMapScreenMarkers().get(0).getPosition().longitude);
+        LatLonPoint mStartLatlng = new LatLonPoint(Double.parseDouble(MyLocation.lat), Double.parseDouble(MyLocation.lng));
         LatLonPoint mEndLatlng = new LatLonPoint(w, j);
         final RouteSearch.FromAndTo fromAndTo = new RouteSearch.FromAndTo(
                 mStartLatlng, mEndLatlng);
