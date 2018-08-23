@@ -65,6 +65,9 @@ public class GoodsModel {
                 .enqueue(new Callback<WashShopBean>() {
                     @Override
                     public void onResponse(Call<WashShopBean> call, Response<WashShopBean> response) {
+                        if (response == null) {
+                            return;
+                        }
                         if (response.body().getCode() != 401) {
                             goodsList = response.body().getData();
                             for (GoodsListener goodsListener : goodsListenerList) {
@@ -81,34 +84,50 @@ public class GoodsModel {
     }
 
     public void addGoods(int id, String name, String currentPrice, String originalPrice, String describe, File file) {
-        RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
-//        final RequestBody requestFile = RequestBody.create(MediaType.parse("image/*"), file);
+        MultipartBody.Part body = null;
+        if (file != null) {
+            RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+             body = MultipartBody.Part.createFormData("commodityImg", file.getName(), requestFile);
+        }
 
-        /**
-         * 创建多部分拿上面的请求体做参数
-         * img 是上传是的参数key,根据需要更改为自己的
-         */
-        MultipartBody.Part body =
-                MultipartBody.Part.createFormData("img", file.getName(), requestFile);
+        RequestBody idBody =
+                RequestBody.create(MediaType.parse("multipart/form-data"), String.valueOf(id));
+        RequestBody nameBody =
+                RequestBody.create(MediaType.parse("multipart/form-data"), name);
+        RequestBody currentBody =
+                RequestBody.create(MediaType.parse("multipart/form-data"), currentPrice);
+        RequestBody originalBody =
+                RequestBody.create(MediaType.parse("multipart/form-data"), originalPrice);
+        RequestBody describeBody =
+                RequestBody.create(MediaType.parse("multipart/form-data"), describe);
 
-        RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
-                .create(WashService.class)
-                .addGoods(id, name, currentPrice, originalPrice, describe, body)
-                .enqueue(new Callback<NoDataBean>() {
-                    @Override
-                    public void onResponse(Call<NoDataBean> call, Response<NoDataBean> response) {
-                        if (response.body().getCode() != 401) {
-                            Toast.makeText(BaseApplication.getContext(), "添加成功，请等待商品审核", Toast.LENGTH_LONG).show();
-                        } else {
-                            Toast.makeText(BaseApplication.getContext(), "添加失败", Toast.LENGTH_LONG).show();
-                        }
-                    }
+        Callback<NoDataBean> callback = new Callback<NoDataBean>() {
+            @Override
+            public void onResponse(Call<NoDataBean> call, Response<NoDataBean> response) {
+                if (response.body().getCode() != 401) {
+                    Toast.makeText(BaseApplication.getContext(), "添加成功，请等待商品审核", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(BaseApplication.getContext(), "添加失败", Toast.LENGTH_LONG).show();
+                }
+            }
 
-                    @Override
-                    public void onFailure(Call<NoDataBean> call, Throwable t) {
-                        Toast.makeText(BaseApplication.getContext(), "添加失败", Toast.LENGTH_LONG).show();
-                    }
-                });
+            @Override
+            public void onFailure(Call<NoDataBean> call, Throwable t) {
+                Toast.makeText(BaseApplication.getContext(), "添加失败", Toast.LENGTH_LONG).show();
+            }
+        };
+
+        if (body != null) {
+            RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
+                    .create(WashService.class)
+                    .addGoods(idBody, nameBody, currentBody, originalBody, describeBody, body)
+                    .enqueue(callback);
+        } else {
+            RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
+                    .create(WashService.class)
+                    .addGoods(idBody, nameBody, currentBody, originalBody, describeBody)
+                    .enqueue(callback);
+        }
     }
 
     public static void release() {

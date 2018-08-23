@@ -3,7 +3,9 @@ package com.xtkj.paopaoxiche.view.CarWashMain;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.os.Build;
+import android.os.Environment;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -15,15 +17,21 @@ import com.xtkj.paopaoxiche.R;
 import com.xtkj.paopaoxiche.base.BaseGaodeActivity;
 import com.xtkj.paopaoxiche.contract.ICarWashContract;
 import com.xtkj.paopaoxiche.event.BaseEvent;
+import com.xtkj.paopaoxiche.model.UserModel;
 import com.xtkj.paopaoxiche.presenter.CarWashInfoPresenterImpl;
 import com.xtkj.paopaoxiche.presenter.CarWashMainPresenterImpl;
 import com.xtkj.paopaoxiche.presenter.CarWashMinePresenterImpl;
+import com.xtkj.paopaoxiche.utils.BitmapUtil;
 import com.xtkj.paopaoxiche.utils.UriUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class CarWashMainActivity extends BaseGaodeActivity implements ICarWashContract.IMainView{
 
@@ -160,7 +168,12 @@ public class CarWashMainActivity extends BaseGaodeActivity implements ICarWashCo
                 return;
             }
             String path = UriUtils.getImagePath(this, data.getData());
-            EventBus.getDefault().post(new BaseEvent(BaseEvent.SET_GOODS_IMAGE, path));
+            Bitmap bitmap = BitmapUtil.decodeSampledBitmapFromFileForRect(path, 640, 640);
+            String targetPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
+                    + File.separator + "MyTestImage" + File.separator
+                    + new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date()) + ".jpg";
+            UserModel.getInstance().updateUserInfo(compressImage(bitmap, targetPath));
+
         }
         if(requestCode == BaseEvent.GOODS_IMAGE) {
             if (data == null) {
@@ -169,5 +182,27 @@ public class CarWashMainActivity extends BaseGaodeActivity implements ICarWashCo
             String path = UriUtils.getImagePath(this, data.getData());
             EventBus.getDefault().post(new BaseEvent(BaseEvent.SET_GOODS_IMAGE, path));
         }
+    }
+
+    private File compressImage(Bitmap bm, String targetPath) {
+
+        int quality = 80;//压缩比例0-100
+
+        File outputFile = new File(targetPath);
+        try {
+            if (!outputFile.exists()) {
+                outputFile.getParentFile().mkdirs();
+                //outputFile.createNewFile();
+            } else {
+                outputFile.delete();
+            }
+            FileOutputStream out = new FileOutputStream(outputFile);
+            bm.compress(Bitmap.CompressFormat.JPEG, quality, out);
+            out.close();
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return null;
+        }
+        return outputFile;
     }
 }

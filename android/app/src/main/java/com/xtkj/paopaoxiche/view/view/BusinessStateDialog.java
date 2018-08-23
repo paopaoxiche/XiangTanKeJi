@@ -45,7 +45,7 @@ public class BusinessStateDialog extends Dialog {
         }
         switch (view.getId()) {
             case R.id.open_business_button:
-                stateTextView.setText("开业");
+                stateTextView.setText("营业");
                 dismiss();
                 break;
             case R.id.pause_business_button:

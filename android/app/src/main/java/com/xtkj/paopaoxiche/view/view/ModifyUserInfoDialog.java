@@ -17,6 +17,10 @@ import com.xtkj.paopaoxiche.widget.FullScreenWithStatusBarDialog;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -48,6 +52,9 @@ public class ModifyUserInfoDialog extends FullScreenWithStatusBarDialog implemen
         if (UserInfo.avatarNotNull()) {
             Glide.with(getContext()).load(UserInfo.getAvatar()).into(avatarImageView);
         }
+        accountTextView.setText(UserInfo.getUserPhone());
+        String time = new SimpleDateFormat("yyyy-MM-dd").format(new Date(UserInfo.getRegTime()));
+        joinTimeTextView.setText(time);
     }
 
     @Override

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
+import android.text.InputFilter;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -13,10 +14,13 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.xtkj.paopaoxiche.R;
+import com.xtkj.paopaoxiche.bean.WashShopBean;
 import com.xtkj.paopaoxiche.event.BaseEvent;
 import com.xtkj.paopaoxiche.model.GoodsModel;
 import com.xtkj.paopaoxiche.utils.BitmapUtil;
+import com.xtkj.paopaoxiche.widget.CashierInputFilter;
 import com.xtkj.paopaoxiche.widget.FullScreenWithStatusBarDialog;
 
 import org.greenrobot.eventbus.EventBus;
@@ -58,6 +62,22 @@ public class ModifyGoodsDialog extends FullScreenWithStatusBarDialog {
         setContentView(R.layout.dialog_modify_goods);
         ButterKnife.bind(this);
         findViewById(R.id.back_arrow_image_button).setOnClickListener(backButtonClickListener);
+        InputFilter[] filters = {new CashierInputFilter()};
+        goodsCurrentPrice.setFilters(filters);
+        goodsOriginalPrice.setFilters(filters);
+    }
+
+    public ModifyGoodsDialog(Context context, boolean statusBarVisible, WashShopBean.DataBean dataBean) {
+        this(context, statusBarVisible);
+        setContentView(R.layout.dialog_modify_goods);
+        ButterKnife.bind(this);
+        findViewById(R.id.back_arrow_image_button).setOnClickListener(backButtonClickListener);
+        id = dataBean.getId();
+        goodsName.setText(dataBean.getName());
+        goodsCurrentPrice.setText(dataBean.getCurrentPrice() + "");
+        goodsOriginalPrice.setText(dataBean.getOriginPrice() + "");
+        describeEditText.setText(dataBean.getDescribe());
+        Glide.with(getContext()).load(dataBean.getImage()).into(goodsImageView);
     }
 
     @Override
@@ -107,7 +127,6 @@ public class ModifyGoodsDialog extends FullScreenWithStatusBarDialog {
      * 设置上传的图片地址
      */
     public void setImagePath(String path) {
-        uploadButton.setVisibility(View.GONE);
         Bitmap bitmap = BitmapUtil.decodeSampledBitmapFromFileForRect(path, 640, 640);
         String targetPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
                 + File.separator + "MyTestImage" + File.separator
@@ -119,7 +138,7 @@ public class ModifyGoodsDialog extends FullScreenWithStatusBarDialog {
 
     private File compressImage(Bitmap bm, String targetPath) {
 
-        int quality = 50;//压缩比例0-100
+        int quality = 80;//压缩比例0-100
 
         File outputFile = new File(targetPath);
         try {

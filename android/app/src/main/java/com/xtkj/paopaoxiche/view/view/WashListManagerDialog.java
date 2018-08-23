@@ -1,12 +1,10 @@
 package com.xtkj.paopaoxiche.view.view;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.ListView;
 
 import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
@@ -24,7 +22,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class GoodsListDialog extends FullScreenWithStatusBarDialog {
+public class WashListManagerDialog extends FullScreenWithStatusBarDialog {
 
     @BindView(R.id.add_goods_image_button)
     ImageButton addGoodsImageButton;
@@ -33,7 +31,7 @@ public class GoodsListDialog extends FullScreenWithStatusBarDialog {
 
     GoodsListAdapter goodsListAdapter;
 
-    public GoodsListDialog(Context context, boolean statusBarVisible) {
+    public WashListManagerDialog(Context context, boolean statusBarVisible) {
         super(context, statusBarVisible);
         setContentView(R.layout.dialog_goods_list);
         findViewById(R.id.back_arrow_image_button).setOnClickListener(backButtonClickListener);
@@ -84,7 +82,6 @@ public class GoodsListDialog extends FullScreenWithStatusBarDialog {
                 switch (index) {
                     case 0:
                         // 修改
-                        new ModifyGoodsDialog(context, true, goodsListAdapter.goodsList.get(position)).show();
                         break;
                     case 1:
                         // 删除

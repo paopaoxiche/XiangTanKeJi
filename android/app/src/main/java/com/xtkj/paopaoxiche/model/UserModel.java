@@ -1,7 +1,10 @@
 package com.xtkj.paopaoxiche.model;
 
+import android.widget.Toast;
+
 import com.xtkj.paopaoxiche.application.AppConstant;
 import com.xtkj.paopaoxiche.application.Authentication;
+import com.xtkj.paopaoxiche.application.BaseApplication;
 import com.xtkj.paopaoxiche.bean.CarWashInfoBean;
 import com.xtkj.paopaoxiche.bean.LoginBean;
 import com.xtkj.paopaoxiche.bean.NoDataBean;
@@ -13,6 +16,9 @@ import com.xtkj.paopaoxiche.utils.PreferUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -205,9 +211,11 @@ public class UserModel {
     }
 
     public void updateUserInfo(String nickName) {
+        RequestBody nameBody =
+                RequestBody.create(MediaType.parse("multipart/form-data"), nickName);
         RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
                 .create(UserService.class)
-                .update(nickName)
+                .update(nameBody)
                 .enqueue(new Callback<NoDataBean>() {
                     @Override
                     public void onResponse(Call<NoDataBean> call, Response<NoDataBean> response) {
@@ -217,10 +225,12 @@ public class UserModel {
                         if (response.body().getCode() != 401) {
                             preferUtils.putString(AppConstant.NICK_NAME, nickName);
                             UserInfo.setNickName(nickName);
+                            Toast.makeText(BaseApplication.getContext(), "修改昵称成功", Toast.LENGTH_SHORT);
                             for (UserInfoListener userInfoListener : userInfoListenerList) {
                                 userInfoListener.modifyUserInfo(AppConstant.NICK_NAME);
                             }
                         } else {
+                            Toast.makeText(BaseApplication.getContext(), "修改昵称失败，请重新登录", Toast.LENGTH_SHORT);
                             for (UserInfoListener userInfoListener : userInfoListenerList) {
                                 userInfoListener.timeOut(AppConstant.NICK_NAME);
                             }
@@ -229,6 +239,7 @@ public class UserModel {
 
                     @Override
                     public void onFailure(Call<NoDataBean> call, Throwable t) {
+                        Toast.makeText(BaseApplication.getContext(), "修改昵称失败", Toast.LENGTH_SHORT);
                         if (loginListenerList == null) {
                             return;
                         }
@@ -240,9 +251,13 @@ public class UserModel {
     }
 
     public void updateUserInfo(File file) {
+        RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+        MultipartBody.Part body =
+                MultipartBody.Part.createFormData("file", file.getName(), requestFile);
+
         RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
                 .create(UserService.class)
-                .update(file)
+                .update(body)
                 .enqueue(new Callback<NoDataBean>() {
                     @Override
                     public void onResponse(Call<NoDataBean> call, Response<NoDataBean> response) {
@@ -250,10 +265,14 @@ public class UserModel {
                             return;
                         }
                         if (response.body().getCode() != 401) {
+                            preferUtils.putString(AppConstant.AVATAR, response.body().getData().toString());
+                            UserInfo.setAvatar(preferUtils.getString(AppConstant.AVATAR));
+                            Toast.makeText(BaseApplication.getContext(), "修改头像成功", Toast.LENGTH_SHORT);
                             for (UserInfoListener userInfoListener : userInfoListenerList) {
                                 userInfoListener.modifyUserInfo(AppConstant.AVATAR);
                             }
                         } else {
+                            Toast.makeText(BaseApplication.getContext(), "修改头像失败,请重新登录", Toast.LENGTH_SHORT);
                             for (UserInfoListener userInfoListener : userInfoListenerList) {
                                 userInfoListener.timeOut(AppConstant.AVATAR);
                             }
@@ -262,6 +281,7 @@ public class UserModel {
 
                     @Override
                     public void onFailure(Call<NoDataBean> call, Throwable t) {
+                        Toast.makeText(BaseApplication.getContext(), "修改头像失败", Toast.LENGTH_SHORT);
                         if (loginListenerList == null) {
                             return;
                         }

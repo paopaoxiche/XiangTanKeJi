@@ -89,8 +89,20 @@ public class CarWashMineFragment extends BaseFragmemt implements ICarWashContrac
     private void initView(View view) {
         phoneNumberTextView.setText(UserInfo.getUserPhone());
         usernameTextView.setText(UserInfo.getNickName());
+        washCountTextView.setText(UserInfo.getWashCount() + "次");
         if (UserInfo.avatarNotNull()) {
             Glide.with(getContext()).load(UserInfo.getAvatar()).into(portraitImageView);
+        }
+        switch (UserInfo.getAuthStatus()) {
+            case -1:
+                stateTextView.setText("停业");
+                break;
+            case 0:
+                stateTextView.setText("歇业");
+                break;
+            case 1:
+                stateTextView.setText("营业");
+                break;
         }
     }
 

@@ -6,6 +6,7 @@ import com.xtkj.paopaoxiche.bean.WashServicesBean;
 import com.xtkj.paopaoxiche.bean.WashShopBean;
 
 import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
@@ -45,6 +46,11 @@ public interface WashService {
 
     @Multipart
     @POST("commodity/addCommodity")
-    Call<NoDataBean> addGoods(@Field("id") int id, @Field("name") String name, @Field("currentPrice") String currentPrice,
-                              @Field("originalPrice") String originalPrice, @Field("describe") String describe, @Part MultipartBody.Part commodityImg);
+    Call<NoDataBean> addGoods(@Part("id") RequestBody id, @Part("name") RequestBody name, @Part("currentPrice") RequestBody currentPrice,
+                              @Part("originalPrice") RequestBody originalPrice, @Part("describe") RequestBody describe, @Part MultipartBody.Part commodityImg);
+
+    @Multipart
+    @POST("commodity/addCommodity")
+    Call<NoDataBean> addGoods(@Part("id") RequestBody id, @Part("name") RequestBody name, @Part("currentPrice") RequestBody currentPrice,
+                              @Part("originalPrice") RequestBody originalPrice, @Part("describe") RequestBody describe);
 }

@@ -5,12 +5,16 @@ import com.xtkj.paopaoxiche.bean.DemoBean;
 import com.xtkj.paopaoxiche.bean.LoginBean;
 import com.xtkj.paopaoxiche.bean.NoDataBean;
 
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Query;
 import java.io.File;
 
@@ -42,15 +46,15 @@ public interface UserService {
 
     /**
      * */
-    @FormUrlEncoded
+    @Multipart
     @POST("user/update")
-    Call<NoDataBean> update(@Field("nickName") String nickName);
+    Call<NoDataBean> update(@Part("nickname") RequestBody nickName);
 
     /**
      * */
-    @FormUrlEncoded
+    @Multipart
     @POST("user/update")
-    Call<NoDataBean> update(@Field("file") File file);
+    Call<NoDataBean> update(@Part MultipartBody.Part file);
 
     /**
      * 验证是否为车主TOKEN

@@ -16,12 +16,22 @@
         android:src="@drawable/logo" />
 
 
-    <ImageView
+    <!--<ImageView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_marginBottom="30dp"-->
+        <!--android:src="@drawable/vi" />-->
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="30dp"
-        android:src="@drawable/vi" />
+        android:textColor="@color/grey"
+        android:textSize="12sp"
+        android:text="Copyright \@河北享坛气象科技有限公司"/>
 
 </RelativeLayout>

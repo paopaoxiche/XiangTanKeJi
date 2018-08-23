@@ -157,6 +157,9 @@ public class WeatherForecastActivity extends BaseGaodeActivity implements IWeath
     public void setForecastWeather(WeatherForecastBean weatherForecastBean) {
         DecimalFormat myformat1 = new DecimalFormat("0.0");
         DecimalFormat myformat0 = new DecimalFormat("0");
+        if (weatherForecastBean == null) {
+            return;
+        }
         temperatureHigh.setText(String.format("%s°", myformat0.format(weatherForecastBean.getResult().getDaily().getTemperature().get(0).getMax())));
         temperatureLow.setText(String.format("%s°", myformat0.format(weatherForecastBean.getResult().getDaily().getTemperature().get(0).getMin())));
         forecast.setText(weatherForecastBean.getResult().getForecast_keypoint());
