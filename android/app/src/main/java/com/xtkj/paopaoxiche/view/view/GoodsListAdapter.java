@@ -49,6 +49,7 @@ public class GoodsListAdapter extends BaseAdapter{
             convertView = LayoutInflater.from(context).inflate(R.layout.item_goods_list, null);
             holder = new ViewHolder();
             convertView.setTag(holder);
+            holder.goodsNameTextView = convertView.findViewById(R.id.goods_name_text_view);
             holder.goodsImageView = (ImageView) convertView.findViewById(R.id.goods_image_view);
             holder.describeTextView = (TextView) convertView.findViewById(R.id.goods_describe_text_view);
             holder.currentPriceTextView = (TextView) convertView.findViewById(R.id.current_price_text_view);
@@ -62,11 +63,13 @@ public class GoodsListAdapter extends BaseAdapter{
         holder.currentPriceTextView.setText(String.format("¥%s", goodsList.get(position).getCurrentPrice()));
         Glide.with(context).load(goodsList.get(position).getImage()).into(holder.goodsImageView);
         holder.originalPriceTextView.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+        holder.goodsNameTextView.setText(goodsList.get(position).getName());
 
         return convertView;
     }
 
     private class ViewHolder {
+        private TextView  goodsNameTextView;
         private ImageView goodsImageView;
         private TextView  describeTextView;
         private TextView  currentPriceTextView;
