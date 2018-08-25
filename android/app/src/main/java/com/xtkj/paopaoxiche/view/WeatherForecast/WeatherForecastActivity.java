@@ -27,7 +27,7 @@ import butterknife.OnClick;
 public class WeatherForecastActivity extends BaseGaodeActivity implements IWeatherForecastContract.IWeatherForecastView {
 
     IWeatherForecastContract.IWeatherForecastPresenter weatherForecastPresenterImpl = null;
-    private static final String[] WEEK_NAME = {"星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"};
+    private static final String[] WEEK_NAME = {"星期日","星期一", "星期二", "星期三", "星期四", "星期五", "星期六"};
     @BindView(R.id.back_button)
     ImageView backButton;
     @BindView(R.id.location_text)
@@ -173,10 +173,10 @@ public class WeatherForecastActivity extends BaseGaodeActivity implements IWeath
         Calendar cal = Calendar.getInstance();
         int i = cal.get(Calendar.DAY_OF_WEEK);
         week1.setText("今天");
-        week2.setText(WEEK_NAME[(i) % 7 -1]);
-        week3.setText(WEEK_NAME[(i + 1) % 7 -1]);
-        week4.setText(WEEK_NAME[(i + 2) % 7 -1]);
-        week5.setText(WEEK_NAME[(i + 3) % 7 -1]);
+        week2.setText(WEEK_NAME[(i) % 7]);
+        week3.setText(WEEK_NAME[(i + 1) % 7]);
+        week4.setText(WEEK_NAME[(i + 2) % 7]);
+        week5.setText(WEEK_NAME[(i + 3) % 7]);
 
         skyImg.setImageResource(SkyconValues.forecastIconMap.get(weatherForecastBean.getResult().getDaily().getSkycon().get(0).getValue()));
         skyImg2.setImageResource(SkyconValues.forecastIconMap.get(weatherForecastBean.getResult().getDaily().getSkycon().get(1).getValue()));

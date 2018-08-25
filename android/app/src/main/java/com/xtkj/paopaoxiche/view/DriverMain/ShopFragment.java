@@ -63,6 +63,19 @@ public class ShopFragment extends BaseFragmemt implements IDriverContract.IShopV
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_driver_shop, container, false);
+        ButterKnife.bind(this, view);
+
+        Glide.with(getActivity()).load(mData.getImage()).into(shopImg);
+        shopName.setText(mData.getName());
+        shopRecycler.setLayoutManager(new GridLayoutManager(getContext(), 3));
+
         RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
                 .create(WashService.class)
                 .getRecommendCommodity(MyLocation.lng +"",MyLocation.lat + "",3)
@@ -79,19 +92,6 @@ public class ShopFragment extends BaseFragmemt implements IDriverContract.IShopV
 
                     }
                 });
-
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_driver_shop, container, false);
-        ButterKnife.bind(this, view);
-
-        Glide.with(getActivity()).load(mData.getImage()).into(shopImg);
-        shopName.setText(mData.getName());
-        shopRecycler.setLayoutManager(new GridLayoutManager(getContext(), 3));
         return view;
     }
 

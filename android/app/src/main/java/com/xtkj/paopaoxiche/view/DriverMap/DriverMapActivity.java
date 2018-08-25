@@ -125,7 +125,7 @@ public class DriverMapActivity extends BaseActivity implements IDriverMapContrac
                 }else if(data.getBusinessStatus()== AppConstant.STATE_STOPPING){
                     img.setImageResource(R.drawable.img_suspend);
                     img.setBackgroundColor(Color.rgb(248,155,10));
-                }else{
+                }else if(data.getBusinessStatus()== AppConstant.STATE_OPENING){
                     img.setImageResource(R.drawable.img_operation);
                     img.setBackgroundColor(Color.rgb(17,176,242));
                 }
