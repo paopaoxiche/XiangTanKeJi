@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white">
 
     <RelativeLayout
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/toolbarHeight"
         android:background="@color/orange">
@@ -13,28 +15,38 @@
             android:id="@+id/back_arrow_image_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:layout_marginLeft="16dp"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:background="@android:color/transparent"
             android:src="@drawable/arrow"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:text="我的评价"
-            android:textSize="24sp"
             android:textColor="@color/black"
-            android:textStyle="bold"
-            android:layout_centerInParent="true"/>
+            android:textSize="24sp"
+            android:textStyle="bold"/>
 
     </RelativeLayout>
+
+    <ListView
+        android:id="@+id/lv_my_evaluate"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:layout_centerHorizontal="true"
+        android:divider="@color/black"
+        android:dividerHeight="@dimen/px1"
+        android:scrollbars="none"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:text="暂无评价"
-        android:textSize="32sp"
-        android:textColor="@color/black"/>
+        android:textColor="@color/black"
+        android:textSize="32sp"/>
 
 </RelativeLayout>
