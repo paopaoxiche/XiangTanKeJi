@@ -20,6 +20,7 @@ import com.bumptech.glide.Glide;
 import com.xtkj.paopaoxiche.R;
 import com.xtkj.paopaoxiche.application.SkyconValues;
 import com.xtkj.paopaoxiche.base.BaseFragmemt;
+import com.xtkj.paopaoxiche.bean.WashCommodityBean;
 import com.xtkj.paopaoxiche.bean.WashServicesBean;
 import com.xtkj.paopaoxiche.bean.WashShopBean;
 import com.xtkj.paopaoxiche.bean.WeatherForecastBean;
@@ -138,7 +139,7 @@ public class CarWashHomeFragment extends BaseFragmemt implements ICarWashContrac
     }
 
     @Override
-    public void setGoodsInfoList(WashShopBean washShopBean) {
+    public void setGoodsInfoList(WashCommodityBean washShopBean) {
         shopItemsAdapter = new ShopItemsAdapter(washShopBean);
         goodsRecylerView.setAdapter(shopItemsAdapter);
     }
@@ -160,10 +161,10 @@ public class CarWashHomeFragment extends BaseFragmemt implements ICarWashContrac
     class ShopItemsAdapter extends RecyclerView.Adapter<CarWashHomeFragment.ShopItemsAdapter.ViewHolder> {
 
 
-        private WashShopBean data;
+        private WashCommodityBean data;
 
-        ShopItemsAdapter(WashShopBean washShopBean) {
-            this.data = washShopBean;
+        ShopItemsAdapter(WashCommodityBean washCommodityBean) {
+            this.data = washCommodityBean;
         }
 
         @Override

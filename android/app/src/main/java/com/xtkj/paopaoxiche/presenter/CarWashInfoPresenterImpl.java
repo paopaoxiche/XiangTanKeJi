@@ -1,5 +1,6 @@
 package com.xtkj.paopaoxiche.presenter;
 
+import com.xtkj.paopaoxiche.bean.WashCommodityBean;
 import com.xtkj.paopaoxiche.bean.WashServicesBean;
 import com.xtkj.paopaoxiche.bean.WashShopBean;
 import com.xtkj.paopaoxiche.bean.WeatherForecastBean;
@@ -87,7 +88,18 @@ public class CarWashInfoPresenterImpl implements ICarWashContract.IInfoPresenter
     }
 
     @Override
-    public void getCarWashGoodsSuccess(WashShopBean washShopBean) {
-        infoView.setGoodsInfoList(washShopBean);
+    public void getCommoditySuccess(WashShopBean washShopBean) {
+
+    }
+
+
+    @Override
+    public void getCommodityFailed() {
+
+    }
+
+    @Override
+    public void getCarWashGoodsSuccess(WashCommodityBean washCommodityBean) {
+        infoView.setGoodsInfoList(washCommodityBean);
     }
 }

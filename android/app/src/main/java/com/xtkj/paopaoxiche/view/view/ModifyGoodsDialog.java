@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.xtkj.paopaoxiche.R;
+import com.xtkj.paopaoxiche.bean.WashCommodityBean;
 import com.xtkj.paopaoxiche.bean.WashShopBean;
 import com.xtkj.paopaoxiche.event.BaseEvent;
 import com.xtkj.paopaoxiche.model.GoodsModel;
@@ -68,7 +69,7 @@ public class ModifyGoodsDialog extends FullScreenWithStatusBarDialog {
         goodsOriginalPrice.setFilters(filters);
     }
 
-    public ModifyGoodsDialog(Context context, boolean statusBarVisible, WashShopBean.DataBean dataBean) {
+    public ModifyGoodsDialog(Context context, boolean statusBarVisible, WashCommodityBean.DataBean dataBean) {
         this(context, statusBarVisible);
         id = dataBean.getId();
         goodsName.setText(dataBean.getName());

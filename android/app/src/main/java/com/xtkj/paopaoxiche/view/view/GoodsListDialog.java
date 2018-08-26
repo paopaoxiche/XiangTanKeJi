@@ -13,6 +13,7 @@ import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.xtkj.paopaoxiche.R;
+import com.xtkj.paopaoxiche.bean.WashCommodityBean;
 import com.xtkj.paopaoxiche.bean.WashShopBean;
 import com.xtkj.paopaoxiche.model.GoodsModel;
 import com.xtkj.paopaoxiche.model.UserInfo;
@@ -81,33 +82,30 @@ public class GoodsListDialog extends FullScreenWithStatusBarDialog {
         goodsListView.setMenuCreator(creator);
         goodsListView.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT);
 
-        goodsListView.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
-                switch (index) {
-                    case 0:
-                        // 修改
-                        new ModifyGoodsDialog(context, true, goodsListAdapter.goodsList.get(position)).show();
-                        break;
-                    case 1:
-                        // 删除
-                        SureDialog sureDialog = new SureDialog(getContext(), R.style.NormalDialog);
-                        sureDialog.setCancelBtnVisibility(View.VISIBLE);
-                        sureDialog.setClickListener(new SureDialog.ClickListener() {
-                            @Override
-                            public void sure(SureDialog dialog) {
-                                GoodsModel.getInstance().deleteGoods(goodsListAdapter.goodsList.get(position).getId());
-                                dismiss();
-                            }
-                        });
-                        sureDialog.show();
-                        break;
-                }
-                return false;
+        goodsListView.setOnMenuItemClickListener((position, menu, index) -> {
+            switch (index) {
+                case 0:
+                    // 修改
+                    new ModifyGoodsDialog(context, true, goodsListAdapter.goodsList.get(position)).show();
+                    break;
+                case 1:
+                    // 删除
+                    SureDialog sureDialog = new SureDialog(getContext(), R.style.NormalDialog);
+                    sureDialog.setCancelBtnVisibility(View.VISIBLE);
+                    sureDialog.setClickListener(new SureDialog.ClickListener() {
+                        @Override
+                        public void sure(SureDialog dialog) {
+                            GoodsModel.getInstance().deleteGoods(goodsListAdapter.goodsList.get(position).getId());
+                            dismiss();
+                        }
+                    });
+                    sureDialog.show();
+                    break;
             }
+            return false;
         });
 
-        List<WashShopBean.DataBean> goodsList = GoodsModel.getInstance().getGoodsList();
+        List<WashCommodityBean.DataBean> goodsList = GoodsModel.getInstance().getGoodsList();
 
         goodsListAdapter = new GoodsListAdapter(getContext(), goodsList);
         goodsListView.setAdapter(goodsListAdapter);

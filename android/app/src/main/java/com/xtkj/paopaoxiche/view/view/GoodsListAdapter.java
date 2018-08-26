@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.xtkj.paopaoxiche.R;
+import com.xtkj.paopaoxiche.bean.WashCommodityBean;
 import com.xtkj.paopaoxiche.bean.WashShopBean;
 
 import java.util.ArrayList;
@@ -20,9 +21,9 @@ public class GoodsListAdapter extends BaseAdapter{
 
     private Context context;
 
-    List<WashShopBean.DataBean> goodsList = new ArrayList<>();
+    List<WashCommodityBean.DataBean> goodsList = new ArrayList<>();
 
-    public GoodsListAdapter(Context context, List<WashShopBean.DataBean> dataBeans) {
+    public GoodsListAdapter(Context context, List<WashCommodityBean.DataBean> dataBeans) {
         goodsList.addAll(dataBeans);
         this.context = context;
     }

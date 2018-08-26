@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.xtkj.paopaoxiche.base.IBasePresenter;
 import com.xtkj.paopaoxiche.base.IBaseView;
+import com.xtkj.paopaoxiche.bean.WashCommodityBean;
 import com.xtkj.paopaoxiche.bean.WashShopBean;
 import com.xtkj.paopaoxiche.bean.WeatherForecastBean;
 import com.xtkj.paopaoxiche.bean.WeatherRealTimeBean;
@@ -28,7 +29,7 @@ public class ICarWashContract {
         void setRealTimeWeather(WeatherRealTimeBean weatherRealTimeBean);
         void setForecastWeather(WeatherForecastBean weatherForecastBean);
 
-        void setGoodsInfoList(WashShopBean washShopBean);
+        void setGoodsInfoList(WashCommodityBean washShopBean);
     }
 
     public interface IMinePresenter extends IBasePresenter {

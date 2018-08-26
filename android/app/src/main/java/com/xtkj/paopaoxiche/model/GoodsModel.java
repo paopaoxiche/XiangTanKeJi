@@ -6,6 +6,7 @@ import android.widget.Toast;
 import com.xtkj.paopaoxiche.application.Authentication;
 import com.xtkj.paopaoxiche.application.BaseApplication;
 import com.xtkj.paopaoxiche.bean.NoDataBean;
+import com.xtkj.paopaoxiche.bean.WashCommodityBean;
 import com.xtkj.paopaoxiche.bean.WashShopBean;
 import com.xtkj.paopaoxiche.http.ApiField;
 import com.xtkj.paopaoxiche.http.RetrofitClient;
@@ -29,7 +30,7 @@ public class GoodsModel {
 
     private List<GoodsListener> goodsListenerList = new ArrayList<>();
 
-    private List<WashShopBean.DataBean> goodsList = new ArrayList<>();
+    private List<WashCommodityBean.DataBean> goodsList = new ArrayList<>();
 
     private GoodsModel() {
 
@@ -43,7 +44,7 @@ public class GoodsModel {
     }
 
     public interface GoodsListener {
-        void getCarWashGoodsSuccess(WashShopBean washShopBean);
+        void getCarWashGoodsSuccess(WashCommodityBean washShopBean);
     }
 
     public void addListener(GoodsListener goodsListener) {
@@ -54,7 +55,7 @@ public class GoodsModel {
         goodsListenerList.remove(goodsListener);
     }
 
-    public List<WashShopBean.DataBean> getGoodsList() {
+    public List<WashCommodityBean.DataBean> getGoodsList() {
         return goodsList;
     }
 
@@ -62,9 +63,9 @@ public class GoodsModel {
         RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
                 .create(WashService.class)
                 .getGoodsList(washId, pageIndex, pageSize)
-                .enqueue(new Callback<WashShopBean>() {
+                .enqueue(new Callback<WashCommodityBean>() {
                     @Override
-                    public void onResponse(Call<WashShopBean> call, Response<WashShopBean> response) {
+                    public void onResponse(Call<WashCommodityBean> call, Response<WashCommodityBean> response) {
                         if (response == null) {
                             return;
                         }
@@ -77,7 +78,7 @@ public class GoodsModel {
                     }
 
                     @Override
-                    public void onFailure(Call<WashShopBean> call, Throwable t) {
+                    public void onFailure(Call<WashCommodityBean> call, Throwable t) {
 
                     }
                 });

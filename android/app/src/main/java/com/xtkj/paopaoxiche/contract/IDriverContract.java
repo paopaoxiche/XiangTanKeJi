@@ -28,6 +28,7 @@ public class IDriverContract {
         void setRealTimeWeather(WeatherRealTimeBean weatherRealTimeBean);
         void setForecastWeather(WeatherForecastBean weatherForecastBean);
         void updateWashServicesBean();
+        void updateCommodity();
 
     }
 

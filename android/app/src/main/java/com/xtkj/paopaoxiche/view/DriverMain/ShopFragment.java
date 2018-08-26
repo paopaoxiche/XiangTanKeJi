@@ -26,6 +26,7 @@ import com.xtkj.paopaoxiche.service.WashService;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -38,9 +39,11 @@ public class ShopFragment extends BaseFragmemt implements IDriverContract.IShopV
     TextView shopName;
     @BindView(R.id.shop_recycler)
     RecyclerView shopRecycler;
+    Unbinder unbinder;
+
     private IDriverContract.IShopPresenter shopPresenter;
 
-    private WashServicesBean.DataBean mData = null;
+    private WashShopBean.DataBean mData = null;
     private WashShopBean washShopBean = null;
     private ShopItemsAdapter shopItemsAdapter = null;
 
@@ -49,12 +52,12 @@ public class ShopFragment extends BaseFragmemt implements IDriverContract.IShopV
         super.setRetainInstance(retain);
     }
 
-    public ShopFragment(WashServicesBean.DataBean data) {
+    public ShopFragment(WashShopBean.DataBean data) {
         // Required empty public constructor
         this.mData = data;
     }
 
-    public static ShopFragment newInstance(WashServicesBean.DataBean data) {
+    public static ShopFragment newInstance(WashShopBean.DataBean data) {
         ShopFragment fragment = new ShopFragment(data);
         return fragment;
     }
@@ -66,33 +69,45 @@ public class ShopFragment extends BaseFragmemt implements IDriverContract.IShopV
     }
 
     @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+//        shopPresenter.onDestroy();
+        unbinder.unbind();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_driver_shop, container, false);
-        ButterKnife.bind(this, view);
+        unbinder = ButterKnife.bind(this, view);
 
-        Glide.with(getActivity()).load(mData.getImage()).into(shopImg);
-        
+        Glide.with(getActivity()).load(mData.getAvatar()).into(shopImg);
+
         shopName.setText(mData.getName());
         shopRecycler.setLayoutManager(new GridLayoutManager(getContext(), 3));
 
-        RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
-                .create(WashService.class)
-                .getRecommendCommodity(MyLocation.lng +"",MyLocation.lat + "",6)
-                .enqueue(new Callback<WashShopBean>() {
-                    @Override
-                    public void onResponse(Call<WashShopBean> call, Response<WashShopBean> response) {
-                        washShopBean = response.body();
-                        shopItemsAdapter = new ShopItemsAdapter(washShopBean);
-                        shopRecycler.setAdapter(shopItemsAdapter);
-                    }
 
-                    @Override
-                    public void onFailure(Call<WashShopBean> call, Throwable t) {
+        shopItemsAdapter = new ShopItemsAdapter(mData);
+        shopRecycler.setAdapter(shopItemsAdapter);
 
-                    }
-                });
+
+//        RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
+//                .create(WashService.class)
+//                .getRecommendCommodity(MyLocation.lng +"",MyLocation.lat + "",6)
+//                .enqueue(new Callback<WashShopBean>() {
+//                    @Override
+//                    public void onResponse(Call<WashShopBean> call, Response<WashShopBean> response) {
+//                        washShopBean = response.body();
+//                        shopItemsAdapter = new ShopItemsAdapter(washShopBean);
+//                        shopRecycler.setAdapter(shopItemsAdapter);
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<WashShopBean> call, Throwable t) {
+//
+//                    }
+//                });
         return view;
     }
 
@@ -105,10 +120,10 @@ public class ShopFragment extends BaseFragmemt implements IDriverContract.IShopV
     class ShopItemsAdapter extends RecyclerView.Adapter<ShopItemsAdapter.ViewHolder> {
 
 
-        private WashShopBean data;
+        private WashShopBean.DataBean  data;
 
-        ShopItemsAdapter(WashShopBean washShopBean) {
-            this.data = washShopBean;
+        ShopItemsAdapter(WashShopBean.DataBean dataBean) {
+            this.data = dataBean;
         }
 
         @Override
@@ -119,16 +134,16 @@ public class ShopFragment extends BaseFragmemt implements IDriverContract.IShopV
 
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
-            Glide.with(getActivity()).load(data.getData().get(position).getImage()).into(holder.sellingGoodsImg);
-            holder.sellingGoodsPrice1.setText(String.format("¥%s", data.getData().get(position).getCurrentPrice()));
-            holder.sellingGoodsPrice2.setText(String.format("¥%s", data.getData().get(position).getOriginPrice()));
+            Glide.with(getActivity()).load(data.getList().get(position).getImage()).into(holder.sellingGoodsImg);
+            holder.sellingGoodsPrice1.setText(String.format("¥%s", data.getList().get(position).getCurrentPrice()));
+            holder.sellingGoodsPrice2.setText(String.format("¥%s", data.getList().get(position).getOriginPrice()));
             holder.sellingGoodsPrice2.getPaint().setFlags(Paint. STRIKE_THRU_TEXT_FLAG);
         }
 
         @Override
         public int getItemCount() {
-            if(data==null||data.getData()==null)return 0;
-            return data.getData().size();
+            if(data==null||data.getList()==null)return 0;
+            return data.getList().size();
         }
 
         class ViewHolder extends RecyclerView.ViewHolder {

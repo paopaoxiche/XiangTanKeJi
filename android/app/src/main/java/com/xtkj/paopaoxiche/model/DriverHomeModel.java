@@ -6,14 +6,18 @@ import android.util.Log;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
+import com.xtkj.paopaoxiche.application.Authentication;
 import com.xtkj.paopaoxiche.application.MyLocation;
+import com.xtkj.paopaoxiche.bean.WashCommodityBean;
 import com.xtkj.paopaoxiche.bean.WashServicesBean;
+import com.xtkj.paopaoxiche.bean.WashShopBean;
 import com.xtkj.paopaoxiche.bean.WeatherForecastBean;
 import com.xtkj.paopaoxiche.bean.WeatherRealTimeBean;
 import com.xtkj.paopaoxiche.http.ApiField;
 import com.xtkj.paopaoxiche.http.RetrofitClient;
 import com.xtkj.paopaoxiche.service.WashService;
 import com.xtkj.paopaoxiche.service.WeatherService;
+import com.xtkj.paopaoxiche.view.DriverMain.ShopFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +38,7 @@ public class DriverHomeModel {
     private String address  = "";
     private WeatherRealTimeBean weatherRealTimeBean = null;
     private WeatherForecastBean weatherForecastBean = null;
+    private WashShopBean washShopBean = null;
 
     private DriverHomeModel(){
         driverHomeListenerList = new ArrayList<>();
@@ -62,6 +67,8 @@ public class DriverHomeModel {
         void getRealTimeWeatherFailed();
         void getForecastWeatherSuccess(WeatherForecastBean weatherForecastBean);
         void getForecastWeatherFailed();
+        void getCommoditySuccess(WashShopBean washShopBean);
+        void getCommodityFailed();
     }
 
     public void getNearWashServices(){
@@ -133,6 +140,28 @@ public class DriverHomeModel {
                 });
     }
 
+    public void getCommodity(){
+        RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
+                .create(WashService.class)
+                .getRecommendCommodity(MyLocation.lng +"",MyLocation.lat + "",6)
+                .enqueue(new Callback<WashShopBean>() {
+                    @Override
+                    public void onResponse(Call<WashShopBean> call, Response<WashShopBean> response) {
+                        washShopBean = response.body();
+                        for (DriverHomeListener driverHomeListener : driverHomeListenerList) {
+                            driverHomeListener.getCommoditySuccess(response.body());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<WashShopBean> call, Throwable t) {
+                        for (DriverHomeListener driverHomeListener : driverHomeListenerList) {
+                            driverHomeListener.getCommodityFailed();
+                        }
+                    }
+                });
+    }
+
 
     public void updateLocation(){
         if(mLocationClient!=null)
@@ -154,6 +183,7 @@ public class DriverHomeModel {
                     getNearWashServices();
                     getRealTimeWeather();
                     getForecastWeather();
+                    getCommodity();
                 } else {
                     Log.e("AmapError", "location Error, ErrCode:"
                             + aMapLocation.getErrorCode() + ", errInfo:"
@@ -195,6 +225,8 @@ public class DriverHomeModel {
     public WeatherForecastBean getWeatherForecastBean() {
         return weatherForecastBean;
     }
+
+    public WashShopBean getWashShopBean() { return washShopBean; }
 
     public static void release() {
         instance.driverHomeListenerList = null;

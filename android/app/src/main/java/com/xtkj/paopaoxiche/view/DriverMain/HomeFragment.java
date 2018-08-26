@@ -161,32 +161,42 @@ public class HomeFragment extends BaseFragmemt implements IDriverContract.IHomeV
             homeWashServiceAdapter = new HomeWashServiceAdapter(DriverHomeModel.getInstance().getWashServicesBean(), getActivityContext());
             washServiceRecyclerView.setAdapter(homeWashServiceAdapter);
         }
-        int num = DriverHomeModel.getInstance().getWashServicesBean().getData().size();
-        if(num==0)noWashService.setVisibility(View.VISIBLE);
-        else{
-            noWashService.setVisibility(View.GONE);
-
-            homeShopFragmentAdapter = new HomeShopFragmentAdapter(getFragmentManager(), DriverHomeModel.getInstance().getWashServicesBean().getData());
-            shopViewpager.setAdapter(homeShopFragmentAdapter);
-            shopViewpager.setCurrentItem(0);
-
-            shopViewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-                    @Override
-                    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) { }
-                    @Override
-                    public void onPageSelected(int position) {
-                        indicator.getChildAt(viewpager_index).setEnabled(false);
-                        indicator.getChildAt(position).setEnabled(true);
-                        viewpager_index = position;
-                    }
-                    @Override
-                    public void onPageScrollStateChanged(int state) {
-                        homeShopFragmentAdapter.notifyDataSetChanged();
-                    }
-                });
-
-        }
         homeWashServiceAdapter.notifyDataSetChanged();
+
+        if (DriverHomeModel.getInstance().getWashServicesBean().getData().size() == 0) {
+            noWashService.setVisibility(View.VISIBLE);
+        } else {
+            noWashService.setVisibility(View.GONE);
+        }
+
+    }
+
+    @Override
+    public void updateCommodity() {
+        int num = DriverHomeModel.getInstance().getWashShopBean().getData().size();
+
+        homeShopFragmentAdapter = new HomeShopFragmentAdapter(getFragmentManager(), DriverHomeModel.getInstance().getWashShopBean().getData());
+        shopViewpager.setAdapter(homeShopFragmentAdapter);
+        shopViewpager.setCurrentItem(0);
+
+        shopViewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                indicator.getChildAt(viewpager_index).setEnabled(false);
+                indicator.getChildAt(position).setEnabled(true);
+                viewpager_index = position;
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                homeShopFragmentAdapter.notifyDataSetChanged();
+            }
+        });
+
 
         indicator.removeAllViews();
         for (int i = 0; i < num; i++) {
@@ -197,12 +207,9 @@ public class HomeFragment extends BaseFragmemt implements IDriverContract.IHomeV
             layoutParams.leftMargin = 10;
             indicator.addView(view, layoutParams);
         }
-        if(indicator.getChildAt(0)!=null)
-        indicator.getChildAt(0).setEnabled(true);
-
-
+        if (indicator.getChildAt(0) != null)
+            indicator.getChildAt(0).setEnabled(true);
         shopViewpager.setCurrentItem(0);
-
     }
 
     @Override
@@ -231,7 +238,6 @@ public class HomeFragment extends BaseFragmemt implements IDriverContract.IHomeV
                 break;
         }
     }
-
 
 
 }
