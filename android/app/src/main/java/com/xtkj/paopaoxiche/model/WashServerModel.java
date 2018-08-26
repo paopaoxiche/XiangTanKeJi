@@ -1,6 +1,10 @@
 package com.xtkj.paopaoxiche.model;
 
+import android.widget.Toast;
+
 import com.xtkj.paopaoxiche.application.Authentication;
+import com.xtkj.paopaoxiche.application.BaseApplication;
+import com.xtkj.paopaoxiche.bean.NoDataBean;
 import com.xtkj.paopaoxiche.bean.WashServiceListBean;
 import com.xtkj.paopaoxiche.bean.WashShopBean;
 import com.xtkj.paopaoxiche.http.ApiField;
@@ -10,6 +14,8 @@ import com.xtkj.paopaoxiche.service.WashService;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -66,6 +72,60 @@ public class WashServerModel {
                     @Override
                     public void onFailure(Call<WashServiceListBean> call, Throwable t) {
 
+                    }
+                });
+    }
+
+    public void addWashService(int washId, int serviceId, String name, String describe, String price) {
+
+        RequestBody washIdBody =
+                RequestBody.create(MediaType.parse("multipart/form-data"), String.valueOf(washId));
+        RequestBody serviceIdBody =
+                RequestBody.create(MediaType.parse("multipart/form-data"), String.valueOf(serviceId));
+        RequestBody nameBody =
+                RequestBody.create(MediaType.parse("multipart/form-data"), name);
+        RequestBody describeBody =
+                RequestBody.create(MediaType.parse("multipart/form-data"), describe);
+        RequestBody priceBody =
+                RequestBody.create(MediaType.parse("multipart/form-data"), price);
+
+        RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
+                .create(WashService.class)
+                .addService(washIdBody, serviceIdBody, nameBody, describeBody, priceBody)
+                .enqueue(new Callback<NoDataBean>() {
+                    @Override
+                    public void onResponse(Call<NoDataBean> call, Response<NoDataBean> response) {
+                        if (response.body().getCode() != 401) {
+                            Toast.makeText(BaseApplication.getContext(), "添加洗车服务成功", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(BaseApplication.getContext(), "添加洗车服务失败，请重新登录", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<NoDataBean> call, Throwable t) {
+                        Toast.makeText(BaseApplication.getContext(), "添加洗车服务失败", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    public void deleteWashService(int washId, int serviceId) {
+        RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
+                .create(WashService.class)
+                .deleteWashService(washId, serviceId)
+                .enqueue(new Callback<NoDataBean>() {
+                    @Override
+                    public void onResponse(Call<NoDataBean> call, Response<NoDataBean> response) {
+                        if (response.body().getCode() != 401) {
+                            Toast.makeText(BaseApplication.getContext(), "删除洗车服务成功", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(BaseApplication.getContext(), "删除洗车服务失败，请重新登录", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<NoDataBean> call, Throwable t) {
+                        Toast.makeText(BaseApplication.getContext(), "删除洗车服务失败", Toast.LENGTH_SHORT).show();
                     }
                 });
     }

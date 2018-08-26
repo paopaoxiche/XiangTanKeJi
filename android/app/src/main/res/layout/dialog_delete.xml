@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="134dp"
+    android:background="@color/white"
+    android:paddingBottom="14dp"
+    android:paddingLeft="24dp"
+    android:paddingRight="16dp"
+    android:paddingTop="24dp" >
+
+    <TextView
+        android:id="@+id/tv_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="确定删除吗？"
+        android:textColor="@color/grey"
+        android:textSize="16sp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:padding="5dp"
+            android:text="取消"
+            android:textColor="#444444"
+            android:textSize="12dp"
+            android:visibility="invisible" />
+
+        <Button
+            android:id="@+id/btn_sure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:background="@android:color/transparent"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:padding="5dp"
+            android:text="确定"
+            android:textColor="@android:color/holo_blue_light"
+            android:textSize="12dp" />
+    </LinearLayout>
+
+</RelativeLayout>

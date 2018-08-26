@@ -43,12 +43,9 @@ public interface UserService {
     @GET("user/info")
     Call<NoDataBean> Login(@Query("id") String id ) ;
 
-
-    /**
-     * */
-    @Multipart
+    @FormUrlEncoded
     @POST("user/update")
-    Call<NoDataBean> update(@Part("nickname") RequestBody nickName);
+    Call<NoDataBean> update(@Field("nickname") String nickName);
 
     /**
      * */

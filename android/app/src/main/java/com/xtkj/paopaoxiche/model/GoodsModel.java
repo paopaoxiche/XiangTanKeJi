@@ -130,6 +130,26 @@ public class GoodsModel {
         }
     }
 
+    public void deleteGoods(int id) {
+        RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
+                .create(WashService.class)
+                .deleteGoods(id)
+                .enqueue(new Callback<NoDataBean>() {
+                    @Override
+                    public void onResponse(Call<NoDataBean> call, Response<NoDataBean> response) {
+                        if (response.body().getCode() != 401) {
+                            Toast.makeText(BaseApplication.getContext(), "删除商品成功", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(BaseApplication.getContext(), "删除商品失败，请重新登录", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<NoDataBean> call, Throwable t) {
+                        Toast.makeText(BaseApplication.getContext(), "删除商品失败", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
     public static void release() {
         instance.goodsListenerList = null;
         instance = null;

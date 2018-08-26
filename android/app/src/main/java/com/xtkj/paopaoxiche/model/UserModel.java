@@ -211,11 +211,9 @@ public class UserModel {
     }
 
     public void updateUserInfo(String nickName) {
-        RequestBody nameBody =
-                RequestBody.create(MediaType.parse("multipart/form-data"), nickName);
         RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
                 .create(UserService.class)
-                .update(nameBody)
+                .update(nickName)
                 .enqueue(new Callback<NoDataBean>() {
                     @Override
                     public void onResponse(Call<NoDataBean> call, Response<NoDataBean> response) {

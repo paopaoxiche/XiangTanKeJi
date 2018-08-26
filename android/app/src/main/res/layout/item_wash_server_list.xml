@@ -25,6 +25,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:layout_alignParentLeft="true"
         android:layout_toLeftOf="@id/wash_server_linear_layout"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"

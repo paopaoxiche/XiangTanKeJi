@@ -70,9 +70,6 @@ public class ModifyGoodsDialog extends FullScreenWithStatusBarDialog {
 
     public ModifyGoodsDialog(Context context, boolean statusBarVisible, WashShopBean.DataBean dataBean) {
         this(context, statusBarVisible);
-        setContentView(R.layout.dialog_modify_goods);
-        ButterKnife.bind(this);
-        findViewById(R.id.back_arrow_image_button).setOnClickListener(backButtonClickListener);
         id = dataBean.getId();
         goodsName.setText(dataBean.getName());
         goodsCurrentPrice.setText(dataBean.getCurrentPrice() + "");

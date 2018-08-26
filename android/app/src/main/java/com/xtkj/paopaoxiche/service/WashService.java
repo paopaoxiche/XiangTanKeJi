@@ -57,4 +57,24 @@ public interface WashService {
 
     @GET("wash/getServiceList")
     Call<WashServiceListBean> getWashServviceList(@Query("washId")int washId);
+
+//    @FormUrlEncoded
+//    @POST("wash/publishService")
+//    Call<NoDataBean> addService(@Field("washId")int washId, @Field("serviceId") int serviceId, @Field("name") String name, @Field("describe") String describe, @Field("price") String price);
+
+//    @POST("wash/publishService")
+//    Call<NoDataBean> addService(@Body int washId, @Body int serviceId, @Body String name, @Body String describe, @Body String price);
+
+    @Multipart
+    @POST("wash/publishService")
+    Call<NoDataBean> addService(@Part("washId")RequestBody washId, @Part("serviceId") RequestBody serviceId, @Part("name") RequestBody name, @Part("describe") RequestBody describe, @Part("price") RequestBody price);
+
+    @FormUrlEncoded
+    @POST("wash/deleteService")
+    Call<NoDataBean> deleteWashService(@Field("washId") int washId, @Field("serviceId") int serviceId);
+
+    @FormUrlEncoded
+    @POST("commodity/deleteCommodity")
+    Call<NoDataBean> deleteGoods(@Field("id") int id);
+
 }

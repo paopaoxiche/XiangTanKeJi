@@ -18,6 +18,7 @@ import com.xtkj.paopaoxiche.model.UserInfo;
 import com.xtkj.paopaoxiche.model.WashServerModel;
 import com.xtkj.paopaoxiche.utils.DensityUtil;
 import com.xtkj.paopaoxiche.widget.FullScreenWithStatusBarDialog;
+import com.xtkj.paopaoxiche.widget.SureDialog;
 
 import java.util.List;
 
@@ -85,9 +86,20 @@ public class WashListManagerDialog extends FullScreenWithStatusBarDialog impleme
                 switch (index) {
                     case 0:
                         // 修改
+                        new ModifyWashServiceDialog(getContext(), true, washServerListAdapter.washServerList.get(position)).show();
                         break;
                     case 1:
                         // 删除
+                        SureDialog sureDialog = new SureDialog(getContext(), R.style.NormalDialog);
+                        sureDialog.setCancelBtnVisibility(View.VISIBLE);
+                        sureDialog.setClickListener(new SureDialog.ClickListener() {
+                            @Override
+                            public void sure(SureDialog dialog) {
+                                WashServerModel.getInstance().deleteWashService(UserInfo.getWashId(), washServerListAdapter.washServerList.get(position).getId());
+                                dismiss();
+                            }
+                        });
+                        sureDialog.show();
                         break;
                 }
                 return false;
@@ -114,7 +126,7 @@ public class WashListManagerDialog extends FullScreenWithStatusBarDialog impleme
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.add_goods_image_button:
-                new ModifyGoodsDialog(getContext(), true).show();
+                new ModifyWashServiceDialog(getContext(), true).show();
                 break;
         }
     }
