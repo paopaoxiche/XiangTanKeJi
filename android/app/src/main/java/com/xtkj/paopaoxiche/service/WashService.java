@@ -56,5 +56,5 @@ public interface WashService {
                               @Part("originalPrice") RequestBody originalPrice, @Part("describe") RequestBody describe);
 
     @GET("wash/getServiceList")
-    Call<WashServiceListBean> getWashServviceList(@Query("washId")int count, @Query("pageIndex")int showAll, @Query("pageSize")float priceLimit);
+    Call<WashServiceListBean> getWashServviceList(@Query("washId")int washId);
 }

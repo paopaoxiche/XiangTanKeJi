@@ -97,6 +97,19 @@ public class WashListManagerDialog extends FullScreenWithStatusBarDialog impleme
         WashServerModel.getInstance().getWashServerList(UserInfo.getWashId(), 0, 20);
     }
 
+    @Override
+    public void show() {
+        super.show();
+        WashServerModel.getInstance().addListener(this);
+        WashServerModel.getInstance().getWashServerList(UserInfo.getWashId(), 0, 20);
+    }
+
+    @Override
+    public void dismiss() {
+        super.dismiss();
+        WashServerModel.getInstance().removeListener(this);
+    }
+
     @OnClick({R.id.add_goods_image_button})
     public void onViewClicked(View view) {
         switch (view.getId()) {

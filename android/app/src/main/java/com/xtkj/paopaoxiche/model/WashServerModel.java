@@ -48,7 +48,7 @@ public class WashServerModel {
     public void getWashServerList(int washId, int pageIndex, int pageSize) {
         RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
                 .create(WashService.class)
-                .getWashServviceList(washId, pageIndex, pageSize)
+                .getWashServviceList(washId)
                 .enqueue(new Callback<WashServiceListBean>() {
                     @Override
                     public void onResponse(Call<WashServiceListBean> call, Response<WashServiceListBean> response) {

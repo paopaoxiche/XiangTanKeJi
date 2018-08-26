@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.xtkj.paopaoxiche.R;
@@ -99,13 +100,16 @@ public class ModifyGoodsDialog extends FullScreenWithStatusBarDialog {
                 if (!TextUtils.isEmpty(describeEditText.getText().toString())
                         && !TextUtils.isEmpty(goodsName.getText().toString())
                         && !TextUtils.isEmpty(goodsCurrentPrice.getText().toString())
-                        && !TextUtils.isEmpty(goodsOriginalPrice.getText().toString())) {
+                        && !TextUtils.isEmpty(goodsOriginalPrice.getText().toString())
+                        && (imageFile != null || id != 0)) {
                     GoodsModel.getInstance().addGoods(id, goodsName.getText().toString(),
                             goodsCurrentPrice.getText().toString(),
                             goodsOriginalPrice.getText().toString(),
                             describeEditText.getText().toString(),
                             imageFile);
                     dismiss();
+                } else {
+                    Toast.makeText(getContext(), "请正确输入信息", Toast.LENGTH_LONG).show();
                 }
                 break;
             case R.id.upload_button:

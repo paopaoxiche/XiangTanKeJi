@@ -23,6 +23,7 @@ import com.xtkj.paopaoxiche.view.view.GoodsListDialog;
 import com.xtkj.paopaoxiche.view.view.IncomeListDialog;
 import com.xtkj.paopaoxiche.view.view.ModifyUserInfoDialog;
 import com.xtkj.paopaoxiche.view.view.MyEvaluateDialog;
+import com.xtkj.paopaoxiche.view.view.WashListManagerDialog;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -133,6 +134,7 @@ public class CarWashMineFragment extends BaseFragmemt implements ICarWashContrac
         time = System.currentTimeMillis();
         switch (view.getId()) {
             case R.id.car_wash_manager_linear_layout:
+                new WashListManagerDialog(getContext(), true).show();
                 break;
             case R.id.goods_manager_linear_layout:
                 new GoodsListDialog(getContext(), true).show();

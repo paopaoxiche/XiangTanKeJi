@@ -46,29 +46,26 @@ public class WashServerListAdapter extends BaseAdapter{
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
         if (convertView == null) {
-//            convertView = LayoutInflater.from(context).inflate(R.layout.item, null);
+            convertView = LayoutInflater.from(context).inflate(R.layout.item_wash_server_list, null);
             holder = new ViewHolder();
             convertView.setTag(holder);
-            holder.goodsNameTextView = convertView.findViewById(R.id.goods_name_text_view);
-            holder.goodsImageView = (ImageView) convertView.findViewById(R.id.goods_image_view);
-            holder.describeTextView = (TextView) convertView.findViewById(R.id.goods_describe_text_view);
-            holder.currentPriceTextView = (TextView) convertView.findViewById(R.id.current_price_text_view);
+            holder.serviceNameTextView = convertView.findViewById(R.id.wash_server_name_text_view);
+            holder.describeTextView = (TextView) convertView.findViewById(R.id.wash_server_describe_text_view);
+            holder.PriceTextView = (TextView) convertView.findViewById(R.id.current_price_text_view);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
 
         holder.describeTextView.setText(washServerList.get(position).getDescribe());
-        holder.currentPriceTextView.setText(String.format("¥%s", washServerList.get(position).getPrice()));
-//        Glide.with(context).load(washServerList.get(position).get()).into(holder.goodsImageView);
-        holder.goodsNameTextView.setText(washServerList.get(position).getName());
+        holder.PriceTextView.setText(String.format("¥%s", washServerList.get(position).getPrice()));
+        holder.serviceNameTextView.setText(washServerList.get(position).getName());
 
         return convertView;
     }
 
     private class ViewHolder {
-        private TextView  goodsNameTextView;
-        private ImageView goodsImageView;
+        private TextView  serviceNameTextView;
         private TextView  describeTextView;
-        private TextView  currentPriceTextView;
+        private TextView  PriceTextView;
     }
 }
