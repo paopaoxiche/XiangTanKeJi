@@ -11,8 +11,11 @@ import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.xtkj.paopaoxiche.R;
+import com.xtkj.paopaoxiche.bean.WashServiceListBean;
 import com.xtkj.paopaoxiche.bean.WashShopBean;
 import com.xtkj.paopaoxiche.model.GoodsModel;
+import com.xtkj.paopaoxiche.model.UserInfo;
+import com.xtkj.paopaoxiche.model.WashServerModel;
 import com.xtkj.paopaoxiche.utils.DensityUtil;
 import com.xtkj.paopaoxiche.widget.FullScreenWithStatusBarDialog;
 
@@ -22,18 +25,18 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class WashListManagerDialog extends FullScreenWithStatusBarDialog {
+public class WashListManagerDialog extends FullScreenWithStatusBarDialog implements WashServerModel.WashServiceListener {
 
     @BindView(R.id.add_goods_image_button)
     ImageButton addGoodsImageButton;
     @BindView(R.id.goods_list_view)
     SwipeMenuListView goodsListView;
 
-    GoodsListAdapter goodsListAdapter;
+    WashServerListAdapter washServerListAdapter;
 
     public WashListManagerDialog(Context context, boolean statusBarVisible) {
         super(context, statusBarVisible);
-        setContentView(R.layout.dialog_goods_list);
+        setContentView(R.layout.dialog_wash_manager_list);
         findViewById(R.id.back_arrow_image_button).setOnClickListener(backButtonClickListener);
         ButterKnife.bind(this);
 
@@ -91,15 +94,7 @@ public class WashListManagerDialog extends FullScreenWithStatusBarDialog {
             }
         });
 
-        List<WashShopBean.DataBean> goodsList = GoodsModel.getInstance().getGoodsList();
-
-        goodsListAdapter = new GoodsListAdapter(getContext(), goodsList);
-        goodsListView.setAdapter(goodsListAdapter);
-
-        if (goodsList != null && goodsList.size() > 0) {
-
-            goodsListView.setVisibility(View.VISIBLE);
-        }
+        WashServerModel.getInstance().getWashServerList(UserInfo.getWashId(), 0, 20);
     }
 
     @OnClick({R.id.add_goods_image_button})
@@ -108,6 +103,16 @@ public class WashListManagerDialog extends FullScreenWithStatusBarDialog {
             case R.id.add_goods_image_button:
                 new ModifyGoodsDialog(getContext(), true).show();
                 break;
+        }
+    }
+
+    @Override
+    public void getWashServerListSuccess(WashServiceListBean washServiceListBean) {
+        washServerListAdapter = new WashServerListAdapter(getContext(), washServiceListBean.getData());
+        goodsListView.setAdapter(washServerListAdapter);
+
+        if (washServiceListBean.getData() != null && washServiceListBean.getData().size() > 0) {
+            goodsListView.setVisibility(View.VISIBLE);
         }
     }
 }

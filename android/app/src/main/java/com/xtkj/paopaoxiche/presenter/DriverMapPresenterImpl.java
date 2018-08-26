@@ -16,17 +16,16 @@ public class DriverMapPresenterImpl implements IDriverMapContract.IDriverMapPres
         driverMapView.setPresenter(this);
 
         viewModel = DriverMapModel.getInstance();
-        viewModel.addListener(this);
     }
 
     @Override
     public void onCreate() {
-
+        viewModel.addListener(this);
     }
 
     @Override
     public void onDestroy() {
-
+        viewModel.removeListener(this);
     }
 
 

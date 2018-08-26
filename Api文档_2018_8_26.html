@@ -117,6 +117,8 @@
                                         <a href="#69be7b5cdab94f3fa6182084e8fb8c80">获取所有优惠券</a>
                                     </li><li>
                                         <a href="#46e4211ae2814e96873f696574d69bd1">兑换优惠券</a>
+                                    </li><li>
+                                        <a href="#84a70569034e475aa54adc6d26c7d041">获取消费记录支付状态</a>
                                     </li>
                                 </ul><span>commodity</span>
                                 <ul class="nav list-group">
@@ -3071,17 +3073,22 @@
                                 <code class="json hljs">{
     "code": 200,
     "data": {
-        "appid": "wx129f550ad02f9cd2",
-        "noncestr": "Xw7togmeKBszXO0m",
-        "outTradeNo": "15349531402951000000201",
-        "package": "Sign=WXPay",
-        "partnerid": "1511685231",
-        "prepayid": "wx22235230986558397e3557eb1956972366",
-        "sign": "3232B0B253B2D5A9FC355B8D432C0FBE",
-        "timestamp": "1534953140"
-    },
+        "aliPay": "alipay_sdk=alipay-sdk-java-3.3.49.ALL&app_id=2018072560779353&biz_content=%7B%22body%22%3A%22%E6%B1%BD%E8%BD%A6%E7%B2%BE%E6%B4%97%E6%9C%8D%E5%8A%A1%22%2C%22out_trade_no%22%3A%2215352766010341000000202%22%2C%22product_code%22%3A%22QUICK_MSECURITY_PAY%22%2C%22subject%22%3A%22%E6%B1%BD%E8%BD%A6%E7%B2%BE%E6%B4%97%E6%9C%8D%E5%8A%A1%22%2C%22timeout_express%22%3A%2230m%22%2C%22total_amount%22%3A%220.01%22%7D&charset=UTF-8&format=json&method=alipay.trade.app.pay&notify_url=http%3A%2F%2F101.200.63.245%3A8080%2Fpay%2FaliPayCallBack&sign=fZlcHEEMXgVM%2BZTL7ZSULfVo4S0bB0saG9FluinuXHaAubCHfiP5svr%2F2MRu0zgi9ZJmBQbe5jG2jkFt%2B6eFIFKXZOdJ0605wTB70sHGYL6M6Paiv8kd8aP7UtZBXvsLIeZYnaxEX8q4dyJvwj9qDeSZDae0djllsvJHUg6blcpB1Wf8KFhHikSS7bxv064D%2BkNiHlbSXXnTMbT6cY7938dvufMLLhxAS9%2B5yUubGluf4OFGa5Fig4e24obk6btDiYeIbBLWX70aXywiD0%2Fw%2BojQPSJigZ3xxA7EKimDKemvaoGFMmAZqpAomIHfaQ1K%2BY%2BNFNp3SOnEo6uVn17l1w%3D%3D&sign_type=RSA2&timestamp=2018-08-26+17%3A43%3A21&version=1.0",
+        "wxPay": {
+            "appid": "wx129f550ad02f9cd2",
+            "noncestr": "8Wc1kpjfS4nNOpNT",
+            "outTradeNo": "15352785553241000000201",
+            "package": "Sign=WXPay",
+            "partnerid": "1511685231",
+            "prepayid": "wx26181558324587605b9640a31757251354",
+            "sign": "F29E92D68647264A5E083DAC1C92F595",
+            "timestamp": "1535278556"
+        },
+        "payType": 1
+    }
     "msg": "请求成功"
-}</code>
+}
+ </code>
                             </pre>
                         </div>                        
                         <table class="table table-hover" style="margin-top: 7px;">
@@ -3098,28 +3105,36 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>data.appid</td>
+                                    <td>data.wxPay.appid</td>
                                     <td>微信支付APPI</td>
                                     <th>string</th>
                                 </tr><tr>
-                                    <td>data.outTradeNo</td>
+                                    <td>data.wxPay.outTradeNo</td>
                                     <td>订单号</td>
                                     <th>string</th>
                                 </tr><tr>
-                                    <td>data.partnerid</td>
+                                    <td>data.wxPaypartnerid</td>
                                     <td>商户号</td>
                                     <th>string</th>
                                 </tr><tr>
-                                    <td>data.prepayid</td>
+                                    <td>data.wxPay.prepayid</td>
                                     <td>预支付交易会话标识</td>
                                     <th>string</th>
                                 </tr><tr>
-                                    <td>data.sign</td>
+                                    <td>data.wxPay.sign</td>
                                     <td>签名</td>
                                     <th>string</th>
                                 </tr><tr>
-                                    <td>data.timestamp</td>
+                                    <td>data.wxPay.timestamp</td>
                                     <td>时间戳</td>
+                                    <th>string</th>
+                                </tr><tr>
+                                    <td>data.aliPay</td>
+                                    <td>支付宝调起支付参数</td>
+                                    <th>string</th>
+                                </tr><tr>
+                                    <td>data.payType</td>
+                                    <td>支付类型 1：微信 （使用data.wxPay的参数） 2：支付宝：(使用data.aliPay参数)</td>
                                     <th>string</th>
                                 </tr>                            </tbody>
                         </table>
@@ -3341,6 +3356,100 @@
                             </pre>
                         </div>                        
                         
+                    </div><div class="api-one">
+                        <h3 id="84a70569034e475aa54adc6d26c7d041">获取消费记录支付状态</h3>
+                        <p>
+                            <a target="_blank" href="http://apizza.cc/console/project/829ba0a1c0fb6675eabcbb0391df72f4/browse?api=84a70569034e475aa54adc6d26c7d041" class="label label-warning">在线测试</a>
+                            <a target="_blank" href="http://apizza.cc/console/project/829ba0a1c0fb6675eabcbb0391df72f4/browse?api=84a70569034e475aa54adc6d26c7d041" class="label label-warning">在线浏览</a>
+                        </p>
+                        <p>请求方式：POST</p>
+                        <p>
+                            请求地址：http://101.200.63.245:8080/carOwner/getConsumeStatus                        </p>
+                        
+                        <table class="table table-hover">
+                                <colgroup>
+                                <col class="col-xs-2">
+                                <col class="col-xs-1">
+                                <col class="col-xs-1">
+                                <col class="col-xs-7">
+                                <col class="col-xs-2">
+                              </colgroup>
+                                <thead>
+                                    <tr>
+                                        <th><span class="label label-success">Header参数名</span></th>
+                                        <th>类型</th>
+                                        <th>必需</th>
+                                        <th>描述</th>
+                                        <th>示例 e.g.</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>authentication</td>
+                                        <td>string</td>
+                                        <td>是</td>
+                                        <td>请求头</td>
+                                        <td>user_id=100000018,token=e701af88a47b44e3bb3e9ff05a7a14ff</td>
+                                    </tr>                                </tbody>
+                            </table>
+                        <table class="table table-hover">
+                                <colgroup>
+                                    <col class="col-xs-2">
+                                    <col class="col-xs-1">
+                                    <col class="col-xs-1">
+                                    <col class="col-xs-7">
+                                    <col class="col-xs-2">
+                                </colgroup>
+                                <thead>
+                                <tr>
+                                    <th><span class="label label-success">Query参数名</span></th>
+                                    <th>类型</th>
+                                    <th>必需</th>
+                                    <th>描述</th>
+                                    <th>示例 e.g.</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                        <td>comsumeId</td>
+                                        <td>string</td>
+                                        <td>是</td>
+                                        <td></td>
+                                        <td>消费记录ID{     "code": 200,     "data": 2,     "msg": "请求成功" }</td>
+                                    </tr>                                </tbody>
+                            </table>
+
+                                                                            
+                        
+                        <p>返回示例：</p>
+                        <div class="highlight">
+                            <pre>
+                                <code class="json hljs">{
+    "code": 200,
+    "data": 2,
+    "msg": "请求成功"
+}</code>
+                            </pre>
+                        </div>                        
+                        <table class="table table-hover" style="margin-top: 7px;">
+                            <colgroup>
+                            <col class="col-xs-4">
+                            <col class="col-xs-8">
+                          </colgroup>
+                            <thead>
+                                <tr>
+                                    <th style="padding-left: 0px;"><span class="label label-success">参数名</span></th>
+                                    <th>描述</th>
+                                    <th>类型</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>data</td>
+                                    <td>状态码 ：状态 0待支付 1支付中 2已支付 3已取消</td>
+                                    <th>number</th>
+                                </tr>                            </tbody>
+                        </table>
                     </div><h1 id="t_api_doc">commodity</h1>
                     
                     <div class="api-one">

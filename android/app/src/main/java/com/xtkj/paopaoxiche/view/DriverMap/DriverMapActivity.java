@@ -164,6 +164,7 @@ public class DriverMapActivity extends BaseGaodeActivity implements IDriverMapCo
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        presenter.onDestroy();
         //在activity执行onDestroy时执行mMapView.onDestroy()，销毁地图
         mMapView.onDestroy();
     }

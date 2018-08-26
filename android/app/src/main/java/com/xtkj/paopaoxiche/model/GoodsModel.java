@@ -131,7 +131,8 @@ public class GoodsModel {
     }
 
     public static void release() {
-
+        instance.goodsListenerList = null;
+        instance = null;
     }
 
 }
