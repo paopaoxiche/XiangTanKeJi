@@ -32,12 +32,10 @@ public class HomeWashServiceAdapter extends RecyclerView.Adapter<HomeWashService
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_home_yard, viewGroup, false);
 
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(mContext, WashServiceActivity.class);
-                mContext.startActivity(intent);
-            }
+        view.setOnClickListener(view1 -> {
+            Intent intent = new Intent(mContext, WashServiceActivity.class);
+
+            mContext.startActivity(intent);
         });
 
         ViewHolder vh = new ViewHolder(view);

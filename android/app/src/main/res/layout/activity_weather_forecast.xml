@@ -55,367 +55,382 @@
         android:paddingBottom="50dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <LinearLayout
-            android:id="@+id/forecast_bg"
-            android:orientation="vertical"
+
+        <FrameLayout
+            android:background="@drawable/bg_nothing"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <LinearLayout
-                android:layout_gravity="center_vertical"
-                android:paddingLeft="28dp"
-                android:orientation="vertical"
+
+            <ImageView
+                android:id="@+id/forecast_bg"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:id="@+id/temperature"
-                    android:textColor="#B2ffffff"
-                    android:textSize="80sp"
-                    android:paddingTop="28dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text=""/>
-
-                <LinearLayout
-                    android:layout_marginTop="28dp"
-                    android:gravity="center_vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <ImageView
-                        android:layout_width="11dp"
-                        android:layout_height="14dp"
-                        android:src="@drawable/img_high"
-                        />
-                    <TextView
-                        android:layout_marginStart="4dp"
-                        android:id="@+id/temperature_high"
-                        android:textSize="16sp"
-                        android:textColor="#b2ffffff"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                    <ImageView
-                        android:layout_marginStart="20dp"
-                        android:layout_width="11dp"
-                        android:layout_height="14dp"
-                        android:src="@drawable/img_low"
-                        />
-                    <TextView
-                        android:layout_marginStart="4dp"
-                        android:id="@+id/temperature_low"
-                        android:textSize="16sp"
-                        android:textColor="#b2ffffff"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_marginTop="16dp"
-                    android:gravity="center_vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <ImageView
-                        android:alpha="0.7"
-                        android:layout_width="16dp"
-                        android:layout_height="12dp"
-                        android:src="@drawable/img_wind"/>
-                    <TextView
-                        android:layout_marginStart="4dp"
-                        android:id="@+id/wind"
-                        android:textSize="16sp"
-                        android:textColor="#b2ffffff"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                    <ImageView
-                        android:alpha="0.7"
-                        android:layout_marginLeft="20dp"
-                        android:layout_width="17dp"
-                        android:layout_height="15dp"
-                        android:src="@drawable/img_humidity"/>
-                    <TextView
-                        android:layout_marginStart="4dp"
-                        android:id="@+id/humidity"
-                        android:textSize="16sp"
-                        android:textColor="#b2ffffff"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-
-            </LinearLayout>
-
-
-            <com.xtkj.paopaoxiche.widget.MarqueeTextView
-                android:layout_marginLeft="28dp"
-                android:layout_marginTop="40dp"
-                android:ellipsize="marquee"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:marqueeRepeatLimit="marquee_forever"
-                android:singleLine="true"
-                android:id="@+id/forecast"
-                android:textSize="18sp"
-                android:textColor="#ffffff"
-                android:layout_width="250dp"
                 android:layout_height="wrap_content" />
 
             <LinearLayout
-                android:layout_marginTop="40dp"
-                android:paddingLeft="28dp"
-                android:paddingRight="28dp"
+                android:background="@drawable/bg_nothing"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <TextView
+
+                <LinearLayout
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="28dp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/temperature"
+                        android:textColor="#B2ffffff"
+                        android:textSize="80sp"
+                        android:paddingTop="28dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=""/>
+
+                    <LinearLayout
+                        android:layout_marginTop="28dp"
+                        android:gravity="center_vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:layout_width="11dp"
+                            android:layout_height="14dp"
+                            android:src="@drawable/img_high"
+                            />
+                        <TextView
+                            android:layout_marginStart="4dp"
+                            android:id="@+id/temperature_high"
+                            android:textSize="16sp"
+                            android:textColor="#b2ffffff"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <ImageView
+                            android:layout_marginStart="20dp"
+                            android:layout_width="11dp"
+                            android:layout_height="14dp"
+                            android:src="@drawable/img_low"
+                            />
+                        <TextView
+                            android:layout_marginStart="4dp"
+                            android:id="@+id/temperature_low"
+                            android:textSize="16sp"
+                            android:textColor="#b2ffffff"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_marginTop="16dp"
+                        android:gravity="center_vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:alpha="0.7"
+                            android:layout_width="16dp"
+                            android:layout_height="12dp"
+                            android:src="@drawable/img_wind"/>
+                        <TextView
+                            android:layout_marginStart="4dp"
+                            android:id="@+id/wind"
+                            android:textSize="16sp"
+                            android:textColor="#b2ffffff"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <ImageView
+                            android:alpha="0.7"
+                            android:layout_marginLeft="20dp"
+                            android:layout_width="17dp"
+                            android:layout_height="15dp"
+                            android:src="@drawable/img_humidity"/>
+                        <TextView
+                            android:layout_marginStart="4dp"
+                            android:id="@+id/humidity"
+                            android:textSize="16sp"
+                            android:textColor="#b2ffffff"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+                <com.xtkj.paopaoxiche.widget.MarqueeTextView
+                    android:layout_marginLeft="28dp"
+                    android:layout_marginTop="40dp"
+                    android:ellipsize="marquee"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:singleLine="true"
+                    android:id="@+id/forecast"
                     android:textSize="18sp"
                     android:textColor="#ffffff"
-                    android:text="五天预报"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
+                    android:layout_width="250dp"
                     android:layout_height="wrap_content" />
 
-                <TextView
-                    android:layout_marginRight="36dp"
-                    android:id="@+id/skycon"
-                    android:textSize="18sp"
-                    android:textColor="#ffffff"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                <LinearLayout
+                    android:layout_marginTop="40dp"
+                    android:paddingLeft="28dp"
+                    android:paddingRight="28dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textSize="18sp"
+                        android:textColor="#ffffff"
+                        android:text="五天预报"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content" />
 
-            </LinearLayout>
+                    <TextView
+                        android:layout_marginRight="36dp"
+                        android:id="@+id/skycon"
+                        android:textSize="18sp"
+                        android:textColor="#ffffff"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
 
-            <View
-                android:layout_marginLeft="28dp"
-                android:layout_marginRight="28dp"
-                android:layout_marginTop="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#b2ffffff" />
+                </LinearLayout>
 
-            <LinearLayout
-                android:layout_marginLeft="28dp"
-                android:layout_marginRight="28dp"
-                android:layout_marginTop="14dp"
-                android:gravity="center_vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:textSize="15sp"
-                    android:textColor="#fff"
-                    android:id="@+id/date1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:textSize="15sp"
-                    android:textColor="#fff"
-                    android:layout_marginLeft="16dp"
-                    android:id="@+id/week1"
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content" />
-                <ImageView
-                    android:layout_marginLeft="56dp"
-                    android:id="@+id/sky_img"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
                 <View
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"/>
+                    android:layout_marginLeft="28dp"
+                    android:layout_marginRight="28dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#b2ffffff" />
 
-                <TextView
-                    android:textSize="15sp"
-                    android:textColor="#fff"
-                    android:id="@+id/high1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:layout_marginStart="20dp"
-                    android:textSize="15sp"
-                    android:textColor="#fff"
-                    android:id="@+id/low1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                <LinearLayout
+                    android:layout_marginLeft="28dp"
+                    android:layout_marginRight="28dp"
+                    android:layout_marginTop="14dp"
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textSize="15sp"
+                        android:textColor="#fff"
+                        android:id="@+id/date1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:textSize="15sp"
+                        android:textColor="#fff"
+                        android:layout_marginLeft="16dp"
+                        android:id="@+id/week1"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content" />
+                    <ImageView
+                        android:layout_marginLeft="56dp"
+                        android:id="@+id/sky_img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <View
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"/>
+
+                    <TextView
+                        android:textSize="15sp"
+                        android:textColor="#fff"
+                        android:id="@+id/high1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:layout_marginStart="20dp"
+                        android:textSize="15sp"
+                        android:textColor="#fff"
+                        android:id="@+id/low1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_marginLeft="28dp"
+                    android:layout_marginRight="28dp"
+                    android:layout_marginTop="14dp"
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textSize="15sp"
+                        android:textColor="#fff"
+                        android:id="@+id/date2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:textSize="15sp"
+                        android:textColor="#fff"
+                        android:layout_marginLeft="16dp"
+                        android:id="@+id/week2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <ImageView
+                        android:layout_marginLeft="56dp"
+                        android:id="@+id/sky_img2"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content" />
+                    <View
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"/>
+
+                    <TextView
+                        android:textSize="15sp"
+                        android:textColor="#fff"
+                        android:id="@+id/high2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:layout_marginStart="20dp"
+                        android:textSize="15sp"
+                        android:textColor="#fff"
+                        android:id="@+id/low2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginLeft="28dp"
+                    android:layout_marginRight="28dp"
+                    android:layout_marginTop="14dp"
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textSize="15sp"
+                        android:textColor="#fff"
+                        android:id="@+id/date3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:textSize="15sp"
+                        android:textColor="#fff"
+                        android:layout_marginLeft="16dp"
+                        android:id="@+id/week3"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content" />
+                    <ImageView
+                        android:layout_marginLeft="56dp"
+                        android:id="@+id/sky_img3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <View
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"/>
+
+                    <TextView
+                        android:textSize="15sp"
+                        android:textColor="#fff"
+                        android:id="@+id/high3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:layout_marginStart="20dp"
+                        android:textSize="15sp"
+                        android:textColor="#fff"
+                        android:id="@+id/low3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginLeft="28dp"
+                    android:layout_marginRight="28dp"
+                    android:layout_marginTop="14dp"
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textSize="15sp"
+                        android:textColor="#fff"
+                        android:id="@+id/date4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:textSize="15sp"
+                        android:textColor="#fff"
+                        android:layout_marginLeft="16dp"
+                        android:id="@+id/week4"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content" />
+                    <ImageView
+                        android:layout_marginLeft="56dp"
+                        android:id="@+id/sky_img4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <View
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"/>
+
+                    <TextView
+                        android:textSize="15sp"
+                        android:textColor="#fff"
+                        android:id="@+id/high4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:layout_marginStart="20dp"
+                        android:textSize="15sp"
+                        android:textColor="#fff"
+                        android:id="@+id/low4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginLeft="28dp"
+                    android:layout_marginRight="28dp"
+                    android:layout_marginTop="14dp"
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textSize="15sp"
+                        android:textColor="#fff"
+                        android:id="@+id/date5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:textSize="15sp"
+                        android:textColor="#fff"
+                        android:layout_marginLeft="16dp"
+                        android:id="@+id/week5"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content" />
+                    <ImageView
+                        android:layout_marginLeft="56dp"
+                        android:id="@+id/sky_img5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <View
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"/>
+
+                    <TextView
+                        android:textSize="15sp"
+                        android:textColor="#fff"
+                        android:id="@+id/high5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:layout_marginStart="20dp"
+                        android:textSize="15sp"
+                        android:textColor="#fff"
+                        android:id="@+id/low5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
             </LinearLayout>
+        </FrameLayout>
 
 
-            <LinearLayout
-                android:layout_marginLeft="28dp"
-                android:layout_marginRight="28dp"
-                android:layout_marginTop="14dp"
-                android:gravity="center_vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:textSize="15sp"
-                    android:textColor="#fff"
-                    android:id="@+id/date2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:textSize="15sp"
-                    android:textColor="#fff"
-                    android:layout_marginLeft="16dp"
-                    android:id="@+id/week2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <ImageView
-                    android:layout_marginLeft="56dp"
-                    android:id="@+id/sky_img2"
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content" />
-                <View
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"/>
-
-                <TextView
-                    android:textSize="15sp"
-                    android:textColor="#fff"
-                    android:id="@+id/high2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:layout_marginStart="20dp"
-                    android:textSize="15sp"
-                    android:textColor="#fff"
-                    android:id="@+id/low2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_marginLeft="28dp"
-                android:layout_marginRight="28dp"
-                android:layout_marginTop="14dp"
-                android:gravity="center_vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:textSize="15sp"
-                    android:textColor="#fff"
-                    android:id="@+id/date3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:textSize="15sp"
-                    android:textColor="#fff"
-                    android:layout_marginLeft="16dp"
-                    android:id="@+id/week3"
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content" />
-                <ImageView
-                    android:layout_marginLeft="56dp"
-                    android:id="@+id/sky_img3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <View
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"/>
-
-                <TextView
-                    android:textSize="15sp"
-                    android:textColor="#fff"
-                    android:id="@+id/high3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:layout_marginStart="20dp"
-                    android:textSize="15sp"
-                    android:textColor="#fff"
-                    android:id="@+id/low3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_marginLeft="28dp"
-                android:layout_marginRight="28dp"
-                android:layout_marginTop="14dp"
-                android:gravity="center_vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:textSize="15sp"
-                    android:textColor="#fff"
-                    android:id="@+id/date4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:textSize="15sp"
-                    android:textColor="#fff"
-                    android:layout_marginLeft="16dp"
-                    android:id="@+id/week4"
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content" />
-                <ImageView
-                    android:layout_marginLeft="56dp"
-                    android:id="@+id/sky_img4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <View
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"/>
-
-                <TextView
-                    android:textSize="15sp"
-                    android:textColor="#fff"
-                    android:id="@+id/high4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:layout_marginStart="20dp"
-                    android:textSize="15sp"
-                    android:textColor="#fff"
-                    android:id="@+id/low4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_marginLeft="28dp"
-                android:layout_marginRight="28dp"
-                android:layout_marginTop="14dp"
-                android:gravity="center_vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:textSize="15sp"
-                    android:textColor="#fff"
-                    android:id="@+id/date5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:textSize="15sp"
-                    android:textColor="#fff"
-                    android:layout_marginLeft="16dp"
-                    android:id="@+id/week5"
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content" />
-                <ImageView
-                    android:layout_marginLeft="56dp"
-                    android:id="@+id/sky_img5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <View
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"/>
-
-                <TextView
-                    android:textSize="15sp"
-                    android:textColor="#fff"
-                    android:id="@+id/high5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:layout_marginStart="20dp"
-                    android:textSize="15sp"
-                    android:textColor="#fff"
-                    android:id="@+id/low5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-
-        </LinearLayout>
 
 
 
