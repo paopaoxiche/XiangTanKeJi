@@ -25,10 +25,12 @@ import com.amap.api.maps2d.model.Marker;
 import com.amap.api.maps2d.model.MarkerOptions;
 import com.amap.api.maps2d.model.MyLocationStyle;
 import com.amap.api.maps2d.overlay.DrivingRouteOverlay;
+import com.amap.api.services.core.AMapException;
 import com.amap.api.services.core.LatLonPoint;
 import com.amap.api.services.route.BusRouteResult;
 import com.amap.api.services.route.DrivePath;
 import com.amap.api.services.route.DriveRouteResult;
+import com.amap.api.services.route.DriveStep;
 import com.amap.api.services.route.RideRouteResult;
 import com.amap.api.services.route.RouteSearch;
 import com.amap.api.services.route.WalkRouteResult;
@@ -39,6 +41,7 @@ import com.xtkj.paopaoxiche.R;
 import com.xtkj.paopaoxiche.application.AppConstant;
 import com.xtkj.paopaoxiche.application.MyLocation;
 import com.xtkj.paopaoxiche.base.BaseActivity;
+import com.xtkj.paopaoxiche.base.BaseGaodeActivity;
 import com.xtkj.paopaoxiche.bean.WashServicesBean;
 import com.xtkj.paopaoxiche.contract.IDriverMapContract;
 import com.xtkj.paopaoxiche.model.DriverMapModel;
@@ -47,7 +50,8 @@ import com.xtkj.paopaoxiche.utils.BitmapUtil;
 import com.xtkj.paopaoxiche.utils.DensityUtil;
 
 
-public class DriverMapActivity extends BaseActivity implements IDriverMapContract.IDriverMapView, AMap.OnMyLocationChangeListener, AMap.OnCameraChangeListener, RouteSearch.OnRouteSearchListener {
+
+public class DriverMapActivity extends BaseGaodeActivity implements IDriverMapContract.IDriverMapView, AMap.OnMyLocationChangeListener, AMap.OnCameraChangeListener, RouteSearch.OnRouteSearchListener {
 
     RecyclerView mRecyclerView;
     WashServiceAdapter washServiceAdapter;
@@ -88,7 +92,7 @@ public class DriverMapActivity extends BaseActivity implements IDriverMapContrac
 
         MyLocationStyle myLocationStyle = new MyLocationStyle();
         myLocationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_LOCATE);
-        aMap.moveCamera(CameraUpdateFactory.zoomTo(15));
+        aMap.moveCamera(CameraUpdateFactory.zoomTo(14));
         aMap.setMyLocationStyle(myLocationStyle);//设置定位蓝点的Style
         aMap.setMyLocationEnabled(true);
         aMap.setOnMyLocationChangeListener(this);
@@ -137,12 +141,9 @@ public class DriverMapActivity extends BaseActivity implements IDriverMapContrac
         mRouteSearch = new RouteSearch(this);
         mRouteSearch.setRouteSearchListener(this);
 
-        AMap.OnMarkerClickListener markerClickListener = new AMap.OnMarkerClickListener() {
-            @Override
-            public boolean onMarkerClick(Marker marker) {
-                aMap.moveCamera(CameraUpdateFactory.changeLatLng(marker.getPosition()));
-                return false;
-            }
+        AMap.OnMarkerClickListener markerClickListener = marker -> {
+            aMap.moveCamera(CameraUpdateFactory.changeLatLng(marker.getPosition()));
+            return false;
         };
         aMap.setOnMarkerClickListener(markerClickListener);
     }
@@ -233,9 +234,12 @@ public class DriverMapActivity extends BaseActivity implements IDriverMapContrac
         LatLonPoint mEndLatlng = new LatLonPoint(w, j);
         final RouteSearch.FromAndTo fromAndTo = new RouteSearch.FromAndTo(
                 mStartLatlng, mEndLatlng);
-        RouteSearch.DriveRouteQuery query = new RouteSearch.DriveRouteQuery(fromAndTo, RouteSearch.DrivingDefault, null,
+        RouteSearch.DriveRouteQuery query = new RouteSearch.DriveRouteQuery(fromAndTo, RouteSearch.DRIVING_SINGLE_DEFAULT, null,
                 null, "");// 第一个参数表示路径规划的起点和终点，第二个参数表示驾车模式，第三个参数表示途经点，第四个参数表示避让区域，第五个参数表示避让道路
+
         mRouteSearch.calculateDriveRouteAsyn(query);
+
+
     }
 
     @Override
@@ -276,7 +280,7 @@ public class DriverMapActivity extends BaseActivity implements IDriverMapContrac
                     DrivingRouteOverlay drivingRouteOverlay = new DrivingRouteOverlay(this, aMap, drivePath, driveRouteResult.getStartPos(),
                             driveRouteResult.getTargetPos());
                     drivingRouteOverlay.removeFromMap();
-                    drivingRouteOverlay.setNodeIconVisibility(false);//隐藏转弯的节点
+                    drivingRouteOverlay.setNodeIconVisibility(true);//隐藏转弯的节点
                     drivingRouteOverlay.addToMap();
                     drivingRouteOverlay.zoomToSpan();
                 }

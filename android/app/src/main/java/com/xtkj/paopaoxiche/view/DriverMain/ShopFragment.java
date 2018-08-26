@@ -73,12 +73,13 @@ public class ShopFragment extends BaseFragmemt implements IDriverContract.IShopV
         ButterKnife.bind(this, view);
 
         Glide.with(getActivity()).load(mData.getImage()).into(shopImg);
+        
         shopName.setText(mData.getName());
         shopRecycler.setLayoutManager(new GridLayoutManager(getContext(), 3));
 
         RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
                 .create(WashService.class)
-                .getRecommendCommodity(MyLocation.lng +"",MyLocation.lat + "",3)
+                .getRecommendCommodity(MyLocation.lng +"",MyLocation.lat + "",6)
                 .enqueue(new Callback<WashShopBean>() {
                     @Override
                     public void onResponse(Call<WashShopBean> call, Response<WashShopBean> response) {

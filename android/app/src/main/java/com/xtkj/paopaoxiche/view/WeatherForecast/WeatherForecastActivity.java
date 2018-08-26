@@ -27,11 +27,13 @@ import butterknife.OnClick;
 public class WeatherForecastActivity extends BaseGaodeActivity implements IWeatherForecastContract.IWeatherForecastView {
 
     IWeatherForecastContract.IWeatherForecastPresenter weatherForecastPresenterImpl = null;
-    private static final String[] WEEK_NAME = {"星期日","星期一", "星期二", "星期三", "星期四", "星期五", "星期六"};
+    private static final String[] WEEK_NAME = {"星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"};
     @BindView(R.id.back_button)
     ImageView backButton;
     @BindView(R.id.location_text)
     MarqueeTextView locationText;
+    @BindView(R.id.forecast_bg)
+    ImageView forecastBg;
     @BindView(R.id.temperature)
     TextView temperature;
     @BindView(R.id.temperature_high)
@@ -42,10 +44,10 @@ public class WeatherForecastActivity extends BaseGaodeActivity implements IWeath
     TextView wind;
     @BindView(R.id.humidity)
     TextView humidity;
-    @BindView(R.id.skycon)
-    TextView skycon;
     @BindView(R.id.forecast)
     MarqueeTextView forecast;
+    @BindView(R.id.skycon)
+    TextView skycon;
     @BindView(R.id.date1)
     TextView date1;
     @BindView(R.id.week1)
@@ -96,8 +98,6 @@ public class WeatherForecastActivity extends BaseGaodeActivity implements IWeath
     TextView high5;
     @BindView(R.id.low5)
     TextView low5;
-    @BindView(R.id.forecast_bg)
-    LinearLayout forecastBg;
     @BindView(R.id.bg_weather)
     LinearLayout bgWeather;
 
