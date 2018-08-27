@@ -119,6 +119,8 @@
                                         <a href="#46e4211ae2814e96873f696574d69bd1">兑换优惠券</a>
                                     </li><li>
                                         <a href="#84a70569034e475aa54adc6d26c7d041">获取消费记录支付状态</a>
+                                    </li><li>
+                                        <a href="#68f2a797c4b64093b1815a4eee3f697e">获取我的消费记录</a>
                                     </li>
                                 </ul><span>commodity</span>
                                 <ul class="nav list-group">
@@ -2649,8 +2651,67 @@
 
                                                 
                         
-                                                
-                        
+                        <p>返回示例：</p>
+                        <div class="highlight">
+                            <pre>
+                                <code class="json hljs">{
+    "code": 200,
+    "data": [
+        {
+            "avatar": "http://localhost:8080/avatars/2018/08/18/3a773e19d68447978e69619bed6f86e9.png",
+            "content": "vasivnaisdvasdv",
+            "id": 9,
+            "nickname": "",
+            "rating": 5,
+            "time": 1535414827000
+        }
+    ],
+    "msg": "请求成功",
+    "pageIndex": 0,
+    "pageSize": 20,
+    "totalCount": 1
+}</code>
+                            </pre>
+                        </div>                        
+                        <table class="table table-hover" style="margin-top: 7px;">
+                            <colgroup>
+                            <col class="col-xs-4">
+                            <col class="col-xs-8">
+                          </colgroup>
+                            <thead>
+                                <tr>
+                                    <th style="padding-left: 0px;"><span class="label label-success">参数名</span></th>
+                                    <th>描述</th>
+                                    <th>类型</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>data.avatar</td>
+                                    <td>头像</td>
+                                    <th>string</th>
+                                </tr><tr>
+                                    <td>data.content</td>
+                                    <td>内容</td>
+                                    <th>string</th>
+                                </tr><tr>
+                                    <td>data.id</td>
+                                    <td>记录id</td>
+                                    <th>number</th>
+                                </tr><tr>
+                                    <td>data.nickname</td>
+                                    <td>普通用户不返回昵称</td>
+                                    <th>string</th>
+                                </tr><tr>
+                                    <td>data.rating</td>
+                                    <td>评级</td>
+                                    <th>number</th>
+                                </tr><tr>
+                                    <td>data.time</td>
+                                    <td>时间</td>
+                                    <th>number</th>
+                                </tr>                            </tbody>
+                        </table>
                     </div><div class="api-one">
                         <h3 id="f368d866a47e6543dcbbd6cc7f557137">评价消费记录</h3>
                         <p>
@@ -3323,12 +3384,30 @@
                             <pre>
                                 <code class="json hljs">{
     "code": 200,
-    "data": null,
+    "data": 2950,
     "msg": "请求成功"
 }</code>
                             </pre>
                         </div>                        
-                        
+                        <table class="table table-hover" style="margin-top: 7px;">
+                            <colgroup>
+                            <col class="col-xs-4">
+                            <col class="col-xs-8">
+                          </colgroup>
+                            <thead>
+                                <tr>
+                                    <th style="padding-left: 0px;"><span class="label label-success">参数名</span></th>
+                                    <th>描述</th>
+                                    <th>类型</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>data</td>
+                                    <td>剩余积分</td>
+                                    <th>number</th>
+                                </tr>                            </tbody>
+                        </table>
                     </div><div class="api-one">
                         <h3 id="84a70569034e475aa54adc6d26c7d041">获取消费记录支付状态</h3>
                         <p>
@@ -3420,6 +3499,171 @@
                                 <tr>
                                     <td>data</td>
                                     <td>状态码 ：状态 0待支付 1支付中 2已支付 3已取消</td>
+                                    <th>number</th>
+                                </tr>                            </tbody>
+                        </table>
+                    </div><div class="api-one">
+                        <h3 id="68f2a797c4b64093b1815a4eee3f697e">获取我的消费记录</h3>
+                        <p>
+                            <a target="_blank" href="http://apizza.cc/console/project/829ba0a1c0fb6675eabcbb0391df72f4/browse?api=68f2a797c4b64093b1815a4eee3f697e" class="label label-warning">在线测试</a>
+                            <a target="_blank" href="http://apizza.cc/console/project/829ba0a1c0fb6675eabcbb0391df72f4/browse?api=68f2a797c4b64093b1815a4eee3f697e" class="label label-warning">在线浏览</a>
+                        </p>
+                        <p>请求方式：GET</p>
+                        <p>
+                            请求地址：http://localhost:8080/carOwner/getUserConsume                        </p>
+                        
+                        <table class="table table-hover">
+                                <colgroup>
+                                <col class="col-xs-2">
+                                <col class="col-xs-1">
+                                <col class="col-xs-1">
+                                <col class="col-xs-7">
+                                <col class="col-xs-2">
+                              </colgroup>
+                                <thead>
+                                    <tr>
+                                        <th><span class="label label-success">Header参数名</span></th>
+                                        <th>类型</th>
+                                        <th>必需</th>
+                                        <th>描述</th>
+                                        <th>示例 e.g.</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>authentication</td>
+                                        <td>string</td>
+                                        <td>是</td>
+                                        <td>请求头</td>
+                                        <td>user_id=100000018,token=e701af88a47b44e3bb3e9ff05a7a14ff</td>
+                                    </tr>                                </tbody>
+                            </table>
+                        
+
+                                                
+                        
+                        <p>返回示例：</p>
+                        <div class="highlight">
+                            <pre>
+                                <code class="json hljs">{
+    "code": 200,
+    "data": [
+        {
+            "carType": "1",
+            "carWashImg": "http://localhost:8080/avatars/2018/08/08/51e6034111a44aa0aca5cf5cdb288e73.jpeg",
+            "carWashName": "老艾洗车场",
+            "commodities": [
+                 {
+                    "commodityId": 5,
+                    "commodityName": "德国马牌(Continental) 轮胎/汽车轮胎 225/50R17 98W UC6 适配奥迪A4L/奔驰C级/雅阁/DS5",
+                    "price": 749
+                },
+                {
+                    "commodityId": 6,
+                    "commodityName": "亿力 YILI 家用洗车机 高压清洗机 YLQ4650C-100C 220v",
+                    "price": 419
+                }
+            ],
+            "coupons": [
+                {
+                    "couponId": 1,
+                    "couponName": "满20减5",
+                    "couponPrice": 5,
+                    "couponType": 1
+                }
+            ],
+            "id": 23,
+            "isEvaluation": 0,
+            "payment": 60,
+            "serviceName": "汽车精洗服务",
+            "time": 1535093757,
+            "totalPrice": 1228
+        }
+    ],
+    "msg": "请求成功"
+}</code>
+                            </pre>
+                        </div>                        
+                        <table class="table table-hover" style="margin-top: 7px;">
+                            <colgroup>
+                            <col class="col-xs-4">
+                            <col class="col-xs-8">
+                          </colgroup>
+                            <thead>
+                                <tr>
+                                    <th style="padding-left: 0px;"><span class="label label-success">参数名</span></th>
+                                    <th>描述</th>
+                                    <th>类型</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>data.carType</td>
+                                    <td>洗车类型</td>
+                                    <th>string</th>
+                                </tr><tr>
+                                    <td>data.carWashImg</td>
+                                    <td>洗车场头像</td>
+                                    <th>string</th>
+                                </tr><tr>
+                                    <td>data.carWashName</td>
+                                    <td>洗车场名称</td>
+                                    <th>string</th>
+                                </tr><tr>
+                                    <td>data.commodities</td>
+                                    <td>商品列表</td>
+                                    <th>array</th>
+                                </tr><tr>
+                                    <td>data.commodities.commodityId</td>
+                                    <td>商品ID</td>
+                                    <th>number</th>
+                                </tr><tr>
+                                    <td>data.commodities.commodityName</td>
+                                    <td>商品名称</td>
+                                    <th>string</th>
+                                </tr><tr>
+                                    <td>data.commodities.consumeId</td>
+                                    <td>消费记录ID</td>
+                                    <th>number</th>
+                                </tr><tr>
+                                    <td>data.commodities.price</td>
+                                    <td>价格</td>
+                                    <th>number</th>
+                                </tr><tr>
+                                    <td>data.coupons.couponId</td>
+                                    <td>优惠券ID</td>
+                                    <th>number</th>
+                                </tr><tr>
+                                    <td>data.coupons.couponName</td>
+                                    <td>优惠券名称</td>
+                                    <th>string</th>
+                                </tr><tr>
+                                    <td>data.coupons.couponPrice</td>
+                                    <td>优惠券金额</td>
+                                    <th>number</th>
+                                </tr><tr>
+                                    <td>data.coupons.couponType</td>
+                                    <td>优惠券类型</td>
+                                    <th>number</th>
+                                </tr><tr>
+                                    <td>data.isEvaluation</td>
+                                    <td>是否评价</td>
+                                    <th>number</th>
+                                </tr><tr>
+                                    <td>data.payment</td>
+                                    <td>洗车服务价格</td>
+                                    <th>number</th>
+                                </tr><tr>
+                                    <td>data.serviceName</td>
+                                    <td>洗车服务名称</td>
+                                    <th>string</th>
+                                </tr><tr>
+                                    <td>data.time</td>
+                                    <td>时间</td>
+                                    <th>number</th>
+                                </tr><tr>
+                                    <td>data.totalPrice</td>
+                                    <td>总价</td>
                                     <th>number</th>
                                 </tr>                            </tbody>
                         </table>
