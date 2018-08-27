@@ -139,6 +139,46 @@
             android:textColor="@color/black"
             android:textSize="16sp"/>
 
+        <RadioGroup
+            android:layout_marginRight="24dp"
+            android:layout_marginLeft="24dp"
+            android:id="@+id/car_model_radio_group"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/small_car_radio_button"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="小型车\n七座及以下"
+                android:textSize="12sp"
+                android:checked="true"
+                />
+
+            <RadioButton
+                android:id="@+id/middle_car_radio_button"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="中型车\n八座和九座"
+                android:textSize="12sp"
+                />
+
+            <RadioButton
+                android:id="@+id/large_car_radio_button"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="大型车\n九座以上"
+                android:textSize="12sp"
+                />
+        </RadioGroup>
+
     </LinearLayout>
 
 </LinearLayout>

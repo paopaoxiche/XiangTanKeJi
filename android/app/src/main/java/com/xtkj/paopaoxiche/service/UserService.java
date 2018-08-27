@@ -67,4 +67,9 @@ public interface UserService {
 
     @GET("wash/getWashInfo")
     Call<CarWashInfoBean> getCarWashInfo() ;
+
+    @FormUrlEncoded
+    @POST("wash/updateStatus")
+    Call<NoDataBean> updateBusinessState(@Field("id") int id, @Field("status") String status) ;
+
 }

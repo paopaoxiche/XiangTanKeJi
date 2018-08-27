@@ -87,6 +87,7 @@ public class WashListManagerDialog extends FullScreenWithStatusBarDialog impleme
                     case 0:
                         // 修改
                         new ModifyWashServiceDialog(getContext(), true, washServerListAdapter.washServerList.get(position)).show();
+                        dismiss();
                         break;
                     case 1:
                         // 删除
@@ -127,6 +128,7 @@ public class WashListManagerDialog extends FullScreenWithStatusBarDialog impleme
         switch (view.getId()) {
             case R.id.add_goods_image_button:
                 new ModifyWashServiceDialog(getContext(), true).show();
+                dismiss();
                 break;
         }
     }
