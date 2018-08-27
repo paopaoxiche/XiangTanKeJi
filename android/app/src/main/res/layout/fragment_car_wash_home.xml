@@ -3,7 +3,7 @@
     android:id="@+id/car_wash_home_background"
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey">
+    android:background="@color/gray">
 
     <ScrollView
         android:background="@android:color/transparent"
@@ -220,7 +220,7 @@
                         android:layout_marginRight="16dp"
                         android:background="@android:color/transparent"
                         android:text="更多"
-                        android:textColor="@color/grey"
+                        android:textColor="@color/gray"
                         android:textSize="14sp" />
 
                 </RelativeLayout>

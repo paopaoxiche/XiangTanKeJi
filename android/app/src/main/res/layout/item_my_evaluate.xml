@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/dp20">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/iv_header"
         android:layout_width="@dimen/dp44"
-        android:layout_height="@dimen/dp44"
-        android:background="@drawable/icon_car2"/>
+        android:layout_height="@dimen/dp44"/>
 
     <TextView
         android:layout_width="wrap_content"

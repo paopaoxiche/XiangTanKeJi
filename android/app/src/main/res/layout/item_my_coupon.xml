@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/dp20"
     android:paddingTop="@dimen/dp16">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/iv_header"
         android:layout_width="@dimen/dp44"
         android:layout_height="@dimen/dp44"/>
@@ -53,6 +53,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/dp10"
         android:text="122455"
-        android:textColor="@color/grey"
+        android:textColor="@color/gray"
         android:textSize="@dimen/sp14"/>
 </RelativeLayout>
