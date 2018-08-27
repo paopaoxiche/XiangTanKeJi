@@ -1,5 +1,6 @@
 package com.xtkj.paopaoxiche.service;
 
+import com.xtkj.paopaoxiche.bean.CouponListBean;
 import com.xtkj.paopaoxiche.bean.LoginBean;
 import com.xtkj.paopaoxiche.bean.NoDataBean;
 import com.xtkj.paopaoxiche.bean.WashCommodityBean;
@@ -77,5 +78,14 @@ public interface WashService {
     @FormUrlEncoded
     @POST("commodity/deleteCommodity")
     Call<NoDataBean> deleteGoods(@Field("id") int id);
+
+    @GET("carOwner/getAllCoupon")
+    Call<CouponListBean> getAllCoupons();
+
+    @FormUrlEncoded
+    @POST("carOwner/exchangePoint")
+    Call<NoDataBean> exchangePoint(@Field("couponId") String couponId);
+
+
 
 }

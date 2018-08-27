@@ -16,6 +16,7 @@ import com.xtkj.paopaoxiche.application.AppConstant;
 import com.xtkj.paopaoxiche.model.UserInfo;
 import com.xtkj.paopaoxiche.base.BaseFragmemt;
 import com.xtkj.paopaoxiche.contract.IDriverContract;
+import com.xtkj.paopaoxiche.view.view.CreditsExchangeDialog;
 import com.xtkj.paopaoxiche.view.view.ExtensionDialog;
 import com.xtkj.paopaoxiche.view.view.ModifyUserInfoDialog;
 import com.xtkj.paopaoxiche.view.view.MyCouponsDialog;
@@ -113,6 +114,7 @@ public class MyInfoFragment extends BaseFragmemt implements IDriverContract.IMyI
         time = System.currentTimeMillis();
         switch (view.getId()) {
             case R.id.my_score:
+                new CreditsExchangeDialog(getContext()).show();
                 break;
             case R.id.my_coupons:
                 new MyCouponsDialog(getContext(), true).show();
