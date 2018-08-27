@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dark_white">
+
+    <RelativeLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbarHeight"
+        android:background="@color/orange">
+
+        <ImageButton
+            android:id="@+id/back_arrow_image_button"
+            android:padding="@dimen/dp10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp6"
+            android:background="@android:color/transparent"
+            android:src="@drawable/arrow"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="积分兑换"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:textStyle="bold"/>
+
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp156"
+        android:background="@color/orange"
+        android:gravity="center_horizontal"
+        android:layout_below="@id/toolbar">
+
+        <TextView
+            android:id="@+id/tv_credits"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/sp36"
+            android:textColor="@color/white"
+            android:text="1000"
+            android:layout_marginTop="@dimen/dp12"/>
+
+        <ImageView
+            android:id="@+id/iv_credits_icon"
+            android:layout_width="@dimen/dp13"
+            android:layout_height="@dimen/dp14"
+            android:layout_below="@id/tv_credits"
+            android:layout_marginTop="@dimen/dp12"
+            android:src="@drawable/img_integral"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp14"
+            android:text="当前积分"
+            android:layout_below="@id/tv_credits"
+            android:layout_marginTop="@dimen/dp12"
+            android:layout_toRightOf="@id/iv_credits_icon"
+            android:layout_marginLeft="@dimen/dp6"
+            android:textSize="@dimen/sp14"
+            android:textColor="@color/half_alpha_white"
+            android:includeFontPadding="false"/>
+
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/lv_my_coupons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dp126"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="@dimen/dp16"
+        android:scrollbars="none"/>
+
+</RelativeLayout>

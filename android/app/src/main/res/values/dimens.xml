@@ -32,6 +32,23 @@
 
     <dimen name="px1">1px</dimen>
     <dimen name="dp14">14dp</dimen>
+    <dimen name="dp6">6dp</dimen>
+    <dimen name="dp156">156dp</dimen>
+    <dimen name="dp13">13dp</dimen>
+    <dimen name="dp126">126dp</dimen>
+    <dimen name="dp92">92dp</dimen>
+    <dimen name="dp68">68dp</dimen>
+    <dimen name="dp18">18dp</dimen>
+    <dimen name="dp64">64dp</dimen>
+    <dimen name="dp28">28dp</dimen>
+    <dimen name="dp15">15dp</dimen>
+    <dimen name="dp24">24dp</dimen>
+    <dimen name="sp24">24sp</dimen>
+    <dimen name="dp327">327dp</dimen>
+    <dimen name="dp138">138dp</dimen>
+    <dimen name="dp280">280dp</dimen>
+    <dimen name="dp46">46dp</dimen>
+    <dimen name="dp40">40dp</dimen>
 
 
 </resources>
