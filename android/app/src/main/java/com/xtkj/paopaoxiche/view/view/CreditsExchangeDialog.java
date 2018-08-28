@@ -3,6 +3,8 @@ package com.xtkj.paopaoxiche.view.view;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
@@ -78,8 +80,15 @@ public class CreditsExchangeDialog extends FullScreenWithStatusBarDialog
         super.onCreate(savedInstanceState);
         initListView();
         tvCredits.setText(String.valueOf(UserInfo.getScore()));
-        showLoadingDialog();
-        requestAllCoupons();
+        new Handler(Looper.getMainLooper()).postDelayed(() -> {
+            if (!isShowing()) {
+                return;
+            }
+
+            showLoadingDialog();
+            requestAllCoupons();
+        }, 0);
+
     }
 
     @Override
@@ -128,6 +137,11 @@ public class CreditsExchangeDialog extends FullScreenWithStatusBarDialog
         super.dismiss();
     }
 
+    @Override
+    protected void setWindowAnimations() {
+        // empty
+    }
+
     class ViewHolder {
         @BindView(R.id.tv_denomination)
         TextView tvDenomination;
@@ -146,7 +160,7 @@ public class CreditsExchangeDialog extends FullScreenWithStatusBarDialog
         ViewHolder(View view) {
             ButterKnife.bind(this, view);
             buttonExchange.setOnClickListener(v -> {
-                //showLoadingDialog();
+                showLoadingDialog();
                 exchangePoint(id);
             });
         }
@@ -162,11 +176,11 @@ public class CreditsExchangeDialog extends FullScreenWithStatusBarDialog
                           .enqueue(new Callback<NoDataBean>() {
                               @Override
                               public void onResponse(Call<NoDataBean> call, Response<NoDataBean> response) {
-                                  //dismissLoadingDialog();
+                                  dismissLoadingDialog();
                                   NoDataBean bean = response.body();
                                   if (bean.getCode() == 200) {
                                       Toast.makeText(BaseApplication.getContext(), "兑换成功！", Toast.LENGTH_LONG).show();
-                                      tvCredits.setText(String.valueOf(bean.getData()));
+                                      tvCredits.setText(String.valueOf(((Double) bean.getData()).intValue()));
                                   } else {
                                       Toast.makeText(BaseApplication.getContext(), "兑换失败！", Toast.LENGTH_LONG).show();
                                   }

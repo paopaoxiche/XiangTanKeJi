@@ -12,6 +12,7 @@ import android.view.WindowManager.LayoutParams;
 import android.widget.Button;
 
 import com.xtkj.paopaoxiche.R;
+import com.xtkj.paopaoxiche.view.view.LoadingDialog;
 
 public abstract class FullScreenWithStatusBarDialog extends Dialog {
 
@@ -50,7 +51,7 @@ public abstract class FullScreenWithStatusBarDialog extends Dialog {
         win.setAttributes(lp);
     }
 
-    private void setWindowAnimations() {
+    protected void setWindowAnimations() {
         if (getWindow() != null) {
             getWindow().setWindowAnimations(R.style.dialog_right_enter_left_exit_animation);
         }
@@ -66,26 +67,18 @@ public abstract class FullScreenWithStatusBarDialog extends Dialog {
         }
     }
 
-    private AlertDialog loadingDialog;
+    private Dialog loadingDialog;
     public void showLoadingDialog() {
-        loadingDialog = new AlertDialog.Builder(getContext()).create();
-        loadingDialog.getWindow().setBackgroundDrawable(new ColorDrawable());
-        loadingDialog.setCancelable(false);
-        loadingDialog.setOnKeyListener((dialog, keyCode, event) -> {
-            if (keyCode == KeyEvent.KEYCODE_SEARCH || keyCode == KeyEvent.KEYCODE_BACK)
-                return true;
-            return false;
-        });
-        loadingDialog.setCancelable(false);
-        loadingDialog.setContentView(R.layout.dialog_loading);
-        loadingDialog.setCanceledOnTouchOutside(false);
+        if(loadingDialog == null){
+            loadingDialog = new LoadingDialog(getContext());
+        }
         loadingDialog.show();
     }
 
     public void dismissLoadingDialog() {
         if (null != loadingDialog && loadingDialog.isShowing()) {
             loadingDialog.dismiss();
+            loadingDialog = null;
         }
     }
-
 }
