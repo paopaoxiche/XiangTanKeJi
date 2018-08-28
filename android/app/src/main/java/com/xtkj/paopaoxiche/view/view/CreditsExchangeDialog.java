@@ -219,10 +219,7 @@ public class CreditsExchangeDialog extends FullScreenWithStatusBarDialog
                                   return;
                               }
 
-                              initListView();
-
-                              adapter.updateData(dataBeans);
-                              adapter.notifyDataSetChanged();
+                              adapter.updateDataAndNotifyDataChanged(dataBeans);
                           }
 
                           @Override

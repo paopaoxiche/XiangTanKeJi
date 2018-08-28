@@ -2,6 +2,7 @@ package com.xtkj.paopaoxiche.service;
 
 import com.xtkj.paopaoxiche.bean.CarWashInfoBean;
 import com.xtkj.paopaoxiche.bean.DemoBean;
+import com.xtkj.paopaoxiche.bean.EvaluateListBean;
 import com.xtkj.paopaoxiche.bean.LoginBean;
 import com.xtkj.paopaoxiche.bean.NoDataBean;
 
@@ -72,4 +73,6 @@ public interface UserService {
     @POST("wash/updateStatus")
     Call<NoDataBean> updateBusinessState(@Field("id") int id, @Field("status") String status) ;
 
+    @GET("carOwner/getEvaluateList")
+    Call<EvaluateListBean> getMyEvaluateList(@Query("pageIndex") int pageIndex,  @Query("pageSize") int pageSize);
 }
