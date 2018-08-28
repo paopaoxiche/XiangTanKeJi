@@ -62,4 +62,8 @@
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>
 
+    <style name="AppTheme.NoActionBar">
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
 </resources>

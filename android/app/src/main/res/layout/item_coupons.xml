@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="@dimen/dp335"
+    android:layout_width="match_parent"
     android:layout_height="@dimen/dp92"
     android:background="@drawable/background_white_radius4dp"
     android:padding="@dimen/dp12">
@@ -9,9 +9,10 @@
     <TextView
         android:id="@+id/tv_denomination"
         android:layout_width="@dimen/dp68"
-        android:layout_height="match_parent"
+        android:layout_height="@dimen/dp68"
         android:background="@drawable/background_tangerine_corner_radius_2dp"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:textColor="@color/white"/>
 
     <TextView
         android:id="@+id/tv_coupon_name"

@@ -2,35 +2,40 @@ package com.xtkj.paopaoxiche.view.view;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.style.AbsoluteSizeSpan;
-import android.text.style.RelativeSizeSpan;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.xtkj.paopaoxiche.R;
 import com.xtkj.paopaoxiche.application.Authentication;
+import com.xtkj.paopaoxiche.application.BaseApplication;
 import com.xtkj.paopaoxiche.base.CustomAdapter;
 import com.xtkj.paopaoxiche.base.CustomAdapter.LayoutView;
 import com.xtkj.paopaoxiche.bean.CouponListBean;
 import com.xtkj.paopaoxiche.bean.CouponListBean.DataBean;
+import com.xtkj.paopaoxiche.bean.NoDataBean;
 import com.xtkj.paopaoxiche.http.ApiField;
 import com.xtkj.paopaoxiche.http.RetrofitClient;
+import com.xtkj.paopaoxiche.model.UserInfo;
 import com.xtkj.paopaoxiche.service.WashService;
 import com.xtkj.paopaoxiche.utils.DensityUtil;
 import com.xtkj.paopaoxiche.widget.FullScreenWithStatusBarDialog;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import butterknife.BindView;
@@ -65,6 +70,16 @@ public class CreditsExchangeDialog extends FullScreenWithStatusBarDialog
         setContentView(R.layout.dialog_credits_exchange);
         ButterKnife.bind(this);
         backButton.setOnClickListener(backButtonClickListener);
+
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        initListView();
+        tvCredits.setText(String.valueOf(UserInfo.getScore()));
+        showLoadingDialog();
+        requestAllCoupons();
     }
 
     @Override
@@ -102,10 +117,18 @@ public class CreditsExchangeDialog extends FullScreenWithStatusBarDialog
             0, ss.length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
         holder.tvDenomination.setText(ssb1.append(ss));
 
+        holder.setId(bean.getId());
+
         return convertView;
     }
 
-    static class ViewHolder {
+    @Override
+    public void dismiss() {
+        dismissLoadingDialog();
+        super.dismiss();
+    }
+
+    class ViewHolder {
         @BindView(R.id.tv_denomination)
         TextView tvDenomination;
         @BindView(R.id.tv_coupon_name)
@@ -123,28 +146,85 @@ public class CreditsExchangeDialog extends FullScreenWithStatusBarDialog
         ViewHolder(View view) {
             ButterKnife.bind(this, view);
             buttonExchange.setOnClickListener(v -> {
-
+                //showLoadingDialog();
+                exchangePoint(id);
             });
         }
 
         public void setId(int id) {
             this.id = id;
         }
+
+        private void exchangePoint(int id) {
+            RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
+                          .create(WashService.class)
+                          .exchangePoint(String.valueOf(id))
+                          .enqueue(new Callback<NoDataBean>() {
+                              @Override
+                              public void onResponse(Call<NoDataBean> call, Response<NoDataBean> response) {
+                                  //dismissLoadingDialog();
+                                  NoDataBean bean = response.body();
+                                  if (bean.getCode() == 200) {
+                                      Toast.makeText(BaseApplication.getContext(), "兑换成功！", Toast.LENGTH_LONG).show();
+                                      tvCredits.setText(String.valueOf(bean.getData()));
+                                  } else {
+                                      Toast.makeText(BaseApplication.getContext(), "兑换失败！", Toast.LENGTH_LONG).show();
+                                  }
+                              }
+
+                              @Override
+                              public void onFailure(Call<NoDataBean> call, Throwable t) {
+                                  dismissLoadingDialog();
+                                  Toast.makeText(BaseApplication.getContext(), "兑换失败！", Toast.LENGTH_LONG).show();
+                              }
+                          });
+        }
     }
 
-    private void requestAllCoupons(){
+    private void requestAllCoupons() {
         RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
-            .create(WashService.class)
-            .getAllCoupons()
-            .enqueue(new Callback<CouponListBean>() {
-                @Override
-                public void onResponse(Call<CouponListBean> call, Response<CouponListBean> response) {
+                      .create(WashService.class)
+                      .getAllCoupons()
+                      .enqueue(new Callback<CouponListBean>() {
+                          @Override
+                          public void onResponse(Call<CouponListBean> call, Response<CouponListBean> response) {
+                              dismissLoadingDialog();
+                              CouponListBean bean = response.body();
+                              if (bean.getCode() != 200) {
+                                  Toast.makeText(BaseApplication.getContext(), "获取优惠券失败！", Toast.LENGTH_LONG).show();
+                                  return;
+                              }
 
-                }
+                              List<DataBean> dataBeans = bean.getData();
+                              if (dataBeans == null || dataBeans.isEmpty()) {
+                                  Toast.makeText(BaseApplication.getContext(), "没有可兑换的优惠券！", Toast.LENGTH_LONG).show();
+                                  return;
+                              }
 
-                @Override
-                public void onFailure(Call<CouponListBean> call, Throwable t) {
-                }
-            });
+                              if (!isShowing()) {
+                                  return;
+                              }
+
+                              initListView();
+
+                              adapter.updateData(dataBeans);
+                              adapter.notifyDataSetChanged();
+                          }
+
+                          @Override
+                          public void onFailure(Call<CouponListBean> call, Throwable t) {
+                              dismissLoadingDialog();
+                              Toast.makeText(BaseApplication.getContext(), "获取优惠券失败！", Toast.LENGTH_LONG).show();
+                          }
+                      });
     }
+
+    private void initListView() {
+        if (adapter == null) {
+            adapter = new CustomAdapter<>(new ArrayList<>());
+            adapter.setLayoutView(this);
+            lvMyCoupons.setAdapter(adapter);
+        }
+    }
+
 }
