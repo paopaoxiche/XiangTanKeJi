@@ -75,6 +75,7 @@
 		65FC33FF20E1357A006DE3F1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 65FC33FE20E1357A006DE3F1 /* main.m */; };
 		65FC341A20E13B74006DE3F1 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65FC341920E13B74006DE3F1 /* MainViewController.m */; };
 		65FC341C20E13B83006DE3F1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65FC341B20E13B83006DE3F1 /* Main.storyboard */; };
+		CC5BF768213658900037DF66 /* NSObject+DictionaryFromModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC5BF767213658900037DF66 /* NSObject+DictionaryFromModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -205,6 +206,8 @@
 		65FC341920E13B74006DE3F1 /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		65FC341B20E13B83006DE3F1 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		6922DD9F059ECB8EEB30484D /* Pods-BubbleCarWash.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BubbleCarWash.release.xcconfig"; path = "Pods/Target Support Files/Pods-BubbleCarWash/Pods-BubbleCarWash.release.xcconfig"; sourceTree = "<group>"; };
+		CC5BF766213658900037DF66 /* NSObject+DictionaryFromModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+DictionaryFromModel.h"; sourceTree = "<group>"; };
+		CC5BF767213658900037DF66 /* NSObject+DictionaryFromModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+DictionaryFromModel.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -529,6 +532,8 @@
 				65C5B0BD2135AE6000727122 /* UIColor+Category.h */,
 				65C5B0BE2135AE6000727122 /* NSString+Category.m */,
 				65C5B0BF2135AE6000727122 /* UIColor+Category.m */,
+				CC5BF766213658900037DF66 /* NSObject+DictionaryFromModel.h */,
+				CC5BF767213658900037DF66 /* NSObject+DictionaryFromModel.m */,
 			);
 			name = Category;
 			path = BubbleCarWash/Category;
@@ -782,6 +787,7 @@
 				65FC33E920E13577006DE3F1 /* Frameworks */,
 				65FC33EA20E13577006DE3F1 /* Resources */,
 				DB4C1590B13D23DE052B5284 /* [CP] Copy Pods Resources */,
+				79E8EB87051E345ED9A256BB /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -848,6 +854,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		79E8EB87051E345ED9A256BB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BubbleCarWash/Pods-BubbleCarWash-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		DB4C1590B13D23DE052B5284 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -859,7 +880,7 @@
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AMap.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -899,6 +920,7 @@
 				6556AE5C211B282E0017B79A /* GlobalMethods.m in Sources */,
 				65C5B10D2135B0F800727122 /* CustomAnnotationView.m in Sources */,
 				65C5B0802135AA8100727122 /* ExpensesRecordViewController.m in Sources */,
+				CC5BF768213658900037DF66 /* NSObject+DictionaryFromModel.m in Sources */,
 				65C5B10B2135B0F800727122 /* MapViewController.m in Sources */,
 				65C5B0E62135AFC900727122 /* HomeModel.m in Sources */,
 				65C5B0B92135AA8200727122 /* ModelCertificationCell.m in Sources */,

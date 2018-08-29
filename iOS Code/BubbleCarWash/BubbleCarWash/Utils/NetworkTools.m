@@ -8,6 +8,7 @@
 
 #import "NetworkTools.h"
 #import "AFNetworking.h"
+#import "NSObject+DictionaryFromModel.h"
 
 @implementation NearbyWashListParam
 
@@ -84,7 +85,7 @@ static const NSTimeInterval kTimeOutInterval = 6.0f;
                      success:(SuccessBlock)success
                       failed:(FailedBlock)failed
 {
-    NSDictionary *params = @{};
+    NSDictionary *params = [param dictionaryFromModel];
     NSString *url = @"http://101.200.63.245:8080/wash/getNearbyWashServiceList";
     [self GET:url parameters:params success:success failure:failed];
 }
