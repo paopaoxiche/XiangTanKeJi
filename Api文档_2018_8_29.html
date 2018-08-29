@@ -51,6 +51,8 @@
                                         <a href="#0b4b3e2b95354af0a9a5822083e1ade7">验证是否为洗车场TOKEN</a>
                                     </li><li>
                                         <a href="#c21ce37ff551491bb2d8a0aff67db8ed">验证是否为车主TOKEN</a>
+                                    </li><li>
+                                        <a href="#0a53ed8814784adc822298c093eaaf87">获取是否有版本更新</a>
                                     </li>
                                 </ul><span>wash</span>
                                 <ul class="nav list-group">
@@ -595,6 +597,113 @@
                         
                                                 
                         
+                    </div><div class="api-one">
+                        <h3 id="0a53ed8814784adc822298c093eaaf87">获取是否有版本更新</h3>
+                        <p>
+                            <a target="_blank" href="http://apizza.cc/console/project/829ba0a1c0fb6675eabcbb0391df72f4/browse?api=0a53ed8814784adc822298c093eaaf87" class="label label-warning">在线测试</a>
+                            <a target="_blank" href="http://apizza.cc/console/project/829ba0a1c0fb6675eabcbb0391df72f4/browse?api=0a53ed8814784adc822298c093eaaf87" class="label label-warning">在线浏览</a>
+                        </p>
+                        <p>请求方式：GET</p>
+                        <p>
+                            请求地址：http://101.200.63.245:8080/user/getAppVersion                        </p>
+                        
+                        
+                        <table class="table table-hover">
+                                <colgroup>
+                                    <col class="col-xs-2">
+                                    <col class="col-xs-1">
+                                    <col class="col-xs-1">
+                                    <col class="col-xs-7">
+                                    <col class="col-xs-2">
+                                </colgroup>
+                                <thead>
+                                <tr>
+                                    <th><span class="label label-success">Query参数名</span></th>
+                                    <th>类型</th>
+                                    <th>必需</th>
+                                    <th>描述</th>
+                                    <th>示例 e.g.</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                        <td>systemType</td>
+                                        <td>string</td>
+                                        <td>是</td>
+                                        <td>系统类型 0:安卓 1:IOS</td>
+                                        <td>0</td>
+                                    </tr><tr>
+                                        <td>version</td>
+                                        <td>string</td>
+                                        <td>是</td>
+                                        <td>版本号</td>
+                                        <td>1.0.1</td>
+                                    </tr>                                </tbody>
+                            </table>
+
+                                                
+                        
+                        <p>返回示例：</p>
+                        <div class="highlight">
+                            <pre>
+                                <code class="json hljs">{
+    "code": 200,
+    "data": {
+        "buildCode": 5,
+        "downloadUrl": "http://101.200.63.245:8080/apk/paopao.apk",
+        "hasNewApp": true,
+        "mandatoryUpdata": 0,
+        "systemType": 0,
+        "updataLog": "123123",
+        "versionCode": "1.1.1"
+    },
+    "msg": "请求成功"
+}</code>
+                            </pre>
+                        </div>                        
+                        <table class="table table-hover" style="margin-top: 7px;">
+                            <colgroup>
+                            <col class="col-xs-4">
+                            <col class="col-xs-8">
+                          </colgroup>
+                            <thead>
+                                <tr>
+                                    <th style="padding-left: 0px;"><span class="label label-success">参数名</span></th>
+                                    <th>描述</th>
+                                    <th>类型</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>data.buildCode</td>
+                                    <td>编译号</td>
+                                    <th>number</th>
+                                </tr><tr>
+                                    <td>data.downloadUrl</td>
+                                    <td>下载地址</td>
+                                    <th>string</th>
+                                </tr><tr>
+                                    <td>data.hasNewApp</td>
+                                    <td>是否有新版本</td>
+                                    <th>boolean</th>
+                                </tr><tr>
+                                    <td>data.mandatoryUpdata</td>
+                                    <td>是否强制更新</td>
+                                    <th>number</th>
+                                </tr><tr>
+                                    <td>data.systemType</td>
+                                    <td>系统类型</td>
+                                    <th>number</th>
+                                </tr><tr>
+                                    <td>data.updataLog</td>
+                                    <td>更新日志</td>
+                                    <th>string</th>
+                                </tr><tr>
+                                    <td>data.versionCode</td>
+                                    <td>版本号</td>
+                                    <th>string</th>
+                                </tr>                            </tbody>
+                        </table>
                     </div><h1 id="t_api_doc">wash</h1>
                     
                     <div class="api-one">
@@ -1760,7 +1869,7 @@
                                         <td>priceLimit</td>
                                         <td>number</td>
                                         <td>是</td>
-                                        <td>价格限制</td>
+                                        <td>价格限制（传0不限制）</td>
                                         <td>5.0</td>
                                     </tr><tr>
                                         <td>radius</td>
