@@ -3,6 +3,8 @@ package com.xtkj.paopaoxiche.view.view;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
@@ -28,6 +30,7 @@ import com.xtkj.paopaoxiche.bean.NoDataBean;
 import com.xtkj.paopaoxiche.http.ApiField;
 import com.xtkj.paopaoxiche.http.RetrofitClient;
 import com.xtkj.paopaoxiche.model.UserInfo;
+import com.xtkj.paopaoxiche.service.UserService;
 import com.xtkj.paopaoxiche.service.WashService;
 import com.xtkj.paopaoxiche.utils.DensityUtil;
 import com.xtkj.paopaoxiche.widget.FullScreenWithStatusBarDialog;
@@ -78,14 +81,15 @@ public class CreditsExchangeDialog extends FullScreenWithStatusBarDialog
         super.onCreate(savedInstanceState);
         initListView();
         tvCredits.setText(String.valueOf(UserInfo.getScore()));
-        showLoadingDialog();
-        requestAllCoupons();
-    }
+        new Handler(Looper.getMainLooper()).postDelayed(() -> {
+            if (!isShowing()) {
+                return;
+            }
 
-    @Override
-    public void show() {
-        super.show();
-        // 请求所有的可兑换列表
+            showLoadingDialog();
+            requestAllCoupons();
+        }, 0);
+
     }
 
     @SuppressLint("SetTextI18n")
@@ -123,9 +127,8 @@ public class CreditsExchangeDialog extends FullScreenWithStatusBarDialog
     }
 
     @Override
-    public void dismiss() {
-        dismissLoadingDialog();
-        super.dismiss();
+    protected void setWindowAnimations() {
+        // empty
     }
 
     class ViewHolder {
@@ -146,7 +149,7 @@ public class CreditsExchangeDialog extends FullScreenWithStatusBarDialog
         ViewHolder(View view) {
             ButterKnife.bind(this, view);
             buttonExchange.setOnClickListener(v -> {
-                //showLoadingDialog();
+                showLoadingDialog();
                 exchangePoint(id);
             });
         }
@@ -157,16 +160,16 @@ public class CreditsExchangeDialog extends FullScreenWithStatusBarDialog
 
         private void exchangePoint(int id) {
             RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
-                          .create(WashService.class)
+                          .create(UserService.class)
                           .exchangePoint(String.valueOf(id))
                           .enqueue(new Callback<NoDataBean>() {
                               @Override
                               public void onResponse(Call<NoDataBean> call, Response<NoDataBean> response) {
-                                  //dismissLoadingDialog();
+                                  dismissLoadingDialog();
                                   NoDataBean bean = response.body();
                                   if (bean.getCode() == 200) {
                                       Toast.makeText(BaseApplication.getContext(), "兑换成功！", Toast.LENGTH_LONG).show();
-                                      tvCredits.setText(String.valueOf(bean.getData()));
+                                      tvCredits.setText(String.valueOf(((Double) bean.getData()).intValue()));
                                   } else {
                                       Toast.makeText(BaseApplication.getContext(), "兑换失败！", Toast.LENGTH_LONG).show();
                                   }
@@ -183,7 +186,7 @@ public class CreditsExchangeDialog extends FullScreenWithStatusBarDialog
 
     private void requestAllCoupons() {
         RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
-                      .create(WashService.class)
+                      .create(UserService.class)
                       .getAllCoupons()
                       .enqueue(new Callback<CouponListBean>() {
                           @Override
@@ -205,10 +208,7 @@ public class CreditsExchangeDialog extends FullScreenWithStatusBarDialog
                                   return;
                               }
 
-                              initListView();
-
-                              adapter.updateData(dataBeans);
-                              adapter.notifyDataSetChanged();
+                              adapter.updateDataAndNotifyDataChanged(dataBeans);
                           }
 
                           @Override

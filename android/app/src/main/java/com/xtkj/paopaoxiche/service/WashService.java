@@ -89,5 +89,4 @@ public interface WashService {
 
     @GET("wash/getRecentWashList")
     Call<RecentWashListBean> getRecentWashList(@Query("washId") int washId, @Query("count") int count);
-
 }

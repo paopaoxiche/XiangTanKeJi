@@ -1,0 +1,114 @@
+ [{
+  "type": "0",
+  "dataSource": [{
+                 "section": "0",
+                 "data": [{
+                          "text": "积分",
+                          "imageName": "Integral",
+                          "nextPageID": "IntegralConvertVC"
+                          },
+                          {
+                          "text": "优惠券",
+                          "imageName": "Coupon",
+                          "nextPageID": "CouponVC"
+                          },
+                          {
+                          "text": "消费记录",
+                          "imageName": "ExpensesRecord",
+                          "nextPageID": "ExpensesRecordVC"
+                          },
+                          {
+                          "text": "我的评价",
+                          "imageName": "Comment",
+                          "nextPageID": "CommentVC"
+                          }
+                          ]
+                 },
+                 {
+                 "section": "1",
+                 "data": [{
+                          "text": "升级提醒",
+                          "imageName": "UpgradeReminder",
+                          "nextPageID": ""
+                          },
+                          {
+                          "text": "客服中心",
+                          "imageName": "CustomerServicer",
+                          "nextPageID": ""
+                          },
+                          {
+                          "text": "推广",
+                          "imageName": "Promotion",
+                          "nextPageID": ""
+                          }
+                          ]
+                 }
+                 ]
+  },
+  {
+  "type": "1",
+  "dataSource": [{
+                 "section": "0",
+                 "data": [{
+                          "text": "我的荣誉",
+                          "imageName": "MyHonor",
+                          "nextPageID": ""
+                          },
+                          {
+                          "text": "接洗次数",
+                          "imageName": "WashNumber",
+                          "nextPageID": ""
+                          }
+                          ]
+                 },
+                 {
+                 "section": "1",
+                 "data": [{
+                          "text": "洗车服务管理",
+                          "imageName": "WashServiceManager",
+                          "nextPageID": "WashServiceManagerVC"
+                          },
+                          {
+                          "text": "商品管理",
+                          "imageName": "CommodityManage",
+                          "nextPageID": "CommodityManagerVC"
+                          },
+                          {
+                          "text": "收入列表",
+                          "imageName": "IncomeList",
+                          "nextPageID": "IncomeListVC"
+                          },
+                          {
+                          "text": "评价",
+                          "imageName": "Comment",
+                          "nextPageID": "CommentVC"
+                          }
+                          ]
+                 },
+                 {
+                 "section": "2",
+                 "data": [{
+                          "text": "营业状态",
+                          "imageName": "TradeState",
+                          "nextPageID": "EditTradeStateVC"
+                          },
+                          {
+                          "text": "升级提醒",
+                          "imageName": "UpgradeReminder",
+                          "nextPageID": ""
+                          },
+                          {
+                          "text": "客服中心",
+                          "imageName": "CustomerServicer",
+                          "nextPageID": ""
+                          },
+                          {
+                          "text": "推广",
+                          "imageName": "Promotion",
+                          "nextPageID": ""
+                          }
+                          ]
+                 }
+                 ]
+  }
+  ]
