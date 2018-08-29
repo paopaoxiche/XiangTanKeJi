@@ -57,7 +57,8 @@
         <activity android:name=".view.WeatherForecast.WeatherForecastActivity" />
         <activity android:name=".view.DriverMap.DriverMapActivity" />
         <activity android:name=".view.CarWashMain.CarWashMainActivity" />
-        <activity android:name=".view.WashService.WashServiceActivity"></activity>
+        <activity android:name=".view.WashService.WashServiceActivity" />
+        <activity android:name=".view.RegisterWashActivity"></activity>
     </application>
 
 </manifest>

@@ -3,6 +3,7 @@ package com.xtkj.paopaoxiche.service;
 import com.xtkj.paopaoxiche.bean.CouponListBean;
 import com.xtkj.paopaoxiche.bean.LoginBean;
 import com.xtkj.paopaoxiche.bean.NoDataBean;
+import com.xtkj.paopaoxiche.bean.RecentWashListBean;
 import com.xtkj.paopaoxiche.bean.WashCommodityBean;
 import com.xtkj.paopaoxiche.bean.WashServiceListBean;
 import com.xtkj.paopaoxiche.bean.WashServicesBean;
@@ -86,6 +87,7 @@ public interface WashService {
     @POST("carOwner/exchangePoint")
     Call<NoDataBean> exchangePoint(@Field("couponId") String couponId);
 
-
+    @GET("wash/getRecentWashList")
+    Call<RecentWashListBean> getRecentWashList(@Query("washId") int washId, @Query("count") int count);
 
 }

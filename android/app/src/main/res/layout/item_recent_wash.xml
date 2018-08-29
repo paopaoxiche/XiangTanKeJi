@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" 
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="68dp"
     android:paddingBottom="12dp"
     android:paddingTop="12dp">
-    
-    <ImageView
+
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/goods_image_view"
         android:layout_width="44dp"
-        android:layout_height="44dp" 
-        android:scaleType="fitCenter"
+        android:layout_height="44dp"
         android:layout_centerVertical="true"
         android:layout_marginLeft="16dp"/>
 
-    
+
     <LinearLayout
         android:id="@+id/recent_wash_linear_layout"
         android:layout_width="wrap_content"
@@ -24,15 +23,16 @@
         android:layout_marginRight="20dp">
 
         <TextView
-            android:id="@+id/current_price_text_view"
+            android:id="@+id/price_text_view"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_weight="1"
+            android:layout_gravity="right"
             android:textSize="18sp"
             android:textColor="@color/black"/>
 
         <TextView
-            android:id="@+id/original_price_text_view"
+            android:id="@+id/time_text_view"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_weight="1"
@@ -49,16 +49,15 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/goods_name_text_view"
+            android:id="@+id/name_text_view"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:textSize="18sp"
-            android:text="商品名称"
             android:textColor="@color/black"/>
 
         <TextView
-            android:id="@+id/goods_describe_text_view"
+            android:id="@+id/car_type_text_view"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_weight="1"
