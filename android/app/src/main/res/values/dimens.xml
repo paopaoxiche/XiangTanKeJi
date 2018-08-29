@@ -53,5 +53,6 @@
 
     <dimen name="px1">1px</dimen>
     <dimen name="dp96">96dp</dimen>
+    <dimen name="dp240">240dp</dimen>
 
 </resources>

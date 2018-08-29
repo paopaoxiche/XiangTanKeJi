@@ -1,9 +1,11 @@
 package com.xtkj.paopaoxiche.service;
 
 import com.xtkj.paopaoxiche.bean.CarWashInfoBean;
+import com.xtkj.paopaoxiche.bean.CouponListBean;
 import com.xtkj.paopaoxiche.bean.DemoBean;
 import com.xtkj.paopaoxiche.bean.EvaluateListBean;
 import com.xtkj.paopaoxiche.bean.LoginBean;
+import com.xtkj.paopaoxiche.bean.MyCouponListBean;
 import com.xtkj.paopaoxiche.bean.NoDataBean;
 
 import okhttp3.MultipartBody;
@@ -75,4 +77,14 @@ public interface UserService {
 
     @GET("carOwner/getEvaluateList")
     Call<EvaluateListBean> getMyEvaluateList(@Query("pageIndex") int pageIndex,  @Query("pageSize") int pageSize);
+
+    @GET("carOwner/getMyCoupon")
+    Call<MyCouponListBean> getMyCoupon();
+
+    @GET("carOwner/getAllCoupon")
+    Call<CouponListBean> getAllCoupons();
+
+    @FormUrlEncoded
+    @POST("carOwner/exchangePoint")
+    Call<NoDataBean> exchangePoint(@Field("couponId") String couponId);
 }

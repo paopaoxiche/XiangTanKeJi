@@ -26,7 +26,7 @@ public class LoadingDialog extends Dialog {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setBackgroundDrawable(new ColorDrawable());
+        //getWindow().setBackgroundDrawable(new ColorDrawable());
         setCancelable(false);
         setOnKeyListener((dialog, keyCode, event) ->
             keyCode == KeyEvent.KEYCODE_SEARCH || keyCode == KeyEvent.KEYCODE_BACK);

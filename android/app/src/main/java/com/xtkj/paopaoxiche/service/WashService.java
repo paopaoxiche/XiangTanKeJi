@@ -78,14 +78,4 @@ public interface WashService {
     @FormUrlEncoded
     @POST("commodity/deleteCommodity")
     Call<NoDataBean> deleteGoods(@Field("id") int id);
-
-    @GET("carOwner/getAllCoupon")
-    Call<CouponListBean> getAllCoupons();
-
-    @FormUrlEncoded
-    @POST("carOwner/exchangePoint")
-    Call<NoDataBean> exchangePoint(@Field("couponId") String couponId);
-
-
-
 }

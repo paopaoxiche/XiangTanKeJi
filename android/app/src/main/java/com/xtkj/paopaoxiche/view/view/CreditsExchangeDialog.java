@@ -30,6 +30,7 @@ import com.xtkj.paopaoxiche.bean.NoDataBean;
 import com.xtkj.paopaoxiche.http.ApiField;
 import com.xtkj.paopaoxiche.http.RetrofitClient;
 import com.xtkj.paopaoxiche.model.UserInfo;
+import com.xtkj.paopaoxiche.service.UserService;
 import com.xtkj.paopaoxiche.service.WashService;
 import com.xtkj.paopaoxiche.utils.DensityUtil;
 import com.xtkj.paopaoxiche.widget.FullScreenWithStatusBarDialog;
@@ -91,12 +92,6 @@ public class CreditsExchangeDialog extends FullScreenWithStatusBarDialog
 
     }
 
-    @Override
-    public void show() {
-        super.show();
-        // 请求所有的可兑换列表
-    }
-
     @SuppressLint("SetTextI18n")
     @Override
     public View setView(int position, View convertView, ViewGroup parent) {
@@ -129,12 +124,6 @@ public class CreditsExchangeDialog extends FullScreenWithStatusBarDialog
         holder.setId(bean.getId());
 
         return convertView;
-    }
-
-    @Override
-    public void dismiss() {
-        dismissLoadingDialog();
-        super.dismiss();
     }
 
     @Override
@@ -171,7 +160,7 @@ public class CreditsExchangeDialog extends FullScreenWithStatusBarDialog
 
         private void exchangePoint(int id) {
             RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
-                          .create(WashService.class)
+                          .create(UserService.class)
                           .exchangePoint(String.valueOf(id))
                           .enqueue(new Callback<NoDataBean>() {
                               @Override
@@ -197,7 +186,7 @@ public class CreditsExchangeDialog extends FullScreenWithStatusBarDialog
 
     private void requestAllCoupons() {
         RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
-                      .create(WashService.class)
+                      .create(UserService.class)
                       .getAllCoupons()
                       .enqueue(new Callback<CouponListBean>() {
                           @Override

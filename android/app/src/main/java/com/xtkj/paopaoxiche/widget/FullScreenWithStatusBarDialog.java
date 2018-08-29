@@ -1,11 +1,8 @@
 package com.xtkj.paopaoxiche.widget;
 
-import android.app.AlertDialog;
+
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.graphics.drawable.ColorDrawable;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager.LayoutParams;
@@ -80,5 +77,11 @@ public abstract class FullScreenWithStatusBarDialog extends Dialog {
             loadingDialog.dismiss();
             loadingDialog = null;
         }
+    }
+
+    @Override
+    public void dismiss() {
+        dismissLoadingDialog();
+        super.dismiss();
     }
 }
