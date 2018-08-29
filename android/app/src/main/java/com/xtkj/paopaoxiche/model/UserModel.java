@@ -67,7 +67,7 @@ public class UserModel {
         void getCodeSuccess();
         void getCodeFail();
         void loginSuccess(LoginBean.DataBean dataBean);
-        void loginFail();
+        void loginFail(int code);
         void timeOut();
         void checkTokenSuccess();
 
@@ -193,7 +193,7 @@ public class UserModel {
                             }
                         } else {
                             for (LoginListener loginListener : loginListenerList) {
-                                loginListener.loginFail();
+                                loginListener.loginFail(response.body().getCode());
                             }
                         }
                     }

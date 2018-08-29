@@ -10,7 +10,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/toolbarHeight"
-        android:background="@color/white">
+        android:background="@color/orange">
 
         <ImageButton
             android:id="@+id/back_arrow_image_button"
@@ -19,7 +19,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="16dp"
             android:background="@android:color/transparent"
-            android:src="@drawable/arrow"/>
+            android:src="@drawable/white_arrow"/>
 
         <TextView
             android:layout_width="wrap_content"

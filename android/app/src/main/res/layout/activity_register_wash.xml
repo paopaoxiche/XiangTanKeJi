@@ -21,14 +21,14 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="16dp"
             android:background="@android:color/transparent"
-            android:src="@drawable/arrow" />
+            android:src="@drawable/white_arrow" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="工商认证"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="24sp"/>
 
         <Button
@@ -40,7 +40,7 @@
             android:layout_marginRight="8dp"
             android:background="@android:color/transparent"
             android:text="提交"
-            android:textColor="@color/orange"
+            android:textColor="@color/white"
             android:textSize="18dp" />
 
     </RelativeLayout>

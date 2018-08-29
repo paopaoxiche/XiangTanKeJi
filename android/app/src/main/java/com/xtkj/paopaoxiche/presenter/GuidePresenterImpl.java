@@ -78,7 +78,7 @@ public class GuidePresenterImpl implements IGuideContract.IGuidePresenter, UserM
     }
 
     @Override
-    public void loginFail() {
+    public void loginFail(int code) {
 
     }
 

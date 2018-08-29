@@ -19,5 +19,6 @@ public class ILoginContract {
         void showToast(String msg);
         void resetSentMsgButton();
         void login(Intent intent);
+        void register();
     }
 }

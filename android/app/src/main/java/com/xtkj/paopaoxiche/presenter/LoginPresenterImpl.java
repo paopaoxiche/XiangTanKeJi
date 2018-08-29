@@ -79,7 +79,10 @@ public class LoginPresenterImpl implements ILoginContract.ILoginPresenter, UserM
     }
 
     @Override
-    public void loginFail() {
+    public void loginFail(int code) {
+        if (code == 10008) {
+            loginView.register();
+        }
         loginView.showToast("登录失败，请检查账号或验证码");
     }
 
