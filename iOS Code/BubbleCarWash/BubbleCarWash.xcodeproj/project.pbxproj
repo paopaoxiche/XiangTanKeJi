@@ -1,0 +1,1135 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0603802FA5429C61B55F5DF8 /* libPods-BubbleCarWash.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29174BA4C402F267A6E8611C /* libPods-BubbleCarWash.a */; };
+		6556AE5C211B282E0017B79A /* GlobalMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 6556AE5B211B282E0017B79A /* GlobalMethods.m */; };
+		6593AB85212942AA002F92F6 /* NetworkTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 6593AB84212942AA002F92F6 /* NetworkTools.m */; };
+		65C5AF582135A32900727122 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5AF522135A32900727122 /* LoginViewController.m */; };
+		65C5AF592135A32900727122 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65C5AF532135A32900727122 /* Login.storyboard */; };
+		65C5AFC42135A45100727122 /* ProfileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65C5AF9B2135A45100727122 /* ProfileCell.xib */; };
+		65C5AFC52135A45100727122 /* ProfileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5AF9C2135A45100727122 /* ProfileCell.m */; };
+		65C5AFC62135A45100727122 /* UserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5AF9E2135A45100727122 /* UserManager.m */; };
+		65C5AFC72135A45100727122 /* ProfileModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5AFA12135A45100727122 /* ProfileModel.m */; };
+		65C5AFC82135A45100727122 /* Profile.json in Resources */ = {isa = PBXBuildFile; fileRef = 65C5AFA22135A45100727122 /* Profile.json */; };
+		65C5AFC92135A45100727122 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65C5AFA42135A45100727122 /* Profile.storyboard */; };
+		65C5AFCA2135A45100727122 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5AFA62135A45100727122 /* ProfileViewController.m */; };
+		65C5AFCD2135A47B00727122 /* UserInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5AFCC2135A47B00727122 /* UserInfoModel.m */; };
+		65C5B0712135AA8100727122 /* PersonalInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5AFD22135AA8100727122 /* PersonalInfoViewController.m */; };
+		65C5B0752135AA8100727122 /* PersonalInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65C5AFD82135AA8100727122 /* PersonalInfo.storyboard */; };
+		65C5B07A2135AA8100727122 /* PersonalInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5AFE32135AA8100727122 /* PersonalInfoCell.m */; };
+		65C5B0802135AA8100727122 /* ExpensesRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5AFF12135AA8100727122 /* ExpensesRecordViewController.m */; };
+		65C5B0812135AA8100727122 /* IncomeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5AFF22135AA8100727122 /* IncomeListViewController.m */; };
+		65C5B0832135AA8100727122 /* IncomeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5AFF72135AA8100727122 /* IncomeModel.m */; };
+		65C5B0872135AA8100727122 /* IncomeListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5B0012135AA8100727122 /* IncomeListCell.m */; };
+		65C5B0882135AA8100727122 /* ExpensesRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5B0022135AA8100727122 /* ExpensesRecordCell.m */; };
+		65C5B08A2135AA8100727122 /* CreateProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5B0082135AA8100727122 /* CreateProductViewController.m */; };
+		65C5B08C2135AA8100727122 /* WashServiceManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5B00C2135AA8100727122 /* WashServiceManagerViewController.m */; };
+		65C5B08F2135AA8100727122 /* CommodityManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5B0102135AA8100727122 /* CommodityManagerViewController.m */; };
+		65C5B0912135AA8100727122 /* WashManager.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65C5B0142135AA8100727122 /* WashManager.storyboard */; };
+		65C5B0952135AA8100727122 /* CreateProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5B01D2135AA8100727122 /* CreateProductCell.m */; };
+		65C5B0962135AA8100727122 /* WashManagerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5B01E2135AA8100727122 /* WashManagerCell.m */; };
+		65C5B0982135AA8100727122 /* WashManagerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65C5B0202135AA8100727122 /* WashManagerCell.xib */; };
+		65C5B09C2135AA8100727122 /* IntegralConvertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5B02B2135AA8100727122 /* IntegralConvertViewController.m */; };
+		65C5B09D2135AA8100727122 /* CouponViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5B02D2135AA8100727122 /* CouponViewController.m */; };
+		65C5B09F2135AA8100727122 /* IntegralConvertCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5B0332135AA8100727122 /* IntegralConvertCell.m */; };
+		65C5B0A22135AA8100727122 /* CouponCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5B0372135AA8100727122 /* CouponCell.m */; };
+		65C5B0A52135AA8100727122 /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5B0412135AA8100727122 /* CommentViewController.m */; };
+		65C5B0A72135AA8100727122 /* DiscussViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5B0442135AA8100727122 /* DiscussViewController.m */; };
+		65C5B0AA2135AA8100727122 /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5B04A2135AA8100727122 /* CommentCell.m */; };
+		65C5B0AF2135AA8200727122 /* EditTradeStateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5B0552135AA8100727122 /* EditTradeStateViewController.m */; };
+		65C5B0B42135AA8200727122 /* TradeStateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5B0602135AA8100727122 /* TradeStateCell.m */; };
+		65C5B0B62135AA8200727122 /* Certification.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65C5B0662135AA8100727122 /* Certification.storyboard */; };
+		65C5B0B72135AA8200727122 /* ModelCertificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5B0672135AA8100727122 /* ModelCertificationViewController.m */; };
+		65C5B0B82135AA8200727122 /* CertificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5B06A2135AA8100727122 /* CertificationViewController.m */; };
+		65C5B0B92135AA8200727122 /* ModelCertificationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5B06D2135AA8100727122 /* ModelCertificationCell.m */; };
+		65C5B0BA2135AA8200727122 /* CertificationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5B06E2135AA8100727122 /* CertificationCell.m */; };
+		65C5B0C02135AE6000727122 /* NSString+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5B0BE2135AE6000727122 /* NSString+Category.m */; };
+		65C5B0C12135AE6000727122 /* UIColor+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5B0BF2135AE6000727122 /* UIColor+Category.m */; };
+		65C5B0C72135AEA300727122 /* ParentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5B0C32135AEA300727122 /* ParentViewController.m */; };
+		65C5B0C82135AEA300727122 /* BaseNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5B0C62135AEA300727122 /* BaseNavigationViewController.m */; };
+		65C5B0E32135AFC900727122 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5B0DA2135AFC900727122 /* HomeViewController.m */; };
+		65C5B0E42135AFC900727122 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65C5B0DB2135AFC900727122 /* Home.storyboard */; };
+		65C5B0E52135AFC900727122 /* LYPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5B0DE2135AFC900727122 /* LYPageControl.m */; };
+		65C5B0E62135AFC900727122 /* HomeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5B0E22135AFC900727122 /* HomeModel.m */; };
+		65C5B1062135B0F800727122 /* CommodityRecommendationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5B0EB2135B0F800727122 /* CommodityRecommendationViewController.m */; };
+		65C5B1072135B0F800727122 /* CommodityRecommendationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5B0ED2135B0F800727122 /* CommodityRecommendationCell.m */; };
+		65C5B1082135B0F800727122 /* CommodityHorizontalFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5B0EE2135B0F800727122 /* CommodityHorizontalFlowLayout.m */; };
+		65C5B1092135B0F800727122 /* NearWashInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5B0F22135B0F800727122 /* NearWashInfoCell.m */; };
+		65C5B10A2135B0F800727122 /* Map.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65C5B0F62135B0F800727122 /* Map.storyboard */; };
+		65C5B10B2135B0F800727122 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5B0F72135B0F800727122 /* MapViewController.m */; };
+		65C5B10C2135B0F800727122 /* CarWashListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5B0F82135B0F800727122 /* CarWashListTableViewController.m */; };
+		65C5B10D2135B0F800727122 /* CustomAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5B0FB2135B0F800727122 /* CustomAnnotationView.m */; };
+		65C5B10E2135B0F800727122 /* CarWashListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5B0FD2135B0F800727122 /* CarWashListCell.m */; };
+		65C5B10F2135B0F800727122 /* WeatherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5B1022135B0F800727122 /* WeatherViewController.m */; };
+		65C5B1102135B0F800727122 /* WeatherInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5B1052135B0F800727122 /* WeatherInfoCell.m */; };
+		65EA90EF212B19C90095F72B /* LYKeyChainStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EA90EE212B19C90095F72B /* LYKeyChainStore.m */; };
+		65FC33F120E13577006DE3F1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 65FC33F020E13577006DE3F1 /* AppDelegate.m */; };
+		65FC33F920E1357A006DE3F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65FC33F820E1357A006DE3F1 /* Assets.xcassets */; };
+		65FC33FC20E1357A006DE3F1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65FC33FA20E1357A006DE3F1 /* LaunchScreen.storyboard */; };
+		65FC33FF20E1357A006DE3F1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 65FC33FE20E1357A006DE3F1 /* main.m */; };
+		65FC341A20E13B74006DE3F1 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65FC341920E13B74006DE3F1 /* MainViewController.m */; };
+		65FC341C20E13B83006DE3F1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65FC341B20E13B83006DE3F1 /* Main.storyboard */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		29174BA4C402F267A6E8611C /* libPods-BubbleCarWash.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BubbleCarWash.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		322598973AA2480B0A9F7672 /* Pods-BubbleCarWash.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BubbleCarWash.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BubbleCarWash/Pods-BubbleCarWash.debug.xcconfig"; sourceTree = "<group>"; };
+		6556AE5A211B282E0017B79A /* GlobalMethods.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlobalMethods.h; sourceTree = "<group>"; };
+		6556AE5B211B282E0017B79A /* GlobalMethods.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GlobalMethods.m; sourceTree = "<group>"; };
+		6593AB83212942AA002F92F6 /* NetworkTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkTools.h; sourceTree = "<group>"; };
+		6593AB84212942AA002F92F6 /* NetworkTools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NetworkTools.m; sourceTree = "<group>"; };
+		6593AB9221297FCD002F92F6 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		65B7FC1821046E5700FC56A1 /* FunctionMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FunctionMacro.h; sourceTree = "<group>"; };
+		65C5AF522135A32900727122 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		65C5AF532135A32900727122 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		65C5AF542135A32900727122 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		65C5AF9A2135A45100727122 /* ProfileCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileCell.h; sourceTree = "<group>"; };
+		65C5AF9B2135A45100727122 /* ProfileCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileCell.xib; sourceTree = "<group>"; };
+		65C5AF9C2135A45100727122 /* ProfileCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileCell.m; sourceTree = "<group>"; };
+		65C5AF9E2135A45100727122 /* UserManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserManager.m; sourceTree = "<group>"; };
+		65C5AF9F2135A45100727122 /* ProfileModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileModel.h; sourceTree = "<group>"; };
+		65C5AFA02135A45100727122 /* UserManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserManager.h; sourceTree = "<group>"; };
+		65C5AFA12135A45100727122 /* ProfileModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileModel.m; sourceTree = "<group>"; };
+		65C5AFA22135A45100727122 /* Profile.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Profile.json; sourceTree = "<group>"; };
+		65C5AFA42135A45100727122 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
+		65C5AFA52135A45100727122 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		65C5AFA62135A45100727122 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		65C5AFCB2135A47B00727122 /* UserInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoModel.h; sourceTree = "<group>"; };
+		65C5AFCC2135A47B00727122 /* UserInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoModel.m; sourceTree = "<group>"; };
+		65C5AFD22135AA8100727122 /* PersonalInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalInfoViewController.m; sourceTree = "<group>"; };
+		65C5AFD72135AA8100727122 /* PersonalInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalInfoViewController.h; sourceTree = "<group>"; };
+		65C5AFD82135AA8100727122 /* PersonalInfo.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PersonalInfo.storyboard; sourceTree = "<group>"; };
+		65C5AFE12135AA8100727122 /* PersonalInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalInfoCell.h; sourceTree = "<group>"; };
+		65C5AFE32135AA8100727122 /* PersonalInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalInfoCell.m; sourceTree = "<group>"; };
+		65C5AFEB2135AA8100727122 /* ExpensesRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpensesRecordViewController.h; sourceTree = "<group>"; };
+		65C5AFEE2135AA8100727122 /* IncomeListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IncomeListViewController.h; sourceTree = "<group>"; };
+		65C5AFF12135AA8100727122 /* ExpensesRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpensesRecordViewController.m; sourceTree = "<group>"; };
+		65C5AFF22135AA8100727122 /* IncomeListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IncomeListViewController.m; sourceTree = "<group>"; };
+		65C5AFF72135AA8100727122 /* IncomeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IncomeModel.m; sourceTree = "<group>"; };
+		65C5AFF82135AA8100727122 /* IncomeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IncomeModel.h; sourceTree = "<group>"; };
+		65C5AFFA2135AA8100727122 /* ExpensesRecordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpensesRecordCell.h; sourceTree = "<group>"; };
+		65C5AFFB2135AA8100727122 /* IncomeListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IncomeListCell.h; sourceTree = "<group>"; };
+		65C5B0012135AA8100727122 /* IncomeListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IncomeListCell.m; sourceTree = "<group>"; };
+		65C5B0022135AA8100727122 /* ExpensesRecordCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpensesRecordCell.m; sourceTree = "<group>"; };
+		65C5B0082135AA8100727122 /* CreateProductViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateProductViewController.m; sourceTree = "<group>"; };
+		65C5B00B2135AA8100727122 /* CommodityManagerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommodityManagerViewController.h; sourceTree = "<group>"; };
+		65C5B00C2135AA8100727122 /* WashServiceManagerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WashServiceManagerViewController.m; sourceTree = "<group>"; };
+		65C5B0102135AA8100727122 /* CommodityManagerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommodityManagerViewController.m; sourceTree = "<group>"; };
+		65C5B0122135AA8100727122 /* CreateProductViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateProductViewController.h; sourceTree = "<group>"; };
+		65C5B0132135AA8100727122 /* WashServiceManagerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WashServiceManagerViewController.h; sourceTree = "<group>"; };
+		65C5B0142135AA8100727122 /* WashManager.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = WashManager.storyboard; sourceTree = "<group>"; };
+		65C5B01D2135AA8100727122 /* CreateProductCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateProductCell.m; sourceTree = "<group>"; };
+		65C5B01E2135AA8100727122 /* WashManagerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WashManagerCell.m; sourceTree = "<group>"; };
+		65C5B0202135AA8100727122 /* WashManagerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WashManagerCell.xib; sourceTree = "<group>"; };
+		65C5B0242135AA8100727122 /* CreateProductCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateProductCell.h; sourceTree = "<group>"; };
+		65C5B0252135AA8100727122 /* WashManagerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WashManagerCell.h; sourceTree = "<group>"; };
+		65C5B0292135AA8100727122 /* CouponViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponViewController.h; sourceTree = "<group>"; };
+		65C5B02B2135AA8100727122 /* IntegralConvertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntegralConvertViewController.m; sourceTree = "<group>"; };
+		65C5B02D2135AA8100727122 /* CouponViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponViewController.m; sourceTree = "<group>"; };
+		65C5B02E2135AA8100727122 /* IntegralConvertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntegralConvertViewController.h; sourceTree = "<group>"; };
+		65C5B0332135AA8100727122 /* IntegralConvertCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntegralConvertCell.m; sourceTree = "<group>"; };
+		65C5B0352135AA8100727122 /* CouponCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponCell.h; sourceTree = "<group>"; };
+		65C5B0372135AA8100727122 /* CouponCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponCell.m; sourceTree = "<group>"; };
+		65C5B0392135AA8100727122 /* IntegralConvertCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntegralConvertCell.h; sourceTree = "<group>"; };
+		65C5B03D2135AA8100727122 /* CommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentViewController.h; sourceTree = "<group>"; };
+		65C5B03F2135AA8100727122 /* DiscussViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscussViewController.h; sourceTree = "<group>"; };
+		65C5B0412135AA8100727122 /* CommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentViewController.m; sourceTree = "<group>"; };
+		65C5B0442135AA8100727122 /* DiscussViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscussViewController.m; sourceTree = "<group>"; };
+		65C5B0462135AA8100727122 /* CommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentCell.h; sourceTree = "<group>"; };
+		65C5B04A2135AA8100727122 /* CommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentCell.m; sourceTree = "<group>"; };
+		65C5B0522135AA8100727122 /* EditTradeStateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditTradeStateViewController.h; sourceTree = "<group>"; };
+		65C5B0552135AA8100727122 /* EditTradeStateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditTradeStateViewController.m; sourceTree = "<group>"; };
+		65C5B05E2135AA8100727122 /* TradeStateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TradeStateCell.h; sourceTree = "<group>"; };
+		65C5B0602135AA8100727122 /* TradeStateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TradeStateCell.m; sourceTree = "<group>"; };
+		65C5B0662135AA8100727122 /* Certification.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Certification.storyboard; sourceTree = "<group>"; };
+		65C5B0672135AA8100727122 /* ModelCertificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelCertificationViewController.m; sourceTree = "<group>"; };
+		65C5B0682135AA8100727122 /* CertificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CertificationViewController.h; sourceTree = "<group>"; };
+		65C5B0692135AA8100727122 /* ModelCertificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelCertificationViewController.h; sourceTree = "<group>"; };
+		65C5B06A2135AA8100727122 /* CertificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CertificationViewController.m; sourceTree = "<group>"; };
+		65C5B06C2135AA8100727122 /* CertificationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CertificationCell.h; sourceTree = "<group>"; };
+		65C5B06D2135AA8100727122 /* ModelCertificationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelCertificationCell.m; sourceTree = "<group>"; };
+		65C5B06E2135AA8100727122 /* CertificationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CertificationCell.m; sourceTree = "<group>"; };
+		65C5B06F2135AA8100727122 /* ModelCertificationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelCertificationCell.h; sourceTree = "<group>"; };
+		65C5B0BC2135AE6000727122 /* NSString+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Category.h"; sourceTree = "<group>"; };
+		65C5B0BD2135AE6000727122 /* UIColor+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Category.h"; sourceTree = "<group>"; };
+		65C5B0BE2135AE6000727122 /* NSString+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Category.m"; sourceTree = "<group>"; };
+		65C5B0BF2135AE6000727122 /* UIColor+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Category.m"; sourceTree = "<group>"; };
+		65C5B0C32135AEA300727122 /* ParentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParentViewController.m; sourceTree = "<group>"; };
+		65C5B0C42135AEA300727122 /* BaseNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseNavigationViewController.h; sourceTree = "<group>"; };
+		65C5B0C52135AEA300727122 /* ParentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParentViewController.h; sourceTree = "<group>"; };
+		65C5B0C62135AEA300727122 /* BaseNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseNavigationViewController.m; sourceTree = "<group>"; };
+		65C5B0DA2135AFC900727122 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		65C5B0DB2135AFC900727122 /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
+		65C5B0DC2135AFC900727122 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
+		65C5B0DE2135AFC900727122 /* LYPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYPageControl.m; sourceTree = "<group>"; };
+		65C5B0DF2135AFC900727122 /* LYPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYPageControl.h; sourceTree = "<group>"; };
+		65C5B0E12135AFC900727122 /* HomeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeModel.h; sourceTree = "<group>"; };
+		65C5B0E22135AFC900727122 /* HomeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeModel.m; sourceTree = "<group>"; };
+		65C5B0EA2135B0F800727122 /* CommodityRecommendationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommodityRecommendationViewController.h; sourceTree = "<group>"; };
+		65C5B0EB2135B0F800727122 /* CommodityRecommendationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommodityRecommendationViewController.m; sourceTree = "<group>"; };
+		65C5B0ED2135B0F800727122 /* CommodityRecommendationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommodityRecommendationCell.m; sourceTree = "<group>"; };
+		65C5B0EE2135B0F800727122 /* CommodityHorizontalFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommodityHorizontalFlowLayout.m; sourceTree = "<group>"; };
+		65C5B0EF2135B0F800727122 /* NearWashInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NearWashInfoCell.h; sourceTree = "<group>"; };
+		65C5B0F02135B0F800727122 /* CommodityHorizontalFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommodityHorizontalFlowLayout.h; sourceTree = "<group>"; };
+		65C5B0F12135B0F800727122 /* CommodityRecommendationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommodityRecommendationCell.h; sourceTree = "<group>"; };
+		65C5B0F22135B0F800727122 /* NearWashInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NearWashInfoCell.m; sourceTree = "<group>"; };
+		65C5B0F52135B0F800727122 /* CarWashListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarWashListTableViewController.h; sourceTree = "<group>"; };
+		65C5B0F62135B0F800727122 /* Map.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Map.storyboard; sourceTree = "<group>"; };
+		65C5B0F72135B0F800727122 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
+		65C5B0F82135B0F800727122 /* CarWashListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarWashListTableViewController.m; sourceTree = "<group>"; };
+		65C5B0F92135B0F800727122 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		65C5B0FB2135B0F800727122 /* CustomAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAnnotationView.m; sourceTree = "<group>"; };
+		65C5B0FC2135B0F800727122 /* CarWashListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarWashListCell.h; sourceTree = "<group>"; };
+		65C5B0FD2135B0F800727122 /* CarWashListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarWashListCell.m; sourceTree = "<group>"; };
+		65C5B0FE2135B0F800727122 /* CustomAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomAnnotationView.h; sourceTree = "<group>"; };
+		65C5B1012135B0F800727122 /* WeatherViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherViewController.h; sourceTree = "<group>"; };
+		65C5B1022135B0F800727122 /* WeatherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherViewController.m; sourceTree = "<group>"; };
+		65C5B1042135B0F800727122 /* WeatherInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherInfoCell.h; sourceTree = "<group>"; };
+		65C5B1052135B0F800727122 /* WeatherInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherInfoCell.m; sourceTree = "<group>"; };
+		65EA90ED212B19C90095F72B /* LYKeyChainStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LYKeyChainStore.h; sourceTree = "<group>"; };
+		65EA90EE212B19C90095F72B /* LYKeyChainStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LYKeyChainStore.m; sourceTree = "<group>"; };
+		65FC33EC20E13577006DE3F1 /* BubbleCarWash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BubbleCarWash.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		65FC33EF20E13577006DE3F1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		65FC33F020E13577006DE3F1 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		65FC33F820E1357A006DE3F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		65FC33FB20E1357A006DE3F1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		65FC33FD20E1357A006DE3F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		65FC33FE20E1357A006DE3F1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		65FC341820E13B74006DE3F1 /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		65FC341920E13B74006DE3F1 /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		65FC341B20E13B83006DE3F1 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		6922DD9F059ECB8EEB30484D /* Pods-BubbleCarWash.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BubbleCarWash.release.xcconfig"; path = "Pods/Target Support Files/Pods-BubbleCarWash/Pods-BubbleCarWash.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		65FC33E920E13577006DE3F1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0603802FA5429C61B55F5DF8 /* libPods-BubbleCarWash.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		65B7FC1121046D1300FC56A1 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				6556AE5A211B282E0017B79A /* GlobalMethods.h */,
+				6556AE5B211B282E0017B79A /* GlobalMethods.m */,
+				6593AB83212942AA002F92F6 /* NetworkTools.h */,
+				6593AB84212942AA002F92F6 /* NetworkTools.m */,
+				65EA90ED212B19C90095F72B /* LYKeyChainStore.h */,
+				65EA90EE212B19C90095F72B /* LYKeyChainStore.m */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		65B7FC1721046E3A00FC56A1 /* Macro */ = {
+			isa = PBXGroup;
+			children = (
+				65B7FC1821046E5700FC56A1 /* FunctionMacro.h */,
+			);
+			name = Macro;
+			path = BubbleCarWash/Macro;
+			sourceTree = SOURCE_ROOT;
+		};
+		65C5AF512135A32900727122 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				65C5AF542135A32900727122 /* LoginViewController.h */,
+				65C5AF522135A32900727122 /* LoginViewController.m */,
+				65C5AF532135A32900727122 /* Login.storyboard */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		65C5AF5B2135A45100727122 /* NextPage */ = {
+			isa = PBXGroup;
+			children = (
+				65C5B0642135AA8100727122 /* Authentication */,
+				65C5B03A2135AA8100727122 /* Comment */,
+				65C5B0262135AA8100727122 /* Integral */,
+				65C5AFCE2135AA8100727122 /* PersonalInfo */,
+				65C5AFE72135AA8100727122 /* Record */,
+				65C5B04C2135AA8100727122 /* TradeState */,
+				65C5B0062135AA8100727122 /* WashManager */,
+			);
+			path = NextPage;
+			sourceTree = "<group>";
+		};
+		65C5AF992135A45100727122 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				65C5AF9A2135A45100727122 /* ProfileCell.h */,
+				65C5AF9B2135A45100727122 /* ProfileCell.xib */,
+				65C5AF9C2135A45100727122 /* ProfileCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		65C5AF9D2135A45100727122 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				65C5AFCB2135A47B00727122 /* UserInfoModel.h */,
+				65C5AFCC2135A47B00727122 /* UserInfoModel.m */,
+				65C5AF9E2135A45100727122 /* UserManager.m */,
+				65C5AF9F2135A45100727122 /* ProfileModel.h */,
+				65C5AFA02135A45100727122 /* UserManager.h */,
+				65C5AFA12135A45100727122 /* ProfileModel.m */,
+				65C5AFA22135A45100727122 /* Profile.json */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		65C5AFA32135A45100727122 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				65C5AFA42135A45100727122 /* Profile.storyboard */,
+				65C5AFA52135A45100727122 /* ProfileViewController.h */,
+				65C5AFA62135A45100727122 /* ProfileViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		65C5AFCE2135AA8100727122 /* PersonalInfo */ = {
+			isa = PBXGroup;
+			children = (
+				65C5AFCF2135AA8100727122 /* Controller */,
+				65C5AFDC2135AA8100727122 /* View */,
+			);
+			path = PersonalInfo;
+			sourceTree = "<group>";
+		};
+		65C5AFCF2135AA8100727122 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				65C5AFD72135AA8100727122 /* PersonalInfoViewController.h */,
+				65C5AFD22135AA8100727122 /* PersonalInfoViewController.m */,
+				65C5AFD82135AA8100727122 /* PersonalInfo.storyboard */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		65C5AFDC2135AA8100727122 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				65C5AFE12135AA8100727122 /* PersonalInfoCell.h */,
+				65C5AFE32135AA8100727122 /* PersonalInfoCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		65C5AFE72135AA8100727122 /* Record */ = {
+			isa = PBXGroup;
+			children = (
+				65C5AFE82135AA8100727122 /* Controller */,
+				65C5AFF62135AA8100727122 /* Model */,
+				65C5AFF92135AA8100727122 /* View */,
+			);
+			path = Record;
+			sourceTree = "<group>";
+		};
+		65C5AFE82135AA8100727122 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				65C5AFEB2135AA8100727122 /* ExpensesRecordViewController.h */,
+				65C5AFF12135AA8100727122 /* ExpensesRecordViewController.m */,
+				65C5AFEE2135AA8100727122 /* IncomeListViewController.h */,
+				65C5AFF22135AA8100727122 /* IncomeListViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		65C5AFF62135AA8100727122 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				65C5AFF82135AA8100727122 /* IncomeModel.h */,
+				65C5AFF72135AA8100727122 /* IncomeModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		65C5AFF92135AA8100727122 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				65C5AFFA2135AA8100727122 /* ExpensesRecordCell.h */,
+				65C5B0022135AA8100727122 /* ExpensesRecordCell.m */,
+				65C5AFFB2135AA8100727122 /* IncomeListCell.h */,
+				65C5B0012135AA8100727122 /* IncomeListCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		65C5B0062135AA8100727122 /* WashManager */ = {
+			isa = PBXGroup;
+			children = (
+				65C5B0072135AA8100727122 /* Controller */,
+				65C5B0182135AA8100727122 /* View */,
+			);
+			path = WashManager;
+			sourceTree = "<group>";
+		};
+		65C5B0072135AA8100727122 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				65C5B0122135AA8100727122 /* CreateProductViewController.h */,
+				65C5B0082135AA8100727122 /* CreateProductViewController.m */,
+				65C5B0132135AA8100727122 /* WashServiceManagerViewController.h */,
+				65C5B00C2135AA8100727122 /* WashServiceManagerViewController.m */,
+				65C5B00B2135AA8100727122 /* CommodityManagerViewController.h */,
+				65C5B0102135AA8100727122 /* CommodityManagerViewController.m */,
+				65C5B0142135AA8100727122 /* WashManager.storyboard */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		65C5B0182135AA8100727122 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				65C5B0242135AA8100727122 /* CreateProductCell.h */,
+				65C5B01D2135AA8100727122 /* CreateProductCell.m */,
+				65C5B0252135AA8100727122 /* WashManagerCell.h */,
+				65C5B01E2135AA8100727122 /* WashManagerCell.m */,
+				65C5B0202135AA8100727122 /* WashManagerCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		65C5B0262135AA8100727122 /* Integral */ = {
+			isa = PBXGroup;
+			children = (
+				65C5B0272135AA8100727122 /* Controller */,
+				65C5B0312135AA8100727122 /* View */,
+			);
+			path = Integral;
+			sourceTree = "<group>";
+		};
+		65C5B0272135AA8100727122 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				65C5B02E2135AA8100727122 /* IntegralConvertViewController.h */,
+				65C5B02B2135AA8100727122 /* IntegralConvertViewController.m */,
+				65C5B0292135AA8100727122 /* CouponViewController.h */,
+				65C5B02D2135AA8100727122 /* CouponViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		65C5B0312135AA8100727122 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				65C5B0392135AA8100727122 /* IntegralConvertCell.h */,
+				65C5B0332135AA8100727122 /* IntegralConvertCell.m */,
+				65C5B0352135AA8100727122 /* CouponCell.h */,
+				65C5B0372135AA8100727122 /* CouponCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		65C5B03A2135AA8100727122 /* Comment */ = {
+			isa = PBXGroup;
+			children = (
+				65C5B03B2135AA8100727122 /* Controller */,
+				65C5B0452135AA8100727122 /* View */,
+			);
+			path = Comment;
+			sourceTree = "<group>";
+		};
+		65C5B03B2135AA8100727122 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				65C5B03D2135AA8100727122 /* CommentViewController.h */,
+				65C5B0412135AA8100727122 /* CommentViewController.m */,
+				65C5B03F2135AA8100727122 /* DiscussViewController.h */,
+				65C5B0442135AA8100727122 /* DiscussViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		65C5B0452135AA8100727122 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				65C5B0462135AA8100727122 /* CommentCell.h */,
+				65C5B04A2135AA8100727122 /* CommentCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		65C5B04C2135AA8100727122 /* TradeState */ = {
+			isa = PBXGroup;
+			children = (
+				65C5B04D2135AA8100727122 /* Controller */,
+				65C5B0592135AA8100727122 /* View */,
+			);
+			path = TradeState;
+			sourceTree = "<group>";
+		};
+		65C5B04D2135AA8100727122 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				65C5B0522135AA8100727122 /* EditTradeStateViewController.h */,
+				65C5B0552135AA8100727122 /* EditTradeStateViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		65C5B0592135AA8100727122 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				65C5B05E2135AA8100727122 /* TradeStateCell.h */,
+				65C5B0602135AA8100727122 /* TradeStateCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		65C5B0642135AA8100727122 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				65C5B0652135AA8100727122 /* Controller */,
+				65C5B06B2135AA8100727122 /* View */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		65C5B0652135AA8100727122 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				65C5B0662135AA8100727122 /* Certification.storyboard */,
+				65C5B0692135AA8100727122 /* ModelCertificationViewController.h */,
+				65C5B0672135AA8100727122 /* ModelCertificationViewController.m */,
+				65C5B0682135AA8100727122 /* CertificationViewController.h */,
+				65C5B06A2135AA8100727122 /* CertificationViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		65C5B06B2135AA8100727122 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				65C5B06F2135AA8100727122 /* ModelCertificationCell.h */,
+				65C5B06D2135AA8100727122 /* ModelCertificationCell.m */,
+				65C5B06C2135AA8100727122 /* CertificationCell.h */,
+				65C5B06E2135AA8100727122 /* CertificationCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		65C5B0BB2135AE6000727122 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				65C5B0BC2135AE6000727122 /* NSString+Category.h */,
+				65C5B0BD2135AE6000727122 /* UIColor+Category.h */,
+				65C5B0BE2135AE6000727122 /* NSString+Category.m */,
+				65C5B0BF2135AE6000727122 /* UIColor+Category.m */,
+			);
+			name = Category;
+			path = BubbleCarWash/Category;
+			sourceTree = SOURCE_ROOT;
+		};
+		65C5B0C22135AEA300727122 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				65C5B0C52135AEA300727122 /* ParentViewController.h */,
+				65C5B0C32135AEA300727122 /* ParentViewController.m */,
+				65C5B0C42135AEA300727122 /* BaseNavigationViewController.h */,
+				65C5B0C62135AEA300727122 /* BaseNavigationViewController.m */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		65C5B0D92135AFC900727122 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				65C5B0DB2135AFC900727122 /* Home.storyboard */,
+				65C5B0DC2135AFC900727122 /* HomeViewController.h */,
+				65C5B0DA2135AFC900727122 /* HomeViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		65C5B0DD2135AFC900727122 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				65C5B0DF2135AFC900727122 /* LYPageControl.h */,
+				65C5B0DE2135AFC900727122 /* LYPageControl.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		65C5B0E02135AFC900727122 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				65C5B0E12135AFC900727122 /* HomeModel.h */,
+				65C5B0E22135AFC900727122 /* HomeModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		65C5B0E72135B0F800727122 /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				65C5B0E82135B0F800727122 /* CarWash */,
+				65C5B0F32135B0F800727122 /* Map */,
+				65C5B0FF2135B0F800727122 /* Weather */,
+			);
+			path = SubViews;
+			sourceTree = "<group>";
+		};
+		65C5B0E82135B0F800727122 /* CarWash */ = {
+			isa = PBXGroup;
+			children = (
+				65C5B0E92135B0F800727122 /* Controller */,
+				65C5B0EC2135B0F800727122 /* View */,
+			);
+			path = CarWash;
+			sourceTree = "<group>";
+		};
+		65C5B0E92135B0F800727122 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				65C5B0EA2135B0F800727122 /* CommodityRecommendationViewController.h */,
+				65C5B0EB2135B0F800727122 /* CommodityRecommendationViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		65C5B0EC2135B0F800727122 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				65C5B0F02135B0F800727122 /* CommodityHorizontalFlowLayout.h */,
+				65C5B0EE2135B0F800727122 /* CommodityHorizontalFlowLayout.m */,
+				65C5B0F12135B0F800727122 /* CommodityRecommendationCell.h */,
+				65C5B0ED2135B0F800727122 /* CommodityRecommendationCell.m */,
+				65C5B0EF2135B0F800727122 /* NearWashInfoCell.h */,
+				65C5B0F22135B0F800727122 /* NearWashInfoCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		65C5B0F32135B0F800727122 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				65C5B0F42135B0F800727122 /* Controller */,
+				65C5B0FA2135B0F800727122 /* View */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
+		65C5B0F42135B0F800727122 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				65C5B0F62135B0F800727122 /* Map.storyboard */,
+				65C5B0F92135B0F800727122 /* MapViewController.h */,
+				65C5B0F72135B0F800727122 /* MapViewController.m */,
+				65C5B0F52135B0F800727122 /* CarWashListTableViewController.h */,
+				65C5B0F82135B0F800727122 /* CarWashListTableViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		65C5B0FA2135B0F800727122 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				65C5B0FC2135B0F800727122 /* CarWashListCell.h */,
+				65C5B0FD2135B0F800727122 /* CarWashListCell.m */,
+				65C5B0FE2135B0F800727122 /* CustomAnnotationView.h */,
+				65C5B0FB2135B0F800727122 /* CustomAnnotationView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		65C5B0FF2135B0F800727122 /* Weather */ = {
+			isa = PBXGroup;
+			children = (
+				65C5B1002135B0F800727122 /* Controller */,
+				65C5B1032135B0F800727122 /* View */,
+			);
+			path = Weather;
+			sourceTree = "<group>";
+		};
+		65C5B1002135B0F800727122 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				65C5B1012135B0F800727122 /* WeatherViewController.h */,
+				65C5B1022135B0F800727122 /* WeatherViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		65C5B1032135B0F800727122 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				65C5B1042135B0F800727122 /* WeatherInfoCell.h */,
+				65C5B1052135B0F800727122 /* WeatherInfoCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		65FC33E320E13576006DE3F1 = {
+			isa = PBXGroup;
+			children = (
+				65FC33EE20E13577006DE3F1 /* BubbleCarWash */,
+				65FC33ED20E13577006DE3F1 /* Products */,
+				D2DA8B02A49A21B970AAC972 /* Pods */,
+				7A3C8B637EAA8F8B98C5119D /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		65FC33ED20E13577006DE3F1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				65FC33EC20E13577006DE3F1 /* BubbleCarWash.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		65FC33EE20E13577006DE3F1 /* BubbleCarWash */ = {
+			isa = PBXGroup;
+			children = (
+				65C5B0C22135AEA300727122 /* Base */,
+				65FC340620E13A04006DE3F1 /* Login */,
+				65FC341720E13B5D006DE3F1 /* Main */,
+				65FC340520E13A04006DE3F1 /* Home */,
+				65FC340720E13A04006DE3F1 /* Profile */,
+				65B7FC1721046E3A00FC56A1 /* Macro */,
+				65C5B0BB2135AE6000727122 /* Category */,
+				65B7FC1121046D1300FC56A1 /* Utils */,
+				65FC33EF20E13577006DE3F1 /* AppDelegate.h */,
+				65FC33F020E13577006DE3F1 /* AppDelegate.m */,
+				65FC33F820E1357A006DE3F1 /* Assets.xcassets */,
+				65FC33FA20E1357A006DE3F1 /* LaunchScreen.storyboard */,
+				65FC33FD20E1357A006DE3F1 /* Info.plist */,
+				65FC33FE20E1357A006DE3F1 /* main.m */,
+			);
+			path = BubbleCarWash;
+			sourceTree = "<group>";
+		};
+		65FC340520E13A04006DE3F1 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				65C5B0D92135AFC900727122 /* Controller */,
+				65C5B0E02135AFC900727122 /* Model */,
+				65C5B0DD2135AFC900727122 /* View */,
+				65C5B0E72135B0F800727122 /* SubViews */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		65FC340620E13A04006DE3F1 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				65C5AF512135A32900727122 /* Controller */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		65FC340720E13A04006DE3F1 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				65C5AFA32135A45100727122 /* Controller */,
+				65C5AF9D2135A45100727122 /* Model */,
+				65C5AF5B2135A45100727122 /* NextPage */,
+				65C5AF992135A45100727122 /* View */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		65FC341720E13B5D006DE3F1 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				65FC341820E13B74006DE3F1 /* MainViewController.h */,
+				65FC341920E13B74006DE3F1 /* MainViewController.m */,
+				65FC341B20E13B83006DE3F1 /* Main.storyboard */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		7A3C8B637EAA8F8B98C5119D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6593AB9221297FCD002F92F6 /* Security.framework */,
+				29174BA4C402F267A6E8611C /* libPods-BubbleCarWash.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D2DA8B02A49A21B970AAC972 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				322598973AA2480B0A9F7672 /* Pods-BubbleCarWash.debug.xcconfig */,
+				6922DD9F059ECB8EEB30484D /* Pods-BubbleCarWash.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		65FC33EB20E13577006DE3F1 /* BubbleCarWash */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 65FC340220E1357A006DE3F1 /* Build configuration list for PBXNativeTarget "BubbleCarWash" */;
+			buildPhases = (
+				E9324C200DD56CC4DA239171 /* [CP] Check Pods Manifest.lock */,
+				65FC33E820E13577006DE3F1 /* Sources */,
+				65FC33E920E13577006DE3F1 /* Frameworks */,
+				65FC33EA20E13577006DE3F1 /* Resources */,
+				DB4C1590B13D23DE052B5284 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BubbleCarWash;
+			productName = BubbleCarWash;
+			productReference = 65FC33EC20E13577006DE3F1 /* BubbleCarWash.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		65FC33E420E13576006DE3F1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0940;
+				ORGANIZATIONNAME = "Sunshine Girl";
+				TargetAttributes = {
+					65FC33EB20E13577006DE3F1 = {
+						CreatedOnToolsVersion = 9.4.1;
+					};
+				};
+			};
+			buildConfigurationList = 65FC33E720E13576006DE3F1 /* Build configuration list for PBXProject "BubbleCarWash" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 65FC33E320E13576006DE3F1;
+			productRefGroup = 65FC33ED20E13577006DE3F1 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				65FC33EB20E13577006DE3F1 /* BubbleCarWash */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		65FC33EA20E13577006DE3F1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				65C5AFC82135A45100727122 /* Profile.json in Resources */,
+				65C5B0982135AA8100727122 /* WashManagerCell.xib in Resources */,
+				65C5B0E42135AFC900727122 /* Home.storyboard in Resources */,
+				65C5B0752135AA8100727122 /* PersonalInfo.storyboard in Resources */,
+				65C5AF592135A32900727122 /* Login.storyboard in Resources */,
+				65FC341C20E13B83006DE3F1 /* Main.storyboard in Resources */,
+				65FC33FC20E1357A006DE3F1 /* LaunchScreen.storyboard in Resources */,
+				65FC33F920E1357A006DE3F1 /* Assets.xcassets in Resources */,
+				65C5B0912135AA8100727122 /* WashManager.storyboard in Resources */,
+				65C5B0B62135AA8200727122 /* Certification.storyboard in Resources */,
+				65C5AFC42135A45100727122 /* ProfileCell.xib in Resources */,
+				65C5AFC92135A45100727122 /* Profile.storyboard in Resources */,
+				65C5B10A2135B0F800727122 /* Map.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		DB4C1590B13D23DE052B5284 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-BubbleCarWash/Pods-BubbleCarWash-resources.sh",
+				"${PODS_ROOT}/AMap2DMap/MAMapKit.framework/AMap.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AMap.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BubbleCarWash/Pods-BubbleCarWash-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E9324C200DD56CC4DA239171 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BubbleCarWash-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		65FC33E820E13577006DE3F1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				65C5B10C2135B0F800727122 /* CarWashListTableViewController.m in Sources */,
+				65EA90EF212B19C90095F72B /* LYKeyChainStore.m in Sources */,
+				65C5B0882135AA8100727122 /* ExpensesRecordCell.m in Sources */,
+				65C5AFC52135A45100727122 /* ProfileCell.m in Sources */,
+				65C5B0832135AA8100727122 /* IncomeModel.m in Sources */,
+				6556AE5C211B282E0017B79A /* GlobalMethods.m in Sources */,
+				65C5B10D2135B0F800727122 /* CustomAnnotationView.m in Sources */,
+				65C5B0802135AA8100727122 /* ExpensesRecordViewController.m in Sources */,
+				65C5B10B2135B0F800727122 /* MapViewController.m in Sources */,
+				65C5B0E62135AFC900727122 /* HomeModel.m in Sources */,
+				65C5B0B92135AA8200727122 /* ModelCertificationCell.m in Sources */,
+				65C5B07A2135AA8100727122 /* PersonalInfoCell.m in Sources */,
+				65C5B0C02135AE6000727122 /* NSString+Category.m in Sources */,
+				65FC341A20E13B74006DE3F1 /* MainViewController.m in Sources */,
+				65C5B0A52135AA8100727122 /* CommentViewController.m in Sources */,
+				65C5B08C2135AA8100727122 /* WashServiceManagerViewController.m in Sources */,
+				65C5B0B72135AA8200727122 /* ModelCertificationViewController.m in Sources */,
+				65C5AFC62135A45100727122 /* UserManager.m in Sources */,
+				65C5AF582135A32900727122 /* LoginViewController.m in Sources */,
+				65C5B0B82135AA8200727122 /* CertificationViewController.m in Sources */,
+				65FC33FF20E1357A006DE3F1 /* main.m in Sources */,
+				65C5B09C2135AA8100727122 /* IntegralConvertViewController.m in Sources */,
+				65C5B0C82135AEA300727122 /* BaseNavigationViewController.m in Sources */,
+				65C5B0812135AA8100727122 /* IncomeListViewController.m in Sources */,
+				65C5B0AA2135AA8100727122 /* CommentCell.m in Sources */,
+				65C5B09F2135AA8100727122 /* IntegralConvertCell.m in Sources */,
+				65C5B0872135AA8100727122 /* IncomeListCell.m in Sources */,
+				65C5B0712135AA8100727122 /* PersonalInfoViewController.m in Sources */,
+				65C5B10F2135B0F800727122 /* WeatherViewController.m in Sources */,
+				65C5B08A2135AA8100727122 /* CreateProductViewController.m in Sources */,
+				65C5B10E2135B0F800727122 /* CarWashListCell.m in Sources */,
+				65C5B0C12135AE6000727122 /* UIColor+Category.m in Sources */,
+				65C5B1102135B0F800727122 /* WeatherInfoCell.m in Sources */,
+				65C5B08F2135AA8100727122 /* CommodityManagerViewController.m in Sources */,
+				65C5B1062135B0F800727122 /* CommodityRecommendationViewController.m in Sources */,
+				65C5B0952135AA8100727122 /* CreateProductCell.m in Sources */,
+				65C5AFCD2135A47B00727122 /* UserInfoModel.m in Sources */,
+				65C5B0BA2135AA8200727122 /* CertificationCell.m in Sources */,
+				65C5B0C72135AEA300727122 /* ParentViewController.m in Sources */,
+				65C5B1082135B0F800727122 /* CommodityHorizontalFlowLayout.m in Sources */,
+				65C5B1092135B0F800727122 /* NearWashInfoCell.m in Sources */,
+				65C5B0E52135AFC900727122 /* LYPageControl.m in Sources */,
+				6593AB85212942AA002F92F6 /* NetworkTools.m in Sources */,
+				65C5B09D2135AA8100727122 /* CouponViewController.m in Sources */,
+				65FC33F120E13577006DE3F1 /* AppDelegate.m in Sources */,
+				65C5B0AF2135AA8200727122 /* EditTradeStateViewController.m in Sources */,
+				65C5B0962135AA8100727122 /* WashManagerCell.m in Sources */,
+				65C5AFCA2135A45100727122 /* ProfileViewController.m in Sources */,
+				65C5B0A72135AA8100727122 /* DiscussViewController.m in Sources */,
+				65C5B0B42135AA8200727122 /* TradeStateCell.m in Sources */,
+				65C5B1072135B0F800727122 /* CommodityRecommendationCell.m in Sources */,
+				65C5B0A22135AA8100727122 /* CouponCell.m in Sources */,
+				65C5AFC72135A45100727122 /* ProfileModel.m in Sources */,
+				65C5B0E32135AFC900727122 /* HomeViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		65FC33FA20E1357A006DE3F1 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				65FC33FB20E1357A006DE3F1 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		65FC340020E1357A006DE3F1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		65FC340120E1357A006DE3F1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		65FC340320E1357A006DE3F1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 322598973AA2480B0A9F7672 /* Pods-BubbleCarWash.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2QLC8E6LG3;
+				INFOPLIST_FILE = BubbleCarWash/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.cqnu.BubbleCarWash;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		65FC340420E1357A006DE3F1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6922DD9F059ECB8EEB30484D /* Pods-BubbleCarWash.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2QLC8E6LG3;
+				INFOPLIST_FILE = BubbleCarWash/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.cqnu.BubbleCarWash;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		65FC33E720E13576006DE3F1 /* Build configuration list for PBXProject "BubbleCarWash" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				65FC340020E1357A006DE3F1 /* Debug */,
+				65FC340120E1357A006DE3F1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		65FC340220E1357A006DE3F1 /* Build configuration list for PBXNativeTarget "BubbleCarWash" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				65FC340320E1357A006DE3F1 /* Debug */,
+				65FC340420E1357A006DE3F1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 65FC33E420E13576006DE3F1 /* Project object */;
+}
