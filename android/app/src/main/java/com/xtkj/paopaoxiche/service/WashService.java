@@ -89,4 +89,10 @@ public interface WashService {
 
     @GET("wash/getRecentWashList")
     Call<RecentWashListBean> getRecentWashList(@Query("washId") int washId, @Query("count") int count);
+
+    @Multipart
+    @POST("wash/registerWash")
+    Call<NoDataBean> certification(@Part("phone") RequestBody phone, @Part("name") RequestBody name, @Part("address") RequestBody address,
+                              @Part("coordX") RequestBody coordX, @Part("coordY") RequestBody coordY,
+                                   @Part MultipartBody.Part license, @Part MultipartBody.Part washCard, @Part MultipartBody.Part idCardPositive, @Part MultipartBody.Part idCardBack);
 }

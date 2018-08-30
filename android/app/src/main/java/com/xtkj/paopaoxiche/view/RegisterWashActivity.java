@@ -2,23 +2,33 @@ package com.xtkj.paopaoxiche.view;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.xtkj.paopaoxiche.R;
+import com.xtkj.paopaoxiche.application.MyLocation;
+import com.xtkj.paopaoxiche.base.BaseGaodeActivity;
+import com.xtkj.paopaoxiche.bean.NoDataBean;
 import com.xtkj.paopaoxiche.bean.WashServicesBean;
 import com.xtkj.paopaoxiche.bean.WashShopBean;
 import com.xtkj.paopaoxiche.bean.WeatherForecastBean;
 import com.xtkj.paopaoxiche.bean.WeatherRealTimeBean;
+import com.xtkj.paopaoxiche.http.ApiField;
+import com.xtkj.paopaoxiche.http.RetrofitClient;
 import com.xtkj.paopaoxiche.model.DriverHomeModel;
+import com.xtkj.paopaoxiche.service.WashService;
 import com.xtkj.paopaoxiche.utils.BitmapUtil;
 import com.xtkj.paopaoxiche.utils.UriUtils;
 import com.xtkj.paopaoxiche.widget.MarqueeTextView;
@@ -31,15 +41,21 @@ import java.util.Date;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-public class RegisterWashActivity extends AppCompatActivity implements DriverHomeModel.DriverHomeListener {
+public class RegisterWashActivity extends BaseGaodeActivity implements DriverHomeModel.DriverHomeListener {
 
     @BindView(R.id.back_arrow_image_button)
     ImageButton backArrowImageButton;
     @BindView(R.id.complete_button)
     Button completeButton;
     @BindView(R.id.address_marquee_text_view)
-    MarqueeTextView addressMarqueeTextView;
+    TextView addressMarqueeTextView;
     @BindView(R.id.upload_yingyezhizhao_button)
     Button uploadYingyezhizhaoButton;
     @BindView(R.id.yingyezhizhao_image_button)
@@ -68,6 +84,7 @@ public class RegisterWashActivity extends AppCompatActivity implements DriverHom
     File shenfenzhengfanmianFile;
 
     String phone;
+    String address;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +98,12 @@ public class RegisterWashActivity extends AppCompatActivity implements DriverHom
 
                 }, 1);
 
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
+                    0);
+        }
+
         DriverHomeModel.getInstance().addListener(this);
         DriverHomeModel.getInstance().initLocation(this);
 
@@ -89,6 +112,7 @@ public class RegisterWashActivity extends AppCompatActivity implements DriverHom
 
     @Override
     public void getLocationSuccess(String address) {
+        this.address = address;
         addressMarqueeTextView.setText(address);
     }
 
@@ -145,6 +169,18 @@ public class RegisterWashActivity extends AppCompatActivity implements DriverHom
                 finish();
                 break;
             case R.id.complete_button:
+                if (yingyezhizhaoFile != null
+                        && shenfenzhengfanmianFile != null
+                        && shenfenzhengzhengmianFile != null
+                        && address != null) {
+                    certification();
+                } else {
+                    if (address == null) {
+                        Toast.makeText(this, "获取当前位置失败，请退出页面再重新进入", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(this, "请上传工商认证文件", Toast.LENGTH_LONG).show();
+                    }
+                }
                 break;
             case R.id.upload_yingyezhizhao_button:
                 pickImage(yingyezhizhaoType);
@@ -222,5 +258,71 @@ public class RegisterWashActivity extends AppCompatActivity implements DriverHom
             return null;
         }
         return outputFile;
+    }
+
+    @Override
+    protected void initViews() {
+
+    }
+
+    @Override
+    protected void initValues() {
+
+    }
+
+    @Override
+    protected void initListeners() {
+
+    }
+
+    private void certification() {
+
+        if (xichezhengFile == null) {
+            xichezhengFile = yingyezhizhaoFile;
+        }
+        RequestBody requestFile1 = RequestBody.create(MediaType.parse("multipart/form-data"), yingyezhizhaoFile);
+        MultipartBody.Part license =
+                MultipartBody.Part.createFormData("license", yingyezhizhaoFile.getName(), requestFile1);
+
+        RequestBody requestFile2 = RequestBody.create(MediaType.parse("multipart/form-data"), xichezhengFile);
+        MultipartBody.Part washCard =
+                MultipartBody.Part.createFormData("washCard", xichezhengFile.getName(), requestFile2);
+
+        RequestBody requestFile3 = RequestBody.create(MediaType.parse("multipart/form-data"), shenfenzhengzhengmianFile);
+        MultipartBody.Part idCardPositive =
+                MultipartBody.Part.createFormData("idCardPositive", shenfenzhengzhengmianFile.getName(), requestFile3);
+
+        RequestBody requestFile4 = RequestBody.create(MediaType.parse("multipart/form-data"), shenfenzhengfanmianFile);
+        MultipartBody.Part idCardBack =
+                MultipartBody.Part.createFormData("idCardBack", shenfenzhengfanmianFile.getName(), requestFile4);
+
+        RequestBody phoneBody =
+                RequestBody.create(MediaType.parse("multipart/form-data"), phone);
+        RequestBody addressBody =
+                RequestBody.create(MediaType.parse("multipart/form-data"), address);
+        RequestBody xBody =
+                RequestBody.create(MediaType.parse("multipart/form-data"), MyLocation.lng);
+        RequestBody yBody =
+                RequestBody.create(MediaType.parse("multipart/form-data"), MyLocation.lat);
+
+        RetrofitClient.newInstance(ApiField.BASEURL)
+                .create(WashService.class)
+                .certification(phoneBody, phoneBody, addressBody, xBody, yBody, license, washCard, idCardPositive, idCardBack)
+                .enqueue(new Callback<NoDataBean>() {
+                    @Override
+                    public void onResponse(Call<NoDataBean> call, Response<NoDataBean> response) {
+                        if (response.body().getCode() == 200) {
+                            Toast.makeText(RegisterWashActivity.this, "提交成功，请等待审核", Toast.LENGTH_LONG).show();
+                            finish();
+                        } else {
+                            Toast.makeText(RegisterWashActivity.this, "提交失败，请检查提交内容", Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<NoDataBean> call, Throwable t) {
+                        Toast.makeText(RegisterWashActivity.this, "网络连接失败，请稍后再试", Toast.LENGTH_LONG).show();
+                    }
+                });
     }
 }

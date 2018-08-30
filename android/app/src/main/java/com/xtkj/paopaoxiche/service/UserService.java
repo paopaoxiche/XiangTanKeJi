@@ -87,4 +87,5 @@ public interface UserService {
     @FormUrlEncoded
     @POST("carOwner/exchangePoint")
     Call<NoDataBean> exchangePoint(@Field("couponId") String couponId);
+
 }
