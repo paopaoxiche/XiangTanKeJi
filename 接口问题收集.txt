@@ -15,6 +15,10 @@
 
 我的评价返回的json数据格式未给出（已解决）
 
+车主帐号18883398513,自动登录验证token一直返回403
+请求url：http://101.200.63.245:8080/user/checkCarOwner
+请求参数：authentication=user_id=100000038,token=ed9599fc880f436b88538faff2b335d2
+
 接口http://101.200.63.245:8080/wash/getNearbyWashServiceList，不应该做5元限制，只有地图处需要提供一个接口专门请求5元洗车服务
 
 获取我的消费记录 接口，商品没有返回图片的url
