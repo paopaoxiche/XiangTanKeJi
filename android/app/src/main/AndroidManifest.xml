@@ -43,6 +43,18 @@
 
         <service android:name="com.amap.api.location.APSService" />
 
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="net.csdn.blog.ruancoder.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+
         <activity android:name=".view.GuideActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

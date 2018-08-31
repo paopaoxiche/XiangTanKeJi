@@ -1,6 +1,8 @@
 package com.xtkj.paopaoxiche.model;
 
 
+import com.xtkj.paopaoxiche.bean.UpdateBean;
+
 public class UserInfo {
     private static String avatar;
     private static int id;
@@ -14,6 +16,8 @@ public class UserInfo {
     private static int authStatus;
     private static int washId;
     private static int washCount;
+
+    private static UpdateBean updateBean;
 
     private static boolean driver = true;
 
@@ -115,6 +119,14 @@ public class UserInfo {
 
     public static boolean avatarNotNull() {
         return avatar != null && avatar.length() > 0;
+    }
+
+    public static UpdateBean getUpdateBean() {
+        return updateBean;
+    }
+
+    protected static void setUpdateBean(UpdateBean updateBean) {
+        UserInfo.updateBean = updateBean;
     }
 }
 

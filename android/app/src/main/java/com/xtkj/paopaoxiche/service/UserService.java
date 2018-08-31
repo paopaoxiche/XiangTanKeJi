@@ -7,6 +7,7 @@ import com.xtkj.paopaoxiche.bean.EvaluateListBean;
 import com.xtkj.paopaoxiche.bean.LoginBean;
 import com.xtkj.paopaoxiche.bean.MyCouponListBean;
 import com.xtkj.paopaoxiche.bean.NoDataBean;
+import com.xtkj.paopaoxiche.bean.UpdateBean;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -88,4 +89,6 @@ public interface UserService {
     @POST("carOwner/exchangePoint")
     Call<NoDataBean> exchangePoint(@Field("couponId") String couponId);
 
+    @GET("user/getAppVersion")
+    Call<UpdateBean> checkUpdate(@Query("systemType") String systemType, @Query("version") String version) ;
 }

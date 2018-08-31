@@ -1,5 +1,6 @@
 package com.xtkj.paopaoxiche.presenter;
 
+import com.xtkj.paopaoxiche.bean.UpdateBean;
 import com.xtkj.paopaoxiche.contract.IDriverContract;
 import com.xtkj.paopaoxiche.model.UserModel;
 
@@ -26,6 +27,14 @@ public class DriverMyInfoPresenterImpl implements IDriverContract.IMyInfoPresent
     @Override
     public void modifyUserInfo(String modifyType) {
         myInfoView.updateUserInfo(modifyType);
+    }
+
+    @Override
+    public void checkUpdate(UpdateBean updateBean) {
+        if (!updateBean.getData().isHasNewApp()) {
+            return;
+        }
+        myInfoView.hasUpdate();
     }
 
     @Override

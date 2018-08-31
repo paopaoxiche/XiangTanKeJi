@@ -8,6 +8,7 @@ import com.xtkj.paopaoxiche.application.BaseApplication;
 import com.xtkj.paopaoxiche.bean.CarWashInfoBean;
 import com.xtkj.paopaoxiche.bean.LoginBean;
 import com.xtkj.paopaoxiche.bean.NoDataBean;
+import com.xtkj.paopaoxiche.bean.UpdateBean;
 import com.xtkj.paopaoxiche.http.ApiField;
 import com.xtkj.paopaoxiche.http.RetrofitClient;
 import com.xtkj.paopaoxiche.service.UserService;
@@ -77,6 +78,8 @@ public class UserModel {
     public interface UserInfoListener {
         void modifyUserInfo(String modifyType);
 
+        void checkUpdate(UpdateBean updateBean);
+
         void timeOut(String modifyType);
     }
 
@@ -106,6 +109,36 @@ public class UserModel {
                         }
                         for (LoginListener loginListener : loginListenerList) {
                             loginListener.timeOut();
+                        }
+                    }
+                });
+    }
+
+    public void checkUpdate(String version){
+        RetrofitClient.newInstance(ApiField.BASEURL)
+                .create(UserService.class)
+                .checkUpdate("0", version)
+                .enqueue(new Callback<UpdateBean>() {
+                    @Override
+                    public void onResponse(Call<UpdateBean> call, Response<UpdateBean> response) {
+                        if (userInfoListenerList == null) {
+                            return;
+                        }
+                        if (response.body().getCode() != 401) {
+                            UserInfo.setUpdateBean(response.body());
+                            for (UserInfoListener userInfoListener : userInfoListenerList) {
+                                userInfoListener.checkUpdate(response.body());
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<UpdateBean> call, Throwable t) {
+                        if (userInfoListenerList == null) {
+                            return;
+                        }
+                        for (UserInfoListener loginListener : userInfoListenerList) {
+                            loginListener.timeOut("0");
                         }
                     }
                 });
