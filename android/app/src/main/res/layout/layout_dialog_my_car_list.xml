@@ -27,6 +27,18 @@
             android:textColor="@color/title_black"
             android:textSize="24sp"/>
 
+        <TextView
+            android:id="@+id/tv_add_car"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="十"
+            android:textColor="@color/title_black"
+            android:textSize="24sp"
+            android:layout_alignParentRight="true"
+            android:padding="@dimen/dp16"
+            android:includeFontPadding="false"/>
+
     </RelativeLayout>
 
     <RelativeLayout
