@@ -2,6 +2,7 @@ package com.xtkj.paopaoxiche.service;
 
 import com.xtkj.paopaoxiche.bean.LoginBean;
 import com.xtkj.paopaoxiche.bean.NoDataBean;
+import com.xtkj.paopaoxiche.bean.SellingServicesBean;
 import com.xtkj.paopaoxiche.bean.WashCommodityBean;
 import com.xtkj.paopaoxiche.bean.WashServiceListBean;
 import com.xtkj.paopaoxiche.bean.WashServicesBean;
@@ -45,6 +46,11 @@ public interface WashService {
 
     @GET("wash/getCommodityList")
     Call<WashCommodityBean> getGoodsList(@Query("washId") Integer washId, @Query("pageIndex") Integer pageIndex, @Query("pageSize") int pageSize);
+
+
+    @GET("wash/getServiceList")
+    Call<SellingServicesBean> getServiceList(@Query("washId") Integer washId, @Query("pageIndex") Integer pageIndex, @Query("pageSize") int pageSize);
+
 
     @Multipart
     @POST("commodity/addCommodity")

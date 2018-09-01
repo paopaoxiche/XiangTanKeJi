@@ -32,11 +32,6 @@ public class HomeWashServiceAdapter extends RecyclerView.Adapter<HomeWashService
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_home_yard, viewGroup, false);
 
-        view.setOnClickListener(view1 -> {
-            Intent intent = new Intent(mContext, WashServiceActivity.class);
-
-            mContext.startActivity(intent);
-        });
 
         ViewHolder vh = new ViewHolder(view);
         return vh;
@@ -51,6 +46,12 @@ public class HomeWashServiceAdapter extends RecyclerView.Adapter<HomeWashService
         viewHolder.honorTimes.setText(String.format("%s", dataList.get(position).getHonor()));
         viewHolder.washTimes.setText(String.format("%s", dataList.get(position).getWashCount()));
         viewHolder.yardDistance.setText(String.format("%sm", dataList.get(position).getDistance()));
+        viewHolder.itemView.setOnClickListener(view1 -> {
+            Intent intent = new Intent(mContext, WashServiceActivity.class);
+            intent.putExtra("washId", dataList.get(position).getWashId());
+            mContext.startActivity(intent);
+        });
+
     }
 
     @Override

@@ -36,13 +36,7 @@ public class WashServiceAdapter extends RecyclerView.Adapter<WashServiceAdapter.
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_wash_car_map, viewGroup, false);
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, WashServiceActivity.class);
-                context.startActivity(intent);
-            }
-        });
+
         ViewHolder vh = new ViewHolder(view);
         return vh;
     }
@@ -63,6 +57,14 @@ public class WashServiceAdapter extends RecyclerView.Adapter<WashServiceAdapter.
             @Override
             public void onClick(View view) {
                 mView.startNavigation(datas.getData().get(position).getLng(),datas.getData().get(position).getLat());
+            }
+        });
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, WashServiceActivity.class);
+                intent.putExtra("washId", datas.getData().get(position).getWashId());
+                context.startActivity(intent);
             }
         });
     }
