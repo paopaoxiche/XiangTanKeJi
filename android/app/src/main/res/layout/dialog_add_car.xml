@@ -82,6 +82,7 @@
                 android:id="@+id/rb_small_car"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/dp40"
+                android:checked="true"
                 android:text="小型车（七座及以下）"/>
         </RadioGroup>
 

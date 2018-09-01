@@ -106,4 +106,8 @@ public interface WashService {
 
     @GET("wash/getEarningsList")
     Call<IncomeBean> getIncome(@Query("washId") int washId, @Query("month") int month);
+
+    @Multipart
+    @POST("car/register")
+    Call<NoDataBean> carRegister(@Part("model") int carType, @Part MultipartBody.Part cover, @Part MultipartBody.Part back);
 }
