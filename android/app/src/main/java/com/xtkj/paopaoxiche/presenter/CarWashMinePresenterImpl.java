@@ -20,7 +20,7 @@ public class CarWashMinePresenterImpl implements ICarWashContract.IMinePresenter
     @Override
     public void onCreate() {
         UserModel.getInstance().addListener(this);
-        UserModel.getInstance().checkUpdate("1.0.0");
+        UserModel.getInstance().checkUpdate("1.1.0");
     }
 
     @Override

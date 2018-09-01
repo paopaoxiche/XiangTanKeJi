@@ -1,8 +1,11 @@
 package com.xtkj.paopaoxiche.service;
 
 import com.xtkj.paopaoxiche.bean.CouponListBean;
+import com.xtkj.paopaoxiche.bean.IncomeBean;
 import com.xtkj.paopaoxiche.bean.LoginBean;
 import com.xtkj.paopaoxiche.bean.NoDataBean;
+import com.xtkj.paopaoxiche.bean.SellingServicesBean;
+
 import com.xtkj.paopaoxiche.bean.RecentWashListBean;
 import com.xtkj.paopaoxiche.bean.WashCommodityBean;
 import com.xtkj.paopaoxiche.bean.WashServiceListBean;
@@ -47,6 +50,11 @@ public interface WashService {
 
     @GET("wash/getCommodityList")
     Call<WashCommodityBean> getGoodsList(@Query("washId") Integer washId, @Query("pageIndex") Integer pageIndex, @Query("pageSize") int pageSize);
+
+
+    @GET("wash/getServiceList")
+    Call<SellingServicesBean> getServiceList(@Query("washId") Integer washId, @Query("pageIndex") Integer pageIndex, @Query("pageSize") int pageSize);
+
 
     @Multipart
     @POST("commodity/addCommodity")
@@ -95,4 +103,7 @@ public interface WashService {
     Call<NoDataBean> certification(@Part("phone") RequestBody phone, @Part("name") RequestBody name, @Part("address") RequestBody address,
                               @Part("coordX") RequestBody coordX, @Part("coordY") RequestBody coordY,
                                    @Part MultipartBody.Part license, @Part MultipartBody.Part washCard, @Part MultipartBody.Part idCardPositive, @Part MultipartBody.Part idCardBack);
+
+    @GET("wash/getEarningsList")
+    Call<IncomeBean> getIncome(@Query("washId") int washId, @Query("month") int month);
 }

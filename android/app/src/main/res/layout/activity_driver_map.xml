@@ -35,6 +35,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
                     <ImageButton
+                        android:id="@+id/wuyuanxiche_image_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/ripple_bg_white"
@@ -45,7 +46,7 @@
                         android:layout_marginEnd="12dp"
                         android:textSize="18sp"
                         android:textColor="#333"
-                        android:text="自助洗车"/>
+                        android:text="五元洗车"/>
                 </LinearLayout>
             </RelativeLayout>
         </android.support.v7.widget.Toolbar>

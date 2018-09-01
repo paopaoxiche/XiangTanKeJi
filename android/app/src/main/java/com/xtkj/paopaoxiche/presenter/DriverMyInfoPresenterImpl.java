@@ -17,6 +17,7 @@ public class DriverMyInfoPresenterImpl implements IDriverContract.IMyInfoPresent
     @Override
     public void onCreate() {
         UserModel.getInstance().addListener(this);
+        UserModel.getInstance().checkUpdate("1.1.0");
     }
 
     @Override

@@ -84,7 +84,7 @@ public class PreferUtils {
     }
 
     public void putLong(String key, long value) {
-        mPref.edit().putLong(key, value);
+        mPref.edit().putLong(key, value).apply();
     }
 
     public long getLong(String key, long defValue) {
