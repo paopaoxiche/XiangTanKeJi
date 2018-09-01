@@ -3,6 +3,7 @@ package com.xtkj.paopaoxiche.view.view;
 import android.content.Context;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -42,6 +43,8 @@ public class ModifyUserInfoDialog extends FullScreenWithStatusBarDialog implemen
     TextView joinTimeTextView;
     @BindView(R.id.ib_enter_car_type_list)
     ImageButton ibEnterCarTypeList;
+    @BindView(R.id.enter_car_layout)
+    RelativeLayout enterCarlayout;
 
     public ModifyUserInfoDialog(Context context, boolean statusBarVisible) {
         super(context, statusBarVisible);
@@ -56,6 +59,9 @@ public class ModifyUserInfoDialog extends FullScreenWithStatusBarDialog implemen
         accountTextView.setText(UserInfo.getUserPhone());
         String time = new SimpleDateFormat("yyyy-MM-dd").format(new Date(UserInfo.getRegTime()));
         joinTimeTextView.setText(time);
+        if (!UserInfo.isDriver()) {
+            enterCarlayout.setVisibility(View.GONE);
+        }
     }
 
     @Override

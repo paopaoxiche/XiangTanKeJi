@@ -45,13 +45,16 @@ import com.xtkj.paopaoxiche.base.BaseGaodeActivity;
 import com.xtkj.paopaoxiche.bean.WashServicesBean;
 import com.xtkj.paopaoxiche.contract.IDriverMapContract;
 import com.xtkj.paopaoxiche.model.DriverMapModel;
+import com.xtkj.paopaoxiche.model.UserInfo;
 import com.xtkj.paopaoxiche.presenter.DriverMapPresenterImpl;
 import com.xtkj.paopaoxiche.utils.BitmapUtil;
 import com.xtkj.paopaoxiche.utils.DensityUtil;
 
+import java.util.List;
 
 
-public class DriverMapActivity extends BaseGaodeActivity implements IDriverMapContract.IDriverMapView, AMap.OnMyLocationChangeListener, AMap.OnCameraChangeListener, RouteSearch.OnRouteSearchListener {
+public class DriverMapActivity extends BaseGaodeActivity implements IDriverMapContract.IDriverMapView, AMap.OnMyLocationChangeListener,
+        AMap.OnCameraChangeListener, RouteSearch.OnRouteSearchListener, View.OnClickListener {
 
     RecyclerView mRecyclerView;
     WashServiceAdapter washServiceAdapter;
@@ -61,6 +64,7 @@ public class DriverMapActivity extends BaseGaodeActivity implements IDriverMapCo
     RouteSearch mRouteSearch;
     DriveRouteResult mDriveRouteResult;
     AMap.InfoWindowAdapter infoWindowAdapter;
+    ImageButton wuyuanxicheImageButton;
 
     private IDriverMapContract.IDriverMapPresenter presenter = null;
 
@@ -89,6 +93,7 @@ public class DriverMapActivity extends BaseGaodeActivity implements IDriverMapCo
         mRecyclerView = (RecyclerView)findViewById(R.id.wash_yard_recyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         backButton = findViewById(R.id.back_button);
+        wuyuanxicheImageButton = findViewById(R.id.wuyuanxiche_image_button);
 
         MyLocationStyle myLocationStyle = new MyLocationStyle();
         myLocationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_LOCATE);
@@ -159,6 +164,7 @@ public class DriverMapActivity extends BaseGaodeActivity implements IDriverMapCo
         backButton.setOnClickListener(view -> {
             finish();
         });
+        wuyuanxicheImageButton.setOnClickListener(this);
     }
 
     @Override
@@ -193,21 +199,20 @@ public class DriverMapActivity extends BaseGaodeActivity implements IDriverMapCo
     }
 
     @Override
-    public void upDateService() {
+    public void upDateService(List<WashServicesBean.DataBean> dataBeanList) {
         washServiceAdapter.notifyDataSetChanged();
 
         ViewGroup.LayoutParams lp = mRecyclerView.getLayoutParams();
-        WashServicesBean washServicesBean = DriverMapModel.getInstance().getWashServicesBean();
         //list高度自适应，最大两个item的高度
-        if (washServicesBean.getData().size() > 2) {
+        if (dataBeanList.size() > 2) {
             lp.height = DensityUtil.dip2px(this,250);
         } else {
-            lp.height = DensityUtil.dip2px(this,125 * washServicesBean.getData().size());
+            lp.height = DensityUtil.dip2px(this,125 * dataBeanList.size());
         }
         mRecyclerView.setLayoutParams(lp);
-        for(int i = 0 ; i < washServicesBean.getData().size() ; i ++ ){
+        for(int i = 0 ; i < dataBeanList.size() ; i ++ ){
             int finalI = i;
-            Glide.with(this).load(washServicesBean.getData().get(i).getImage()).into(new SimpleTarget<Drawable>() {
+            Glide.with(this).load(dataBeanList.get(i).getImage()).into(new SimpleTarget<Drawable>() {
                 @Override
                 public void onResourceReady(Drawable resource, Transition<? super Drawable> transition) {
                     Bitmap bitmap = BitmapUtil.getZoomImage(BitmapUtil.drawableToBitmap(resource),40,40);
@@ -215,11 +220,11 @@ public class DriverMapActivity extends BaseGaodeActivity implements IDriverMapCo
                     Bitmap bitmap2 = BitmapUtil.getZoomImage(BitmapUtil.drawableToBitmap( getResources().getDrawable(R.drawable.anchor)),80,80);
                     bitmap = BitmapUtil.mergeBitmap(bitmap2,bitmap,20,10);
 
-                    Marker marker = aMap.addMarker(new MarkerOptions().position(new LatLng(washServicesBean.getData().get(finalI).getLat(),washServicesBean.getData().get(finalI).getLng()))
-                            .title(washServicesBean.getData().get(finalI).getName())
-                            .snippet(washServicesBean.getData().get(finalI).getDistance() + "m")
+                    Marker marker = aMap.addMarker(new MarkerOptions().position(new LatLng(dataBeanList.get(finalI).getLat(),dataBeanList.get(finalI).getLng()))
+                            .title(dataBeanList.get(finalI).getName())
+                            .snippet(dataBeanList.get(finalI).getDistance() + "m")
                             .icon(BitmapDescriptorFactory.fromBitmap(bitmap)));
-                    marker.setObject(washServicesBean.getData().get(finalI));
+                    marker.setObject(dataBeanList.get(finalI));
                 }
             });
 
@@ -296,5 +301,20 @@ public class DriverMapActivity extends BaseGaodeActivity implements IDriverMapCo
     @Override
     public void onRideRouteSearched(RideRouteResult rideRouteResult, int i) {
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.wuyuanxiche_image_button) {
+            if (UserInfo.isIsCheckWuYuanXiChe()) {
+                wuyuanxicheImageButton.setImageResource(R.drawable.btn_radio_nor);
+                UserInfo.setIsCheckWuYuanXiChe(false);
+                presenter.checkWuYuanXiChe();
+            } else {
+                wuyuanxicheImageButton.setImageResource(R.drawable.btn_radio_true);
+                UserInfo.setIsCheckWuYuanXiChe(true);
+                presenter.checkWuYuanXiChe();
+            }
+        }
     }
 }

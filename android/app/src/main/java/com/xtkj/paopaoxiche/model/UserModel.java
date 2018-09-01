@@ -338,6 +338,7 @@ public class UserModel {
                             UserInfo.setAuthStatus(carWashInfoBean.getData().getAuthStatus());
                             UserInfo.setWashId(carWashInfoBean.getData().getId());
                             UserInfo.setWashCount(carWashInfoBean.getData().getWashCount());
+                            UserInfo.setHonor(carWashInfoBean.getData().getHonor());
                             for (LoginListener loginListener : loginListenerList) {
                                 loginListener.getCarWashInfoSuccess();
                             }
@@ -382,7 +383,7 @@ public class UserModel {
         UserInfo.setAvatar(preferUtils.getString(AppConstant.AVATAR));
         UserInfo.setNickName(preferUtils.getString(AppConstant.NICK_NAME));
         UserInfo.setUserPhone(preferUtils.getString(AppConstant.PHONE));
-//        UserInfo.setScore(preferUtils.getInt(AppConstant.SCORE));
+        UserInfo.setScore(preferUtils.getInt(AppConstant.SCORE));
         UserInfo.setRegTime(preferUtils.getLong(AppConstant.REGISTER_TIME, 0));
         Authentication.setUser_id(UserInfo.getId());
         Authentication.setToken(UserInfo.getToken());

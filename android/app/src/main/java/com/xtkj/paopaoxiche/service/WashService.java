@@ -1,6 +1,7 @@
 package com.xtkj.paopaoxiche.service;
 
 import com.xtkj.paopaoxiche.bean.CouponListBean;
+import com.xtkj.paopaoxiche.bean.IncomeBean;
 import com.xtkj.paopaoxiche.bean.LoginBean;
 import com.xtkj.paopaoxiche.bean.NoDataBean;
 import com.xtkj.paopaoxiche.bean.SellingServicesBean;
@@ -102,4 +103,7 @@ public interface WashService {
     Call<NoDataBean> certification(@Part("phone") RequestBody phone, @Part("name") RequestBody name, @Part("address") RequestBody address,
                               @Part("coordX") RequestBody coordX, @Part("coordY") RequestBody coordY,
                                    @Part MultipartBody.Part license, @Part MultipartBody.Part washCard, @Part MultipartBody.Part idCardPositive, @Part MultipartBody.Part idCardBack);
+
+    @GET("wash/getEarningsList")
+    Call<IncomeBean> getIncome(@Query("washId") int washId, @Query("month") int month);
 }
