@@ -196,4 +196,43 @@
             android:background="@color/gray" />
     </LinearLayout>
 
+    <RelativeLayout
+        android:id="@+id/enter_car_layout"
+        android:layout_marginTop="@dimen/dp12"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        android:layout_gravity="center_vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="24dp"
+            android:text="车型认证"
+            android:textColor="@color/black"
+            android:textSize="16sp"/>
+
+        <ImageButton
+            android:id="@+id/ib_enter_car_type_list"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:scaleType="center"
+            android:background="@android:color/transparent"
+            android:layout_alignParentRight="true"
+            android:padding="16dp"
+            android:src="@drawable/btn_nextpag" />
+
+        <TextView
+            android:id="@+id/tv_car_authentication_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/ib_enter_car_type_list"
+            android:layout_marginRight="11dp"
+            android:src="@drawable/avatar_man"
+            android:includeFontPadding="false"
+            android:textSize="@dimen/sp16"
+            android:textColor="@color/red"/>
+    </RelativeLayout>
+
 </LinearLayout>

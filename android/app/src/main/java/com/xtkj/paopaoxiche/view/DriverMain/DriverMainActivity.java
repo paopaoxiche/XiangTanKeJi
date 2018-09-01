@@ -1,9 +1,13 @@
 package com.xtkj.paopaoxiche.view.DriverMain;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Parcelable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
@@ -15,14 +19,25 @@ import android.widget.Toast;
 
 import com.xtkj.paopaoxiche.R;
 import com.xtkj.paopaoxiche.base.BaseGaodeActivity;
+import com.xtkj.paopaoxiche.event.BaseEvent;
+import com.xtkj.paopaoxiche.model.UserModel;
 import com.xtkj.paopaoxiche.presenter.DriverHomePresenterImpl;
 import com.xtkj.paopaoxiche.presenter.DriverMyInfoPresenterImpl;
 import com.xtkj.paopaoxiche.base.BaseFragmemt;
 import com.xtkj.paopaoxiche.bean.WeatherRealTimeBean;
 import com.xtkj.paopaoxiche.contract.IDriverContract;
 import com.xtkj.paopaoxiche.presenter.DriverPresenterImpl;
+import com.xtkj.paopaoxiche.utils.BitmapUtil;
+import com.xtkj.paopaoxiche.utils.UriUtils;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 
 public class DriverMainActivity extends BaseGaodeActivity implements IDriverContract.IDriverView {
@@ -55,6 +70,8 @@ public class DriverMainActivity extends BaseGaodeActivity implements IDriverCont
                 },
                 PERMISSION_REQUEST_CODE);
 
+        EventBus.getDefault().register(this);
+
         initViews();
         initValues();
         initListeners();
@@ -73,6 +90,7 @@ public class DriverMainActivity extends BaseGaodeActivity implements IDriverCont
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
     @Override
@@ -135,7 +153,7 @@ public class DriverMainActivity extends BaseGaodeActivity implements IDriverCont
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-//        super.onSaveInstanceState(outState);
+        super.onSaveInstanceState(outState);
     }
 
     @Override
@@ -146,5 +164,73 @@ public class DriverMainActivity extends BaseGaodeActivity implements IDriverCont
             Toast.makeText(this, "再按一次退出", Toast.LENGTH_SHORT).show();
             firstPressedTime = System.currentTimeMillis();
         }
+    }
+
+    private void pickImage(int type) {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            intent.setAction(Intent.ACTION_OPEN_DOCUMENT);
+        } else {
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+        }
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        startActivityForResult(intent, type);
+    }
+
+    @Subscribe
+    public void onEventMainThread(BaseEvent baseEvent) {
+        switch (baseEvent.getType()) {
+            case BaseEvent.CAR_WASH_PICK_AVATAR:
+            case BaseEvent.CAR_PHOTO_BACK:
+            case BaseEvent.CAR_PHOTO_CONER:
+                pickImage(baseEvent.getType());
+                break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (data == null) {
+            return;
+        }
+        String path = UriUtils.getImagePath(this, data.getData());
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == BaseEvent.CAR_WASH_PICK_AVATAR) {
+            Bitmap bitmap = BitmapUtil.decodeSampledBitmapFromFileForRect(path, 640, 640);
+            String targetPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
+                    + File.separator + "MyTestImage" + File.separator
+                    + new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date()) + ".jpg";
+            UserModel.getInstance().updateUserInfo(compressImage(bitmap, targetPath));
+
+        }
+        if(requestCode == BaseEvent.CAR_PHOTO_CONER) {
+            EventBus.getDefault().post(new BaseEvent(BaseEvent.SET_CAR_COVER, path));
+        }
+        if(requestCode == BaseEvent.CAR_PHOTO_BACK) {
+            EventBus.getDefault().post(new BaseEvent(BaseEvent.SET_CAR_BACK, path));
+        }
+    }
+
+    private File compressImage(Bitmap bm, String targetPath) {
+
+        int quality = 80;//压缩比例0-100
+
+        File outputFile = new File(targetPath);
+        try {
+            if (!outputFile.exists()) {
+                outputFile.getParentFile().mkdirs();
+                //outputFile.createNewFile();
+            } else {
+                outputFile.delete();
+            }
+            FileOutputStream out = new FileOutputStream(outputFile);
+            bm.compress(Bitmap.CompressFormat.JPEG, quality, out);
+            out.close();
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return null;
+        }
+        return outputFile;
     }
 }

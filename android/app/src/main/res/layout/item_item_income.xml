@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="52dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/car_image_view"
+            android:layout_width="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_height="32dp"
+            android:layout_marginLeft="20dp"/>
+
+        <TextView
+            android:id="@+id/money_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:textColor="@color/black"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/car_type_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_toRightOf="@id/car_image_view"
+            android:layout_toLeftOf="@id/money_text_view"
+            android:layout_centerVertical="true"
+            android:textSize="16sp"
+            android:textColor="@color/black"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

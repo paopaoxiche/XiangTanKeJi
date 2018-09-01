@@ -34,6 +34,7 @@ public class CarWashInfoBean {
         private int authStatus;
         private int id;
         private int washCount;
+        private String honor;
 
         public int getAuthStatus() {
             return authStatus;
@@ -57,6 +58,14 @@ public class CarWashInfoBean {
 
         public void setWashCount(int washCount) {
             this.washCount = washCount;
+        }
+
+        public String getHonor() {
+            return honor;
+        }
+
+        public void setHonor(String honor) {
+            this.honor = honor;
         }
     }
 }

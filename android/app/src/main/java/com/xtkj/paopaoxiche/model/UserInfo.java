@@ -16,8 +16,10 @@ public class UserInfo {
     private static int authStatus;
     private static int washId;
     private static int washCount;
+    private static String honor;
 
     private static UpdateBean updateBean;
+    private static boolean isCheckWuYuanXiChe = false;
 
     private static boolean driver = true;
 
@@ -127,6 +129,22 @@ public class UserInfo {
 
     protected static void setUpdateBean(UpdateBean updateBean) {
         UserInfo.updateBean = updateBean;
+    }
+
+    public static String getHonor() {
+        return honor;
+    }
+
+    protected static void setHonor(String honor) {
+        UserInfo.honor = honor;
+    }
+
+    public static boolean isIsCheckWuYuanXiChe() {
+        return isCheckWuYuanXiChe;
+    }
+
+    public static void setIsCheckWuYuanXiChe(boolean isCheckWuYuanXiChe) {
+        UserInfo.isCheckWuYuanXiChe = isCheckWuYuanXiChe;
     }
 }
 

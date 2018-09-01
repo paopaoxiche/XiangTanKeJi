@@ -10,6 +10,7 @@
     <color name="gray">#999999</color>
     <color name="dark_white">#e4e4e4</color>
     <color name="yellow">#eac414</color>
+    <color name="white_dddddd">#dddddd</color>
 
     <color name="orange">#f8990a</color>
 
@@ -22,5 +23,6 @@
     <color name="tangerine">#ff693d</color>
     
     <color name="gray_b7c4cb">#b7c4cb</color>
+    <color name="red">#f80a0a</color>
 
 </resources>

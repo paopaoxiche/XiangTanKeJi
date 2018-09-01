@@ -4,8 +4,12 @@ public class BaseEvent {
 
     public static final int CAR_WASH_PICK_AVATAR = 100;
     public static final int GOODS_IMAGE = 101;
+    public static final int CAR_PHOTO_CONER = 102;
+    public static final int CAR_PHOTO_BACK = 103;
 
     public static final int SET_GOODS_IMAGE = 201;
+    public static final int SET_CAR_COVER = 202;
+    public static final int SET_CAR_BACK = 203;
 
     private int eventType;
 

@@ -54,5 +54,10 @@
     <dimen name="px1">1px</dimen>
     <dimen name="dp96">96dp</dimen>
     <dimen name="dp240">240dp</dimen>
+    <dimen name="sp20">20sp</dimen>
+    <dimen name="dp17">17dp</dimen>
+    <dimen name="dp4">4dp</dimen>
+    <dimen name="dp58">58dp</dimen>
+    <dimen name="dp80">80dp</dimen>
 
 </resources>
