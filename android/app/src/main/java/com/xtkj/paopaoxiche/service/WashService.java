@@ -1,8 +1,11 @@
 package com.xtkj.paopaoxiche.service;
 
+import com.xtkj.paopaoxiche.bean.CouponListBean;
 import com.xtkj.paopaoxiche.bean.LoginBean;
 import com.xtkj.paopaoxiche.bean.NoDataBean;
 import com.xtkj.paopaoxiche.bean.SellingServicesBean;
+
+import com.xtkj.paopaoxiche.bean.RecentWashListBean;
 import com.xtkj.paopaoxiche.bean.WashCommodityBean;
 import com.xtkj.paopaoxiche.bean.WashServiceListBean;
 import com.xtkj.paopaoxiche.bean.WashServicesBean;
@@ -65,16 +68,16 @@ public interface WashService {
     @GET("wash/getServiceList")
     Call<WashServiceListBean> getWashServviceList(@Query("washId")int washId);
 
-//    @FormUrlEncoded
-//    @POST("wash/publishService")
-//    Call<NoDataBean> addService(@Field("washId")int washId, @Field("serviceId") int serviceId, @Field("name") String name, @Field("describe") String describe, @Field("price") String price);
+    @FormUrlEncoded
+    @POST("wash/publishService")
+    Call<NoDataBean> addService(@Field("washId")int washId, @Field("serviceId") int serviceId, @Field("name") String name, @Field("describe") String describe, @Field("price") String price, @Field("carModel") int carModel);
 
 //    @POST("wash/publishService")
 //    Call<NoDataBean> addService(@Body int washId, @Body int serviceId, @Body String name, @Body String describe, @Body String price);
 
-    @Multipart
-    @POST("wash/publishService")
-    Call<NoDataBean> addService(@Part("washId")RequestBody washId, @Part("serviceId") RequestBody serviceId, @Part("name") RequestBody name, @Part("describe") RequestBody describe, @Part("price") RequestBody price);
+//    @Multipart
+//    @POST("wash/publishService")
+//    Call<NoDataBean> addService(@Part("washId")RequestBody washId, @Part("serviceId") RequestBody serviceId, @Part("name") RequestBody name, @Part("describe") RequestBody describe, @Part("price") RequestBody price);
 
     @FormUrlEncoded
     @POST("wash/deleteService")
@@ -84,4 +87,19 @@ public interface WashService {
     @POST("commodity/deleteCommodity")
     Call<NoDataBean> deleteGoods(@Field("id") int id);
 
+    @GET("carOwner/getAllCoupon")
+    Call<CouponListBean> getAllCoupons();
+
+    @FormUrlEncoded
+    @POST("carOwner/exchangePoint")
+    Call<NoDataBean> exchangePoint(@Field("couponId") String couponId);
+
+    @GET("wash/getRecentWashList")
+    Call<RecentWashListBean> getRecentWashList(@Query("washId") int washId, @Query("count") int count);
+
+    @Multipart
+    @POST("wash/registerWash")
+    Call<NoDataBean> certification(@Part("phone") RequestBody phone, @Part("name") RequestBody name, @Part("address") RequestBody address,
+                              @Part("coordX") RequestBody coordX, @Part("coordY") RequestBody coordY,
+                                   @Part MultipartBody.Part license, @Part MultipartBody.Part washCard, @Part MultipartBody.Part idCardPositive, @Part MultipartBody.Part idCardBack);
 }

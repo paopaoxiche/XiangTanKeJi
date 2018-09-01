@@ -1,0 +1,8 @@
+platform :ios, '9.0'
+target 'BubbleCarWash' do
+  pod 'AMap2DMap'
+  pod 'AMapLocation'
+  pod 'AFNetworking'
+  pod 'SDWebImage'
+  pod 'Masonry'
+end

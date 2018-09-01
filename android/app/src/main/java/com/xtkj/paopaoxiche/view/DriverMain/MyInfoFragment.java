@@ -13,10 +13,15 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.xtkj.paopaoxiche.R;
 import com.xtkj.paopaoxiche.application.AppConstant;
+import com.xtkj.paopaoxiche.bean.UpdateBean;
 import com.xtkj.paopaoxiche.model.UserInfo;
 import com.xtkj.paopaoxiche.base.BaseFragmemt;
 import com.xtkj.paopaoxiche.contract.IDriverContract;
+import com.xtkj.paopaoxiche.model.update.DownloadAPKCallback;
+import com.xtkj.paopaoxiche.model.update.DownloadManager;
+import com.xtkj.paopaoxiche.view.view.CreditsExchangeDialog;
 import com.xtkj.paopaoxiche.view.view.ExtensionDialog;
+import com.xtkj.paopaoxiche.view.view.FeedbackDialog;
 import com.xtkj.paopaoxiche.view.view.ModifyUserInfoDialog;
 import com.xtkj.paopaoxiche.view.view.MyCouponsDialog;
 import com.xtkj.paopaoxiche.view.view.MyCustomDialog;
@@ -53,6 +58,8 @@ public class MyInfoFragment extends BaseFragmemt implements IDriverContract.IMyI
     LinearLayout myCustomerService;
     @BindView(R.id.my_promote)
     LinearLayout myPromote;
+    @BindView(R.id.remind_update_text_view)
+    TextView remindUpdateTextView;
     Unbinder unbinder;
     private IDriverContract.IMyInfoPresenter myInfoPresenter;
 
@@ -113,6 +120,7 @@ public class MyInfoFragment extends BaseFragmemt implements IDriverContract.IMyI
         time = System.currentTimeMillis();
         switch (view.getId()) {
             case R.id.my_score:
+                new CreditsExchangeDialog(getContext()).show();
                 break;
             case R.id.my_coupons:
                 new MyCouponsDialog(getContext(), true).show();
@@ -124,9 +132,19 @@ public class MyInfoFragment extends BaseFragmemt implements IDriverContract.IMyI
                 new MyEvaluateDialog(getContext(), true).show();
                 break;
             case R.id.my_updatecf:
-                Toast.makeText(getContext(), "当前已是最新版本", Toast.LENGTH_SHORT).show();
+                if (UserInfo.getUpdateBean() == null) {
+                    Toast.makeText(getContext(), "当前已是最新版本", Toast.LENGTH_SHORT).show();
+                    break;
+                }
+                if (!UserInfo.getUpdateBean().getData().isHasNewApp()) {
+                    Toast.makeText(getContext(), "当前已是最新版本", Toast.LENGTH_SHORT).show();
+                } else {
+                    UpdateBean.DataBean updateBean = UserInfo.getUpdateBean().getData();
+                    DownloadManager.downloadAPK(updateBean.getDownloadUrl(), new DownloadAPKCallback(getActivity(), false));
+                }
                 break;
             case R.id.my_customer_service:
+                new FeedbackDialog(getContext(), true).show();
                 break;
             case R.id.my_promote:
                 new ExtensionDialog(getContext(), true).show();
@@ -147,5 +165,10 @@ public class MyInfoFragment extends BaseFragmemt implements IDriverContract.IMyI
         if (modifyType.equals(AppConstant.AVATAR)) {
             Glide.with(getContext()).load(UserInfo.getAvatar()).into(portraitImageView);
         }
+    }
+
+    @Override
+    public void hasUpdate() {
+        remindUpdateTextView.setText("请升级！");
     }
 }

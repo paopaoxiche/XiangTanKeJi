@@ -16,7 +16,7 @@
 
     
     <LinearLayout
-        android:id="@+id/goods_list_linear_layout"
+        android:id="@+id/recent_wash_linear_layout"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -37,11 +37,11 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:textSize="18sp"
-            android:textColor="@color/grey"/>
+            android:textColor="@color/gray"/>
     </LinearLayout>
 
     <LinearLayout
-        android:layout_toLeftOf="@+id/goods_list_linear_layout"
+        android:layout_toLeftOf="@+id/recent_wash_linear_layout"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_toRightOf="@id/goods_image_view"
@@ -66,7 +66,7 @@
             android:singleLine="true"
             android:maxLength="15"
             android:textSize="18sp"
-            android:textColor="@color/grey"/>
+            android:textColor="@color/gray"/>
 
     </LinearLayout>
 

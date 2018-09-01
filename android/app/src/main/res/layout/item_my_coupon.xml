@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="@dimen/dp335"
+    android:layout_width="match_parent"
     android:layout_height="@dimen/dp112"
     android:background="@drawable/my_bg_coupon"
     android:paddingBottom="@dimen/dp12"
@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/dp20"
     android:paddingTop="@dimen/dp16">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/iv_header"
         android:layout_width="@dimen/dp44"
         android:layout_height="@dimen/dp44"/>
@@ -37,13 +37,14 @@
         android:textSize="14sp"/>
 
     <TextView
-        android:id="@+id/tv_price"
+        android:id="@+id/tv_denomination"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="@dimen/dp10"
         android:text="122455"
-        android:textColor="@color/black"/>
+        android:layout_marginTop="@dimen/dp10"
+        android:textColor="@color/black"
+        android:includeFontPadding="false"/>
 
     <TextView
         android:id="@+id/tv_end_time"
@@ -53,6 +54,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/dp10"
         android:text="122455"
-        android:textColor="@color/grey"
+        android:textColor="@color/gray"
         android:textSize="@dimen/sp14"/>
 </RelativeLayout>

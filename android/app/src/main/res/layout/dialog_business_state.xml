@@ -14,7 +14,7 @@
         android:background="@color/white"
         android:textSize="24dp"
         android:textColor="@color/black"
-        android:text="开业"/>
+        android:text="营业"/>
 
     <View
         android:layout_width="match_parent"

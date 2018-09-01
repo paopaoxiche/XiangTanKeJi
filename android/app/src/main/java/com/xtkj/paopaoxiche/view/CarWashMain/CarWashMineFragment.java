@@ -14,11 +14,15 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.xtkj.paopaoxiche.R;
 import com.xtkj.paopaoxiche.application.AppConstant;
+import com.xtkj.paopaoxiche.bean.UpdateBean;
 import com.xtkj.paopaoxiche.model.UserInfo;
 import com.xtkj.paopaoxiche.base.BaseFragmemt;
 import com.xtkj.paopaoxiche.contract.ICarWashContract;
+import com.xtkj.paopaoxiche.model.update.DownloadAPKCallback;
+import com.xtkj.paopaoxiche.model.update.DownloadManager;
 import com.xtkj.paopaoxiche.view.view.BusinessStateDialog;
 import com.xtkj.paopaoxiche.view.view.ExtensionDialog;
+import com.xtkj.paopaoxiche.view.view.FeedbackDialog;
 import com.xtkj.paopaoxiche.view.view.GoodsListDialog;
 import com.xtkj.paopaoxiche.view.view.IncomeListDialog;
 import com.xtkj.paopaoxiche.view.view.ModifyUserInfoDialog;
@@ -72,6 +76,8 @@ public class CarWashMineFragment extends BaseFragmemt implements ICarWashContrac
     LinearLayout myPromote;
     @BindView(R.id.wash_modify_user_image_button)
     ImageButton modifyUserImageButton;
+    @BindView(R.id.remind_update_text_view)
+    TextView remindUpdateTextView;
 
 
     @Nullable
@@ -149,9 +155,19 @@ public class CarWashMineFragment extends BaseFragmemt implements ICarWashContrac
                 new BusinessStateDialog(getContext(), stateTextView).show();
                 break;
             case R.id.my_updatecf:
-                Toast.makeText(getContext(), "当前已是最新版本", Toast.LENGTH_SHORT).show();
+                if (UserInfo.getUpdateBean() == null) {
+                    Toast.makeText(getContext(), "当前已是最新版本", Toast.LENGTH_SHORT).show();
+                    break;
+                }
+                if (!UserInfo.getUpdateBean().getData().isHasNewApp()) {
+                    Toast.makeText(getContext(), "当前已是最新版本", Toast.LENGTH_SHORT).show();
+                } else {
+                    UpdateBean.DataBean updateBean = UserInfo.getUpdateBean().getData();
+                    DownloadManager.downloadAPK(updateBean.getDownloadUrl(), new DownloadAPKCallback(getActivity(), false));
+                }
                 break;
             case R.id.my_customer_service:
+                new FeedbackDialog(getContext(), true).show();
                 break;
             case R.id.my_promote:
                 new ExtensionDialog(getContext(), true).show();
@@ -172,5 +188,10 @@ public class CarWashMineFragment extends BaseFragmemt implements ICarWashContrac
         if (modifyType.equals(AppConstant.AVATAR)) {
             Glide.with(getContext()).load(UserInfo.getAvatar()).into(portraitImageView);
         }
+    }
+
+    @Override
+    public void hasUpdate() {
+        remindUpdateTextView.setText("请升级！");
     }
 }

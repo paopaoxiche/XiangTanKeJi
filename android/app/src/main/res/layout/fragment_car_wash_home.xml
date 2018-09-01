@@ -3,7 +3,7 @@
     android:id="@+id/car_wash_home_background"
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey">
+    android:background="@color/gray">
 
     <ScrollView
         android:background="@android:color/transparent"
@@ -130,11 +130,14 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center_vertical|end">
+                            android:gravity="center_vertical">
 
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_gravity="bottom"
+                                android:paddingRight="2dp"
+                                android:paddingBottom="4dp"
                                 android:src="@drawable/img_wind" />
 
                             <TextView
@@ -150,6 +153,9 @@
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_gravity="bottom"
+                                android:paddingRight="2dp"
+                                android:paddingBottom="4dp"
                                 android:src="@drawable/img_humidity" />
 
                             <TextView
@@ -220,7 +226,8 @@
                         android:layout_marginRight="16dp"
                         android:background="@android:color/transparent"
                         android:text="更多"
-                        android:textColor="@color/grey"
+                        android:visibility="gone"
+                        android:textColor="@color/gray"
                         android:textSize="14sp" />
 
                 </RelativeLayout>

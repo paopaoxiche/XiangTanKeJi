@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.xtkj.paopaoxiche.R;
 import com.xtkj.paopaoxiche.application.SkyconValues;
 import com.xtkj.paopaoxiche.base.BaseFragmemt;
+import com.xtkj.paopaoxiche.bean.WashShopBean;
 import com.xtkj.paopaoxiche.bean.WeatherForecastBean;
 import com.xtkj.paopaoxiche.bean.WeatherRealTimeBean;
 import com.xtkj.paopaoxiche.contract.IDriverContract;
@@ -141,8 +142,8 @@ public class HomeFragment extends BaseFragmemt implements IDriverContract.IHomeV
         DecimalFormat myformat2 = new DecimalFormat("0");
         temperature.setText(String.format("%s°", Math.round(weatherRealTimeBean.getResult().getTemperature())));
         skycon.setText(SkyconValues.cnNameMap.get(weatherRealTimeBean.getResult().getSkycon()));
-        wind.setText(String.format("风速%s", myformat.format(weatherRealTimeBean.getResult().getWind().getSpeed())));
-        humidity.setText(String.format("湿度%s%%", myformat2.format(weatherRealTimeBean.getResult().getHumidity() * 100)));
+        wind.setText(String.format("风速\n%s", myformat.format(weatherRealTimeBean.getResult().getWind().getSpeed())));
+        humidity.setText(String.format("湿度\n%s%%", myformat2.format(weatherRealTimeBean.getResult().getHumidity() * 100)));
         bgWeather.setImageResource(SkyconValues.homeIconMap.get(weatherRealTimeBean.getResult().getSkycon()));
         homeWeatherBg.setBackgroundResource(SkyconValues.weatherBgMap.get(weatherRealTimeBean.getResult().getSkycon()));
     }
@@ -173,9 +174,14 @@ public class HomeFragment extends BaseFragmemt implements IDriverContract.IHomeV
 
     @Override
     public void updateCommodity() {
-        int num = DriverHomeModel.getInstance().getWashShopBean().getData().size();
+        // 此处可能为null 需要定位为什么为null
+        WashShopBean bean = DriverHomeModel.getInstance().getWashShopBean();
+        if(bean == null){
+            return;
+        }
+        int num = bean.getData().size();
 
-        homeShopFragmentAdapter = new HomeShopFragmentAdapter(getFragmentManager(), DriverHomeModel.getInstance().getWashShopBean().getData());
+        homeShopFragmentAdapter = new HomeShopFragmentAdapter(getFragmentManager(), bean.getData());
         shopViewpager.setAdapter(homeShopFragmentAdapter);
         shopViewpager.setCurrentItem(0);
 

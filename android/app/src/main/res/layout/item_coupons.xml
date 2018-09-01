@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp92"
+    android:background="@drawable/background_white_radius4dp"
+    android:padding="@dimen/dp12">
+
+    <TextView
+        android:id="@+id/tv_denomination"
+        android:layout_width="@dimen/dp68"
+        android:layout_height="@dimen/dp68"
+        android:background="@drawable/background_tangerine_corner_radius_2dp"
+        android:gravity="center"
+        android:textColor="@color/white"/>
+
+    <TextView
+        android:id="@+id/tv_coupon_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/tv_denomination"
+        android:layout_marginLeft="@dimen/dp12"
+        android:text="tongyongjuan"
+        android:textColor="@color/title_black"
+        android:textSize="@dimen/dp18"
+        android:includeFontPadding="false"/>
+
+    <TextView
+        android:id="@+id/tv_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/tv_denomination"
+        android:layout_marginLeft="@dimen/dp12"
+        android:text="tongyongjuan2"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/dp14"
+        android:layout_below="@+id/tv_coupon_name"
+        android:layout_marginTop="@dimen/dp10"
+        android:includeFontPadding="false"/>
+
+    <TextView
+        android:id="@+id/tv_start_and_end_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/tv_denomination"
+        android:layout_marginLeft="@dimen/dp12"
+        android:text="2018.7.21-2018.8.27"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/dp14"
+        android:layout_below="@+id/tv_detail"
+        android:layout_marginTop="@dimen/dp10"
+        android:includeFontPadding="false"/>
+
+    <TextView
+        android:id="@+id/tv_coupon_credits"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:textColor="@color/orange"
+        android:textSize="@dimen/dp18"
+        android:text="50jifen"
+        android:includeFontPadding="false"/>
+
+    <Button
+        android:id="@+id/button_exchange"
+        android:layout_width="@dimen/dp64"
+        android:layout_height="@dimen/dp28"
+        android:background="@drawable/background_orange_radius4dp_2px_storke"
+        android:text="兑换"
+        android:textSize="@dimen/dp15"
+        android:textColor="@color/orange"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>

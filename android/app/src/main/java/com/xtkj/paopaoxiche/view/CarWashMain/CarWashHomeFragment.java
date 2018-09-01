@@ -18,15 +18,22 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.xtkj.paopaoxiche.R;
+import com.xtkj.paopaoxiche.application.Authentication;
 import com.xtkj.paopaoxiche.application.SkyconValues;
 import com.xtkj.paopaoxiche.base.BaseFragmemt;
+import com.xtkj.paopaoxiche.bean.RecentWashListBean;
 import com.xtkj.paopaoxiche.bean.WashCommodityBean;
+import com.xtkj.paopaoxiche.bean.WashServiceListBean;
 import com.xtkj.paopaoxiche.bean.WashServicesBean;
 import com.xtkj.paopaoxiche.bean.WashShopBean;
 import com.xtkj.paopaoxiche.bean.WeatherForecastBean;
 import com.xtkj.paopaoxiche.bean.WeatherRealTimeBean;
 import com.xtkj.paopaoxiche.contract.ICarWashContract;
+import com.xtkj.paopaoxiche.http.ApiField;
+import com.xtkj.paopaoxiche.http.RetrofitClient;
 import com.xtkj.paopaoxiche.model.UserInfo;
+import com.xtkj.paopaoxiche.model.WashServerModel;
+import com.xtkj.paopaoxiche.service.WashService;
 import com.xtkj.paopaoxiche.view.WeatherForecast.WeatherForecastActivity;
 import com.xtkj.paopaoxiche.widget.MarqueeTextView;
 import com.xtkj.paopaoxiche.widget.NoScrollListView;
@@ -37,6 +44,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CarWashHomeFragment extends BaseFragmemt implements ICarWashContract.IInfoView {
 
@@ -82,6 +92,8 @@ public class CarWashHomeFragment extends BaseFragmemt implements ICarWashContrac
     Unbinder unbinder;
     private CarWashHomeFragment.ShopItemsAdapter shopItemsAdapter = null;
 
+    private RecentWashAdapter recentWashAdapter;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -93,6 +105,9 @@ public class CarWashHomeFragment extends BaseFragmemt implements ICarWashContrac
         if (UserInfo.getAvatar() != null && UserInfo.getAvatar().length() > 0) {
             Glide.with(getActivity()).load(UserInfo.getAvatar()).into(goodsWashIconImageView);
         }
+
+        getWashList();
+
         return carWashView;
     }
 
@@ -124,8 +139,8 @@ public class CarWashHomeFragment extends BaseFragmemt implements ICarWashContrac
         DecimalFormat myformat2 = new DecimalFormat("0");
         temperature.setText(String.format("%s°", Math.round(weatherRealTimeBean.getResult().getTemperature())));
         skycon.setText(SkyconValues.cnNameMap.get(weatherRealTimeBean.getResult().getSkycon()));
-        wind.setText(String.format("风速%s", myformat.format(weatherRealTimeBean.getResult().getWind().getSpeed())));
-        humidity.setText(String.format("湿度%s%%", myformat2.format(weatherRealTimeBean.getResult().getHumidity() * 100)));
+        wind.setText(String.format("风速\n%s", myformat.format(weatherRealTimeBean.getResult().getWind().getSpeed())));
+        humidity.setText(String.format("湿度\n%s%%", myformat2.format(weatherRealTimeBean.getResult().getHumidity() * 100)));
         bgWeather.setImageResource(SkyconValues.homeIconMap.get(weatherRealTimeBean.getResult().getSkycon()));
         carWashHomeBackground.setBackgroundResource(SkyconValues.weatherBgMap.get(weatherRealTimeBean.getResult().getSkycon()));
     }
@@ -202,6 +217,28 @@ public class CarWashHomeFragment extends BaseFragmemt implements ICarWashContrac
                 ButterKnife.bind(this, itemView);
             }
         }
+    }
 
+    public void getWashList() {
+        RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
+                .create(WashService.class)
+                .getRecentWashList(UserInfo.getWashId(), 4)
+                .enqueue(new Callback<RecentWashListBean>() {
+                    @Override
+                    public void onResponse(Call<RecentWashListBean> call, Response<RecentWashListBean> response) {
+                        if (response == null || response.body() == null) {
+                            return;
+                        }
+                        if (response.body().getCode() != 401) {
+                            recentWashAdapter = new RecentWashAdapter(getContext(), response.body().getData());
+                            washListView.setAdapter(recentWashAdapter);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<RecentWashListBean> call, Throwable t) {
+
+                    }
+                });
     }
 }

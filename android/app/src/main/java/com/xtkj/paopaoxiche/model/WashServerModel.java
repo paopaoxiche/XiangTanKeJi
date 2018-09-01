@@ -76,7 +76,7 @@ public class WashServerModel {
                 });
     }
 
-    public void addWashService(int washId, int serviceId, String name, String describe, String price) {
+    public void addWashService(int washId, int serviceId, String name, String describe, String price, int carModel) {
 
         RequestBody washIdBody =
                 RequestBody.create(MediaType.parse("multipart/form-data"), String.valueOf(washId));
@@ -91,7 +91,7 @@ public class WashServerModel {
 
         RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
                 .create(WashService.class)
-                .addService(washIdBody, serviceIdBody, nameBody, describeBody, priceBody)
+                .addService(washId, serviceId, name, describe, price, carModel)
                 .enqueue(new Callback<NoDataBean>() {
                     @Override
                     public void onResponse(Call<NoDataBean> call, Response<NoDataBean> response) {

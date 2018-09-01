@@ -33,10 +33,12 @@ public class ICarWashContract {
     }
 
     public interface IMinePresenter extends IBasePresenter {
-
+        void update();
     }
 
     public interface IMineView extends IBaseView<IMinePresenter> {
         void updateUserInfo(String modifyType);
+
+        void hasUpdate();
     }
 }

@@ -38,6 +38,8 @@ public class IDriverContract {
 
     public interface IMyInfoView extends IBaseView<IMyInfoPresenter> {
         void updateUserInfo (String modifyType);
+
+        void hasUpdate();
     }
 
     public interface IShopPresenter extends IBasePresenter {

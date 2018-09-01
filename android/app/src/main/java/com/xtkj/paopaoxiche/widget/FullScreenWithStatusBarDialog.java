@@ -1,5 +1,6 @@
 package com.xtkj.paopaoxiche.widget;
 
+
 import android.app.Dialog;
 import android.content.Context;
 import android.view.View;
@@ -8,9 +9,7 @@ import android.view.WindowManager.LayoutParams;
 import android.widget.Button;
 
 import com.xtkj.paopaoxiche.R;
-
-import butterknife.ButterKnife;
-import butterknife.OnClick;
+import com.xtkj.paopaoxiche.view.view.LoadingDialog;
 
 public abstract class FullScreenWithStatusBarDialog extends Dialog {
 
@@ -49,7 +48,7 @@ public abstract class FullScreenWithStatusBarDialog extends Dialog {
         win.setAttributes(lp);
     }
 
-    private void setWindowAnimations() {
+    protected void setWindowAnimations() {
         if (getWindow() != null) {
             getWindow().setWindowAnimations(R.style.dialog_right_enter_left_exit_animation);
         }
@@ -63,5 +62,26 @@ public abstract class FullScreenWithStatusBarDialog extends Dialog {
                 dismiss();
             }
         }
+    }
+
+    private Dialog loadingDialog;
+    public void showLoadingDialog() {
+        if(loadingDialog == null){
+            loadingDialog = new LoadingDialog(getContext());
+        }
+        loadingDialog.show();
+    }
+
+    public void dismissLoadingDialog() {
+        if (null != loadingDialog && loadingDialog.isShowing()) {
+            loadingDialog.dismiss();
+            loadingDialog = null;
+        }
+    }
+
+    @Override
+    public void dismiss() {
+        dismissLoadingDialog();
+        super.dismiss();
     }
 }

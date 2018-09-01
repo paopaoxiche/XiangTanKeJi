@@ -1,7 +1,11 @@
 package com.xtkj.paopaoxiche.presenter;
 
+import com.xtkj.paopaoxiche.bean.UpdateBean;
 import com.xtkj.paopaoxiche.contract.ICarWashContract;
+import com.xtkj.paopaoxiche.model.UserInfo;
 import com.xtkj.paopaoxiche.model.UserModel;
+import com.xtkj.paopaoxiche.model.update.DownloadAPKCallback;
+import com.xtkj.paopaoxiche.model.update.DownloadManager;
 import com.xtkj.paopaoxiche.view.CarWashMain.CarWashMineFragment;
 
 public class CarWashMinePresenterImpl implements ICarWashContract.IMinePresenter, UserModel.UserInfoListener {
@@ -16,6 +20,7 @@ public class CarWashMinePresenterImpl implements ICarWashContract.IMinePresenter
     @Override
     public void onCreate() {
         UserModel.getInstance().addListener(this);
+        UserModel.getInstance().checkUpdate("1.0.0");
     }
 
     @Override
@@ -29,7 +34,20 @@ public class CarWashMinePresenterImpl implements ICarWashContract.IMinePresenter
     }
 
     @Override
+    public void checkUpdate(UpdateBean updateBean) {
+        if (!updateBean.getData().isHasNewApp()) {
+            return;
+        }
+        mineView.hasUpdate();
+    }
+
+    @Override
     public void timeOut(String modifyType) {
+
+    }
+
+    @Override
+    public void update() {
 
     }
 }

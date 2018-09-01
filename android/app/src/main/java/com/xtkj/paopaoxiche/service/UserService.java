@@ -1,9 +1,13 @@
 package com.xtkj.paopaoxiche.service;
 
 import com.xtkj.paopaoxiche.bean.CarWashInfoBean;
+import com.xtkj.paopaoxiche.bean.CouponListBean;
 import com.xtkj.paopaoxiche.bean.DemoBean;
+import com.xtkj.paopaoxiche.bean.EvaluateListBean;
 import com.xtkj.paopaoxiche.bean.LoginBean;
+import com.xtkj.paopaoxiche.bean.MyCouponListBean;
 import com.xtkj.paopaoxiche.bean.NoDataBean;
+import com.xtkj.paopaoxiche.bean.UpdateBean;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -67,4 +71,24 @@ public interface UserService {
 
     @GET("wash/getWashInfo")
     Call<CarWashInfoBean> getCarWashInfo() ;
+
+    @FormUrlEncoded
+    @POST("wash/updateStatus")
+    Call<NoDataBean> updateBusinessState(@Field("id") int id, @Field("status") String status) ;
+
+    @GET("carOwner/getEvaluateList")
+    Call<EvaluateListBean> getMyEvaluateList(@Query("pageIndex") int pageIndex,  @Query("pageSize") int pageSize);
+
+    @GET("carOwner/getMyCoupon")
+    Call<MyCouponListBean> getMyCoupon();
+
+    @GET("carOwner/getAllCoupon")
+    Call<CouponListBean> getAllCoupons();
+
+    @FormUrlEncoded
+    @POST("carOwner/exchangePoint")
+    Call<NoDataBean> exchangePoint(@Field("couponId") String couponId);
+
+    @GET("user/getAppVersion")
+    Call<UpdateBean> checkUpdate(@Query("systemType") String systemType, @Query("version") String version) ;
 }

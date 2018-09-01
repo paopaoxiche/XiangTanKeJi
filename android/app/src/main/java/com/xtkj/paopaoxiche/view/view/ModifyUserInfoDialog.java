@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.xtkj.paopaoxiche.R;
 import com.xtkj.paopaoxiche.application.AppConstant;
+import com.xtkj.paopaoxiche.bean.UpdateBean;
 import com.xtkj.paopaoxiche.event.BaseEvent;
 import com.xtkj.paopaoxiche.model.UserInfo;
 import com.xtkj.paopaoxiche.model.UserModel;
@@ -92,6 +93,11 @@ public class ModifyUserInfoDialog extends FullScreenWithStatusBarDialog implemen
         if (modifyType.equals(AppConstant.AVATAR)) {
             Glide.with(getContext()).load(UserInfo.getAvatar()).into(avatarImageView);
         }
+    }
+
+    @Override
+    public void checkUpdate(UpdateBean updateBean) {
+
     }
 
     @Override

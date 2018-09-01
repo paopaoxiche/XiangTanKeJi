@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RadioGroup;
 
 import com.bumptech.glide.Glide;
 import com.xtkj.paopaoxiche.R;
@@ -34,9 +35,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ModifyWashServiceDialog extends FullScreenWithStatusBarDialog {
+public class ModifyWashServiceDialog extends FullScreenWithStatusBarDialog implements RadioGroup.OnCheckedChangeListener{
 
     int id = 0;
+
+    int carModel = 3;
 
     @BindView(R.id.back_arrow_image_button)
     ImageButton backArrowImageButton;
@@ -48,6 +51,8 @@ public class ModifyWashServiceDialog extends FullScreenWithStatusBarDialog {
     EditText goodsCurrentPrice;
     @BindView(R.id.describe_edit_text)
     EditText describeEditText;
+    @BindView(R.id.car_model_radio_group)
+    RadioGroup carModelRadioGrpoup;
 
     public ModifyWashServiceDialog(Context context, boolean statusBarVisible) {
         super(context, statusBarVisible);
@@ -56,6 +61,7 @@ public class ModifyWashServiceDialog extends FullScreenWithStatusBarDialog {
         findViewById(R.id.back_arrow_image_button).setOnClickListener(backButtonClickListener);
         InputFilter[] filters = {new CashierInputFilter()};
         goodsCurrentPrice.setFilters(filters);
+        carModelRadioGrpoup.setOnCheckedChangeListener(this);
     }
 
     public ModifyWashServiceDialog(Context context, boolean statusBarVisible, WashServiceListBean.DataBean dataBean) {
@@ -64,6 +70,13 @@ public class ModifyWashServiceDialog extends FullScreenWithStatusBarDialog {
         goodsName.setText(dataBean.getName());
         goodsCurrentPrice.setText(dataBean.getPrice() + "");
         describeEditText.setText(dataBean.getDescribe());
+        carModel = dataBean.getCarModel();
+        if (carModel == 1) {
+            carModelRadioGrpoup.check(R.id.large_car_radio_button);
+        }
+        if (carModel == 2) {
+            carModelRadioGrpoup.check(R.id.middle_car_radio_button);
+        }
     }
 
     @Override
@@ -84,7 +97,7 @@ public class ModifyWashServiceDialog extends FullScreenWithStatusBarDialog {
                         && !TextUtils.isEmpty(goodsName.getText().toString())
                         && !TextUtils.isEmpty(goodsCurrentPrice.getText().toString())) {
                     WashServerModel.getInstance().addWashService(UserInfo.getWashId(), id, goodsName.getText().toString(),
-                            describeEditText.getText().toString(), goodsCurrentPrice.getText().toString());
+                            describeEditText.getText().toString(), goodsCurrentPrice.getText().toString(), carModel);
                     dismiss();
                 }
                 break;
@@ -92,4 +105,18 @@ public class ModifyWashServiceDialog extends FullScreenWithStatusBarDialog {
     }
 
 
+    @Override
+    public void onCheckedChanged(RadioGroup group, int checkedId) {
+        switch (checkedId) {
+            case R.id.small_car_radio_button:
+                carModel = 3;
+                break;
+            case R.id.middle_car_radio_button:
+                carModel = 2;
+                break;
+            case R.id.large_car_radio_button:
+                carModel = 1;
+                break;
+        }
+    }
 }

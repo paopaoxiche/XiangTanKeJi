@@ -30,7 +30,7 @@
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="30dp"
-        android:textColor="@color/grey"
+        android:textColor="@color/gray"
         android:textSize="12sp"
         android:text="Copyright \@河北享坛气象科技有限公司"/>
 

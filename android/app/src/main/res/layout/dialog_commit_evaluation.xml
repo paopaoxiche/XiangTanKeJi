@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <RelativeLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbarHeight">
+
+        <ImageButton
+            android:id="@+id/back_arrow_image_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp6"
+            android:background="@android:color/transparent"
+            android:padding="@dimen/dp10"
+            android:src="@drawable/arrow"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="评价"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp24"
+            android:textStyle="bold"/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dp28"
+        android:text="本次洗车服务满意吗？"
+        android:textColor="@color/gray_b7c4cb"
+        android:textSize="@dimen/sp16"/>
+
+    <LinearLayout
+        android:id="@+id/ll_stars"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dp24"
+        android:layout_below="@id/tv_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dp28">
+
+        <ImageView
+            android:layout_width="@dimen/dp24"
+            android:layout_height="@dimen/dp24"
+            android:background="@drawable/star"/>
+
+        <ImageView
+            android:layout_width="@dimen/dp24"
+            android:layout_height="@dimen/dp24"
+            android:layout_marginLeft="@dimen/dp20"
+            android:background="@drawable/star"/>
+
+        <ImageView
+            android:layout_width="@dimen/dp24"
+            android:layout_height="@dimen/dp24"
+            android:layout_marginLeft="@dimen/dp20"
+            android:background="@drawable/star"/>
+
+        <ImageView
+            android:layout_width="@dimen/dp24"
+            android:layout_height="@dimen/dp24"
+            android:layout_marginLeft="@dimen/dp20"
+            android:background="@drawable/star"/>
+
+        <ImageView
+            android:layout_width="@dimen/dp24"
+            android:layout_height="@dimen/dp24"
+            android:layout_marginLeft="@dimen/dp20"
+            android:background="@drawable/star"/>
+
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/et_msg"
+        android:layout_width="@dimen/dp327"
+        android:layout_height="@dimen/dp138"
+        android:layout_below="@id/ll_stars"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dp28"
+        android:background="@drawable/background_dark_white_4dp"
+        android:gravity="left|top"
+        android:hint="亲，对本次洗车服务还满意吗？请进行简要描述！"
+        android:maxLength="100"
+        android:padding="@dimen/dp16"
+        android:textColor="@color/black"
+        android:textColorHint="@color/gray_b7c4cb"
+        android:textSize="@dimen/sp18"/>
+
+    <Button
+        android:id="@+id/button_commit"
+        android:layout_width="@dimen/dp280"
+        android:layout_height="@dimen/dp46"
+        android:layout_below="@id/et_msg"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dp40"
+        android:background="@drawable/background_orange_full"
+        android:text="去评价"/>
+</RelativeLayout>
