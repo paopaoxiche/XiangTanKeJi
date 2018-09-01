@@ -1,6 +1,7 @@
 package com.xtkj.paopaoxiche.view.WashService;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -14,12 +15,23 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.xtkj.paopaoxiche.R;
+import com.xtkj.paopaoxiche.application.Authentication;
 import com.xtkj.paopaoxiche.base.BaseActivity;
+import com.xtkj.paopaoxiche.bean.SellingServicesBean;
+import com.xtkj.paopaoxiche.bean.WashCommodityBean;
 import com.xtkj.paopaoxiche.contract.IWashServiceContract;
+import com.xtkj.paopaoxiche.http.ApiField;
+import com.xtkj.paopaoxiche.http.RetrofitClient;
 import com.xtkj.paopaoxiche.presenter.WashServicePresenterImpl;
+import com.xtkj.paopaoxiche.service.WashService;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class WashServiceActivity extends BaseActivity implements IWashServiceContract.IWashServiceView {
 
@@ -36,94 +48,128 @@ public class WashServiceActivity extends BaseActivity implements IWashServiceCon
 
 
     IWashServiceContract.IWashServicePresenter presenter ;
+    int washId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wash_service);
         ButterKnife.bind(this);
+        Intent i = getIntent();
+        washId = i.getIntExtra("washId",0);
 
         new WashServicePresenterImpl(this);
         presenter.onCreate();
         initViews();
     }
 
+    private void buildServiceLayout(SellingServicesBean.DataBean d,int index){
+        LinearLayout linearLayout = (LinearLayout) View.inflate(this,R.layout.item_wash_service_details,null);
+        TextView service_name = linearLayout.findViewById(R.id.service_name);
+        service_name.setText(d.getName());
+        TextView describe = linearLayout.findViewById(R.id.describe);
+        describe.setText(d.getDescribe());
+        TextView old_price = linearLayout.findViewById(R.id.old_price);
+
+        old_price.setText(String.format("￥%s", d.getPrice()));
+        old_price.getPaint().setFlags(Paint. STRIKE_THRU_TEXT_FLAG);
+
+        TextView price = linearLayout.findViewById(R.id.price);
+        price.setText(String.format("￥%s", d.getPrice()));
+
+        RadioButton radio =linearLayout.findViewById(R.id.radio);
+
+        radio.setOnCheckedChangeListener((compoundButton, b) -> {
+            if(b){
+                int count = serviceItems.getChildCount();
+                for(int j = 0 ; j < count ; j ++){
+                    if(index ==j)continue;
+                    RadioButton r  = serviceItems.getChildAt(j).findViewById(R.id.radio);
+                    r.setChecked(false);
+                }
+            }
+        });
+
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 200);
+        layoutParams.setMargins(0,16,0,16);
+        serviceItems.addView(linearLayout,layoutParams);
+    }
+
+    private void buildGoodsLayout(WashCommodityBean.DataBean dataBean,int index){
+        LinearLayout linearLayout = (LinearLayout) View.inflate(this,R.layout.item_wash_service_shop,null);
+
+        TextView shop_name = linearLayout.findViewById(R.id.shop_name);
+        shop_name.setText(dataBean.getName());
+        TextView sell_num = linearLayout.findViewById(R.id.sell_num);
+        sell_num.setText("销量" + index * 100);
+        TextView old_price = linearLayout.findViewById(R.id.old_price);
+
+        old_price.setText(String.format("￥%s", dataBean.getOriginPrice()));
+        old_price.getPaint().setFlags(Paint. STRIKE_THRU_TEXT_FLAG);
+
+        old_price.setVisibility(View.GONE);
+
+        TextView price = linearLayout.findViewById(R.id.price);
+        price.setText(String.format("￥%s", dataBean.getCurrentPrice()));
+        RadioButton radio =linearLayout.findViewById(R.id.radio);
+        radio.setOnCheckedChangeListener((compoundButton, b) -> {
+            if(b){
+                int count = shopList.getChildCount();
+                for(int j = 0 ; j < count ; j ++ ){
+                    if(index ==j)continue;
+                    RadioButton r  = shopList.getChildAt(j).findViewById(R.id.radio);
+                    r.setChecked(false);
+                }
+            }
+        });
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,150);
+        layoutParams.setMargins(0,16,0,16);
+        shopList.addView(linearLayout,layoutParams);
+    }
+
     @Override
     protected void initViews() {
 
-        for(int i = 0  ; i < 3 ; i ++){
-            LinearLayout linearLayout = (LinearLayout) View.inflate(this,R.layout.item_wash_service_details,null);
-            TextView service_name = linearLayout.findViewById(R.id.service_name);
-            service_name.setText("洗车套餐" + i);
-            TextView describe = linearLayout.findViewById(R.id.describe);
-            describe.setText("套餐详细信息" + i);
-            TextView old_price = linearLayout.findViewById(R.id.old_price);
-            if(i!=1) {
-                old_price.setText("￥15.0");
-                old_price.getPaint().setFlags(Paint. STRIKE_THRU_TEXT_FLAG);
-            }else {
-                old_price.setVisibility(View.GONE);
-            }
-            TextView price = linearLayout.findViewById(R.id.price);
-            price.setText("￥12.0");
 
-            RadioButton radio =linearLayout.findViewById(R.id.radio);
-            int finalI = i;
-            radio.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                    if(b){
-                        int count = serviceItems.getChildCount();
-                        for(int j = 0 ; j < count ; j ++){
-                            if(finalI ==j)continue;
-                            RadioButton r  = serviceItems.getChildAt(j).findViewById(R.id.radio);
-                            r.setChecked(false);
+        RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
+                .create(WashService.class)
+                .getServiceList(washId,0,20)
+                .enqueue(new Callback<SellingServicesBean>() {
+                    @Override
+                    public void onResponse(Call<SellingServicesBean> call, Response<SellingServicesBean> response) {
+                        if( response.body()==null)return;;
+                        ArrayList<SellingServicesBean.DataBean> dataBeans = (ArrayList<SellingServicesBean.DataBean>) response.body().getData();
+                        if(dataBeans==null)return;
+                        for(int i  = 0 ; i < dataBeans.size() ; i ++){
+                            buildServiceLayout(dataBeans.get(i),i);
                         }
                     }
-                }
-            });
 
-            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 200);
-            layoutParams.setMargins(0,16,0,16);
-            serviceItems.addView(linearLayout,layoutParams);
-        }
+                    @Override
+                    public void onFailure(Call<SellingServicesBean> call, Throwable t) {
 
-        for(int i = 0  ; i < 4 ; i ++){
-            LinearLayout linearLayout = (LinearLayout) View.inflate(this,R.layout.item_wash_service_shop,null);
+                    }
+                });
 
-            TextView shop_name = linearLayout.findViewById(R.id.shop_name);
-            shop_name.setText("商品名" + i);
-            TextView sell_num = linearLayout.findViewById(R.id.sell_num);
-            sell_num.setText("销量" + i * 100);
-            TextView old_price = linearLayout.findViewById(R.id.old_price);
-            if(i!=1) {
-                old_price.setText("￥15.0");
-                old_price.getPaint().setFlags(Paint. STRIKE_THRU_TEXT_FLAG);
-            }else {
-                old_price.setVisibility(View.GONE);
-            }
-            TextView price = linearLayout.findViewById(R.id.price);
-            price.setText("￥12.0");
-            RadioButton radio =linearLayout.findViewById(R.id.radio);
-            int finalI = i;
-            radio.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                    if(b){
-                        int count = shopList.getChildCount();
-                        for(int j = 0 ; j < count ; j ++ ){
-                            if(finalI ==j)continue;
-                            RadioButton r  = shopList.getChildAt(j).findViewById(R.id.radio);
-                            r.setChecked(false);
+        RetrofitClient.newInstance(ApiField.BASEURL,Authentication.getAuthentication())
+                .create(WashService.class)
+                .getGoodsList(washId,0,20)
+                .enqueue(new Callback<WashCommodityBean>() {
+                    @Override
+                    public void onResponse(Call<WashCommodityBean> call, Response<WashCommodityBean> response) {
+                        if( response.body()==null)return;;
+                        ArrayList<WashCommodityBean.DataBean> dataBeans = (ArrayList<WashCommodityBean.DataBean>) response.body().getData();
+                        if(dataBeans==null)return;
+                        for(int i  = 0 ; i < dataBeans.size() ; i ++){
+                            buildGoodsLayout(dataBeans.get(i),i);
                         }
                     }
-                }
-            });
-            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,150);
-            layoutParams.setMargins(0,16,0,16);
-            shopList.addView(linearLayout,layoutParams);
-        }
 
+                    @Override
+                    public void onFailure(Call<WashCommodityBean> call, Throwable t) {
+
+                    }
+                });
 
     }
 
