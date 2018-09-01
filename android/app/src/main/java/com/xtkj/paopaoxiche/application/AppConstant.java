@@ -19,4 +19,7 @@ public class AppConstant {
     public final static int STATE_STOPPING = 0;
     public final static int STATE_OPENING = 1;
 
+    public final static int PAY_WX = 1;
+    public final static int PAY_ZFB = 2;
+
 }

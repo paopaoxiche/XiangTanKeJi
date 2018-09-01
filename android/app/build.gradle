@@ -83,7 +83,7 @@ dependencies {
     //noinspection GradleDependency
     implementation 'com.github.bumptech.glide:glide:4.0.0'
 
-
-
+    implementation  project(path: ':wxpay')
     implementation 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:5.1.4'
+
 }

@@ -52,7 +52,7 @@ public interface WashService {
 
 
     @GET("wash/getServiceList")
-    Call<SellingServicesBean> getServiceList(@Query("washId") Integer washId, @Query("pageIndex") Integer pageIndex, @Query("pageSize") int pageSize);
+    Call<SellingServicesBean> getServiceList(@Query("washId") Integer washId);
 
 
     @Multipart

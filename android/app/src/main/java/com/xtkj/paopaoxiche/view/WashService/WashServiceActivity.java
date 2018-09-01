@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.provider.SyncStateContract;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,16 +14,22 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bingo.wxpay.PayActivity;
+import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.xtkj.paopaoxiche.R;
+import com.xtkj.paopaoxiche.application.AppConstant;
 import com.xtkj.paopaoxiche.application.Authentication;
 import com.xtkj.paopaoxiche.base.BaseActivity;
+import com.xtkj.paopaoxiche.bean.CreateConsumeBean;
 import com.xtkj.paopaoxiche.bean.SellingServicesBean;
 import com.xtkj.paopaoxiche.bean.WashCommodityBean;
 import com.xtkj.paopaoxiche.contract.IWashServiceContract;
 import com.xtkj.paopaoxiche.http.ApiField;
 import com.xtkj.paopaoxiche.http.RetrofitClient;
 import com.xtkj.paopaoxiche.presenter.WashServicePresenterImpl;
+import com.xtkj.paopaoxiche.service.CarOwnerService;
 import com.xtkj.paopaoxiche.service.WashService;
 
 import java.util.ArrayList;
@@ -32,6 +39,9 @@ import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import rx.Observable;
+
+import com.tencent.mm.opensdk.openapi.IWXAPI;
 
 public class WashServiceActivity extends BaseActivity implements IWashServiceContract.IWashServiceView {
 
@@ -47,8 +57,13 @@ public class WashServiceActivity extends BaseActivity implements IWashServiceCon
     Button payButton;
 
 
+    private IWXAPI api;
+
     IWashServiceContract.IWashServicePresenter presenter ;
     int washId;
+
+    int serviceId = 0;
+    int commodityId = 0 ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +76,8 @@ public class WashServiceActivity extends BaseActivity implements IWashServiceCon
         new WashServicePresenterImpl(this);
         presenter.onCreate();
         initViews();
+        initValues();
+        initListeners();
     }
 
     private void buildServiceLayout(SellingServicesBean.DataBean d,int index){
@@ -83,14 +100,17 @@ public class WashServiceActivity extends BaseActivity implements IWashServiceCon
             if(b){
                 int count = serviceItems.getChildCount();
                 for(int j = 0 ; j < count ; j ++){
-                    if(index ==j)continue;
+                    if(index ==j){
+                        commodityId = d.getId();
+                        continue;
+                    }
                     RadioButton r  = serviceItems.getChildAt(j).findViewById(R.id.radio);
                     r.setChecked(false);
                 }
             }
         });
 
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 200);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         layoutParams.setMargins(0,16,0,16);
         serviceItems.addView(linearLayout,layoutParams);
     }
@@ -116,13 +136,16 @@ public class WashServiceActivity extends BaseActivity implements IWashServiceCon
             if(b){
                 int count = shopList.getChildCount();
                 for(int j = 0 ; j < count ; j ++ ){
-                    if(index ==j)continue;
+                    if(index ==j){
+                        commodityId = dataBean.getId();
+                        continue;
+                    }
                     RadioButton r  = shopList.getChildAt(j).findViewById(R.id.radio);
                     r.setChecked(false);
                 }
             }
         });
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,150);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
         layoutParams.setMargins(0,16,0,16);
         shopList.addView(linearLayout,layoutParams);
     }
@@ -131,13 +154,20 @@ public class WashServiceActivity extends BaseActivity implements IWashServiceCon
     protected void initViews() {
 
 
+
+    }
+
+    @Override
+    protected void initValues() {
+
+
         RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
                 .create(WashService.class)
-                .getServiceList(washId,0,20)
+                .getServiceList(washId)
                 .enqueue(new Callback<SellingServicesBean>() {
                     @Override
                     public void onResponse(Call<SellingServicesBean> call, Response<SellingServicesBean> response) {
-                        if( response.body()==null)return;;
+                        if( response.body()==null)return;
                         ArrayList<SellingServicesBean.DataBean> dataBeans = (ArrayList<SellingServicesBean.DataBean>) response.body().getData();
                         if(dataBeans==null)return;
                         for(int i  = 0 ; i < dataBeans.size() ; i ++){
@@ -157,7 +187,7 @@ public class WashServiceActivity extends BaseActivity implements IWashServiceCon
                 .enqueue(new Callback<WashCommodityBean>() {
                     @Override
                     public void onResponse(Call<WashCommodityBean> call, Response<WashCommodityBean> response) {
-                        if( response.body()==null)return;;
+                        if( response.body()==null)return;
                         ArrayList<WashCommodityBean.DataBean> dataBeans = (ArrayList<WashCommodityBean.DataBean>) response.body().getData();
                         if(dataBeans==null)return;
                         for(int i  = 0 ; i < dataBeans.size() ; i ++){
@@ -171,21 +201,48 @@ public class WashServiceActivity extends BaseActivity implements IWashServiceCon
                     }
                 });
 
-    }
-
-    @Override
-    protected void initValues() {
 
     }
 
     @Override
     protected void initListeners() {
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
+
+        backButton.setOnClickListener(view -> finish());
+        payButton.setOnClickListener(e ->{
+            callPay();
         });
+    }
+
+
+
+    private void callPay(){
+        RetrofitClient.newInstance(ApiField.BASEURL,Authentication.getAuthentication())
+                .create(CarOwnerService.class)
+                .createConsume(serviceId,commodityId,0, AppConstant.PAY_WX)
+                .enqueue(new Callback<CreateConsumeBean>() {
+                    @Override
+                    public void onResponse(Call<CreateConsumeBean> call, Response<CreateConsumeBean> response) {
+
+                        PayReq req = new PayReq();
+                        //req.appId = "wxf8b4f85f3a794e77";  // 测试用appId
+                        req.appId			= response.body().getData().getWxPay().getAppid();
+                        req.partnerId		= response.body().getData().getWxPay().getPartnerid();
+                        req.prepayId		= response.body().getData().getWxPay().getPrepayid();
+                        req.nonceStr		= response.body().getData().getWxPay().getNoncestr();
+                        req.timeStamp		= response.body().getData().getWxPay().getTimestamp();
+                        req.packageValue	= response.body().getData().getWxPay().getPackageX();
+                        req.sign			= response.body().getData().getWxPay().getSign();
+                        req.extData			= "app data"; // optional
+                        Toast.makeText(getActivityContext(), "正常调起支付", Toast.LENGTH_SHORT).show();
+                        // 在支付之前，如果应用没有注册到微信，应该先调用IWXMsg.registerApp将应用注册到微信
+                        api.sendReq(req);
+                    }
+
+                    @Override
+                    public void onFailure(Call<CreateConsumeBean> call, Throwable t) {
+
+                    }
+                });
     }
 
     @Override
