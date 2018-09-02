@@ -8,6 +8,7 @@
 
 #import "CommodityRecommendationCell.h"
 #import "UIColor+Category.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface CommodityRecommendationCell ()
 
@@ -26,8 +27,18 @@
     _commodityImgView.layer.masksToBounds = YES;
 }
 
-- (void)setOriginalPrice:(NSString *)originalPrice {
-    NSMutableAttributedString *price = [[NSMutableAttributedString alloc] initWithString:originalPrice];
+- (void)setPhotoUrl:(NSString *)photoUrl {
+    [_commodityImgView sd_setImageWithURL:[NSURL URLWithString:photoUrl]
+                         placeholderImage:[UIImage imageNamed:@"CarWashAvatar"]];
+}
+
+- (void)setCurrentPrice:(CGFloat)currentPrice {
+    _currentPriceLabel.text = [NSString stringWithFormat:@"%.2f", currentPrice];;
+}
+
+- (void)setOriginalPrice:(CGFloat)originalPrice {
+    NSString *original = [NSString stringWithFormat:@"%.2f", originalPrice];
+    NSMutableAttributedString *price = [[NSMutableAttributedString alloc] initWithString:original];
     [price addAttribute:NSStrikethroughStyleAttributeName
                   value:@(NSUnderlineStyleSingle)
                   range:NSMakeRange(0, price.length)];

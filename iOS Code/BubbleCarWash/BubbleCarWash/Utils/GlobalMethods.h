@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+/// 位置结构体
+struct Location {
+    CGFloat lng;
+    CGFloat lat;
+};
+typedef struct CG_BOXABLE Location Location;
+
 @interface GlobalMethods : NSObject
 
 + (UIViewController *)viewControllerWithBuddleName:(NSString *)name vcIdentifier:(NSString *)identifier;
@@ -19,6 +26,11 @@
  */
 + (BOOL)checkPhoneNumberValid:(NSString *)phoneNumberString;
 
-+ (NSString *)conversionTimestampToStr:(NSString *)timestamp;
++ (NSString *)conversionTimestampToStr:(NSString *)timestamp dateFormat:(NSString *)dateFormat;
+
+/**
+ *  求两经纬度间距离
+ */
++ (NSInteger)calculateDistanceWithLocation:(Location)location localLocation:(Location)localLocation;
 
 @end

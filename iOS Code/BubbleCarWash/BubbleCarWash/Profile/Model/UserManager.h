@@ -19,18 +19,21 @@ typedef NS_ENUM(NSInteger, CertificationState) {
     CertificationStateDone          // 认证完成
 };
 
+typedef void(^CodeResultBlock)(NSInteger code);
+
 @class UserInfoModel;
 
 @interface UserManager : NSObject
 
 @property (nonatomic, strong) UserInfoModel *userInfo;
 @property (nonatomic, assign) BOOL isLogin;
+@property (nonatomic, copy) NSString *authentication;
 
 + (instancetype)sharedInstance;
 + (UserType)userType;
 - (void)savaUserInfoWithPassword:(NSString *)password;
 - (BOOL)isAutoLogin;
-- (void)autoLogin;
+- (void)autoLogin:(CodeResultBlock)block;
 - (void)obtainUserInfo;
 
 @end

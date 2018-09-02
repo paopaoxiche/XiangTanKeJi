@@ -7,6 +7,7 @@
 //
 
 #import "GlobalMethods.h"
+#import <CoreLocation/CoreLocation.h>
 
 @implementation GlobalMethods
 
@@ -41,12 +42,20 @@
     return NO;
 }
 
-+ (NSString *)conversionTimestampToStr:(NSString *)timestamp {
++ (NSString *)conversionTimestampToStr:(NSString *)timestamp dateFormat:(NSString *)dateFormat {
     long long time = [timestamp longLongValue] / 1000;
     NSDate *date = [[NSDate alloc] initWithTimeIntervalSince1970:time];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    formatter.dateFormat = @"yyyy-MM-dd";
+    formatter.dateFormat = dateFormat;
     return [formatter stringFromDate:date];
+}
+
++ (NSInteger)calculateDistanceWithLocation:(Location)location localLocation:(Location)localLocation {
+    CLLocation *local = [[CLLocation alloc] initWithLatitude:localLocation.lat longitude:localLocation.lng];
+    CLLocation *other = [[CLLocation alloc] initWithLatitude:location.lat longitude:location.lng];
+    NSInteger distance = ceil([local distanceFromLocation:other]);
+    
+    return distance;
 }
 
 @end

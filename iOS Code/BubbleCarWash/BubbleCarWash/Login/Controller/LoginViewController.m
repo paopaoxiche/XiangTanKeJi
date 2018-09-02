@@ -80,6 +80,7 @@
     [NetworkTools loginWithPhoneNumber:_phoneNumberTextField.text code:[_verificationCodeTextField.text integerValue] userType:_type success:^(NSDictionary *response, BOOL isSuccess) {
         long code = [response[@"code"] longValue];
         if (code == 200) {
+            [self stopCountingDown];
             // 登录成功
             UserInfoModel *userInfo = [[UserInfoModel alloc] initWithDic:response[@"data"]];
             [UserManager sharedInstance].userInfo = userInfo;
@@ -88,6 +89,7 @@
             UIViewController *mainVC = [GlobalMethods viewControllerWithBuddleName:@"Main" vcIdentifier:@"MainVC"];
             [self presentViewController:mainVC animated:YES completion:nil];
         } else if (code == 10008) {
+            [self stopCountingDown];
             // 洗车场认证
         }
     } failed:^(NSError *error) {
@@ -102,7 +104,8 @@
 - (void)startCountingDown {
     _seconds = 60;
     _verificationCodeButton.layer.borderColor = [UIColor rgbWithRed:217 green:227 blue:255].CGColor;
-    _verificationCodeButton.backgroundColor = [UIColor rgbWithRed:255 green:255 blue:255];
+    _verificationCodeButton.backgroundColor = [UIColor rgbWithRed:217 green:227 blue:232];
+    [_verificationCodeButton setTintColor:[UIColor whiteColor]];
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
     dispatch_resume(_timer);
@@ -112,7 +115,8 @@
             if (self.seconds <= 0) {
                 [self stopCountingDown];
             } else {
-                [self.verificationCodeButton setTitle:[NSString stringWithFormat:@"%lu s", self.seconds] forState:UIControlStateNormal];
+                [self.verificationCodeButton setTitle:[NSString stringWithFormat:@"%lu s", self.seconds]
+                                             forState:UIControlStateNormal];
             }
             
             self.seconds--;
@@ -124,6 +128,7 @@
     if (_timer) {
         _verificationCodeButton.layer.borderColor = [UIColor rgbWithRed:248 green:155 blue:10].CGColor;
         _verificationCodeButton.backgroundColor = [UIColor whiteColor];
+        [_verificationCodeButton setTintColor:[UIColor whiteColor]];
         [_verificationCodeButton setTitle:@"获取验证码" forState:UIControlStateNormal];
         // 取消timer，必须重建才能运行timer
         dispatch_source_cancel(_timer);

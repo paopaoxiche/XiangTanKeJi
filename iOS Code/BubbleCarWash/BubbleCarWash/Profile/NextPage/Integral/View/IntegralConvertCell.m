@@ -36,4 +36,35 @@
     // Configure the view for the selected state
 }
 
+- (IBAction)onClickedConvertBtn:(id)sender {
+    if (_delegate) {
+        [_delegate onClickedConvertButtonnAtIndex:_index];
+    }
+}
+
+- (void)setNoteSum:(NSString *)noteSum {
+    _noteSum = noteSum;
+    _noteSumLabel.text = noteSum;
+}
+
+- (void)setCouponType:(NSString *)couponType {
+    _couponType = couponType;
+    _noteTypeLabel.text = couponType;
+}
+
+- (void)setCouponDesc:(NSString *)couponDesc {
+    _couponDesc = couponDesc;
+    _detailNoteLabel.text = couponDesc;
+}
+
+- (void)setValidityPeroid:(NSString *)validityPeroid {
+    _validityPeroid = validityPeroid;
+    _validityPeriodLabel.text = validityPeroid;
+}
+
+- (void)setIntegral:(NSString *)integral {
+    _integral = integral;
+    _IntegralLabel.text = integral;
+}
+
 @end

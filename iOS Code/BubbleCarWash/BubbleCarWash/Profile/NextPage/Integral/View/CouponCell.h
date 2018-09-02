@@ -10,4 +10,10 @@
 
 @interface CouponCell : UITableViewCell
 
+@property (nonatomic, copy) NSString *avatarUrl;
+@property (nonatomic, copy) NSString *couponDesc;
+@property (nonatomic, copy) NSString *washName;
+@property (nonatomic, copy) NSString *validityPeroid;
+@property (nonatomic, copy) NSString *noteSum;
+
 @end

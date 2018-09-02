@@ -10,6 +10,8 @@
 
 @interface CommodityRecommendationCell : UICollectionViewCell
 
-@property (nonatomic, copy) NSString *originalPrice;
+@property (nonatomic, copy) NSString *photoUrl;
+@property (nonatomic, assign) CGFloat currentPrice;
+@property (nonatomic, assign) CGFloat originalPrice;
 
 @end

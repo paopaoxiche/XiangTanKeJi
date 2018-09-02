@@ -7,28 +7,39 @@
 //
 
 #import "CouponCell.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface CouponCell ()
 
-@property (weak, nonatomic) IBOutlet UIImageView *avatar;           // 洗车场头像
+@property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;           // 洗车场头像
 @property (weak, nonatomic) IBOutlet UILabel *couponDetailLabel;    // 优惠券详细描述
-@property (weak, nonatomic) IBOutlet UILabel *carWashName;          // 洗车场名字
-@property (weak, nonatomic) IBOutlet UILabel *validityPeroid;       // 券有效期
+@property (weak, nonatomic) IBOutlet UILabel *carWashNameLabel;     // 洗车场名字
+@property (weak, nonatomic) IBOutlet UILabel *validityPeroidLabel;  // 券有效期
 @property (weak, nonatomic) IBOutlet UILabel *noteSumLabel;         // 券金额
 
 @end
 
 @implementation CouponCell
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    // Initialization code
+- (void)setAvatarUrl:(NSString *)avatarUrl {
+    [_avatarImageView sd_setImageWithURL:[NSURL URLWithString:avatarUrl]
+                        placeholderImage:[UIImage imageNamed:@"CarWashAvatar"]];
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
+- (void)setCouponDesc:(NSString *)couponDesc {
+    _couponDetailLabel.text = couponDesc;
+}
 
-    // Configure the view for the selected state
+- (void)setWashName:(NSString *)washName {
+    _carWashNameLabel.text = washName;
+}
+
+- (void)setValidityPeroid:(NSString *)validityPeroid {
+    _validityPeroidLabel.text = validityPeroid;
+}
+
+- (void)setNoteSum:(NSString *)noteSum {
+    _noteSumLabel.text = noteSum;
 }
 
 @end

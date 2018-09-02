@@ -8,11 +8,13 @@
 
 #import "IntegralConvertViewController.h"
 #import "IntegralConvertCell.h"
+#import "CouponListModel.h"
 
-@interface IntegralConvertViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface IntegralConvertViewController () <UITableViewDataSource, UITableViewDelegate, IntegralConvertCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UILabel *currentIntegralLabel;
+@property (nonatomic, copy) NSArray *redeemableCouponList;
 
 @end
 
@@ -30,6 +32,11 @@
     self.extendedLayoutIncludesOpaqueBars = NO;
     self.modalPresentationCapturesStatusBarAppearance = NO;
     self.automaticallyAdjustsScrollViewInsets = NO;
+    
+    [CouponListModel loadRedeemableCouponList:^(NSArray *result) {
+        self.redeemableCouponList = [result copy];
+        [self.tableView reloadData];
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -40,7 +47,7 @@
 #pragma mark - UITableViewDatasource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return _redeemableCouponList.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -48,10 +55,29 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    RedeemableCouponModel *model = [_redeemableCouponList objectAtIndex:indexPath.section];
     IntegralConvertCell *cell = [tableView dequeueReusableCellWithIdentifier:@"IntegralIdentifier"];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.noteSum = model.price;
+    cell.couponType = model.couponType;
+    cell.couponDesc = model.name;
+    cell.validityPeroid = model.validityPeroid;
+    cell.integral = model.integral;
+    cell.index = indexPath.row;
+    cell.delegate = self;
     
     return cell;
+}
+
+#pragma mark - IntegralConvertCellDelegate
+
+- (void)onClickedConvertButtonnAtIndex:(NSInteger)index {
+    RedeemableCouponModel *model = [_redeemableCouponList objectAtIndex:index];
+    [model convertIntegralToCoupon:^(NSInteger code) {
+//        if (code == -1) {
+//            <#statements#>
+//        }
+    }];
 }
 
 #pragma mark - UITableViewDelegate

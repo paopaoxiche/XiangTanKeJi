@@ -46,12 +46,27 @@
     UITapGestureRecognizer *singleGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onHeaderViewClicked)];
     [_headerView addGestureRecognizer:singleGesture];
     _tableView.tableFooterView = [[UIView alloc] init];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUserInfo:) name:@"UpdateUserInfo" object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
     [[UserManager sharedInstance] obtainUserInfo];
+    [self updateUserInfo:nil];
+}
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+- (void)updateUserInfo:(NSNotification *)notification {
     BOOL isLogin = [UserManager sharedInstance].isLogin;
     _userInfo = [UserManager sharedInstance].userInfo;
     _userType = isLogin ? _userInfo.type : UserTypeOwner;
@@ -65,15 +80,6 @@
     } else {
         _avatar.image = [UIImage imageNamed:@"OwnerAvatar"];
     }
-}
-
-- (void)viewWillLayoutSubviews {
-    [super viewWillLayoutSubviews];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)onHeaderViewClicked {

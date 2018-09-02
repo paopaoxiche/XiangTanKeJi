@@ -10,6 +10,8 @@
 #import "UserInfoModel.h"
 #import "LYKeyChainStore.h"
 #import "NetworkTools.h"
+#import "AFNetworking.h"
+#import "LoginViewController.h"
 
 @interface UserManager ()
 
@@ -73,11 +75,24 @@
     return YES;
 }
 
-- (void)autoLogin {
+- (void)autoLogin:(CodeResultBlock)block {
     if (!_isLogin && [self isAutoLogin]) {
+//        AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+//        NSString *authenStr = [NSString stringWithFormat:@"user_id=%@,token=%@", _userInfo.userID, _userInfo.token];
+//        NSString *url = @"http://101.200.63.245:8080/user/checkCarOwner";
+//        [manager.requestSerializer setValue:authenStr forHTTPHeaderField:@"authentication"];
+//        [manager GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+//            NSLog(@"%@", responseObject);
+//            NSInteger code = [responseObject[@"code"] integerValue];
+//            self.isLogin = code == 200 ? YES : NO;
+//        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+//            self.isLogin = NO;
+//        }];
+        
         [NetworkTools checkToken:_userInfo.token userID:_userInfo.userID isOwner:_userInfo.type == UserTypeOwner success:^(NSDictionary *response, BOOL isSuccess) {
             NSInteger code = [response[@"code"] integerValue];
             self.isLogin = code == 200 ? YES : NO;
+            block(code);
         } failed:^(NSError *error) {
             self.isLogin = NO;
         }]; // block
@@ -95,7 +110,10 @@
 //                self.userInfo.regTime = model.regTime;
 //                self.userInfo.score = model.score;
 //                self.userInfo.phoneNumber = model.phoneNumber;
+                model.token = self.userInfo.token;
                 self.userInfo = model;
+                self.authentication = [NSString stringWithFormat:@"user_id=%@,token=%@", self.userInfo.userID, self.userInfo.token];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateUserInfo" object:nil];
             }
         } failed:^(NSError *error) {
             

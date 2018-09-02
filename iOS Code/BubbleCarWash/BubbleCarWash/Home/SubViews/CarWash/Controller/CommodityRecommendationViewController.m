@@ -10,6 +10,7 @@
 #import "LYPageControl.h"
 #import "CommodityRecommendationCell.h"
 #import "CommodityHorizontalFlowLayout.h"
+#import "HomeModel.h"
 
 @interface CommodityRecommendationViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 
@@ -41,10 +42,18 @@
     _flowLayout.total = 18;
 }
 
+- (void)setRecommendWashCommodity:(NSArray *)recommendWashCommodity {
+    _recommendWashCommodity = recommendWashCommodity;
+    _pageControl.numberOfPages = recommendWashCommodity.count;
+//    _collectionView.contentSize = CGSizeMake(([UIScreen mainScreen].bounds.size.width - 12 * 2) * recommendWashCommodity.count, 250);
+//    [self.view layoutIfNeeded];
+    [_collectionView reloadData];
+}
+
 #pragma mark - UICollectionViewDataSource
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 3;
+    return _recommendWashCommodity.count;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -53,7 +62,11 @@
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     CommodityRecommendationCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
-    cell.originalPrice = @"¥33.00";
+    RecommendWashModel *washModel = _recommendWashCommodity[indexPath.section];
+    RecommendCommodityModel *commodityModel = washModel.commodityList[indexPath.item];
+    cell.photoUrl = commodityModel.imageUrl;
+    cell.currentPrice = commodityModel.currentPrice;
+    cell.originalPrice = commodityModel.originPrice;
     
     return cell;
 }

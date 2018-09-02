@@ -10,4 +10,6 @@
 
 @interface CommodityRecommendationViewController : UIViewController
 
+@property (nonatomic, copy) NSArray *recommendWashCommodity;
+
 @end

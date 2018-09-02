@@ -257,6 +257,9 @@
                                                                     <state key="normal" title="兑换">
                                                                         <color key="titleColor" red="0.97254901959999995" green="0.60784313729999995" blue="0.039215686270000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     </state>
+                                                                    <connections>
+                                                                        <action selector="onClickedConvertBtn:" destination="u7u-UW-TKw" eventType="touchUpInside" id="Uk2-a6-Kdz"/>
+                                                                    </connections>
                                                                 </button>
                                                             </subviews>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -566,11 +569,11 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
-                                            <outlet property="avatar" destination="lDx-VG-pbT" id="xK0-Hd-9DH"/>
-                                            <outlet property="carWashName" destination="oIG-G5-x49" id="n21-rb-6xD"/>
+                                            <outlet property="avatarImageView" destination="lDx-VG-pbT" id="DNn-Yg-Wr3"/>
+                                            <outlet property="carWashNameLabel" destination="oIG-G5-x49" id="Nub-VC-FW0"/>
                                             <outlet property="couponDetailLabel" destination="3Rq-xy-ErC" id="g8y-oT-E5Q"/>
                                             <outlet property="noteSumLabel" destination="3E5-g7-dtB" id="UEd-Cm-aDI"/>
-                                            <outlet property="validityPeroid" destination="C9q-AU-eQt" id="8mn-Dp-68y"/>
+                                            <outlet property="validityPeroidLabel" destination="C9q-AU-eQt" id="bc2-Jd-RZy"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -659,7 +662,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="91.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2KY-TA-8AC">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ServiceDefault" translatesAutoresizingMaskIntoConstraints="NO" id="2KY-TA-8AC">
                                                     <rect key="frame" x="20" y="15" width="60" height="60"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="60" id="68P-Go-Bdd"/>
@@ -682,20 +685,8 @@
                                                     <color key="textColor" red="0.71764705880000002" green="0.76862745099999996" blue="0.79607843140000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="商家券" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ijB-BP-KBD">
-                                                    <rect key="frame" x="90" y="60" width="49" height="20"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" red="0.71764705880000002" green="0.76862745099999996" blue="0.79607843140000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-¥5.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1a0-zp-6qe">
                                                     <rect key="frame" x="305" y="36" width="50" height="20"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" red="0.71764705880000002" green="0.76862745099999996" blue="0.79607843140000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-¥2.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MJG-TY-bku">
-                                                    <rect key="frame" x="305" y="60" width="50" height="20"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.71764705880000002" green="0.76862745099999996" blue="0.79607843140000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -705,24 +696,18 @@
                                                 <constraint firstItem="2KY-TA-8AC" firstAttribute="centerY" secondItem="JT5-0U-APT" secondAttribute="centerY" id="249-AC-3Ub"/>
                                                 <constraint firstItem="aUA-Wh-vsV" firstAttribute="top" secondItem="bMc-Ee-klb" secondAttribute="bottom" constant="4" id="9n0-fx-jFO"/>
                                                 <constraint firstItem="aUA-Wh-vsV" firstAttribute="leading" secondItem="bMc-Ee-klb" secondAttribute="leading" id="IKa-yh-bXy"/>
-                                                <constraint firstItem="MJG-TY-bku" firstAttribute="centerY" secondItem="ijB-BP-KBD" secondAttribute="centerY" id="KG3-pG-wdO"/>
                                                 <constraint firstItem="1a0-zp-6qe" firstAttribute="trailing" secondItem="IbC-by-ek2" secondAttribute="trailing" id="Nc5-iF-gRA"/>
-                                                <constraint firstItem="ijB-BP-KBD" firstAttribute="top" secondItem="aUA-Wh-vsV" secondAttribute="bottom" constant="4" id="PlU-qG-lQI"/>
                                                 <constraint firstAttribute="trailing" secondItem="IbC-by-ek2" secondAttribute="trailing" constant="20" id="ZoY-Tl-bML"/>
                                                 <constraint firstItem="bMc-Ee-klb" firstAttribute="top" secondItem="JT5-0U-APT" secondAttribute="top" constant="12" id="dSE-Cy-EJ8"/>
                                                 <constraint firstItem="1a0-zp-6qe" firstAttribute="centerY" secondItem="aUA-Wh-vsV" secondAttribute="centerY" id="dkF-W9-g7m"/>
                                                 <constraint firstItem="IbC-by-ek2" firstAttribute="centerY" secondItem="bMc-Ee-klb" secondAttribute="centerY" id="e3l-dW-b0F"/>
-                                                <constraint firstItem="MJG-TY-bku" firstAttribute="trailing" secondItem="IbC-by-ek2" secondAttribute="trailing" id="erA-WY-c0n"/>
                                                 <constraint firstItem="bMc-Ee-klb" firstAttribute="leading" secondItem="2KY-TA-8AC" secondAttribute="trailing" constant="10" id="fu2-Zf-Y0p"/>
                                                 <constraint firstItem="2KY-TA-8AC" firstAttribute="leading" secondItem="JT5-0U-APT" secondAttribute="leading" constant="20" id="pi6-sT-Goe"/>
-                                                <constraint firstItem="ijB-BP-KBD" firstAttribute="leading" secondItem="bMc-Ee-klb" secondAttribute="leading" id="yGq-Hq-f7o"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="businessCouponLabel" destination="ijB-BP-KBD" id="YuT-hc-4Ny"/>
-                                            <outlet property="couponNumOne" destination="1a0-zp-6qe" id="mpp-mR-fG2"/>
-                                            <outlet property="couponNumTwo" destination="MJG-TY-bku" id="dBN-zg-fDl"/>
-                                            <outlet property="generalCouponLabel" destination="aUA-Wh-vsV" id="Ilh-Yk-kEw"/>
+                                            <outlet property="couponNumber" destination="1a0-zp-6qe" id="Wg5-Ql-k2d"/>
+                                            <outlet property="couponTypeLabel" destination="aUA-Wh-vsV" id="eZ9-Mf-M7C"/>
                                             <outlet property="proImgView" destination="2KY-TA-8AC" id="vpt-n3-zCB"/>
                                             <outlet property="proNameLabel" destination="bMc-Ee-klb" id="OwD-LH-Dg5"/>
                                             <outlet property="proPriceLabel" destination="IbC-by-ek2" id="5xd-pG-CX2"/>
@@ -1002,23 +987,23 @@
                                             <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="StartNormal" translatesAutoresizingMaskIntoConstraints="NO" id="VZL-Wo-nBE">
+                                        <imageView userInteractionEnabled="NO" tag="100" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="StartNormal" translatesAutoresizingMaskIntoConstraints="NO" id="VZL-Wo-nBE">
                                             <rect key="frame" x="80" y="50" width="14" height="14"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="14" id="I3g-yi-KGa"/>
                                                 <constraint firstAttribute="width" constant="14" id="rUG-AX-RRl"/>
                                             </constraints>
                                         </imageView>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="StartNormal" translatesAutoresizingMaskIntoConstraints="NO" id="fFh-D3-Lsa">
+                                        <imageView userInteractionEnabled="NO" tag="101" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="StartNormal" translatesAutoresizingMaskIntoConstraints="NO" id="fFh-D3-Lsa">
                                             <rect key="frame" x="100" y="50" width="14" height="14"/>
                                         </imageView>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="StartNormal" translatesAutoresizingMaskIntoConstraints="NO" id="S9F-RC-YVP">
+                                        <imageView userInteractionEnabled="NO" tag="102" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="StartNormal" translatesAutoresizingMaskIntoConstraints="NO" id="S9F-RC-YVP">
                                             <rect key="frame" x="120" y="50" width="14" height="14"/>
                                         </imageView>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="StartNormal" translatesAutoresizingMaskIntoConstraints="NO" id="orz-T8-Few">
+                                        <imageView userInteractionEnabled="NO" tag="103" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="StartNormal" translatesAutoresizingMaskIntoConstraints="NO" id="orz-T8-Few">
                                             <rect key="frame" x="140" y="50" width="14" height="14"/>
                                         </imageView>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="StartNormal" translatesAutoresizingMaskIntoConstraints="NO" id="IWT-L0-h6Z">
+                                        <imageView userInteractionEnabled="NO" tag="104" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="StartNormal" translatesAutoresizingMaskIntoConstraints="NO" id="IWT-L0-h6Z">
                                             <rect key="frame" x="160" y="50" width="14" height="14"/>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2017.07.06" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wbn-MN-oCP">
@@ -1077,11 +1062,11 @@
                                     <outlet property="evaluationContent" destination="kfQ-dq-Ic4" id="I9j-CK-MPW"/>
                                     <outlet property="evaluationTime" destination="wbn-MN-oCP" id="UPh-So-vfP"/>
                                     <outlet property="scoreLabel" destination="0zn-tS-5Do" id="gcf-hP-3HT"/>
-                                    <outlet property="start1" destination="VZL-Wo-nBE" id="V29-lD-l2Y"/>
-                                    <outlet property="start2" destination="fFh-D3-Lsa" id="GM0-Z5-dAi"/>
-                                    <outlet property="start3" destination="S9F-RC-YVP" id="qwr-07-zS2"/>
-                                    <outlet property="start4" destination="orz-T8-Few" id="ccl-J6-ciQ"/>
-                                    <outlet property="start5" destination="IWT-L0-h6Z" id="wCe-6B-6g2"/>
+                                    <outlet property="star1" destination="VZL-Wo-nBE" id="ftZ-kf-TXJ"/>
+                                    <outlet property="star2" destination="fFh-D3-Lsa" id="ic5-ob-OVW"/>
+                                    <outlet property="star3" destination="S9F-RC-YVP" id="fx7-lQ-yqc"/>
+                                    <outlet property="star4" destination="orz-T8-Few" id="W8l-pi-9yW"/>
+                                    <outlet property="star5" destination="IWT-L0-h6Z" id="aGI-95-nb5"/>
                                     <outlet property="userName" destination="TJJ-j7-1AH" id="Oab-0V-FRN"/>
                                 </connections>
                             </tableViewCell>
@@ -1257,6 +1242,7 @@
         <image name="HeaderRightArrow" width="6" height="11"/>
         <image name="OwnerAvatar" width="400" height="400"/>
         <image name="Profile_Normal" width="24" height="24"/>
+        <image name="ServiceDefault" width="60" height="60"/>
         <image name="SingleSelection_Selected" width="44" height="44"/>
         <image name="StartNormal" width="24" height="24"/>
     </resources>

@@ -8,10 +8,12 @@
 
 #import "ExpensesRecordViewController.h"
 #import "ExpensesRecordCell.h"
+#import "ExpensesRecordListModel.h"
 
 @interface ExpensesRecordViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, copy) NSArray *recordList;
 
 @end
 
@@ -19,32 +21,56 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [ExpensesRecordListModel loadExpensesRecordList:^(NSArray *result) {
+        self.recordList = result;
+        [self.tableView reloadData];
+    }];
 }
 
 #pragma mark - UITableViewDatasource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return _recordList.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return section == 0 ? 5 : 3;
+    ExpensesRecordModel *model = [_recordList objectAtIndex:section];
+    return model.commodities.count + 3; // title + service + totalPrice + commodities count
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    ExpensesRecordModel *model = [_recordList objectAtIndex:indexPath.section];
     if (indexPath.row == 0) {
         ExpensesRecordTitleCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ExpensesRecordTitleCell" forIndexPath:indexPath];
+        cell.avatarUrl = model.avatarUrl;
+        cell.washName = model.washName;
+        cell.time = model.time;
         
         return cell;
     }
     
-    if ((indexPath.section == 0 && indexPath.row == 4) || (indexPath.section == 1 && indexPath.row == 2)) {
+    if (indexPath.row == (model.commodities.count + 2)) {
         TotalConsumptionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TotalConsumptionCell" forIndexPath:indexPath];
+        cell.totalPrice = model.totalPrice;
+        cell.isEvaluation = model.isEvaluation == ExpensesRecordEvaluationStatusOn;
         
         return cell;
     }
     
     ExpensesRecordContentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ExpensesRecordContentCell" forIndexPath:indexPath];
+    if (indexPath.row == 1) {
+        cell.imageUrl = @"ServiceDefault";
+        cell.name = model.serviceName;
+        cell.couponType = model.coupon ? model.coupon.couponType : @"";
+        cell.price =  model.coupon ? model.servicePrice : @"";
+        cell.isShowCoupon = YES;
+    } else {
+        CommodityExpensesModel *commodity = model.commodities[indexPath.row - 2];
+        cell.imageUrl = commodity.imageUrl;
+        cell.name = commodity.name;
+        cell.isShowCoupon = NO;
+    }
     
     return cell;
 }

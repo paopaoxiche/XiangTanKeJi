@@ -10,12 +10,26 @@
 
 @interface ExpensesRecordTitleCell : UITableViewCell
 
+@property (nonatomic, copy) NSString *avatarUrl;
+@property (nonatomic, copy) NSString *washName;
+@property (nonatomic, copy) NSString *time;
+
 @end
 
 @interface ExpensesRecordContentCell : UITableViewCell
 
+@property (nonatomic, copy) NSString *imageUrl;
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic, copy) NSString *price;
+@property (nonatomic, copy) NSString *couponType;
+@property (nonatomic, copy) NSString *couponPrice;
+@property (nonatomic, assign) BOOL isShowCoupon;
+
 @end
 
 @interface TotalConsumptionCell : UITableViewCell
+
+@property (nonatomic, copy) NSString *totalPrice;
+@property (nonatomic, assign) BOOL isEvaluation;
 
 @end

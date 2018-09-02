@@ -10,4 +10,11 @@
 
 @interface NearWashInfoCell : UITableViewCell
 
+@property (nonatomic, copy) NSString *avatarUrl;
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic, assign) CGFloat lowestPrice;
+@property (nonatomic, assign) NSInteger honor;
+@property (nonatomic, assign) NSInteger washNumber;
+@property (nonatomic, assign) NSInteger distance;
+
 @end

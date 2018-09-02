@@ -10,4 +10,10 @@
 
 @interface CommentCell : UITableViewCell
 
+@property (nonatomic, copy) NSString *avatarUrl;
+@property (nonatomic, copy) NSString *nickName;
+@property (nonatomic, copy) NSString *commentTime;
+@property (nonatomic, copy) NSString *content;
+@property (nonatomic, assign) NSInteger score;
+
 @end

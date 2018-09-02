@@ -8,10 +8,12 @@
 
 #import "CouponViewController.h"
 #import "CouponCell.h"
+#import "CouponListModel.h"
 
 @interface CouponViewController () <UITableViewDataSource, UITableViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, weak) IBOutlet UITableView *tableView;
+@property (nonatomic, copy) NSArray *myCouponList;
 
 @end
 
@@ -21,6 +23,10 @@
     [super viewDidLoad];
     
     self.title = @"优惠券";
+    [CouponListModel loadMyCouponList:^(NSArray *result) {
+        self.myCouponList = [result copy];
+        [self.tableView reloadData];
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -31,7 +37,7 @@
 #pragma mark - UITableViewDatasource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return _myCouponList.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -39,7 +45,13 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    MyCouponModel *model = [_myCouponList objectAtIndex:indexPath.section];
     CouponCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CouponCell"];
+    cell.avatarUrl = model.avatarUrl;
+    cell.couponDesc = model.title;
+    cell.washName = model.washName;
+    cell.validityPeroid = model.validityPeroid;
+    cell.noteSum = model.price;
     
     return cell;
 }

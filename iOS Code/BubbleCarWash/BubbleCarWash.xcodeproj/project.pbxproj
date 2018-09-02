@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		0603802FA5429C61B55F5DF8 /* libPods-BubbleCarWash.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29174BA4C402F267A6E8611C /* libPods-BubbleCarWash.a */; };
 		6556AE5C211B282E0017B79A /* GlobalMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 6556AE5B211B282E0017B79A /* GlobalMethods.m */; };
+		657AA201213BA0B10086F98A /* WeatherModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 657AA200213BA0B10086F98A /* WeatherModel.m */; };
+		657AA205213BCD660086F98A /* CouponListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 657AA204213BCD660086F98A /* CouponListModel.m */; };
+		657AA20E213C022F0086F98A /* ExpensesRecordListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 657AA20D213C022F0086F98A /* ExpensesRecordListModel.m */; };
+		657AA215213C27AC0086F98A /* CommentListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 657AA214213C27AC0086F98A /* CommentListModel.m */; };
 		6593AB85212942AA002F92F6 /* NetworkTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 6593AB84212942AA002F92F6 /* NetworkTools.m */; };
 		65C5AF582135A32900727122 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5AF522135A32900727122 /* LoginViewController.m */; };
 		65C5AF592135A32900727122 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65C5AF532135A32900727122 /* Login.storyboard */; };
@@ -83,6 +87,14 @@
 		322598973AA2480B0A9F7672 /* Pods-BubbleCarWash.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BubbleCarWash.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BubbleCarWash/Pods-BubbleCarWash.debug.xcconfig"; sourceTree = "<group>"; };
 		6556AE5A211B282E0017B79A /* GlobalMethods.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlobalMethods.h; sourceTree = "<group>"; };
 		6556AE5B211B282E0017B79A /* GlobalMethods.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GlobalMethods.m; sourceTree = "<group>"; };
+		657AA1FF213BA0B10086F98A /* WeatherModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeatherModel.h; sourceTree = "<group>"; };
+		657AA200213BA0B10086F98A /* WeatherModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WeatherModel.m; sourceTree = "<group>"; };
+		657AA203213BCD660086F98A /* CouponListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CouponListModel.h; sourceTree = "<group>"; };
+		657AA204213BCD660086F98A /* CouponListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CouponListModel.m; sourceTree = "<group>"; };
+		657AA20C213C022F0086F98A /* ExpensesRecordListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExpensesRecordListModel.h; sourceTree = "<group>"; };
+		657AA20D213C022F0086F98A /* ExpensesRecordListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExpensesRecordListModel.m; sourceTree = "<group>"; };
+		657AA213213C27AC0086F98A /* CommentListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentListModel.h; sourceTree = "<group>"; };
+		657AA214213C27AC0086F98A /* CommentListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentListModel.m; sourceTree = "<group>"; };
 		6593AB83212942AA002F92F6 /* NetworkTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkTools.h; sourceTree = "<group>"; };
 		6593AB84212942AA002F92F6 /* NetworkTools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NetworkTools.m; sourceTree = "<group>"; };
 		6593AB9221297FCD002F92F6 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -222,6 +234,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		657AA1FE213BA03C0086F98A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				657AA1FF213BA0B10086F98A /* WeatherModel.h */,
+				657AA200213BA0B10086F98A /* WeatherModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		657AA202213BCD3A0086F98A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				657AA203213BCD660086F98A /* CouponListModel.h */,
+				657AA204213BCD660086F98A /* CouponListModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		657AA20F213C23390086F98A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				657AA213213C27AC0086F98A /* CommentListModel.h */,
+				657AA214213C27AC0086F98A /* CommentListModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		65B7FC1121046D1300FC56A1 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -283,9 +322,9 @@
 			children = (
 				65C5AFCB2135A47B00727122 /* UserInfoModel.h */,
 				65C5AFCC2135A47B00727122 /* UserInfoModel.m */,
+				65C5AFA02135A45100727122 /* UserManager.h */,
 				65C5AF9E2135A45100727122 /* UserManager.m */,
 				65C5AF9F2135A45100727122 /* ProfileModel.h */,
-				65C5AFA02135A45100727122 /* UserManager.h */,
 				65C5AFA12135A45100727122 /* ProfileModel.m */,
 				65C5AFA22135A45100727122 /* Profile.json */,
 			);
@@ -356,6 +395,8 @@
 			children = (
 				65C5AFF82135AA8100727122 /* IncomeModel.h */,
 				65C5AFF72135AA8100727122 /* IncomeModel.m */,
+				657AA20C213C022F0086F98A /* ExpensesRecordListModel.h */,
+				657AA20D213C022F0086F98A /* ExpensesRecordListModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -411,6 +452,7 @@
 			children = (
 				65C5B0272135AA8100727122 /* Controller */,
 				65C5B0312135AA8100727122 /* View */,
+				657AA202213BCD3A0086F98A /* Model */,
 			);
 			path = Integral;
 			sourceTree = "<group>";
@@ -442,6 +484,7 @@
 			children = (
 				65C5B03B2135AA8100727122 /* Controller */,
 				65C5B0452135AA8100727122 /* View */,
+				657AA20F213C23390086F98A /* Model */,
 			);
 			path = Comment;
 			sourceTree = "<group>";
@@ -656,6 +699,7 @@
 			children = (
 				65C5B1002135B0F800727122 /* Controller */,
 				65C5B1032135B0F800727122 /* View */,
+				657AA1FE213BA03C0086F98A /* Model */,
 			);
 			path = Weather;
 			sourceTree = "<group>";
@@ -938,6 +982,7 @@
 				65C5B0C82135AEA300727122 /* BaseNavigationViewController.m in Sources */,
 				65C5B0812135AA8100727122 /* IncomeListViewController.m in Sources */,
 				65C5B0AA2135AA8100727122 /* CommentCell.m in Sources */,
+				657AA201213BA0B10086F98A /* WeatherModel.m in Sources */,
 				65C5B09F2135AA8100727122 /* IntegralConvertCell.m in Sources */,
 				65C5B0872135AA8100727122 /* IncomeListCell.m in Sources */,
 				65C5B0712135AA8100727122 /* PersonalInfoViewController.m in Sources */,
@@ -953,6 +998,7 @@
 				65C5B0BA2135AA8200727122 /* CertificationCell.m in Sources */,
 				65C5B0C72135AEA300727122 /* ParentViewController.m in Sources */,
 				65C5B1082135B0F800727122 /* CommodityHorizontalFlowLayout.m in Sources */,
+				657AA205213BCD660086F98A /* CouponListModel.m in Sources */,
 				65C5B1092135B0F800727122 /* NearWashInfoCell.m in Sources */,
 				65C5B0E52135AFC900727122 /* LYPageControl.m in Sources */,
 				6593AB85212942AA002F92F6 /* NetworkTools.m in Sources */,
@@ -966,6 +1012,8 @@
 				65C5B1072135B0F800727122 /* CommodityRecommendationCell.m in Sources */,
 				65C5B0A22135AA8100727122 /* CouponCell.m in Sources */,
 				65C5AFC72135A45100727122 /* ProfileModel.m in Sources */,
+				657AA215213C27AC0086F98A /* CommentListModel.m in Sources */,
+				657AA20E213C022F0086F98A /* ExpensesRecordListModel.m in Sources */,
 				65C5B0E32135AFC900727122 /* HomeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

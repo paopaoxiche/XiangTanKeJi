@@ -16,14 +16,16 @@
 #import "UserManager.h"
 #import "UserInfoModel.h"
 #import "NetworkTools.h"
+#import "HomeModel.h"
 
 @interface HomeViewController () <UITableViewDataSource, UITableViewDelegate, AMapLocationManagerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *weatherView;
 @property (weak, nonatomic) IBOutlet UITableView *nearWashTableView;
 @property (weak, nonatomic) IBOutlet UIView *scrollSubView;
-@property (strong, nonatomic) CommodityRecommendationViewController *commodityRecommendationVC;
-@property (strong, nonatomic) AMapLocationManager *locationManager;
+@property (nonatomic, strong) CommodityRecommendationViewController *commodityRecommendationVC;
+@property (nonatomic, strong) AMapLocationManager *locationManager;
+@property (nonatomic, copy) NSArray *nearbyWashList;
 
 @end
 
@@ -43,7 +45,19 @@
     [self addChildViewController:_commodityRecommendationVC];
     [self.scrollSubView addSubview:_commodityRecommendationVC.view];
     
-    [[UserManager sharedInstance] autoLogin];
+    [[UserManager sharedInstance] autoLogin:^(NSInteger code) {
+        if (code == 401) {
+            UIViewController *loginVC = [GlobalMethods viewControllerWithBuddleName:@"Login" vcIdentifier:@"LoginVC"];
+            [self presentViewController:loginVC animated:YES completion:nil];
+        }
+    }];
+    [HomeDataModel loadNearbyWashList:^(NSArray *result) {
+        self.nearbyWashList = [result copy];
+        [self.nearWashTableView reloadData];
+    }];
+    [HomeDataModel loadRecommendWashCommodity:^(NSArray *result) {
+        self.commodityRecommendationVC.recommendWashCommodity = result;
+    }];
     
     self.locationManager = [[AMapLocationManager alloc] init];
     self.locationManager.delegate = self;
@@ -76,11 +90,18 @@
 #pragma mark - UITableViewDatasource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 4;
+    return _nearbyWashList.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NearbyWashListModel *model = _nearbyWashList[indexPath.row];
     NearWashInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NearWashInfoIdentifier"];
+    cell.avatarUrl = model.avatarUrl;
+    cell.name = model.carWashName;
+    cell.lowestPrice = model.price;
+    cell.honor = model.honor;
+    cell.washNumber = model.washCount;
+//    cell.distance = model.distance;
     
     return cell;
 }
