@@ -16,7 +16,7 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bingo.wxpay.PayActivity;
+
 import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.xtkj.paopaoxiche.R;
 import com.xtkj.paopaoxiche.application.AppConstant;
@@ -39,7 +39,6 @@ import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import rx.Observable;
 
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 
