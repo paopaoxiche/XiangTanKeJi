@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/dark_white">
 
@@ -14,33 +15,38 @@
             android:id="@+id/back_arrow_image_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:layout_marginLeft="16dp"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:background="@android:color/transparent"
             android:src="@drawable/arrow"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:text="消费记录"
-            android:textSize="24sp"
             android:textColor="@color/black"
-            android:textStyle="bold"
-            android:layout_centerInParent="true"/>
+            android:textSize="24sp"
+            android:textStyle="bold"/>
 
     </RelativeLayout>
 
+    <View
+        android:id="@+id/head_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/dark_white"
+        android:layout_below="@id/toolbar"/>
+
     <ListView
         android:id="@+id/lv_consumption_record"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/toolbar"
-        android:layout_centerHorizontal="true"
-        android:divider="@android:color/transparent"
+        android:layout_below="@+id/head_divider"
+        android:divider="@color/dark_white"
         android:dividerHeight="@dimen/dp12"
         android:scrollbars="none"
-        android:layout_marginLeft="@dimen/dp20"
-        android:layout_marginRight="@dimen/dp20"/>
+        android:background="@color/white"/>
 
 
     <TextView
@@ -49,8 +55,8 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:text="暂无消费记录"
-        android:textSize="32sp"
         android:textColor="@color/black"
+        android:textSize="32sp"
         android:visibility="gone"/>
 
 </RelativeLayout>

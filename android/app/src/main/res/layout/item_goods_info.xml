@@ -7,7 +7,7 @@
     android:paddingTop="@dimen/dp16">
 
     <ImageView
-        android:id="@+id/iv_header"
+        android:id="@+id/iv_goods_icon"
         android:layout_width="@dimen/dp60"
         android:layout_height="@dimen/dp60"/>
 
@@ -16,85 +16,88 @@
         android:id="@+id/ll_service"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/iv_header"
-        android:layout_marginLeft="@dimen/dp12">
-        <TextView
-            android:id="@+id/tv_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/dp16"
-            android:textColor="@color/title_black"
-            android:text="123456"
-            android:includeFontPadding="false"/>
+        android:layout_marginLeft="@dimen/dp12"
+        android:layout_toRightOf="@id/iv_goods_icon">
 
         <TextView
             android:id="@+id/tv_normal_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/dp16"
+            android:layout_alignParentRight="true"
+            android:includeFontPadding="false"
+            android:text="123456"
             android:textColor="@color/title_black"
-            android:text="123456"
+            android:textSize="@dimen/dp16"/>
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp10"
+            android:layout_toLeftOf="@id/tv_normal_price"
             android:includeFontPadding="false"
-            android:layout_alignParentRight="true"/>
+            android:text="123456"
+            android:textColor="@color/title_black"
+            android:textSize="@dimen/dp16"/>
 
     </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/ll_common_coupon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/ll_service"
-        android:layout_below="@id/ll_service"
-        android:layout_marginTop="@dimen/dp8"
-        android:visibility="gone">
-        <TextView
-            android:id="@+id/tv_common_coupon_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/dp12"
-            android:textColor="@color/gray_b7c4cb"
-            android:text="123456"
-            android:includeFontPadding="false"/>
+    <!--<RelativeLayout-->
+    <!--android:id="@+id/ll_common_coupon"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignLeft="@id/ll_service"-->
+    <!--android:layout_below="@id/ll_service"-->
+    <!--android:layout_marginTop="@dimen/dp8"-->
+    <!--android:visibility="gone">-->
+    <!--<TextView-->
+    <!--android:id="@+id/tv_common_coupon_name"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:textSize="@dimen/dp12"-->
+    <!--android:textColor="@color/gray_b7c4cb"-->
+    <!--android:text="123456"-->
+    <!--android:includeFontPadding="false"/>-->
 
-        <TextView
-            android:id="@+id/tv_common_favorable_price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/dp12"
-            android:textColor="@color/gray_b7c4cb"
-            android:text="123456"
-            android:includeFontPadding="false"
-            android:layout_alignParentRight="true"/>
+    <!--<TextView-->
+    <!--android:id="@+id/tv_common_favorable_price"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:textSize="@dimen/dp12"-->
+    <!--android:textColor="@color/gray_b7c4cb"-->
+    <!--android:text="123456"-->
+    <!--android:includeFontPadding="false"-->
+    <!--android:layout_alignParentRight="true"/>-->
 
-    </RelativeLayout>
+    <!--</RelativeLayout>-->
 
-    <RelativeLayout
-        android:id="@+id/ll_company_coupon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/ll_service"
-        android:layout_below="@id/ll_common_coupon"
-        android:layout_marginTop="@dimen/dp8"
-        android:visibility="gone">
-        <TextView
-            android:id="@+id/tv_company_coupon_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/dp12"
-            android:textColor="@color/gray_b7c4cb"
-            android:text="123456"
-            android:includeFontPadding="false"/>
+    <!--<RelativeLayout-->
+    <!--android:id="@+id/ll_company_coupon"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignLeft="@id/ll_service"-->
+    <!--android:layout_below="@id/ll_common_coupon"-->
+    <!--android:layout_marginTop="@dimen/dp8"-->
+    <!--android:visibility="gone">-->
+    <!--<TextView-->
+    <!--android:id="@+id/tv_company_coupon_name"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:textSize="@dimen/dp12"-->
+    <!--android:textColor="@color/gray_b7c4cb"-->
+    <!--android:text="123456"-->
+    <!--android:includeFontPadding="false"/>-->
 
-        <TextView
-            android:id="@+id/tv_company_favorable_price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/dp12"
-            android:textColor="@color/gray_b7c4cb"
-            android:text="123456"
-            android:includeFontPadding="false"
-            android:layout_alignParentRight="true"/>
+    <!--<TextView-->
+    <!--android:id="@+id/tv_company_favorable_price"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:textSize="@dimen/dp12"-->
+    <!--android:textColor="@color/gray_b7c4cb"-->
+    <!--android:text="123456"-->
+    <!--android:includeFontPadding="false"-->
+    <!--android:layout_alignParentRight="true"/>-->
 
-    </RelativeLayout>
+    <!--</RelativeLayout>-->
 
 </RelativeLayout>
