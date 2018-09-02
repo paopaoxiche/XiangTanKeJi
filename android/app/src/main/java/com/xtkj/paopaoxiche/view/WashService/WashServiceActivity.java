@@ -1,11 +1,13 @@
 package com.xtkj.paopaoxiche.view.WashService;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.provider.SyncStateContract;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -17,12 +19,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.bingo.wxpay.Constants;
+import com.tencent.mm.opensdk.constants.ConstantsAPI;
+import com.tencent.mm.opensdk.modelbase.BaseReq;
+import com.tencent.mm.opensdk.modelbase.BaseResp;
 import com.tencent.mm.opensdk.modelpay.PayReq;
+import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.xtkj.paopaoxiche.R;
 import com.xtkj.paopaoxiche.application.AppConstant;
 import com.xtkj.paopaoxiche.application.Authentication;
 import com.xtkj.paopaoxiche.base.BaseActivity;
 import com.xtkj.paopaoxiche.bean.CreateConsumeBean;
+import com.xtkj.paopaoxiche.bean.PostWashServiceBean;
 import com.xtkj.paopaoxiche.bean.SellingServicesBean;
 import com.xtkj.paopaoxiche.bean.WashCommodityBean;
 import com.xtkj.paopaoxiche.contract.IWashServiceContract;
@@ -42,7 +51,7 @@ import retrofit2.Response;
 
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 
-public class WashServiceActivity extends BaseActivity implements IWashServiceContract.IWashServiceView {
+public class WashServiceActivity extends BaseActivity implements IWashServiceContract.IWashServiceView,IWXAPIEventHandler {
 
     @BindView(R.id.back_button)
     ImageView backButton;
@@ -61,8 +70,8 @@ public class WashServiceActivity extends BaseActivity implements IWashServiceCon
     IWashServiceContract.IWashServicePresenter presenter ;
     int washId;
 
-    int serviceId = 0;
-    int commodityId = 0 ;
+
+    private PostWashServiceBean postWashServiceBean;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,7 +109,7 @@ public class WashServiceActivity extends BaseActivity implements IWashServiceCon
                 int count = serviceItems.getChildCount();
                 for(int j = 0 ; j < count ; j ++){
                     if(index ==j){
-                        commodityId = d.getId();
+                        postWashServiceBean.setWashServiceId(d.getId());
                         continue;
                     }
                     RadioButton r  = serviceItems.getChildAt(j).findViewById(R.id.radio);
@@ -136,7 +145,7 @@ public class WashServiceActivity extends BaseActivity implements IWashServiceCon
                 int count = shopList.getChildCount();
                 for(int j = 0 ; j < count ; j ++ ){
                     if(index ==j){
-                        commodityId = dataBean.getId();
+                        postWashServiceBean.setCommoditys(dataBean.getId());
                         continue;
                     }
                     RadioButton r  = shopList.getChildAt(j).findViewById(R.id.radio);
@@ -159,6 +168,13 @@ public class WashServiceActivity extends BaseActivity implements IWashServiceCon
     @Override
     protected void initValues() {
 
+        api = WXAPIFactory.createWXAPI(this, Constants.APP_ID, false);
+        api.handleIntent(getIntent(), this);
+        postWashServiceBean = new PostWashServiceBean();
+        postWashServiceBean.setCommoditys(0);
+        postWashServiceBean.setCouponId(0);
+        postWashServiceBean.setPayType(AppConstant.PAY_WX);
+        postWashServiceBean.setWashServiceId(0);
 
         RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
                 .create(WashService.class)
@@ -217,11 +233,12 @@ public class WashServiceActivity extends BaseActivity implements IWashServiceCon
     private void callPay(){
         RetrofitClient.newInstance(ApiField.BASEURL,Authentication.getAuthentication())
                 .create(CarOwnerService.class)
-                .createConsume(serviceId,commodityId,0, AppConstant.PAY_WX)
+                .createConsume(postWashServiceBean.getWashServiceId(),postWashServiceBean.getCommoditys(),postWashServiceBean.getCouponId(),postWashServiceBean.getPayType())
                 .enqueue(new Callback<CreateConsumeBean>() {
                     @Override
                     public void onResponse(Call<CreateConsumeBean> call, Response<CreateConsumeBean> response) {
 
+                        if(response.body().getData()==null)return;
                         PayReq req = new PayReq();
                         //req.appId = "wxf8b4f85f3a794e77";  // 测试用appId
                         req.appId			= response.body().getData().getWxPay().getAppid();
@@ -253,5 +270,22 @@ public class WashServiceActivity extends BaseActivity implements IWashServiceCon
     @Override
     public Context getActivityContext() {
         return this;
+    }
+
+    @Override
+    public void onReq(BaseReq baseReq) {
+
+    }
+
+    @Override
+    public void onResp(BaseResp resp) {
+        Log.d("支付反馈", "onPayFinish, errCode = " + resp.errCode);
+
+        if (resp.getType() == ConstantsAPI.COMMAND_PAY_BY_WX) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle(com.bingo.wxpay.R.string.app_tip);
+            builder.setMessage(getString(com.bingo.wxpay.R.string.pay_result_callback_msg, String.valueOf(resp.errCode)));
+            builder.show();
+        }
     }
 }
