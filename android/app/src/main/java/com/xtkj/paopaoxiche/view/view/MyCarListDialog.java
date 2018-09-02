@@ -41,7 +41,4 @@ public class MyCarListDialog extends FullScreenWithStatusBarDialog {
         tvAddCar.setOnClickListener((View)-> new AddCarDialog(getContext()).show());
     }
 
-    private void getCarDetail() {
-
-    }
 }
