@@ -5,11 +5,13 @@ import com.xtkj.paopaoxiche.bean.CreateConsumeBean;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 
 public interface CarOwnerService {
 
-    @POST
+    @FormUrlEncoded
+    @POST("carOwner/createConsume")
     Call<CreateConsumeBean> createConsume(@Field("washServiceId") int washServiceId,@Field("commoditys") int commoditys,@Field("couponId") int couponId,@Field("payType") int payType);
 
 
