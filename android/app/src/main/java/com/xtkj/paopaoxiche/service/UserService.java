@@ -90,6 +90,9 @@ public interface UserService {
     Call<NoDataBean> commitEvaluateRecord(@Field("consumeId") int consumeId, @Field("grade") int grade,
                                           @Field("content") String content);
 
+    @GET("car/list")
+    Call<CarAuthStateBean> getAuthCarByStatus(@Query("status") int status);
+
     @GET("user/getAppVersion")
     Call<UpdateBean> checkUpdate(@Query("systemType") String systemType, @Query("version") String version) ;
 }

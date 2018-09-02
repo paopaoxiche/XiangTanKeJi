@@ -80,8 +80,9 @@
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="@dimen/dp20"
         android:layout_marginRight="@dimen/dp20"
-        android:divider="@android:color/transparent"
+        android:divider="@color/white"
         android:dividerHeight="@dimen/dp16"
-        android:scrollbars="none"/>
+        android:scrollbars="none"
+        android:background="@color/dark_white"/>
 
 </RelativeLayout>
