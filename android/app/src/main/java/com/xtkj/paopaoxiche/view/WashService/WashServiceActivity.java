@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 
 import com.bingo.wxpay.Constants;
+import com.bumptech.glide.Glide;
 import com.tencent.mm.opensdk.constants.ConstantsAPI;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
@@ -140,6 +141,11 @@ public class WashServiceActivity extends BaseActivity implements IWashServiceCon
         TextView price = linearLayout.findViewById(R.id.price);
         price.setText(String.format("￥%s", dataBean.getCurrentPrice()));
         RadioButton radio =linearLayout.findViewById(R.id.radio);
+
+        ImageView goodsImageView = linearLayout.findViewById(R.id.shop_img);
+        Glide.with(this)
+                .load(dataBean.getImage())
+                .into(goodsImageView);
         radio.setOnCheckedChangeListener((compoundButton, b) -> {
             if(b){
                 int count = shopList.getChildCount();
@@ -168,7 +174,8 @@ public class WashServiceActivity extends BaseActivity implements IWashServiceCon
     @Override
     protected void initValues() {
 
-        api = WXAPIFactory.createWXAPI(this, Constants.APP_ID, false);
+        api = WXAPIFactory.createWXAPI(this, Constants.APP_ID, true);
+        api.registerApp(Constants.APP_ID);
         api.handleIntent(getIntent(), this);
         postWashServiceBean = new PostWashServiceBean();
         postWashServiceBean.setCommoditys(0);
@@ -249,9 +256,10 @@ public class WashServiceActivity extends BaseActivity implements IWashServiceCon
                         req.packageValue	= response.body().getData().getWxPay().getPackageX();
                         req.sign			= response.body().getData().getWxPay().getSign();
                         req.extData			= "app data"; // optional
-                        Toast.makeText(getActivityContext(), "正常调起支付", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getActivityContext(), "正常调起支付", Toast.LENGTH_SHORT).show();
                         // 在支付之前，如果应用没有注册到微信，应该先调用IWXMsg.registerApp将应用注册到微信
-                        api.sendReq(req);
+                        boolean isSuccess = api.sendReq(req);
+                        Toast.makeText(getActivityContext(), "正常调起支付: " + isSuccess, Toast.LENGTH_LONG).show();
                     }
 
                     @Override
