@@ -15,7 +15,7 @@
     NearbyWashListParam *param = [[NearbyWashListParam alloc] init];
     param.lng = [NSNumber numberWithFloat:113.89];
     param.lat = [NSNumber numberWithFloat:22.567];
-    [NetworkTools obtainNearbyWashList:param success:^(NSDictionary *response, BOOL isSuccess) {
+    [[NetworkTools sharedInstance] obtainNearbyWashList:param success:^(NSDictionary *response, BOOL isSuccess) {
         if ([response objectForKey:@"data"] == [NSNull null]) {
             return result(@[]);
         }
@@ -37,7 +37,7 @@
 }
 
 + (void)loadRecommendWashCommodity:(ResultBlock)result {
-    [NetworkTools obtainRecommendCommodity:6 longitude:[NSNumber numberWithFloat:113.89] latitude:[NSNumber numberWithFloat:22.567] success:^(NSDictionary *response, BOOL isSuccess) {
+    [[NetworkTools sharedInstance] obtainRecommendCommodity:6 longitude:[NSNumber numberWithFloat:113.89] latitude:[NSNumber numberWithFloat:22.567] success:^(NSDictionary *response, BOOL isSuccess) {
         if ([response objectForKey:@"data"] == [NSNull null]) {
             return result(@[]);
         }

@@ -17,7 +17,7 @@
 @implementation ExpensesRecordListModel
 
 + (void)loadExpensesRecordList:(ResultBlock)block {
-    [NetworkTools obtainExpensesRecordWithAuthentication:[UserManager sharedInstance].authentication success:^(NSDictionary *response, BOOL isSuccess) {
+    [[NetworkTools sharedInstance] obtainExpensesRecordWithAuthentication:[UserManager sharedInstance].authentication success:^(NSDictionary *response, BOOL isSuccess) {
         NSInteger code = [[response objectForKey:@"code"] integerValue];
         if (code == 200 && [response objectForKey:@"data"] != [NSNull null]) {
             NSDictionary *dataArr = [response objectForKey:@"data"];

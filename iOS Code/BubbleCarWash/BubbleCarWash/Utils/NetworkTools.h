@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AFNetworking.h"
 
 @interface NearbyWashListParam : NSObject
 
@@ -22,20 +23,22 @@
 typedef void(^SuccessBlock)(NSDictionary *response, BOOL isSuccess);
 typedef void(^FailedBlock)(NSError *error);
 
-@interface NetworkTools : NSObject
+@interface NetworkTools : AFHTTPSessionManager
+
++ (NetworkTools *)sharedInstance;
 
 #pragma mark - 公告接口
 
 /**
  *  获取验证码
  */
-+ (void)obtainVerificationCodeWithPhoneNumber:(NSString *)phoneNumber
+- (void)obtainVerificationCodeWithPhoneNumber:(NSString *)phoneNumber
                                       success:(SuccessBlock)success
                                        failed:(FailedBlock)failed;
 /**
  *  登录
  */
-+ (void)loginWithPhoneNumber:(NSString *)phoneNumber
+- (void)loginWithPhoneNumber:(NSString *)phoneNumber
                         code:(NSUInteger)code
                     userType:(NSUInteger)type
                      success:(SuccessBlock)success
@@ -43,7 +46,7 @@ typedef void(^FailedBlock)(NSError *error);
 /**
  *  验证token
  */
-+ (void)checkToken:(NSString *)token
+- (void)checkToken:(NSString *)token
             userID:(NSString *)userID
            isOwner:(BOOL)isOwner
            success:(SuccessBlock)success
@@ -51,7 +54,7 @@ typedef void(^FailedBlock)(NSError *error);
 /**
  *  获取用户信息
  */
-+ (void)obtainUserInfoWithUserID:(NSString *)userID
+- (void)obtainUserInfoWithUserID:(NSString *)userID
                          success:(SuccessBlock)success
                           failed:(FailedBlock)failed;
 
@@ -65,13 +68,13 @@ typedef void(^FailedBlock)(NSError *error);
 /**
  *  获取附近洗车场
  */
-+ (void)obtainNearbyWashList:(NearbyWashListParam *)param
+- (void)obtainNearbyWashList:(NearbyWashListParam *)param
                      success:(SuccessBlock)success
                       failed:(FailedBlock)failed;
 /**
  *  获取推荐商品
  */
-+ (void)obtainRecommendCommodity:(NSInteger)count
+- (void)obtainRecommendCommodity:(NSInteger)count
                        longitude:(NSNumber *)longitude
                         latitude:(NSNumber *)latitude
                          success:(SuccessBlock)success
@@ -83,7 +86,7 @@ typedef void(^FailedBlock)(NSError *error);
  *  获取优惠券列表
  *  @param isRedeemable 1-获取我可兑换的优惠券列表 0-获取我已兑换的优惠券列表
  */
-+ (void)obtainMyCouponListWithAuthentication:(NSString *)authentication
+- (void)obtainMyCouponListWithAuthentication:(NSString *)authentication
                                 isRedeemable:(BOOL)isRedeemable
                                      success:(SuccessBlock)success
                                       failed:(FailedBlock)failed;
@@ -91,14 +94,14 @@ typedef void(^FailedBlock)(NSError *error);
 /**
  *  获取消费记录
  */
-+ (void)obtainExpensesRecordWithAuthentication:(NSString *)authentication
+- (void)obtainExpensesRecordWithAuthentication:(NSString *)authentication
                                        success:(SuccessBlock)success
                                         failed:(FailedBlock)failed;
 
 /**
  *  获取评价列表
  */
-+ (void)obtainEvaluateListWithAuthentication:(NSString *)authentication
+- (void)obtainEvaluateListWithAuthentication:(NSString *)authentication
                                    pageIndex:(NSInteger)pageIndex
                                     pageSize:(NSInteger)pageSize
                                      success:(SuccessBlock)success
@@ -107,7 +110,7 @@ typedef void(^FailedBlock)(NSError *error);
 /**
  *  兑换优惠券
  */
-+ (void)convertIntegralToCouponWithAuthentication:(NSString *)authentication
+- (void)convertIntegralToCouponWithAuthentication:(NSString *)authentication
                                          couponID:(NSString *)couponID
                                           success:(SuccessBlock)success
                                            failed:(FailedBlock)failed;
@@ -115,5 +118,7 @@ typedef void(^FailedBlock)(NSError *error);
 #pragma mark - 天气
 
 #pragma mark - 地图
+
+- (void)GET:(NSString *)url parameters:(NSDictionary *)params success:(SuccessBlock)success failure:(FailedBlock)failed;
 
 @end

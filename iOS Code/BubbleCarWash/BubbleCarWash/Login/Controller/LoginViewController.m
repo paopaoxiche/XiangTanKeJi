@@ -52,7 +52,7 @@
 - (IBAction)onVerificationCodeBtnClicked:(id)sender {
     [self checkPhoneNumber];
     
-    [NetworkTools obtainVerificationCodeWithPhoneNumber:_phoneNumberTextField.text success:^(NSDictionary *response, BOOL isSuccess) {
+    [[NetworkTools sharedInstance] obtainVerificationCodeWithPhoneNumber:_phoneNumberTextField.text success:^(NSDictionary *response, BOOL isSuccess) {
         if (isSuccess) {
             // 倒计时
             [self startCountingDown];
@@ -77,7 +77,7 @@
     [self checkPhoneNumber];
     [self checkVerificationCode];
     
-    [NetworkTools loginWithPhoneNumber:_phoneNumberTextField.text code:[_verificationCodeTextField.text integerValue] userType:_type success:^(NSDictionary *response, BOOL isSuccess) {
+    [[NetworkTools sharedInstance] loginWithPhoneNumber:_phoneNumberTextField.text code:[_verificationCodeTextField.text integerValue] userType:_type success:^(NSDictionary *response, BOOL isSuccess) {
         long code = [response[@"code"] longValue];
         if (code == 200) {
             [self stopCountingDown];

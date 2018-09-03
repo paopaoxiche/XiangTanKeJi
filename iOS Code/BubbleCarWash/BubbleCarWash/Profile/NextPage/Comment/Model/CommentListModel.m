@@ -18,7 +18,7 @@
 @implementation CommentListModel
 
 + (void)loadCommentList:(ResultBlock)block {
-    [NetworkTools obtainEvaluateListWithAuthentication:[UserManager sharedInstance].authentication pageIndex:0 pageSize:20 success:^(NSDictionary *response, BOOL isSuccess) {
+    [[NetworkTools sharedInstance] obtainEvaluateListWithAuthentication:[UserManager sharedInstance].authentication pageIndex:0 pageSize:20 success:^(NSDictionary *response, BOOL isSuccess) {
         NSInteger code = [[response objectForKey:@"code"] integerValue];
         if (code == 200 && [response objectForKey:@"data"] != [NSNull null]) {
             NSDictionary *dataArr = [response objectForKey:@"data"];
