@@ -75,6 +75,7 @@ public class DriverHomePresenterImpl implements IDriverContract.IHomePresenter,D
 
     @Override
     public void getForecastWeatherSuccess(WeatherForecastBean weatherForecastBean) {
+        homeView.setForecastWeather(weatherForecastBean);
         homeView.updateCommodity();
     }
 
