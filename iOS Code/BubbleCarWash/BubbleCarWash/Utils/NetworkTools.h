@@ -86,34 +86,27 @@ typedef void(^FailedBlock)(NSError *error);
  *  获取优惠券列表
  *  @param isRedeemable 1-获取我可兑换的优惠券列表 0-获取我已兑换的优惠券列表
  */
-- (void)obtainMyCouponListWithAuthentication:(NSString *)authentication
-                                isRedeemable:(BOOL)isRedeemable
-                                     success:(SuccessBlock)success
-                                      failed:(FailedBlock)failed;
+- (void)obtainMyCouponList:(BOOL)isRedeemable success:(SuccessBlock)success failed:(FailedBlock)failed;
 
 /**
  *  获取消费记录
  */
-- (void)obtainExpensesRecordWithAuthentication:(NSString *)authentication
-                                       success:(SuccessBlock)success
-                                        failed:(FailedBlock)failed;
+- (void)obtainExpensesRecord:(SuccessBlock)success failed:(FailedBlock)failed;
 
 /**
  *  获取评价列表
  */
-- (void)obtainEvaluateListWithAuthentication:(NSString *)authentication
-                                   pageIndex:(NSInteger)pageIndex
-                                    pageSize:(NSInteger)pageSize
-                                     success:(SuccessBlock)success
-                                      failed:(FailedBlock)failed;
+- (void)obtainEvaluateListWithPageIndex:(NSInteger)pageIndex
+                               pageSize:(NSInteger)pageSize
+                                success:(SuccessBlock)success
+                                 failed:(FailedBlock)failed;
 
 /**
  *  兑换优惠券
  */
-- (void)convertIntegralToCouponWithAuthentication:(NSString *)authentication
-                                         couponID:(NSString *)couponID
-                                          success:(SuccessBlock)success
-                                           failed:(FailedBlock)failed;
+- (void)convertIntegralToCouponWithCouponID:(NSString *)couponID
+                                    success:(SuccessBlock)success
+                                     failed:(FailedBlock)failed;
 
 #pragma mark - 天气
 

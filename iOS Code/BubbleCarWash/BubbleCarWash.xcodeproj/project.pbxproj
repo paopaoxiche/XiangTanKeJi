@@ -762,6 +762,8 @@
 		65FC33EE20E13577006DE3F1 /* BubbleCarWash */ = {
 			isa = PBXGroup;
 			children = (
+				65FC33EF20E13577006DE3F1 /* AppDelegate.h */,
+				65FC33F020E13577006DE3F1 /* AppDelegate.m */,
 				65C5B0C22135AEA300727122 /* Base */,
 				65FC340620E13A04006DE3F1 /* Login */,
 				65FC341720E13B5D006DE3F1 /* Main */,
@@ -770,8 +772,6 @@
 				65B7FC1721046E3A00FC56A1 /* Macro */,
 				65C5B0BB2135AE6000727122 /* Category */,
 				65B7FC1121046D1300FC56A1 /* Utils */,
-				65FC33EF20E13577006DE3F1 /* AppDelegate.h */,
-				65FC33F020E13577006DE3F1 /* AppDelegate.m */,
 				65FC33F820E1357A006DE3F1 /* Assets.xcassets */,
 				65FC33FA20E1357A006DE3F1 /* LaunchScreen.storyboard */,
 				65FC33FD20E1357A006DE3F1 /* Info.plist */,

@@ -28,7 +28,7 @@
 
 + (void)loadCouponList:(BOOL)isRedeemable reslut:(ResultBlock)result {
     ;
-    [[NetworkTools sharedInstance] obtainMyCouponListWithAuthentication:[UserManager sharedInstance].authentication isRedeemable:isRedeemable success:^(NSDictionary *response, BOOL isSuccess) {
+    [[NetworkTools sharedInstance] obtainMyCouponList:isRedeemable success:^(NSDictionary *response, BOOL isSuccess) {
         NSInteger code = [[response objectForKey:@"code"] integerValue];
         if (code == 200 && [response objectForKey:@"data"] != [NSNull null]) {
             NSDictionary *dataArr = [response objectForKey:@"data"];
@@ -89,7 +89,7 @@
 
 - (void)convertIntegralToCoupon:(CodeResultBlock)result {
     NSString *couponid = [NSString stringWithFormat:@"%li", _couponID];
-    [[NetworkTools sharedInstance] convertIntegralToCouponWithAuthentication:[UserManager sharedInstance].authentication couponID:couponid success:^(NSDictionary *response, BOOL isSuccess) {
+    [[NetworkTools sharedInstance] convertIntegralToCouponWithCouponID:couponid success:^(NSDictionary *response, BOOL isSuccess) {
         NSInteger code = [[response objectForKey:@"code"] integerValue];
         result(code);
     } failed:^(NSError *error) {

@@ -8,6 +8,7 @@
 
 #import "NetworkTools.h"
 #import "NSObject+DictionaryFromModel.h"
+#import "UserManager.h"
 
 @implementation NearbyWashListParam
 
@@ -112,45 +113,42 @@ static const NSTimeInterval kTimeOutInterval = 6.0f;
 
 #pragma mark - 车主我的
 
-- (void)obtainMyCouponListWithAuthentication:(NSString *)authentication
-                                isRedeemable:(BOOL)isRedeemable
-                                     success:(SuccessBlock)success
-                                      failed:(FailedBlock)failed {
+- (void)obtainMyCouponList:(BOOL)isRedeemable success:(SuccessBlock)success failed:(FailedBlock)failed {
     AFHTTPSessionManager *manager = [NetworkTools sharedInstance];
     NSString *url = isRedeemable ? @"http://101.200.63.245:8080/carOwner/getAllCoupon" : @"carOwner/getMyCoupon";
-    [manager.requestSerializer setValue:authentication forHTTPHeaderField:@"authentication"];
+    [manager.requestSerializer setValue:[UserManager sharedInstance].authentication
+                     forHTTPHeaderField:@"authentication"];
     [self GET:url parameters:nil success:success failure:failed];
 }
 
-- (void)obtainExpensesRecordWithAuthentication:(NSString *)authentication
-                                       success:(SuccessBlock)success
-                                        failed:(FailedBlock)failed {
+- (void)obtainExpensesRecord:(SuccessBlock)success failed:(FailedBlock)failed {
     AFHTTPSessionManager *manager = [NetworkTools sharedInstance];
     NSString *url = @"carOwner/getUserConsume";
-    [manager.requestSerializer setValue:authentication forHTTPHeaderField:@"authentication"];
+    [manager.requestSerializer setValue:[UserManager sharedInstance].authentication
+                     forHTTPHeaderField:@"authentication"];
     [self GET:url parameters:nil success:success failure:failed];
 }
 
-- (void)obtainEvaluateListWithAuthentication:(NSString *)authentication
-                                   pageIndex:(NSInteger)pageIndex
-                                    pageSize:(NSInteger)pageSize
-                                     success:(SuccessBlock)success
-                                      failed:(FailedBlock)failed {
+- (void)obtainEvaluateListWithPageIndex:(NSInteger)pageIndex
+                               pageSize:(NSInteger)pageSize
+                                success:(SuccessBlock)success
+                                 failed:(FailedBlock)failed {
     NSDictionary *params = @{@"pageIndex": [NSNumber numberWithInteger:pageIndex], @"pageSize": [NSNumber numberWithInteger:pageSize]};
     AFHTTPSessionManager *manager = [NetworkTools sharedInstance];;
     NSString *url = @"carOwner/getEvaluateList";
-    [manager.requestSerializer setValue:authentication forHTTPHeaderField:@"authentication"];
+    [manager.requestSerializer setValue:[UserManager sharedInstance].authentication
+                     forHTTPHeaderField:@"authentication"];
     [self GET:url parameters:params success:success failure:failed];
 }
 
-- (void)convertIntegralToCouponWithAuthentication:(NSString *)authentication
-                                         couponID:(NSString *)couponID
-                                          success:(SuccessBlock)success
-                                           failed:(FailedBlock)failed {
+- (void)convertIntegralToCouponWithCouponID:(NSString *)couponID
+                                    success:(SuccessBlock)success
+                                     failed:(FailedBlock)failed {
     NSDictionary *params = @{@"couponId": couponID};
     AFHTTPSessionManager *manager = [NetworkTools sharedInstance];;
     NSString *url = @"carOwner/exchangePoint";
-    [manager.requestSerializer setValue:authentication forHTTPHeaderField:@"authentication"];
+    [manager.requestSerializer setValue:[UserManager sharedInstance].authentication
+                     forHTTPHeaderField:@"authentication"];
     [self GET:url parameters:params success:success failure:failed];
 }
 
