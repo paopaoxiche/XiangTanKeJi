@@ -70,8 +70,13 @@ public class RecentWashAdapter extends BaseAdapter{
         String time = new SimpleDateFormat("yyyy-MM-dd").format(new Date(washRecordList.get(position).getTime()));
         holder.timeTextView.setText(time);
         holder.priceTextView.setText(String.format("¥%s", washRecordList.get(position).getPayPrice() + ""));
-        Glide.with(context).load(washRecordList.get(position).getAvatar()).into(holder.washImageView);
         holder.nameTextView.setText(washRecordList.get(position).getNickname());
+        String image = washRecordList.get(position).getAvatar();
+        if (image != null && image.length() != 0) {
+            Glide.with(context).load(washRecordList.get(position).getAvatar()).into(holder.washImageView);
+        } else {
+            holder.washImageView.setImageResource(R.drawable.avatar_man);
+        }
 
         return convertView;
     }

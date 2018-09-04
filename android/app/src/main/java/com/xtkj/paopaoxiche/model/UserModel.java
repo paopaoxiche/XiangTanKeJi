@@ -121,7 +121,7 @@ public class UserModel {
                 .enqueue(new Callback<UpdateBean>() {
                     @Override
                     public void onResponse(Call<UpdateBean> call, Response<UpdateBean> response) {
-                        if (userInfoListenerList == null) {
+                        if (userInfoListenerList == null || response.body() == null) {
                             return;
                         }
                         if (response.body().getCode() != 401) {

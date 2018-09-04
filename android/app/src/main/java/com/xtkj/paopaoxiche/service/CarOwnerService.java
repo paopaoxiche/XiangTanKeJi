@@ -12,7 +12,7 @@ public interface CarOwnerService {
 
     @FormUrlEncoded
     @POST("carOwner/createConsume")
-    Call<CreateConsumeBean> createConsume(@Field("washServiceId") int washServiceId,@Field("commoditys") int commoditys,@Field("couponId") int couponId,@Field("payType") int payType);
+    Call<CreateConsumeBean> createConsume(@Field("washServiceId") int washServiceId,@Field("commoditys") String commoditys,@Field("couponId") int couponId,@Field("payType") int payType);
 
 
 }

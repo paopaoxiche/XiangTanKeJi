@@ -3,7 +3,7 @@ package com.xtkj.paopaoxiche.bean;
 public class PostWashServiceBean {
 
     private int washServiceId;
-    private int commoditys;
+    private String commoditys = new String();
     private int couponId;
     private int payType;
 
@@ -15,11 +15,11 @@ public class PostWashServiceBean {
         this.washServiceId = washServiceId;
     }
 
-    public int getCommoditys() {
+    public String getCommoditys() {
         return commoditys;
     }
 
-    public void setCommoditys(int commoditys) {
+    public void setCommoditys(String commoditys) {
         this.commoditys = commoditys;
     }
 

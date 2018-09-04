@@ -71,10 +71,10 @@ public class UserConsumeBean {
         private String carWashName;
         private int id;
         private int isEvaluation;
-        private int payment;
+        private double payment;
         private String serviceName;
         private long time;
-        private int totalPrice;
+        private double totalPrice;
         private List<CommoditiesBean> commodities;
         private List<CouponsBean> coupons;
 
@@ -118,11 +118,11 @@ public class UserConsumeBean {
             this.isEvaluation = isEvaluation;
         }
 
-        public int getPayment() {
+        public double getPayment() {
             return payment;
         }
 
-        public void setPayment(int payment) {
+        public void setPayment(double payment) {
             this.payment = payment;
         }
 
@@ -142,11 +142,11 @@ public class UserConsumeBean {
             this.time = time;
         }
 
-        public int getTotalPrice() {
+        public double getTotalPrice() {
             return totalPrice;
         }
 
-        public void setTotalPrice(int totalPrice) {
+        public void setTotalPrice(double totalPrice) {
             this.totalPrice = totalPrice;
         }
 

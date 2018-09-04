@@ -87,9 +87,13 @@ public class MyEvaluateDialog extends FullScreenWithStatusBarDialog implements L
 
         // 加载头像图片
         holder.ivHeader.setImageDrawable(null);
-        Glide.with(getContext())
-             .load(bean.getAvatar())
-             .into(holder.ivHeader);
+        if (bean.getAvatar() != null && bean.getAvatar().length() != 0) {
+            Glide.with(getContext())
+                    .load(bean.getAvatar())
+                    .into(holder.ivHeader);
+        } else {
+            holder.ivHeader.setImageResource(R.drawable.avatar_man);
+        }
 
         setStars(holder.llStars, bean.getRating());
         holder.tvStarPoint.setText(Integer.valueOf(bean.getRating()).doubleValue() + "分");

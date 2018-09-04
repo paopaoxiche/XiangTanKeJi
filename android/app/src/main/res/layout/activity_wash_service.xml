@@ -31,7 +31,8 @@
                     android:text="洗车场详细信息"
                     android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:textSize="24sp"/>
                 <ImageView
                     android:visibility="invisible"
                     android:src="@drawable/ic_keyboard_arrow_left_black_36dp"
