@@ -29,12 +29,12 @@
                  "data": [{
                           "text": "升级提醒",
                           "imageName": "UpgradeReminder",
-                          "nextPageID": ""
+                          "nextPageID": "UpgradeReminderVC"
                           },
                           {
                           "text": "客服中心",
                           "imageName": "CustomerServicer",
-                          "nextPageID": ""
+                          "nextPageID": "CustomerServicerVC"
                           },
                           {
                           "text": "推广",
@@ -95,12 +95,12 @@
                           {
                           "text": "升级提醒",
                           "imageName": "UpgradeReminder",
-                          "nextPageID": ""
+                          "nextPageID": "UpgradeReminderVC"
                           },
                           {
                           "text": "客服中心",
                           "imageName": "CustomerServicer",
-                          "nextPageID": ""
+                          "nextPageID": "CustomerServicerVC"
                           },
                           {
                           "text": "推广",

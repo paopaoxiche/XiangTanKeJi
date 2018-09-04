@@ -12,7 +12,11 @@
 // 颜色定义
 #define RGBColor(r, g, b) ([UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:1.0])
 
-#define kScreenWidth [UIScreen mainScreen].bounds.size.width;
-#define kScreenHeight [UIScreen mainScreen].bounds.size.height;
+#define kScreenWidth [UIScreen mainScreen].bounds.size.width
+#define kScreenHeight [UIScreen mainScreen].bounds.size.height
+
+// 字体
+#define Font(s) ([UIFont systemFontOfSize:s])
+#define BFont(s) ([UIFont boldSystemFontOfSize:s])
 
 #endif /* FunctionMacro_h */

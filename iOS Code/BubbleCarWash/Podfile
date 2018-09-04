@@ -5,4 +5,5 @@ target 'BubbleCarWash' do
   pod 'AFNetworking'
   pod 'SDWebImage'
   pod 'Masonry'
+  pod 'ReactiveObjC'
 end
