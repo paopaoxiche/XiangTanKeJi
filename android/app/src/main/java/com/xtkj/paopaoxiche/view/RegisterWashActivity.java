@@ -12,6 +12,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -72,6 +73,8 @@ public class RegisterWashActivity extends BaseGaodeActivity implements DriverHom
     Button uploadFanmianButton;
     @BindView(R.id.fanmian_image_button)
     ImageView fanmianImageButton;
+    @BindView(R.id.wash_name_edit_text)
+    EditText washNameEditText;
 
     final int yingyezhizhaoType = 1;
     final int xichezhengType = 2;
@@ -304,10 +307,16 @@ public class RegisterWashActivity extends BaseGaodeActivity implements DriverHom
                 RequestBody.create(MediaType.parse("multipart/form-data"), MyLocation.lng);
         RequestBody yBody =
                 RequestBody.create(MediaType.parse("multipart/form-data"), MyLocation.lat);
+        String name = washNameEditText.getText().toString();
+        if (name == null || name.length() == 0) {
+            name = phone;
+        }
+        RequestBody nameBody =
+                RequestBody.create(MediaType.parse("multipart/form-data"), name);
 
         RetrofitClient.newInstance(ApiField.BASEURL)
                 .create(WashService.class)
-                .certification(phoneBody, phoneBody, addressBody, xBody, yBody, license, washCard, idCardPositive, idCardBack)
+                .certification(phoneBody, nameBody, addressBody, xBody, yBody, license, washCard, idCardPositive, idCardBack)
                 .enqueue(new Callback<NoDataBean>() {
                     @Override
                     public void onResponse(Call<NoDataBean> call, Response<NoDataBean> response) {

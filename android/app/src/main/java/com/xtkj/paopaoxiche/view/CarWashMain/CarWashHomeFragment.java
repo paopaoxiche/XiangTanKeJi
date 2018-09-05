@@ -35,6 +35,7 @@ import com.xtkj.paopaoxiche.model.UserInfo;
 import com.xtkj.paopaoxiche.model.WashServerModel;
 import com.xtkj.paopaoxiche.service.WashService;
 import com.xtkj.paopaoxiche.view.WeatherForecast.WeatherForecastActivity;
+import com.xtkj.paopaoxiche.view.view.WashCarListDialog;
 import com.xtkj.paopaoxiche.widget.MarqueeTextView;
 import com.xtkj.paopaoxiche.widget.NoScrollListView;
 
@@ -159,7 +160,7 @@ public class CarWashHomeFragment extends BaseFragmemt implements ICarWashContrac
         goodsRecylerView.setAdapter(shopItemsAdapter);
     }
 
-    @OnClick({R.id.location, R.id.weather_details1, R.id.weather_details2})
+    @OnClick({R.id.location, R.id.weather_details1, R.id.weather_details2, R.id.more_button})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.location:
@@ -169,6 +170,9 @@ public class CarWashHomeFragment extends BaseFragmemt implements ICarWashContrac
             case R.id.weather_details2:
                 Intent intent2 = new Intent(getActivity(), WeatherForecastActivity.class);
                 startActivity(intent2);
+                break;
+            case R.id.more_button:
+                new WashCarListDialog(getContext(), true).show();
                 break;
         }
     }

@@ -226,7 +226,6 @@
                         android:layout_marginRight="16dp"
                         android:background="@android:color/transparent"
                         android:text="更多"
-                        android:visibility="gone"
                         android:textColor="@color/gray"
                         android:textSize="14sp" />
 

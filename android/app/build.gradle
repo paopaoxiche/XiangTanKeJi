@@ -14,8 +14,8 @@ android {
         applicationId "com.xtkj.paopaoxiche"
         minSdkVersion 17
         targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
+        versionCode 101000 //版本名的第一位占版本号一位，第二位占版本号两位，第三位占版本号三位 例: 1.2.3 -> 102003
+        versionName "1.1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         ndk {

@@ -67,6 +67,31 @@
             android:id="@+id/address_marquee_text_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="12dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="洗车场名称:"/>
+
+        <EditText
+            android:id="@+id/wash_name_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="16sp"
             android:layout_marginLeft="4dp"
             android:layout_marginRight="12dp"/>
 
