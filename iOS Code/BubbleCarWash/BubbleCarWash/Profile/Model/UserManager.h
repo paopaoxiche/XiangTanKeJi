@@ -27,6 +27,7 @@ typedef void(^CodeResultBlock)(NSInteger code);
 
 @property (nonatomic, strong) UserInfoModel *userInfo;
 @property (nonatomic, assign) BOOL isLogin;
+@property (nonatomic, assign) BOOL isUpdateUserInfo;
 @property (nonatomic, copy) NSString *authentication;
 
 + (instancetype)sharedInstance;

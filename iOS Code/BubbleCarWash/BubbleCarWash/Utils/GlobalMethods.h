@@ -33,4 +33,8 @@ typedef struct CG_BOXABLE Location Location;
  */
 + (NSInteger)calculateDistanceWithLocation:(Location)location localLocation:(Location)localLocation;
 
++ (NSString *)deviceModel;
++ (NSString *)productVersion;
++ (NSString *)systemVersion;
+
 @end

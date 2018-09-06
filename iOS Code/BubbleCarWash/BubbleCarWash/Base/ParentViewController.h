@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^ActionHandle)(void);
+
 @interface ParentViewController : UIViewController
 
 - (void)messageBox:(NSString *)lpszMessage;
+- (void)messageBox:(NSString *)lpszMessage handle:(ActionHandle)handle;
 
 @end

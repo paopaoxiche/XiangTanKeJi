@@ -20,6 +20,17 @@
 
 @end
 
+@interface FeedBackParam : NSObject
+
+@property (nonatomic, copy) NSString *systemType;
+@property (nonatomic, copy) NSString *device;
+@property (nonatomic, copy) NSString *versionCode;
+@property (nonatomic, copy) NSString *systemVersion;
+@property (nonatomic, copy) NSString *content;
+@property (nonatomic, copy) NSString *contactInformation;
+
+@end
+
 typedef void(^SuccessBlock)(NSDictionary *response, BOOL isSuccess);
 typedef void(^FailedBlock)(NSError *error);
 
@@ -54,14 +65,24 @@ typedef void(^FailedBlock)(NSError *error);
 /**
  *  获取用户信息
  */
-- (void)obtainUserInfoWithUserID:(NSString *)userID
-                         success:(SuccessBlock)success
-                          failed:(FailedBlock)failed;
-
+- (void)obtainUserInfoWithUserID:(NSString *)userID success:(SuccessBlock)success failed:(FailedBlock)failed;
+/**
+ *  更新用户昵称
+ */
+- (void)updateUserNickName:(NSString *)nickName success:(SuccessBlock)success failed:(FailedBlock)failed;
+/**
+ *  更新用户头像
+ */
+- (void)updateUserAvatar:(UIImage *)image success:(SuccessBlock)success failed:(FailedBlock)failed;
 /**
  *  获取升级
  */
+- (void)obtainUpgradeInfo:(SuccessBlock)success failed:(FailedBlock)failed;
 
+/**
+ *  上传反馈信息
+ */
+- (void)submitFeedBackInfo:(FeedBackParam *)param success:(SuccessBlock)success failed:(FailedBlock)failed;
 
 #pragma mark - 车主首页
 
@@ -113,5 +134,6 @@ typedef void(^FailedBlock)(NSError *error);
 #pragma mark - 地图
 
 - (void)GET:(NSString *)url parameters:(NSDictionary *)params success:(SuccessBlock)success failure:(FailedBlock)failed;
+- (void)POST:(NSString *)url parameters:(NSDictionary *)params success:(SuccessBlock)success failure:(FailedBlock)failed;
 
 @end

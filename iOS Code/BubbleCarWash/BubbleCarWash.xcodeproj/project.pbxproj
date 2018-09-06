@@ -8,11 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		0603802FA5429C61B55F5DF8 /* libPods-BubbleCarWash.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29174BA4C402F267A6E8611C /* libPods-BubbleCarWash.a */; };
+		6545FCE0214028A60032DEEA /* UpgradeReminderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6545FCDF214028A60032DEEA /* UpgradeReminderModel.m */; };
 		6556AE5C211B282E0017B79A /* GlobalMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 6556AE5B211B282E0017B79A /* GlobalMethods.m */; };
 		657AA201213BA0B10086F98A /* WeatherModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 657AA200213BA0B10086F98A /* WeatherModel.m */; };
 		657AA205213BCD660086F98A /* CouponListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 657AA204213BCD660086F98A /* CouponListModel.m */; };
 		657AA20E213C022F0086F98A /* ExpensesRecordListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 657AA20D213C022F0086F98A /* ExpensesRecordListModel.m */; };
 		657AA215213C27AC0086F98A /* CommentListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 657AA214213C27AC0086F98A /* CommentListModel.m */; };
+		657AA218213D95680086F98A /* EditNicknameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 657AA217213D95680086F98A /* EditNicknameViewController.m */; };
+		6584AA9421401D2600DEA15F /* UIImage+ScaleImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6584AA9321401D2600DEA15F /* UIImage+ScaleImage.m */; };
 		6593AB85212942AA002F92F6 /* NetworkTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 6593AB84212942AA002F92F6 /* NetworkTools.m */; };
 		65C5AF582135A32900727122 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5AF522135A32900727122 /* LoginViewController.m */; };
 		65C5AF592135A32900727122 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65C5AF532135A32900727122 /* Login.storyboard */; };
@@ -82,14 +85,14 @@
 		CC5BF768213658900037DF66 /* NSObject+DictionaryFromModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC5BF767213658900037DF66 /* NSObject+DictionaryFromModel.m */; };
 		CCA16520213E413E001626C6 /* CustomerServicerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA1651F213E413E001626C6 /* CustomerServicerViewController.m */; };
 		CCA16526213E41B9001626C6 /* UpgradeReminderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA16525213E41B9001626C6 /* UpgradeReminderViewController.m */; };
-		CCA16529213E450F001626C6 /* LYEdgeInsetsLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA16528213E450F001626C6 /* LYEdgeInsetsLabel.m */; };
-		CCA1652C213E4549001626C6 /* FeedbackTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA1652B213E4549001626C6 /* FeedbackTextView.m */; };
 		CCA1652F213E48BB001626C6 /* UILabel+CreateLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA1652E213E48BB001626C6 /* UILabel+CreateLabel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		29174BA4C402F267A6E8611C /* libPods-BubbleCarWash.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BubbleCarWash.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		322598973AA2480B0A9F7672 /* Pods-BubbleCarWash.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BubbleCarWash.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BubbleCarWash/Pods-BubbleCarWash.debug.xcconfig"; sourceTree = "<group>"; };
+		6545FCDE214028A60032DEEA /* UpgradeReminderModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UpgradeReminderModel.h; sourceTree = "<group>"; };
+		6545FCDF214028A60032DEEA /* UpgradeReminderModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UpgradeReminderModel.m; sourceTree = "<group>"; };
 		6556AE5A211B282E0017B79A /* GlobalMethods.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlobalMethods.h; sourceTree = "<group>"; };
 		6556AE5B211B282E0017B79A /* GlobalMethods.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GlobalMethods.m; sourceTree = "<group>"; };
 		657AA1FF213BA0B10086F98A /* WeatherModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeatherModel.h; sourceTree = "<group>"; };
@@ -100,6 +103,10 @@
 		657AA20D213C022F0086F98A /* ExpensesRecordListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExpensesRecordListModel.m; sourceTree = "<group>"; };
 		657AA213213C27AC0086F98A /* CommentListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentListModel.h; sourceTree = "<group>"; };
 		657AA214213C27AC0086F98A /* CommentListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentListModel.m; sourceTree = "<group>"; };
+		657AA216213D95670086F98A /* EditNicknameViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditNicknameViewController.h; sourceTree = "<group>"; };
+		657AA217213D95680086F98A /* EditNicknameViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditNicknameViewController.m; sourceTree = "<group>"; };
+		6584AA9221401D2600DEA15F /* UIImage+ScaleImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+ScaleImage.h"; sourceTree = "<group>"; };
+		6584AA9321401D2600DEA15F /* UIImage+ScaleImage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ScaleImage.m"; sourceTree = "<group>"; };
 		6593AB83212942AA002F92F6 /* NetworkTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkTools.h; sourceTree = "<group>"; };
 		6593AB84212942AA002F92F6 /* NetworkTools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NetworkTools.m; sourceTree = "<group>"; };
 		6593AB9221297FCD002F92F6 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -229,10 +236,6 @@
 		CCA1651F213E413E001626C6 /* CustomerServicerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomerServicerViewController.m; sourceTree = "<group>"; };
 		CCA16524213E41B9001626C6 /* UpgradeReminderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UpgradeReminderViewController.h; sourceTree = "<group>"; };
 		CCA16525213E41B9001626C6 /* UpgradeReminderViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UpgradeReminderViewController.m; sourceTree = "<group>"; };
-		CCA16527213E450F001626C6 /* LYEdgeInsetsLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LYEdgeInsetsLabel.h; sourceTree = "<group>"; };
-		CCA16528213E450F001626C6 /* LYEdgeInsetsLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LYEdgeInsetsLabel.m; sourceTree = "<group>"; };
-		CCA1652A213E4549001626C6 /* FeedbackTextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FeedbackTextView.h; sourceTree = "<group>"; };
-		CCA1652B213E4549001626C6 /* FeedbackTextView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FeedbackTextView.m; sourceTree = "<group>"; };
 		CCA1652D213E48BB001626C6 /* UILabel+CreateLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UILabel+CreateLabel.h"; sourceTree = "<group>"; };
 		CCA1652E213E48BB001626C6 /* UILabel+CreateLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UILabel+CreateLabel.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -249,6 +252,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6545FCDA214028700032DEEA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6545FCDE214028A60032DEEA /* UpgradeReminderModel.h */,
+				6545FCDF214028A60032DEEA /* UpgradeReminderModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		657AA1FE213BA03C0086F98A /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -327,8 +339,8 @@
 		65C5AF992135A45100727122 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				65C5AF9A2135A45100727122 /* ProfileCell.h */,
 				65C5AF9B2135A45100727122 /* ProfileCell.xib */,
+				65C5AF9A2135A45100727122 /* ProfileCell.h */,
 				65C5AF9C2135A45100727122 /* ProfileCell.m */,
 			);
 			path = View;
@@ -370,9 +382,11 @@
 		65C5AFCF2135AA8100727122 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				65C5AFD82135AA8100727122 /* PersonalInfo.storyboard */,
 				65C5AFD72135AA8100727122 /* PersonalInfoViewController.h */,
 				65C5AFD22135AA8100727122 /* PersonalInfoViewController.m */,
-				65C5AFD82135AA8100727122 /* PersonalInfo.storyboard */,
+				657AA216213D95670086F98A /* EditNicknameViewController.h */,
+				657AA217213D95680086F98A /* EditNicknameViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -589,13 +603,15 @@
 			isa = PBXGroup;
 			children = (
 				65C5B0BC2135AE6000727122 /* NSString+Category.h */,
-				65C5B0BD2135AE6000727122 /* UIColor+Category.h */,
 				65C5B0BE2135AE6000727122 /* NSString+Category.m */,
+				65C5B0BD2135AE6000727122 /* UIColor+Category.h */,
 				65C5B0BF2135AE6000727122 /* UIColor+Category.m */,
 				CC5BF766213658900037DF66 /* NSObject+DictionaryFromModel.h */,
 				CC5BF767213658900037DF66 /* NSObject+DictionaryFromModel.m */,
 				CCA1652D213E48BB001626C6 /* UILabel+CreateLabel.h */,
 				CCA1652E213E48BB001626C6 /* UILabel+CreateLabel.m */,
+				6584AA9221401D2600DEA15F /* UIImage+ScaleImage.h */,
+				6584AA9321401D2600DEA15F /* UIImage+ScaleImage.m */,
 			);
 			name = Category;
 			path = BubbleCarWash/Category;
@@ -832,35 +848,16 @@
 		CCA1651B213E411F001626C6 /* CustomerServicer */ = {
 			isa = PBXGroup;
 			children = (
-				CCA1651C213E411F001626C6 /* Controller */,
-				CCA1651D213E411F001626C6 /* View */,
-			);
-			path = CustomerServicer;
-			sourceTree = "<group>";
-		};
-		CCA1651C213E411F001626C6 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
 				CCA1651E213E413E001626C6 /* CustomerServicerViewController.h */,
 				CCA1651F213E413E001626C6 /* CustomerServicerViewController.m */,
 			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		CCA1651D213E411F001626C6 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				CCA16527213E450F001626C6 /* LYEdgeInsetsLabel.h */,
-				CCA16528213E450F001626C6 /* LYEdgeInsetsLabel.m */,
-				CCA1652A213E4549001626C6 /* FeedbackTextView.h */,
-				CCA1652B213E4549001626C6 /* FeedbackTextView.m */,
-			);
-			path = View;
+			path = CustomerServicer;
 			sourceTree = "<group>";
 		};
 		CCA16521213E41AA001626C6 /* UpgradeReminder */ = {
 			isa = PBXGroup;
 			children = (
+				6545FCDA214028700032DEEA /* Model */,
 				CCA16522213E41AA001626C6 /* Controller */,
 			);
 			path = UpgradeReminder;
@@ -896,7 +893,6 @@
 				65FC33E920E13577006DE3F1 /* Frameworks */,
 				65FC33EA20E13577006DE3F1 /* Resources */,
 				DB4C1590B13D23DE052B5284 /* [CP] Copy Pods Resources */,
-				79E8EB87051E345ED9A256BB /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -963,21 +959,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		79E8EB87051E345ED9A256BB /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BubbleCarWash/Pods-BubbleCarWash-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		DB4C1590B13D23DE052B5284 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -989,7 +970,7 @@
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AMap.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1033,7 +1014,6 @@
 				65C5B10B2135B0F800727122 /* MapViewController.m in Sources */,
 				65C5B0E62135AFC900727122 /* HomeModel.m in Sources */,
 				65C5B0B92135AA8200727122 /* ModelCertificationCell.m in Sources */,
-				CCA16529213E450F001626C6 /* LYEdgeInsetsLabel.m in Sources */,
 				CCA1652F213E48BB001626C6 /* UILabel+CreateLabel.m in Sources */,
 				65C5B07A2135AA8100727122 /* PersonalInfoCell.m in Sources */,
 				65C5B0C02135AE6000727122 /* NSString+Category.m in Sources */,
@@ -1043,7 +1023,6 @@
 				65C5B08C2135AA8100727122 /* WashServiceManagerViewController.m in Sources */,
 				65C5B0B72135AA8200727122 /* ModelCertificationViewController.m in Sources */,
 				CCA16526213E41B9001626C6 /* UpgradeReminderViewController.m in Sources */,
-				CCA1652C213E4549001626C6 /* FeedbackTextView.m in Sources */,
 				65C5AFC62135A45100727122 /* UserManager.m in Sources */,
 				65C5AF582135A32900727122 /* LoginViewController.m in Sources */,
 				65C5B0B82135AA8200727122 /* CertificationViewController.m in Sources */,
@@ -1052,6 +1031,8 @@
 				65C5B0C82135AEA300727122 /* BaseNavigationViewController.m in Sources */,
 				65C5B0812135AA8100727122 /* IncomeListViewController.m in Sources */,
 				65C5B0AA2135AA8100727122 /* CommentCell.m in Sources */,
+				6545FCE0214028A60032DEEA /* UpgradeReminderModel.m in Sources */,
+				657AA218213D95680086F98A /* EditNicknameViewController.m in Sources */,
 				657AA201213BA0B10086F98A /* WeatherModel.m in Sources */,
 				65C5B09F2135AA8100727122 /* IntegralConvertCell.m in Sources */,
 				65C5B0872135AA8100727122 /* IncomeListCell.m in Sources */,
@@ -1065,6 +1046,7 @@
 				65C5B1062135B0F800727122 /* CommodityRecommendationViewController.m in Sources */,
 				65C5B0952135AA8100727122 /* CreateProductCell.m in Sources */,
 				65C5AFCD2135A47B00727122 /* UserInfoModel.m in Sources */,
+				6584AA9421401D2600DEA15F /* UIImage+ScaleImage.m in Sources */,
 				65C5B0BA2135AA8200727122 /* CertificationCell.m in Sources */,
 				65C5B0C72135AEA300727122 /* ParentViewController.m in Sources */,
 				65C5B1082135B0F800727122 /* CommodityHorizontalFlowLayout.m in Sources */,

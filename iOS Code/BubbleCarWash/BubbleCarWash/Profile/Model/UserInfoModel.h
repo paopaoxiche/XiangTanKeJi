@@ -16,7 +16,7 @@
 @property (nonatomic, copy) NSString *avatarUrl;
 @property (nonatomic, copy) NSString *token;
 @property (nonatomic, copy) NSString *regTime;
-@property (nonatomic, copy) NSString *code;
+@property (nonatomic, copy) NSString *code;             // 验证码
 @property (nonatomic, assign) NSUInteger type;
 @property (nonatomic, assign) NSUInteger score;
 

@@ -10,9 +10,16 @@
 #import "PersonalInfoCell.h"
 #import "UIColor+Category.h"
 #import "ModelCertificationViewController.h"
+#import "UserManager.h"
+#import "UserInfoModel.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+#import "GlobalMethods.h"
+#import "UIImage+ScaleImage.h"
+#import "NetworkTools.h"
 
-@interface PersonalInfoViewController ()
+@interface PersonalInfoViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
+@property (nonatomic, strong) UIImagePickerController *imagePicker;
 
 @end
 
@@ -27,11 +34,15 @@
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor]}];
     self.tableView.rowHeight = 50;
     self.tableView.separatorColor = [UIColor rgbWithRed:235 green:235 blue:241];
+    
+    _imagePicker = [[UIImagePickerController alloc] init];
+    _imagePicker.delegate = self;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUserInfo:) name:@"UpdateUserInfo" object:nil];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)updateUserInfo:(NSNotification *)notification {
+    [self.tableView reloadData];
 }
 
 #pragma mark - UITableViewDatasource
@@ -55,22 +66,23 @@
         switch (indexPath.row) {
             case 0:
                 cell.cusTextLable.text = @"昵称";
-                cell.cusDetailLabel.text = @"爱洗车";
+                cell.cusDetailLabel.text = [UserManager sharedInstance].userInfo.nickName;
                 break;
             case 1:
                 cell.cusTextLable.text = @"头像";
                 cell.cusDetailLabel.hidden = YES;
                 cell.imgView.hidden = NO;
-                cell.imgView.image = [UIImage imageNamed:@"AppIcon"];
+                [cell.imgView sd_setImageWithURL:[NSURL URLWithString:[UserManager sharedInstance].userInfo.avatarUrl]
+                                placeholderImage:[UIImage imageNamed:@"CarWashAvatar"]];
                 break;
             case 2:
                 cell.cusTextLable.text = @"帐号";
-                cell.cusDetailLabel.text = @"12345678909";
+                cell.cusDetailLabel.text = [UserManager sharedInstance].userInfo.phoneNumber;
                 cell.arrow.hidden = YES;
                 break;
             case 3:
                 cell.cusTextLable.text = @"加入时间";
-                cell.cusDetailLabel.text = @"2018-07-21";
+                cell.cusDetailLabel.text = [UserManager sharedInstance].userInfo.regTime;
                 cell.arrow.hidden = YES;
                 break;
             default:
@@ -88,6 +100,18 @@
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            NSString *vcIdentifier = @"EditNicknameVC";
+            UIViewController *vc = [GlobalMethods viewControllerWithBuddleName:@"PersonalInfo" vcIdentifier:vcIdentifier];
+            [self presentViewController:vc animated:NO completion:nil];
+        }
+        
+        if (indexPath.row == 1) {
+            [self presentImagePicker];
+        }
+    }
+    
     if (indexPath.section == 1) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Certification" bundle:[NSBundle mainBundle]];
         ModelCertificationViewController *modelCertificationVC = [storyboard instantiateViewControllerWithIdentifier:@"ModeCertificationVC"];
@@ -101,6 +125,79 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     return 0.000001;
+}
+
+#pragma mark - UIImagePickerController
+
+- (BOOL)isValidCamera {
+    return [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
+}
+
+- (BOOL)isValidPhotoLibrary {
+    return [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary];
+}
+
+- (void)presentImagePicker {
+    UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *photoAction = [UIAlertAction actionWithTitle:@"从相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        if (![self isValidPhotoLibrary]) {
+            [self messageBox:@"不能打开相册"];
+        }
+        
+        self.imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        [self presentViewController:self.imagePicker animated:YES completion:nil];
+    }];
+    UIAlertAction *cameraAction = [UIAlertAction actionWithTitle:@"拍摄" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        if (![self isValidCamera]) {
+            [self messageBox:@"不能打开相机"];
+        }
+        
+        self.imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        [self presentViewController:self.imagePicker animated:YES completion:nil];
+    }];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"" style:UIAlertActionStyleCancel handler:nil];
+    
+    [actionSheet addAction:photoAction];
+    [actionSheet addAction:cameraAction];
+    [actionSheet addAction:cancel];
+    
+    [self presentViewController:actionSheet animated:YES completion:nil];
+}
+
+/**
+ *  选中相片之后调用
+ */
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+    UIImage *image = [[info objectForKey:UIImagePickerControllerOriginalImage] imageWithScale:320];
+    
+    // 上传头像
+    [[NetworkTools sharedInstance] updateUserAvatar:image success:^(NSDictionary *response, BOOL isSuccess) {
+        if ([[response objectForKey:@"code"] integerValue] == 200) {
+            // 更新头像
+            PersonalInfoCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+            cell.imgView.image = image;
+            [self messageBox:@"修改头像成功"];
+            [UserManager sharedInstance].isUpdateUserInfo = YES;
+            [[UserManager sharedInstance] obtainUserInfo];
+        }
+    } failed:^(NSError *error) {
+        [self messageBox:@"头像上传失败"];
+    }];
+    
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark -
+
+- (void)messageBox:(NSString *)lpszMessage {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示"
+                                                                   message:lpszMessage
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *iKnow = [UIAlertAction actionWithTitle:@"我知道了"
+                                                    style:UIAlertActionStyleCancel
+                                                  handler:nil];
+    [alert addAction:iKnow];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 @end

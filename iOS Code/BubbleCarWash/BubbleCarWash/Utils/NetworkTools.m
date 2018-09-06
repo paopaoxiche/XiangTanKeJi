@@ -9,6 +9,7 @@
 #import "NetworkTools.h"
 #import "NSObject+DictionaryFromModel.h"
 #import "UserManager.h"
+#import "GlobalMethods.h"
 
 @implementation NearbyWashListParam
 
@@ -19,6 +20,22 @@
         _showAll = 0;
         _priceLimit = 0;
         _radius = -1;
+    }
+    
+    return self;
+}
+
+@end
+
+@implementation FeedBackParam
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        _systemType = @"1";
+        _device = [GlobalMethods deviceModel];
+        _versionCode = [GlobalMethods productVersion];
+        _systemVersion = [GlobalMethods systemVersion];
     }
     
     return self;
@@ -47,20 +64,24 @@ static const NSTimeInterval kTimeOutInterval = 6.0f;
     return instance;
 }
 
+- (void)setRequestHeader {
+    AFHTTPSessionManager *manager = [NetworkTools sharedInstance];
+    [manager.requestSerializer setValue:[UserManager sharedInstance].authentication
+                     forHTTPHeaderField:@"authentication"];
+}
+
 #pragma mark - 公告接口
 
 - (void)obtainVerificationCodeWithPhoneNumber:(NSString *)phoneNumber
                                       success:(SuccessBlock)success
-                                       failed:(FailedBlock)failed
-{
+                                       failed:(FailedBlock)failed {
     [self GET:@"user/getMessageCode" parameters:@{@"phone": phoneNumber} success:success failure:failed];
 }
 
 - (void)loginWithPhoneNumber:(NSString *)phoneNumber
                         code:(NSUInteger)code userType:(NSUInteger)type
                      success:(SuccessBlock)success
-                      failed:(FailedBlock)failed
-{
+                      failed:(FailedBlock)failed {
     NSDictionary *params = @{@"phone": phoneNumber,
                              @"code": [NSNumber numberWithUnsignedInteger:code],
                              @"type": [NSNumber numberWithUnsignedInteger:type]};
@@ -71,8 +92,7 @@ static const NSTimeInterval kTimeOutInterval = 6.0f;
             userID:(NSString *)userID
            isOwner:(BOOL)isOwner
            success:(SuccessBlock)success
-            failed:(FailedBlock)failed
-{
+            failed:(FailedBlock)failed {
     AFHTTPSessionManager *manager = [NetworkTools sharedInstance];
     NSString *authenStr = [NSString stringWithFormat:@"user_id=%@,token=%@", userID, token];
     NSString *url = isOwner ? @"user/checkCarOwner" : @"user/checkCarWash";
@@ -80,21 +100,37 @@ static const NSTimeInterval kTimeOutInterval = 6.0f;
     [self GET:url parameters:nil success:success failure:failed];
 }
 
-- (void)obtainUserInfoWithUserID:(NSString *)userID
-                         success:(SuccessBlock)success
-                          failed:(FailedBlock)failed
-{
+- (void)obtainUserInfoWithUserID:(NSString *)userID success:(SuccessBlock)success failed:(FailedBlock)failed {
     NSDictionary *params = @{@"id": userID};
     NSString *url = @"user/info";
     [self GET:url parameters:params success:success failure:failed];
+}
+
+- (void)updateUserNickName:(NSString *)nickName success:(SuccessBlock)success failed:(FailedBlock)failed {
+    [self setRequestHeader];
+    [self POST:@"user/update" parameters:@{@"nickname": nickName} success:success failure:failed];
+}
+
+- (void)updateUserAvatar:(UIImage *)image success:(SuccessBlock)success failed:(FailedBlock)failed {
+    [self setRequestHeader];
+    [self POST:@"user/update" name:@"file" image:image success:success failure:failed];
+}
+
+- (void)obtainUpgradeInfo:(SuccessBlock)success failed:(FailedBlock)failed {
+    NSDictionary *params = @{@"systemType": @"1", @"version": [GlobalMethods productVersion]};
+    [self GET:@"user/getAppVersion" parameters:params success:success failure:failed];
+}
+
+- (void)submitFeedBackInfo:(FeedBackParam *)param success:(SuccessBlock)success failed:(FailedBlock)failed {
+    NSDictionary *params = [param dictionaryFromModel];
+    [self POST:@"feedback/submit" parameters:params success:success failure:failed];
 }
 
 #pragma mark - 车主首页
 
 - (void)obtainNearbyWashList:(NearbyWashListParam *)param
                      success:(SuccessBlock)success
-                      failed:(FailedBlock)failed
-{
+                      failed:(FailedBlock)failed {
     NSDictionary *params = [param dictionaryFromModel];
     NSString *url = @"wash/getNearbyWashServiceList";
     [self GET:url parameters:params success:success failure:failed];
@@ -104,8 +140,7 @@ static const NSTimeInterval kTimeOutInterval = 6.0f;
                        longitude:(NSNumber *)longitude
                         latitude:(NSNumber *)latitude
                          success:(SuccessBlock)success
-                          failed:(FailedBlock)failed
-{
+                          failed:(FailedBlock)failed {
     NSDictionary *params = @{@"count": [NSNumber numberWithInteger:count], @"lng":longitude, @"lat": latitude};
     NSString *url = @"wash/getRecommendCommodity";
     [self GET:url parameters:params success:success failure:failed];
@@ -145,7 +180,7 @@ static const NSTimeInterval kTimeOutInterval = 6.0f;
                                     success:(SuccessBlock)success
                                      failed:(FailedBlock)failed {
     NSDictionary *params = @{@"couponId": couponID};
-    AFHTTPSessionManager *manager = [NetworkTools sharedInstance];;
+    AFHTTPSessionManager *manager = [NetworkTools sharedInstance];
     NSString *url = @"carOwner/exchangePoint";
     [manager.requestSerializer setValue:[UserManager sharedInstance].authentication
                      forHTTPHeaderField:@"authentication"];
@@ -166,5 +201,40 @@ static const NSTimeInterval kTimeOutInterval = 6.0f;
         failed(error);
     }];
 }
+
+- (void)POST:(NSString *)url parameters:(NSDictionary *)params success:(SuccessBlock)success failure:(FailedBlock)failed {
+    [self POST:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"responseObject = %@", responseObject);
+        if (responseObject) {
+            success(responseObject, YES);
+        } else {
+            success(@{@"msg": @"暂无数据"}, NO);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failed(error);
+    }];
+}
+
+- (void)POST:(NSString *)url name:(NSString *)name image:(UIImage *)image success:(SuccessBlock)success failure:(FailedBlock)failed {
+    [self POST:url parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
+        
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        formatter.dateFormat = @"yyyyMMddHHmmss";
+        NSString *str = [formatter stringFromDate:[NSDate date]];
+        NSString *fileName = [NSString stringWithFormat:@"%@.jpg", str];
+        
+        [formData appendPartWithFileData:imageData name:name fileName:fileName mimeType:@"image/jpg"];
+    } progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"responseObject = %@", responseObject);
+        if (responseObject) {
+            success(responseObject, YES);
+        } else {
+            success(@{@"msg": @"暂无数据"}, NO);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failed(error);
+    }];
+} // func
 
 @end

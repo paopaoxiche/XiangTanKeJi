@@ -37,6 +37,7 @@
     self = [super init];
     if (self) {
         _isLogin = NO;
+        _isUpdateUserInfo = NO;
     }
     
     return self;
@@ -88,7 +89,8 @@
 } // func
 
 - (void)obtainUserInfo {
-    if (_isLogin && (!_userInfo.phoneNumber || [_userInfo.phoneNumber isEqualToString:@""])) {
+    if (_isLogin && ((!_userInfo.phoneNumber || [_userInfo.phoneNumber isEqualToString:@""]) || _isUpdateUserInfo)) {
+        self.isUpdateUserInfo = NO;
         [[NetworkTools sharedInstance] obtainUserInfoWithUserID:_userInfo.userID success:^(NSDictionary *response, BOOL isSuccess) {
             NSInteger code = [response[@"code"] integerValue];
             if (code == 200) {

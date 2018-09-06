@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ParentViewController.h"
 
-@interface CustomerServicerViewController : UIViewController
+@interface CustomerServicerViewController : ParentViewController
 
 @end

@@ -7,28 +7,23 @@
 //
 
 #import "CustomerServicerViewController.h"
-#import "FeedbackTextView.h"
 #import "FunctionMacro.h"
 #import "UILabel+CreateLabel.h"
 #import "NSString+Category.h"
-#import <ReactiveObjC/ReactiveObjC.h>
+#import "NetworkTools.h"
 
 #define NUMBER @"1234567890"
 
-static const CGFloat kHeaderViewHeight = 185;
-static const CGFloat kTextViewHeight = 145;
 static const NSUInteger kContactMaxLenght = 12;
 static const NSUInteger kContactMinLenght = 4;
-static const NSUInteger kRandomStrLength = 8;
 
 @interface CustomerServicerViewController () <UITextFieldDelegate, UITextViewDelegate>
 
-@property (nonatomic, strong) FeedbackTextView *tv_feedback;
-@property (nonatomic, strong) UIView *headerView;
-@property (nonatomic, strong) UIView *contantView;
-@property (nonatomic, strong) UITextField *contactTextFiled;
+@property (weak, nonatomic) IBOutlet UITextView *textView;
+@property (weak, nonatomic) IBOutlet UILabel *placeholderLabel;
+@property (weak, nonatomic) IBOutlet UILabel *lengthLabel;
+@property (weak, nonatomic) IBOutlet UITextField *contactTextFiled;
 @property (nonatomic, strong) UIBarButtonItem *sendBtn;
-@property (nonatomic, strong) UILabel *lengthLabel;
 
 @end
 
@@ -37,8 +32,14 @@ static const NSUInteger kRandomStrLength = 8;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setupUI];
-    [self handleSingle];
+    self.view.backgroundColor = RGBColor(237, 240, 244);
+    self.title = @"反馈";
+    
+    _sendBtn = [[UIBarButtonItem alloc] initWithTitle:@"发送" style:UIBarButtonItemStylePlain target:self  action:@selector(send)];
+    [_sendBtn setEnabled:NO];
+    self.navigationItem.rightBarButtonItem = _sendBtn;
+    
+    [_contactTextFiled addTarget:self action:@selector(textChange) forControlEvents:UIControlEventEditingChanged];
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hideKeyboard)];
     [self.view addGestureRecognizer:tap];
@@ -58,6 +59,20 @@ static const NSUInteger kRandomStrLength = 8;
     [self hideKeyboard];
     // 开始loading
 //    [UIApplication showBusyHUD:nil withTitle:Localstring(@"sending")];
+    FeedBackParam *param = [[FeedBackParam alloc] init];
+    param.content = _textView.text;
+    param.contactInformation = _contactTextFiled.text;
+    [[NetworkTools sharedInstance] submitFeedBackInfo:param success:^(NSDictionary *response, BOOL isSuccess) {
+        if ([response[@"code"] integerValue] == 200) {
+            [self messageBox:@"反馈成功" handle:^{
+                [self.navigationController popViewControllerAnimated:YES];
+            }];
+        } else {
+            [self messageBox:@"反馈失败，请稍后重试"];
+        }
+    } failed:^(NSError *error) {
+        [self messageBox:@"反馈失败，请稍后重试"];
+    }];
 }
 
 /**
@@ -88,70 +103,22 @@ static const NSUInteger kRandomStrLength = 8;
 }
 
 - (void)hideKeyboard {
-    [_tv_feedback.textView resignFirstResponder];
+    [_textView resignFirstResponder];
     [_contactTextFiled resignFirstResponder];
 }
 
-- (void)handleSingle {
-    @weakify(self);
-    [[_contactTextFiled.rac_textSignal
-      filter:^BOOL(id value) {
-          NSString *text = value;
-          return text.length > kContactMaxLenght;
-      }]
-     subscribeNext:^(id _Nullable x) {
-         @strongify(self);
-         // 限制长度
-         self.contactTextFiled.text = [self.contactTextFiled.text substringToIndex:kContactMaxLenght];
-     }];
-}
-
-#pragma mark - Setup UI
-
-- (void)setupUI {
-    self.view.backgroundColor = RGBColor(237, 240, 244);
-    self.title = @"反馈";
-    _sendBtn = [[UIBarButtonItem alloc] initWithTitle:@"发送" style:UIBarButtonItemStylePlain target:self  action:@selector(send)];
-    [_sendBtn setEnabled:NO];
-    self.navigationItem.rightBarButtonItem = _sendBtn;
-    
-    _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 20, kScreenWidth, kHeaderViewHeight)];
-    _headerView.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:_headerView];
-    
-    _tv_feedback = [[FeedbackTextView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kTextViewHeight)];
-    _tv_feedback.textView.font = Font(18);
-    _tv_feedback.backgroundColor = [UIColor whiteColor];
-    _tv_feedback.textView.textContainerInset = UIEdgeInsetsMake(10, 8, 8, 8);
-    _tv_feedback.textView.delegate = self;
-    
-    _lengthLabel = [UILabel createLabelWithFontSize:16 textColor:RGBColor(199, 204, 209)];
-    _lengthLabel.frame = CGRectMake(kScreenWidth - 120, _headerView.frame.size.height - 40, 100, 30);
-    _lengthLabel.backgroundColor = [UIColor clearColor];
-    _lengthLabel.text = @"0/400";
-    _lengthLabel.textAlignment = NSTextAlignmentRight;
-    
-    [_headerView addSubview:_tv_feedback];
-    [_headerView addSubview:_lengthLabel];
-    
-    CGFloat headerViewMaxY = CGRectGetMaxY(_headerView.frame);
-    _contantView = [[UIView alloc] initWithFrame:CGRectMake(0, headerViewMaxY + 20, kScreenWidth, 46)];
-    _contantView.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:_contantView];
-    
-    _contactTextFiled = [[UITextField alloc] initWithFrame:CGRectMake(12, 8, kScreenWidth - 12 * 2, 30)];
-    _contactTextFiled.font = Font(18);
-    _contactTextFiled.placeholder = @"手机号码或QQ";
-    _contactTextFiled.keyboardType = UIKeyboardTypeNumberPad;
-    _contactTextFiled.delegate = self;
-    [_contantView addSubview:_contactTextFiled];
+- (void)textChange {
+    NSString *text = _contactTextFiled.text;
+    if (text.length > kContactMaxLenght) {
+        _contactTextFiled.text = [text substringToIndex:kContactMaxLenght];
+    }
 }
 
 #pragma mark - UITextView Delegete
 
 - (void)textViewDidChange:(UITextView *)textView {
-    _tv_feedback.placeholder_lab.hidden = textView.hasText;
-    _sendBtn.enabled = (textView.hasText && ![NSString isBlackString:_tv_feedback.textView.text]);
+    _placeholderLabel.hidden = textView.hasText;
+    _sendBtn.enabled = (textView.hasText && ![NSString isBlackString:_textView.text]);
     if ([textView.text length] >= 400) {
         textView.text = [textView.text substringToIndex:400];
     }

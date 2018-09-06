@@ -33,5 +33,15 @@
     [self presentViewController:alert animated:YES completion:nil];
 }
 
+- (void)messageBox:(NSString *)lpszMessage handle:(ActionHandle)handle {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示"
+                                                                   message:lpszMessage
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *iKnow = [UIAlertAction actionWithTitle:@"我知道了"
+                                                    style:UIAlertActionStyleCancel
+                                                  handler:^(UIAlertAction * _Nonnull action) { handle(); }];
+    [alert addAction:iKnow];
+    [self presentViewController:alert animated:YES completion:nil];
+}
 
 @end
