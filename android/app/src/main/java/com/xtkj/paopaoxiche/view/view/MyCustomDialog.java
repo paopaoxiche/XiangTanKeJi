@@ -152,6 +152,14 @@ public class MyCustomDialog extends FullScreenWithStatusBarDialog implements Lay
         // 设置商品布局
         setGoodsView(bean.getCommodities(), holder);
 
+        if (bean.getIsEvaluation() == 0) {
+            holder.buttonEvaluation.setClickable(true);
+            holder.buttonEvaluation.setText("评价");
+        } else {
+            holder.buttonEvaluation.setClickable(false);
+            holder.buttonEvaluation.setText("已评价");
+        }
+
         return convertView;
     }
 

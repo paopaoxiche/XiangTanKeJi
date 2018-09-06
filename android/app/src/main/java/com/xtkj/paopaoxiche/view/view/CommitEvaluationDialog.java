@@ -51,6 +51,7 @@ public class CommitEvaluationDialog extends FullScreenWithStatusBarDialog {
         for (int i = 0; i < llStars.getChildCount(); i++) {
             llStars.getChildAt(i).setOnClickListener(new StarClickListener(i));
         }
+        dismiss();
     }
 
     private class StarClickListener implements View.OnClickListener {
