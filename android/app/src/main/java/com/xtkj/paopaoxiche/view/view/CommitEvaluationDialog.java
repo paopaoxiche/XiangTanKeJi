@@ -36,8 +36,11 @@ public class CommitEvaluationDialog extends FullScreenWithStatusBarDialog {
     private int serviceId;
     private int curPoint = 1;
 
-    public CommitEvaluationDialog(int serviceId, Context context) {
+    EvaluateCallback evaluateCallback;
+
+    public CommitEvaluationDialog(int serviceId, EvaluateCallback evaluateCallback, Context context) {
         super(context, false);
+        this.evaluateCallback = evaluateCallback;
         this.serviceId = serviceId;
         setContentView(R.layout.dialog_commit_evaluation);
         ButterKnife.bind(this);
@@ -51,7 +54,6 @@ public class CommitEvaluationDialog extends FullScreenWithStatusBarDialog {
         for (int i = 0; i < llStars.getChildCount(); i++) {
             llStars.getChildAt(i).setOnClickListener(new StarClickListener(i));
         }
-        dismiss();
     }
 
     private class StarClickListener implements View.OnClickListener {
@@ -93,6 +95,10 @@ public class CommitEvaluationDialog extends FullScreenWithStatusBarDialog {
                               } else {
                                   Toast.makeText(BaseApplication.getContext(), "评价成功！",
                                                  Toast.LENGTH_LONG).show();
+                                  if (evaluateCallback != null) {
+                                      evaluateCallback.success(serviceId);
+                                  }
+                                  dismiss();
                               }
 
                           }
@@ -107,5 +113,9 @@ public class CommitEvaluationDialog extends FullScreenWithStatusBarDialog {
                                              Toast.LENGTH_LONG).show();
                           }
                       });
+    }
+
+    public interface EvaluateCallback {
+        void success(int serviceId);
     }
 }

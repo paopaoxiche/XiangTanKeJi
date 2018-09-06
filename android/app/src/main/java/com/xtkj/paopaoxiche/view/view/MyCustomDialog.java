@@ -37,7 +37,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MyCustomDialog extends FullScreenWithStatusBarDialog implements LayoutView {
+public class MyCustomDialog extends FullScreenWithStatusBarDialog implements LayoutView, CommitEvaluationDialog.EvaluateCallback {
     @BindView(R.id.back_arrow_image_button)
     ImageButton backArrowImageButton;
     @BindView(R.id.lv_consumption_record)
@@ -210,6 +210,11 @@ public class MyCustomDialog extends FullScreenWithStatusBarDialog implements Lay
         holder.lvWashCarService.setAdapter(commoditiesBeanAdapter);
     }
 
+    @Override
+    public void success(int serviceId) {
+        getMyConsume();
+    }
+
     class ViewHolder {
         @BindView(R.id.iv_consume_company_icon)
         ImageView ivConsumeCompanyIcon;
@@ -240,11 +245,13 @@ public class MyCustomDialog extends FullScreenWithStatusBarDialog implements Lay
 
         ViewHolder(View view) {
             ButterKnife.bind(this, view);
-            buttonEvaluation.setOnClickListener(v -> new CommitEvaluationDialog(serviceId, getContext()).show());
+            buttonEvaluation.setOnClickListener(v -> new CommitEvaluationDialog(serviceId, MyCustomDialog.this, getContext()).show());
         }
 
         void setServiceId(int serviceId) {
             this.serviceId = serviceId;
         }
     }
+
+
 }
