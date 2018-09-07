@@ -1,6 +1,7 @@
 package com.xtkj.paopaoxiche.service;
 
 import com.xtkj.paopaoxiche.bean.CouponListBean;
+import com.xtkj.paopaoxiche.bean.EvaluateListBean;
 import com.xtkj.paopaoxiche.bean.IncomeBean;
 import com.xtkj.paopaoxiche.bean.LoginBean;
 import com.xtkj.paopaoxiche.bean.NoDataBean;
@@ -110,4 +111,7 @@ public interface WashService {
     @Multipart
     @POST("car/register")
     Call<NoDataBean> carRegister(@Part("model") int carType, @Part MultipartBody.Part cover, @Part MultipartBody.Part back);
+
+    @GET("wash/getCarWashEstimate")
+    Call<EvaluateListBean> getMyEvaluateList(@Query("washId") int washId, @Query("pageIndex") int pageIndex, @Query("pageSize") int pageSize);
 }

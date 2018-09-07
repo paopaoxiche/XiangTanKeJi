@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:text="商品管理"
             android:textSize="24sp"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textStyle="bold"
             android:layout_centerInParent="true"/>
 

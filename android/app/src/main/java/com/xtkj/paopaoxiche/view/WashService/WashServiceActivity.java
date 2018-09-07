@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.alipay.sdk.app.PayTask;
 import com.bingo.wxpay.Constants;
 import com.bumptech.glide.Glide;
 import com.tencent.mm.opensdk.constants.ConstantsAPI;
@@ -44,6 +45,7 @@ import com.xtkj.paopaoxiche.service.WashService;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import butterknife.BindView;
@@ -240,6 +242,7 @@ public class WashServiceActivity extends BaseActivity implements IWashServiceCon
 
 
     private void callPay() {
+//        postWashServiceBean.setPayType(2);
         RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
                 .create(CarOwnerService.class)
                 .createConsume(postWashServiceBean.getWashServiceId(), postWashServiceBean.getCommoditys(), postWashServiceBean.getCouponId(), postWashServiceBean.getPayType())
@@ -247,26 +250,38 @@ public class WashServiceActivity extends BaseActivity implements IWashServiceCon
                     @Override
                     public void onResponse(Call<CreateConsumeBean> call, Response<CreateConsumeBean> response) {
 
-                        if (response.body().getData() == null) return;
-                        PayReq req = new PayReq();
-                        //req.appId = "wxf8b4f85f3a794e77";  // 测试用appId
-                        req.appId = response.body().getData().getWxPay().getAppid();
-                        req.partnerId = response.body().getData().getWxPay().getPartnerid();
-                        req.prepayId = response.body().getData().getWxPay().getPrepayid();
-                        req.nonceStr = response.body().getData().getWxPay().getNoncestr();
-                        req.timeStamp = response.body().getData().getWxPay().getTimestamp();
-                        req.packageValue = response.body().getData().getWxPay().getPackageX();
-                        req.sign = response.body().getData().getWxPay().getSign();
-                        req.extData = "app data"; // optional
-                        //Toast.makeText(getActivityContext(), "正常调起支付", Toast.LENGTH_SHORT).show();
-                        // 在支付之前，如果应用没有注册到微信，应该先调用IWXMsg.registerApp将应用注册到微信
-                        boolean isSuccess = api.sendReq(req);
-                        Toast.makeText(getActivityContext(), "正常调起支付: " + isSuccess, Toast.LENGTH_LONG).show();
+                        if (response.body() == null || response.body().getCode() != 200) {
+                            Toast.makeText(getActivityContext(), "调起支付失败, 请重新登录", Toast.LENGTH_LONG).show();
+                            return;
+                        }
+
+                        if (postWashServiceBean.getPayType() == 1) {
+                            PayReq req = new PayReq();
+                            req.appId = response.body().getData().getWxPay().getAppid();
+                            req.partnerId = response.body().getData().getWxPay().getPartnerid();
+                            req.prepayId = response.body().getData().getWxPay().getPrepayid();
+                            req.nonceStr = response.body().getData().getWxPay().getNoncestr();
+                            req.timeStamp = response.body().getData().getWxPay().getTimestamp();
+                            req.packageValue = response.body().getData().getWxPay().getPackageX();
+                            req.sign = response.body().getData().getWxPay().getSign();
+                            req.extData = "app data"; // optional
+                            // 在支付之前，如果应用没有注册到微信，应该先调用IWXMsg.registerApp将应用注册到微信
+                            boolean isSuccess = api.sendReq(req);
+//                        Toast.makeText(getActivityContext(), "调起微信支付", Toast.LENGTH_LONG).show();
+                        }
+                        if (postWashServiceBean.getPayType() == 2) {
+
+                            new Thread(() -> {
+                                PayTask payTask = new PayTask(WashServiceActivity.this);
+                                Map<String, String> result = payTask.payV2(response.body().getData().getAliPay(), true);
+                            }).start();
+//                        Toast.makeText(getActivityContext(), "调起阿里支付成功", Toast.LENGTH_LONG).show();
+                        }
                     }
 
                     @Override
                     public void onFailure(Call<CreateConsumeBean> call, Throwable t) {
-
+                        Toast.makeText(getActivityContext(), "调起阿里支付失败", Toast.LENGTH_LONG).show();
                     }
                 });
     }

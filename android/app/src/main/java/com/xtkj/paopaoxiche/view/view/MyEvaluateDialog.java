@@ -26,7 +26,9 @@ import com.xtkj.paopaoxiche.bean.EvaluateListBean;
 import com.xtkj.paopaoxiche.bean.EvaluateListBean.DataBean;
 import com.xtkj.paopaoxiche.http.ApiField;
 import com.xtkj.paopaoxiche.http.RetrofitClient;
+import com.xtkj.paopaoxiche.model.UserInfo;
 import com.xtkj.paopaoxiche.service.UserService;
+import com.xtkj.paopaoxiche.service.WashService;
 import com.xtkj.paopaoxiche.widget.FullScreenWithStatusBarDialog;
 
 import java.text.SimpleDateFormat;
@@ -151,35 +153,43 @@ public class MyEvaluateDialog extends FullScreenWithStatusBarDialog implements L
     }
 
     private void getEvaluateList() {
-        RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
-            .create(UserService.class)
-            .getMyEvaluateList(0, 1000)
-            .enqueue(new Callback<EvaluateListBean>() {
-                @Override
-                public void onResponse(Call<EvaluateListBean> call, Response<EvaluateListBean> response) {
-                    if(!isShowing()){
-                        return;
-                    }
-
-                    EvaluateListBean bean = response.body();
-                    if(bean.getCode() != 200){
-                        Toast.makeText(BaseApplication.getContext(), "获取评论列表失败！", Toast.LENGTH_LONG).show();
-                        return;
-                    }
-
-                    List<DataBean> dataBeans = bean.getData();
-                    if(dataBeans == null || dataBeans.isEmpty()){
-                        Toast.makeText(BaseApplication.getContext(), "没有任何评论！", Toast.LENGTH_LONG).show();
-                        return;
-                    }
-
-                    adapter.updateDataAndNotifyDataChanged(dataBeans);
+        Callback callback = new Callback<EvaluateListBean>() {
+            @Override
+            public void onResponse(Call<EvaluateListBean> call, Response<EvaluateListBean> response) {
+                if (!isShowing()) {
+                    return;
                 }
 
-                @Override
-                public void onFailure(Call<EvaluateListBean> call, Throwable t) {
+                EvaluateListBean bean = response.body();
+                if (bean.getCode() != 200) {
                     Toast.makeText(BaseApplication.getContext(), "获取评论列表失败！", Toast.LENGTH_LONG).show();
+                    return;
                 }
-            });
+
+                List<DataBean> dataBeans = bean.getData();
+                if (dataBeans == null || dataBeans.isEmpty()) {
+                    Toast.makeText(BaseApplication.getContext(), "没有任何评论！", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                adapter.updateDataAndNotifyDataChanged(dataBeans);
+            }
+
+            @Override
+            public void onFailure(Call<EvaluateListBean> call, Throwable t) {
+                Toast.makeText(BaseApplication.getContext(), "获取评论列表失败！", Toast.LENGTH_LONG).show();
+            }
+        };
+        if (UserInfo.isDriver()) {
+            RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
+                    .create(UserService.class)
+                    .getMyEvaluateList(0, 1000)
+                    .enqueue(callback);
+        } else {
+            RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
+                    .create(WashService.class)
+                    .getMyEvaluateList(UserInfo.getWashId(), 0, 1000)
+                    .enqueue(callback);
+        }
     }
 }
