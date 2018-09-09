@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseTableViewController.h"
 #import "UserManager.h"
 
-@interface CertificationViewController : UITableViewController
+@interface CertificationViewController : BaseTableViewController
 
 @property (nonatomic, assign) CertificationState state;
+@property (nonatomic, assign) NSInteger dataID;
 
 @end

@@ -76,6 +76,9 @@
 		65C5B10F2135B0F800727122 /* WeatherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5B1022135B0F800727122 /* WeatherViewController.m */; };
 		65C5B1102135B0F800727122 /* WeatherInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5B1052135B0F800727122 /* WeatherInfoCell.m */; };
 		65EA90EF212B19C90095F72B /* LYKeyChainStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EA90EE212B19C90095F72B /* LYKeyChainStore.m */; };
+		65EFB57B2143A9D9009289E4 /* AuthenticationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EFB57A2143A9D9009289E4 /* AuthenticationModel.m */; };
+		65FA514A2144FAD500F9D08C /* SeeLargePictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65FA51492144FAD500F9D08C /* SeeLargePictureViewController.m */; };
+		65FA514D2145009200F9D08C /* BaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65FA514C2145009200F9D08C /* BaseTableViewController.m */; };
 		65FC33F120E13577006DE3F1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 65FC33F020E13577006DE3F1 /* AppDelegate.m */; };
 		65FC33F920E1357A006DE3F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65FC33F820E1357A006DE3F1 /* Assets.xcassets */; };
 		65FC33FC20E1357A006DE3F1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65FC33FA20E1357A006DE3F1 /* LaunchScreen.storyboard */; };
@@ -219,6 +222,12 @@
 		65C5B1052135B0F800727122 /* WeatherInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherInfoCell.m; sourceTree = "<group>"; };
 		65EA90ED212B19C90095F72B /* LYKeyChainStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LYKeyChainStore.h; sourceTree = "<group>"; };
 		65EA90EE212B19C90095F72B /* LYKeyChainStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LYKeyChainStore.m; sourceTree = "<group>"; };
+		65EFB5792143A9D9009289E4 /* AuthenticationModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AuthenticationModel.h; sourceTree = "<group>"; };
+		65EFB57A2143A9D9009289E4 /* AuthenticationModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AuthenticationModel.m; sourceTree = "<group>"; };
+		65FA51482144FAD500F9D08C /* SeeLargePictureViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SeeLargePictureViewController.h; sourceTree = "<group>"; };
+		65FA51492144FAD500F9D08C /* SeeLargePictureViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SeeLargePictureViewController.m; sourceTree = "<group>"; };
+		65FA514B2145009200F9D08C /* BaseTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseTableViewController.h; sourceTree = "<group>"; };
+		65FA514C2145009200F9D08C /* BaseTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseTableViewController.m; sourceTree = "<group>"; };
 		65FC33EC20E13577006DE3F1 /* BubbleCarWash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BubbleCarWash.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65FC33EF20E13577006DE3F1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		65FC33F020E13577006DE3F1 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -572,6 +581,7 @@
 			children = (
 				65C5B0652135AA8100727122 /* Controller */,
 				65C5B06B2135AA8100727122 /* View */,
+				65EFB5782143A9AA009289E4 /* Mode */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -584,6 +594,8 @@
 				65C5B0672135AA8100727122 /* ModelCertificationViewController.m */,
 				65C5B0682135AA8100727122 /* CertificationViewController.h */,
 				65C5B06A2135AA8100727122 /* CertificationViewController.m */,
+				65FA51482144FAD500F9D08C /* SeeLargePictureViewController.h */,
+				65FA51492144FAD500F9D08C /* SeeLargePictureViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -624,6 +636,8 @@
 				65C5B0C32135AEA300727122 /* ParentViewController.m */,
 				65C5B0C42135AEA300727122 /* BaseNavigationViewController.h */,
 				65C5B0C62135AEA300727122 /* BaseNavigationViewController.m */,
+				65FA514B2145009200F9D08C /* BaseTableViewController.h */,
+				65FA514C2145009200F9D08C /* BaseTableViewController.m */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -755,6 +769,15 @@
 				65C5B1052135B0F800727122 /* WeatherInfoCell.m */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		65EFB5782143A9AA009289E4 /* Mode */ = {
+			isa = PBXGroup;
+			children = (
+				65EFB5792143A9D9009289E4 /* AuthenticationModel.h */,
+				65EFB57A2143A9D9009289E4 /* AuthenticationModel.m */,
+			);
+			path = Mode;
 			sourceTree = "<group>";
 		};
 		65FC33E320E13576006DE3F1 = {
@@ -1012,6 +1035,7 @@
 				65C5B0802135AA8100727122 /* ExpensesRecordViewController.m in Sources */,
 				CC5BF768213658900037DF66 /* NSObject+DictionaryFromModel.m in Sources */,
 				65C5B10B2135B0F800727122 /* MapViewController.m in Sources */,
+				65FA514D2145009200F9D08C /* BaseTableViewController.m in Sources */,
 				65C5B0E62135AFC900727122 /* HomeModel.m in Sources */,
 				65C5B0B92135AA8200727122 /* ModelCertificationCell.m in Sources */,
 				CCA1652F213E48BB001626C6 /* UILabel+CreateLabel.m in Sources */,
@@ -1055,6 +1079,7 @@
 				65C5B0E52135AFC900727122 /* LYPageControl.m in Sources */,
 				6593AB85212942AA002F92F6 /* NetworkTools.m in Sources */,
 				65C5B09D2135AA8100727122 /* CouponViewController.m in Sources */,
+				65FA514A2144FAD500F9D08C /* SeeLargePictureViewController.m in Sources */,
 				65FC33F120E13577006DE3F1 /* AppDelegate.m in Sources */,
 				65C5B0AF2135AA8200727122 /* EditTradeStateViewController.m in Sources */,
 				65C5B0962135AA8100727122 /* WashManagerCell.m in Sources */,
@@ -1065,6 +1090,7 @@
 				65C5B0A22135AA8100727122 /* CouponCell.m in Sources */,
 				65C5AFC72135A45100727122 /* ProfileModel.m in Sources */,
 				657AA215213C27AC0086F98A /* CommentListModel.m in Sources */,
+				65EFB57B2143A9D9009289E4 /* AuthenticationModel.m in Sources */,
 				657AA20E213C022F0086F98A /* ExpensesRecordListModel.m in Sources */,
 				65C5B0E32135AFC900727122 /* HomeViewController.m in Sources */,
 			);

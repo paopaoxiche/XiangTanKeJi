@@ -128,6 +128,26 @@ typedef void(^FailedBlock)(NSError *error);
 - (void)convertIntegralToCouponWithCouponID:(NSString *)couponID
                                     success:(SuccessBlock)success
                                      failed:(FailedBlock)failed;
+/**
+ *  获取车型列表
+ */
+- (void)obtainCarTypeList:(SuccessBlock)success failed:(FailedBlock)failed;
+/**
+ *  获取车型审核列表
+ */
+- (void)obtainModelReviewList:(SuccessBlock)success failed:(FailedBlock)failed;
+/**
+ *  提交车型审核
+ */
+- (void)submitModelReview:(NSString *)modelID
+                    cover:(UIImage *)cover
+                     back:(UIImage *)back
+                  success:(SuccessBlock)success
+                   failed:(FailedBlock)failed;
+/**
+ *  获取车型登记详情
+ */
+- (void)obtainModelDetail:(NSInteger)modelID success:(SuccessBlock)success failed:(FailedBlock)failed;
 
 #pragma mark - 天气
 

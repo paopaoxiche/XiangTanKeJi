@@ -156,6 +156,9 @@
                                         <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X1a-1D-yEE">
                                             <rect key="frame" x="18" y="0.0" width="44" height="44"/>
                                             <state key="normal" image="SingleSelection_Selected"/>
+                                            <connections>
+                                                <action selector="onSelectBtnClicked:" destination="g3p-8c-FuJ" eventType="touchUpInside" id="um4-ys-WKA"/>
+                                            </connections>
                                         </button>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y8u-YR-Bz5" userLabel="Line">
                                             <rect key="frame" x="72" y="0.0" width="303" height="1"/>

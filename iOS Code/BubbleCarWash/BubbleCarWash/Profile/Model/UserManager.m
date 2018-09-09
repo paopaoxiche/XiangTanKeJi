@@ -29,8 +29,8 @@
     return instance;
 }
 
-+ (UserType)userType {
-    return [UserManager sharedInstance].userInfo.type;
+- (UserType)userType {
+    return _userInfo.type;
 }
 
 - (instancetype)init {

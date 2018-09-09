@@ -31,7 +31,7 @@ typedef void(^CodeResultBlock)(NSInteger code);
 @property (nonatomic, copy) NSString *authentication;
 
 + (instancetype)sharedInstance;
-+ (UserType)userType;
+- (UserType)userType;
 - (void)savaUserInfoWithPassword:(NSString *)password;
 - (BOOL)isAutoLogin;
 - (void)autoLogin:(CodeResultBlock)block;
