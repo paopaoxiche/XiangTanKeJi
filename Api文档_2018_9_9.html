@@ -58,8 +58,6 @@
                                 <ul class="nav list-group">
                                     
                                     <li>
-                                        <a href="#14ce8d74ea00db02cffdd876d7e670bc">获取洗车服务列表</a>
-                                    </li><li>
                                         <a href="#3ebb61f4391a78a12ed4453cc608c3ac">获取洗车场信息</a>
                                     </li><li>
                                         <a href="#554a410dc33d830bd87a0bf48412c9ac">提交洗车场认证</a>
@@ -89,6 +87,8 @@
                                         <a href="#a1fc087ec2df47f8add7e08e3bb5a2e9">更新洗车场营业状态</a>
                                     </li><li>
                                         <a href="#536e4c6a5a9e4a3dbc684c473d349dac">获取洗车场收入列表接口</a>
+                                    </li><li>
+                                        <a href="#b2ad5ab9766648be873419d41c5fcdef">更新洗车场地址</a>
                                     </li>
                                 </ul><span>car</span>
                                 <ul class="nav list-group">
@@ -147,6 +147,8 @@
                                         <a href="#fd8826e526058c55e62278bf26357bf2">获取常见的反馈问题</a>
                                     </li><li>
                                         <a href="#225756d161dc4a7abf7f493e10bc1a77">提交反馈意见</a>
+                                    </li><li>
+                                        <a href="#2c5d23be869242d0a45eb7c5d25ea2f0">新建API</a>
                                     </li>
                                 </ul>                                <span>附录</span>
                                 <ul class="nav list-group">
@@ -709,137 +711,6 @@
                     </div><h1 id="t_api_doc">wash</h1>
                     
                     <div class="api-one">
-                        <h3 id="14ce8d74ea00db02cffdd876d7e670bc">获取洗车服务列表</h3>
-                        <p>
-                            <a target="_blank" href="http://apizza.cc/console/project/829ba0a1c0fb6675eabcbb0391df72f4/browse?api=14ce8d74ea00db02cffdd876d7e670bc" class="label label-warning">在线测试</a>
-                            <a target="_blank" href="http://apizza.cc/console/project/829ba0a1c0fb6675eabcbb0391df72f4/browse?api=14ce8d74ea00db02cffdd876d7e670bc" class="label label-warning">在线浏览</a>
-                        </p>
-                        <p>请求方式：GET</p>
-                        <p>
-                            请求地址：http://localhost:8080/wash/getServiceList                        </p>
-                        
-                        <table class="table table-hover">
-                                <colgroup>
-                                <col class="col-xs-2">
-                                <col class="col-xs-1">
-                                <col class="col-xs-1">
-                                <col class="col-xs-7">
-                                <col class="col-xs-2">
-                              </colgroup>
-                                <thead>
-                                    <tr>
-                                        <th><span class="label label-success">Header参数名</span></th>
-                                        <th>类型</th>
-                                        <th>必需</th>
-                                        <th>描述</th>
-                                        <th>示例 e.g.</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>authentication</td>
-                                        <td></td>
-                                        <td>否</td>
-                                        <td>请求头</td>
-                                        <td>user_id=100000018,token=e701af88a47b44e3bb3e9ff05a7a14ff</td>
-                                    </tr>                                </tbody>
-                            </table>
-                        <table class="table table-hover">
-                                <colgroup>
-                                    <col class="col-xs-2">
-                                    <col class="col-xs-1">
-                                    <col class="col-xs-1">
-                                    <col class="col-xs-7">
-                                    <col class="col-xs-2">
-                                </colgroup>
-                                <thead>
-                                <tr>
-                                    <th><span class="label label-success">Query参数名</span></th>
-                                    <th>类型</th>
-                                    <th>必需</th>
-                                    <th>描述</th>
-                                    <th>示例 e.g.</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                        <td>washId</td>
-                                        <td>string</td>
-                                        <td>是</td>
-                                        <td>洗车场ID</td>
-                                        <td>1</td>
-                                    </tr>                                </tbody>
-                            </table>
-
-                                                
-                        
-                        <p>返回示例：</p>
-                        <div class="highlight">
-                            <pre>
-                                <code class="json hljs">{
-    "code": 200,
-    "data": [
-        {
-            "carModel": 0,
-            "carWashId": 4,
-            "describe": "这是测试洗车服务的描述",
-            "id": 5,
-            "isActive": true,
-            "name": "测试洗车",
-            "price": 23.49
-        }
-    ],
-    "msg": "请求成功",
-    "pageIndex": 0,
-    "pageSize": 20,
-    "totalCount": 0
-}</code>
-                            </pre>
-                        </div>                        
-                        <table class="table table-hover" style="margin-top: 7px;">
-                            <colgroup>
-                            <col class="col-xs-4">
-                            <col class="col-xs-8">
-                          </colgroup>
-                            <thead>
-                                <tr>
-                                    <th style="padding-left: 0px;"><span class="label label-success">参数名</span></th>
-                                    <th>描述</th>
-                                    <th>类型</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>data.describe</td>
-                                    <td>描述</td>
-                                    <th>string</th>
-                                </tr><tr>
-                                    <td>data.carModel</td>
-                                    <td>车型ID</td>
-                                    <th>number</th>
-                                </tr><tr>
-                                    <td>data.carWashId</td>
-                                    <td>洗车场ID</td>
-                                    <th>number</th>
-                                </tr><tr>
-                                    <td>data.id</td>
-                                    <td>洗车服务ID</td>
-                                    <th>number</th>
-                                </tr><tr>
-                                    <td>data.isActive</td>
-                                    <td>是否有效</td>
-                                    <th>boolean</th>
-                                </tr><tr>
-                                    <td>data.name</td>
-                                    <td>名称</td>
-                                    <th>string</th>
-                                </tr><tr>
-                                    <td>data.price</td>
-                                    <td>价格</td>
-                                    <th>number</th>
-                                </tr>                            </tbody>
-                        </table>
-                    </div><div class="api-one">
                         <h3 id="3ebb61f4391a78a12ed4453cc608c3ac">获取洗车场信息</h3>
                         <p>
                             <a target="_blank" href="http://apizza.cc/console/project/829ba0a1c0fb6675eabcbb0391df72f4/browse?api=3ebb61f4391a78a12ed4453cc608c3ac" class="label label-warning">在线测试</a>
@@ -2352,6 +2223,100 @@
                             </pre>
                         </div>                        
                         
+                    </div><div class="api-one">
+                        <h3 id="b2ad5ab9766648be873419d41c5fcdef">更新洗车场地址</h3>
+                        <p>
+                            <a target="_blank" href="http://apizza.cc/console/project/829ba0a1c0fb6675eabcbb0391df72f4/browse?api=b2ad5ab9766648be873419d41c5fcdef" class="label label-warning">在线测试</a>
+                            <a target="_blank" href="http://apizza.cc/console/project/829ba0a1c0fb6675eabcbb0391df72f4/browse?api=b2ad5ab9766648be873419d41c5fcdef" class="label label-warning">在线浏览</a>
+                        </p>
+                        <p>请求方式：POST</p>
+                        <p>
+                            请求地址：http://101.200.63.245:8080/wash/updataWashAddress                        </p>
+                        
+                        <table class="table table-hover">
+                                <colgroup>
+                                <col class="col-xs-2">
+                                <col class="col-xs-1">
+                                <col class="col-xs-1">
+                                <col class="col-xs-7">
+                                <col class="col-xs-2">
+                              </colgroup>
+                                <thead>
+                                    <tr>
+                                        <th><span class="label label-success">Header参数名</span></th>
+                                        <th>类型</th>
+                                        <th>必需</th>
+                                        <th>描述</th>
+                                        <th>示例 e.g.</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>authentication</td>
+                                        <td>string</td>
+                                        <td>是</td>
+                                        <td>请求头</td>
+                                        <td>user_id=100000018,token=e701af88a47b44e3bb3e9ff05a7a14ff</td>
+                                    </tr>                                </tbody>
+                            </table>
+                        
+
+                                                    <table class="table table-hover">
+                                    <colgroup>
+                                    <col class="col-xs-2">
+                                    <col class="col-xs-1">
+                                    <col class="col-xs-1">
+                                    <col class="col-xs-7">
+                                    <col class="col-xs-2">
+                                  </colgroup>
+                                    <thead>
+                                         <tr>
+                                            <th><span class="label label-success">Body参数名</span></th>
+                                            <th>类型</th>
+                                            <th>必需</th>
+                                            <th>描述</th>
+                                            <th>示例 e.g.</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>washId</td>
+                                            <td>string</td>
+                                            <td>是</td>
+                                            <td>洗车场ID</td>
+                                            <td>4</td>
+                                        </tr><tr>
+                                            <td>address</td>
+                                            <td>string</td>
+                                            <td>是</td>
+                                            <td>地址</td>
+                                            <td>深圳市</td>
+                                        </tr><tr>
+                                            <td>lat</td>
+                                            <td>string</td>
+                                            <td>是</td>
+                                            <td>纬度</td>
+                                            <td>22.578545</td>
+                                        </tr><tr>
+                                            <td>lng</td>
+                                            <td>string</td>
+                                            <td>是</td>
+                                            <td>经度</td>
+                                            <td>113.885755{     "code": 500,     "data": null,     "msg": "地址不能为空" }</td>
+                                        </tr>                                    </tbody>
+                                </table>                        
+                        
+                        <p>返回示例：</p>
+                        <div class="highlight">
+                            <pre>
+                                <code class="json hljs">{
+    "code": 200,
+    "data": null,
+    "msg": "请求成功"
+}</code>
+                            </pre>
+                        </div>                        
+                        
                     </div><h1 id="t_api_doc">car</h1>
                     
                     <div class="api-one">
@@ -2551,7 +2516,7 @@
                         </p>
                         <p>请求方式：GET</p>
                         <p>
-                            请求地址：http://localhost:8080/car/list                        </p>
+                            请求地址：http://101.200.63.245:8080/car/list                        </p>
                         
                         <table class="table table-hover">
                                 <colgroup>
@@ -2600,15 +2565,35 @@
                                 <tr>
                                         <td>status</td>
                                         <td>number</td>
-                                        <td>是</td>
+                                        <td>否</td>
                                         <td>审核状态</td>
                                         <td>1</td>
                                     </tr>                                </tbody>
                             </table>
 
                                                 
-                        
-                                                
+                        <p>详细说明：</p>
+                        <p>
+                        <div class="detail-info">
+                            <div><br></div>
+                        </div>
+                        </p>
+                        <p>返回示例：</p>
+                        <div class="highlight">
+                            <pre>
+                                <code class="json hljs">{
+    "code": 200,
+    "data": [
+        {
+            "id": 1,
+            "model": "小型车7座及以下",
+            "status": 0
+        }
+    ],
+    "msg": "请求成功"
+}</code>
+                            </pre>
+                        </div>                        
                         
                     </div><div class="api-one">
                         <h3 id="e3f6c154aa3526846832099df0e7725a">车主提交车辆审核</h3>
@@ -2951,19 +2936,16 @@
         {
             "couponType": 1,
             "discount": "",
-            "endDate": "2018-08-31 07:22:17",
+            "endDate": 1536722944000,
             "id": 1,
-            "price": "5.0",
+            "price": 5,
             "status": 1,
             "title": "满20减5",
-            "washHeader": "http://localhost:8080/avatars/null",
+            "washHeader": "",
             "washName": ""
         }
     ],
-    "msg": "请求成功",
-    "pageIndex": 0,
-    "pageSize": 20,
-    "totalCount": 1
+    "msg": "请求成功"
 }</code>
                             </pre>
                         </div>                        
@@ -4194,6 +4176,54 @@
 }</code>
                             </pre>
                         </div>                        
+                        
+                    </div><div class="api-one">
+                        <h3 id="2c5d23be869242d0a45eb7c5d25ea2f0">新建API</h3>
+                        <p>
+                            <a target="_blank" href="http://apizza.cc/console/project/829ba0a1c0fb6675eabcbb0391df72f4/browse?api=2c5d23be869242d0a45eb7c5d25ea2f0" class="label label-warning">在线测试</a>
+                            <a target="_blank" href="http://apizza.cc/console/project/829ba0a1c0fb6675eabcbb0391df72f4/browse?api=2c5d23be869242d0a45eb7c5d25ea2f0" class="label label-warning">在线浏览</a>
+                        </p>
+                        <p>请求方式：POST</p>
+                        <p>
+                            请求地址：http://                        </p>
+                        
+                        
+                        
+
+                                                    <table class="table table-hover">
+                                    <colgroup>
+                                    <col class="col-xs-2">
+                                    <col class="col-xs-1">
+                                    <col class="col-xs-1">
+                                    <col class="col-xs-7">
+                                    <col class="col-xs-2">
+                                  </colgroup>
+                                    <thead>
+                                         <tr>
+                                            <th style="padding-left: 0px;"><span class="label label-success">Body参数名</span></th>
+                                            <th>类型</th>
+                                            <th>必需</th>
+                                            <th>描述</th>
+                                            <th>示例 e.g.</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>qwe</td>
+                                            <td>string</td>
+                                            <td>是</td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr><tr>
+                                            <td>qweqwe</td>
+                                            <td>string</td>
+                                            <td>是</td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>                                    </tbody>
+                                </table>                                                
+                        
+                                                
                         
                     </div>
                     <h1 id="t_api_doc">附录</h1>
