@@ -45,7 +45,8 @@
                 android:background="#f4f4f4"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:scrollbars="none">
 
                 <LinearLayout
                     android:orientation="vertical"
@@ -130,7 +131,7 @@
                                     android:layout_marginLeft="12dp"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="中型车（七座以上九座以下）"/>
+                                    android:text="中型车（七座以上九座及以下）"/>
                             </LinearLayout>
                             <LinearLayout
                                 android:gravity="center"
@@ -148,6 +149,42 @@
                             </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
+
+                    <TextView
+                        android:layout_marginTop="16dp"
+                        android:textSize="15sp"
+                        android:text="支付方式"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <RadioGroup
+                        android:id="@+id/pay_radio_group"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:background="@color/white"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/wx_radio_button"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:checked="true"
+                            android:text="微信"
+                            android:textSize="16sp"
+                            android:textColor="@color/black"/>
+
+                        <RadioButton
+                            android:id="@+id/alipay_radio_button"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="支付宝"
+                            android:textSize="16sp"
+                            android:textColor="@color/black"/>
+
+                    </RadioGroup>
 
                     <TextView
                         android:layout_marginTop="16dp"

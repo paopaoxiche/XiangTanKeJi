@@ -45,6 +45,12 @@ public class ModifyUserInfoDialog extends FullScreenWithStatusBarDialog implemen
     ImageButton ibEnterCarTypeList;
     @BindView(R.id.enter_car_layout)
     RelativeLayout enterCarlayout;
+    @BindView(R.id.address_image_button)
+    ImageButton addressImageButton;
+    @BindView(R.id.address_text_view)
+    TextView addressTextView;
+    @BindView(R.id.address_layout)
+    RelativeLayout addressLayout;
 
     public ModifyUserInfoDialog(Context context, boolean statusBarVisible) {
         super(context, statusBarVisible);
@@ -61,6 +67,9 @@ public class ModifyUserInfoDialog extends FullScreenWithStatusBarDialog implemen
         joinTimeTextView.setText(time);
         if (!UserInfo.isDriver()) {
             enterCarlayout.setVisibility(View.GONE);
+            addressTextView.setText(UserInfo.get);
+        } else {
+            addressLayout.setVisibility(View.GONE);
         }
     }
 
@@ -112,6 +121,11 @@ public class ModifyUserInfoDialog extends FullScreenWithStatusBarDialog implemen
 
     @Override
     public void timeOut(String modifyType) {
+
+    }
+
+    @OnClick(R.id.address_image_button)
+    public void onViewClicked() {
 
     }
 }

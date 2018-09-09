@@ -13,6 +13,7 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -57,7 +58,7 @@ import retrofit2.Response;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.xtkj.paopaoxiche.utils.DensityUtil;
 
-public class WashServiceActivity extends BaseActivity implements IWashServiceContract.IWashServiceView, IWXAPIEventHandler {
+public class WashServiceActivity extends BaseActivity implements IWashServiceContract.IWashServiceView, IWXAPIEventHandler, RadioGroup.OnCheckedChangeListener {
 
     @BindView(R.id.back_button)
     ImageView backButton;
@@ -69,6 +70,8 @@ public class WashServiceActivity extends BaseActivity implements IWashServiceCon
     LinearLayout shopList;
     @BindView(R.id.pay_button)
     Button payButton;
+    @BindView(R.id.pay_radio_group)
+    RadioGroup payRadioGroup;
 
 
     private IWXAPI api;
@@ -242,7 +245,6 @@ public class WashServiceActivity extends BaseActivity implements IWashServiceCon
 
 
     private void callPay() {
-//        postWashServiceBean.setPayType(2);
         RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
                 .create(CarOwnerService.class)
                 .createConsume(postWashServiceBean.getWashServiceId(), postWashServiceBean.getCommoditys(), postWashServiceBean.getCouponId(), postWashServiceBean.getPayType())
@@ -299,18 +301,23 @@ public class WashServiceActivity extends BaseActivity implements IWashServiceCon
 
     @Override
     public void onReq(BaseReq baseReq) {
-
+        Log.i("支付反馈", "onPayFinish, reqType = " + baseReq.getType());
     }
 
     @Override
     public void onResp(BaseResp resp) {
-        Log.d("支付反馈", "onPayFinish, errCode = " + resp.errCode);
+        Log.i("支付反馈", "onPayFinish, respType = " + resp.getType());
+    }
 
-        if (resp.getType() == ConstantsAPI.COMMAND_PAY_BY_WX) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle(com.bingo.wxpay.R.string.app_tip);
-            builder.setMessage(getString(com.bingo.wxpay.R.string.pay_result_callback_msg, String.valueOf(resp.errCode)));
-            builder.show();
+    @Override
+    public void onCheckedChanged(RadioGroup group, int checkedId) {
+        switch (checkedId) {
+            case R.id.wx_radio_button:
+                postWashServiceBean.setPayType(1);
+                break;
+            case R.id.alipay_radio_button:
+                postWashServiceBean.setPayType(2);
+                break;
         }
     }
 }
