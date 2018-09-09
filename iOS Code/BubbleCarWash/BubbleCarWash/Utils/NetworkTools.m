@@ -126,6 +126,8 @@ static const NSTimeInterval kTimeOutInterval = 6.0f;
     [self POST:@"feedback/submit" parameters:params success:success failure:failed];
 }
 
+#pragma mark - 洗车场
+
 #pragma mark - 车主首页
 
 - (void)obtainNearbyWashList:(NearbyWashListParam *)param
@@ -143,6 +145,27 @@ static const NSTimeInterval kTimeOutInterval = 6.0f;
                           failed:(FailedBlock)failed {
     NSDictionary *params = @{@"count": [NSNumber numberWithInteger:count], @"lng":longitude, @"lat": latitude};
     NSString *url = @"wash/getRecommendCommodity";
+    [self GET:url parameters:params success:success failure:failed];
+}
+
+- (void)obtainCarWashInfo:(NSInteger)washID success:(SuccessBlock)success failed:(FailedBlock)failed {
+    NSString *url = @"wash/getCarWashDetail";
+    [self GET:url parameters:@{@"washId": [NSNumber numberWithInteger:washID]} success:success failure:failed];
+}
+
+- (void)obtainCarWashServiceList:(NSInteger)washID success:(SuccessBlock)success failed:(FailedBlock)failed {
+    NSDictionary *params = @{@"washId": [NSNumber numberWithInteger:washID],
+                             @"pageIndex": [NSNumber numberWithInteger:1],
+                             @"pageSize": [NSNumber numberWithInteger:20]};
+    NSString *url = @"wash/getServiceList";
+    [self GET:url parameters:params success:success failure:failed];
+}
+
+- (void)obtainCarWashCommodityList:(NSInteger)washID success:(SuccessBlock)success failed:(FailedBlock)failed {
+    NSDictionary *params = @{@"washId": [NSNumber numberWithInteger:washID],
+                             @"pageIndex": [NSNumber numberWithInteger:1],
+                             @"pageSize": [NSNumber numberWithInteger:20]};
+    NSString *url = @"wash/getCommodityList";
     [self GET:url parameters:params success:success failure:failed];
 }
 
@@ -191,9 +214,9 @@ static const NSTimeInterval kTimeOutInterval = 6.0f;
     [self GET:@"car/models" parameters:nil success:success failure:failed];
 }
 
-- (void)obtainModelReviewList:(SuccessBlock)success failed:(FailedBlock)failed {
+- (void)obtainModelReviewList:(NSInteger)status success:(SuccessBlock)success failed:(FailedBlock)failed {
     [self setRequestHeader];
-    [self GET:@"car/list" parameters:@{@"status": [NSNumber numberWithInteger:0]} success:success failure:failed];
+    [self GET:@"car/list" parameters:@{@"status": [NSNumber numberWithInteger:status]} success:success failure:failed];
 }
 
 - (void)submitModelReview:(NSString *)modelID

@@ -19,7 +19,7 @@ typedef void(^ResultBlock)(id result);
 @interface AuthenticationModel : NSObject
 
 + (void)loadCarTypeList:(ResultBlock)result;
-+ (void)loadModelCertificationList:(ResultBlock)result;
++ (void)loadModelCertificationList:(NSInteger)status result:(ResultBlock)result;
 + (void)loadCarModelDetailList:(NSInteger)dateID result:(ResultBlock)result;
 
 @end
@@ -43,6 +43,7 @@ typedef void(^ResultBlock)(id result);
 /// 认证状态
 @property (nonatomic, assign) NSInteger status;
 @property (nonatomic, assign) NSInteger dataID;
+@property (nonatomic, copy) NSString *imageName;
 
 - (instancetype)initWithDic:(NSDictionary *)dic;
 

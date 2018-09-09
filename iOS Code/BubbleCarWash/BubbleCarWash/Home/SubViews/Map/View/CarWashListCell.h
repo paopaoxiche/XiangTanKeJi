@@ -8,6 +8,22 @@
 
 #import <UIKit/UIKit.h>
 
+@class CarWashListCell;
+
+@protocol CarWashListCellDelegate <NSObject>
+
+- (void)titleViewCarWashListCell:(CarWashListCell *)cell;
+- (void)detailViewCarWashListCell:(CarWashListCell *)cell;
+
+@end
+
 @interface CarWashListCell : UITableViewCell
+
+@property (nonatomic, weak) id<CarWashListCellDelegate> delegate;
+@property (nonatomic, copy) NSString *avatarUrl;
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic, copy) NSString *address;
+@property (nonatomic, assign) CGFloat price;
+@property (nonatomic, assign) NSUInteger distance;
 
 @end

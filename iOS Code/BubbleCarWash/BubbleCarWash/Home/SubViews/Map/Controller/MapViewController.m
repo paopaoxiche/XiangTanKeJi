@@ -13,12 +13,15 @@
 #import "GlobalMethods.h"
 #import "FunctionMacro.h"
 #import "CustomAnnotationView.h"
+#import "HomeModel.h"
+#import "UserManager.h"
 
 @interface MapViewController () <MAMapViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UIView *containerView;
+@property (nonatomic, weak) IBOutlet UIView *containerView;
 @property (nonatomic, strong) MAMapView *mapView;
 @property (nonatomic, strong) CarWashListTableViewController *carWashListVC;
+@property (nonatomic, copy) NSArray *nearbyWashList;
 
 @end
 
@@ -44,13 +47,11 @@
     [self addChildViewController:_carWashListVC];
     [_mapView addSubview:_carWashListVC.view];
     
-    MAPointAnnotation *pointAnnotation = [[MAPointAnnotation alloc] init];
-    pointAnnotation.coordinate = CLLocationCoordinate2DMake(22.567, 113.89);
-    [_mapView addAnnotation:pointAnnotation];
-    
-    MAPointAnnotation *pointAnnotation1 = [[MAPointAnnotation alloc] init];
-    pointAnnotation1.coordinate = CLLocationCoordinate2DMake(22.569, 113.91);
-    [_mapView addAnnotation:pointAnnotation1];
+    [HomeDataModel loadNearbyWashList:[UserManager sharedInstance].location isMap:YES result:^(NSArray *result) {
+        self.nearbyWashList = [result copy];
+        self.carWashListVC.dataSource = self.nearbyWashList;
+        [self addPointAnnotation];
+    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -64,6 +65,14 @@
     
     _mapView.frame = CGRectMake(0, 0, _containerView.frame.size.width, _containerView.frame.size.height);
     _carWashListVC.view.frame = CGRectMake(12, _containerView.frame.size.height - 300, _mapView.frame.size.width - 24, 300);
+}
+
+- (void)addPointAnnotation {
+    for (NearbyWashListModel *model in _nearbyWashList) {
+        MAPointAnnotation *pointAnnotation = [[MAPointAnnotation alloc] init];
+        pointAnnotation.coordinate = CLLocationCoordinate2DMake(model.location.lat, model.location.lng);
+        [_mapView addAnnotation:pointAnnotation];
+    }
 }
 
 - (MAAnnotationView *)mapView:(MAMapView *)mapView viewForAnnotation:(id <MAAnnotation>)annotation {

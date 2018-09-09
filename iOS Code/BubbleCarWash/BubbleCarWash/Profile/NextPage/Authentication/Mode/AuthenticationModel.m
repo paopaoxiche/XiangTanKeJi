@@ -31,8 +31,8 @@
     }];
 }
 
-+ (void)loadModelCertificationList:(ResultBlock)result {
-    [[NetworkTools sharedInstance] obtainModelReviewList:^(NSDictionary *response, BOOL isSuccess) {
++ (void)loadModelCertificationList:(NSInteger)status result:(ResultBlock)result {
+    [[NetworkTools sharedInstance] obtainModelReviewList:status success:^(NSDictionary *response, BOOL isSuccess) {
         NSInteger code = [[response objectForKey:@"code"] integerValue];
         if (code == 200 && [response objectForKey:@"data"] != [NSNull null]) {
             NSArray *dataArr = [response objectForKey:@"data"];
@@ -119,6 +119,14 @@
         _status = [[dic objectForKey:@"status"] integerValue];
         _model = [dic objectForKey:@"model"];
         _desc = [dic objectForKey:@"desc"];
+        
+        if ([_model isEqualToString:@"大型车"]) {
+            _imageName = @"LargeCar_New";
+        } else if ([_model isEqualToString:@"中型车"]) {
+            _imageName = @"MediumCar_New";
+        } else {
+            _imageName = @"SmallCar_New";
+        }
     }
     
     return self;

@@ -10,4 +10,6 @@
 
 @interface CarWashListTableViewController : UITableViewController
 
+@property (nonatomic, copy) NSArray *dataSource;
+
 @end

@@ -746,7 +746,7 @@
                             <constraint firstAttribute="top" secondItem="8BE-5h-Dn8" secondAttribute="top" id="BFC-TN-HJb"/>
                             <constraint firstItem="8BE-5h-Dn8" firstAttribute="leading" secondItem="27h-ij-D1t" secondAttribute="leading" id="Bz4-u8-S9k"/>
                             <constraint firstItem="27h-ij-D1t" firstAttribute="trailing" secondItem="8BE-5h-Dn8" secondAttribute="trailing" id="NPi-NS-gYG"/>
-                            <constraint firstItem="27h-ij-D1t" firstAttribute="bottom" secondItem="8BE-5h-Dn8" secondAttribute="bottom" id="SKI-6h-t6L"/>
+                            <constraint firstAttribute="bottom" secondItem="8BE-5h-Dn8" secondAttribute="bottom" id="SKI-6h-t6L"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="27h-ij-D1t"/>
                     </view>

@@ -8,13 +8,22 @@
 
 #import "HomeModel.h"
 #import "NetworkTools.h"
+#import "GlobalMethods.h"
+#import "UserManager.h"
 
 @implementation HomeDataModel
 
-+ (void)loadNearbyWashList:(ResultBlock)result {
++ (void)loadNearbyWashList:(Location)location isMap:(BOOL)isMap result:(HomeResultBlock)result {
     NearbyWashListParam *param = [[NearbyWashListParam alloc] init];
-    param.lng = [NSNumber numberWithFloat:113.89];
-    param.lat = [NSNumber numberWithFloat:22.567];
+    param.lng = [NSNumber numberWithFloat:location.lng];
+    param.lat = [NSNumber numberWithFloat:location.lat];
+    
+    if (isMap) {
+        param.count = 0;
+        param.showAll = 1;
+        param.radius = 2;
+    }
+    
     [[NetworkTools sharedInstance] obtainNearbyWashList:param success:^(NSDictionary *response, BOOL isSuccess) {
         if ([response objectForKey:@"data"] == [NSNull null]) {
             return result(@[]);
@@ -36,7 +45,7 @@
     }];
 }
 
-+ (void)loadRecommendWashCommodity:(ResultBlock)result {
++ (void)loadRecommendWashCommodity:(HomeResultBlock)result {
     [[NetworkTools sharedInstance] obtainRecommendCommodity:6 longitude:[NSNumber numberWithFloat:113.89] latitude:[NSNumber numberWithFloat:22.567] success:^(NSDictionary *response, BOOL isSuccess) {
         if ([response objectForKey:@"data"] == [NSNull null]) {
             return result(@[]);
@@ -64,16 +73,8 @@
 
 @interface NearbyWashListModel ()
 
-/// 洗车场地址
-@property (nonatomic, copy) NSString *address;
 /// id
 @property (nonatomic, assign) NSInteger dataID;
-/// 洗车场id
-@property (nonatomic, assign) NSInteger washID;
-/// 洗车场纬度
-@property (nonatomic, assign) CGFloat lat;
-/// 洗车场经度
-@property (nonatomic, assign) CGFloat lng;
 
 @end
 
@@ -88,8 +89,8 @@
         _honor = [[dic objectForKey:@"honor"] integerValue];
         _dataID = [[dic objectForKey:@"id"] integerValue];
         _avatarUrl = [dic objectForKey:@"image"];
-        _lat = [[dic objectForKey:@"lat"] floatValue];
-        _lng = [[dic objectForKey:@"lng"] floatValue];
+        _location.lat = [[dic objectForKey:@"lat"] floatValue];
+        _location.lng = [[dic objectForKey:@"lng"] floatValue];
         _carWashName = [dic objectForKey:@"name"];
         _price = [[dic objectForKey:@"price"] floatValue];
         _washCount = [[dic objectForKey:@"washCount"] integerValue];
@@ -99,8 +100,8 @@
     return self;
 }
 
-- (NSInteger)distance {
-    return 200;
+- (NSUInteger)distance {
+    return [GlobalMethods calculateDistanceWithLocation:_location localLocation:[UserManager sharedInstance].location];
 }
 
 @end
@@ -120,7 +121,10 @@
         if (list.count > 0) {
             _avatarUrl = [dic objectForKey:@"avatar"];
             _carWashName = [dic objectForKey:@"name"];
-            _washID = [[dic objectForKey:@"washId"] integerValue];
+            
+            if ([dic objectForKey:@"washId"]) {
+                _washID = [[dic objectForKey:@"washId"] integerValue];
+            }
             
             NSMutableArray *commoditys = [NSMutableArray arrayWithCapacity:list.count];
             for (NSDictionary *tempDic in list) {

@@ -17,6 +17,7 @@
 #import "UserInfoModel.h"
 #import "NetworkTools.h"
 #import "HomeModel.h"
+#import "DataType.h"
 
 @interface HomeViewController () <UITableViewDataSource, UITableViewDelegate, AMapLocationManagerDelegate>
 
@@ -26,6 +27,7 @@
 @property (nonatomic, strong) CommodityRecommendationViewController *commodityRecommendationVC;
 @property (nonatomic, strong) AMapLocationManager *locationManager;
 @property (nonatomic, copy) NSArray *nearbyWashList;
+@property (nonatomic, assign) BOOL isUpdateMearByWashList;
 
 @end
 
@@ -36,6 +38,7 @@
     // Do any additional setup after loading the view.
     
     _nearWashTableView.layer.cornerRadius = 4;
+    _isUpdateMearByWashList = YES;
     
     UITapGestureRecognizer *singleGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(touchWeatherView:)];
     [_weatherView addGestureRecognizer:singleGesture];
@@ -51,10 +54,7 @@
             [self presentViewController:loginVC animated:YES completion:nil];
         }
     }];
-    [HomeDataModel loadNearbyWashList:^(NSArray *result) {
-        self.nearbyWashList = [result copy];
-        [self.nearWashTableView reloadData];
-    }];
+    
     [HomeDataModel loadRecommendWashCommodity:^(NSArray *result) {
         self.commodityRecommendationVC.recommendWashCommodity = result;
     }];
@@ -76,6 +76,13 @@
     _commodityRecommendationVC.view.frame = CGRectMake(0, 434, [UIScreen mainScreen].bounds.size.width, 350);
 }
 
+- (void)loadNearByWashList {
+    [HomeDataModel loadNearbyWashList:[UserManager sharedInstance].location isMap:NO result:^(NSArray *result) {
+        self.nearbyWashList = [result copy];
+        [self.nearWashTableView reloadData];
+    }];
+}
+
 - (void)touchWeatherView:(UIGestureRecognizer *)gesture {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Home" bundle:[NSBundle mainBundle]];
     UIViewController *weatherInfoVC = [storyboard instantiateViewControllerWithIdentifier:@"WeatherInfoVC"];
@@ -84,6 +91,7 @@
 
 - (IBAction)push2Map:(id)sender {
     UIViewController *mapVC = [GlobalMethods viewControllerWithBuddleName:@"Home" vcIdentifier:@"MapVC"];
+    mapVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:mapVC animated:YES];
 }
 
@@ -116,6 +124,14 @@
 
 - (void)amapLocationManager:(AMapLocationManager *)manager didUpdateLocation:(CLLocation *)location {
     NSLog(@"location:{lat:%f; lon:%f; accuracy:%f}", location.coordinate.latitude, location.coordinate.longitude, location.horizontalAccuracy);
+    Location userLocation;
+    userLocation.lat = location.coordinate.latitude;
+    userLocation.lng = location.coordinate.longitude;
+    [UserManager sharedInstance].location = userLocation;
+    if (_isUpdateMearByWashList) {
+        _isUpdateMearByWashList = NO;
+        [self loadNearByWashList];
+    }
 }
 
 @end
