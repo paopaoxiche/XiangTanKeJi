@@ -8,6 +8,7 @@
 
 #import "CertificationCell.h"
 #import "UIColor+Category.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 #pragma mark - CertificationTitleCell
 
@@ -47,6 +48,12 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+}
+
+- (IBAction)onSelectBtnClicked:(id)sender {
+    if (_delegate) {
+        [_delegate onSelectedBtnClicked:self];
+    }
 }
 
 - (void)setCarImgName:(NSString *)carImgName {
@@ -90,12 +97,28 @@
     
     _uploadView.layer.borderWidth = 1;
     _uploadView.layer.borderColor = [UIColor rgbWithRed:221 green:221 blue:221].CGColor;
+    
+    UITapGestureRecognizer *singleGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onUploadViewClicked:)];
+    [_uploadView addGestureRecognizer:singleGesture];
+    
+    UITapGestureRecognizer *imgaeSingleGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onUploadViewClicked:)];
+    [_cerImgView addGestureRecognizer:imgaeSingleGesture];
+}
+
+- (void)onUploadViewClicked:(UIGestureRecognizer *)gesture {
+    if (_delegate) {
+        [_delegate onUploadViewClicked:self];
+    }
 }
 
 - (void)setCerDesc:(NSString *)desc cerImgName:(NSString *)name cerType:(CertificationCellType)type {
     _uploadDescLabel.text = desc;
     if (![name isEqualToString:@""]) {
-        _cerImgView.image = [UIImage imageNamed:name];
+        [_cerImgView sd_setImageWithURL:[NSURL URLWithString:name] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            if (image) {
+                self.cerDetailImage = image;
+            }
+        }];
     }
     
     switch (type) {
@@ -108,7 +131,6 @@
             _uploadImageView.hidden = YES;
             _uploadHintLabel.hidden = YES;
             _cerStateLabel.hidden = NO;
-            _uploadView.hidden = NO;
             _cerImgView.hidden = NO;
             break;
         default:
@@ -116,10 +138,22 @@
             _uploadImageView.hidden = YES;
             _uploadHintLabel.hidden = YES;
             _cerStateLabel.hidden = YES;
-            _uploadView.hidden = YES;
             _cerImgView.hidden = NO;
             break;
     }
+}
+
+- (void)setCerImage:(UIImage *)cerImage {
+    if (!cerImage) {
+        return;
+    }
+    
+    _cerImgView.image = cerImage;
+    _uploadView.hidden = YES;
+    _uploadImageView.hidden = YES;
+    _uploadHintLabel.hidden = YES;
+    _cerStateLabel.hidden = YES;
+    _cerImgView.hidden = NO;
 }
 
 @end

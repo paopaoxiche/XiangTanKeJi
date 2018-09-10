@@ -100,6 +100,18 @@ typedef void(^FailedBlock)(NSError *error);
                         latitude:(NSNumber *)latitude
                          success:(SuccessBlock)success
                           failed:(FailedBlock)failed;
+/**
+ *  获取洗车场信息
+ */
+- (void)obtainCarWashInfo:(NSInteger)washID success:(SuccessBlock)success failed:(FailedBlock)failed;
+/**
+ *  获取洗车场服务列表
+ */
+- (void)obtainCarWashServiceList:(NSInteger)washID success:(SuccessBlock)success failed:(FailedBlock)failed;
+/**
+ *  获取洗车场商品列表
+ */
+- (void)obtainCarWashCommodityList:(NSInteger)washID success:(SuccessBlock)success failed:(FailedBlock)failed;
 
 #pragma mark - 车主我的
 
@@ -128,6 +140,26 @@ typedef void(^FailedBlock)(NSError *error);
 - (void)convertIntegralToCouponWithCouponID:(NSString *)couponID
                                     success:(SuccessBlock)success
                                      failed:(FailedBlock)failed;
+/**
+ *  获取车型列表
+ */
+- (void)obtainCarTypeList:(SuccessBlock)success failed:(FailedBlock)failed;
+/**
+ *  获取车型审核列表
+ */
+- (void)obtainModelReviewList:(NSInteger)status success:(SuccessBlock)success failed:(FailedBlock)failed;
+/**
+ *  提交车型审核
+ */
+- (void)submitModelReview:(NSString *)modelID
+                    cover:(UIImage *)cover
+                     back:(UIImage *)back
+                  success:(SuccessBlock)success
+                   failed:(FailedBlock)failed;
+/**
+ *  获取车型登记详情
+ */
+- (void)obtainModelDetail:(NSInteger)modelID success:(SuccessBlock)success failed:(FailedBlock)failed;
 
 #pragma mark - 天气
 

@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DataType.h"
 
 typedef NS_ENUM(NSInteger, UserType) {
     UserTypeOwner,
@@ -29,9 +30,10 @@ typedef void(^CodeResultBlock)(NSInteger code);
 @property (nonatomic, assign) BOOL isLogin;
 @property (nonatomic, assign) BOOL isUpdateUserInfo;
 @property (nonatomic, copy) NSString *authentication;
+@property (nonatomic, assign) Location location;
 
 + (instancetype)sharedInstance;
-+ (UserType)userType;
+- (UserType)userType;
 - (void)savaUserInfoWithPassword:(NSString *)password;
 - (BOOL)isAutoLogin;
 - (void)autoLogin:(CodeResultBlock)block;

@@ -10,10 +10,11 @@
 
 @interface ModelCertificationCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UIImageView *carImgView;
-@property (weak, nonatomic) IBOutlet UILabel *carType;
-@property (weak, nonatomic) IBOutlet UILabel *carDetail;
-@property (weak, nonatomic) IBOutlet UIImageView *verifyImgView;
-@property (weak, nonatomic) IBOutlet UILabel *verifyLabel;
+/// 车型
+@property (nonatomic, copy) NSString *model;
+/// 车型描述
+@property (nonatomic, copy) NSString *desc;
+/// 认证状态
+@property (nonatomic, assign) NSInteger status;
 
 @end

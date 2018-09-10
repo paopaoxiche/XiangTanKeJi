@@ -61,20 +61,11 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    
+
     [self.navigationController.navigationBar setBackgroundImage:nil
                                                   forBarMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setShadowImage:nil];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor]}];
-}
-
-- (void)viewWillLayoutSubviews {
-    [super viewWillLayoutSubviews];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)updateUserInfo:(NSNotification *)notification {
@@ -96,6 +87,7 @@
 - (void)onHeaderViewClicked {
     if ([UserManager sharedInstance].isLogin) {
         UIViewController *personalInfoVC = [GlobalMethods viewControllerWithBuddleName:@"PersonalInfo" vcIdentifier:@"PersonalInfoVC"];
+        personalInfoVC.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:personalInfoVC animated:YES];
     } else {
         UIViewController *loginVC = [GlobalMethods viewControllerWithBuddleName:@"Login" vcIdentifier:@"LoginVC"];
@@ -145,6 +137,7 @@
     if (![item.nextPageID isEqualToString:@""] && item.nextPageID) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Profile" bundle:[NSBundle mainBundle]];
         UIViewController *nextPageVC = [storyboard instantiateViewControllerWithIdentifier:item.nextPageID];
+        nextPageVC.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:nextPageVC animated:YES];
     }
 }

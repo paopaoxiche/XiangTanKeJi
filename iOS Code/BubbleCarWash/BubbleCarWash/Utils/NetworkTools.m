@@ -113,7 +113,7 @@ static const NSTimeInterval kTimeOutInterval = 6.0f;
 
 - (void)updateUserAvatar:(UIImage *)image success:(SuccessBlock)success failed:(FailedBlock)failed {
     [self setRequestHeader];
-    [self POST:@"user/update" name:@"file" image:image success:success failure:failed];
+    [self POST:@"user/update" parameters:nil images:@[@{@"file": image}] success:success failure:failed];
 }
 
 - (void)obtainUpgradeInfo:(SuccessBlock)success failed:(FailedBlock)failed {
@@ -125,6 +125,8 @@ static const NSTimeInterval kTimeOutInterval = 6.0f;
     NSDictionary *params = [param dictionaryFromModel];
     [self POST:@"feedback/submit" parameters:params success:success failure:failed];
 }
+
+#pragma mark - 洗车场
 
 #pragma mark - 车主首页
 
@@ -143,6 +145,27 @@ static const NSTimeInterval kTimeOutInterval = 6.0f;
                           failed:(FailedBlock)failed {
     NSDictionary *params = @{@"count": [NSNumber numberWithInteger:count], @"lng":longitude, @"lat": latitude};
     NSString *url = @"wash/getRecommendCommodity";
+    [self GET:url parameters:params success:success failure:failed];
+}
+
+- (void)obtainCarWashInfo:(NSInteger)washID success:(SuccessBlock)success failed:(FailedBlock)failed {
+    NSString *url = @"wash/getCarWashDetail";
+    [self GET:url parameters:@{@"washId": [NSNumber numberWithInteger:washID]} success:success failure:failed];
+}
+
+- (void)obtainCarWashServiceList:(NSInteger)washID success:(SuccessBlock)success failed:(FailedBlock)failed {
+    NSDictionary *params = @{@"washId": [NSNumber numberWithInteger:washID],
+                             @"pageIndex": [NSNumber numberWithInteger:0],
+                             @"pageSize": [NSNumber numberWithInteger:20]};
+    NSString *url = @"wash/getServiceList";
+    [self GET:url parameters:params success:success failure:failed];
+}
+
+- (void)obtainCarWashCommodityList:(NSInteger)washID success:(SuccessBlock)success failed:(FailedBlock)failed {
+    NSDictionary *params = @{@"washId": [NSNumber numberWithInteger:washID],
+                             @"pageIndex": [NSNumber numberWithInteger:0],
+                             @"pageSize": [NSNumber numberWithInteger:20]};
+    NSString *url = @"wash/getCommodityList";
     [self GET:url parameters:params success:success failure:failed];
 }
 
@@ -187,6 +210,41 @@ static const NSTimeInterval kTimeOutInterval = 6.0f;
     [self GET:url parameters:params success:success failure:failed];
 }
 
+- (void)obtainCarTypeList:(SuccessBlock)success failed:(FailedBlock)failed {
+    [self GET:@"car/models" parameters:nil success:success failure:failed];
+}
+
+- (void)obtainModelReviewList:(NSInteger)status success:(SuccessBlock)success failed:(FailedBlock)failed {
+    [self setRequestHeader];
+    [self GET:@"car/list" parameters:@{@"status": [NSNumber numberWithInteger:status]} success:success failure:failed];
+}
+
+- (void)submitModelReview:(NSString *)modelID
+                    cover:(UIImage *)cover
+                     back:(UIImage *)back
+                  success:(SuccessBlock)success
+                   failed:(FailedBlock)failed {
+    NSMutableArray *images = [[NSMutableArray alloc] initWithCapacity:0];
+    if (cover) {
+        [images addObject:@{@"cover": cover}];
+    }
+    if (back) {
+        [images addObject:@{@"back": back}];
+    }
+    
+    [self setRequestHeader];
+    if (images.count > 0) {
+        [self POST:@"car/register" parameters:@{@"model": modelID} images:images success:success failure:failed];
+    } else {
+        [self POST:@"car/register" parameters:@{@"model": modelID} success:success failure:failed];
+    }
+}
+
+- (void)obtainModelDetail:(NSInteger)modelID success:(SuccessBlock)success failed:(FailedBlock)failed {
+    [self setRequestHeader];
+    [self GET:@"car/detail" parameters:@{@"id": [NSNumber numberWithInteger:modelID]} success:success failure:failed];
+}
+
 #pragma mark - Get Method
 
 - (void)GET:(NSString *)url parameters:(NSDictionary *)params success:(SuccessBlock)success failure:(FailedBlock)failed {
@@ -215,16 +273,23 @@ static const NSTimeInterval kTimeOutInterval = 6.0f;
     }];
 }
 
-- (void)POST:(NSString *)url name:(NSString *)name image:(UIImage *)image success:(SuccessBlock)success failure:(FailedBlock)failed {
-    [self POST:url parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-        NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
-        
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        formatter.dateFormat = @"yyyyMMddHHmmss";
-        NSString *str = [formatter stringFromDate:[NSDate date]];
-        NSString *fileName = [NSString stringWithFormat:@"%@.jpg", str];
-        
-        [formData appendPartWithFileData:imageData name:name fileName:fileName mimeType:@"image/jpg"];
+- (void)POST:(NSString *)url parameters:(NSDictionary *)params  images:(NSArray <NSDictionary <NSString *, UIImage *>*>*)images success:(SuccessBlock)success failure:(FailedBlock)failed {
+    [self POST:url parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        for (NSDictionary *dic in images) {
+            NSArray *keys = dic.allKeys;
+            UIImage *image = dic[keys[0]];
+            if (!image) {
+                continue;
+            }
+            NSData *imageData = UIImageJPEGRepresentation(dic[keys[0]], 1.0);
+            
+            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+            formatter.dateFormat = @"yyyyMMddHHmmss";
+            NSString *str = [formatter stringFromDate:[NSDate date]];
+            NSString *fileName = [NSString stringWithFormat:@"%@.jpg", str];
+            
+            [formData appendPartWithFileData:imageData name:keys[0] fileName:fileName mimeType:@"image/jpg"];
+        }
     } progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"responseObject = %@", responseObject);
         if (responseObject) {

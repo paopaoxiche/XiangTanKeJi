@@ -29,8 +29,8 @@
     return instance;
 }
 
-+ (UserType)userType {
-    return [UserManager sharedInstance].userInfo.type;
+- (UserType)userType {
+    return _userInfo.type;
 }
 
 - (instancetype)init {
@@ -82,6 +82,7 @@
             NSInteger code = [response[@"code"] integerValue];
             self.isLogin = code == 200 ? YES : NO;
             block(code);
+            [self obtainUserInfo];
         } failed:^(NSError *error) {
             self.isLogin = NO;
         }]; // block

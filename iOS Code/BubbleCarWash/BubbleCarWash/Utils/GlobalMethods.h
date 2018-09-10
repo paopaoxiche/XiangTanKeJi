@@ -7,13 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-/// 位置结构体
-struct Location {
-    CGFloat lng;
-    CGFloat lat;
-};
-typedef struct CG_BOXABLE Location Location;
+#import "DataType.h"
 
 @interface GlobalMethods : NSObject
 

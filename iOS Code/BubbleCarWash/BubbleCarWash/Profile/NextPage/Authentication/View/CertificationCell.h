@@ -14,6 +14,18 @@ typedef NS_ENUM(NSInteger, CertificationCellType) {
     CertificationCellTypeDone          // 认证完成
 };
 
+@class CertificationCarTypeCell;
+@class CertificationInfoCell;
+
+@protocol CertificationCellDelegate <NSObject>
+
+@optional
+
+- (void)onSelectedBtnClicked:(CertificationCarTypeCell *)cell;
+- (void)onUploadViewClicked:(CertificationInfoCell *)cell;
+
+@end
+
 @interface CertificationTitleCell : UITableViewCell
 
 @property (nonatomic, copy) NSString *title;
@@ -22,6 +34,7 @@ typedef NS_ENUM(NSInteger, CertificationCellType) {
 
 @interface CertificationCarTypeCell : UITableViewCell
 
+@property (nonatomic, weak) id<CertificationCellDelegate> delegate;
 @property (nonatomic, copy) NSString *carImgName;
 @property (nonatomic, copy) NSString *carDesc;
 @property (nonatomic, copy) NSString *selectImgName;
@@ -29,6 +42,10 @@ typedef NS_ENUM(NSInteger, CertificationCellType) {
 @end
 
 @interface CertificationInfoCell : UITableViewCell
+
+@property (nonatomic, weak) id<CertificationCellDelegate> delegate;
+@property (nonatomic, strong) UIImage *cerDetailImage;
+@property (nonatomic, strong) UIImage *cerImage;
 
 - (void)setCerDesc:(NSString *)desc cerImgName:(NSString *)name cerType:(CertificationCellType)type;
 

@@ -7,18 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DataType.h"
 
-typedef void(^ResultBlock)(NSArray *result);
+typedef void(^HomeResultBlock)(NSArray *result);
 
 @interface HomeDataModel : NSObject
 
-+ (void)loadNearbyWashList:(ResultBlock)result;
-+ (void)loadRecommendWashCommodity:(ResultBlock)result;
++ (void)loadNearbyWashList:(Location)location isMap:(BOOL)isMap result:(HomeResultBlock)result;
++ (void)loadRecommendWashCommodity:(HomeResultBlock)result;
 
 @end
 
 @interface NearbyWashListModel : NSObject
 
+/// 洗车场地址
+@property (nonatomic, copy) NSString *address;
 /// 洗车场头像地址
 @property (nonatomic, copy) NSString *avatarUrl;
 /// 洗车场名称
@@ -32,7 +35,11 @@ typedef void(^ResultBlock)(NSArray *result);
 /// 接洗次数
 @property (nonatomic, assign) NSInteger washCount;
 /// 与洗车场间距离
-@property (nonatomic, assign) NSInteger distance;
+@property (nonatomic, assign) NSUInteger distance;
+/// 洗车场位置
+@property (nonatomic, assign) Location location;
+/// 洗车场id
+@property (nonatomic, assign) NSInteger washID;
 
 - (instancetype)initWithDic:(NSDictionary *)dic;
 

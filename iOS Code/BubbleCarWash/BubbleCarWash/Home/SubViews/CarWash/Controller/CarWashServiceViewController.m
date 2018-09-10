@@ -1,0 +1,130 @@
+//
+//  CarWashServiceViewController.m
+//  BubbleCarWash
+//
+//  Created by paomoliu on 2018/9/9.
+//  Copyright © 2018年 Sunshine Girl. All rights reserved.
+//
+
+#import "CarWashServiceViewController.h"
+#import "CarWashServiceModel.h"
+#import "AuthenticationModel.h"
+#import "HomeModel.h"
+#import "CarWashServiceCell.h"
+#import "CommodityCell.h"
+#import "CertificationCell.h"
+
+@interface CarWashServiceViewController ()
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) NSMutableArray *dataSource;
+
+@end
+
+@implementation CarWashServiceViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    _dataSource = [[NSMutableArray alloc] initWithCapacity:0];
+    [_tableView registerNib:[UINib nibWithNibName:@"CertificationCell" bundle:[NSBundle mainBundle]]
+     forCellReuseIdentifier:@"CarTypeIdentifier"];
+}
+
+- (void)setWashID:(NSInteger)washID {
+    _washID = washID;
+    [CarWashServiceModel loadCarWashServiceData:washID result:^(NSArray *result) {
+        NSArray *modelCertificationList = [[NSArray alloc] init];
+        modelCertificationList = result[1][@"ModelCertificationList"];
+        if (modelCertificationList.count <= 0) {
+            [self messageBox:@"请先进行车型认证再进行下单" handle:^{
+                [self.navigationController popViewControllerAnimated:YES];
+            }];
+            return;
+        }
+        
+        NSArray *serviceList = [[NSArray alloc] init];
+        serviceList = result[0][@"ServiceList"];
+        if (serviceList.count <= 0) {
+            [self messageBox:@"该洗车场无洗车服务" handle:^{
+                [self.navigationController popViewControllerAnimated:YES];
+            }];
+            return;
+        }
+        
+        [self.dataSource addObject:serviceList];
+        [self.dataSource addObject:modelCertificationList];
+        
+        NSArray *commodityList = [[NSArray alloc] init];
+        commodityList = result[2][@"CommodityList"];
+        if (commodityList.count > 0) {
+            [self.dataSource addObject:commodityList];
+        }
+        [self.tableView reloadData];
+    }];
+}
+
+#pragma mark - UITableViewDatasource
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return _dataSource.count;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    NSArray *list = _dataSource[section];
+    return list.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSArray *list = _dataSource[indexPath.section];
+    if (indexPath.section == 0) {
+        ServiceModel *model =  list[indexPath.row];
+        CarWashServiceCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CarWashServiceIdentifier" forIndexPath:indexPath];
+
+        cell.name = model.carWashName;
+        cell.desc = model.desc;
+        cell.couponPrice = model.price;
+        cell.hasCoupon = NO;
+        
+        return cell;
+    } else if (indexPath.section == 1) {
+        ModelCertificationModel *model = list[indexPath.row];
+        CertificationCarTypeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CarTypeIdentifier" forIndexPath:indexPath];
+        cell.carImgName = model.imageName;
+        cell.carDesc = [NSString stringWithFormat:@"%@(%@)", model.model, model.desc];
+        cell.selectImgName = @"SingleSelection_Normal";
+
+        return cell;
+    } else {
+        RecommendCommodityModel *model = list[indexPath.row];
+        CommodityCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommodityIdentifier" forIndexPath:indexPath];
+        cell.avatarUrl = model.imageUrl;
+        cell.name = model.commodityName;
+        cell.price = model.currentPrice;
+
+        return cell;
+    }
+}
+
+#pragma mark - UITableViewDelegate
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0) {
+        return 78;
+    }
+    
+    if (indexPath.section == 1) {
+        return 44;
+    }
+    
+    return 75;
+}
+
+//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+//    return 10;
+//}
+//
+//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+//    return 0.001;
+//}
+
+@end

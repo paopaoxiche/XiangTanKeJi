@@ -126,6 +126,15 @@
                                     </userDefinedRuntimeAttributes>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="addressLabel" destination="OGK-4Y-Ap1" id="pwf-sv-xSY"/>
+                                    <outlet property="avatarImageView" destination="1Bm-E5-OeO" id="u04-td-uPO"/>
+                                    <outlet property="carWashDetailView" destination="ef3-11-ieW" id="Wuz-3e-ijK"/>
+                                    <outlet property="carWashTitleView" destination="Lcf-bw-vqe" id="9Sn-c7-b7P"/>
+                                    <outlet property="distanceLabel" destination="fBY-Sk-TbD" id="m9g-Qg-ERp"/>
+                                    <outlet property="nameLabel" destination="jnI-Ro-jjB" id="P7N-yn-4Ua"/>
+                                    <outlet property="priceLabel" destination="3mL-Yp-kcV" id="30T-c9-ZZR"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
