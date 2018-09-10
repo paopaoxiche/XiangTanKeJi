@@ -31,8 +31,10 @@ import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.xtkj.paopaoxiche.R;
 import com.xtkj.paopaoxiche.application.AppConstant;
 import com.xtkj.paopaoxiche.application.Authentication;
+import com.xtkj.paopaoxiche.application.BaseApplication;
 import com.xtkj.paopaoxiche.base.BaseActivity;
 import com.xtkj.paopaoxiche.bean.CreateConsumeBean;
+import com.xtkj.paopaoxiche.bean.MyCouponListBean;
 import com.xtkj.paopaoxiche.bean.PostWashServiceBean;
 import com.xtkj.paopaoxiche.bean.SellingServicesBean;
 import com.xtkj.paopaoxiche.bean.WashCommodityBean;
@@ -41,6 +43,7 @@ import com.xtkj.paopaoxiche.http.ApiField;
 import com.xtkj.paopaoxiche.http.RetrofitClient;
 import com.xtkj.paopaoxiche.presenter.WashServicePresenterImpl;
 import com.xtkj.paopaoxiche.service.CarOwnerService;
+import com.xtkj.paopaoxiche.service.UserService;
 import com.xtkj.paopaoxiche.service.WashService;
 
 import java.util.ArrayList;
@@ -75,6 +78,7 @@ public class WashServiceActivity extends BaseActivity implements IWashServiceCon
 
 
     private IWXAPI api;
+    private List<MyCouponListBean.DataBean> couponList = new ArrayList<>();
 
     IWashServiceContract.IWashServicePresenter presenter;
     int washId;
@@ -120,6 +124,16 @@ public class WashServiceActivity extends BaseActivity implements IWashServiceCon
                 for (int j = 0; j < count; j++) {
                     if (index == j) {
                         postWashServiceBean.setWashServiceId(d.getId());
+                        double max = 0;
+                        for (MyCouponListBean.DataBean dataBean : couponList) {
+                            if (Double.valueOf(d.getPrice()) > Double.valueOf(dataBean.getPrice()) && Double.valueOf(dataBean.getPrice()) > max) {
+                                max = Double.valueOf(dataBean.getPrice());
+                                postWashServiceBean.setCouponId(dataBean.getId());
+                            }
+                        }
+                        if (max > 0) {
+                            price.setText(String.format("￥%s - ￥%s", d.getPrice(), String.valueOf(max)));
+                        }
                         continue;
                     }
                     RadioButton r = serviceItems.getChildAt(j).findViewById(R.id.radio);
@@ -182,6 +196,7 @@ public class WashServiceActivity extends BaseActivity implements IWashServiceCon
     @Override
     protected void initValues() {
 
+        getMyCoupons();
         api = WXAPIFactory.createWXAPI(this, Constants.APP_ID, true);
         api.registerApp(Constants.APP_ID);
         api.handleIntent(getIntent(), this);
@@ -254,7 +269,7 @@ public class WashServiceActivity extends BaseActivity implements IWashServiceCon
                     public void onResponse(Call<CreateConsumeBean> call, Response<CreateConsumeBean> response) {
 
                         if (response.body() == null || response.body().getCode() != 200) {
-                            Toast.makeText(getActivityContext(), "调起支付失败, 请重新登录", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getActivityContext(), "调起支付失败, 请检查选项", Toast.LENGTH_LONG).show();
                             return;
                         }
 
@@ -320,5 +335,32 @@ public class WashServiceActivity extends BaseActivity implements IWashServiceCon
                 postWashServiceBean.setPayType(2);
                 break;
         }
+    }
+
+    private void getMyCoupons() {
+        RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
+                .create(UserService.class)
+                .getMyCoupon()
+                .enqueue(new Callback<MyCouponListBean>() {
+                    @Override
+                    public void onResponse(Call<MyCouponListBean> call, Response<MyCouponListBean> response) {
+                        MyCouponListBean bean = response.body();
+                        if (bean.getCode() != 200) {
+                            Toast.makeText(BaseApplication.getContext(),
+                                    "获取个人优惠劵数据失败！", Toast.LENGTH_LONG).show();
+                            return;
+                        }
+
+                        List<MyCouponListBean.DataBean> dataBeans = bean.getData();
+                        if (dataBeans != null) {
+                            couponList.addAll(dataBeans);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<MyCouponListBean> call, Throwable t) {
+
+                    }
+                });
     }
 }
