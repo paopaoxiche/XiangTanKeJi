@@ -91,6 +91,7 @@
 		65FC33FF20E1357A006DE3F1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 65FC33FE20E1357A006DE3F1 /* main.m */; };
 		65FC341A20E13B74006DE3F1 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65FC341920E13B74006DE3F1 /* MainViewController.m */; };
 		65FC341C20E13B83006DE3F1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65FC341B20E13B83006DE3F1 /* Main.storyboard */; };
+		CC041A1121464CA600804FAD /* CertificationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC041A1021464CA500804FAD /* CertificationCell.xib */; };
 		CC5BF768213658900037DF66 /* NSObject+DictionaryFromModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC5BF767213658900037DF66 /* NSObject+DictionaryFromModel.m */; };
 		CCA16520213E413E001626C6 /* CustomerServicerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA1651F213E413E001626C6 /* CustomerServicerViewController.m */; };
 		CCA16526213E41B9001626C6 /* UpgradeReminderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA16525213E41B9001626C6 /* UpgradeReminderViewController.m */; };
@@ -257,6 +258,7 @@
 		65FC341920E13B74006DE3F1 /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		65FC341B20E13B83006DE3F1 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		6922DD9F059ECB8EEB30484D /* Pods-BubbleCarWash.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BubbleCarWash.release.xcconfig"; path = "Pods/Target Support Files/Pods-BubbleCarWash/Pods-BubbleCarWash.release.xcconfig"; sourceTree = "<group>"; };
+		CC041A1021464CA500804FAD /* CertificationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CertificationCell.xib; sourceTree = "<group>"; };
 		CC5BF766213658900037DF66 /* NSObject+DictionaryFromModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+DictionaryFromModel.h"; sourceTree = "<group>"; };
 		CC5BF767213658900037DF66 /* NSObject+DictionaryFromModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+DictionaryFromModel.m"; sourceTree = "<group>"; };
 		CCA1651E213E413E001626C6 /* CustomerServicerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomerServicerViewController.h; sourceTree = "<group>"; };
@@ -626,6 +628,7 @@
 				65C5B06D2135AA8100727122 /* ModelCertificationCell.m */,
 				65C5B06C2135AA8100727122 /* CertificationCell.h */,
 				65C5B06E2135AA8100727122 /* CertificationCell.m */,
+				CC041A1021464CA500804FAD /* CertificationCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1002,6 +1005,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				65C5AFC82135A45100727122 /* Profile.json in Resources */,
+				CC041A1121464CA600804FAD /* CertificationCell.xib in Resources */,
 				65C5B0982135AA8100727122 /* WashManagerCell.xib in Resources */,
 				65C5B0E42135AFC900727122 /* Home.storyboard in Resources */,
 				65C5B0752135AA8100727122 /* PersonalInfo.storyboard in Resources */,

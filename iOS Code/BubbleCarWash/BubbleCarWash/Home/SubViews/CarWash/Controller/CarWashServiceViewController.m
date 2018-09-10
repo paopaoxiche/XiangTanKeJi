@@ -26,6 +26,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _dataSource = [[NSMutableArray alloc] initWithCapacity:0];
+    [_tableView registerNib:[UINib nibWithNibName:@"CertificationCell" bundle:[NSBundle mainBundle]]
+     forCellReuseIdentifier:@"CarTypeIdentifier"];
 }
 
 - (void)setWashID:(NSInteger)washID {
@@ -57,6 +59,7 @@
         if (commodityList.count > 0) {
             [self.dataSource addObject:commodityList];
         }
+        [self.tableView reloadData];
     }];
 }
 
@@ -75,7 +78,7 @@
     NSArray *list = _dataSource[indexPath.section];
     if (indexPath.section == 0) {
         ServiceModel *model =  list[indexPath.row];
-        CarWashServiceCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommentCell"];
+        CarWashServiceCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CarWashServiceIdentifier" forIndexPath:indexPath];
 
         cell.name = model.carWashName;
         cell.desc = model.desc;
@@ -85,20 +88,43 @@
         return cell;
     } else if (indexPath.section == 1) {
         ModelCertificationModel *model = list[indexPath.row];
-        CertificationCarTypeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommentCell"];
+        CertificationCarTypeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CarTypeIdentifier" forIndexPath:indexPath];
         cell.carImgName = model.imageName;
         cell.carDesc = [NSString stringWithFormat:@"%@(%@)", model.model, model.desc];
-        
+        cell.selectImgName = @"SingleSelection_Normal";
+
         return cell;
     } else {
         RecommendCommodityModel *model = list[indexPath.row];
-        CommodityCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommentCell"];
+        CommodityCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommodityIdentifier" forIndexPath:indexPath];
         cell.avatarUrl = model.imageUrl;
         cell.name = model.commodityName;
         cell.price = model.currentPrice;
-        
+
         return cell;
     }
 }
+
+#pragma mark - UITableViewDelegate
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0) {
+        return 78;
+    }
+    
+    if (indexPath.section == 1) {
+        return 44;
+    }
+    
+    return 75;
+}
+
+//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+//    return 10;
+//}
+//
+//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+//    return 0.001;
+//}
 
 @end

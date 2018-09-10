@@ -155,7 +155,7 @@ static const NSTimeInterval kTimeOutInterval = 6.0f;
 
 - (void)obtainCarWashServiceList:(NSInteger)washID success:(SuccessBlock)success failed:(FailedBlock)failed {
     NSDictionary *params = @{@"washId": [NSNumber numberWithInteger:washID],
-                             @"pageIndex": [NSNumber numberWithInteger:1],
+                             @"pageIndex": [NSNumber numberWithInteger:0],
                              @"pageSize": [NSNumber numberWithInteger:20]};
     NSString *url = @"wash/getServiceList";
     [self GET:url parameters:params success:success failure:failed];
@@ -163,7 +163,7 @@ static const NSTimeInterval kTimeOutInterval = 6.0f;
 
 - (void)obtainCarWashCommodityList:(NSInteger)washID success:(SuccessBlock)success failed:(FailedBlock)failed {
     NSDictionary *params = @{@"washId": [NSNumber numberWithInteger:washID],
-                             @"pageIndex": [NSNumber numberWithInteger:1],
+                             @"pageIndex": [NSNumber numberWithInteger:0],
                              @"pageSize": [NSNumber numberWithInteger:20]};
     NSString *url = @"wash/getCommodityList";
     [self GET:url parameters:params success:success failure:failed];

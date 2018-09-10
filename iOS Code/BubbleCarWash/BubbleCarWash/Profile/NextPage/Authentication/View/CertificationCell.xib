@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CarTypeIdentifier" id="moP-Ws-KCC" customClass="CertificationCarTypeCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="moP-Ws-KCC" id="GX8-xV-SyJ">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LargeCar_New" translatesAutoresizingMaskIntoConstraints="NO" id="Ip5-mg-S0u">
+                        <rect key="frame" x="22" y="16.5" width="28" height="12"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="大型车（九座以上）" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7CI-9C-aSy">
+                        <rect key="frame" x="62" y="12" width="147" height="20"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ErQ-ZE-wEB">
+                        <rect key="frame" x="18" y="0.0" width="44" height="44"/>
+                        <state key="normal" image="SingleSelection_Selected"/>
+                        <connections>
+                            <action selector="onSelectBtnClicked:" destination="moP-Ws-KCC" eventType="touchUpInside" id="CU5-tF-KIp"/>
+                        </connections>
+                    </button>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Ma-hK-ZkA" userLabel="Line">
+                        <rect key="frame" x="72" y="0.0" width="303" height="1"/>
+                        <color key="backgroundColor" red="0.93658203120000005" green="0.93658203120000005" blue="0.93658203120000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="Akf-er-ueZ"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="7Ma-hK-ZkA" secondAttribute="trailing" id="0Hb-Gs-Kmh"/>
+                    <constraint firstItem="7Ma-hK-ZkA" firstAttribute="top" secondItem="GX8-xV-SyJ" secondAttribute="top" id="2WO-64-GOR"/>
+                    <constraint firstItem="Ip5-mg-S0u" firstAttribute="leading" secondItem="GX8-xV-SyJ" secondAttribute="leading" constant="22" id="JXT-A0-gct"/>
+                    <constraint firstItem="7CI-9C-aSy" firstAttribute="centerY" secondItem="Ip5-mg-S0u" secondAttribute="centerY" id="Jg0-1h-F14"/>
+                    <constraint firstItem="ErQ-ZE-wEB" firstAttribute="leading" secondItem="GX8-xV-SyJ" secondAttribute="leading" constant="18" id="Qnm-uZ-83q"/>
+                    <constraint firstItem="7Ma-hK-ZkA" firstAttribute="leading" secondItem="GX8-xV-SyJ" secondAttribute="leading" constant="72" id="igv-l7-RjT"/>
+                    <constraint firstItem="7CI-9C-aSy" firstAttribute="leading" secondItem="Ip5-mg-S0u" secondAttribute="trailing" constant="12" id="p2c-LJ-k37"/>
+                    <constraint firstItem="Ip5-mg-S0u" firstAttribute="centerY" secondItem="ErQ-ZE-wEB" secondAttribute="centerY" id="rW9-MK-Fub"/>
+                    <constraint firstItem="ErQ-ZE-wEB" firstAttribute="centerY" secondItem="GX8-xV-SyJ" secondAttribute="centerY" id="sty-PU-x42"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="carDescLabel" destination="7CI-9C-aSy" id="CBJ-BR-Uyp"/>
+                <outlet property="carImgView" destination="Ip5-mg-S0u" id="0cb-We-CbQ"/>
+                <outlet property="carImgViewConstraint" destination="JXT-A0-gct" id="Y5F-CX-8Qi"/>
+                <outlet property="selectBtn" destination="ErQ-ZE-wEB" id="p0u-SF-cHh"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="LargeCar_New" width="28" height="12"/>
+        <image name="SingleSelection_Selected" width="44" height="44"/>
+    </resources>
+</document>
