@@ -31,7 +31,8 @@
 - (void)setWashID:(NSInteger)washID {
     _washID = washID;
     [CarWashServiceModel loadCarWashServiceData:washID result:^(NSArray *result) {
-        NSArray *modelCertificationList = result[0][@"ModelCertificationList"];
+        NSArray *modelCertificationList = [[NSArray alloc] init];
+        modelCertificationList = result[1][@"ModelCertificationList"];
         if (modelCertificationList.count <= 0) {
             [self messageBox:@"请先进行车型认证再进行下单" handle:^{
                 [self.navigationController popViewControllerAnimated:YES];
@@ -39,7 +40,8 @@
             return;
         }
         
-        NSArray *serviceList = result[0][@"ServiceList"];
+        NSArray *serviceList = [[NSArray alloc] init];
+        serviceList = result[0][@"ServiceList"];
         if (serviceList.count <= 0) {
             [self messageBox:@"该洗车场无洗车服务" handle:^{
                 [self.navigationController popViewControllerAnimated:YES];
@@ -50,7 +52,8 @@
         [self.dataSource addObject:serviceList];
         [self.dataSource addObject:modelCertificationList];
         
-        NSArray *commodityList = result[2][@"CommodityList"];
+        NSArray *commodityList = [[NSArray alloc] init];
+        commodityList = result[2][@"CommodityList"];
         if (commodityList.count > 0) {
             [self.dataSource addObject:commodityList];
         }

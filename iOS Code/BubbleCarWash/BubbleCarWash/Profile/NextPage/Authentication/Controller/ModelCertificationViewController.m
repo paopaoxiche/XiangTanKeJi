@@ -28,7 +28,7 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"BackArrowBlack"] style:UIBarButtonItemStylePlain target:self action:@selector(backToSuperVC)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(pushToNewCarModelVC)];
     
-    [AuthenticationModel loadModelCertificationList:0 result:^(NSArray *result) {
+    [AuthenticationModel loadModelCertificationList:-1 result:^(NSArray *result) {
         self.modelCertificationList = result;
         [self.tableView reloadData];
     }];
