@@ -11,11 +11,15 @@
 @implementation UIColor (Category)
 
 + (UIColor *)rgbByHexStr:(NSString *)hexStr {
+    return [self rgbByHexStr:hexStr alpha:1.0];
+}
+
++ (UIColor *)rgbByHexStr:(NSString *)hexStr alpha:(CGFloat)alpha {
     unsigned long red = strtoul([[hexStr substringWithRange:NSMakeRange(0, 2)] UTF8String], 0, 16);
     unsigned long green = strtoul([[hexStr substringWithRange:NSMakeRange(2, 2)] UTF8String], 0, 16);
     unsigned long blue = strtoul([[hexStr substringWithRange:NSMakeRange(4, 2)] UTF8String], 0, 16);
     
-    return [self rgbWithRed:red green:green blue:blue];
+    return [self rgbWithRed:red green:green blue:blue alpha:alpha];
 }
 
 + (UIColor *)rgbWithRed:(CGFloat)r green:(CGFloat)g blue:(CGFloat)b {

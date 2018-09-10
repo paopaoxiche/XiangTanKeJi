@@ -38,6 +38,7 @@ typedef NS_ENUM(NSInteger, CertificationCellType) {
 @property (nonatomic, copy) NSString *carImgName;
 @property (nonatomic, copy) NSString *carDesc;
 @property (nonatomic, copy) NSString *selectImgName;
+@property (nonatomic, assign) CGFloat btnLeadingConstraint;
 
 @end
 

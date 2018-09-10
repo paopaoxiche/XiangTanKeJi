@@ -11,6 +11,7 @@
 @interface UIColor (Category)
 
 + (UIColor *)rgbByHexStr:(NSString *)hexStr;
++ (UIColor *)rgbByHexStr:(NSString *)hexStr alpha:(CGFloat)alpha;
 + (UIColor *)rgbWithRed:(CGFloat)r green:(CGFloat)g blue:(CGFloat)b;
 + (UIColor *)rgbWithRed:(CGFloat)r green:(CGFloat)g blue:(CGFloat)b alpha:(CGFloat)alpha;
 

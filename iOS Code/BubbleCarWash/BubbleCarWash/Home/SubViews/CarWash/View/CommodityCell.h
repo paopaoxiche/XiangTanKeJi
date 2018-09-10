@@ -8,10 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
+@class CommodityCell;
+
+@protocol CommodityCellDelegate <NSObject>
+
+- (void)selectedCommodityCell:(CommodityCell *)cell;
+
+@end
+
 @interface CommodityCell : UITableViewCell
 
+@property (nonatomic, weak) id<CommodityCellDelegate> delegate;
 @property (nonatomic, copy) NSString *avatarUrl;
 @property (nonatomic, copy) NSString *name;
+@property (nonatomic, copy) NSString *selectBtnImageName;
 @property (nonatomic, assign) CGFloat price;
 
 @end

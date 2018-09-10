@@ -9,6 +9,7 @@
 #import "WeatherViewController.h"
 #import "WeatherInfoCell.h"
 #import "UIColor+Category.h"
+#import "GlobalMethods.h"
 
 @interface WeatherViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -34,7 +35,10 @@
     UITapGestureRecognizer *singleGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backToSuperView)];
     [_backView addGestureRecognizer:singleGesture];
     
-    [self setGradientColor];
+    [GlobalMethods setGradientColor:@[(id)[UIColor rgbByHexStr:@"5b779c"].CGColor, (id)[UIColor rgbByHexStr:@"cbbd9d"].CGColor]
+                         startPoint:CGPointMake(0, 0)
+                           endPoint:CGPointMake(0, 1)
+                               view:self.view];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -45,18 +49,6 @@
 
 - (void)backToSuperView {
     [self dismissViewControllerAnimated:NO completion:nil];
-}
-
-/**
- *  设置渐变背景
- */
-- (void)setGradientColor {
-    CAGradientLayer *layer = [CAGradientLayer layer];
-    layer.startPoint = CGPointMake(0, 0);   // (0,0)代表左上角，(0,1)代表左下角
-    layer.endPoint = CGPointMake(0, 1);     // (0,0)(0,1)结合起来就是竖直方向渐变
-    layer.colors = @[(id)[UIColor rgbByHexStr:@"5b779c"].CGColor, (id)[UIColor rgbByHexStr:@"cbbd9d"].CGColor];
-    layer.frame = self.view.layer.bounds;
-    [self.view.layer insertSublayer:layer atIndex:0];
 }
 
 #pragma mark - UITableViewDatasource

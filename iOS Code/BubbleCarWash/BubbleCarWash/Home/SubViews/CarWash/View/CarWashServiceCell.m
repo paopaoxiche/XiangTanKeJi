@@ -26,6 +26,12 @@
     [super awakeFromNib];
 }
 
+- (IBAction)onSelectBtnClicked:(id)sender {
+    if (_delegate) {
+        [_delegate selectedServiceCell:self];
+    }
+}
+
 - (void)setName:(NSString *)name {
     _name = name;
     _serviceNameLabel.text = name;
@@ -34,6 +40,11 @@
 - (void)setDesc:(NSString *)desc {
     _desc = desc;
     _serviceDescLabel.text = desc;
+}
+
+- (void)setSelectBtnImageName:(NSString *)selectBtnImageName {
+    _selectBtnImageName = selectBtnImageName;
+    [_selectedBtn setImage:[UIImage imageNamed:selectBtnImageName] forState:UIControlStateNormal];
 }
 
 - (void)setOriginalPrice:(CGFloat)originalPrice {

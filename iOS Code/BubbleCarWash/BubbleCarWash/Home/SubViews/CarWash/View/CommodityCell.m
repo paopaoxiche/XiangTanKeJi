@@ -24,6 +24,12 @@
     [super awakeFromNib];
 }
 
+- (IBAction)onSelectBtnClicked:(id)sender {
+    if (_delegate) {
+        [_delegate selectedCommodityCell:self];
+    }
+}
+
 - (void)setAvatarUrl:(NSString *)avatarUrl {
     _avatarUrl = avatarUrl;
     [_avatarImageView sd_setImageWithURL:[NSURL URLWithString:avatarUrl]];
@@ -32,6 +38,11 @@
 - (void)setName:(NSString *)name {
     _name = name;
     _nameLabel.text = name;
+}
+
+- (void)setSelectBtnImageName:(NSString *)selectBtnImageName {
+    _selectBtnImageName = selectBtnImageName;
+    [_selectedBtn setImage:[UIImage imageNamed:selectBtnImageName] forState:UIControlStateNormal];
 }
 
 - (void)setPrice:(CGFloat)price {

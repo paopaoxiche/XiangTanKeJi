@@ -75,6 +75,10 @@
 		65C5B10E2135B0F800727122 /* CarWashListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5B0FD2135B0F800727122 /* CarWashListCell.m */; };
 		65C5B10F2135B0F800727122 /* WeatherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5B1022135B0F800727122 /* WeatherViewController.m */; };
 		65C5B1102135B0F800727122 /* WeatherInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5B1052135B0F800727122 /* WeatherInfoCell.m */; };
+		65D8D49C2146CF5800934589 /* PaymentSuccessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D8D4972146CF5800934589 /* PaymentSuccessViewController.m */; };
+		65D8D49D2146CF5800934589 /* Payment.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65D8D49A2146CF5800934589 /* Payment.storyboard */; };
+		65D8D49E2146CF5800934589 /* PaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D8D49B2146CF5800934589 /* PaymentViewController.m */; };
+		65D8D4A12146CF7D00934589 /* PaymentTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D8D4A02146CF7D00934589 /* PaymentTypeCell.m */; };
 		65EA90EF212B19C90095F72B /* LYKeyChainStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EA90EE212B19C90095F72B /* LYKeyChainStore.m */; };
 		65EFB57B2143A9D9009289E4 /* AuthenticationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EFB57A2143A9D9009289E4 /* AuthenticationModel.m */; };
 		65FA514A2144FAD500F9D08C /* SeeLargePictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65FA51492144FAD500F9D08C /* SeeLargePictureViewController.m */; };
@@ -227,6 +231,13 @@
 		65C5B1022135B0F800727122 /* WeatherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherViewController.m; sourceTree = "<group>"; };
 		65C5B1042135B0F800727122 /* WeatherInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherInfoCell.h; sourceTree = "<group>"; };
 		65C5B1052135B0F800727122 /* WeatherInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherInfoCell.m; sourceTree = "<group>"; };
+		65D8D4972146CF5800934589 /* PaymentSuccessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentSuccessViewController.m; sourceTree = "<group>"; };
+		65D8D4982146CF5800934589 /* PaymentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentViewController.h; sourceTree = "<group>"; };
+		65D8D4992146CF5800934589 /* PaymentSuccessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentSuccessViewController.h; sourceTree = "<group>"; };
+		65D8D49A2146CF5800934589 /* Payment.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Payment.storyboard; sourceTree = "<group>"; };
+		65D8D49B2146CF5800934589 /* PaymentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentViewController.m; sourceTree = "<group>"; };
+		65D8D49F2146CF7D00934589 /* PaymentTypeCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PaymentTypeCell.h; sourceTree = "<group>"; };
+		65D8D4A02146CF7D00934589 /* PaymentTypeCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PaymentTypeCell.m; sourceTree = "<group>"; };
 		65EA90ED212B19C90095F72B /* LYKeyChainStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LYKeyChainStore.h; sourceTree = "<group>"; };
 		65EA90EE212B19C90095F72B /* LYKeyChainStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LYKeyChainStore.m; sourceTree = "<group>"; };
 		65EFB5792143A9D9009289E4 /* AuthenticationModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AuthenticationModel.h; sourceTree = "<group>"; };
@@ -695,6 +706,7 @@
 		65C5B0E72135B0F800727122 /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
+				65D8D48B2146C4C800934589 /* Payment */,
 				65C5B0E82135B0F800727122 /* CarWash */,
 				65C5B0F32135B0F800727122 /* Map */,
 				65C5B0FF2135B0F800727122 /* Weather */,
@@ -801,6 +813,44 @@
 				65C5B1052135B0F800727122 /* WeatherInfoCell.m */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		65D8D48B2146C4C800934589 /* Payment */ = {
+			isa = PBXGroup;
+			children = (
+				65D8D4962146CF5800934589 /* Contoller */,
+				65D8D4942146CF5700934589 /* Model */,
+				65D8D4952146CF5700934589 /* View */,
+			);
+			path = Payment;
+			sourceTree = "<group>";
+		};
+		65D8D4942146CF5700934589 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		65D8D4952146CF5700934589 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				65D8D49F2146CF7D00934589 /* PaymentTypeCell.h */,
+				65D8D4A02146CF7D00934589 /* PaymentTypeCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		65D8D4962146CF5800934589 /* Contoller */ = {
+			isa = PBXGroup;
+			children = (
+				65D8D49A2146CF5800934589 /* Payment.storyboard */,
+				65D8D4982146CF5800934589 /* PaymentViewController.h */,
+				65D8D49B2146CF5800934589 /* PaymentViewController.m */,
+				65D8D4992146CF5800934589 /* PaymentSuccessViewController.h */,
+				65D8D4972146CF5800934589 /* PaymentSuccessViewController.m */,
+			);
+			path = Contoller;
 			sourceTree = "<group>";
 		};
 		65EFB5782143A9AA009289E4 /* Mode */ = {
@@ -1011,6 +1061,7 @@
 				65C5B0752135AA8100727122 /* PersonalInfo.storyboard in Resources */,
 				65C5AF592135A32900727122 /* Login.storyboard in Resources */,
 				65FC341C20E13B83006DE3F1 /* Main.storyboard in Resources */,
+				65D8D49D2146CF5800934589 /* Payment.storyboard in Resources */,
 				65FC33FC20E1357A006DE3F1 /* LaunchScreen.storyboard in Resources */,
 				65FC33F920E1357A006DE3F1 /* Assets.xcassets in Resources */,
 				65FA515921454B6900F9D08C /* CarWash.storyboard in Resources */,
@@ -1080,12 +1131,14 @@
 				65C5B10B2135B0F800727122 /* MapViewController.m in Sources */,
 				65FA514D2145009200F9D08C /* BaseTableViewController.m in Sources */,
 				65C5B0E62135AFC900727122 /* HomeModel.m in Sources */,
+				65D8D4A12146CF7D00934589 /* PaymentTypeCell.m in Sources */,
 				65C5B0B92135AA8200727122 /* ModelCertificationCell.m in Sources */,
 				CCA1652F213E48BB001626C6 /* UILabel+CreateLabel.m in Sources */,
 				65C5B07A2135AA8100727122 /* PersonalInfoCell.m in Sources */,
 				65C5B0C02135AE6000727122 /* NSString+Category.m in Sources */,
 				CCA16520213E413E001626C6 /* CustomerServicerViewController.m in Sources */,
 				65FC341A20E13B74006DE3F1 /* MainViewController.m in Sources */,
+				65D8D49E2146CF5800934589 /* PaymentViewController.m in Sources */,
 				65C5B0A52135AA8100727122 /* CommentViewController.m in Sources */,
 				65C5B08C2135AA8100727122 /* WashServiceManagerViewController.m in Sources */,
 				65C5B0B72135AA8200727122 /* ModelCertificationViewController.m in Sources */,
@@ -1105,6 +1158,7 @@
 				657AA201213BA0B10086F98A /* WeatherModel.m in Sources */,
 				65C5B09F2135AA8100727122 /* IntegralConvertCell.m in Sources */,
 				65C5B0872135AA8100727122 /* IncomeListCell.m in Sources */,
+				65D8D49C2146CF5800934589 /* PaymentSuccessViewController.m in Sources */,
 				65C5B0712135AA8100727122 /* PersonalInfoViewController.m in Sources */,
 				65C5B10F2135B0F800727122 /* WeatherViewController.m in Sources */,
 				65C5B08A2135AA8100727122 /* CreateProductViewController.m in Sources */,

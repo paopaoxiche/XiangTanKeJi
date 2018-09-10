@@ -13,11 +13,20 @@
 #import "CarWashServiceCell.h"
 #import "CommodityCell.h"
 #import "CertificationCell.h"
+#import "GlobalMethods.h"
+#import "UIColor+Category.h"
 
-@interface CarWashServiceViewController ()
+@interface CarWashServiceViewController () <CarWashServiceCellDelegate, CommodityCellDelegate,
+    CertificationCellDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIView *bottomView;
+@property (weak, nonatomic) IBOutlet UIButton *payButton;
 @property (nonatomic, strong) NSMutableArray *dataSource;
+@property (nonatomic, strong) NSIndexPath *serviceSelectedIndexPath;
+@property (nonatomic, strong) NSIndexPath *commoditySelectedIndexPath;
+@property (nonatomic, strong) NSIndexPath *carTypeSelectedIndexPath;
+@property (nonatomic, assign) CGFloat totalAmount;
 
 @end
 
@@ -28,6 +37,17 @@
     _dataSource = [[NSMutableArray alloc] initWithCapacity:0];
     [_tableView registerNib:[UINib nibWithNibName:@"CertificationCell" bundle:[NSBundle mainBundle]]
      forCellReuseIdentifier:@"CarTypeIdentifier"];
+    
+    _serviceSelectedIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    _carTypeSelectedIndexPath = [NSIndexPath indexPathForRow:0 inSection:1];
+    _commoditySelectedIndexPath = nil;
+    _totalAmount = 0;
+    
+    NSArray *colors = @[(id)[UIColor rgbByHexStr:@"ffffff" alpha:0.0].CGColor, (id)[UIColor rgbByHexStr:@"ffffff" alpha:1.0].CGColor];
+    [GlobalMethods setTransparentGradientColor:colors
+                                    startPoint:CGPointMake(0, 0)
+                                      endPoint:CGPointMake(0, 1)
+                                          view:_bottomView];
 }
 
 - (void)setWashID:(NSInteger)washID {
@@ -59,8 +79,33 @@
         if (commodityList.count > 0) {
             [self.dataSource addObject:commodityList];
         }
+        
+        [self calculatePaymentAmount];
         [self.tableView reloadData];
     }];
+}
+
+- (IBAction)onPayButtonClicked:(id)sender {
+    // loading提示创建订单，去支付（美团），然后跳转到支付选择界面
+    
+}
+
+- (void)calculatePaymentAmount {
+    if (_dataSource.count < 2) {
+        return;
+    }
+    
+    NSArray *servicelist = _dataSource[0];
+    ServiceModel *model =  servicelist[_serviceSelectedIndexPath.row];
+    _totalAmount = model.price;
+    if (_dataSource.count > 2 && _commoditySelectedIndexPath) {
+        NSArray *commoditylist = _dataSource[2];
+        RecommendCommodityModel *model = commoditylist[_commoditySelectedIndexPath.row];
+        _totalAmount += model.currentPrice;
+    }
+    
+    [_payButton setTitle:[NSString stringWithFormat:@"支付 (¥%.2f)", _totalAmount]
+                forState:UIControlStateNormal];
 }
 
 #pragma mark - UITableViewDatasource
@@ -79,30 +124,104 @@
     if (indexPath.section == 0) {
         ServiceModel *model =  list[indexPath.row];
         CarWashServiceCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CarWashServiceIdentifier" forIndexPath:indexPath];
-
+        cell.delegate = self;
         cell.name = model.carWashName;
         cell.desc = model.desc;
         cell.couponPrice = model.price;
         cell.hasCoupon = NO;
+        cell.selectBtnImageName =  indexPath.row == 0 ? @"SingleSelection_Selected" : @"SingleSelection_Normal";
         
         return cell;
     } else if (indexPath.section == 1) {
         ModelCertificationModel *model = list[indexPath.row];
         CertificationCarTypeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CarTypeIdentifier" forIndexPath:indexPath];
+        cell.delegate = self;
         cell.carImgName = model.imageName;
         cell.carDesc = [NSString stringWithFormat:@"%@(%@)", model.model, model.desc];
-        cell.selectImgName = @"SingleSelection_Normal";
+        cell.selectImgName =  indexPath.row == 0 ? @"SingleSelection_Selected" : @"SingleSelection_Normal";
+        cell.btnLeadingConstraint = 0;
 
         return cell;
     } else {
         RecommendCommodityModel *model = list[indexPath.row];
         CommodityCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommodityIdentifier" forIndexPath:indexPath];
+        cell.delegate = self;
         cell.avatarUrl = model.imageUrl;
         cell.name = model.commodityName;
         cell.price = model.currentPrice;
+        cell.selectBtnImageName = @"SingleSelection_Normal";
 
         return cell;
     }
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ([cell respondsToSelector:@selector(tintColor)]) {
+        if (tableView == _tableView) {
+            CGFloat cornerRadius = 10.f;
+            cell.backgroundColor = UIColor.clearColor;
+            
+            CAShapeLayer *layer = [[CAShapeLayer alloc] init];
+            CGMutablePathRef pathRef = CGPathCreateMutable();
+            CGRect bounds = CGRectInset(cell.bounds, 0, 0);
+            
+            BOOL addLine = NO;
+            //只有一行
+            if ([tableView numberOfRowsInSection:indexPath.section] == 1) {
+                CGPathAddRoundedRect(pathRef, nil, bounds, cornerRadius, cornerRadius);
+            } else {
+                if (indexPath.row == 0) {
+                    // 初始起点为cell的左下角坐标
+                    CGPathMoveToPoint(pathRef, nil, CGRectGetMinX(bounds), CGRectGetMaxY(bounds));
+                    CGPathAddArcToPoint(pathRef, nil, CGRectGetMinX(bounds), CGRectGetMinY(bounds), CGRectGetMidX(bounds), CGRectGetMinY(bounds), cornerRadius);
+                    CGPathAddArcToPoint(pathRef, nil, CGRectGetMaxX(bounds), CGRectGetMinY(bounds), CGRectGetMaxX(bounds), CGRectGetMidY(bounds), cornerRadius);
+                    CGPathAddLineToPoint(pathRef, nil, CGRectGetMaxX(bounds), CGRectGetMaxY(bounds));
+                    addLine = YES;
+                } else if (indexPath.row == [tableView numberOfRowsInSection:indexPath.section] - 1) {
+                    CGPathMoveToPoint(pathRef, nil, CGRectGetMinX(bounds), CGRectGetMinY(bounds));
+                    CGPathAddArcToPoint(pathRef, nil, CGRectGetMinX(bounds), CGRectGetMaxY(bounds), CGRectGetMidX(bounds), CGRectGetMaxY(bounds), cornerRadius);
+                    CGPathAddArcToPoint(pathRef, nil, CGRectGetMaxX(bounds), CGRectGetMaxY(bounds), CGRectGetMaxX(bounds), CGRectGetMidY(bounds), cornerRadius);
+                    CGPathAddLineToPoint(pathRef, nil, CGRectGetMaxX(bounds), CGRectGetMinY(bounds));
+                } else {
+                    CGPathAddRect(pathRef, nil, bounds);
+                    addLine = YES;
+                }
+            }
+            
+            // 把已经绘制好的可变图像路径赋值给图层
+            layer.path = pathRef;
+            // 注意：但凡通过Quartz2D中带有creat/copy/retain方法创建出来的值都必须要释放
+            CFRelease(pathRef);
+            // 按照shape layer的path填充颜色，类似于渲染render
+            layer.fillColor = [UIColor colorWithWhite:1.f alpha:0.8f].CGColor;
+            
+            // 添加分隔线图层
+            if (addLine == YES) {
+                CALayer *lineLayer = [[CALayer alloc] init];
+                CGFloat lineHeight = 1;
+                lineLayer.frame = CGRectMake(12, bounds.size.height - lineHeight, bounds.size.width, lineHeight);
+                lineLayer.backgroundColor = [UIColor rgbWithRed:244 green:244 blue:244].CGColor;
+                [layer addSublayer:lineLayer];
+            }
+            
+            UIView *roundView = [[UIView alloc] initWithFrame:bounds];
+            [roundView.layer insertSublayer:layer atIndex:0];
+            roundView.backgroundColor = UIColor.clearColor;
+            cell.backgroundView = roundView;
+        }
+    }
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
+    UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 12, 200, 20)];
+    headerLabel.backgroundColor = [UIColor clearColor];
+    headerLabel.font = [UIFont systemFontOfSize:15];
+    headerLabel.textColor = [UIColor rgbWithRed:153 green:153 blue:153];
+    headerLabel.text = (section == 0 ? @"洗车服务" : (section == 1 ? @"选择你要洗的车型" : @"商品"));
+    [headerView addSubview:headerLabel];
+    
+    return headerView;
 }
 
 #pragma mark - UITableViewDelegate
@@ -119,12 +238,56 @@
     return 75;
 }
 
-//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-//    return 10;
-//}
-//
-//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-//    return 0.001;
-//}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 39.999999;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    if (section == _dataSource.count - 1) {
+        return 58;
+    }
+    
+    return 0.000001;
+}
+
+#pragma mark - CarWashServiceCellDelegate
+
+- (void)selectedServiceCell:(CarWashServiceCell *)cell {
+    cell.selectBtnImageName = @"SingleSelection_Selected";
+    
+    CarWashServiceCell *serviceCell = [self.tableView cellForRowAtIndexPath:_serviceSelectedIndexPath];
+    serviceCell.selectBtnImageName = @"SingleSelection_Normal";
+    
+    _serviceSelectedIndexPath = [self.tableView indexPathForCell:cell];
+    
+    [self calculatePaymentAmount];
+}
+
+#pragma mark - CommodityCellDelegate
+
+- (void)selectedCommodityCell:(CommodityCell *)cell {
+    cell.selectBtnImageName = @"SingleSelection_Selected";
+    
+    if (_commoditySelectedIndexPath) {
+        CommodityCell *commodityCell = [self.tableView cellForRowAtIndexPath:_commoditySelectedIndexPath];
+        commodityCell.selectBtnImageName = @"SingleSelection_Normal";
+        
+    }
+    
+    _commoditySelectedIndexPath = [self.tableView indexPathForCell:cell];
+    
+    [self calculatePaymentAmount];
+}
+
+#pragma mark - CertificationCellDelegate
+
+- (void)onSelectedBtnClicked:(CertificationCarTypeCell *)cell {
+    cell.selectImgName = @"SingleSelection_Selected";
+    
+    CertificationCarTypeCell *selectedCell = [self.tableView cellForRowAtIndexPath:_carTypeSelectedIndexPath];
+    selectedCell.selectImgName = @"SingleSelection_Normal";
+    
+    _carTypeSelectedIndexPath = [self.tableView indexPathForCell:cell];
+}
 
 @end

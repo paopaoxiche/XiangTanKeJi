@@ -59,6 +59,7 @@
                 <outlet property="carImgView" destination="Ip5-mg-S0u" id="0cb-We-CbQ"/>
                 <outlet property="carImgViewConstraint" destination="JXT-A0-gct" id="Y5F-CX-8Qi"/>
                 <outlet property="selectBtn" destination="ErQ-ZE-wEB" id="p0u-SF-cHh"/>
+                <outlet property="selectBtnLeadingConstraint" destination="Qnm-uZ-83q" id="KkF-vI-arT"/>
             </connections>
         </tableViewCell>
     </objects>

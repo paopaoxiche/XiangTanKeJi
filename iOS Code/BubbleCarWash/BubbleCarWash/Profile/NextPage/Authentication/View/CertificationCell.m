@@ -40,6 +40,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *carImgView;
 @property (weak, nonatomic) IBOutlet UILabel *carDescLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *carImgViewConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *selectBtnLeadingConstraint;
 
 @end
 
@@ -65,14 +66,15 @@
 }
 
 - (void)setSelectImgName:(NSString *)selectImgName {
-//    if ([selectImgName isEqualToString:@""]) {
-//        _selectBtn.hidden = YES;
-//        _carImgViewConstraint.constant = 22;
-//    } else {
-        _selectBtn.hidden = NO;
-        [_selectBtn setImage:[UIImage imageNamed:selectImgName] forState:UIControlStateNormal];
-        _carImgViewConstraint.constant = 74;
-//    }
+    _selectBtn.hidden = NO;
+    [_selectBtn setImage:[UIImage imageNamed:selectImgName] forState:UIControlStateNormal];
+    _carImgViewConstraint.constant = 74;
+}
+
+- (void)setBtnLeadingConstraint:(CGFloat)btnLeadingConstraint {
+    _btnLeadingConstraint = btnLeadingConstraint;
+    _selectBtnLeadingConstraint.constant = btnLeadingConstraint;
+    _carImgViewConstraint.constant = 74 - (22 - btnLeadingConstraint);
 }
 
 @end

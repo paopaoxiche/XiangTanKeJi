@@ -8,10 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
+@class CarWashServiceCell;
+
+@protocol CarWashServiceCellDelegate <NSObject>
+
+- (void)selectedServiceCell:(CarWashServiceCell *)cell;
+
+@end
+
 @interface CarWashServiceCell : UITableViewCell
 
+@property (nonatomic, weak) id<CarWashServiceCellDelegate> delegate;
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *desc;
+@property (nonatomic, copy) NSString *selectBtnImageName;
 @property (nonatomic, assign) CGFloat originalPrice;
 @property (nonatomic, assign) CGFloat couponPrice;
 @property (nonatomic, assign) NSInteger couponNumber;
