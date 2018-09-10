@@ -67,7 +67,7 @@ public class UserInfo {
         return score;
     }
 
-    protected static void setScore(int score) {
+    public static void setScore(int score) {
         UserInfo.score = score;
     }
 

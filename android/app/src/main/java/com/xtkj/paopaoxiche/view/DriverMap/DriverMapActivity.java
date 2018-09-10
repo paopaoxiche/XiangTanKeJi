@@ -90,7 +90,7 @@ public class DriverMapActivity extends BaseGaodeActivity implements IDriverMapCo
 
     @Override
     protected void initViews() {
-        mRecyclerView = (RecyclerView)findViewById(R.id.wash_yard_recyclerView);
+        mRecyclerView = (RecyclerView) findViewById(R.id.wash_yard_recyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         backButton = findViewById(R.id.back_button);
         wuyuanxicheImageButton = findViewById(R.id.wuyuanxiche_image_button);
@@ -106,9 +106,10 @@ public class DriverMapActivity extends BaseGaodeActivity implements IDriverMapCo
         aMap.getUiSettings().setZoomControlsEnabled(false);
         infoWindowAdapter = new AMap.InfoWindowAdapter() {
             View infoWindow = null;
+
             @Override
             public View getInfoWindow(Marker marker) {
-                if(infoWindow == null) {
+                if (infoWindow == null) {
                     infoWindow = LayoutInflater.from(getContext()).inflate(
                             R.layout.item_anchor, null);
                 }
@@ -125,18 +126,19 @@ public class DriverMapActivity extends BaseGaodeActivity implements IDriverMapCo
                 TextView price = view.findViewById(R.id.anchor_price);
                 TextView name = view.findViewById(R.id.anchor_name);
                 ImageView img = view.findViewById(R.id.anchor_img);
-                WashServicesBean.DataBean  data = (WashServicesBean.DataBean) marker.getObject();
+                WashServicesBean.DataBean data = (WashServicesBean.DataBean) marker.getObject();
+                presenter.checkedWash(data.getWashId());
                 price.setText(String.format("￥%s", data.getPrice()));
                 name.setText(data.getName());
-                if(data.getBusinessStatus()== AppConstant.STATE_CLOSED){
+                if (data.getBusinessStatus() == AppConstant.STATE_CLOSED) {
                     img.setImageResource(R.drawable.img_close);
-                    img.setBackgroundColor(Color.rgb(183,196,203));
-                }else if(data.getBusinessStatus()== AppConstant.STATE_STOPPING){
+                    img.setBackgroundColor(Color.rgb(183, 196, 203));
+                } else if (data.getBusinessStatus() == AppConstant.STATE_STOPPING) {
                     img.setImageResource(R.drawable.img_suspend);
-                    img.setBackgroundColor(Color.rgb(248,155,10));
-                }else if(data.getBusinessStatus()== AppConstant.STATE_OPENING){
+                    img.setBackgroundColor(Color.rgb(248, 155, 10));
+                } else if (data.getBusinessStatus() == AppConstant.STATE_OPENING) {
                     img.setImageResource(R.drawable.img_operation);
-                    img.setBackgroundColor(Color.rgb(17,176,242));
+                    img.setBackgroundColor(Color.rgb(17, 176, 242));
                 }
             }
 
@@ -155,7 +157,7 @@ public class DriverMapActivity extends BaseGaodeActivity implements IDriverMapCo
 
     @Override
     protected void initValues() {
-        washServiceAdapter = new WashServiceAdapter(DriverMapModel.getInstance().getWashServicesBean(),this);
+        washServiceAdapter = new WashServiceAdapter(DriverMapModel.getInstance().getWashServicesBean(), this);
         mRecyclerView.setAdapter(washServiceAdapter);
     }
 
@@ -174,18 +176,21 @@ public class DriverMapActivity extends BaseGaodeActivity implements IDriverMapCo
         //在activity执行onDestroy时执行mMapView.onDestroy()，销毁地图
         mMapView.onDestroy();
     }
+
     @Override
     protected void onResume() {
         super.onResume();
         //在activity执行onResume时执行mMapView.onResume ()，重新绘制加载地图
         mMapView.onResume();
     }
+
     @Override
     protected void onPause() {
         super.onPause();
         //在activity执行onPause时执行mMapView.onPause ()，暂停地图的绘制
         mMapView.onPause();
     }
+
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -205,22 +210,22 @@ public class DriverMapActivity extends BaseGaodeActivity implements IDriverMapCo
         ViewGroup.LayoutParams lp = mRecyclerView.getLayoutParams();
         //list高度自适应，最大两个item的高度
         if (dataBeanList.size() > 2) {
-            lp.height = DensityUtil.dip2px(this,250);
+            lp.height = DensityUtil.dip2px(this, 250);
         } else {
-            lp.height = DensityUtil.dip2px(this,125 * dataBeanList.size());
+            lp.height = DensityUtil.dip2px(this, 125 * dataBeanList.size());
         }
         mRecyclerView.setLayoutParams(lp);
-        for(int i = 0 ; i < dataBeanList.size() ; i ++ ){
+        for (int i = 0; i < dataBeanList.size(); i++) {
             int finalI = i;
             Glide.with(this).load(dataBeanList.get(i).getImage()).into(new SimpleTarget<Drawable>() {
                 @Override
                 public void onResourceReady(Drawable resource, Transition<? super Drawable> transition) {
-                    Bitmap bitmap = BitmapUtil.getZoomImage(BitmapUtil.drawableToBitmap(resource),40,40);
+                    Bitmap bitmap = BitmapUtil.getZoomImage(BitmapUtil.drawableToBitmap(resource), 40, 40);
                     bitmap = BitmapUtil.ToRoundBitmap(bitmap);
-                    Bitmap bitmap2 = BitmapUtil.getZoomImage(BitmapUtil.drawableToBitmap( getResources().getDrawable(R.drawable.anchor)),80,80);
-                    bitmap = BitmapUtil.mergeBitmap(bitmap2,bitmap,20,10);
+                    Bitmap bitmap2 = BitmapUtil.getZoomImage(BitmapUtil.drawableToBitmap(getResources().getDrawable(R.drawable.anchor)), 80, 80);
+                    bitmap = BitmapUtil.mergeBitmap(bitmap2, bitmap, 20, 10);
 
-                    Marker marker = aMap.addMarker(new MarkerOptions().position(new LatLng(dataBeanList.get(finalI).getLat(),dataBeanList.get(finalI).getLng()))
+                    Marker marker = aMap.addMarker(new MarkerOptions().position(new LatLng(dataBeanList.get(finalI).getLat(), dataBeanList.get(finalI).getLng()))
                             .title(dataBeanList.get(finalI).getName())
                             .snippet(dataBeanList.get(finalI).getDistance() + "m")
                             .icon(BitmapDescriptorFactory.fromBitmap(bitmap)));
@@ -265,7 +270,7 @@ public class DriverMapActivity extends BaseGaodeActivity implements IDriverMapCo
 
     @Override
     public void onCameraChangeFinish(CameraPosition cameraPosition) {
-        presenter.updateLocation(cameraPosition.target.longitude,cameraPosition.target.latitude);
+        presenter.updateLocation(cameraPosition.target.longitude, cameraPosition.target.latitude);
     }
 
     @Override

@@ -14,6 +14,7 @@ public class IDriverMapContract {
     public interface IDriverMapPresenter extends IBasePresenter {
         void updateLocation(double j, double w);
         void checkWuYuanXiChe();
+        void checkedWash(int washId);
     }
 
     public interface IDriverMapView extends IBaseView<IDriverMapPresenter> {

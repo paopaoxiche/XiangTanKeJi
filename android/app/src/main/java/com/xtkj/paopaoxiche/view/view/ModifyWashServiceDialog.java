@@ -1,41 +1,28 @@
 package com.xtkj.paopaoxiche.view.view;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.os.Environment;
 import android.text.InputFilter;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 
-import com.bumptech.glide.Glide;
 import com.xtkj.paopaoxiche.R;
 import com.xtkj.paopaoxiche.bean.WashServiceListBean;
-import com.xtkj.paopaoxiche.bean.WashShopBean;
-import com.xtkj.paopaoxiche.event.BaseEvent;
-import com.xtkj.paopaoxiche.model.GoodsModel;
 import com.xtkj.paopaoxiche.model.UserInfo;
 import com.xtkj.paopaoxiche.model.WashServerModel;
-import com.xtkj.paopaoxiche.utils.BitmapUtil;
 import com.xtkj.paopaoxiche.widget.CashierInputFilter;
 import com.xtkj.paopaoxiche.widget.FullScreenWithStatusBarDialog;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import com.xtkj.paopaoxiche.widget.SureDialog;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ModifyWashServiceDialog extends FullScreenWithStatusBarDialog implements RadioGroup.OnCheckedChangeListener{
+public class ModifyWashServiceDialog extends FullScreenWithStatusBarDialog implements RadioGroup.OnCheckedChangeListener {
 
     int id = 0;
 
@@ -53,6 +40,10 @@ public class ModifyWashServiceDialog extends FullScreenWithStatusBarDialog imple
     EditText describeEditText;
     @BindView(R.id.car_model_radio_group)
     RadioGroup carModelRadioGrpoup;
+    @BindView(R.id.auto_wash_image_button)
+    Button autoWashImageButton;
+    @BindView(R.id.auto_wash_linear_layout)
+    LinearLayout autoWashLinearLayout;
 
     public ModifyWashServiceDialog(Context context, boolean statusBarVisible) {
         super(context, statusBarVisible);
@@ -77,6 +68,7 @@ public class ModifyWashServiceDialog extends FullScreenWithStatusBarDialog imple
         if (carModel == 2) {
             carModelRadioGrpoup.check(R.id.middle_car_radio_button);
         }
+        autoWashLinearLayout.setVisibility(View.GONE);
     }
 
     @Override
@@ -118,5 +110,21 @@ public class ModifyWashServiceDialog extends FullScreenWithStatusBarDialog imple
                 carModel = 1;
                 break;
         }
+    }
+
+    @OnClick(R.id.auto_wash_image_button)
+    public void onViewClicked() {
+        SureDialog sureDialog = new SureDialog(getContext(), R.style.NormalDialog);
+        sureDialog.setCancelBtnVisibility(View.VISIBLE);
+        sureDialog.setMessage("您确定添加自助洗车服务吗？\n");
+        sureDialog.setClickListener(new SureDialog.ClickListener() {
+            @Override
+            public void sure(SureDialog dialog) {
+                WashServerModel.getInstance().addWashService(UserInfo.getWashId(), 0, "自助洗车",
+                        "自助洗车服务", "4.5", 3);
+                dismiss();
+            }
+        });
+        sureDialog.show();
     }
 }

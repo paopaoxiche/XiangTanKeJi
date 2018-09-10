@@ -16,6 +16,8 @@ public class DriverMapPresenterImpl implements IDriverMapContract.IDriverMapPres
     IDriverMapContract.IDriverMapView driverMapView ;
     private DriverMapModel viewModel;
 
+    int checkedWashId = -1;
+
     public DriverMapPresenterImpl(IDriverMapContract.IDriverMapView iDriverMapView) {
         driverMapView = iDriverMapView;
         driverMapView.setPresenter(this);
@@ -42,18 +44,35 @@ public class DriverMapPresenterImpl implements IDriverMapContract.IDriverMapPres
     @Override
     public void checkWuYuanXiChe() {
         List<WashServicesBean.DataBean> dataBeanList = DriverMapModel.getInstance().getWashServicesBean().getData();
-        if (!UserInfo.isIsCheckWuYuanXiChe()) {
-            driverMapView.upDateService(dataBeanList);
-            return;
-        }
         List<WashServicesBean.DataBean> resultList = new ArrayList<>();
-        for (WashServicesBean.DataBean dataBean : dataBeanList) {
-            if (dataBean.getPrice() > 5) {
-                continue;
+        if (!UserInfo.isIsCheckWuYuanXiChe()) {
+            resultList = dataBeanList;
+        } else {
+
+            for (WashServicesBean.DataBean dataBean : dataBeanList) {
+                if (dataBean.getPrice() > 5) {
+                    continue;
+                }
+                resultList.add(dataBean);
             }
-            resultList.add(dataBean);
+        }
+        int position = 0;
+        for (int i = 0; i < resultList.size(); i++) {
+            if (resultList.get(i).getWashId() == checkedWashId) {
+                position = i;
+                break;
+            }
+        }
+        if (position > 0) {
+            resultList.add(0, resultList.get(position));
+            resultList.remove(position + 1);
         }
         driverMapView.upDateService(resultList);
+    }
+
+    @Override
+    public void checkedWash(int washId) {
+        checkedWashId = washId;
     }
 
     @Override

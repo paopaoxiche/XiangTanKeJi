@@ -241,6 +241,7 @@ public class WashServiceActivity extends BaseActivity implements IWashServiceCon
         payButton.setOnClickListener(e -> {
             callPay();
         });
+        payRadioGroup.setOnCheckedChangeListener(this);
     }
 
 

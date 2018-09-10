@@ -114,4 +114,8 @@ public interface WashService {
 
     @GET("wash/getCarWashEstimate")
     Call<EvaluateListBean> getMyEvaluateList(@Query("washId") int washId, @Query("pageIndex") int pageIndex, @Query("pageSize") int pageSize);
+
+    @FormUrlEncoded
+    @POST("wash/updataWashAddress")
+    Call<NoDataBean> updateAddress(@Field("washId") String washId, @Field("address") String address, @Field("lat") String lat, @Field("lng") String lng);
 }

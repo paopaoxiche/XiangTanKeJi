@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.xtkj.paopaoxiche.R;
+import com.xtkj.paopaoxiche.application.AppConstant;
 import com.xtkj.paopaoxiche.application.Authentication;
 import com.xtkj.paopaoxiche.application.BaseApplication;
 import com.xtkj.paopaoxiche.base.CustomAdapter;
@@ -33,6 +34,7 @@ import com.xtkj.paopaoxiche.model.UserInfo;
 import com.xtkj.paopaoxiche.service.UserService;
 import com.xtkj.paopaoxiche.service.WashService;
 import com.xtkj.paopaoxiche.utils.DensityUtil;
+import com.xtkj.paopaoxiche.utils.PreferUtils;
 import com.xtkj.paopaoxiche.widget.FullScreenWithStatusBarDialog;
 
 import java.text.SimpleDateFormat;
@@ -170,6 +172,8 @@ public class CreditsExchangeDialog extends FullScreenWithStatusBarDialog
                                   if (bean.getCode() == 200) {
                                       Toast.makeText(BaseApplication.getContext(), "兑换成功！", Toast.LENGTH_LONG).show();
                                       tvCredits.setText(String.valueOf(((Double) bean.getData()).intValue()));
+                                      PreferUtils.getInstance().putInt(AppConstant.SCORE, ((Double)bean.getData()).intValue());
+                                      UserInfo.setScore(PreferUtils.getInstance().getInt(AppConstant.SCORE));
                                   } else {
                                       Toast.makeText(BaseApplication.getContext(), "兑换失败！", Toast.LENGTH_LONG).show();
                                   }

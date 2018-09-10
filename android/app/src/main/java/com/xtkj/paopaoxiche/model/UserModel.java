@@ -219,7 +219,7 @@ public class UserModel {
                         }
                         LoginBean.DataBean data = response.body().getData();
                         if (response.body().getCode() == 200) {
-                            saveData(data);
+                            saveData(data, true);
                             initData();
                             for (LoginListener loginListener : loginListenerList) {
                                 loginListener.loginSuccess(data);
@@ -360,9 +360,32 @@ public class UserModel {
                     }
                 });
     }
+
+    public void getUserInfo(String id) {
+        RetrofitClient.newInstance(ApiField.BASEURL)
+                .create(UserService.class)
+                .getUserInfo(id)
+                .enqueue(new Callback<LoginBean>() {
+                    @Override
+                    public void onResponse(Call<LoginBean> call, Response<LoginBean> response) {
+                        LoginBean.DataBean data = response.body().getData();
+                        if (response.body().getCode() == 200) {
+                            saveData(data,false);
+                            initData();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<LoginBean> call, Throwable t) {
+
+                    }
+                });
+    }
     
-    private void saveData(LoginBean.DataBean data) {
-        preferUtils.putString(AppConstant.TOKEN, data.getToken());
+    private void saveData(LoginBean.DataBean data, boolean saveToken) {
+        if (saveToken) {
+            preferUtils.putString(AppConstant.TOKEN, data.getToken());
+        }
         preferUtils.putInt(AppConstant.USER_ID, data.getId());
         if (data.getType() == 0) {
             preferUtils.putBoolean(AppConstant.IS_DRIVER, true);

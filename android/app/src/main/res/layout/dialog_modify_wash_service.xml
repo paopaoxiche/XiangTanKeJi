@@ -179,6 +179,23 @@
                 />
         </RadioGroup>
 
+        <LinearLayout
+            android:id="@+id/auto_wash_linear_layout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp">
+
+            <Button
+                android:id="@+id/auto_wash_image_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="一键添加自助洗车服务"
+                android:textSize="16sp"
+                android:textColor="@color/white"
+                android:background="@color/orange"/>
+
+        </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>

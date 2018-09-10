@@ -1,5 +1,6 @@
 package com.xtkj.paopaoxiche.presenter;
 
+import com.xtkj.paopaoxiche.application.BaseApplication;
 import com.xtkj.paopaoxiche.bean.UpdateBean;
 import com.xtkj.paopaoxiche.contract.IDriverContract;
 import com.xtkj.paopaoxiche.model.UserModel;
@@ -17,7 +18,7 @@ public class DriverMyInfoPresenterImpl implements IDriverContract.IMyInfoPresent
     @Override
     public void onCreate() {
         UserModel.getInstance().addListener(this);
-        UserModel.getInstance().checkUpdate("1.1.0");
+        UserModel.getInstance().checkUpdate(BaseApplication.getVersionName());
     }
 
     @Override

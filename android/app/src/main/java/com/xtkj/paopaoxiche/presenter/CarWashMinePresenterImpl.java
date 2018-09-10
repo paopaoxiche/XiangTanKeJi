@@ -1,5 +1,6 @@
 package com.xtkj.paopaoxiche.presenter;
 
+import com.xtkj.paopaoxiche.application.BaseApplication;
 import com.xtkj.paopaoxiche.bean.UpdateBean;
 import com.xtkj.paopaoxiche.contract.ICarWashContract;
 import com.xtkj.paopaoxiche.model.UserInfo;
@@ -20,7 +21,7 @@ public class CarWashMinePresenterImpl implements ICarWashContract.IMinePresenter
     @Override
     public void onCreate() {
         UserModel.getInstance().addListener(this);
-        UserModel.getInstance().checkUpdate("1.1.0");
+        UserModel.getInstance().checkUpdate(BaseApplication.getVersionName());
     }
 
     @Override

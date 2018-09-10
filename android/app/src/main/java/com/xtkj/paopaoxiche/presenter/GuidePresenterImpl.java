@@ -59,7 +59,7 @@ public class GuidePresenterImpl implements IGuideContract.IGuidePresenter, UserM
     public void autoLogin() {
         // TODO 这里需要http去判断TOKEN是否生效
         Intent intent = new Intent();
-        new Handler().postDelayed(() -> guideView.startActivityForIntent(intent, clazz), 1500);
+        new Handler().postDelayed(() -> guideView.startActivityForIntent(intent, clazz), 2500);
     }
 
     @Override
@@ -91,6 +91,7 @@ public class GuidePresenterImpl implements IGuideContract.IGuidePresenter, UserM
     public void checkTokenSuccess() {
         init();
         if (UserInfo.isDriver()) {
+            UserModel.getInstance().getUserInfo(UserInfo.getId() + "");
             clazz = DriverMainActivity.class;
         } else {
             UserModel.getInstance().getCarWashInfo();

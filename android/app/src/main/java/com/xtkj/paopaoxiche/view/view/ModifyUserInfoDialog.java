@@ -5,16 +5,26 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.xtkj.paopaoxiche.R;
 import com.xtkj.paopaoxiche.application.AppConstant;
+import com.xtkj.paopaoxiche.application.Authentication;
+import com.xtkj.paopaoxiche.application.BaseApplication;
+import com.xtkj.paopaoxiche.bean.NoDataBean;
 import com.xtkj.paopaoxiche.bean.UpdateBean;
 import com.xtkj.paopaoxiche.event.BaseEvent;
+import com.xtkj.paopaoxiche.http.ApiField;
+import com.xtkj.paopaoxiche.http.RetrofitClient;
+import com.xtkj.paopaoxiche.model.DriverHomeModel;
 import com.xtkj.paopaoxiche.model.UserInfo;
 import com.xtkj.paopaoxiche.model.UserModel;
 import com.xtkj.paopaoxiche.model.UserModel.UserInfoListener;
+import com.xtkj.paopaoxiche.service.WashService;
+import com.xtkj.paopaoxiche.utils.LocationUtils;
 import com.xtkj.paopaoxiche.widget.FullScreenWithStatusBarDialog;
+import com.xtkj.paopaoxiche.widget.SureDialog;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -25,6 +35,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ModifyUserInfoDialog extends FullScreenWithStatusBarDialog implements UserInfoListener {
     @BindView(R.id.back_arrow_image_button)
@@ -67,7 +80,7 @@ public class ModifyUserInfoDialog extends FullScreenWithStatusBarDialog implemen
         joinTimeTextView.setText(time);
         if (!UserInfo.isDriver()) {
             enterCarlayout.setVisibility(View.GONE);
-            addressTextView.setText(UserInfo.get);
+//            addressTextView.setText(U);
         } else {
             addressLayout.setVisibility(View.GONE);
         }
@@ -126,6 +139,34 @@ public class ModifyUserInfoDialog extends FullScreenWithStatusBarDialog implemen
 
     @OnClick(R.id.address_image_button)
     public void onViewClicked() {
+        DriverHomeModel driverHomeModel = DriverHomeModel.getInstance();
+        SureDialog sureDialog = new SureDialog(getContext(), R.style.NormalDialog);
+        sureDialog.setCancelBtnVisibility(View.VISIBLE);
+        sureDialog.setMessage("您确定将洗车场地址修改到以下地址吗？\n" + driverHomeModel.getAddress());
+        sureDialog.setClickListener(new SureDialog.ClickListener() {
+            @Override
+            public void sure(SureDialog dialog) {
+                RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
+                        .create(WashService.class)
+                        .updateAddress(UserInfo.getWashId() + "", driverHomeModel.getAddress(), driverHomeModel.getLatitude() + "", driverHomeModel.getLongitude() + "")
+                        .enqueue(new Callback<NoDataBean>() {
+                            @Override
+                            public void onResponse(Call<NoDataBean> call, Response<NoDataBean> response) {
+                                if (response.body().getCode() != 401) {
+                                    Toast.makeText(BaseApplication.getContext(), "修改地址成功", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(BaseApplication.getContext(), "修改地址失败，请重新登录", Toast.LENGTH_SHORT).show();
+                                }
+                            }
 
+                            @Override
+                            public void onFailure(Call<NoDataBean> call, Throwable t) {
+                                Toast.makeText(BaseApplication.getContext(), "修改地址失败", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                dismiss();
+            }
+        });
+        sureDialog.show();
     }
 }

@@ -38,7 +38,7 @@ public interface UserService {
      * @param id
      * */
     @GET("user/info")
-    Call<NoDataBean> Login(@Query("id") String id ) ;
+    Call<LoginBean> getUserInfo(@Query("id") String id ) ;
 
     @FormUrlEncoded
     @POST("user/update")
