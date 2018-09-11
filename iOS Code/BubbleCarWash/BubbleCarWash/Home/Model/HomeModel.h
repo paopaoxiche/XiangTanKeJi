@@ -72,6 +72,8 @@ typedef void(^HomeResultBlock)(NSArray *result);
 @property (nonatomic, assign) CGFloat currentPrice;
 /// 商品原价
 @property (nonatomic, assign) CGFloat originPrice;
+/// 商品是否被选择
+@property (nonatomic, assign) BOOL isSelected;
 /// 商品图片地址
 @property (nonatomic, copy) NSString *imageUrl;
 /// 商品名称

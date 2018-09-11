@@ -84,7 +84,6 @@
 
 @property (nonatomic, assign) NSInteger carModel;
 @property (nonatomic, assign) NSInteger carWashID;
-@property (nonatomic, assign) NSInteger dataID;
 @property (nonatomic, assign) BOOL isActive;
 
 @end

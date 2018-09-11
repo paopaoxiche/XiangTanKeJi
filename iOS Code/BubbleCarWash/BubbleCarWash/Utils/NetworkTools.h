@@ -31,6 +31,16 @@
 
 @end
 
+@interface CreateOrderParam : NSObject
+
+@property (nonatomic, copy) NSString *washServiceId;
+@property (nonatomic, copy) NSString *commoditys;
+@property (nonatomic, copy) NSString *couponId;
+@property (nonatomic, copy) NSString *payType;
+
+@end
+
+
 typedef void(^SuccessBlock)(NSDictionary *response, BOOL isSuccess);
 typedef void(^FailedBlock)(NSError *error);
 
@@ -160,6 +170,10 @@ typedef void(^FailedBlock)(NSError *error);
  *  获取车型登记详情
  */
 - (void)obtainModelDetail:(NSInteger)modelID success:(SuccessBlock)success failed:(FailedBlock)failed;
+
+#pragma mark - 车主支付
+
+- (void)createOrder:(CreateOrderParam *)param success:(SuccessBlock)success failed:(FailedBlock)failed;
 
 #pragma mark - 天气
 

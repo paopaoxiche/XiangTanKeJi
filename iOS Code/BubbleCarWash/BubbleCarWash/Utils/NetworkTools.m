@@ -43,6 +43,20 @@
 
 @end
 
+@implementation CreateOrderParam : NSObject
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        _couponId = @"0";
+        _payType = @"1";
+    }
+    
+    return self;
+}
+
+@end
+
 #pragma mark - NetworkTools
 
 static const NSTimeInterval kTimeOutInterval = 6.0f;
@@ -243,6 +257,14 @@ static const NSTimeInterval kTimeOutInterval = 6.0f;
 - (void)obtainModelDetail:(NSInteger)modelID success:(SuccessBlock)success failed:(FailedBlock)failed {
     [self setRequestHeader];
     [self GET:@"car/detail" parameters:@{@"id": [NSNumber numberWithInteger:modelID]} success:success failure:failed];
+}
+
+#pragma mark - 车主支付
+
+- (void)createOrder:(CreateOrderParam *)param success:(SuccessBlock)success failed:(FailedBlock)failed {
+    [self setRequestHeader];
+    NSDictionary *params = [param dictionaryFromModel];
+    [self POST:@"carOwner/createConsume" parameters:params success:success failure:failed];
 }
 
 #pragma mark - Get Method

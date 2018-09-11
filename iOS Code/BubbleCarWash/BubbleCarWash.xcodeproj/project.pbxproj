@@ -100,6 +100,7 @@
 		CCA16520213E413E001626C6 /* CustomerServicerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA1651F213E413E001626C6 /* CustomerServicerViewController.m */; };
 		CCA16526213E41B9001626C6 /* UpgradeReminderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA16525213E41B9001626C6 /* UpgradeReminderViewController.m */; };
 		CCA1652F213E48BB001626C6 /* UILabel+CreateLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA1652E213E48BB001626C6 /* UILabel+CreateLabel.m */; };
+		CCC4030D214780EA006A5F54 /* CreateOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC4030C214780EA006A5F54 /* CreateOrderModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -278,6 +279,8 @@
 		CCA16525213E41B9001626C6 /* UpgradeReminderViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UpgradeReminderViewController.m; sourceTree = "<group>"; };
 		CCA1652D213E48BB001626C6 /* UILabel+CreateLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UILabel+CreateLabel.h"; sourceTree = "<group>"; };
 		CCA1652E213E48BB001626C6 /* UILabel+CreateLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UILabel+CreateLabel.m"; sourceTree = "<group>"; };
+		CCC4030B214780EA006A5F54 /* CreateOrderModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CreateOrderModel.h; sourceTree = "<group>"; };
+		CCC4030C214780EA006A5F54 /* CreateOrderModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CreateOrderModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -818,18 +821,11 @@
 		65D8D48B2146C4C800934589 /* Payment */ = {
 			isa = PBXGroup;
 			children = (
+				CCC4030421478080006A5F54 /* Model */,
 				65D8D4962146CF5800934589 /* Contoller */,
-				65D8D4942146CF5700934589 /* Model */,
 				65D8D4952146CF5700934589 /* View */,
 			);
 			path = Payment;
-			sourceTree = "<group>";
-		};
-		65D8D4942146CF5700934589 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		65D8D4952146CF5700934589 /* View */ = {
@@ -986,6 +982,15 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		CCC4030421478080006A5F54 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CCC4030B214780EA006A5F54 /* CreateOrderModel.h */,
+				CCC4030C214780EA006A5F54 /* CreateOrderModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		D2DA8B02A49A21B970AAC972 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1123,6 +1128,7 @@
 				65EA90EF212B19C90095F72B /* LYKeyChainStore.m in Sources */,
 				65C5B0882135AA8100727122 /* ExpensesRecordCell.m in Sources */,
 				65C5AFC52135A45100727122 /* ProfileCell.m in Sources */,
+				CCC4030D214780EA006A5F54 /* CreateOrderModel.m in Sources */,
 				65C5B0832135AA8100727122 /* IncomeModel.m in Sources */,
 				6556AE5C211B282E0017B79A /* GlobalMethods.m in Sources */,
 				65C5B10D2135B0F800727122 /* CustomAnnotationView.m in Sources */,

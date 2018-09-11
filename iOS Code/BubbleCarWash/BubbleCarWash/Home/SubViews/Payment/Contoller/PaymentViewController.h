@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ParentViewController.h"
 
-@interface PaymentViewController : UIViewController
+@interface PaymentViewController : ParentViewController
+
+@property (nonatomic, copy) NSString *serviceID;
+@property (nonatomic, copy) NSString *commoditys;
 
 @end

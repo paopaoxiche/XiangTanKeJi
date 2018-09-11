@@ -15,6 +15,7 @@
 #import "CertificationCell.h"
 #import "GlobalMethods.h"
 #import "UIColor+Category.h"
+#import "PaymentViewController.h"
 
 @interface CarWashServiceViewController () <CarWashServiceCellDelegate, CommodityCellDelegate,
     CertificationCellDelegate, UITableViewDataSource, UITableViewDelegate>
@@ -24,9 +25,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *payButton;
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) NSIndexPath *serviceSelectedIndexPath;
-@property (nonatomic, strong) NSIndexPath *commoditySelectedIndexPath;
 @property (nonatomic, strong) NSIndexPath *carTypeSelectedIndexPath;
 @property (nonatomic, assign) CGFloat totalAmount;
+@property (nonatomic, copy) NSMutableArray *commoditys;
 
 @end
 
@@ -34,13 +35,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     _dataSource = [[NSMutableArray alloc] initWithCapacity:0];
     [_tableView registerNib:[UINib nibWithNibName:@"CertificationCell" bundle:[NSBundle mainBundle]]
      forCellReuseIdentifier:@"CarTypeIdentifier"];
     
     _serviceSelectedIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     _carTypeSelectedIndexPath = [NSIndexPath indexPathForRow:0 inSection:1];
-    _commoditySelectedIndexPath = nil;
+    _commoditys = [[NSMutableArray alloc] initWithCapacity:0];
     _totalAmount = 0;
     
     NSArray *colors = @[(id)[UIColor rgbByHexStr:@"ffffff" alpha:0.0].CGColor, (id)[UIColor rgbByHexStr:@"ffffff" alpha:1.0].CGColor];
@@ -88,6 +90,22 @@
 - (IBAction)onPayButtonClicked:(id)sender {
     // loading提示创建订单，去支付（美团），然后跳转到支付选择界面
     
+    ServiceModel *serviceModel = [_dataSource[0] objectAtIndex:_serviceSelectedIndexPath.row];
+    
+    NSMutableString *commoditys = [[NSMutableString alloc] initWithCapacity:0];
+    if (_commoditys.count > 0) {
+        for (RecommendCommodityModel *model in _commoditys) {
+            [commoditys appendString:[NSString stringWithFormat:@"%li,", model.dataID]];
+        }
+        
+        [commoditys replaceCharactersInRange:NSMakeRange(commoditys.length - 1, 1) withString:@""];
+    }
+    
+    PaymentViewController *paymentVC = (PaymentViewController *)[GlobalMethods viewControllerWithBuddleName:@"Payment"
+                                                                                               vcIdentifier:@"PaymentViC"];
+    paymentVC.serviceID = [NSString stringWithFormat:@"%li", serviceModel.dataID];
+    paymentVC.commoditys = commoditys;
+    [self.navigationController pushViewController:paymentVC animated:YES];
 }
 
 - (void)calculatePaymentAmount {
@@ -98,10 +116,10 @@
     NSArray *servicelist = _dataSource[0];
     ServiceModel *model =  servicelist[_serviceSelectedIndexPath.row];
     _totalAmount = model.price;
-    if (_dataSource.count > 2 && _commoditySelectedIndexPath) {
-        NSArray *commoditylist = _dataSource[2];
-        RecommendCommodityModel *model = commoditylist[_commoditySelectedIndexPath.row];
-        _totalAmount += model.currentPrice;
+    if (_dataSource.count > 2 && _commoditys.count > 0) {
+        for (RecommendCommodityModel *model in _commoditys) {
+            _totalAmount += model.currentPrice;
+        }
     }
     
     [_payButton setTitle:[NSString stringWithFormat:@"支付 (¥%.2f)", _totalAmount]
@@ -149,7 +167,7 @@
         cell.avatarUrl = model.imageUrl;
         cell.name = model.commodityName;
         cell.price = model.currentPrice;
-        cell.selectBtnImageName = @"SingleSelection_Normal";
+        cell.selectBtnImageName = model.isSelected ? @"SingleSelection_Selected" : @"SingleSelection_Normal";
 
         return cell;
     }
@@ -266,15 +284,17 @@
 #pragma mark - CommodityCellDelegate
 
 - (void)selectedCommodityCell:(CommodityCell *)cell {
-    cell.selectBtnImageName = @"SingleSelection_Selected";
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    RecommendCommodityModel *model = _dataSource[indexPath.section][indexPath.row];
+    model.isSelected = !model.isSelected;
+    cell.selectBtnImageName = model.isSelected ? @"SingleSelection_Selected" : @"SingleSelection_Normal";
     
-    if (_commoditySelectedIndexPath) {
-        CommodityCell *commodityCell = [self.tableView cellForRowAtIndexPath:_commoditySelectedIndexPath];
-        commodityCell.selectBtnImageName = @"SingleSelection_Normal";
-        
+    [_dataSource[indexPath.section] replaceObjectAtIndex:indexPath.row withObject:model];
+    if (model.isSelected) {
+        [_commoditys addObject:model];
+    } else {
+        [_commoditys removeObject:model];
     }
-    
-    _commoditySelectedIndexPath = [self.tableView indexPathForCell:cell];
     
     [self calculatePaymentAmount];
 }

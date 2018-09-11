@@ -158,6 +158,7 @@
         _commodityName = [dic objectForKey:@"name"];
         _originPrice = [[dic objectForKey:@"originPrice"] floatValue];
         _washID = [[dic objectForKey:@"washId"] integerValue];
+        _isSelected = NO;
     }
     
     return self;

@@ -14,7 +14,7 @@
         <!--Payment View Controller-->
         <scene sceneID="Rl2-HF-rwb">
             <objects>
-                <viewController id="Ae4-2r-mdC" customClass="PaymentViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PaymentViC" id="Ae4-2r-mdC" customClass="PaymentViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Xlw-sh-H5C">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -109,6 +109,9 @@
                                 <state key="normal" title="确认支付 ¥35.00">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="createOrder:" destination="Ae4-2r-mdC" eventType="touchUpInside" id="ohE-5t-SsY"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -139,11 +142,54 @@
         <!--Payment Success View Controller-->
         <scene sceneID="6TN-qI-Hte">
             <objects>
-                <viewController id="d3P-Oa-svx" customClass="PaymentSuccessViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PaymentSuccessVC" id="d3P-Oa-svx" customClass="PaymentSuccessViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="d68-63-N5A">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PaymentSuccess" translatesAutoresizingMaskIntoConstraints="NO" id="G4Q-VF-kOL">
+                                <rect key="frame" x="144" y="48" width="87" height="87"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="87" id="TSO-qP-QAc"/>
+                                    <constraint firstAttribute="height" constant="87" id="zhb-fl-ObG"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="支付成功!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4J7-aA-bzL">
+                                <rect key="frame" x="148" y="163" width="79" height="21.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T6B-9t-cXx">
+                                <rect key="frame" x="39.5" y="228.5" width="295" height="48"/>
+                                <color key="backgroundColor" red="0.97254901959999995" green="0.60784313729999995" blue="0.039215686270000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="295" id="Kqu-WT-9zw"/>
+                                    <constraint firstAttribute="height" constant="48" id="fip-Hm-yFd"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="去评价">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="24"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="go2Evaluation:" destination="d3P-Oa-svx" eventType="touchUpInside" id="7qz-JJ-ihb"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="G4Q-VF-kOL" firstAttribute="centerX" secondItem="d68-63-N5A" secondAttribute="centerX" id="4Q0-tj-vPV"/>
+                            <constraint firstItem="T6B-9t-cXx" firstAttribute="top" secondItem="4J7-aA-bzL" secondAttribute="bottom" constant="44" id="HDs-32-olC"/>
+                            <constraint firstItem="T6B-9t-cXx" firstAttribute="centerX" secondItem="G4Q-VF-kOL" secondAttribute="centerX" id="Hdk-fo-uig"/>
+                            <constraint firstItem="4J7-aA-bzL" firstAttribute="top" secondItem="G4Q-VF-kOL" secondAttribute="bottom" constant="28" id="Isi-Jr-qlF"/>
+                            <constraint firstItem="G4Q-VF-kOL" firstAttribute="top" secondItem="VVO-Cf-tYX" secondAttribute="top" constant="28" id="nss-9O-K81"/>
+                            <constraint firstItem="4J7-aA-bzL" firstAttribute="centerX" secondItem="G4Q-VF-kOL" secondAttribute="centerX" id="obG-jA-iJY"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="VVO-Cf-tYX"/>
                     </view>
                 </viewController>
@@ -154,6 +200,7 @@
     </scenes>
     <resources>
         <image name="CarWashAvatar" width="400" height="400"/>
+        <image name="PaymentSuccess" width="87" height="87"/>
         <image name="SingleSelection_Normal" width="44" height="44"/>
     </resources>
 </document>
