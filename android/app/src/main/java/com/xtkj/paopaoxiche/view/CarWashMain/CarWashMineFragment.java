@@ -112,7 +112,7 @@ public class CarWashMineFragment extends BaseFragmemt implements ICarWashContrac
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                getRemain();
+//                getRemain();
             }
         },500);
 

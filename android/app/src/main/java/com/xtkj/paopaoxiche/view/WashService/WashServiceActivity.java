@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -295,13 +297,28 @@ public class WashServiceActivity extends BaseActivity implements IWashServiceCon
                             req.extData = "app data"; // optional
                             // 在支付之前，如果应用没有注册到微信，应该先调用IWXMsg.registerApp将应用注册到微信
                             boolean isSuccess = api.sendReq(req);
-//                        Toast.makeText(getActivityContext(), "调起微信支付", Toast.LENGTH_LONG).show();
                         }
                         if (postWashServiceBean.getPayType() == 2) {
 
                             new Thread(() -> {
                                 PayTask payTask = new PayTask(WashServiceActivity.this);
                                 Map<String, String> result = payTask.payV2(response.body().getData().getAliPay(), true);
+                                if (result != null && result.get("resultStatus") != null && result.get("resultStatus").equals("9000")) {
+                                    new Handler(Looper.getMainLooper()).post(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(getActivityContext(), "支付成功", Toast.LENGTH_LONG).show();
+                                            finish();
+                                        }
+                                    });
+                                } else {
+                                    new Handler(Looper.getMainLooper()).post(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(getActivityContext(), "支付失败", Toast.LENGTH_LONG).show();
+                                        }
+                                    });
+                                }
                             }).start();
 //                        Toast.makeText(getActivityContext(), "调起阿里支付成功", Toast.LENGTH_LONG).show();
                         }
