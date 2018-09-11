@@ -16,7 +16,7 @@
         _aliPay = [dic objectForKey:@"aliPay"];
         _payType = [[dic objectForKey:@"payType"] integerValue];
         NSDictionary *wxpay = [dic objectForKey:@"wxPay"];
-        _wxPay = [[WeiXinPaymentModel alloc] init];
+        _wxPay = (wxpay == [NSNull null]) ? [[WeiXinPaymentModel alloc] init] : [[WeiXinPaymentModel alloc] initWithDic:wxpay];
     }
     
     return self;
@@ -34,9 +34,9 @@
         _outTradeNo = [dic objectForKey:@"outTradeNo"];
         _package = [dic objectForKey:@"package"];;
         _partnerid = [dic objectForKey:@"partnerid"];
-        _prepayid = [dic objectForKey:@"prepayid"];;
+        _prepayid = [dic objectForKey:@"prepayid"];
         _sign = [dic objectForKey:@"sign"];
-        _timestamp = [dic objectForKey:@"timestamp"];;
+        _timestamp = [[dic objectForKey:@"timestamp"] intValue];
     }
     
     return self;

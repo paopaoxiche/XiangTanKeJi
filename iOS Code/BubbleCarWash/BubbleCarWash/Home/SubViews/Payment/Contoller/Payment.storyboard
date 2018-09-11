@@ -47,19 +47,19 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CarWashAvatar" translatesAutoresizingMaskIntoConstraints="NO" id="GEL-BK-X3A">
-                                                    <rect key="frame" x="15" y="17" width="20" height="20"/>
+                                                    <rect key="frame" x="15" y="15" width="24" height="24"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="20" id="O9W-5f-BRY"/>
-                                                        <constraint firstAttribute="width" constant="20" id="l9t-Oq-gXC"/>
+                                                        <constraint firstAttribute="height" constant="24" id="O9W-5f-BRY"/>
+                                                        <constraint firstAttribute="width" constant="24" id="l9t-Oq-gXC"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="微信" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QW7-vP-7qe">
-                                                    <rect key="frame" x="51" y="19" width="29" height="17"/>
+                                                    <rect key="frame" x="55" y="19" width="29" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="推荐" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RR9-UB-5uY">
-                                                    <rect key="frame" x="81" y="15" width="21" height="12"/>
+                                                    <rect key="frame" x="85" y="15" width="21" height="12"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                     <color key="textColor" red="0.97254901959999995" green="0.60784313729999995" blue="0.039215686270000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
