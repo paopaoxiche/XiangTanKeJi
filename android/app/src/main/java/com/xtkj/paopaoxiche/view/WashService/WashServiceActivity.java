@@ -133,6 +133,8 @@ public class WashServiceActivity extends BaseActivity implements IWashServiceCon
                         }
                         if (max > 0) {
                             price.setText(String.format("￥%s - ￥%s", d.getPrice(), String.valueOf(max)));
+                        } else {
+                            postWashServiceBean.setCouponId(0);
                         }
                         continue;
                     }

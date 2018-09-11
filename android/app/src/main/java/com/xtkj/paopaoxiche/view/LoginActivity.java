@@ -26,6 +26,7 @@ import com.xtkj.paopaoxiche.contract.ILoginContract;
 import com.xtkj.paopaoxiche.model.UserInfo;
 import com.xtkj.paopaoxiche.presenter.LoginPresenterImpl;
 import com.xtkj.paopaoxiche.utils.PhoneCheckUtils;
+import com.xtkj.paopaoxiche.view.view.LoadingDialog;
 import com.xtkj.paopaoxiche.widget.CountdownButton;
 
 import java.security.MessageDigest;
@@ -72,6 +73,8 @@ public class LoginActivity extends BaseActivity implements RadioGroup.OnCheckedC
 
     int roletype = 0;
 
+    LoadingDialog loadingDialog;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -117,7 +120,7 @@ public class LoginActivity extends BaseActivity implements RadioGroup.OnCheckedC
 
     @Override
     protected void initViews() {
-
+        loadingDialog = new LoadingDialog(this);
     }
 
     @Override
@@ -165,6 +168,9 @@ public class LoginActivity extends BaseActivity implements RadioGroup.OnCheckedC
     @Override
     public void showToast(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+        if (loadingDialog.isShowing()) {
+            loadingDialog.dismiss();
+        }
     }
 
     @Override
@@ -211,6 +217,8 @@ public class LoginActivity extends BaseActivity implements RadioGroup.OnCheckedC
                     return;
                 }
                 Long code = Long.valueOf(codeText.getEditableText().toString() + "");
+
+                loadingDialog.show();
 
                 loginPresenter.doLogin(account, roletype, code);
 
