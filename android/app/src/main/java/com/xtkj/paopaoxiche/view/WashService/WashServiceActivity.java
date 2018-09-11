@@ -25,6 +25,8 @@ import com.bumptech.glide.Glide;
 import com.tencent.mm.opensdk.constants.ConstantsAPI;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
+import com.tencent.mm.opensdk.modelmsg.SendAuth;
+import com.tencent.mm.opensdk.modelmsg.ShowMessageFromWX;
 import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
@@ -102,6 +104,12 @@ public class WashServiceActivity extends BaseActivity implements IWashServiceCon
         initListeners();
     }
 
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        api.handleIntent(intent, this);
+    }
     private void buildServiceLayout(SellingServicesBean.DataBean d, int index) {
         LinearLayout linearLayout = (LinearLayout) View.inflate(this, R.layout.item_wash_service_details, null);
         TextView service_name = linearLayout.findViewById(R.id.service_name);
@@ -320,11 +328,32 @@ public class WashServiceActivity extends BaseActivity implements IWashServiceCon
     @Override
     public void onReq(BaseReq baseReq) {
         Log.i("支付反馈", "onPayFinish, reqType = " + baseReq.getType());
+        Toast.makeText(this, "openid = " + baseReq.openId, Toast.LENGTH_SHORT).show();
+
+        switch (baseReq.getType()) {
+            case ConstantsAPI.COMMAND_GETMESSAGE_FROM_WX:
+                //goToGetMsg();
+                break;
+            case ConstantsAPI.COMMAND_SHOWMESSAGE_FROM_WX:
+               // goToShowMsg((ShowMessageFromWX.Req) req);
+                break;
+            case ConstantsAPI.COMMAND_LAUNCH_BY_WX:
+                Toast.makeText(this, com.bingo.wxpay.R.string.launch_from_wx, Toast.LENGTH_SHORT).show();
+                break;
+            default:
+                break;
+        }
     }
 
     @Override
     public void onResp(BaseResp resp) {
         Log.i("支付反馈", "onPayFinish, respType = " + resp.getType());
+        Toast.makeText(this, "openid = " + resp.openId, Toast.LENGTH_SHORT).show();
+
+        if (resp.getType() == ConstantsAPI.COMMAND_SENDAUTH) {
+            Toast.makeText(this, "code = " + ((SendAuth.Resp) resp).code, Toast.LENGTH_SHORT).show();
+
+        }
     }
 
     @Override
