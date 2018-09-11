@@ -118,4 +118,11 @@ public interface WashService {
     @FormUrlEncoded
     @POST("wash/updataWashAddress")
     Call<NoDataBean> updateAddress(@Field("washId") String washId, @Field("address") String address, @Field("lat") String lat, @Field("lng") String lng);
+
+    @FormUrlEncoded
+    @POST("wash/drawDeposits")
+    Call<NoDataBean> drawDeposits(@Field("washId") String washId, @Field("money") String money);
+
+    @GET("wash/getBalance")
+    Call<NoDataBean> getBalance(@Query("washId") int washId);
 }

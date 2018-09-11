@@ -1,10 +1,12 @@
 package com.xtkj.paopaoxiche.view.CarWashMain;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -14,12 +16,19 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.xtkj.paopaoxiche.R;
 import com.xtkj.paopaoxiche.application.AppConstant;
-import com.xtkj.paopaoxiche.bean.UpdateBean;
-import com.xtkj.paopaoxiche.model.UserInfo;
+import com.xtkj.paopaoxiche.application.Authentication;
+import com.xtkj.paopaoxiche.application.BaseApplication;
 import com.xtkj.paopaoxiche.base.BaseFragmemt;
+import com.xtkj.paopaoxiche.bean.NoDataBean;
+import com.xtkj.paopaoxiche.bean.UpdateBean;
 import com.xtkj.paopaoxiche.contract.ICarWashContract;
+import com.xtkj.paopaoxiche.http.ApiField;
+import com.xtkj.paopaoxiche.http.RetrofitClient;
+import com.xtkj.paopaoxiche.model.DriverHomeModel;
+import com.xtkj.paopaoxiche.model.UserInfo;
 import com.xtkj.paopaoxiche.model.update.DownloadAPKCallback;
 import com.xtkj.paopaoxiche.model.update.DownloadManager;
+import com.xtkj.paopaoxiche.service.WashService;
 import com.xtkj.paopaoxiche.view.view.BusinessStateDialog;
 import com.xtkj.paopaoxiche.view.view.ExtensionDialog;
 import com.xtkj.paopaoxiche.view.view.FeedbackDialog;
@@ -28,11 +37,15 @@ import com.xtkj.paopaoxiche.view.view.IncomeListDialog;
 import com.xtkj.paopaoxiche.view.view.ModifyUserInfoDialog;
 import com.xtkj.paopaoxiche.view.view.MyEvaluateDialog;
 import com.xtkj.paopaoxiche.view.view.WashListManagerDialog;
+import com.xtkj.paopaoxiche.widget.SureDialog;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CarWashMineFragment extends BaseFragmemt implements ICarWashContract.IMineView {
 
@@ -78,6 +91,12 @@ public class CarWashMineFragment extends BaseFragmemt implements ICarWashContrac
     ImageButton modifyUserImageButton;
     @BindView(R.id.remind_update_text_view)
     TextView remindUpdateTextView;
+    @BindView(R.id.money_text_view)
+    TextView moneyTextView;
+    @BindView(R.id.money_button)
+    TextView moneyButton;
+
+    String remain = "0";
 
 
     @Nullable
@@ -89,6 +108,14 @@ public class CarWashMineFragment extends BaseFragmemt implements ICarWashContrac
         initView(view);
 
         minePresenter.onCreate();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                getRemain();
+            }
+        },500);
+
 
         return view;
     }
@@ -147,7 +174,7 @@ public class CarWashMineFragment extends BaseFragmemt implements ICarWashContrac
                 new GoodsListDialog(getContext(), true).show();
                 break;
             case R.id.income_linear_layout:
-                new IncomeListDialog(getContext(),true).show();
+                new IncomeListDialog(getContext(), true).show();
                 break;
             case R.id.my_evaluation:
                 new MyEvaluateDialog(getContext(), true).show();
@@ -194,5 +221,66 @@ public class CarWashMineFragment extends BaseFragmemt implements ICarWashContrac
     @Override
     public void hasUpdate() {
         remindUpdateTextView.setText("请升级！");
+    }
+
+    @OnClick(R.id.money_button)
+    public void onViewClicked() {
+        SureDialog sureDialog = new SureDialog(getContext(), R.style.NormalDialog);
+        sureDialog.setCancelBtnVisibility(View.VISIBLE);
+        sureDialog.setMessage("您确定要提取账户余额吗？");
+        sureDialog.setClickListener(new SureDialog.ClickListener() {
+            @Override
+            public void sure(SureDialog dialog) {
+                if (remain.equals("0") || remain.equals("0.0") || remain.equals("0.00")) {
+                    Toast.makeText(BaseApplication.getContext(), "账户无余额", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
+                        .create(WashService.class)
+                        .drawDeposits(UserInfo.getWashId() + "", remain)
+                        .enqueue(new Callback<NoDataBean>() {
+                            @Override
+                            public void onResponse(Call<NoDataBean> call, Response<NoDataBean> response) {
+                                if (response.body() != null && response.body().getCode() == 200) {
+                                    Toast.makeText(BaseApplication.getContext(), "申请提现成功", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    if (response != null) {
+                                        Toast.makeText(BaseApplication.getContext(), response.body().getMsg(), Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(BaseApplication.getContext(), "申请提现失败", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<NoDataBean> call, Throwable t) {
+                                Toast.makeText(BaseApplication.getContext(), "申请提现失败", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+            }
+        });
+        sureDialog.show();
+    }
+
+    private void getRemain() {
+        RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
+                .create(WashService.class)
+                .drawDeposits(UserInfo.getWashId() + "", "1")
+                .enqueue(new Callback<NoDataBean>() {
+                    @Override
+                    public void onResponse(Call<NoDataBean> call, Response<NoDataBean> response) {
+                        if (response.body() != null && response.body().getCode() == 200) {
+                            remain = response.body().getData().toString();
+                            moneyTextView.setText("账户余额 " + remain + "元");
+                        } else {
+                            Toast.makeText(BaseApplication.getContext(), "获取余额失败", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<NoDataBean> call, Throwable t) {
+                        Toast.makeText(BaseApplication.getContext(), "获取余额失败", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 }
