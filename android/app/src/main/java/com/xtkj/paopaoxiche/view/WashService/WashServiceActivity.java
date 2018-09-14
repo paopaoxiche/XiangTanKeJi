@@ -165,9 +165,6 @@ public class WashServiceActivity extends BaseActivity implements IWashServiceCon
         TextView shop_name = linearLayout.findViewById(R.id.shop_name);
         shop_name.setText(dataBean.getName());
 
-        TextView describeTextView = linearLayout.findViewById(R.id.describe_text_view);
-        describeTextView.setText(String.format("%s", dataBean.getDescribe()));
-
         TextView price = linearLayout.findViewById(R.id.price);
         price.setText(String.format("￥%s", dataBean.getCurrentPrice()));
         CheckBox radio = linearLayout.findViewById(R.id.radio);

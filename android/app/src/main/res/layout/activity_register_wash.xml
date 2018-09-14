@@ -108,7 +108,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:textSize="16sp"
-            android:text="工商营业执照"/>
+            android:text="工商营业执照(必传)"/>
 
         <Button
             android:id="@+id/upload_yingyezhizhao_button"
@@ -148,7 +148,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:layout_marginTop="8dp"
-            android:text="上传营业执照"
+            android:text="上传洗车证"
             android:textColor="@color/gray"
             android:textSize="16sp"/>
 
@@ -172,7 +172,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:textSize="16sp"
-            android:text="洗车证"/>
+            android:text="身份证（必传）"/>
 
         <LinearLayout
             android:layout_width="match_parent"

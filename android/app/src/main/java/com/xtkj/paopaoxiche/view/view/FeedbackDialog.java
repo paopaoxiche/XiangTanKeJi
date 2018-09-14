@@ -58,7 +58,7 @@ public class FeedbackDialog extends FullScreenWithStatusBarDialog {
                 .enqueue(new Callback<NoDataBean>() {
                     @Override
                     public void onResponse(Call<NoDataBean> call, Response<NoDataBean> response) {
-                        if (response.body() != null && response.body().getCode() != 401) {
+                        if (response.body() != null && response.body().getCode() == 200) {
                             Toast.makeText(BaseApplication.getContext(), "反馈成功", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(BaseApplication.getContext(), "反馈失败，请重新登录", Toast.LENGTH_SHORT).show();

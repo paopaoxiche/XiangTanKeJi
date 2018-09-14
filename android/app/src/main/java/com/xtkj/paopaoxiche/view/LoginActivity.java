@@ -186,6 +186,7 @@ public class LoginActivity extends BaseActivity implements RadioGroup.OnCheckedC
 
     @Override
     public void register() {
+        loadingDialog.dismiss();
         Intent intent = new Intent(this, RegisterWashActivity.class);
         Bundle bundle = new Bundle();
         bundle.putString("phone", accountText.getEditableText().toString());

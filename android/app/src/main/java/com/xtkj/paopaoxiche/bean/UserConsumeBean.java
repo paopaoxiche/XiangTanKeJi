@@ -177,7 +177,7 @@ public class UserConsumeBean {
             private int commodityId;
             private String commodityImg;
             private String commodityName;
-            private int price;
+            private double price;
 
             public int getCommodityId() {
                 return commodityId;
@@ -203,11 +203,11 @@ public class UserConsumeBean {
                 this.commodityName = commodityName;
             }
 
-            public int getPrice() {
+            public double getPrice() {
                 return price;
             }
 
-            public void setPrice(int price) {
+            public void setPrice(double price) {
                 this.price = price;
             }
         }

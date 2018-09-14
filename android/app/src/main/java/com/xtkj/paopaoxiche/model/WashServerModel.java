@@ -61,7 +61,7 @@ public class WashServerModel {
                         if (response == null) {
                             return;
                         }
-                        if (response.body().getCode() != 401) {
+                        if (response.body().getCode() == 200) {
                             washServerList = response.body().getData();
                             for (WashServiceListener washServiceListener : washServiceListenerList) {
                                 washServiceListener.getWashServerListSuccess(response.body());
@@ -95,7 +95,7 @@ public class WashServerModel {
                 .enqueue(new Callback<NoDataBean>() {
                     @Override
                     public void onResponse(Call<NoDataBean> call, Response<NoDataBean> response) {
-                        if (response.body().getCode() != 401) {
+                        if (response.body().getCode() == 200) {
                             Toast.makeText(BaseApplication.getContext(), "添加洗车服务成功", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(BaseApplication.getContext(), "添加洗车服务失败，请重新登录", Toast.LENGTH_SHORT).show();

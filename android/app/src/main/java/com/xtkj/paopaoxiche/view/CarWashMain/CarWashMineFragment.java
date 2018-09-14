@@ -112,7 +112,7 @@ public class CarWashMineFragment extends BaseFragmemt implements ICarWashContrac
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-//                getRemain();
+                getRemain();
             }
         },500);
 
@@ -243,6 +243,8 @@ public class CarWashMineFragment extends BaseFragmemt implements ICarWashContrac
                             public void onResponse(Call<NoDataBean> call, Response<NoDataBean> response) {
                                 if (response.body() != null && response.body().getCode() == 200) {
                                     Toast.makeText(BaseApplication.getContext(), "申请提现成功", Toast.LENGTH_SHORT).show();
+                                    moneyTextView.setText("账户余额 0元");
+                                    getRemain();
                                 } else {
                                     if (response != null) {
                                         Toast.makeText(BaseApplication.getContext(), response.body().getMsg(), Toast.LENGTH_SHORT).show();
@@ -265,7 +267,7 @@ public class CarWashMineFragment extends BaseFragmemt implements ICarWashContrac
     private void getRemain() {
         RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
                 .create(WashService.class)
-                .drawDeposits(UserInfo.getWashId() + "", "1")
+                .getBalance(UserInfo.getWashId())
                 .enqueue(new Callback<NoDataBean>() {
                     @Override
                     public void onResponse(Call<NoDataBean> call, Response<NoDataBean> response) {

@@ -21,6 +21,8 @@ public class GuidePresenterImpl implements IGuideContract.IGuidePresenter, UserM
     Class clazz = LoginActivity.class;
     PreferUtils preferUtils;
 
+    boolean checkTokenComplete = false;
+
     public GuidePresenterImpl(IGuideContract.IGuideView iGuideView) {
         guideView = iGuideView;
         guideView.setPresenter(this);
@@ -59,7 +61,16 @@ public class GuidePresenterImpl implements IGuideContract.IGuidePresenter, UserM
     public void autoLogin() {
         // TODO 这里需要http去判断TOKEN是否生效
         Intent intent = new Intent();
-        new Handler().postDelayed(() -> guideView.startActivityForIntent(intent, clazz), 2500);
+        Handler handler = new Handler();
+        handler.postDelayed(() -> {
+            if (checkTokenComplete) {
+                guideView.startActivityForIntent(intent, clazz);
+            } else {
+                handler.postDelayed(() -> {
+                        guideView.startActivityForIntent(intent, clazz);
+                }, 2500);
+            }
+        }, 2500);
     }
 
     @Override
@@ -89,6 +100,7 @@ public class GuidePresenterImpl implements IGuideContract.IGuidePresenter, UserM
 
     @Override
     public void checkTokenSuccess() {
+        checkTokenComplete = true;
         init();
         if (UserInfo.isDriver()) {
             UserModel.getInstance().getUserInfo(UserInfo.getId() + "");
@@ -97,6 +109,11 @@ public class GuidePresenterImpl implements IGuideContract.IGuidePresenter, UserM
             UserModel.getInstance().getCarWashInfo();
             clazz = CarWashMainActivity.class;
         }
+    }
+
+    @Override
+    public void checkTokenFailed() {
+        checkTokenComplete = true;
     }
 
     @Override

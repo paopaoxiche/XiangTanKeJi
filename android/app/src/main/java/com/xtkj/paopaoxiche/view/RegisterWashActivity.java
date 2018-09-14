@@ -203,6 +203,9 @@ public class RegisterWashActivity extends BaseGaodeActivity implements DriverHom
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if (data == null) {
+            return;
+        }
         String path = UriUtils.getImagePath(this, data.getData());
         switch (requestCode) {
             case yingyezhizhaoType:

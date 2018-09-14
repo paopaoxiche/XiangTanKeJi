@@ -182,10 +182,6 @@ public class MyCustomDialog extends FullScreenWithStatusBarDialog implements Lay
     }
 
     private void setGoodsView(List<CommoditiesBean> commoditiesBeans, ViewHolder holder) {
-        if (commoditiesBeans == null || commoditiesBeans.isEmpty()) {
-            return;
-        }
-
         final CustomAdapter<CommoditiesBean> commoditiesBeanAdapter = new CustomAdapter<>(commoditiesBeans);
         commoditiesBeanAdapter.setLayoutView(new LayoutView() {
             @SuppressLint("SetTextI18n")

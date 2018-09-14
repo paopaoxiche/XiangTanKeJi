@@ -152,7 +152,7 @@ public class ModifyUserInfoDialog extends FullScreenWithStatusBarDialog implemen
                         .enqueue(new Callback<NoDataBean>() {
                             @Override
                             public void onResponse(Call<NoDataBean> call, Response<NoDataBean> response) {
-                                if (response.body().getCode() != 401) {
+                                if (response.body().getCode() == 200) {
                                     Toast.makeText(BaseApplication.getContext(), "修改地址成功", Toast.LENGTH_SHORT).show();
                                 } else {
                                     Toast.makeText(BaseApplication.getContext(), "修改地址失败，请重新登录", Toast.LENGTH_SHORT).show();

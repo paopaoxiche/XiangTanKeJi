@@ -108,7 +108,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="44dp">
                                 <ImageView
-                                    android:src="@drawable/img_car1"
+                                    android:src="@drawable/img_car3"
                                     android:layout_width="28dp"
                                     android:layout_height="13dp" />
                                 <TextView
@@ -138,7 +138,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="44dp">
                                 <ImageView
-                                    android:src="@drawable/img_car3"
+                                    android:src="@drawable/img_car1"
                                     android:layout_width="28dp"
                                     android:layout_height="13dp" />
                                 <TextView
@@ -202,9 +202,12 @@
                         android:layout_height="wrap_content">
 
 
-
-
                     </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:background="@android:color/transparent"/>
 
                 </LinearLayout>
 

@@ -69,7 +69,7 @@ public class GoodsModel {
                         if (response == null) {
                             return;
                         }
-                        if (response.body().getCode() != 401) {
+                        if (response.body().getCode() == 200) {
                             goodsList = response.body().getData();
                             for (GoodsListener goodsListener : goodsListenerList) {
                                 goodsListener.getCarWashGoodsSuccess(response.body());
@@ -105,7 +105,7 @@ public class GoodsModel {
         Callback<NoDataBean> callback = new Callback<NoDataBean>() {
             @Override
             public void onResponse(Call<NoDataBean> call, Response<NoDataBean> response) {
-                if (response.body().getCode() != 401) {
+                if (response.body().getCode() == 200) {
                     Toast.makeText(BaseApplication.getContext(), "添加成功，请等待商品审核", Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(BaseApplication.getContext(), "添加失败", Toast.LENGTH_LONG).show();
@@ -138,7 +138,7 @@ public class GoodsModel {
                 .enqueue(new Callback<NoDataBean>() {
                     @Override
                     public void onResponse(Call<NoDataBean> call, Response<NoDataBean> response) {
-                        if (response.body().getCode() != 401) {
+                        if (response.body().getCode() == 200) {
                             Toast.makeText(BaseApplication.getContext(), "删除商品成功", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(BaseApplication.getContext(), "删除商品失败，请重新登录", Toast.LENGTH_SHORT).show();

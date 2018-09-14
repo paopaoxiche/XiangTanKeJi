@@ -86,7 +86,7 @@ public class BusinessStateDialog extends Dialog {
                         if (stateTextView == null) {
                             return;
                         }
-                        if (response.body().getCode() != 401) {
+                        if (response.body().getCode() == 200) {
                             stateTextView.setText(stateString);
                         } else {
                             Toast.makeText(BaseApplication.getContext(), "修改洗车状态失败，请重新登录", Toast.LENGTH_SHORT);

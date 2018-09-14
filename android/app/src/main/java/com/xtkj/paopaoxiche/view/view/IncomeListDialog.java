@@ -64,10 +64,10 @@ public class IncomeListDialog extends FullScreenWithStatusBarDialog {
                         if (response == null || response.body() == null) {
                             return;
                         }
-                        if (response.body().getCode() != 401) {
+                        if (response.body().getCode() == 200) {
                             IncomeAdapter incomeAdapter = new IncomeAdapter(getContext(), response.body().getData());
                             incomeListView.setAdapter(incomeAdapter);
-                            int income = 0;
+                            double income = 0;
                             for (IncomeBean.DataBean dataBean : response.body().getData()) {
                                 income += dataBean.getTotalMoney();
                             }

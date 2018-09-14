@@ -132,7 +132,7 @@ class AddCarDialog extends FullScreenWithStatusBarDialog implements RadioGroup.O
                 .enqueue(new Callback<NoDataBean>() {
                     @Override
                     public void onResponse(Call<NoDataBean> call, Response<NoDataBean> response) {
-                        if (response.body().getCode() != 401) {
+                        if (response.body().getCode() == 200) {
                             Toast.makeText(getContext(), "提交成功", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(getContext(), "提交失败，请重新登录", Toast.LENGTH_SHORT).show();

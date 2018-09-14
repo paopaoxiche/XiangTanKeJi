@@ -101,6 +101,11 @@ public class LoginPresenterImpl implements ILoginContract.ILoginPresenter, UserM
     }
 
     @Override
+    public void checkTokenFailed() {
+
+    }
+
+    @Override
     public void getCarWashInfoSuccess() {
         Intent intent = new Intent(loginView.getContext(), CarWashMainActivity.class);
         loginView.login(intent);

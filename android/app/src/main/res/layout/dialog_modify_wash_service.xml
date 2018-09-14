@@ -71,7 +71,7 @@
                 android:gravity="center_vertical"
                 android:hint="请输入服务名称"
                 android:layout_marginLeft="14dp"
-                android:maxLength="15"
+                android:maxLength="10"
                 android:maxLines="1"
                 android:singleLine="true"
                 android:textColor="@color/black"
@@ -134,7 +134,7 @@
             android:layout_marginLeft="24dp"
             android:layout_marginRight="24dp"
             android:hint="请输入服务描述"
-            android:maxLength="30"
+            android:maxLength="20"
             android:padding="10dp"
             android:textColor="@color/black"
             android:textSize="16sp"/>

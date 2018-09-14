@@ -71,6 +71,7 @@ public class UserModel {
         void loginFail(int code);
         void timeOut();
         void checkTokenSuccess();
+        void checkTokenFailed();
 
         void getCarWashInfoSuccess();
     }
@@ -90,16 +91,18 @@ public class UserModel {
                 .enqueue(new Callback<NoDataBean>() {
                     @Override
                     public void onResponse(Call<NoDataBean> call, Response<NoDataBean> response) {
-                        if (response.body().getCode() != 401) {
                             if (loginListenerList == null) {
                                 return;
                             }
-                            if (response.body().getCode() != 401) {
+                            if (response.body().getCode() == 200) {
                                 for (LoginListener loginListener : loginListenerList) {
                                     loginListener.checkTokenSuccess();
                                 }
+                            } else {
+                                for (LoginListener loginListener : loginListenerList) {
+                                    loginListener.checkTokenFailed();
+                                }
                             }
-                        }
                     }
 
                     @Override
@@ -108,7 +111,7 @@ public class UserModel {
                             return;
                         }
                         for (LoginListener loginListener : loginListenerList) {
-                            loginListener.timeOut();
+                            loginListener.checkTokenFailed();
                         }
                     }
                 });
@@ -124,7 +127,7 @@ public class UserModel {
                         if (userInfoListenerList == null || response.body() == null) {
                             return;
                         }
-                        if (response.body().getCode() != 401) {
+                        if (response.body().getCode() == 200) {
                             UserInfo.setUpdateBean(response.body());
                             for (UserInfoListener userInfoListener : userInfoListenerList) {
                                 userInfoListener.checkUpdate(response.body());
@@ -154,9 +157,13 @@ public class UserModel {
                         if (loginListenerList == null) {
                             return;
                         }
-                        if (response.body().getCode() != 401) {
+                        if (response.body().getCode() == 200) {
                             for (LoginListener loginListener : loginListenerList) {
                                 loginListener.checkTokenSuccess();
+                            }
+                        } else {
+                            for (LoginListener loginListener : loginListenerList) {
+                                loginListener.checkTokenFailed();
                             }
                         }
 
@@ -168,7 +175,7 @@ public class UserModel {
                             return;
                         }
                         for (LoginListener loginListener : loginListenerList) {
-                            loginListener.timeOut();
+                            loginListener.checkTokenFailed();
                         }
                     }
                 });
@@ -253,7 +260,7 @@ public class UserModel {
                         if (loginListenerList == null) {
                             return;
                         }
-                        if (response.body().getCode() != 401) {
+                        if (response.body().getCode() == 200) {
                             preferUtils.putString(AppConstant.NICK_NAME, nickName);
                             UserInfo.setNickName(nickName);
                             Toast.makeText(BaseApplication.getContext(), "修改昵称成功", Toast.LENGTH_SHORT);
@@ -295,7 +302,7 @@ public class UserModel {
                         if (loginListenerList == null) {
                             return;
                         }
-                        if (response.body().getCode() != 401) {
+                        if (response.body().getCode() == 200) {
                             preferUtils.putString(AppConstant.AVATAR, response.body().getData().toString());
                             UserInfo.setAvatar(preferUtils.getString(AppConstant.AVATAR));
                             Toast.makeText(BaseApplication.getContext(), "修改头像成功", Toast.LENGTH_SHORT);
@@ -333,7 +340,7 @@ public class UserModel {
                         if (loginListenerList == null) {
                             return;
                         }
-                        if (response.body().getCode() != 401) {
+                        if (response.body().getCode() == 200) {
                             CarWashInfoBean carWashInfoBean = response.body();
                             UserInfo.setAuthStatus(carWashInfoBean.getData().getAuthStatus());
                             UserInfo.setWashId(carWashInfoBean.getData().getId());
