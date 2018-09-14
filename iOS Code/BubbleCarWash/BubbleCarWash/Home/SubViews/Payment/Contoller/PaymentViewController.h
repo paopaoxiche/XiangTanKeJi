@@ -14,4 +14,6 @@
 @property (nonatomic, copy) NSString *serviceID;
 @property (nonatomic, copy) NSString *commoditys;
 
+- (void)paymentSuccess;
+
 @end

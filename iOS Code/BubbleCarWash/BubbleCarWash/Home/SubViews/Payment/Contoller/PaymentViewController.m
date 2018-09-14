@@ -6,11 +6,16 @@
 //  Copyright © 2018年 Sunshine Girl. All rights reserved.
 //
 
+#import <AlipaySDK/AlipaySDK.h>
+
 #import "PaymentViewController.h"
 #import "PaymentTypeCell.h"
 #import "NetworkTools.h"
 #import "CreateOrderModel.h"
 #import "GlobalMethods.h"
+#import "WXApi.h"
+#import "WXApiManager.h"
+#import "AlipayManager.h"
 
 @interface PaymentViewController () <UITableViewDataSource, PaymentTypeCellDelegate>
 
@@ -41,14 +46,33 @@
             NSDictionary *data = [response objectForKey:@"data"];
             self.orderModel = [[CreateOrderModel alloc] initWithDic:data];
             
-            UIViewController *vc = [GlobalMethods viewControllerWithBuddleName:@"Payment" vcIdentifier:@"PaymentSuccessVC"];
-            [self.navigationController pushViewController:vc animated:YES];
+            if (self.paymentTypeSelectedIndexPath.row == 0) {
+                PayReq *request = [[PayReq alloc] init];
+                request.partnerId = self.orderModel.wxPay.partnerid;
+                request.prepayId = self.orderModel.wxPay.prepayid;
+                request.package = self.orderModel.wxPay.package;
+                request.nonceStr = self.orderModel.wxPay.noncestr;
+                request.timeStamp = self.orderModel.wxPay.timestamp;
+                request.sign = self.orderModel.wxPay.sign;
+                [WXApiManager sharedManager].paymentVC = self;
+                [WXApi sendReq:request];
+            } else {
+                [AlipayManager sharedManager].paymentVC = self;
+                [[AlipaySDK defaultService] payOrder:self.orderModel.aliPay fromScheme:@"2018072560779353" callback:^(NSDictionary *resultDic) {
+                    NSLog(@"resultDic = %@", resultDic);
+                }];
+            }
         } else {
             [self messageBox:@"创建订单失败，请稍后重试"];
         }
     } failed:^(NSError *error) {
         [self messageBox:@"创建订单失败，请稍后重试"];
     }];
+}
+
+- (void)paymentSuccess {
+    UIViewController *vc = [GlobalMethods viewControllerWithBuddleName:@"Payment" vcIdentifier:@"PaymentSuccessVC"];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - UITableViewDatasource
@@ -61,12 +85,12 @@
     PaymentTypeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PaymentTypeIdentifier" forIndexPath:indexPath];
     cell.delegate = self;
     if (indexPath.row == 0) {
-//        cell.typeImageName = @"";
+        cell.typeImageName = @"WeiXin";
         cell.name = @"微信";
         cell.isShowRecommend = YES;
         cell.selectImageName = @"SingleSelection_Selected";
     } else {
-//        cell.typeImageName = @"";
+        cell.typeImageName = @"Alipay";
         cell.name = @"支付宝";
         cell.isShowRecommend = NO;
         cell.selectImageName = @"SingleSelection_Normal";
