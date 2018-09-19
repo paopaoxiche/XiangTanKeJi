@@ -10,4 +10,6 @@
 
 @interface WeatherViewController : UIViewController
 
+@property (nonatomic, copy) NSDictionary *weatherInfos;
+
 @end

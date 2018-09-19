@@ -34,6 +34,7 @@ typedef void(^ResultBlock)(NSArray *result);
 @property (nonatomic, copy) NSArray *commodities;
 @property (nonatomic, strong) ExpensesCouponModel *coupon;
 @property (nonatomic, assign) NSInteger isEvaluation;
+@property (nonatomic, assign) NSInteger recordID;
 
 - (instancetype)initWithDic:(NSDictionary *)dic;
 

@@ -35,6 +35,7 @@
 		657AA218213D95680086F98A /* EditNicknameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 657AA217213D95680086F98A /* EditNicknameViewController.m */; };
 		6584AA9421401D2600DEA15F /* UIImage+ScaleImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6584AA9321401D2600DEA15F /* UIImage+ScaleImage.m */; };
 		6593AB85212942AA002F92F6 /* NetworkTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 6593AB84212942AA002F92F6 /* NetworkTools.m */; };
+		65BCC85321529611009EC365 /* AMapSearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65BCC85221529611009EC365 /* AMapSearchKit.framework */; };
 		65C5AF582135A32900727122 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5AF522135A32900727122 /* LoginViewController.m */; };
 		65C5AF592135A32900727122 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65C5AF532135A32900727122 /* Login.storyboard */; };
 		65C5AFC42135A45100727122 /* ProfileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65C5AF9B2135A45100727122 /* ProfileCell.xib */; };
@@ -97,6 +98,7 @@
 		65D8D49D2146CF5800934589 /* Payment.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65D8D49A2146CF5800934589 /* Payment.storyboard */; };
 		65D8D49E2146CF5800934589 /* PaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D8D49B2146CF5800934589 /* PaymentViewController.m */; };
 		65D8D4A12146CF7D00934589 /* PaymentTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D8D4A02146CF7D00934589 /* PaymentTypeCell.m */; };
+		65E19EE2214FE87E00079CF3 /* WeatherNetworkTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E19EE1214FE87E00079CF3 /* WeatherNetworkTools.m */; };
 		65EA90EF212B19C90095F72B /* LYKeyChainStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EA90EE212B19C90095F72B /* LYKeyChainStore.m */; };
 		65EFB57B2143A9D9009289E4 /* AuthenticationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EFB57A2143A9D9009289E4 /* AuthenticationModel.m */; };
 		65FA514A2144FAD500F9D08C /* SeeLargePictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65FA51492144FAD500F9D08C /* SeeLargePictureViewController.m */; };
@@ -165,6 +167,8 @@
 		6593AB84212942AA002F92F6 /* NetworkTools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NetworkTools.m; sourceTree = "<group>"; };
 		6593AB9221297FCD002F92F6 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		65B7FC1821046E5700FC56A1 /* FunctionMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FunctionMacro.h; sourceTree = "<group>"; };
+		65BCC850215295B7009EC365 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		65BCC85221529611009EC365 /* AMapSearchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMapSearchKit.framework; path = Pods/AMapSearch/AMapSearchKit.framework; sourceTree = "<group>"; };
 		65C5AF522135A32900727122 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		65C5AF532135A32900727122 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		65C5AF542135A32900727122 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
@@ -278,6 +282,8 @@
 		65D8D49B2146CF5800934589 /* PaymentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentViewController.m; sourceTree = "<group>"; };
 		65D8D49F2146CF7D00934589 /* PaymentTypeCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PaymentTypeCell.h; sourceTree = "<group>"; };
 		65D8D4A02146CF7D00934589 /* PaymentTypeCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PaymentTypeCell.m; sourceTree = "<group>"; };
+		65E19EE0214FE87E00079CF3 /* WeatherNetworkTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeatherNetworkTools.h; sourceTree = "<group>"; };
+		65E19EE1214FE87E00079CF3 /* WeatherNetworkTools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WeatherNetworkTools.m; sourceTree = "<group>"; };
 		65EA90ED212B19C90095F72B /* LYKeyChainStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LYKeyChainStore.h; sourceTree = "<group>"; };
 		65EA90EE212B19C90095F72B /* LYKeyChainStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LYKeyChainStore.m; sourceTree = "<group>"; };
 		65EFB5792143A9D9009289E4 /* AuthenticationModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AuthenticationModel.h; sourceTree = "<group>"; };
@@ -327,6 +333,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65BCC85321529611009EC365 /* AMapSearchKit.framework in Frameworks */,
 				653E3BE121480F9100FD08BE /* AlipaySDK.framework in Frameworks */,
 				653E3BED21480FF300FD08BE /* CoreMotion.framework in Frameworks */,
 				653E3BEB21480FE500FD08BE /* Foundation.framework in Frameworks */,
@@ -420,6 +427,8 @@
 				6556AE5B211B282E0017B79A /* GlobalMethods.m */,
 				6593AB83212942AA002F92F6 /* NetworkTools.h */,
 				6593AB84212942AA002F92F6 /* NetworkTools.m */,
+				65E19EE0214FE87E00079CF3 /* WeatherNetworkTools.h */,
+				65E19EE1214FE87E00079CF3 /* WeatherNetworkTools.m */,
 				65EA90ED212B19C90095F72B /* LYKeyChainStore.h */,
 				65EA90EE212B19C90095F72B /* LYKeyChainStore.m */,
 				65FA5151214520A700F9D08C /* DataType.h */,
@@ -1036,6 +1045,8 @@
 		7A3C8B637EAA8F8B98C5119D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				65BCC85221529611009EC365 /* AMapSearchKit.framework */,
+				65BCC850215295B7009EC365 /* Podfile */,
 				653E3BEC21480FF300FD08BE /* CoreMotion.framework */,
 				653E3BEA21480FE500FD08BE /* Foundation.framework */,
 				653E3BE821480FDC00FD08BE /* UIKit.framework */,
@@ -1283,6 +1294,7 @@
 				65C5B0C72135AEA300727122 /* ParentViewController.m in Sources */,
 				65C5B1082135B0F800727122 /* CommodityHorizontalFlowLayout.m in Sources */,
 				657AA205213BCD660086F98A /* CouponListModel.m in Sources */,
+				65E19EE2214FE87E00079CF3 /* WeatherNetworkTools.m in Sources */,
 				65C5B1092135B0F800727122 /* NearWashInfoCell.m in Sources */,
 				65C5B0E52135AFC900727122 /* LYPageControl.m in Sources */,
 				6593AB85212942AA002F92F6 /* NetworkTools.m in Sources */,
@@ -1440,6 +1452,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/BubbleCarWash/Vendor/Apliay",
+					"$(PROJECT_DIR)/Pods/AMapSearch",
 				);
 				INFOPLIST_FILE = BubbleCarWash/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1505,6 +1518,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/BubbleCarWash/Vendor/Apliay",
+					"$(PROJECT_DIR)/Pods/AMapSearch",
 				);
 				INFOPLIST_FILE = BubbleCarWash/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

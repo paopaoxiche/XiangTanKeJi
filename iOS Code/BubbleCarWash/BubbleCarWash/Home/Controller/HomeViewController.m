@@ -8,6 +8,7 @@
 
 #import <AMapFoundationKit/AMapFoundationKit.h>
 #import <AMapLocationKit/AMapLocationKit.h>
+#import <AMapSearchKit/AMapSearchKit.h>
 
 #import "HomeViewController.h"
 #import "NearWashInfoCell.h"
@@ -18,16 +19,28 @@
 #import "NetworkTools.h"
 #import "HomeModel.h"
 #import "DataType.h"
+#import "WeatherModel.h"
+#import "WeatherViewController.h"
 
-@interface HomeViewController () <UITableViewDataSource, UITableViewDelegate, AMapLocationManagerDelegate>
+@interface HomeViewController () <UITableViewDataSource, UITableViewDelegate, AMapLocationManagerDelegate, AMapSearchDelegate>
 
-@property (weak, nonatomic) IBOutlet UIView *weatherView;
-@property (weak, nonatomic) IBOutlet UITableView *nearWashTableView;
-@property (weak, nonatomic) IBOutlet UIView *scrollSubView;
+@property (nonatomic, weak) IBOutlet UIView *weatherView;
+@property (nonatomic, weak) IBOutlet UILabel *currentTemperatureLabel;
+@property (nonatomic, weak) IBOutlet UILabel *locationLabel;
+@property (nonatomic, weak) IBOutlet UILabel *maximumTemperature;
+@property (nonatomic, weak) IBOutlet UILabel *lowestTemperature;
+@property (nonatomic, weak) IBOutlet UILabel *windLevelLabel;
+@property (nonatomic, weak) IBOutlet UILabel *humidityLabel;
+@property (nonatomic, weak) IBOutlet UILabel *curWeatherStateLabel;
+@property (nonatomic, weak) IBOutlet UILabel *weatherDescLabel;
+@property (nonatomic, weak) IBOutlet UITableView *nearWashTableView;
+@property (nonatomic, weak) IBOutlet UIView *scrollSubView;
 @property (nonatomic, strong) CommodityRecommendationViewController *commodityRecommendationVC;
 @property (nonatomic, strong) AMapLocationManager *locationManager;
-@property (nonatomic, copy) NSArray *nearbyWashList;
+@property (nonatomic, strong) AMapSearchAPI *search;
 @property (nonatomic, assign) BOOL isUpdateMearByWashList;
+@property (nonatomic, copy) NSArray *nearbyWashList;
+@property (nonatomic, copy) NSDictionary *weatherInfos;
 
 @end
 
@@ -63,6 +76,9 @@
     self.locationManager.delegate = self;
     self.locationManager.distanceFilter = 200;
     [self.locationManager startUpdatingLocation];
+    
+    self.search = [[AMapSearchAPI alloc] init];
+    self.search.delegate = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -83,9 +99,41 @@
     }];
 }
 
+- (void)loadWeatherInfos {
+    [WeatherModel loadWeatherData:[UserManager sharedInstance].location result:^(NSDictionary *result) {
+        self.weatherInfos = result;
+        
+        WeatherRealTimeModel *realTimeModel = result[@"WeatherRealTimeModel"];
+        self.currentTemperatureLabel.text = realTimeModel.currentTemperature;
+        self.curWeatherStateLabel.text = realTimeModel.currentWeatherState;
+        self.windLevelLabel.text = realTimeModel.currentwindSpeed;
+        self.humidityLabel.text = realTimeModel.currentHumidity;
+        
+        NSArray *forecasts = result[@"WeatherForeCasts"];
+        if (forecasts.count > 0) {
+            WeatherForeCastModel *forecastModel = forecasts[0];
+            self.weatherDescLabel.text = forecastModel.hint;
+            self.maximumTemperature.text = forecastModel.maxTemperature;
+            self.lowestTemperature.text = forecastModel.minTemperature;
+        }
+    }];
+}
+
+- (void)searchReGeocode {
+    // 设置逆地理编码查询参数
+    AMapReGeocodeSearchRequest *regeo = [[AMapReGeocodeSearchRequest alloc] init];
+    regeo.location = [AMapGeoPoint locationWithLatitude:[UserManager sharedInstance].location.lat
+                                              longitude:[UserManager sharedInstance].location.lng];
+    regeo.requireExtension = YES;
+    
+    // 发起逆地理编码查询
+    [self.search AMapReGoecodeSearch:regeo];
+}
+
 - (void)touchWeatherView:(UIGestureRecognizer *)gesture {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Home" bundle:[NSBundle mainBundle]];
-    UIViewController *weatherInfoVC = [storyboard instantiateViewControllerWithIdentifier:@"WeatherInfoVC"];
+    WeatherViewController *weatherInfoVC = [storyboard instantiateViewControllerWithIdentifier:@"WeatherInfoVC"];
+    weatherInfoVC.weatherInfos = _weatherInfos;
     [self presentViewController:weatherInfoVC animated:NO completion:nil];
 }
 
@@ -109,7 +157,7 @@
     cell.lowestPrice = model.price;
     cell.honor = model.honor;
     cell.washNumber = model.washCount;
-//    cell.distance = model.distance;
+    cell.distance = model.distance;
     
     return cell;
 }
@@ -131,7 +179,30 @@
     if (_isUpdateMearByWashList) {
         _isUpdateMearByWashList = NO;
         [self loadNearByWashList];
+        [self loadWeatherInfos];
     }
+    
+    [self searchReGeocode];
+}
+
+#pragma mark - AMapSearchDelegate
+
+
+/**
+ *  逆地理编码回调
+ */
+- (void)onReGeocodeSearchDone:(AMapReGeocodeSearchRequest *)request response:(AMapReGeocodeSearchResponse *)response {
+    if (response.regeocode) {
+        [UserManager sharedInstance].address = response.regeocode.formattedAddress;
+        self.locationLabel.text = response.regeocode.formattedAddress;
+    }
+}
+
+/**
+ *  检索失败回调
+ */
+- (void)AMapSearchRequest:(id)request didFailWithError:(NSError *)error {
+    NSLog(@"Error: %@", error);
 }
 
 @end

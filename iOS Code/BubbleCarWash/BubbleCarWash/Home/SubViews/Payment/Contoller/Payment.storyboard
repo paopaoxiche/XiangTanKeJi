@@ -46,7 +46,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="55.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CarWashAvatar" translatesAutoresizingMaskIntoConstraints="NO" id="GEL-BK-X3A">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WeiXin" translatesAutoresizingMaskIntoConstraints="NO" id="GEL-BK-X3A">
                                                     <rect key="frame" x="15" y="15" width="24" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="24" id="O9W-5f-BRY"/>
@@ -199,8 +199,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="CarWashAvatar" width="400" height="400"/>
         <image name="PaymentSuccess" width="87" height="87"/>
         <image name="SingleSelection_Normal" width="44" height="44"/>
+        <image name="WeiXin" width="24" height="24"/>
     </resources>
 </document>

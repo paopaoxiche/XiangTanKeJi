@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ParentViewController.h"
 
-@interface DiscussViewController : UIViewController
+@interface DiscussViewController : ParentViewController
+
+@property (nonatomic, assign) NSInteger consumeID;
 
 @end

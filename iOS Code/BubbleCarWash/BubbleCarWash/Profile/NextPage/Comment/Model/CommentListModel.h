@@ -23,6 +23,7 @@ typedef void(^ResultBlock)(NSArray *result);
 @property (nonatomic, copy) NSString *nickName;
 @property (nonatomic, copy) NSString *time;
 @property (nonatomic, assign) NSInteger score;
+@property (nonatomic, assign) NSInteger commentID;
 
 - (instancetype)initWithDic:(NSDictionary *)dic;
 

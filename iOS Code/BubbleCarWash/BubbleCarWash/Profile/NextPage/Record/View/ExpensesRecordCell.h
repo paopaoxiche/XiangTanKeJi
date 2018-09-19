@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@class TotalConsumptionCell;
+
+@protocol TotalConsumptionCellDelegate <NSObject>
+
+- (void)onEvaluationButtonClicked:(TotalConsumptionCell *)cell;
+
+@end
+
 @interface ExpensesRecordTitleCell : UITableViewCell
 
 @property (nonatomic, copy) NSString *avatarUrl;
@@ -29,6 +37,7 @@
 
 @interface TotalConsumptionCell : UITableViewCell
 
+@property (nonatomic, weak) id<TotalConsumptionCellDelegate> delegate;
 @property (nonatomic, copy) NSString *totalPrice;
 @property (nonatomic, assign) BOOL isEvaluation;
 

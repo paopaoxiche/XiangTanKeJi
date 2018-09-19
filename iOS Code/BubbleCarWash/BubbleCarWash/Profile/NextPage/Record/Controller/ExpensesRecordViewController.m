@@ -9,8 +9,10 @@
 #import "ExpensesRecordViewController.h"
 #import "ExpensesRecordCell.h"
 #import "ExpensesRecordListModel.h"
+#import "DiscussViewController.h"
+#import "GlobalMethods.h"
 
-@interface ExpensesRecordViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface ExpensesRecordViewController () <UITableViewDataSource, UITableViewDelegate, TotalConsumptionCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, copy) NSArray *recordList;
@@ -54,6 +56,7 @@
         TotalConsumptionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TotalConsumptionCell" forIndexPath:indexPath];
         cell.totalPrice = model.totalPrice;
         cell.isEvaluation = model.isEvaluation == ExpensesRecordEvaluationStatusOn;
+        cell.delegate = self;
         
         return cell;
     }
@@ -99,6 +102,19 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     return 11.9999;
+}
+
+#pragma mark - TotalConsumptionCellDelegate
+
+- (void)onEvaluationButtonClicked:(TotalConsumptionCell *)cell {
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    ExpensesRecordModel *model = [_recordList objectAtIndex:indexPath.section];
+    if (model.isEvaluation == ExpensesRecordEvaluationStatusNOT) {
+        DiscussViewController *discussVC = (DiscussViewController *)[GlobalMethods viewControllerWithBuddleName:@"Profile"
+                                                                                                   vcIdentifier:@"DiscussVC"];
+        discussVC.consumeID = model.recordID;
+        [self.navigationController pushViewController:discussVC animated:YES];
+    }
 }
 
 @end

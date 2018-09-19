@@ -10,20 +10,24 @@
 #import "WeatherInfoCell.h"
 #import "UIColor+Category.h"
 #import "GlobalMethods.h"
+#import "WeatherModel.h"
+#import "UserManager.h"
 
 @interface WeatherViewController () <UITableViewDataSource, UITableViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UIImageView *weatherBgImgView;
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (weak, nonatomic) IBOutlet UIView *backView;
-@property (weak, nonatomic) IBOutlet UILabel *locationLabel;
-@property (weak, nonatomic) IBOutlet UILabel *curTemperature;
-@property (weak, nonatomic) IBOutlet UILabel *maximumTemperature;
-@property (weak, nonatomic) IBOutlet UILabel *lowestTemperature;
-@property (weak, nonatomic) IBOutlet UILabel *windLevelLabel;
-@property (weak, nonatomic) IBOutlet UILabel *humidityLabel;
-@property (weak, nonatomic) IBOutlet UILabel *curWeatherStateLabel;
-@property (weak, nonatomic) IBOutlet UILabel *weatherDescLabel;
+@property (nonatomic, weak) IBOutlet UIImageView *weatherBgImgView;
+@property (nonatomic, weak) IBOutlet UITableView *tableView;
+@property (nonatomic, weak) IBOutlet UIView *backView;
+@property (nonatomic, weak) IBOutlet UILabel *locationLabel;
+@property (nonatomic, weak) IBOutlet UILabel *curTemperature;
+@property (nonatomic, weak) IBOutlet UILabel *maximumTemperature;
+@property (nonatomic, weak) IBOutlet UILabel *lowestTemperature;
+@property (nonatomic, weak) IBOutlet UILabel *windLevelLabel;
+@property (nonatomic, weak) IBOutlet UILabel *humidityLabel;
+@property (nonatomic, weak) IBOutlet UILabel *curWeatherStateLabel;
+@property (nonatomic, weak) IBOutlet UILabel *weatherDescLabel;
+@property (nonatomic, copy) NSArray *dataSource;
+@property (nonatomic, strong) WeatherRealTimeModel *realTimeModel;
 
 @end
 
@@ -39,6 +43,12 @@
                          startPoint:CGPointMake(0, 0)
                            endPoint:CGPointMake(0, 1)
                                view:self.view];
+    
+    self.realTimeModel = _weatherInfos[@"WeatherRealTimeModel"];
+    self.dataSource = [[NSArray alloc] initWithArray:_weatherInfos[@"WeatherForeCasts"]];
+    
+    [self setWeatherRealTimeInfo];
+    self.locationLabel.text = [UserManager sharedInstance].address;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -51,18 +61,36 @@
     [self dismissViewControllerAnimated:NO completion:nil];
 }
 
+- (void)setWeatherRealTimeInfo {
+    self.curTemperature.text = _realTimeModel.currentTemperature;
+    self.curWeatherStateLabel.text = _realTimeModel.currentWeatherState;
+    self.windLevelLabel.text = _realTimeModel.currentwindSpeed;
+    self.humidityLabel.text = _realTimeModel.currentHumidity;
+    
+    if (_dataSource.count > 0) {
+        WeatherForeCastModel *forecastModel = _dataSource[0];
+        self.weatherDescLabel.text = forecastModel.hint;
+        self.maximumTemperature.text = [NSString stringWithFormat:@"%@˚", forecastModel.maxTemperature];
+        self.lowestTemperature.text = [NSString stringWithFormat:@"%@˚", forecastModel.minTemperature];
+    }
+}
+
 #pragma mark - UITableViewDatasource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 5;
+    return _dataSource.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    WeatherForeCastModel *model = _dataSource[indexPath.row];
     WeatherInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WeatherInfoIdentifier" forIndexPath:indexPath];
+    cell.date = model.date;
+    cell.week = model.week;
+    cell.maxTemperature = model.maxTemperature;
+    cell.lowTemperature = model.minTemperature;
+    cell.imgName = model.imageName;
     
     return cell;
 }
-
-#pragma mark - UITableViewDelegate
 
 @end

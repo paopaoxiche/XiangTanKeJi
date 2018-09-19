@@ -102,6 +102,11 @@
     
     _evaluationBtn.layer.borderColor = [UIColor rgbWithRed:248 green:155 blue:10].CGColor;
 }
+- (IBAction)onEvaluationButtonClicked:(id)sender {
+    if (_delegate) {
+        [_delegate onEvaluationButtonClicked:self];
+    }
+}
 
 - (void)setTotalPrice:(NSString *)totalPrice {
     _expensesTotalLabel.text = totalPrice;

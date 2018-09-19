@@ -143,7 +143,14 @@ typedef void(^FailedBlock)(NSError *error);
                                pageSize:(NSInteger)pageSize
                                 success:(SuccessBlock)success
                                  failed:(FailedBlock)failed;
-
+/**
+ *  提交评价
+ */
+- (void)submitEvaluate:(NSUInteger)consumeID
+                 grade:(NSInteger)grade
+               content:(NSString *)content
+               success:(SuccessBlock)success
+                failed:(FailedBlock)failed;
 /**
  *  兑换优惠券
  */
@@ -173,7 +180,71 @@ typedef void(^FailedBlock)(NSError *error);
 
 #pragma mark - 车主支付
 
+/**
+ *  创建订单
+ */
 - (void)createOrder:(CreateOrderParam *)param success:(SuccessBlock)success failed:(FailedBlock)failed;
+
+#pragma mark - 洗车场首页
+
+/**
+ *  获取近期洗车列表
+ */
+- (void)obtainRecentCarWashList:(NSInteger)washID count:(NSInteger)count success:(SuccessBlock)success failed:(FailedBlock)failed;
+
+#pragma mark - 洗车场我的
+
+/**
+ *  更新洗车场地址
+ */
+
+/**
+ *  获取工商认证状态
+ */
+
+/**
+ *  提交工商认证
+ */
+
+/**
+ *  获取近期洗车列表
+ */
+
+/**
+ *  获取收入列表
+ */
+
+/**
+ *  获取洗车场评价列表
+ */
+
+/**
+ *  更新洗车场营业状态
+ */
+
+/**
+ *  发布洗车服务
+ */
+
+/**
+ *  删除洗车服务
+ */
+
+/**
+ *  增加/修改商品
+ */
+
+/**
+ *  删除商品
+ */
+
+/**
+ *  提取现金
+ */
+
+/**
+ *  获取余额
+ */
 
 #pragma mark - 天气
 

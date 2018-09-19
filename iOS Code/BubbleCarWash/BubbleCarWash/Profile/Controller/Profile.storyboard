@@ -879,6 +879,9 @@
                                                             <integer key="value" value="1"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="onEvaluationButtonClicked:" destination="X0W-l2-6B3" eventType="touchUpInside" id="lgU-GT-gKh"/>
+                                                    </connections>
                                                 </button>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u6Q-Op-gMo" userLabel="Line">
                                                     <rect key="frame" x="20" y="48" width="355" height="1"/>
@@ -1234,39 +1237,39 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CjA-3L-gay">
                                 <rect key="frame" x="79.5" y="82" width="216" height="26"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gg1-EO-IXX">
+                                    <button opaque="NO" tag="2001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gg1-EO-IXX" userLabel="1">
                                         <rect key="frame" x="8" y="1" width="24" height="24"/>
-                                        <state key="normal" image="DiscussHighlighted"/>
+                                        <state key="normal" image="DiscussNormal"/>
                                         <connections>
                                             <action selector="onStartBtnClicked:" destination="kIp-Mt-ta2" eventType="touchUpInside" id="cxp-Zj-CYK"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dBX-lJ-263">
+                                    <button opaque="NO" tag="2002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dBX-lJ-263" userLabel="2">
                                         <rect key="frame" x="52" y="1" width="24" height="24"/>
-                                        <state key="normal" image="DiscussHighlighted"/>
+                                        <state key="normal" image="DiscussNormal"/>
                                         <connections>
                                             <action selector="onStartBtnClicked:" destination="kIp-Mt-ta2" eventType="touchUpInside" id="lrM-uu-6mJ"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yEp-fH-RNZ">
+                                    <button opaque="NO" tag="2003" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Arn-eC-ntW" userLabel="3">
+                                        <rect key="frame" x="95.5" y="1" width="24" height="24"/>
+                                        <state key="normal" image="DiscussNormal"/>
+                                        <connections>
+                                            <action selector="onStartBtnClicked:" destination="kIp-Mt-ta2" eventType="touchUpInside" id="3a1-h5-Vmw"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="2004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yEp-fH-RNZ" userLabel="4">
                                         <rect key="frame" x="140" y="1" width="24" height="24"/>
-                                        <state key="normal" image="DiscussHighlighted"/>
+                                        <state key="normal" image="DiscussNormal"/>
                                         <connections>
                                             <action selector="onStartBtnClicked:" destination="kIp-Mt-ta2" eventType="touchUpInside" id="6Je-lm-cuW"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WDk-as-VjW">
+                                    <button opaque="NO" tag="2005" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WDk-as-VjW" userLabel="5">
                                         <rect key="frame" x="184" y="1" width="24" height="24"/>
-                                        <state key="normal" image="DiscussHighlighted"/>
+                                        <state key="normal" image="DiscussNormal"/>
                                         <connections>
                                             <action selector="onStartBtnClicked:" destination="kIp-Mt-ta2" eventType="touchUpInside" id="8mh-I4-DjG"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Arn-eC-ntW">
-                                        <rect key="frame" x="96" y="1" width="24" height="24"/>
-                                        <state key="normal" image="DiscussHighlighted"/>
-                                        <connections>
-                                            <action selector="onStartBtnClicked:" destination="kIp-Mt-ta2" eventType="touchUpInside" id="3a1-h5-Vmw"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -1357,11 +1360,6 @@
                     <connections>
                         <outlet property="discussTextView" destination="tbj-jG-kAq" id="3yh-hx-pm3"/>
                         <outlet property="placeholderLabel" destination="Q67-O4-uRq" id="JvC-jS-K1u"/>
-                        <outlet property="startBtn1" destination="Gg1-EO-IXX" id="s7K-Zg-EfP"/>
-                        <outlet property="startBtn2" destination="dBX-lJ-263" id="RCd-yC-Q3C"/>
-                        <outlet property="startBtn3" destination="Arn-eC-ntW" id="tvz-UG-KYf"/>
-                        <outlet property="startBtn4" destination="yEp-fH-RNZ" id="YwA-Ke-gpU"/>
-                        <outlet property="startBtn5" destination="WDk-as-VjW" id="20W-yt-M3S"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LBy-Rb-w9X" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1372,7 +1370,7 @@
     <resources>
         <image name="CouponBg" width="335" height="112"/>
         <image name="CurrentIntegral" width="12" height="14"/>
-        <image name="DiscussHighlighted" width="24" height="24"/>
+        <image name="DiscussNormal" width="24" height="24"/>
         <image name="HeaderBg" width="375" height="231"/>
         <image name="HeaderPhone" width="9" height="14"/>
         <image name="HeaderRightArrow" width="6" height="11"/>

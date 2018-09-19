@@ -48,4 +48,19 @@
                            endPoint:(CGPoint)endPoint
                                view:(UIView *)view;
 
+/**
+ *  转换日期字符串
+ *
+ *  @param dateString 日期字符串，格式yyyy-MM-dd
+ *  @return 返回格式为MM-dd的日期字符串
+ */
++ (NSString *)convertDate:(NSString *)dateString;
+/**
+ *  根据日期字符串获取是周几
+ *
+ *  @param dateString 日期字符串，格式yyyy-MM-dd
+ *  @return 返回是周几
+ */
++ (NSString *)dayOfWeekByDateString:(NSString *)dateString;
+
 @end

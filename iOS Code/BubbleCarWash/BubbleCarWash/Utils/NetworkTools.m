@@ -213,6 +213,16 @@ static const NSTimeInterval kTimeOutInterval = 6.0f;
     [self GET:url parameters:params success:success failure:failed];
 }
 
+- (void)submitEvaluate:(NSUInteger)consumeID
+                 grade:(NSInteger)grade
+               content:(NSString *)content
+               success:(SuccessBlock)success
+                failed:(FailedBlock)failed {
+    NSDictionary *params = @{@"consumeId": [NSNumber numberWithUnsignedInteger:consumeID], @"grade": [NSNumber numberWithInteger:grade], @"content": content};
+    [self setRequestHeader];
+    [self POST:@"carOwner/evaluateRecord" parameters:params success:success failure:failed];
+}
+
 - (void)convertIntegralToCouponWithCouponID:(NSString *)couponID
                                     success:(SuccessBlock)success
                                      failed:(FailedBlock)failed {
@@ -281,6 +291,14 @@ static const NSTimeInterval kTimeOutInterval = 6.0f;
         failed(error);
     }];
 }
+
+#pragma mark - 洗车场首页
+
+- (void)obtainRecentCarWashList:(NSInteger)washID count:(NSInteger)count success:(SuccessBlock)success failed:(FailedBlock)failed {
+    
+}
+
+#pragma mark - 洗车场我的
 
 - (void)POST:(NSString *)url parameters:(NSDictionary *)params success:(SuccessBlock)success failure:(FailedBlock)failed {
     [self POST:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {

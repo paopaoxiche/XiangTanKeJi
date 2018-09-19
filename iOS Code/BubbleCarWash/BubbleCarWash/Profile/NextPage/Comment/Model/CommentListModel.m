@@ -41,8 +41,6 @@
 
 @interface CommentModel ()
 
-@property (nonatomic, assign) NSInteger commentID;
-
 @end
 
 @implementation CommentModel

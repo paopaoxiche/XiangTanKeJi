@@ -126,4 +126,32 @@
     [view.layer setMask:layer];
 }
 
++ (NSString *)convertDate:(NSString *)dateString {
+    NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
+    [inputFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSDate *inputDate = [inputFormatter dateFromString:dateString];
+    
+    NSDateFormatter *outputFormatter = [[NSDateFormatter alloc] init];
+    [outputFormatter setDateFormat:@"MM/dd"];
+    NSString *date = [outputFormatter stringFromDate:inputDate];
+    
+    return date;
+}
+
++ (NSString *)dayOfWeekByDateString:(NSString *)dateString {
+    NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
+    [inputFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSDate *inputDate = [inputFormatter dateFromString:dateString];
+
+    NSArray *weekdays = @[@"星期日", @"星期一", @"星期二", @"星期三", @"星期四", @"星期五", @"星期六"];
+    
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierChinese];
+    NSDateComponents *component = [[NSDateComponents alloc] init];
+    NSCalendarUnit calendarUnit = NSCalendarUnitWeekday;
+    component = [calendar components:calendarUnit fromDate:inputDate];
+    
+    return [weekdays objectAtIndex:([component weekday] - 1)];
+}
+
+
 @end

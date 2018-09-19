@@ -43,7 +43,6 @@
 @interface ExpensesRecordModel ()
 
 @property (nonatomic, assign) NSUInteger carType;
-@property (nonatomic, assign) NSInteger recordID;
 
 @end
 
@@ -61,7 +60,9 @@
         _time = [dic objectForKey:@"time"];
         _totalPrice = [dic objectForKey:@"totalPrice"];
         _isEvaluation = [[dic objectForKey:@"isEvaluation"] integerValue];
-        _coupon = [[ExpensesCouponModel alloc] initWithDic:[dic objectForKey:@"coupons"]];
+        
+        NSDictionary *coupons = [dic objectForKey:@"coupons"];
+        _coupon = (coupons && coupons != [NSNull null]) ? [[ExpensesCouponModel alloc] initWithDic:coupons] : nil;
         
         NSArray *dataArr = [dic objectForKey:@"commodities"];
         NSMutableArray *commodities = [NSMutableArray arrayWithCapacity:dataArr.count];
