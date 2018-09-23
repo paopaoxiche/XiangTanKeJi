@@ -27,7 +27,7 @@
      */
     NSString *CM = @"^1(34[0-8]|57[0-79]|(3[5-9]|5[0-289]|78|8[2-478])\\d)\\d{7}$";     //中国移动：China Mobile
     NSString *CU = @"^1(3[0-2]|5[56]|76|8[56])\\d{8}$";                                 //中国联通：China Unicom
-    NSString *CT = @"^1(33|53|77|8[019])\\d{8}$";                                     //中国电信：China Telecom
+    NSString *CT = @"^1(33|53|77|73|8[019])\\d{8}$";                                     //中国电信：China Telecom
     
     NSPredicate *predicateCM = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CM];
     NSPredicate *predicateCU = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CU];

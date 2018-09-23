@@ -138,12 +138,10 @@ static const NSTimeInterval kTimeOutInterval = 6.0f;
 }
 
 - (void)updateUserNickName:(NSString *)nickName success:(SuccessBlock)success failed:(FailedBlock)failed {
-    [self setRequestHeader];
     [self POST:@"user/update" parameters:@{@"nickname": nickName} success:success failure:failed];
 }
 
 - (void)updateUserAvatar:(UIImage *)image success:(SuccessBlock)success failed:(FailedBlock)failed {
-    [self setRequestHeader];
     [self POST:@"user/update" parameters:nil images:@[@{@"file": image}] success:success failure:failed];
 }
 
@@ -302,6 +300,19 @@ static const NSTimeInterval kTimeOutInterval = 6.0f;
 
 #pragma mark - 洗车场我的
 
+//- (void)obtainCarWashDetail:(NSInteger)washID success:(SuccessBlock)success failed:(FailedBlock)failed {
+//    NSDictionary *params = @{@"washId":[NSNumber numberWithInteger:washID]};
+//    [self GET:@"wash/getCarWashDetail" parameters:params success:success failure:failed];
+//}
+
+- (void)obtainCarWashInfo:(SuccessBlock)success failed:(FailedBlock)failed {
+    [self GET:@"wash/getWashInfo" parameters:nil success:success failure:failed];
+}
+
+- (void)obtainCarWashCertificationInfo:(SuccessBlock)success failed:(FailedBlock)failed {
+    [self GET:@"wash/getAuthenticationInfo" parameters:nil success:success failure:failed];
+}
+
 - (void)registerWash:(RegisterWashParam *)param success:(SuccessBlock)success failed:(FailedBlock)failed {
     NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithCapacity:0];
     if (param.phone && ![param.phone isEqualToString:@""]) {
@@ -335,6 +346,12 @@ static const NSTimeInterval kTimeOutInterval = 6.0f;
     }
     
     [self POST:@"wash/registerWash" parameters:params images:images success:success failure:failed];
+}
+
+- (void)obtainRecentCarWashes:(NSInteger)washID count:(NSInteger)count success:(SuccessBlock)success failed:(FailedBlock)failed {
+    NSDictionary *params = @{@"washId":[NSNumber numberWithInteger:washID], @"count":[NSNumber numberWithInteger:count]};
+    [self setRequestHeader];
+    [self GET:@"wash/getRecentWashList" parameters:params success:success failure:failed];
 }
 
 #pragma mark - GET Method

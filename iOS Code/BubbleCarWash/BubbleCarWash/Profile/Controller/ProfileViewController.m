@@ -14,7 +14,9 @@
 #import "CouponViewController.h"
 #import "UserManager.h"
 #import "UserInfoModel.h"
+#import "CarWashInfoModel.h"
 #import "GlobalMethods.h"
+#include "NetworkTools.h"
 
 @interface ProfileViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -42,7 +44,9 @@
 
     UITapGestureRecognizer *singleGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onHeaderViewClicked)];
     [_headerView addGestureRecognizer:singleGesture];
+    
     _tableView.tableFooterView = [[UIView alloc] init];
+    [_tableView registerNib:[UINib nibWithNibName:@"ProfileCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"ProfileCellIdentifier"];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUserInfo:) name:@"UpdateUserInfo" object:nil];
 }
@@ -82,6 +86,8 @@
     } else {
         _avatar.image = [UIImage imageNamed:@"OwnerAvatar"];
     }
+    
+    [self.tableView reloadData];
 }
 
 - (void)onHeaderViewClicked {
@@ -108,23 +114,25 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     BOOL isOwner = _userType == UserTypeOwner;
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
-    UITableViewCellStyle style = isOwner ? UITableViewCellStyleDefault : UITableViewCellStyleValue1;
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:style reuseIdentifier:@"Cell"];
-    }
+    ProfileCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ProfileCellIdentifier"];
+    cell.upgradeView.hidden = YES;
+
     ProfileItem *item = self.dataSource[indexPath.section][indexPath.row];
-    cell.textLabel.text = item.text;
-    cell.imageView.image = [UIImage imageNamed:item.imageName];
+    cell.cusTextLabel.text = item.text;
+    cell.imgView.image = [UIImage imageNamed:item.imageName];
+    
+    if (indexPath.section == 0 && _userType == UserTypeCarWash) {
+        CarWashInfoModel *washInfo = [UserManager sharedInstance].carWashInfo;
+        cell.cusDetailTextLabel.hidden = NO;
+        cell.cusDetailTextLabel.text = indexPath.row == 0 ? [NSString stringWithFormat:@"%li", washInfo.honor] : [NSString stringWithFormat:@"%li次", washInfo.washCount];
+    } else {
+        cell.cusDetailTextLabel.hidden = YES;
+    }
     
     if (!isOwner && indexPath.section == 0) {
-        cell.accessoryView = nil;
+        cell.accessoryArrow.hidden = YES;
     } else {
-        cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"AccessoryArrow"]];
-    }
-    
-    if (!isOwner) {
-        cell.detailTextLabel.text = @"detailText";
+        cell.accessoryArrow.hidden = NO;
     }
     
     return cell;
@@ -151,7 +159,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    if (section == 1) {
+    if (section == _dataSource.count - 1) {
         return 20;
     }
     
@@ -159,9 +167,7 @@
 }
 
 - (NSArray *)dataSource {
-    if (!_dataSource) {
-        _dataSource = [ProfileModel profileDataSourceWithUserType:_userType];
-    }
+    _dataSource = [ProfileModel profileDataSourceWithUserType:_userType];
     
     return _dataSource;
 }

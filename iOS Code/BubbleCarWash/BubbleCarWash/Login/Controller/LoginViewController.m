@@ -86,7 +86,7 @@
 
     [[NetworkTools sharedInstance] loginWithPhoneNumber:_phoneNumberTextField.text code:[_verificationCodeTextField.text integerValue] userType:_type success:^(NSDictionary *response, BOOL isSuccess) {
         long code = [response[@"code"] longValue];
-        if (code == 200) {
+        if (code == 200 || code == 10009) {
             [self stopCountingDown];
             // 登录成功
             UserInfoModel *userInfo = [[UserInfoModel alloc] initWithDic:response[@"data"]];

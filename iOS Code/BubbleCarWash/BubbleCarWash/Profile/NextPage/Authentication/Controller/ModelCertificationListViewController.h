@@ -11,4 +11,6 @@
 
 @interface ModelCertificationListViewController : BaseTableViewController
 
+@property (nonatomic, copy) NSArray *modelCertificationList;
+
 @end

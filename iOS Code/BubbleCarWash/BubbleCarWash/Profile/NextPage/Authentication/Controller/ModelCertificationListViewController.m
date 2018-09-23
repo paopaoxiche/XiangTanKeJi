@@ -14,7 +14,6 @@
 @interface ModelCertificationListViewController ()
 
 @property (nonatomic, weak) IBOutlet UILabel *carNumberLabel;
-@property (nonatomic, copy) NSArray *modelCertificationList;
 
 @end
 
@@ -28,10 +27,7 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"BackArrowBlack"] style:UIBarButtonItemStylePlain target:self action:@selector(backToSuperVC)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(pushToNewCarModelVC)];
     
-    [AuthenticationModel loadModelCertificationList:-1 result:^(NSArray *result) {
-        self.modelCertificationList = result;
-        [self.tableView reloadData];
-    }];
+    
 }
 
 - (void)didReceiveMemoryWarning {

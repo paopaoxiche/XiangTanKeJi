@@ -67,6 +67,22 @@
     }];
 }
 
++ (void)loadCarWashCertificationInfo:(ResultBlock)result {
+    [[NetworkTools sharedInstance] obtainCarWashCertificationInfo:^(NSDictionary *response, BOOL isSuccess) {
+        NSInteger code = [[response objectForKey:@"code"] integerValue];
+        if (code == 200 && [response objectForKey:@"data"] != [NSNull null]) {
+            NSDictionary *dataDic = [response objectForKey:@"data"];
+            CarWashCertificationModel *model = [[CarWashCertificationModel alloc] initWithDic:dataDic];
+            
+            result(model);
+        } else {
+            result(nil);
+        }
+    } failed:^(NSError *error) {
+        result(nil);
+    }];
+}
+
 @end
 
 #pragma mark - 车型模型
@@ -167,6 +183,25 @@
         } else {
             _imageName = @"SmallCar_New";
         }
+    }
+    
+    return self;
+}
+
+@end
+
+#pragma mark - 工商认证信息
+
+@implementation CarWashCertificationModel
+
+- (instancetype)initWithDic:(NSDictionary *)dic {
+    self = [super init];
+    if (self) {
+        _status = [dic objectForKey:@"authStatus"];
+        _licenseUrl = [dic objectForKey:@"licenseImg"];
+        _washCardUrl = [dic objectForKey:@"washCardImg"];
+        _cardCoverUrl = [dic objectForKey:@"idCardCoverImg"];
+        _cardBackUrl = [dic objectForKey:@"idCardBackImg"];
     }
     
     return self;

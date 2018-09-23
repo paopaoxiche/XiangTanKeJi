@@ -34,6 +34,7 @@
 		657AA215213C27AC0086F98A /* CommentListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 657AA214213C27AC0086F98A /* CommentListModel.m */; };
 		657AA218213D95680086F98A /* EditNicknameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 657AA217213D95680086F98A /* EditNicknameViewController.m */; };
 		6580E82E21576C9E00C5B5FA /* ModelCertificationListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6580E82D21576C9E00C5B5FA /* ModelCertificationListViewController.m */; };
+		6580E8312157C2DB00C5B5FA /* CarWashInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6580E8302157C2DB00C5B5FA /* CarWashInfoModel.m */; };
 		6584AA9421401D2600DEA15F /* UIImage+ScaleImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6584AA9321401D2600DEA15F /* UIImage+ScaleImage.m */; };
 		6593AB85212942AA002F92F6 /* NetworkTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 6593AB84212942AA002F92F6 /* NetworkTools.m */; };
 		65BCC85321529611009EC365 /* AMapSearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65BCC85221529611009EC365 /* AMapSearchKit.framework */; };
@@ -163,6 +164,8 @@
 		657AA217213D95680086F98A /* EditNicknameViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditNicknameViewController.m; sourceTree = "<group>"; };
 		6580E82C21576C9E00C5B5FA /* ModelCertificationListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModelCertificationListViewController.h; sourceTree = "<group>"; };
 		6580E82D21576C9E00C5B5FA /* ModelCertificationListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModelCertificationListViewController.m; sourceTree = "<group>"; };
+		6580E82F2157C2DB00C5B5FA /* CarWashInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CarWashInfoModel.h; sourceTree = "<group>"; };
+		6580E8302157C2DB00C5B5FA /* CarWashInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CarWashInfoModel.m; sourceTree = "<group>"; };
 		6584AA9221401D2600DEA15F /* UIImage+ScaleImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+ScaleImage.h"; sourceTree = "<group>"; };
 		6584AA9321401D2600DEA15F /* UIImage+ScaleImage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ScaleImage.m"; sourceTree = "<group>"; };
 		6593AB83212942AA002F92F6 /* NetworkTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkTools.h; sourceTree = "<group>"; };
@@ -495,6 +498,8 @@
 				65C5AF9F2135A45100727122 /* ProfileModel.h */,
 				65C5AFA12135A45100727122 /* ProfileModel.m */,
 				65C5AFA22135A45100727122 /* Profile.json */,
+				6580E82F2157C2DB00C5B5FA /* CarWashInfoModel.h */,
+				6580E8302157C2DB00C5B5FA /* CarWashInfoModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1273,6 +1278,7 @@
 				657AA218213D95680086F98A /* EditNicknameViewController.m in Sources */,
 				657AA201213BA0B10086F98A /* WeatherModel.m in Sources */,
 				65C5B09F2135AA8100727122 /* IntegralConvertCell.m in Sources */,
+				6580E8312157C2DB00C5B5FA /* CarWashInfoModel.m in Sources */,
 				65C5B0872135AA8100727122 /* IncomeListCell.m in Sources */,
 				65D8D49C2146CF5800934589 /* PaymentSuccessViewController.m in Sources */,
 				65C5B0712135AA8100727122 /* PersonalInfoViewController.m in Sources */,

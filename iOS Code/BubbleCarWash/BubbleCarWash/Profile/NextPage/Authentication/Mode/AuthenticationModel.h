@@ -21,6 +21,7 @@ typedef void(^ResultBlock)(id result);
 + (void)loadCarTypeList:(ResultBlock)result;
 + (void)loadModelCertificationList:(NSInteger)status result:(ResultBlock)result;
 + (void)loadCarModelDetailList:(NSInteger)dateID result:(ResultBlock)result;
++ (void)loadCarWashCertificationInfo:(ResultBlock)result;
 
 @end
 
@@ -60,6 +61,23 @@ typedef void(^ResultBlock)(id result);
 @property (nonatomic, copy) NSString *backUrl;
 /// 认证状态 0待审核 1审核通过 2审核不通过
 @property (nonatomic, assign) NSInteger status;
+
+- (instancetype)initWithDic:(NSDictionary *)dic;
+
+@end
+
+@interface CarWashCertificationModel : NSObject
+
+/// 认证状态
+@property (nonatomic, copy) NSString *status;
+/// 营业执照
+@property (nonatomic, copy) NSString *licenseUrl;
+/// 洗车证
+@property (nonatomic, copy) NSString *washCardUrl;
+/// 身份证正面
+@property (nonatomic, copy) NSString *cardCoverUrl;
+/// 身份证背面
+@property (nonatomic, copy) NSString *cardBackUrl;
 
 - (instancetype)initWithDic:(NSDictionary *)dic;
 

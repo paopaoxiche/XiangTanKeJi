@@ -15,18 +15,21 @@ typedef NS_ENUM(NSInteger, UserType) {
 };
 
 typedef NS_ENUM(NSInteger, CertificationState) {
-    CertificationStateAdd,          // 添加认证
-    CertificationStateIn,           // 认证中
-    CertificationStateDone          // 认证完成
+    CertificationStateAdd = -1,             // 添加认证
+    CertificationStateIn = 0,               // 认证中 
+    CertificationStateDone = 1,             // 认证完成
+    CertificationStateFailed = 2,           // 认证失败
 };
 
 typedef void(^CodeResultBlock)(NSInteger code);
 
 @class UserInfoModel;
+@class CarWashInfoModel;
 
 @interface UserManager : NSObject
 
 @property (nonatomic, strong) UserInfoModel *userInfo;
+@property (nonatomic, strong) CarWashInfoModel *carWashInfo;
 @property (nonatomic, assign) BOOL isLogin;
 @property (nonatomic, assign) BOOL isUpdateUserInfo;
 @property (nonatomic, assign) Location location;

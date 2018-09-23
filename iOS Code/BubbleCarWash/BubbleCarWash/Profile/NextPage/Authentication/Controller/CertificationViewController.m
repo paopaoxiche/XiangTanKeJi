@@ -32,6 +32,7 @@
 @property (nonatomic, strong) CarModelDetailModel *modelDetail;
 @property (nonatomic, strong) UIImagePickerController *imagePicker;
 @property (nonatomic, strong) RegisterWashParam *registerWash;
+@property (nonatomic, strong) CarWashCertificationModel *carWashCertificationModel;
 
 @end
 
@@ -63,7 +64,7 @@
                 if (self.modelDetail) {
                     [self.tableView reloadData];
                 } else {
-                    // 进行提示
+                    [self messageBox:@"获取车型认证失败，请稍后重试"];
                 }
             }]; // block
         } // else
@@ -86,7 +87,16 @@
                 [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateLocation:) name:@"UpdateLocation" object:nil];
             }
         } else {
-            
+            _tableViewTopConstraint.constant = 0;
+            _headerView.hidden = YES;
+            [AuthenticationModel loadCarWashCertificationInfo:^(CarWashCertificationModel *model) {
+                self.carWashCertificationModel = model;
+                if (self.carWashCertificationModel) {
+                    [self.tableView reloadData];
+                } else {
+                    [self messageBox:@"获取工商认证失败，请稍后重试"];
+                }
+            }];
         }
     }
 }
@@ -150,7 +160,30 @@
 #pragma mark - UITableViewDatasource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return _userType == UserTypeOwner ? 2 : 3;
+    if (_userType == UserTypeOwner) {
+        return 2;
+    }
+    
+    if (_userType == UserTypeCarWash && _state == CertificationStateAdd) {
+        return 3;
+    }
+    
+    NSInteger number = 0;
+    NSString *licenseUrl = _carWashCertificationModel.licenseUrl;
+    if (licenseUrl && ![licenseUrl isEqualToString:@""]) {
+        number++;
+    }
+    NSString *washCardUrl = _carWashCertificationModel.washCardUrl;
+    if (washCardUrl && ![washCardUrl isEqualToString:@""]) {
+        number++;
+    }
+    NSString *cardCoverUrl = _carWashCertificationModel.cardCoverUrl;
+    NSString *cardBackUrl = _carWashCertificationModel.cardBackUrl;
+    if ((cardCoverUrl && ![cardCoverUrl isEqualToString:@""]) && (cardBackUrl && ![cardBackUrl isEqualToString:@""])) {
+        number++;
+    }
+    
+    return number;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -232,19 +265,20 @@
         switch (indexPath.section) {
             case 0:
                 desc = isAddCer ? @"上传工商营业执照（必填）" : @"营业执照";
-                imgName = isAddCer ? @"": @"CommodityManage";
+                imgName = isAddCer ? @"": _carWashCertificationModel.licenseUrl;
                 break;
             case 1:
                 desc = isAddCer ? @"上传洗车证（必填）" : @"洗车证";
-                imgName = isAddCer ? @"": @"CommodityManage";
+                imgName = isAddCer ? @"": _carWashCertificationModel.washCardUrl;
                 break;
             case 2:
                 if (indexPath.row == 1) {
                     desc = isAddCer ? @"上传法人身份证（正面）" : @"法人身份证（正面）";
+                    imgName = isAddCer ? @"" : _carWashCertificationModel.cardCoverUrl;
                 } else {
                     desc = isAddCer ? @"上传法人身份证（反面）" : @"法人身份证（反面）";
+                    imgName = isAddCer ? @"": _carWashCertificationModel.cardBackUrl;
                 }
-                imgName = isAddCer ? @"": @"CommodityManage";
                 break;
             default:
                 break;

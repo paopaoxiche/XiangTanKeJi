@@ -12,7 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="52" id="KGk-i7-Jjw" customClass="ProfileCell">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProfileCellIdentifier" rowHeight="52" id="KGk-i7-Jjw" customClass="ProfileCell">
             <rect key="frame" x="0.0" y="0.0" width="320" height="52"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
@@ -70,7 +70,7 @@
                 <outlet property="cusDetailTextLabel" destination="bNO-VJ-GD3" id="usK-DR-akl"/>
                 <outlet property="cusTextLabel" destination="JpB-HP-QUR" id="ppn-Td-ad1"/>
                 <outlet property="imgView" destination="cpe-pK-rFP" id="SSi-1V-NRJ"/>
-                <outlet property="upgradeView" destination="b2s-cO-hlu" id="Hrm-bY-w4j"/>
+                <outlet property="upgradeView" destination="b2s-cO-hlu" id="hOS-jw-hNT"/>
             </connections>
         </tableViewCell>
     </objects>

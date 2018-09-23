@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 
 typedef NS_ENUM(NSInteger, CertificationCellType) {
-    CertificationCellTypeAdd,          // 添加认证
-    CertificationCellTypeIn,           // 认证中
-    CertificationCellTypeDone          // 认证完成
+    CertificationCellTypeAdd = -1,          // 添加认证
+    CertificationCellTypeIn = 0,            // 认证中
+    CertificationCellTypeDone = 1           // 认证完成
 };
 
 @class CertificationCarTypeCell;

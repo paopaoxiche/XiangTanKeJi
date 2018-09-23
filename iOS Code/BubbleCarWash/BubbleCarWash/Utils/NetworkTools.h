@@ -212,22 +212,29 @@ typedef void(^FailedBlock)(NSError *error);
 #pragma mark - 洗车场我的
 
 /**
+ *  获取洗车场详细信息
+ */
+//- (void)obtainCarWashDetail:(NSInteger)washID success:(SuccessBlock)success failed:(FailedBlock)failed;
+/**
+ *  获取洗车场信息
+ */
+- (void)obtainCarWashInfo:(SuccessBlock)success failed:(FailedBlock)failed;
+/**
  *  更新洗车场地址
  */
 
 /**
  *  获取工商认证状态
  */
-
+- (void)obtainCarWashCertificationInfo:(SuccessBlock)success failed:(FailedBlock)failed;
 /**
  *  提交工商认证(洗车场注册)
  */
 - (void)registerWash:(RegisterWashParam *)param success:(SuccessBlock)success failed:(FailedBlock)failed;
-
 /**
  *  获取近期洗车列表
  */
-
+- (void)obtainRecentCarWashes:(NSInteger)washID count:(NSInteger)count success:(SuccessBlock)success failed:(FailedBlock)failed;
 /**
  *  获取收入列表
  */
