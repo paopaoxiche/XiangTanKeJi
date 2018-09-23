@@ -1,24 +1,24 @@
 //
-//  ModelCertificationViewController.m
+//  ModelCertificationListViewController.m
 //  BubbleCarWash
 //
-//  Created by paomoliu on 2018/7/24.
+//  Created by paomoliu on 2018/9/23.
 //  Copyright © 2018年 Sunshine Girl. All rights reserved.
 //
 
-#import "ModelCertificationViewController.h"
+#import "ModelCertificationListViewController.h"
 #import "ModelCertificationCell.h"
 #import "CertificationViewController.h"
 #import "AuthenticationModel.h"
 
-@interface ModelCertificationViewController ()
+@interface ModelCertificationListViewController ()
 
 @property (nonatomic, weak) IBOutlet UILabel *carNumberLabel;
 @property (nonatomic, copy) NSArray *modelCertificationList;
 
 @end
 
-@implementation ModelCertificationViewController
+@implementation ModelCertificationListViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

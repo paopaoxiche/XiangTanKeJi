@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "AFNetworking.h"
 
+/// 附近洗车场列表
 @interface NearbyWashListParam : NSObject
 
 @property (nonatomic, strong) NSNumber *lng;        // 经度
@@ -20,6 +21,7 @@
 
 @end
 
+/// 反馈
 @interface FeedBackParam : NSObject
 
 @property (nonatomic, copy) NSString *systemType;
@@ -31,6 +33,7 @@
 
 @end
 
+/// 创建订单
 @interface CreateOrderParam : NSObject
 
 @property (nonatomic, copy) NSString *washServiceId;
@@ -40,6 +43,20 @@
 
 @end
 
+/// 注册洗车场（工商认证）
+@interface RegisterWashParam : NSObject
+
+@property (nonatomic, copy) NSString *phone;            // 手机号码
+@property (nonatomic, copy) NSString *name;             // 洗车场名称
+@property (nonatomic, copy) NSString *address;          // 地址
+@property (nonatomic, copy) NSString *coordX;           // 纬度
+@property (nonatomic, copy) NSString *coordY;           // 经度
+@property (nonatomic, strong) UIImage *license;         // 营业执照文件
+@property (nonatomic, strong) UIImage *washCard;        // 洗车证
+@property (nonatomic, strong) UIImage *idCardPositive;  // 身份证正面
+@property (nonatomic, strong) UIImage *idCardBack;      // 身份证背面
+
+@end
 
 typedef void(^SuccessBlock)(NSDictionary *response, BOOL isSuccess);
 typedef void(^FailedBlock)(NSError *error);
@@ -203,8 +220,9 @@ typedef void(^FailedBlock)(NSError *error);
  */
 
 /**
- *  提交工商认证
+ *  提交工商认证(洗车场注册)
  */
+- (void)registerWash:(RegisterWashParam *)param success:(SuccessBlock)success failed:(FailedBlock)failed;
 
 /**
  *  获取近期洗车列表

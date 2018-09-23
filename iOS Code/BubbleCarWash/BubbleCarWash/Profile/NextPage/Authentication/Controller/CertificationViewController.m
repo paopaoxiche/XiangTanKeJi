@@ -13,9 +13,16 @@
 #import "UIImage+ScaleImage.h"
 #import "GlobalMethods.h"
 #import "SeeLargePictureViewController.h"
+#import "UserInfoModel.h"
 
-@interface CertificationViewController () <CertificationCellDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface CertificationViewController () <CertificationCellDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITableViewDelegate, UITableViewDataSource>
 
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIView *headerView;
+@property (weak, nonatomic) IBOutlet UIView *backView;
+@property (weak, nonatomic) IBOutlet UILabel *locationLabel;
+@property (weak, nonatomic) IBOutlet UITextField *washNameTextField;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewTopConstraint;
 @property (nonatomic, copy) NSArray *dataSource;
 @property (nonatomic, assign) UserType userType;
 @property (nonatomic, assign) NSIndexPath *carTypeIndexPath;
@@ -24,6 +31,7 @@
 @property (nonatomic, strong) UIImage *backImage;
 @property (nonatomic, strong) CarModelDetailModel *modelDetail;
 @property (nonatomic, strong) UIImagePickerController *imagePicker;
+@property (nonatomic, strong) RegisterWashParam *registerWash;
 
 @end
 
@@ -48,7 +56,7 @@
                 [self.tableView reloadData];
             }];
             self.carTypeIndexPath = [NSIndexPath indexPathForRow:1 inSection:0];
-            self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"提交" style:UIBarButtonItemStylePlain target:self action:@selector(onSubmitBtnClicked)];
+            self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"提交" style:UIBarButtonItemStylePlain target:self action:@selector(onSubmitBtnClicked:)];
         } else {
             [AuthenticationModel loadCarModelDetailList:_dataID result:^(CarModelDetailModel *result) {
                 self.modelDetail = result;
@@ -59,28 +67,84 @@
                 }
             }]; // block
         } // else
-    } // if
+    } else {
+        if (_state == CertificationStateAdd) {
+            _tableViewTopConstraint.constant = 135;
+            _headerView.hidden = NO;
+            _registerWash = [[RegisterWashParam alloc] init];
+            
+            UITapGestureRecognizer *singleGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backToSuperVC)];
+            [_backView addGestureRecognizer:singleGesture];
+            
+            UITapGestureRecognizer *hideKeyboard = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
+            [self.view addGestureRecognizer:hideKeyboard];
+            
+            NSString *address = [UserManager sharedInstance].address;
+            if (address && ![address isEqualToString:@""]) {
+                self.locationLabel.text = address;
+            } else {
+                [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateLocation:) name:@"UpdateLocation" object:nil];
+            }
+        } else {
+            
+        }
+    }
+}
+
+- (void)updateLocation:(NSNotification *)notification {
+    self.locationLabel.text = [UserManager sharedInstance].address;
+}
+
+- (void)hideKeyboard {
+    if (self.washNameTextField.isFirstResponder) {
+        [self.washNameTextField resignFirstResponder];
+    }
 }
 
 - (void)backToSuperVC {
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)onSubmitBtnClicked {
-    CarTypeModel *model = _dataSource[_carTypeIndexPath.row - 1];
-    NSString *idStr = [NSString stringWithFormat:@"%li", model.dataID];
-    [[NetworkTools sharedInstance] submitModelReview:idStr cover:_coverImage back:_backImage success:^(NSDictionary *response, BOOL isSuccess) {
-        NSInteger code = [[response objectForKey:@"code"] integerValue];
-        if (code == 200) {
-            [self messageBox:@"车型提交成功，请等待审核" handle:^{
-                [self backToSuperVC];
-            }];
-        } else {
+- (IBAction)onSubmitBtnClicked:(id)sender {
+    if (_userType == UserTypeOwner) {
+        CarTypeModel *model = _dataSource[_carTypeIndexPath.row - 1];
+        NSString *idStr = [NSString stringWithFormat:@"%li", model.dataID];
+        [[NetworkTools sharedInstance] submitModelReview:idStr cover:_coverImage back:_backImage success:^(NSDictionary *response, BOOL isSuccess) {
+            NSInteger code = [[response objectForKey:@"code"] integerValue];
+            if (code == 200) {
+                [self messageBox:@"车型提交成功，请等待审核" handle:^{
+                    [self backToSuperVC];
+                }];
+            } else {
+                [self messageBox:@"提交失败，请稍后重试"];
+            }
+        } failed:^(NSError *error) {
             [self messageBox:@"提交失败，请稍后重试"];
-        }
-    } failed:^(NSError *error) {
-        [self messageBox:@"提交失败，请稍后重试"];
-    }];
+        }];
+    } else {
+        _registerWash.phone = [UserManager sharedInstance].userInfo.phoneNumber;
+        _registerWash.name = self.washNameTextField.text;
+        _registerWash.address = [UserManager sharedInstance].address;
+        _registerWash.coordX = [NSString stringWithFormat:@"%.6f", [UserManager sharedInstance].location.lat];
+        _registerWash.coordY = [NSString stringWithFormat:@"%.6f", [UserManager sharedInstance].location.lng];
+        
+        [[NetworkTools sharedInstance] registerWash:_registerWash success:^(NSDictionary *response, BOOL isSuccess) {
+            NSInteger code = [[response objectForKey:@"code"] integerValue];
+            if (code == 200) {
+                NSString *code = [UserManager sharedInstance].userInfo.code;
+                UserInfoModel *userInfo = [[UserInfoModel alloc] initWithDic:response[@"data"]];
+                [UserManager sharedInstance].userInfo = userInfo;
+                [UserManager sharedInstance].isLogin = YES;
+                [[UserManager sharedInstance] savaUserInfoWithPassword:code];
+                UIViewController *mainVC = [GlobalMethods viewControllerWithBuddleName:@"Main" vcIdentifier:@"MainVC"];
+                [self presentViewController:mainVC animated:YES completion:nil];
+            } else {
+                [self messageBox:@"提交失败，请稍后重试"];
+            }
+        } failed:^(NSError *error) {
+            [self messageBox:@"提交失败，请稍后重试"];
+        }];
+    }
 }
 
 #pragma mark - UITableViewDatasource
@@ -103,7 +167,19 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0 && !(indexPath.section == 0 && _userType == UserTypeOwner && _state != CertificationStateAdd)) {
-        NSString *titleStr = indexPath.section == 0 ? @"车型选择" : @"行车证信息";
+        NSString *titleStr = @"";
+        if (_userType == UserTypeOwner) {
+            titleStr = indexPath.section == 0 ? @"车型选择" : @"行车证信息";
+        } else {
+            if (indexPath.section == 0) {
+                titleStr = @"工商营业执照";
+            } else if (indexPath.section == 1) {
+                titleStr = @"洗车证";
+            } else {
+                titleStr = @"法人身份证";
+            }
+        }
+        
         CertificationTitleCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TitleCellIdentifier"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.title = titleStr;
@@ -199,10 +275,11 @@
     CertificationCarTypeCell *selectedCell = [self.tableView cellForRowAtIndexPath:_carTypeIndexPath];
     selectedCell.selectImgName = @"SingleSelection_Normal";
     
-    _carTypeIndexPath = [self.tableView indexPathForCell:cell];
+    self.carTypeIndexPath = [self.tableView indexPathForCell:cell];
 }
 
 - (void)onUploadViewClicked:(CertificationInfoCell *)cell {
+    self.imageIndexPath = [self.tableView indexPathForCell:cell];
     if (_state == CertificationCellTypeAdd) {
         [self presentImagePicker];
     } else {
@@ -259,10 +336,26 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
     UIImage *image = [[info objectForKey:UIImagePickerControllerOriginalImage] imageWithScale:320];
     
-    if (_imageIndexPath.row == 1) {
-        _coverImage = image;
+    if (_userType == UserTypeOwner) {
+        if (_imageIndexPath.row == 1) {
+            self.coverImage = image;
+        } else {
+            self.backImage = image;
+        }
     } else {
-        _backImage = image;
+        if (_imageIndexPath.section == 0) {
+            self.registerWash.license = image;
+        } else if (_imageIndexPath.section == 1) {
+            self.registerWash.washCard = image;
+        } else {
+            if (_imageIndexPath.row == 1) {
+                self.registerWash.idCardPositive = image;
+            }
+            
+            if (_imageIndexPath.row == 2) {
+                self.registerWash.idCardBack = image;
+            }
+        }
     }
     
     CertificationInfoCell *cell = [self.tableView cellForRowAtIndexPath:_imageIndexPath];
@@ -278,7 +371,7 @@
         return 58;
     }
     
-    if (indexPath.section == 0) {
+    if (indexPath.section == 0 && _userType == UserTypeOwner) {
         return 44;
     }
     

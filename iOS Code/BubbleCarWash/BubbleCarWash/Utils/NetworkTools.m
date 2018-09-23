@@ -57,6 +57,23 @@
 
 @end
 
+@implementation RegisterWashParam
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        _license = nil;
+        _washCard = nil;
+        _idCardBack = nil;
+        _idCardPositive = nil;
+    }
+    
+    return self;
+}
+
+@end
+
+
 #pragma mark - NetworkTools
 
 static const NSTimeInterval kTimeOutInterval = 6.0f;
@@ -277,7 +294,50 @@ static const NSTimeInterval kTimeOutInterval = 6.0f;
     [self POST:@"carOwner/createConsume" parameters:params success:success failure:failed];
 }
 
-#pragma mark - Get Method
+#pragma mark - 洗车场首页
+
+- (void)obtainRecentCarWashList:(NSInteger)washID count:(NSInteger)count success:(SuccessBlock)success failed:(FailedBlock)failed {
+    
+}
+
+#pragma mark - 洗车场我的
+
+- (void)registerWash:(RegisterWashParam *)param success:(SuccessBlock)success failed:(FailedBlock)failed {
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithCapacity:0];
+    if (param.phone && ![param.phone isEqualToString:@""]) {
+        [params setObject:param.phone forKey:@"phone"];
+    }
+    if (param.name && ![param.name isEqualToString:@""]) {
+        [params setObject:param.name forKey:@"name"];
+    }
+    if (param.address && ![param.address isEqualToString:@""]) {
+        [params setObject:param.address forKey:@"address"];
+    }
+    if (param.coordX && ![param.coordX isEqualToString:@""]) {
+        [params setObject:param.coordX forKey:@"coordX"];
+    }
+    if (param.coordY && ![param.coordY isEqualToString:@""]) {
+        [params setObject:param.coordY forKey:@"coordY"];
+    }
+    
+    NSMutableArray *images = [[NSMutableArray alloc] initWithCapacity:0];
+    if (param.license) {
+        [images addObject:@{@"license":param.license}];
+    }
+    if (param.washCard) {
+        [images addObject:@{@"washCard":param.washCard}];
+    }
+    if (param.idCardPositive) {
+        [images addObject:@{@"idCardPositive":param.idCardPositive}];
+    }
+    if (param.idCardBack) {
+        [images addObject:@{@"idCardBack":param.idCardBack}];
+    }
+    
+    [self POST:@"wash/registerWash" parameters:params images:images success:success failure:failed];
+}
+
+#pragma mark - GET Method
 
 - (void)GET:(NSString *)url parameters:(NSDictionary *)params success:(SuccessBlock)success failure:(FailedBlock)failed {
     [self GET:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -292,13 +352,7 @@ static const NSTimeInterval kTimeOutInterval = 6.0f;
     }];
 }
 
-#pragma mark - 洗车场首页
-
-- (void)obtainRecentCarWashList:(NSInteger)washID count:(NSInteger)count success:(SuccessBlock)success failed:(FailedBlock)failed {
-    
-}
-
-#pragma mark - 洗车场我的
+#pragma mark - POST Method
 
 - (void)POST:(NSString *)url parameters:(NSDictionary *)params success:(SuccessBlock)success failure:(FailedBlock)failed {
     [self POST:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -313,7 +367,7 @@ static const NSTimeInterval kTimeOutInterval = 6.0f;
     }];
 }
 
-- (void)POST:(NSString *)url parameters:(NSDictionary *)params  images:(NSArray <NSDictionary <NSString *, UIImage *>*>*)images success:(SuccessBlock)success failure:(FailedBlock)failed {
+- (void)POST:(NSString *)url parameters:(NSDictionary *)params images:(NSArray <NSDictionary <NSString *, UIImage *>*>*)images success:(SuccessBlock)success failure:(FailedBlock)failed {
     [self POST:url parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         for (NSDictionary *dic in images) {
             NSArray *keys = dic.allKeys;

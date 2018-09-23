@@ -13,7 +13,9 @@
 
 /// 位置结构体
 struct Location {
+    /// 经度
     CGFloat lng;
+    /// 纬度
     CGFloat lat;
 };
 typedef struct CG_BOXABLE Location Location;

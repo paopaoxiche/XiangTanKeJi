@@ -11,7 +11,6 @@
 #import "LYKeyChainStore.h"
 #import "NetworkTools.h"
 #import "AFNetworking.h"
-#import "LoginViewController.h"
 
 @interface UserManager ()
 
@@ -45,7 +44,7 @@
 
 - (void)savaUserInfoWithPassword:(NSString *)password {
     NSString *bundleID = [[NSBundle mainBundle] bundleIdentifier];
-    NSString *passwordStr = [NSString stringWithFormat:@"%lu/%@/%@", _userInfo.type, password, _userInfo.token];
+    NSString *passwordStr = [NSString stringWithFormat:@"%@/%lu/%@/%@", _userInfo.phoneNumber, _userInfo.type, password, _userInfo.token];
     [LYKeyChainStore saveAccount:_userInfo.userID
                         password:passwordStr
                          service:bundleID];
@@ -62,14 +61,15 @@
     
     if (!_userInfo) {
         NSArray *data = [password componentsSeparatedByString:@"/"];
-        if (data.count < 3) {
+        if (data.count < 4) {
             return NO;
         }
         
         _userInfo = [[UserInfoModel alloc] init];
-        _userInfo.type = [data[0] integerValue];
-        _userInfo.code = data[1];
-        _userInfo.token = data[2];
+        _userInfo.phoneNumber = data[0];
+        _userInfo.type = [data[1] integerValue];
+        _userInfo.code = data[2];
+        _userInfo.token = data[3];
         _userInfo.userID = account;
     }
     

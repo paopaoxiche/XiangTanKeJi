@@ -33,6 +33,7 @@
 		657AA20E213C022F0086F98A /* ExpensesRecordListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 657AA20D213C022F0086F98A /* ExpensesRecordListModel.m */; };
 		657AA215213C27AC0086F98A /* CommentListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 657AA214213C27AC0086F98A /* CommentListModel.m */; };
 		657AA218213D95680086F98A /* EditNicknameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 657AA217213D95680086F98A /* EditNicknameViewController.m */; };
+		6580E82E21576C9E00C5B5FA /* ModelCertificationListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6580E82D21576C9E00C5B5FA /* ModelCertificationListViewController.m */; };
 		6584AA9421401D2600DEA15F /* UIImage+ScaleImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6584AA9321401D2600DEA15F /* UIImage+ScaleImage.m */; };
 		6593AB85212942AA002F92F6 /* NetworkTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 6593AB84212942AA002F92F6 /* NetworkTools.m */; };
 		65BCC85321529611009EC365 /* AMapSearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65BCC85221529611009EC365 /* AMapSearchKit.framework */; };
@@ -71,7 +72,6 @@
 		65C5B0AF2135AA8200727122 /* EditTradeStateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5B0552135AA8100727122 /* EditTradeStateViewController.m */; };
 		65C5B0B42135AA8200727122 /* TradeStateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5B0602135AA8100727122 /* TradeStateCell.m */; };
 		65C5B0B62135AA8200727122 /* Certification.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65C5B0662135AA8100727122 /* Certification.storyboard */; };
-		65C5B0B72135AA8200727122 /* ModelCertificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5B0672135AA8100727122 /* ModelCertificationViewController.m */; };
 		65C5B0B82135AA8200727122 /* CertificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5B06A2135AA8100727122 /* CertificationViewController.m */; };
 		65C5B0B92135AA8200727122 /* ModelCertificationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5B06D2135AA8100727122 /* ModelCertificationCell.m */; };
 		65C5B0BA2135AA8200727122 /* CertificationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5B06E2135AA8100727122 /* CertificationCell.m */; };
@@ -161,6 +161,8 @@
 		657AA214213C27AC0086F98A /* CommentListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentListModel.m; sourceTree = "<group>"; };
 		657AA216213D95670086F98A /* EditNicknameViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditNicknameViewController.h; sourceTree = "<group>"; };
 		657AA217213D95680086F98A /* EditNicknameViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditNicknameViewController.m; sourceTree = "<group>"; };
+		6580E82C21576C9E00C5B5FA /* ModelCertificationListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModelCertificationListViewController.h; sourceTree = "<group>"; };
+		6580E82D21576C9E00C5B5FA /* ModelCertificationListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModelCertificationListViewController.m; sourceTree = "<group>"; };
 		6584AA9221401D2600DEA15F /* UIImage+ScaleImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+ScaleImage.h"; sourceTree = "<group>"; };
 		6584AA9321401D2600DEA15F /* UIImage+ScaleImage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ScaleImage.m"; sourceTree = "<group>"; };
 		6593AB83212942AA002F92F6 /* NetworkTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkTools.h; sourceTree = "<group>"; };
@@ -231,9 +233,7 @@
 		65C5B05E2135AA8100727122 /* TradeStateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TradeStateCell.h; sourceTree = "<group>"; };
 		65C5B0602135AA8100727122 /* TradeStateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TradeStateCell.m; sourceTree = "<group>"; };
 		65C5B0662135AA8100727122 /* Certification.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Certification.storyboard; sourceTree = "<group>"; };
-		65C5B0672135AA8100727122 /* ModelCertificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelCertificationViewController.m; sourceTree = "<group>"; };
 		65C5B0682135AA8100727122 /* CertificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CertificationViewController.h; sourceTree = "<group>"; };
-		65C5B0692135AA8100727122 /* ModelCertificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelCertificationViewController.h; sourceTree = "<group>"; };
 		65C5B06A2135AA8100727122 /* CertificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CertificationViewController.m; sourceTree = "<group>"; };
 		65C5B06C2135AA8100727122 /* CertificationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CertificationCell.h; sourceTree = "<group>"; };
 		65C5B06D2135AA8100727122 /* ModelCertificationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelCertificationCell.m; sourceTree = "<group>"; };
@@ -720,12 +720,12 @@
 			isa = PBXGroup;
 			children = (
 				65C5B0662135AA8100727122 /* Certification.storyboard */,
-				65C5B0692135AA8100727122 /* ModelCertificationViewController.h */,
-				65C5B0672135AA8100727122 /* ModelCertificationViewController.m */,
 				65C5B0682135AA8100727122 /* CertificationViewController.h */,
 				65C5B06A2135AA8100727122 /* CertificationViewController.m */,
 				65FA51482144FAD500F9D08C /* SeeLargePictureViewController.h */,
 				65FA51492144FAD500F9D08C /* SeeLargePictureViewController.m */,
+				6580E82C21576C9E00C5B5FA /* ModelCertificationListViewController.h */,
+				6580E82D21576C9E00C5B5FA /* ModelCertificationListViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1258,7 +1258,6 @@
 				65D8D49E2146CF5800934589 /* PaymentViewController.m in Sources */,
 				65C5B0A52135AA8100727122 /* CommentViewController.m in Sources */,
 				65C5B08C2135AA8100727122 /* WashServiceManagerViewController.m in Sources */,
-				65C5B0B72135AA8200727122 /* ModelCertificationViewController.m in Sources */,
 				CCA16526213E41B9001626C6 /* UpgradeReminderViewController.m in Sources */,
 				65C5AFC62135A45100727122 /* UserManager.m in Sources */,
 				65C5AF582135A32900727122 /* LoginViewController.m in Sources */,
@@ -1297,6 +1296,7 @@
 				65E19EE2214FE87E00079CF3 /* WeatherNetworkTools.m in Sources */,
 				65C5B1092135B0F800727122 /* NearWashInfoCell.m in Sources */,
 				65C5B0E52135AFC900727122 /* LYPageControl.m in Sources */,
+				6580E82E21576C9E00C5B5FA /* ModelCertificationListViewController.m in Sources */,
 				6593AB85212942AA002F92F6 /* NetworkTools.m in Sources */,
 				65C5B09D2135AA8100727122 /* CouponViewController.m in Sources */,
 				65FA514A2144FAD500F9D08C /* SeeLargePictureViewController.m in Sources */,

@@ -9,7 +9,7 @@
 #import "PersonalInfoViewController.h"
 #import "PersonalInfoCell.h"
 #import "UIColor+Category.h"
-#import "ModelCertificationViewController.h"
+#import "ModelCertificationListViewController.h"
 #import "UserManager.h"
 #import "UserInfoModel.h"
 #import <SDWebImage/UIImageView+WebCache.h>
@@ -114,8 +114,8 @@
     
     if (indexPath.section == 1) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Certification" bundle:[NSBundle mainBundle]];
-        ModelCertificationViewController *modelCertificationVC = [storyboard instantiateViewControllerWithIdentifier:@"ModeCertificationVC"];
-        [self.navigationController pushViewController:modelCertificationVC animated:YES];
+        ModelCertificationListViewController *modelCertificationListVC = [storyboard instantiateViewControllerWithIdentifier:@"ModeCertificationVC"];
+        [self.navigationController pushViewController:modelCertificationListVC animated:YES];
     }
 }
 

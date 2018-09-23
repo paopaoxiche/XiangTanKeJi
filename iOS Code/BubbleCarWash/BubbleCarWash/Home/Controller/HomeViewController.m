@@ -187,7 +187,6 @@
 
 #pragma mark - AMapSearchDelegate
 
-
 /**
  *  逆地理编码回调
  */
@@ -195,6 +194,7 @@
     if (response.regeocode) {
         [UserManager sharedInstance].address = response.regeocode.formattedAddress;
         self.locationLabel.text = response.regeocode.formattedAddress;
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateLocation" object:nil];
     }
 }
 
