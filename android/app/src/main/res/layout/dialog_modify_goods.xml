@@ -173,7 +173,7 @@
             android:layout_marginLeft="24dp"
             android:layout_marginRight="24dp"
             android:hint="请输入商品描述"
-            android:maxLength="20"
+            android:maxLength="50"
             android:padding="10dp"
             android:textColor="@color/black"
             android:textSize="16sp"/>

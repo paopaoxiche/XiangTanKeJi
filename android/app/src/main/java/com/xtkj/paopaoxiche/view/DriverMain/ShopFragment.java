@@ -23,6 +23,7 @@ import com.xtkj.paopaoxiche.http.RetrofitClient;
 import com.xtkj.paopaoxiche.model.DriverHomeModel;
 import com.xtkj.paopaoxiche.model.DriverMapModel;
 import com.xtkj.paopaoxiche.service.WashService;
+import com.xtkj.paopaoxiche.view.view.GoodsDetailDialog;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -117,10 +118,16 @@ public class ShopFragment extends BaseFragmemt implements IDriverContract.IShopV
     }
 
 
-    class ShopItemsAdapter extends RecyclerView.Adapter<ShopItemsAdapter.ViewHolder> {
+    class ShopItemsAdapter extends RecyclerView.Adapter<ShopItemsAdapter.ViewHolder> implements View.OnClickListener{
 
 
         private WashShopBean.DataBean  data;
+        private OnItemClickListener onItemClickListener = new OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                new GoodsDetailDialog(getContext(), data.getList().get(position)).show();
+            }
+        };
 
         ShopItemsAdapter(WashShopBean.DataBean dataBean) {
             this.data = dataBean;
@@ -129,11 +136,13 @@ public class ShopFragment extends BaseFragmemt implements IDriverContract.IShopV
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
             View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_shop_selling_goods, viewGroup, false);
+            view.setOnClickListener(this);
             return new ViewHolder(view);
         }
 
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
+            holder.itemView.setTag(position);
             Glide.with(getActivity()).load(data.getList().get(position).getImage()).into(holder.sellingGoodsImg);
             holder.sellingGoodsPrice1.setText(String.format("¥%s", data.getList().get(position).getCurrentPrice()));
             holder.sellingGoodsPrice2.setText(String.format("¥%s", data.getList().get(position).getOriginPrice()));
@@ -144,6 +153,13 @@ public class ShopFragment extends BaseFragmemt implements IDriverContract.IShopV
         public int getItemCount() {
             if(data==null||data.getList()==null)return 0;
             return data.getList().size();
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (onItemClickListener!=null) {
+                onItemClickListener.onItemClick((Integer) v.getTag());
+            }
         }
 
         class ViewHolder extends RecyclerView.ViewHolder {
@@ -159,5 +175,9 @@ public class ShopFragment extends BaseFragmemt implements IDriverContract.IShopV
             }
         }
 
+    }
+
+    interface OnItemClickListener{
+        void onItemClick(int position);
     }
 }

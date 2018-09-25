@@ -55,7 +55,8 @@
         </provider>
 
 
-        <activity android:name=".view.GuideActivity">
+        <activity android:name=".view.GuideActivity"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -64,12 +65,18 @@
         </activity>
         <activity
             android:name=".view.LoginActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_login" />
-        <activity android:name=".view.DriverMain.DriverMainActivity" />
-        <activity android:name=".view.WeatherForecast.WeatherForecastActivity" />
-        <activity android:name=".view.DriverMap.DriverMapActivity" />
-        <activity android:name=".view.CarWashMain.CarWashMainActivity" />
+        <activity android:name=".view.DriverMain.DriverMainActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".view.WeatherForecast.WeatherForecastActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".view.DriverMap.DriverMapActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".view.CarWashMain.CarWashMainActivity"
+            android:screenOrientation="portrait" />
         <activity android:name=".view.WashService.WashServiceActivity"
+            android:screenOrientation="portrait"
             android:exported="true"
             android:launchMode="singleTop">
 
@@ -86,7 +93,8 @@
             <!--android:exported="true"-->
             <!--android:launchMode="singleTop"/>-->
 
-        <activity android:name=".view.RegisterWashActivity"></activity>
+        <activity android:name=".view.RegisterWashActivity"
+            android:screenOrientation="portrait" ></activity>
 
         <activity
             android:name="com.alipay.sdk.app.H5PayActivity"

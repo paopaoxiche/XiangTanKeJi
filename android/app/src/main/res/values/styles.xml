@@ -67,6 +67,11 @@
         <item name="android:windowNoTitle">true</item>
     </style>
 
+    <style name="NoTitleBar" parent="@android:style/Theme.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFrame">@null</item>
+    </style>
+
     <style name="inputRoomPasswordDialog" parent="@android:style/Theme.Dialog">
         <item name="android:windowFrame">@null</item>
         <item name="android:windowIsFloating">true</item>

@@ -4,6 +4,8 @@ import android.app.Dialog;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,8 +40,13 @@ public class BusinessStateDialog extends Dialog {
     String stateString = "营业";
 
     public BusinessStateDialog(@NonNull Context context, TextView textView) {
-        super(context);
-        setContentView(R.layout.dialog_business_state);
+        super(context, R.style.NoTitleBar);
+        Window window = this.getWindow();
+        if (window != null) {
+            window.setContentView(R.layout.dialog_business_state);
+        } else {
+            setContentView(R.layout.dialog_business_state);
+        }
         ButterKnife.bind(this);
         stateTextView = textView;
     }
@@ -60,17 +67,17 @@ public class BusinessStateDialog extends Dialog {
         switch (view.getId()) {
             case R.id.open_business_button:
                 stateString = "营业";
-                updateState(UserInfo.getWashId(), String.valueOf(1));
+                updateState(UserInfo.getWashId(), String.valueOf(AppConstant.STATE_OPENING));
                 dismiss();
                 break;
             case R.id.pause_business_button:
                 stateString = "歇业";
-                updateState(UserInfo.getWashId(), String.valueOf(2));
+                updateState(UserInfo.getWashId(), String.valueOf(AppConstant.STATE_STOPPING));
                 dismiss();
                 break;
             case R.id.stop_business_button:
                 stateString = "停业";
-                updateState(UserInfo.getWashId(), String.valueOf(3));
+                updateState(UserInfo.getWashId(), String.valueOf(AppConstant.STATE_CLOSED));
                 dismiss();
                 break;
         }
@@ -89,13 +96,13 @@ public class BusinessStateDialog extends Dialog {
                         if (response.body().getCode() == 200) {
                             stateTextView.setText(stateString);
                         } else {
-                            Toast.makeText(BaseApplication.getContext(), "修改洗车状态失败，请重新登录", Toast.LENGTH_SHORT);
+                            Toast.makeText(BaseApplication.getContext(), "修改洗车状态失败，请重新登录", Toast.LENGTH_SHORT).show();
                         }
                     }
 
                     @Override
                     public void onFailure(Call<NoDataBean> call, Throwable t) {
-                        Toast.makeText(BaseApplication.getContext(), "修改洗车状态失败", Toast.LENGTH_SHORT);
+                        Toast.makeText(BaseApplication.getContext(), "修改洗车状态失败", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
