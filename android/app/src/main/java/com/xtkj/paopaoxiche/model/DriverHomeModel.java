@@ -176,6 +176,9 @@ public class DriverHomeModel {
                     latitude = aMapLocation.getLatitude();
                     MyLocation.lat = latitude+ "";
                     MyLocation.lng = longitude+ "";
+                    MyLocation.province = aMapLocation.getProvince();
+                    MyLocation.city = aMapLocation.getCity();
+                    MyLocation.district = aMapLocation.getDistrict();
                     address = aMapLocation.getAddress();
                     for (DriverHomeListener driverHomeListener : driverHomeListenerList) {
                         driverHomeListener.getLocationSuccess(address);

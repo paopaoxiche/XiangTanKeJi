@@ -84,7 +84,7 @@ public class LoginPresenterImpl implements ILoginContract.ILoginPresenter, UserM
         if (code == 10008) {
             loginView.register();
         } else if (code == 10009) {
-            Toast.makeText(loginView.getContext(), "您的账号正在审核中，请稍后再试", Toast.LENGTH_LONG).show();
+            loginView.showToast("您的账号正在审核中，请稍后再试");
         } else {
             loginView.showToast("登录失败，请检查账号或验证码");
         }

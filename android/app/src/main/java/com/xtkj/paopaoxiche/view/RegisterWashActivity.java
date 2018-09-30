@@ -316,10 +316,19 @@ public class RegisterWashActivity extends BaseGaodeActivity implements DriverHom
         }
         RequestBody nameBody =
                 RequestBody.create(MediaType.parse("multipart/form-data"), name);
+        RequestBody provinceBody =
+                RequestBody.create(MediaType.parse("multipart/form-data"), MyLocation.province);
+        RequestBody cityBody =
+                RequestBody.create(MediaType.parse("multipart/form-data"), MyLocation.city);
+        RequestBody districtBody =
+                RequestBody.create(MediaType.parse("multipart/form-data"), MyLocation.district);
+
+
 
         RetrofitClient.newInstance(ApiField.BASEURL)
                 .create(WashService.class)
-                .certification(phoneBody, nameBody, addressBody, xBody, yBody, license, washCard, idCardPositive, idCardBack)
+                .certification(phoneBody, nameBody, addressBody, xBody, yBody, license, washCard, idCardPositive, idCardBack,
+                        provinceBody, cityBody, districtBody)
                 .enqueue(new Callback<NoDataBean>() {
                     @Override
                     public void onResponse(Call<NoDataBean> call, Response<NoDataBean> response) {

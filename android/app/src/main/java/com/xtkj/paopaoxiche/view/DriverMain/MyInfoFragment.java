@@ -112,7 +112,8 @@ public class MyInfoFragment extends BaseFragmemt implements IDriverContract.IMyI
 
     long time = 0;
     @OnClick({R.id.my_score, R.id.my_coupons, R.id.my_comsumption, R.id.my_evaluation,
-            R.id.my_updatecf, R.id.my_customer_service, R.id.my_promote, R.id.modify_user_image_button})
+            R.id.my_updatecf, R.id.my_customer_service, R.id.my_promote, R.id.modify_user_image_button,
+            R.id.portrait_image_view})
     public void onViewClicked(View view) {
         if (System.currentTimeMillis() - time < 500) {
             return;
@@ -149,6 +150,7 @@ public class MyInfoFragment extends BaseFragmemt implements IDriverContract.IMyI
             case R.id.my_promote:
                 new ExtensionDialog(getContext(), true).show();
                 break;
+            case R.id.portrait_image_view:
             case R.id.modify_user_image_button:
                 new ModifyUserInfoDialog(getContext(), true).show();
                 break;

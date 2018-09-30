@@ -13,9 +13,9 @@ import java.util.TimerTask;
 
 public class CountdownButton extends Button implements View.OnClickListener{
     /**
-     * 倒计时时长，默认倒计时时间60秒；
+     * 倒计时时长，默认倒计时时间120秒；
      */
-    private long length = 60 * 1000;
+    private long length = 120 * 1000;
     /**
      * 开始执行计时的类，可以在每秒实行间隔任务
      */
@@ -155,7 +155,7 @@ public class CountdownButton extends Button implements View.OnClickListener{
                 CountdownButton.this.setEnabled(true);
                 CountdownButton.this.setText(beforeText);
                 clearTimer();
-                length = 60 * 1000;
+                length = 120 * 1000;
             }
         }
     };

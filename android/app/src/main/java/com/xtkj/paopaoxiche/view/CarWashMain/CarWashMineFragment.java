@@ -160,7 +160,7 @@ public class CarWashMineFragment extends BaseFragmemt implements ICarWashContrac
 
     @OnClick({R.id.car_wash_manager_linear_layout, R.id.goods_manager_linear_layout, R.id.income_linear_layout,
             R.id.my_evaluation, R.id.state_linear_layout, R.id.my_updatecf, R.id.my_customer_service,
-            R.id.my_promote, R.id.wash_modify_user_image_button})
+            R.id.my_promote, R.id.wash_modify_user_image_button, R.id.portrait_image_view})
     public void onViewClicked(View view) {
         if (System.currentTimeMillis() - time < 500) {
             return;
@@ -200,6 +200,7 @@ public class CarWashMineFragment extends BaseFragmemt implements ICarWashContrac
             case R.id.my_promote:
                 new ExtensionDialog(getContext(), true).show();
                 break;
+            case R.id.portrait_image_view:
             case R.id.wash_modify_user_image_button:
                 new ModifyUserInfoDialog(getContext(), true).show();
                 break;

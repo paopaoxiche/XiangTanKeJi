@@ -14,10 +14,10 @@
         <ImageButton
             android:id="@+id/back_arrow_image_button"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="16dp"
             android:background="@android:color/transparent"
+            android:layout_height="match_parent"
+            android:scaleType="center"
+            android:paddingLeft="16dp"
             android:src="@drawable/white_arrow"/>
 
         <TextView

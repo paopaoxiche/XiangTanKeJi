@@ -39,6 +39,7 @@
                         android:id="@+id/portrait_image_view"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
+                        android:clickable="true"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="52dp"
                         android:src="@drawable/avatar_man"/>
@@ -81,7 +82,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
-                            android:layout_marginRight="16dp"
+                            android:padding="8dp"
+                            android:layout_marginRight="8dp"
                             android:layout_centerVertical="true"
                             android:background="@android:color/transparent"
                             android:src="@drawable/btn_nextpag_white"/>
