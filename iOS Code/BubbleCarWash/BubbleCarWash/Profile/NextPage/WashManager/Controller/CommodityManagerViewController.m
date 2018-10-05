@@ -9,10 +9,17 @@
 #import "CommodityManagerViewController.h"
 #import "CreateProductViewController.h"
 #import "WashManagerCell.h"
+#import "HomeModel.h"
+#import "NetworkTools.h"
+#import "UserManager.h"
+#include "CarWashInfoModel.h"
+#import "UIColor+Category.h"
+#import "GlobalMethods.h"
 
 @interface CommodityManagerViewController () <UITableViewDataSource, UITableViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, weak) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) NSMutableArray *dataSource;
 
 @end
 
@@ -24,34 +31,103 @@
     self.title = @"商品管理";
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewCommodity)];
     
+    self.dataSource = [[NSMutableArray alloc] initWithCapacity:0];
+    
     _tableView.rowHeight = 68;
     _tableView.tableFooterView = [[UIView alloc] init];
     [_tableView registerNib:[UINib nibWithNibName:@"WashManagerCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"WashManagerCell"];
+    
+    [self loadCarWashCommodityList];
+}
+
+- (void)loadCarWashCommodityList {
+    [[NetworkTools sharedInstance] obtainCarWashCommodityList:[UserManager sharedInstance].carWashInfo.washID success:^(NSDictionary *response, BOOL isSuccess) {
+        NSInteger code = [[response objectForKey:@"code"] integerValue];
+        if (code == 200 && [response objectForKey:@"data"] != [NSNull null]) {
+            NSDictionary *dataArr = [response objectForKey:@"data"];
+            NSMutableArray *list = [NSMutableArray arrayWithCapacity:dataArr.count];
+            for (NSDictionary *dic in dataArr) {
+                RecommendCommodityModel *model = [[RecommendCommodityModel alloc] initWithDic:dic];
+                [list addObject:model];
+            }
+            
+            self.dataSource = list;
+            if (list.count > 0) {
+                [self.tableView reloadData];
+            } else {
+                // 提示无商品
+            }
+        } else {
+            [self messageBox:@"获取商品列表失败"];
+        }
+    } failed:^(NSError *error) {
+        [self messageBox:@"获取商品列表失败"];
+    }];
 }
 
 - (void)addNewCommodity {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"WashManager" bundle:[NSBundle mainBundle]];
-    CreateProductViewController *createProductVC = [storyboard instantiateViewControllerWithIdentifier:@"CreateProductVC"];
-    createProductVC.proType = ProductTypeCommodity;
+    CreateProductViewController *createProductVC = (CreateProductViewController *)[GlobalMethods viewControllerWithBuddleName:@"WashManager" vcIdentifier:@"CreateProductVC"];
     [self.navigationController pushViewController:createProductVC animated:YES];
 }
 
 #pragma mark - UITableViewDatasource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+    return self.dataSource.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    RecommendCommodityModel *model = _dataSource[indexPath.row];
     WashManagerCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WashManagerCell" forIndexPath:indexPath];
+    cell.imageUrl = model.imageUrl;
+    cell.name = model.commodityName;
+    cell.desc = model.describe;
+    cell.currentPrice = model.currentPrice;
+    cell.originalPrice = model.originPrice;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
 }
 
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
 #pragma mark - UITableViewDelegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+- (nullable NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSMutableArray *buttons = [[NSMutableArray alloc] initWithCapacity:0];
     
+    UITableViewRowAction *deleteRowAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"删除" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+        RecommendCommodityModel *model = self.dataSource[indexPath.row];
+        
+        [[NetworkTools sharedInstance] deleteCommodity:model.dataID success:^(NSDictionary *response, BOOL isSuccess) {
+            NSInteger code = [response[@"code"] integerValue];
+            if (code == 200) {
+                [self.dataSource removeObjectAtIndex:indexPath.row];
+                [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+                [self messageBox:@"删除商品成功"];
+            } else {
+                [self messageBox:@"删除商品失败，请重试"];
+            }
+        } failure:^(NSError *error) {
+            [self messageBox:@"删除商品失败，请重试"];
+        }];
+    }];
+    deleteRowAction.backgroundColor = [UIColor rgbWithRed:255 green:105 blue:61];
+    
+    UITableViewRowAction *editRowAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"编辑" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+        RecommendCommodityModel *model = self.dataSource[indexPath.row];
+        CreateProductViewController *createProductVC = (CreateProductViewController *)[GlobalMethods viewControllerWithBuddleName:@"WashManager" vcIdentifier:@"CreateProductVC"];
+        createProductVC.model = model;
+        [self.navigationController pushViewController:createProductVC animated:YES];
+    }];
+    editRowAction.backgroundColor = [UIColor rgbWithRed:250 green:196 blue:20];
+    
+    [buttons addObject:deleteRowAction];
+    [buttons addObject:editRowAction];
+    
+    return buttons;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {

@@ -28,6 +28,7 @@
 		653E3BF02148134400FD08BE /* AlipayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 653E3BEF2148134400FD08BE /* AlipayManager.m */; };
 		6545FCE0214028A60032DEEA /* UpgradeReminderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6545FCDF214028A60032DEEA /* UpgradeReminderModel.m */; };
 		6556AE5C211B282E0017B79A /* GlobalMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 6556AE5B211B282E0017B79A /* GlobalMethods.m */; };
+		65696B9A215928C4000F1E16 /* IncomeListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 65696B99215928C4000F1E16 /* IncomeListModel.m */; };
 		657AA201213BA0B10086F98A /* WeatherModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 657AA200213BA0B10086F98A /* WeatherModel.m */; };
 		657AA205213BCD660086F98A /* CouponListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 657AA204213BCD660086F98A /* CouponListModel.m */; };
 		657AA20E213C022F0086F98A /* ExpensesRecordListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 657AA20D213C022F0086F98A /* ExpensesRecordListModel.m */; };
@@ -53,14 +54,12 @@
 		65C5B07A2135AA8100727122 /* PersonalInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5AFE32135AA8100727122 /* PersonalInfoCell.m */; };
 		65C5B0802135AA8100727122 /* ExpensesRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5AFF12135AA8100727122 /* ExpensesRecordViewController.m */; };
 		65C5B0812135AA8100727122 /* IncomeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5AFF22135AA8100727122 /* IncomeListViewController.m */; };
-		65C5B0832135AA8100727122 /* IncomeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5AFF72135AA8100727122 /* IncomeModel.m */; };
 		65C5B0872135AA8100727122 /* IncomeListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5B0012135AA8100727122 /* IncomeListCell.m */; };
 		65C5B0882135AA8100727122 /* ExpensesRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5B0022135AA8100727122 /* ExpensesRecordCell.m */; };
 		65C5B08A2135AA8100727122 /* CreateProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5B0082135AA8100727122 /* CreateProductViewController.m */; };
 		65C5B08C2135AA8100727122 /* WashServiceManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5B00C2135AA8100727122 /* WashServiceManagerViewController.m */; };
 		65C5B08F2135AA8100727122 /* CommodityManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5B0102135AA8100727122 /* CommodityManagerViewController.m */; };
 		65C5B0912135AA8100727122 /* WashManager.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65C5B0142135AA8100727122 /* WashManager.storyboard */; };
-		65C5B0952135AA8100727122 /* CreateProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5B01D2135AA8100727122 /* CreateProductCell.m */; };
 		65C5B0962135AA8100727122 /* WashManagerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5B01E2135AA8100727122 /* WashManagerCell.m */; };
 		65C5B0982135AA8100727122 /* WashManagerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65C5B0202135AA8100727122 /* WashManagerCell.xib */; };
 		65C5B09C2135AA8100727122 /* IntegralConvertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5B02B2135AA8100727122 /* IntegralConvertViewController.m */; };
@@ -100,6 +99,7 @@
 		65D8D49E2146CF5800934589 /* PaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D8D49B2146CF5800934589 /* PaymentViewController.m */; };
 		65D8D4A12146CF7D00934589 /* PaymentTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D8D4A02146CF7D00934589 /* PaymentTypeCell.m */; };
 		65E19EE2214FE87E00079CF3 /* WeatherNetworkTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E19EE1214FE87E00079CF3 /* WeatherNetworkTools.m */; };
+		65E5EDCF215886230013E390 /* CreateServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E5EDCE215886230013E390 /* CreateServiceViewController.m */; };
 		65EA90EF212B19C90095F72B /* LYKeyChainStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EA90EE212B19C90095F72B /* LYKeyChainStore.m */; };
 		65EFB57B2143A9D9009289E4 /* AuthenticationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EFB57A2143A9D9009289E4 /* AuthenticationModel.m */; };
 		65FA514A2144FAD500F9D08C /* SeeLargePictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65FA51492144FAD500F9D08C /* SeeLargePictureViewController.m */; };
@@ -152,6 +152,8 @@
 		6545FCDF214028A60032DEEA /* UpgradeReminderModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UpgradeReminderModel.m; sourceTree = "<group>"; };
 		6556AE5A211B282E0017B79A /* GlobalMethods.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlobalMethods.h; sourceTree = "<group>"; };
 		6556AE5B211B282E0017B79A /* GlobalMethods.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GlobalMethods.m; sourceTree = "<group>"; };
+		65696B98215928C4000F1E16 /* IncomeListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IncomeListModel.h; sourceTree = "<group>"; };
+		65696B99215928C4000F1E16 /* IncomeListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IncomeListModel.m; sourceTree = "<group>"; };
 		657AA1FF213BA0B10086F98A /* WeatherModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeatherModel.h; sourceTree = "<group>"; };
 		657AA200213BA0B10086F98A /* WeatherModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WeatherModel.m; sourceTree = "<group>"; };
 		657AA203213BCD660086F98A /* CouponListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CouponListModel.h; sourceTree = "<group>"; };
@@ -199,8 +201,6 @@
 		65C5AFEE2135AA8100727122 /* IncomeListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IncomeListViewController.h; sourceTree = "<group>"; };
 		65C5AFF12135AA8100727122 /* ExpensesRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpensesRecordViewController.m; sourceTree = "<group>"; };
 		65C5AFF22135AA8100727122 /* IncomeListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IncomeListViewController.m; sourceTree = "<group>"; };
-		65C5AFF72135AA8100727122 /* IncomeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IncomeModel.m; sourceTree = "<group>"; };
-		65C5AFF82135AA8100727122 /* IncomeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IncomeModel.h; sourceTree = "<group>"; };
 		65C5AFFA2135AA8100727122 /* ExpensesRecordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpensesRecordCell.h; sourceTree = "<group>"; };
 		65C5AFFB2135AA8100727122 /* IncomeListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IncomeListCell.h; sourceTree = "<group>"; };
 		65C5B0012135AA8100727122 /* IncomeListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IncomeListCell.m; sourceTree = "<group>"; };
@@ -212,10 +212,8 @@
 		65C5B0122135AA8100727122 /* CreateProductViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateProductViewController.h; sourceTree = "<group>"; };
 		65C5B0132135AA8100727122 /* WashServiceManagerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WashServiceManagerViewController.h; sourceTree = "<group>"; };
 		65C5B0142135AA8100727122 /* WashManager.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = WashManager.storyboard; sourceTree = "<group>"; };
-		65C5B01D2135AA8100727122 /* CreateProductCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateProductCell.m; sourceTree = "<group>"; };
 		65C5B01E2135AA8100727122 /* WashManagerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WashManagerCell.m; sourceTree = "<group>"; };
 		65C5B0202135AA8100727122 /* WashManagerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WashManagerCell.xib; sourceTree = "<group>"; };
-		65C5B0242135AA8100727122 /* CreateProductCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateProductCell.h; sourceTree = "<group>"; };
 		65C5B0252135AA8100727122 /* WashManagerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WashManagerCell.h; sourceTree = "<group>"; };
 		65C5B0292135AA8100727122 /* CouponViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponViewController.h; sourceTree = "<group>"; };
 		65C5B02B2135AA8100727122 /* IntegralConvertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntegralConvertViewController.m; sourceTree = "<group>"; };
@@ -287,6 +285,8 @@
 		65D8D4A02146CF7D00934589 /* PaymentTypeCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PaymentTypeCell.m; sourceTree = "<group>"; };
 		65E19EE0214FE87E00079CF3 /* WeatherNetworkTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeatherNetworkTools.h; sourceTree = "<group>"; };
 		65E19EE1214FE87E00079CF3 /* WeatherNetworkTools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WeatherNetworkTools.m; sourceTree = "<group>"; };
+		65E5EDCD215886230013E390 /* CreateServiceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CreateServiceViewController.h; sourceTree = "<group>"; };
+		65E5EDCE215886230013E390 /* CreateServiceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CreateServiceViewController.m; sourceTree = "<group>"; };
 		65EA90ED212B19C90095F72B /* LYKeyChainStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LYKeyChainStore.h; sourceTree = "<group>"; };
 		65EA90EE212B19C90095F72B /* LYKeyChainStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LYKeyChainStore.m; sourceTree = "<group>"; };
 		65EFB5792143A9D9009289E4 /* AuthenticationModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AuthenticationModel.h; sourceTree = "<group>"; };
@@ -568,10 +568,10 @@
 		65C5AFF62135AA8100727122 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				65C5AFF82135AA8100727122 /* IncomeModel.h */,
-				65C5AFF72135AA8100727122 /* IncomeModel.m */,
 				657AA20C213C022F0086F98A /* ExpensesRecordListModel.h */,
 				657AA20D213C022F0086F98A /* ExpensesRecordListModel.m */,
+				65696B98215928C4000F1E16 /* IncomeListModel.h */,
+				65696B99215928C4000F1E16 /* IncomeListModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -606,6 +606,8 @@
 				65C5B00B2135AA8100727122 /* CommodityManagerViewController.h */,
 				65C5B0102135AA8100727122 /* CommodityManagerViewController.m */,
 				65C5B0142135AA8100727122 /* WashManager.storyboard */,
+				65E5EDCD215886230013E390 /* CreateServiceViewController.h */,
+				65E5EDCE215886230013E390 /* CreateServiceViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -613,8 +615,6 @@
 		65C5B0182135AA8100727122 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				65C5B0242135AA8100727122 /* CreateProductCell.h */,
-				65C5B01D2135AA8100727122 /* CreateProductCell.m */,
 				65C5B0252135AA8100727122 /* WashManagerCell.h */,
 				65C5B01E2135AA8100727122 /* WashManagerCell.m */,
 				65C5B0202135AA8100727122 /* WashManagerCell.xib */,
@@ -1245,11 +1245,11 @@
 				65C5B0882135AA8100727122 /* ExpensesRecordCell.m in Sources */,
 				65C5AFC52135A45100727122 /* ProfileCell.m in Sources */,
 				CCC4030D214780EA006A5F54 /* CreateOrderModel.m in Sources */,
-				65C5B0832135AA8100727122 /* IncomeModel.m in Sources */,
 				6556AE5C211B282E0017B79A /* GlobalMethods.m in Sources */,
 				65C5B10D2135B0F800727122 /* CustomAnnotationView.m in Sources */,
 				65C5B0802135AA8100727122 /* ExpensesRecordViewController.m in Sources */,
 				CC5BF768213658900037DF66 /* NSObject+DictionaryFromModel.m in Sources */,
+				65696B9A215928C4000F1E16 /* IncomeListModel.m in Sources */,
 				65C5B10B2135B0F800727122 /* MapViewController.m in Sources */,
 				65FA514D2145009200F9D08C /* BaseTableViewController.m in Sources */,
 				65C5B0E62135AFC900727122 /* HomeModel.m in Sources */,
@@ -1290,8 +1290,8 @@
 				65C5B08F2135AA8100727122 /* CommodityManagerViewController.m in Sources */,
 				653E3BF02148134400FD08BE /* AlipayManager.m in Sources */,
 				65FA515421454B4100F9D08C /* CarWashInfoViewController.m in Sources */,
+				65E5EDCF215886230013E390 /* CreateServiceViewController.m in Sources */,
 				65C5B1062135B0F800727122 /* CommodityRecommendationViewController.m in Sources */,
-				65C5B0952135AA8100727122 /* CreateProductCell.m in Sources */,
 				65C5AFCD2135A47B00727122 /* UserInfoModel.m in Sources */,
 				6584AA9421401D2600DEA15F /* UIImage+ScaleImage.m in Sources */,
 				65C5B0BA2135AA8200727122 /* CertificationCell.m in Sources */,

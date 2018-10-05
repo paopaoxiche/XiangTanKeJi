@@ -157,7 +157,10 @@
         _imageUrl = [dic objectForKey:@"image"];
         _commodityName = [dic objectForKey:@"name"];
         _originPrice = [[dic objectForKey:@"originPrice"] floatValue];
-        _washID = [[dic objectForKey:@"washId"] integerValue];
+        
+        if ([dic objectForKey:@"washId"]) {
+            _washID = [[dic objectForKey:@"washId"] integerValue];
+        }
         _isSelected = NO;
     }
     

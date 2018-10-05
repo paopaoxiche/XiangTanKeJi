@@ -125,8 +125,10 @@
         CarWashInfoModel *washInfo = [UserManager sharedInstance].carWashInfo;
         cell.cusDetailTextLabel.hidden = NO;
         cell.cusDetailTextLabel.text = indexPath.row == 0 ? [NSString stringWithFormat:@"%li", washInfo.honor] : [NSString stringWithFormat:@"%li次", washInfo.washCount];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     } else {
         cell.cusDetailTextLabel.hidden = YES;
+        cell.selectionStyle = UITableViewCellSelectionStyleGray;
     }
     
     if (!isOwner && indexPath.section == 0) {

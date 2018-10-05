@@ -21,6 +21,12 @@
     [super awakeFromNib];
 }
 
+- (IBAction)onselectedBtnClicked:(id)sender {
+    if (_delegate) {
+        [_delegate selectedTradeStateCell:self];
+    }
+}
+
 - (void)setImgName:(NSString *)imgName {
     [_selectBtn setImage:[UIImage imageNamed:imgName] forState:UIControlStateNormal];
 }

@@ -10,4 +10,10 @@
 
 @interface WashManagerCell : UITableViewCell
 
+@property (nonatomic, copy) NSString *imageUrl;
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic, copy) NSString *desc;
+@property (nonatomic, assign) CGFloat currentPrice;
+@property (nonatomic, assign) CGFloat originalPrice;
+
 @end

@@ -7,14 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ParentViewController.h"
 
-typedef NS_ENUM(NSUInteger, ProductType) {
-    ProductTypeCarWash,         // 洗车服务产品
-    ProductTypeCommodity        // 商品产品
-};
+@class RecommendCommodityModel;
 
-@interface CreateProductViewController : UIViewController
+@interface CreateProductViewController : ParentViewController
 
-@property (nonatomic, assign) ProductType proType;
+@property (nonatomic, strong) RecommendCommodityModel *model;
 
 @end

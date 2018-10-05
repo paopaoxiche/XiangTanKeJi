@@ -73,6 +73,32 @@
 
 @end
 
+@implementation CommodityParam
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        _commodityID = @"0";
+    }
+    
+    return self;
+}
+
+@end
+
+@implementation ServiceParam
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        _serviceId = @0;
+        _carModel = @"1";
+    }
+    
+    return self;
+}
+
+@end
 
 #pragma mark - NetworkTools
 
@@ -352,6 +378,55 @@ static const NSTimeInterval kTimeOutInterval = 6.0f;
     NSDictionary *params = @{@"washId":[NSNumber numberWithInteger:washID], @"count":[NSNumber numberWithInteger:count]};
     [self setRequestHeader];
     [self GET:@"wash/getRecentWashList" parameters:params success:success failure:failed];
+}
+
+- (void)obtainIncomeList:(NSInteger)washID month:(NSInteger)month success:(SuccessBlock)success failed:(FailedBlock)failed {
+    NSDictionary *params = @{
+                             @"washId": [NSNumber numberWithInteger:washID],
+                             @"month": [NSNumber numberWithInteger:month]
+                             };
+    [self GET:@"wash/getEarningsList" parameters:params success:success failure:failed];
+}
+
+- (void)obtainCarWashComment:(NSInteger)washID pageIndex:(NSInteger)pageIndex pageSize:(NSInteger)pageSize success:(SuccessBlock)success failed:(FailedBlock)failed {
+    NSDictionary *params = @{
+                             @"washId":[NSNumber numberWithInteger:washID],
+                             @"pageIndex":[NSNumber numberWithInteger:pageIndex],
+                             @"pageSize":[NSNumber numberWithInteger:pageSize]
+                             };
+    [self GET:@"wash/getCarWashEstimate" parameters:params success:success failure:failed];
+}
+
+- (void)updateTradeState:(NSInteger)washID status:(NSString *)status success:(SuccessBlock)success failed:(FailedBlock)failed {
+    NSDictionary *params = @{@"id": [NSNumber numberWithInteger:washID], @"status": status};
+    [self POST:@"wash/updateStatus" parameters:params success:success failure:failed];
+}
+
+- (void)addOrModifyService:(ServiceParam *)param success:(SuccessBlock)success failure:(FailedBlock)failed {
+    NSDictionary *params = [param dictionaryFromModel];
+    [self POST:@"wash/publishService" parameters:params success:success failure:failed];
+}
+
+- (void)deleteWashService:(NSInteger)washID serviceID:(NSInteger)serviceID success:(SuccessBlock)success failure:(FailedBlock)failed {
+    NSDictionary *params = @{@"washId": [NSNumber numberWithInteger:washID], @"serviceId": [NSNumber numberWithInteger:serviceID]};
+    [self POST:@"wash/deleteService" parameters:params success:success failure:failed];
+}
+
+- (void)addOrModifyCommodity:(CommodityParam *)param success:(SuccessBlock)success failure:(FailedBlock)failed {
+    NSDictionary *params = @{
+                             @"id": param.commodityID,
+                             @"name": param.name,
+                             @"currentPrice": param.currentPrice,
+                             @"originalPrice": param.originalPrice,
+                             @"describe": param.describe
+                             };
+    NSArray *images = @[@{@"commodityImg": param.commodityImg}];
+    [self POST:@"commodity/addCommodity" parameters:params images:images success:success failure:failed];
+}
+
+- (void)deleteCommodity:(NSInteger)commodityID success:(SuccessBlock)success failure:(FailedBlock)failed {
+    NSDictionary *params = @{@"id": [NSNumber numberWithInteger:commodityID]};
+    [self POST:@"commodity/deleteCommodity" parameters:params success:success failure:failed];
 }
 
 #pragma mark - GET Method

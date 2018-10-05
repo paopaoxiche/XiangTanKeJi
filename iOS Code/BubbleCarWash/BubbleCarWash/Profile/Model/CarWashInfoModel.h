@@ -8,6 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+typedef NS_ENUM(NSInteger, TradeState) {
+    TradeStateClosed = -1,      // 停业
+    TradeStateRest = 0,         // 歇业
+    TradeStateOperate = 1       // 营业
+};
+
 @interface CarWashInfoModel : NSObject
 
 /// 手机号
@@ -24,6 +30,8 @@
 @property (nonatomic, assign) NSInteger authStatus;
 /// 洗车场ID
 @property (nonatomic, assign) NSInteger washID;
+/// 洗车场运营状态
+@property (nonatomic, assign) TradeState tradeState;
 
 - (instancetype)initWithDic:(NSDictionary *)dic;
 

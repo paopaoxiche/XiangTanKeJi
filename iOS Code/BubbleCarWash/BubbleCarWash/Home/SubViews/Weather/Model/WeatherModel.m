@@ -44,7 +44,7 @@
                     NSDictionary *temperature = temperatures[i];
                     
                     NSString *date = temperature[@"date"];
-                    model.date = [GlobalMethods convertDate:date];
+                    model.date = [GlobalMethods convertDate:date outputFormat:@"MM/dd"];
                     model.week = i == 0 ? @"今天" : [GlobalMethods dayOfWeekByDateString:date];
                     model.maxTemperature = [NSString stringWithFormat:@"%li", [temperature[@"max"] integerValue]];
                     model.minTemperature = [NSString stringWithFormat:@"%li", [temperature[@"min"] integerValue]];

@@ -58,6 +58,30 @@
 
 @end
 
+@interface CommodityParam : NSObject
+
+/// 0 - 新增商品，具体商品id - 修改商品
+@property (nonatomic, copy) NSString *commodityID;
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic, copy) NSString *currentPrice;
+@property (nonatomic, copy) NSString *originalPrice;
+@property (nonatomic, copy) NSString *describe;
+@property (nonatomic, strong) UIImage *commodityImg;
+
+@end
+
+@interface ServiceParam : NSObject
+
+@property (nonatomic, strong) NSNumber *washId;
+/// 0 - 新增服务，具体服务id - 修改服务
+@property (nonatomic, strong) NSNumber *serviceId;
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic, copy) NSString *describe;
+@property (nonatomic, copy) NSString *price;
+@property (nonatomic, copy) NSString *carModel;
+
+@end
+
 typedef void(^SuccessBlock)(NSDictionary *response, BOOL isSuccess);
 typedef void(^FailedBlock)(NSError *error);
 
@@ -238,31 +262,31 @@ typedef void(^FailedBlock)(NSError *error);
 /**
  *  获取收入列表
  */
-
+- (void)obtainIncomeList:(NSInteger)washID month:(NSInteger)month success:(SuccessBlock)success failed:(FailedBlock)failed;
 /**
  *  获取洗车场评价列表
  */
-
+- (void)obtainCarWashComment:(NSInteger)washID pageIndex:(NSInteger)pageIndex pageSize:(NSInteger)pageSize success:(SuccessBlock)success failed:(FailedBlock)failed;
 /**
  *  更新洗车场营业状态
  */
-
+- (void)updateTradeState:(NSInteger)washID status:(NSString *)status success:(SuccessBlock)success failed:(FailedBlock)failed;
 /**
  *  发布洗车服务
  */
-
+- (void)addOrModifyService:(ServiceParam *)param success:(SuccessBlock)success failure:(FailedBlock)failed;
 /**
  *  删除洗车服务
  */
-
+- (void)deleteWashService:(NSInteger)washID serviceID:(NSInteger)serviceID success:(SuccessBlock)success failure:(FailedBlock)failed;
 /**
  *  增加/修改商品
  */
-
+- (void)addOrModifyCommodity:(CommodityParam *)param success:(SuccessBlock)success failure:(FailedBlock)failed;
 /**
  *  删除商品
  */
-
+- (void)deleteCommodity:(NSInteger)commodityID success:(SuccessBlock)success failure:(FailedBlock)failed;
 /**
  *  提取现金
  */

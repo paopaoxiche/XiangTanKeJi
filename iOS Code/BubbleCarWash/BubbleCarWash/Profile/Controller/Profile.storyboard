@@ -435,6 +435,9 @@
                                                 <constraint firstAttribute="width" constant="44" id="f8H-Ak-hjd"/>
                                             </constraints>
                                             <state key="normal" image="SingleSelection_Selected"/>
+                                            <connections>
+                                                <action selector="onselectedBtnClicked:" destination="kTz-nO-VTL" eventType="touchUpInside" id="68s-mq-VnW"/>
+                                            </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="营业" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VfF-h1-Fpg">
                                             <rect key="frame" x="62" y="11" width="33" height="20"/>

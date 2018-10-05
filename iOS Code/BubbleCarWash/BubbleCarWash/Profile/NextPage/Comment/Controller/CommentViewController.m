@@ -9,6 +9,8 @@
 #import "CommentViewController.h"
 #import "CommentCell.h"
 #import "CommentListModel.h"
+#import "UserManager.h"
+#import "CarWashInfoModel.h"
 
 @interface CommentViewController ()
 
@@ -27,10 +29,39 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [CommentListModel loadCommentList:^(NSArray *result) {
-        self.commentList = result;
-        [self.tableView reloadData];
-    }];
+    BOOL isOwner = [UserManager sharedInstance].userType == UserTypeOwner;
+    if (isOwner) {
+        [CommentListModel loadCommentList:0 pageSize:20 result:^(NSArray *result, BOOL isSuccess) {
+            self.commentList = result;
+            if (isSuccess) {
+                if (result.count > 0) {
+                    [self.tableView reloadData];
+                } else {
+                    // 提示无评价
+                }
+            }
+            
+            if (!isSuccess) {
+                [self messageBox:@"评价请求失败"];
+            }
+        }];
+    } else {
+        NSInteger washID = [UserManager sharedInstance].carWashInfo.washID;
+        [CommentListModel loadCommentList:washID pageIndex:0 pageSize:20 result:^(NSArray *result, BOOL isSuccess) {
+            self.commentList = result;
+            if (isSuccess) {
+                if (result.count > 0) {
+                    [self.tableView reloadData];
+                } else {
+                    // 提示无评价
+                }
+            }
+            
+            if (!isSuccess) {
+                [self messageBox:@"评价请求失败"];
+            }
+        }];
+    }
 }
 
 #pragma mark - UITableViewDatasource

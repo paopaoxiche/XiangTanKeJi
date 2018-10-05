@@ -83,6 +83,7 @@
         [[NetworkTools sharedInstance] checkToken:_userInfo.token userID:_userInfo.userID isOwner:_userInfo.type == UserTypeOwner success:^(NSDictionary *response, BOOL isSuccess) {
             NSInteger code = [response[@"code"] integerValue];
             self.isLogin = code == 200 ? YES : NO;
+            self.isUpdateUserInfo = self.isLogin;
             block(code);
             [self obtainUserInfo];
         } failed:^(NSError *error) {

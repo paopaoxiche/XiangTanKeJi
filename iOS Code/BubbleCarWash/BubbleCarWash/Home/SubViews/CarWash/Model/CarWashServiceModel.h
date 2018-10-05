@@ -6,7 +6,7 @@
 //  Copyright © 2018年 Sunshine Girl. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 typedef void(^ServiceResultBlock)(NSArray *result);
 
@@ -20,7 +20,7 @@ typedef void(^ServiceResultBlock)(NSArray *result);
 
 @property (nonatomic, copy) NSString *carWashName;
 @property (nonatomic, copy) NSString *desc;
-@property (nonatomic, assign) NSInteger price;
+@property (nonatomic, assign) CGFloat price;
 @property (nonatomic, assign) NSInteger dataID;
 
 - (instancetype)initWithDic:(NSDictionary *)dic;

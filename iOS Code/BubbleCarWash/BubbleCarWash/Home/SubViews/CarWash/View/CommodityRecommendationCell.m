@@ -33,7 +33,7 @@
 }
 
 - (void)setCurrentPrice:(CGFloat)currentPrice {
-    _currentPriceLabel.text = [NSString stringWithFormat:@"%.2f", currentPrice];;
+    _currentPriceLabel.text = [NSString stringWithFormat:@"%.2f", currentPrice];
 }
 
 - (void)setOriginalPrice:(CGFloat)originalPrice {
