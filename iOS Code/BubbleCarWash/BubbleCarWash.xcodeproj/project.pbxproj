@@ -599,13 +599,13 @@
 		65C5B0072135AA8100727122 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				65C5B0142135AA8100727122 /* WashManager.storyboard */,
 				65C5B0122135AA8100727122 /* CreateProductViewController.h */,
 				65C5B0082135AA8100727122 /* CreateProductViewController.m */,
 				65C5B0132135AA8100727122 /* WashServiceManagerViewController.h */,
 				65C5B00C2135AA8100727122 /* WashServiceManagerViewController.m */,
 				65C5B00B2135AA8100727122 /* CommodityManagerViewController.h */,
 				65C5B0102135AA8100727122 /* CommodityManagerViewController.m */,
-				65C5B0142135AA8100727122 /* WashManager.storyboard */,
 				65E5EDCD215886230013E390 /* CreateServiceViewController.h */,
 				65E5EDCE215886230013E390 /* CreateServiceViewController.m */,
 			);

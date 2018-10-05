@@ -12,8 +12,8 @@
 typedef NS_ENUM(NSInteger, WeatherSkycon) {
     WeatherSkyconClearDay,                 // 晴天
     WeatherSkyconClearNight,               // 晴夜
-    WeatherSkyconPartlyCloudyDay,          // 多云
-    WeatherSkyconPartlyCloudyNight,        // 多云
+    WeatherSkyconPartlyCloudyDay,          // 多云日
+    WeatherSkyconPartlyCloudyNight,        // 多云夜
     WeatherSkyconCloudy,                   // 阴
     WeatherSkyconRain,                     // 雨
     WeatherSkyconSnow,                     // 雪
@@ -33,6 +33,7 @@ typedef void(^ResultBlock)(NSDictionary *result);
 
 + (void)loadWeatherData:(Location)location result:(ResultBlock)result;
 + (WeatherSkycon)weatherSkycon:(NSString *)skycon;
++ (NSArray *)weatherBackgroundColor:(WeatherSkycon)skycon;
 
 @end
 

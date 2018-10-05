@@ -64,4 +64,5 @@
     _proOriginalPriceLabel.attributedText = price;
     _proOriginalPriceLabel.hidden = NO;
 }
+
 @end

@@ -21,10 +21,12 @@
 #import "DataType.h"
 #import "WeatherModel.h"
 #import "WeatherViewController.h"
+#import "GlobalMethods.h"
 
 @interface HomeViewController () <UITableViewDataSource, UITableViewDelegate, AMapLocationManagerDelegate, AMapSearchDelegate>
 
 @property (nonatomic, weak) IBOutlet UIView *weatherView;
+@property (weak, nonatomic) IBOutlet UIImageView *weatherBg;
 @property (nonatomic, weak) IBOutlet UILabel *currentTemperatureLabel;
 @property (nonatomic, weak) IBOutlet UILabel *locationLabel;
 @property (nonatomic, weak) IBOutlet UILabel *maximumTemperature;
@@ -41,6 +43,7 @@
 @property (nonatomic, assign) BOOL isUpdateMearByWashList;
 @property (nonatomic, copy) NSArray *nearbyWashList;
 @property (nonatomic, copy) NSDictionary *weatherInfos;
+@property (nonatomic, copy) NSArray *backgroundImageNames;
 
 @end
 
@@ -79,6 +82,12 @@
     
     self.search = [[AMapSearchAPI alloc] init];
     self.search.delegate = self;
+    
+    // 从状态栏开始布局
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    self.extendedLayoutIncludesOpaqueBars = NO;
+    self.modalPresentationCapturesStatusBarAppearance = NO;
+    self.automaticallyAdjustsScrollViewInsets = NO;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -115,6 +124,12 @@
             self.weatherDescLabel.text = forecastModel.hint;
             self.maximumTemperature.text = forecastModel.maxTemperature;
             self.lowestTemperature.text = forecastModel.minTemperature;
+            
+            [GlobalMethods setGradientColor:[WeatherModel weatherBackgroundColor:forecastModel.skycon]
+                                 startPoint:CGPointMake(0, 0)
+                                   endPoint:CGPointMake(0, 1)
+                                       view:self.view];
+            self.weatherBg.image = [UIImage imageNamed:self.backgroundImageNames[forecastModel.skycon]];
         }
     }];
 }
@@ -203,6 +218,16 @@
  */
 - (void)AMapSearchRequest:(id)request didFailWithError:(NSError *)error {
     NSLog(@"Error: %@", error);
+}
+
+#pragma mark - Lazy loading
+
+- (NSArray *)backgroundImageNames {
+    if (!_backgroundImageNames) {
+        _backgroundImageNames = @[@"SunnyDay_HomeBg", @"SunnyNight_HomeBg", @"PartlyCloudy_HomeBg", @"PartlyCloudy_HomeBg", @"", @"Rain_HomeBg", @"Snow_HomeBg", @"Wind_HomeBg", @""];
+    }
+    
+    return _backgroundImageNames;
 }
 
 @end

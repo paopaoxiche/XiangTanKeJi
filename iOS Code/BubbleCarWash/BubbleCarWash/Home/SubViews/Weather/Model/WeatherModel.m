@@ -9,6 +9,7 @@
 #import "WeatherModel.h"
 #import "WeatherNetworkTools.h"
 #import "GlobalMethods.h"
+#import "UIColor+Category.h"
 
 @implementation WeatherModel
 
@@ -141,6 +142,24 @@
     }
     
     return imageName;
+}
+
++ (NSArray *)weatherBackgroundColor:(WeatherSkycon)skycon {
+    if (skycon == WeatherSkyconClearDay) {
+        return @[(id)[UIColor rgbByHexStr:@"2f89e9"].CGColor, (id)[UIColor rgbByHexStr:@"62b0ee"].CGColor];
+    } else if (skycon == WeatherSkyconClearNight) {
+        return @[(id)[UIColor rgbByHexStr:@"003171"].CGColor, (id)[UIColor rgbByHexStr:@"1b496e"].CGColor];
+    } else if (skycon == WeatherSkyconPartlyCloudyDay) {
+        return @[(id)[UIColor rgbByHexStr:@"7897c0"].CGColor, (id)[UIColor rgbByHexStr:@"9abcd7"].CGColor];
+    } else if (skycon == WeatherSkyconPartlyCloudyNight) {
+        return @[(id)[UIColor rgbByHexStr:@"213857"].CGColor, (id)[UIColor rgbByHexStr:@"334655"].CGColor];
+    } else if (skycon == WeatherSkyconHaze) {
+        return @[(id)[UIColor rgbByHexStr:@"bfb08d"].CGColor, (id)[UIColor rgbByHexStr:@"5f5030"].CGColor];
+    } else if (skycon == WeatherSkyconWind) {
+        return @[(id)[UIColor rgbByHexStr:@"5b779c"].CGColor, (id)[UIColor rgbByHexStr:@"cbbd9d"].CGColor];
+    } else {
+        return @[(id)[UIColor rgbByHexStr:@"5b779c"].CGColor, (id)[UIColor rgbByHexStr:@"8aabc5"].CGColor];
+    }
 }
 
 @end
