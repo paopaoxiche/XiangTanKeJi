@@ -13,7 +13,7 @@
 
 @implementation WeatherModel
 
-+ (void)loadWeatherData:(Location)location result:(ResultBlock)result {
++ (void)loadWeatherData:(Location)location result:(WeatherBlock)result {
     dispatch_group_t group = dispatch_group_create();
     
     dispatch_group_enter(group);

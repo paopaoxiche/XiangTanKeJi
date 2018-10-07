@@ -63,7 +63,7 @@
     
     ExpensesRecordContentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ExpensesRecordContentCell" forIndexPath:indexPath];
     if (indexPath.row == 1) {
-        cell.imageUrl = @"ServiceDefault";
+        cell.imageUrl = @"";
         cell.name = model.serviceName;
         cell.couponType = model.coupon ? model.coupon.couponType : @"";
         cell.price =  model.coupon ? model.servicePrice : @"";

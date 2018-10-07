@@ -21,7 +21,7 @@ typedef NS_ENUM(NSInteger, WeatherSkycon) {
     WeatherSkyconHaze                      // 雾霾沙尘
 };
 
-typedef void(^ResultBlock)(NSDictionary *result);
+typedef void(^WeatherBlock)(NSDictionary *result);
 
 @class WeatherRealTimeModel;
 @class WeatherForeCastModel;
@@ -31,7 +31,7 @@ typedef void(^ResultBlock)(NSDictionary *result);
 @property (nonatomic, strong) WeatherRealTimeModel *realTimeModel;
 @property (nonatomic, copy) NSArray<WeatherForeCastModel *> *foreCastModel;
 
-+ (void)loadWeatherData:(Location)location result:(ResultBlock)result;
++ (void)loadWeatherData:(Location)location result:(WeatherBlock)result;
 + (WeatherSkycon)weatherSkycon:(NSString *)skycon;
 + (NSArray *)weatherBackgroundColor:(WeatherSkycon)skycon;
 

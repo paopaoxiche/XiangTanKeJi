@@ -9,6 +9,7 @@
 #import "ExpensesRecordListModel.h"
 #import "UserManager.h"
 #import "NetworkTools.h"
+#import "CarWashInfoModel.h"
 
 @interface ExpensesRecordListModel ()
 
@@ -36,6 +37,27 @@
     }];
 }
 
++ (void)loadRecentCarWashList:(NSInteger)count result:(ResultBlock)result {
+    [[NetworkTools sharedInstance] obtainRecentCarWashes:[UserManager sharedInstance].carWashInfo.washID count:count success:^(NSDictionary *response, BOOL isSuccess) {
+        NSLog(@"respons = %@", response);
+        NSInteger code = [[response objectForKey:@"code"] integerValue];
+        if (code == 200 && [response objectForKey:@"data"] != [NSNull null]) {
+            NSDictionary *dataArr = [response objectForKey:@"data"];
+            NSMutableArray *recordList = [NSMutableArray arrayWithCapacity:dataArr.count];
+            for (NSDictionary *dic in dataArr) {
+                ExpensesRecordModel *model = [[ExpensesRecordModel alloc] initWithDic:dic];
+                [recordList addObject:model];
+            }
+            
+            result(recordList);
+        } else {
+            result(@[]);
+        }
+    } failed:^(NSError *error) {
+        result(@[]);
+    }];
+}
+
 @end
 
 #pragma mark -
@@ -53,13 +75,24 @@
     if (self) {
         _recordID = [[dic objectForKey:@"id"] integerValue];
         _carType = [[dic objectForKey:@"carType"] integerValue];
-        _avatarUrl = [dic objectForKey:@"carWashImg"];
-        _washName = [dic objectForKey:@"carWashName"];
         _serviceName = [dic objectForKey:@"serviceName"];
         _servicePrice = [dic objectForKey:@"payment"];
         _time = [dic objectForKey:@"time"];
         _totalPrice = [dic objectForKey:@"totalPrice"];
         _isEvaluation = [[dic objectForKey:@"isEvaluation"] integerValue];
+        
+        NSString *avatarUrl = [dic objectForKey:@"carWashImg"];
+        if (avatarUrl) {
+            _avatarUrl = avatarUrl;
+        }
+        NSString *washName = [dic objectForKey:@"carWashName"];
+        if (washName) {
+            _washName = washName;
+        }
+        NSString *time = [dic objectForKey:@"time"];
+        if (time) {
+            _time = time;
+        }
         
         NSDictionary *coupons = [dic objectForKey:@"coupons"];
         _coupon = (coupons && coupons != [NSNull null]) ? [[ExpensesCouponModel alloc] initWithDic:coupons] : nil;

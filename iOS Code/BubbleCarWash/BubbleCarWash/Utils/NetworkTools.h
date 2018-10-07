@@ -51,6 +51,9 @@
 @property (nonatomic, copy) NSString *address;          // 地址
 @property (nonatomic, copy) NSString *coordX;           // 纬度
 @property (nonatomic, copy) NSString *coordY;           // 经度
+@property (nonatomic, copy) NSString *province;         // 省
+@property (nonatomic, copy) NSString *city;            // 市
+@property (nonatomic, copy) NSString *district;         // 区
 @property (nonatomic, strong) UIImage *license;         // 营业执照文件
 @property (nonatomic, strong) UIImage *washCard;        // 洗车证
 @property (nonatomic, strong) UIImage *idCardPositive;  // 身份证正面
@@ -231,7 +234,7 @@ typedef void(^FailedBlock)(NSError *error);
 /**
  *  获取近期洗车列表
  */
-- (void)obtainRecentCarWashList:(NSInteger)washID count:(NSInteger)count success:(SuccessBlock)success failed:(FailedBlock)failed;
+- (void)obtainRecentCarWashes:(NSInteger)washID count:(NSInteger)count success:(SuccessBlock)success failed:(FailedBlock)failed;
 
 #pragma mark - 洗车场我的
 
@@ -246,7 +249,12 @@ typedef void(^FailedBlock)(NSError *error);
 /**
  *  更新洗车场地址
  */
-
+- (void)updateCarWashAddress:(NSInteger)washID
+                     address:(NSString *)address
+                    latitude:(CGFloat)latitude
+                   longitude:(CGFloat)longitude
+                     success:(SuccessBlock)success
+                      failed:(FailedBlock)failed;
 /**
  *  获取工商认证状态
  */
@@ -255,10 +263,6 @@ typedef void(^FailedBlock)(NSError *error);
  *  提交工商认证(洗车场注册)
  */
 - (void)registerWash:(RegisterWashParam *)param success:(SuccessBlock)success failed:(FailedBlock)failed;
-/**
- *  获取近期洗车列表
- */
-- (void)obtainRecentCarWashes:(NSInteger)washID count:(NSInteger)count success:(SuccessBlock)success failed:(FailedBlock)failed;
 /**
  *  获取收入列表
  */
@@ -295,8 +299,6 @@ typedef void(^FailedBlock)(NSError *error);
  *  获取余额
  */
 - (void)obtainBalance:(NSInteger)washID success:(SuccessBlock)success failure:(FailedBlock)failed;
-
-#pragma mark - 地图
 
 - (void)GET:(NSString *)url parameters:(NSDictionary *)params success:(SuccessBlock)success failure:(FailedBlock)failed;
 - (void)POST:(NSString *)url parameters:(NSDictionary *)params success:(SuccessBlock)success failure:(FailedBlock)failed;

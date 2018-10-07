@@ -38,6 +38,10 @@
 
 @implementation CertificationViewController
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -137,6 +141,9 @@
         _registerWash.address = [UserManager sharedInstance].address;
         _registerWash.coordX = [NSString stringWithFormat:@"%.6f", [UserManager sharedInstance].location.lat];
         _registerWash.coordY = [NSString stringWithFormat:@"%.6f", [UserManager sharedInstance].location.lng];
+        _registerWash.province = [UserManager sharedInstance].province;
+        _registerWash.city = [UserManager sharedInstance].city;
+        _registerWash.district = [UserManager sharedInstance].district;
         
         [[NetworkTools sharedInstance] registerWash:_registerWash success:^(NSDictionary *response, BOOL isSuccess) {
             NSInteger code = [[response objectForKey:@"code"] integerValue];

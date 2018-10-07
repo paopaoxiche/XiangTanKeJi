@@ -18,6 +18,7 @@ typedef void(^ResultBlock)(NSArray *result);
 @interface ExpensesRecordListModel : NSObject
 
 + (void)loadExpensesRecordList:(ResultBlock)block;
++ (void)loadRecentCarWashList:(NSInteger)count result:(ResultBlock)result;
 
 @end
 

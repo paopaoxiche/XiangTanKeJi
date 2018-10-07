@@ -33,6 +33,12 @@ typedef void(^CodeResultBlock)(NSInteger code);
 @property (nonatomic, assign) BOOL isLogin;
 @property (nonatomic, assign) BOOL isUpdateUserInfo;
 @property (nonatomic, assign) Location location;
+/// 省
+@property (nonatomic, copy) NSString *province;
+/// 市
+@property (nonatomic, copy) NSString *city;
+/// 区
+@property (nonatomic, copy) NSString *district;
 @property (nonatomic, copy) NSString *authentication;
 @property (nonatomic, copy) NSString *address;
 

@@ -22,6 +22,9 @@
 #import "WeatherModel.h"
 #import "WeatherViewController.h"
 #import "GlobalMethods.h"
+#import "ExpensesRecordListModel.h"
+#import "RecentWashRecordCell.h"
+#import "CarWashInfoModel.h"
 
 @interface HomeViewController () <UITableViewDataSource, UITableViewDelegate, AMapLocationManagerDelegate, AMapSearchDelegate>
 
@@ -37,6 +40,10 @@
 @property (nonatomic, weak) IBOutlet UILabel *weatherDescLabel;
 @property (nonatomic, weak) IBOutlet UITableView *nearWashTableView;
 @property (nonatomic, weak) IBOutlet UIView *scrollSubView;
+@property (weak, nonatomic) IBOutlet UILabel *hintLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *scrollViewHeightConstraint;
+@property (weak, nonatomic) IBOutlet UILabel *emptyLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *washViewHeightConstraint;
 @property (nonatomic, strong) CommodityRecommendationViewController *commodityRecommendationVC;
 @property (nonatomic, strong) AMapLocationManager *locationManager;
 @property (nonatomic, strong) AMapSearchAPI *search;
@@ -49,12 +56,17 @@
 
 @implementation HomeViewController
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
     _nearWashTableView.layer.cornerRadius = 4;
     _isUpdateMearByWashList = YES;
+    _nearWashTableView.rowHeight = 68;
     
     UITapGestureRecognizer *singleGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(touchWeatherView:)];
     [_weatherView addGestureRecognizer:singleGesture];
@@ -68,11 +80,13 @@
         if (code == 401) {
             UIViewController *loginVC = [GlobalMethods viewControllerWithBuddleName:@"Login" vcIdentifier:@"LoginVC"];
             [self presentViewController:loginVC animated:YES completion:nil];
+        } else {
+            if ([UserManager sharedInstance].userType ==  UserTypeOwner) {
+                [HomeDataModel loadRecommendWashCommodity:^(NSArray *result) {
+                    self.commodityRecommendationVC.recommendWashCommodity = result;
+                }];
+            }
         }
-    }];
-    
-    [HomeDataModel loadRecommendWashCommodity:^(NSArray *result) {
-        self.commodityRecommendationVC.recommendWashCommodity = result;
     }];
     
     self.locationManager = [[AMapLocationManager alloc] init];
@@ -88,23 +102,100 @@
     self.extendedLayoutIncludesOpaqueBars = NO;
     self.modalPresentationCapturesStatusBarAppearance = NO;
     self.automaticallyAdjustsScrollViewInsets = NO;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadRecentWashRecord) name:@"UpdateUserInfo" object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
     [self.navigationController setNavigationBarHidden:YES animated:YES];
+    
+    BOOL isOwner = [UserManager sharedInstance].userType == UserTypeOwner;
+    if (isOwner && [UserManager sharedInstance].location.lat != 0) {
+        [self loadNearByWashList];
+    }
+    
+    if (!isOwner && [UserManager sharedInstance].carWashInfo.washID != 0) {
+        [self loadRecentWashRecord];
+    }
 }
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
-    _commodityRecommendationVC.view.frame = CGRectMake(0, 434, [UIScreen mainScreen].bounds.size.width, 350);
+    
+    BOOL isOwner = [UserManager sharedInstance].userType == UserTypeOwner;
+    
+    // 根据数据个数设置列表高度
+    if (self.nearbyWashList.count > 0 && self.nearbyWashList.count < 4) {
+        _washViewHeightConstraint.constant = 322 - (4 - self.nearbyWashList.count) * 68;
+    }
+    
+    CGFloat heigth = isOwner ? 410 : 370;
+    NSInteger count = self.commodityRecommendationVC.recommendWashCommodity.count;
+    if (count > 0 && count < 4 && !isOwner) {
+        heigth -= 160;
+    }
+    if (count == 0 && isOwner) {
+        heigth = 0;
+        _commodityRecommendationVC.view.hidden = YES;
+    } else {
+        _commodityRecommendationVC.view.hidden = NO;
+        _commodityRecommendationVC.view.frame = CGRectMake(0, 120 + _washViewHeightConstraint.constant + 16, [UIScreen mainScreen].bounds.size.width, heigth);
+    }
+    _scrollViewHeightConstraint.constant = heigth + 472 + 10;
 }
 
 - (void)loadNearByWashList {
     [HomeDataModel loadNearbyWashList:[UserManager sharedInstance].location isMap:NO result:^(NSArray *result) {
         self.nearbyWashList = [result copy];
-        [self.nearWashTableView reloadData];
+        if (result.count > 0) {
+            [self.nearWashTableView reloadData];
+            self.nearWashTableView.hidden = NO;
+            self.emptyLabel.hidden = YES;
+        } else {
+            self.nearWashTableView.hidden = YES;
+            self.emptyLabel.text = @"附近暂无洗车场";
+            self.emptyLabel.hidden = NO;
+        }
+    }];
+}
+
+- (void)loadRecentWashRecord {
+    _hintLabel.text = @"近期洗车列表";
+    [self loadCarWashCommodityList];
+    
+    [ExpensesRecordListModel loadRecentCarWashList:4 result:^(NSArray *result) {
+        self.nearbyWashList = [result copy];
+        if (result.count > 0) {
+            [self.nearWashTableView reloadData];
+            self.nearWashTableView.hidden = NO;
+            self.emptyLabel.hidden = YES;
+        } else {
+            self.nearWashTableView.hidden = YES;
+            self.emptyLabel.text = @"近期暂无洗车记录";
+            self.emptyLabel.hidden = NO;
+        }
+    }];
+}
+
+- (void)loadCarWashCommodityList {
+    [[NetworkTools sharedInstance] obtainCarWashCommodityList:[UserManager sharedInstance].carWashInfo.washID success:^(NSDictionary *response, BOOL isSuccess) {
+        NSInteger code = [[response objectForKey:@"code"] integerValue];
+        if (code == 200 && [response objectForKey:@"data"] != [NSNull null]) {
+            NSDictionary *dataArr = [response objectForKey:@"data"];
+            NSMutableArray *list = [NSMutableArray arrayWithCapacity:dataArr.count];
+            for (NSDictionary *dic in dataArr) {
+                RecommendCommodityModel *model = [[RecommendCommodityModel alloc] initWithDic:dic];
+                [list addObject:model];
+            }
+            
+            self.commodityRecommendationVC.recommendWashCommodity = list;
+        } else {
+            self.commodityRecommendationVC.recommendWashCommodity = @[];
+        }
+    } failed:^(NSError *error) {
+        self.commodityRecommendationVC.recommendWashCommodity = @[];
     }];
 }
 
@@ -153,9 +244,10 @@
 }
 
 - (IBAction)push2Map:(id)sender {
-    UIViewController *mapVC = [GlobalMethods viewControllerWithBuddleName:@"Home" vcIdentifier:@"MapVC"];
-    mapVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:mapVC animated:YES];
+    NSString *identifier = [UserManager sharedInstance].userType == UserTypeOwner ? @"MapVC" : @"WashRecordVC";
+    UIViewController *vc = [GlobalMethods viewControllerWithBuddleName:@"Home" vcIdentifier:identifier];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:NO];
 }
 
 #pragma mark - UITableViewDatasource
@@ -165,22 +257,24 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NearbyWashListModel *model = _nearbyWashList[indexPath.row];
-    NearWashInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NearWashInfoIdentifier"];
-    cell.avatarUrl = model.avatarUrl;
-    cell.name = model.carWashName;
-    cell.lowestPrice = model.price;
-    cell.honor = model.honor;
-    cell.washNumber = model.washCount;
-    cell.distance = model.distance;
+    if ([UserManager sharedInstance].userType == UserTypeOwner) {
+        NearbyWashListModel *model = _nearbyWashList[indexPath.row];
+        NearWashInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NearWashInfoIdentifier"];
+        cell.avatarUrl = model.avatarUrl;
+        cell.name = model.carWashName;
+        cell.lowestPrice = model.price;
+        cell.honor = model.honor;
+        cell.washNumber = model.washCount;
+        cell.distance = model.distance;
+        
+        return cell;
+    }
+    
+//    ExpensesRecordModel *model = _nearbyWashList[indexPath.row];
+    RecentWashRecordCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RecentWashRecordIdentifier"];
+//    cell.imageName =
     
     return cell;
-}
-
-#pragma mark - UITableViewDelegate
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 62;
 }
 
 #pragma mark - AMapLocationManagerDelegate
@@ -193,7 +287,10 @@
     [UserManager sharedInstance].location = userLocation;
     if (_isUpdateMearByWashList) {
         _isUpdateMearByWashList = NO;
-        [self loadNearByWashList];
+        if ([UserManager sharedInstance].userType ==  UserTypeOwner) {
+            [self loadNearByWashList];
+        }
+        
         [self loadWeatherInfos];
     }
     
@@ -207,8 +304,16 @@
  */
 - (void)onReGeocodeSearchDone:(AMapReGeocodeSearchRequest *)request response:(AMapReGeocodeSearchResponse *)response {
     if (response.regeocode) {
-        [UserManager sharedInstance].address = response.regeocode.formattedAddress;
-        self.locationLabel.text = response.regeocode.formattedAddress;
+        [UserManager sharedInstance].address = [NSString stringWithFormat:@"%@%@", response.regeocode.formattedAddress, response.regeocode.pois.firstObject.name];
+        self.locationLabel.text = [UserManager sharedInstance].address;
+        
+        NSString *province = response.regeocode.addressComponent.province;
+        NSString *city = response.regeocode.addressComponent.city;
+        NSString *district = response.regeocode.addressComponent.district;
+        [UserManager sharedInstance].province = province;
+        [UserManager sharedInstance].city = city;
+        [UserManager sharedInstance].district = district;
+        
         [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateLocation" object:nil];
     }
 }

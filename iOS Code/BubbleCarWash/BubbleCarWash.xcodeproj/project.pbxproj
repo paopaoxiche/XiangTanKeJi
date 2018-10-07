@@ -28,6 +28,10 @@
 		653E3BF02148134400FD08BE /* AlipayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 653E3BEF2148134400FD08BE /* AlipayManager.m */; };
 		6545FCE0214028A60032DEEA /* UpgradeReminderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6545FCDF214028A60032DEEA /* UpgradeReminderModel.m */; };
 		65551C692169E6900045F30B /* ExtractCashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65551C682169E6900045F30B /* ExtractCashViewController.m */; };
+		65551C70216A0CFA0045F30B /* WashRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65551C6F216A0CFA0045F30B /* WashRecordViewController.m */; };
+		65551C75216A1CF70045F30B /* WashRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65551C74216A1CF70045F30B /* WashRecordCell.m */; };
+		65551C78216A22890045F30B /* RecentWashRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65551C77216A22890045F30B /* RecentWashRecordCell.m */; };
+		65551C6C2169FAD90045F30B /* UpdateAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65551C6B2169FAD90045F30B /* UpdateAddressViewController.m */; };
 		6556AE5C211B282E0017B79A /* GlobalMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 6556AE5B211B282E0017B79A /* GlobalMethods.m */; };
 		65696B9A215928C4000F1E16 /* IncomeListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 65696B99215928C4000F1E16 /* IncomeListModel.m */; };
 		657AA201213BA0B10086F98A /* WeatherModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 657AA200213BA0B10086F98A /* WeatherModel.m */; };
@@ -153,6 +157,14 @@
 		6545FCDF214028A60032DEEA /* UpgradeReminderModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UpgradeReminderModel.m; sourceTree = "<group>"; };
 		65551C672169E6900045F30B /* ExtractCashViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExtractCashViewController.h; sourceTree = "<group>"; };
 		65551C682169E6900045F30B /* ExtractCashViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExtractCashViewController.m; sourceTree = "<group>"; };
+		65551C6E216A0CFA0045F30B /* WashRecordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WashRecordViewController.h; sourceTree = "<group>"; };
+		65551C6F216A0CFA0045F30B /* WashRecordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WashRecordViewController.m; sourceTree = "<group>"; };
+		65551C73216A1CF70045F30B /* WashRecordCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WashRecordCell.h; sourceTree = "<group>"; };
+		65551C74216A1CF70045F30B /* WashRecordCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WashRecordCell.m; sourceTree = "<group>"; };
+		65551C76216A22890045F30B /* RecentWashRecordCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecentWashRecordCell.h; sourceTree = "<group>"; };
+		65551C77216A22890045F30B /* RecentWashRecordCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecentWashRecordCell.m; sourceTree = "<group>"; };
+		65551C6A2169FAD90045F30B /* UpdateAddressViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UpdateAddressViewController.h; sourceTree = "<group>"; };
+		65551C6B2169FAD90045F30B /* UpdateAddressViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UpdateAddressViewController.m; sourceTree = "<group>"; };
 		6556AE5A211B282E0017B79A /* GlobalMethods.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlobalMethods.h; sourceTree = "<group>"; };
 		6556AE5B211B282E0017B79A /* GlobalMethods.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GlobalMethods.m; sourceTree = "<group>"; };
 		65696B98215928C4000F1E16 /* IncomeListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IncomeListModel.h; sourceTree = "<group>"; };
@@ -408,6 +420,17 @@
 			path = ExtractCash;
 			sourceTree = "<group>";
 		};
+		65551C6D216A0CE50045F30B /* WashRecord */ = {
+			isa = PBXGroup;
+			children = (
+				65551C6E216A0CFA0045F30B /* WashRecordViewController.h */,
+				65551C6F216A0CFA0045F30B /* WashRecordViewController.m */,
+				65551C73216A1CF70045F30B /* WashRecordCell.h */,
+				65551C74216A1CF70045F30B /* WashRecordCell.m */,
+			);
+			path = WashRecord;
+			sourceTree = "<group>";
+		};
 		657AA1FE213BA03C0086F98A /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -544,6 +567,8 @@
 				65C5AFD22135AA8100727122 /* PersonalInfoViewController.m */,
 				657AA216213D95670086F98A /* EditNicknameViewController.h */,
 				657AA217213D95680086F98A /* EditNicknameViewController.m */,
+				65551C6A2169FAD90045F30B /* UpdateAddressViewController.h */,
+				65551C6B2169FAD90045F30B /* UpdateAddressViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -822,6 +847,7 @@
 		65C5B0E72135B0F800727122 /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
+				65551C6D216A0CE50045F30B /* WashRecord */,
 				65D8D48B2146C4C800934589 /* Payment */,
 				65C5B0E82135B0F800727122 /* CarWash */,
 				65C5B0F32135B0F800727122 /* Map */,
@@ -867,6 +893,8 @@
 				65FA516221456B5200F9D08C /* CarWashServiceCell.m */,
 				65FA51642145719100F9D08C /* CommodityCell.h */,
 				65FA51652145719100F9D08C /* CommodityCell.m */,
+				65551C76216A22890045F30B /* RecentWashRecordCell.h */,
+				65551C77216A22890045F30B /* RecentWashRecordCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1278,6 +1306,7 @@
 				65C5B08C2135AA8100727122 /* WashServiceManagerViewController.m in Sources */,
 				CCA16526213E41B9001626C6 /* UpgradeReminderViewController.m in Sources */,
 				65C5AFC62135A45100727122 /* UserManager.m in Sources */,
+				65551C6C2169FAD90045F30B /* UpdateAddressViewController.m in Sources */,
 				65C5AF582135A32900727122 /* LoginViewController.m in Sources */,
 				65C5B0B82135AA8200727122 /* CertificationViewController.m in Sources */,
 				65FC33FF20E1357A006DE3F1 /* main.m in Sources */,
@@ -1306,6 +1335,7 @@
 				65E5EDCF215886230013E390 /* CreateServiceViewController.m in Sources */,
 				65C5B1062135B0F800727122 /* CommodityRecommendationViewController.m in Sources */,
 				65C5AFCD2135A47B00727122 /* UserInfoModel.m in Sources */,
+				65551C75216A1CF70045F30B /* WashRecordCell.m in Sources */,
 				6584AA9421401D2600DEA15F /* UIImage+ScaleImage.m in Sources */,
 				65C5B0BA2135AA8200727122 /* CertificationCell.m in Sources */,
 				65FA516321456B5200F9D08C /* CarWashServiceCell.m in Sources */,
@@ -1318,9 +1348,11 @@
 				6580E82E21576C9E00C5B5FA /* ModelCertificationListViewController.m in Sources */,
 				6593AB85212942AA002F92F6 /* NetworkTools.m in Sources */,
 				65C5B09D2135AA8100727122 /* CouponViewController.m in Sources */,
+				65551C70216A0CFA0045F30B /* WashRecordViewController.m in Sources */,
 				65FA514A2144FAD500F9D08C /* SeeLargePictureViewController.m in Sources */,
 				65FC33F120E13577006DE3F1 /* AppDelegate.m in Sources */,
 				65551C692169E6900045F30B /* ExtractCashViewController.m in Sources */,
+				65551C78216A22890045F30B /* RecentWashRecordCell.m in Sources */,
 				65C5B0AF2135AA8200727122 /* EditTradeStateViewController.m in Sources */,
 				65C5B0962135AA8100727122 /* WashManagerCell.m in Sources */,
 				65C5AFCA2135A45100727122 /* ProfileViewController.m in Sources */,
