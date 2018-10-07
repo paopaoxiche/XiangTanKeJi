@@ -71,4 +71,9 @@
  */
 + (NSInteger)currentMonth;
 
+/**
+ *  判断是否为浮点数
+ */
++ (BOOL)isFloat:(NSString *)string;
+
 @end

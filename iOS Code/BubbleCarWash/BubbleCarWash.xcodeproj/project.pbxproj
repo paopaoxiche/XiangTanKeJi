@@ -27,6 +27,7 @@
 		653E3BED21480FF300FD08BE /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 653E3BEC21480FF300FD08BE /* CoreMotion.framework */; };
 		653E3BF02148134400FD08BE /* AlipayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 653E3BEF2148134400FD08BE /* AlipayManager.m */; };
 		6545FCE0214028A60032DEEA /* UpgradeReminderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6545FCDF214028A60032DEEA /* UpgradeReminderModel.m */; };
+		65551C692169E6900045F30B /* ExtractCashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65551C682169E6900045F30B /* ExtractCashViewController.m */; };
 		6556AE5C211B282E0017B79A /* GlobalMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 6556AE5B211B282E0017B79A /* GlobalMethods.m */; };
 		65696B9A215928C4000F1E16 /* IncomeListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 65696B99215928C4000F1E16 /* IncomeListModel.m */; };
 		657AA201213BA0B10086F98A /* WeatherModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 657AA200213BA0B10086F98A /* WeatherModel.m */; };
@@ -150,6 +151,8 @@
 		653E3BEF2148134400FD08BE /* AlipayManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlipayManager.m; sourceTree = "<group>"; };
 		6545FCDE214028A60032DEEA /* UpgradeReminderModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UpgradeReminderModel.h; sourceTree = "<group>"; };
 		6545FCDF214028A60032DEEA /* UpgradeReminderModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UpgradeReminderModel.m; sourceTree = "<group>"; };
+		65551C672169E6900045F30B /* ExtractCashViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExtractCashViewController.h; sourceTree = "<group>"; };
+		65551C682169E6900045F30B /* ExtractCashViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExtractCashViewController.m; sourceTree = "<group>"; };
 		6556AE5A211B282E0017B79A /* GlobalMethods.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlobalMethods.h; sourceTree = "<group>"; };
 		6556AE5B211B282E0017B79A /* GlobalMethods.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GlobalMethods.m; sourceTree = "<group>"; };
 		65696B98215928C4000F1E16 /* IncomeListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IncomeListModel.h; sourceTree = "<group>"; };
@@ -396,6 +399,15 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		65551C662169E6690045F30B /* ExtractCash */ = {
+			isa = PBXGroup;
+			children = (
+				65551C672169E6900045F30B /* ExtractCashViewController.h */,
+				65551C682169E6900045F30B /* ExtractCashViewController.m */,
+			);
+			path = ExtractCash;
+			sourceTree = "<group>";
+		};
 		657AA1FE213BA03C0086F98A /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -465,6 +477,7 @@
 		65C5AF5B2135A45100727122 /* NextPage */ = {
 			isa = PBXGroup;
 			children = (
+				65551C662169E6690045F30B /* ExtractCash */,
 				65C5B0642135AA8100727122 /* Authentication */,
 				65C5B03A2135AA8100727122 /* Comment */,
 				65C5B0262135AA8100727122 /* Integral */,
@@ -1307,6 +1320,7 @@
 				65C5B09D2135AA8100727122 /* CouponViewController.m in Sources */,
 				65FA514A2144FAD500F9D08C /* SeeLargePictureViewController.m in Sources */,
 				65FC33F120E13577006DE3F1 /* AppDelegate.m in Sources */,
+				65551C692169E6900045F30B /* ExtractCashViewController.m in Sources */,
 				65C5B0AF2135AA8200727122 /* EditTradeStateViewController.m in Sources */,
 				65C5B0962135AA8100727122 /* WashManagerCell.m in Sources */,
 				65C5AFCA2135A45100727122 /* ProfileViewController.m in Sources */,

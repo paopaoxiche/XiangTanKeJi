@@ -6,7 +6,7 @@
 //  Copyright © 2018年 Sunshine Girl. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 typedef NS_ENUM(NSInteger, TradeState) {
     TradeStateClosed = -1,      // 停业
@@ -32,6 +32,8 @@ typedef NS_ENUM(NSInteger, TradeState) {
 @property (nonatomic, assign) NSInteger washID;
 /// 洗车场运营状态
 @property (nonatomic, assign) TradeState tradeState;
+/// 余额
+@property (nonatomic, assign) CGFloat balance;
 
 - (instancetype)initWithDic:(NSDictionary *)dic;
 

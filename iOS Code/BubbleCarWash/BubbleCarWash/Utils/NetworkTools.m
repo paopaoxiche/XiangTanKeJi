@@ -429,6 +429,19 @@ static const NSTimeInterval kTimeOutInterval = 6.0f;
     [self POST:@"commodity/deleteCommodity" parameters:params success:success failure:failed];
 }
 
+- (void)extractCash:(NSInteger)washID money:(NSString *)money success:(SuccessBlock)success failure:(FailedBlock)failed {
+    NSDictionary *params = @{
+                             @"washId": [NSString stringWithFormat:@"%li", washID],
+                             @"money": money
+                             };
+    [self POST:@"wash/drawDeposits" parameters:params success:success failure:failed];
+}
+
+- (void)obtainBalance:(NSInteger)washID success:(SuccessBlock)success failure:(FailedBlock)failed {
+    NSDictionary *params = @{@"washId": [NSString stringWithFormat:@"%li", washID]};
+    [self GET:@"wash/getBalance" parameters:params success:success failure:failed];
+}
+
 #pragma mark - GET Method
 
 - (void)GET:(NSString *)url parameters:(NSDictionary *)params success:(SuccessBlock)success failure:(FailedBlock)failed {

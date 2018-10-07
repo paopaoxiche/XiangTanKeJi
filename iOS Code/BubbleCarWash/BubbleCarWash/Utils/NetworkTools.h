@@ -290,12 +290,11 @@ typedef void(^FailedBlock)(NSError *error);
 /**
  *  提取现金
  */
-
+- (void)extractCash:(NSInteger)washID money:(NSString *)money success:(SuccessBlock)success failure:(FailedBlock)failed;
 /**
  *  获取余额
  */
-
-#pragma mark - 天气
+- (void)obtainBalance:(NSInteger)washID success:(SuccessBlock)success failure:(FailedBlock)failed;
 
 #pragma mark - 地图
 

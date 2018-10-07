@@ -21,6 +21,7 @@
         _authStatus = [[dic objectForKey:@"authStatus"] integerValue];
         _honor = [[dic objectForKey:@"honor"] integerValue];
         _tradeState = [[dic objectForKey:@"businessState"] integerValue];
+        _balance = 0;
     }
     
     return self;

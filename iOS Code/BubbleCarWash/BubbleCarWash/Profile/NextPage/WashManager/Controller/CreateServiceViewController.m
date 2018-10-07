@@ -12,6 +12,7 @@
 #import "NetworkTools.h"
 #import "UserManager.h"
 #import "CarWashInfoModel.h"
+#import "GlobalMethods.h"
 
 @interface CreateServiceViewController () <UITextViewDelegate>
 
@@ -55,6 +56,11 @@
     
     if ([NSString isBlackString:_priceTextField.text]) {
         [self messageBox:@"服务价格不能为空"];
+        return;
+    }
+    
+    if (![GlobalMethods isFloat:_priceTextField.text]) {
+        [self messageBox:@"请输入有效的价格"];
         return;
     }
     

@@ -13,6 +13,7 @@
 #import "UIColor+Category.h"
 #import "HomeModel.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "GlobalMethods.h"
 
 @interface CreateProductViewController () <UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -48,12 +49,17 @@
     }
     
     if ([NSString isBlackString:_currentPriceTextField.text]) {
-        [self messageBox:@"商品原价不能为空"];
+        [self messageBox:@"商品现价不能为空"];
         return;
     }
     
     if ([NSString isBlackString:_originalPriceTextField.text]) {
-        [self messageBox:@"商品现价不能为空"];
+        [self messageBox:@"商品原价不能为空"];
+        return;
+    }
+    
+    if (![GlobalMethods isFloat:_currentPriceTextField.text] || ![GlobalMethods isFloat:_originalPriceTextField.text]) {
+        [self messageBox:@"请输入有效的价格"];
         return;
     }
     
