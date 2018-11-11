@@ -13,7 +13,7 @@
 
 @implementation HomeDataModel
 
-+ (void)loadNearbyWashList:(Location)location isMap:(BOOL)isMap result:(HomeResultBlock)result {
++ (void)loadNearbyWashList:(Location)location isMap:(BOOL)isMap isSearch:(BOOL)isSearch result:(HomeResultBlock)result {
     NearbyWashListParam *param = [[NearbyWashListParam alloc] init];
     param.lng = [NSNumber numberWithFloat:location.lng];
     param.lat = [NSNumber numberWithFloat:location.lat];
@@ -22,6 +22,10 @@
         param.count = 0;
         param.showAll = 1;
         param.radius = 2;
+    }
+    
+    if (isSearch) {
+        param.priceLimit = 5;
     }
     
     [[NetworkTools sharedInstance] obtainNearbyWashList:param success:^(NSDictionary *response, BOOL isSuccess) {

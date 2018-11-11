@@ -147,7 +147,7 @@
 }
 
 - (void)loadNearByWashList {
-    [HomeDataModel loadNearbyWashList:[UserManager sharedInstance].location isMap:NO result:^(NSArray *result) {
+    [HomeDataModel loadNearbyWashList:[UserManager sharedInstance].location isMap:NO isSearch:NO result:^(NSArray *result) {
         self.nearbyWashList = [result copy];
         if (result.count > 0) {
             [self.nearWashTableView reloadData];
