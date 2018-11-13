@@ -23,6 +23,7 @@ import com.xtkj.paopaoxiche.presenter.CarWashMainPresenterImpl;
 import com.xtkj.paopaoxiche.presenter.CarWashMinePresenterImpl;
 import com.xtkj.paopaoxiche.utils.BitmapUtil;
 import com.xtkj.paopaoxiche.utils.UriUtils;
+import com.xtkj.paopaoxiche.view.LoginActivity;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -157,6 +158,11 @@ public class CarWashMainActivity extends BaseGaodeActivity implements ICarWashCo
                 break;
             case BaseEvent.GOODS_IMAGE:
                 pickImage(BaseEvent.GOODS_IMAGE);
+                break;
+            case BaseEvent.LOGOUT:
+                startActivity(new Intent(this, LoginActivity.class));
+                finish();
+                break;
         }
     }
 

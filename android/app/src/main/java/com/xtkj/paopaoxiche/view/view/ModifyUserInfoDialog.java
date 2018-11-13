@@ -99,7 +99,7 @@ public class ModifyUserInfoDialog extends FullScreenWithStatusBarDialog implemen
     }
 
     @OnClick({R.id.back_arrow_image_button, R.id.modify_nick_name_image_button, R.id.modify_avatar_image_button,
-            R.id.ib_enter_car_type_list})
+            R.id.ib_enter_car_type_list, R.id.logout_layout})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.back_arrow_image_button:
@@ -112,6 +112,9 @@ public class ModifyUserInfoDialog extends FullScreenWithStatusBarDialog implemen
                 break;
             case R.id.ib_enter_car_type_list:
                 new MyCarListDialog(getContext()).show();
+                break;
+            case R.id.logout_layout:
+                EventBus.getDefault().post(new BaseEvent(BaseEvent.LOGOUT));
                 break;
         }
         dismiss();

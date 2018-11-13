@@ -191,6 +191,9 @@ public class DriverHomeModel {
                     Log.e("AmapError", "location Error, ErrCode:"
                             + aMapLocation.getErrorCode() + ", errInfo:"
                             + aMapLocation.getErrorInfo());
+                    for (DriverHomeListener driverHomeListener : driverHomeListenerList) {
+                        driverHomeListener.getLocationSuccess(null);
+                    }
                 }
             }
         };

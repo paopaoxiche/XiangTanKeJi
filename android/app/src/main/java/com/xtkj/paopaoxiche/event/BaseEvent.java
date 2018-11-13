@@ -6,6 +6,7 @@ public class BaseEvent {
     public static final int GOODS_IMAGE = 101;
     public static final int CAR_PHOTO_CONER = 102;
     public static final int CAR_PHOTO_BACK = 103;
+    public static final int LOGOUT = 104;
 
     public static final int SET_GOODS_IMAGE = 201;
     public static final int SET_CAR_COVER = 202;

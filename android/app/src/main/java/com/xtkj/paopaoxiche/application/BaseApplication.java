@@ -4,6 +4,9 @@ import android.app.Application;
 import android.content.Context;
 import android.content.pm.PackageManager;
 
+import com.tencent.stat.StatConfig;
+import com.tencent.stat.StatService;
+
 public class BaseApplication extends Application {
 
     private static Context context;
@@ -28,5 +31,10 @@ public class BaseApplication extends Application {
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
+
+        // [可选]设置是否打开debug输出，上线时请关闭，Logcat标签为"MtaSDK"
+        StatConfig.setDebugEnable(false);
+        // 基础统计API
+        StatService.registerActivityLifecycleCallbacks(this);
     }
 }

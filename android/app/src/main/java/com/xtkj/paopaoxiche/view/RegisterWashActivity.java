@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -89,6 +90,8 @@ public class RegisterWashActivity extends BaseGaodeActivity implements DriverHom
     String phone;
     String address;
 
+    int getAddressCount = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -116,7 +119,19 @@ public class RegisterWashActivity extends BaseGaodeActivity implements DriverHom
     @Override
     public void getLocationSuccess(String address) {
         this.address = address;
-        addressMarqueeTextView.setText(address);
+        if (address == null) {
+            if (getAddressCount <= 10) {
+                this.address = "地址获取失败，正在重新获取，请稍后";
+                new Handler().postDelayed(() ->
+                        DriverHomeModel.getInstance().initLocation(RegisterWashActivity.this), 200 * getAddressCount);
+                getAddressCount++;
+            } else {
+                this.address = "无法获取地址，请移至开阔地带重新注册";
+            }
+        } else {
+            getAddressCount = 1;
+        }
+        addressMarqueeTextView.setText(this.address);
     }
 
     @Override

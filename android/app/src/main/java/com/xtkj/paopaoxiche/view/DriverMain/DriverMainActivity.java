@@ -29,6 +29,7 @@ import com.xtkj.paopaoxiche.contract.IDriverContract;
 import com.xtkj.paopaoxiche.presenter.DriverPresenterImpl;
 import com.xtkj.paopaoxiche.utils.BitmapUtil;
 import com.xtkj.paopaoxiche.utils.UriUtils;
+import com.xtkj.paopaoxiche.view.LoginActivity;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -185,6 +186,10 @@ public class DriverMainActivity extends BaseGaodeActivity implements IDriverCont
             case BaseEvent.CAR_PHOTO_BACK:
             case BaseEvent.CAR_PHOTO_CONER:
                 pickImage(baseEvent.getType());
+                break;
+            case BaseEvent.LOGOUT:
+                startActivity(new Intent(this, LoginActivity.class));
+                finish();
                 break;
         }
     }

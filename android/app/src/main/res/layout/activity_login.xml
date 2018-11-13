@@ -125,7 +125,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:checked="true"
+                    android:checked="false"
                     android:text="我是车主"
                     android:button="@drawable/login_selector"
                     android:textSize="@dimen/login_radio_text_size"/>
@@ -136,6 +136,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
+                    android:checked="false"
                     android:button="@drawable/login_selector"
                     android:text="我是洗车场"
                     android:textSize="@dimen/login_radio_text_size"/>

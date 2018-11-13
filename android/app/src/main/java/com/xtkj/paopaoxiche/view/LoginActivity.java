@@ -71,7 +71,7 @@ public class LoginActivity extends BaseActivity implements RadioGroup.OnCheckedC
     @BindView(R.id.login_form)
     ScrollView loginForm;
 
-    int roletype = 0;
+    int roletype = -1;
 
     LoadingDialog loadingDialog;
 
@@ -216,6 +216,9 @@ public class LoginActivity extends BaseActivity implements RadioGroup.OnCheckedC
                         || codeString == null || codeString.length() < 6) {
                     showToast("电话号码或验证码输入不正确");
                     return;
+                }
+                if (roletype < 0) {
+                    showToast("请选择用户类型");
                 }
                 Long code = Long.valueOf(codeText.getEditableText().toString() + "");
 
