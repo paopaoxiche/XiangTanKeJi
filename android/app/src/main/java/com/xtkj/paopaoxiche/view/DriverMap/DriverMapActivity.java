@@ -251,6 +251,21 @@ public class DriverMapActivity extends BaseGaodeActivity implements IDriverMapCo
 
 
     }
+    @Override
+    public void changeCamera(int washId, double lon, double lat) {
+        mMapView.getMap().moveCamera(CameraUpdateFactory.changeLatLng(new LatLng(lat, lon)));
+        presenter.checkedWash(washId);
+        for (Marker marker : mMapView.getMap().getMapScreenMarkers()) {
+            if (marker.getObject() != null
+                    && marker.getObject() instanceof WashServicesBean.DataBean) {
+                if (((WashServicesBean.DataBean) marker.getObject()).getWashId() == washId) {
+                    marker.showInfoWindow();
+                    break;
+                }
+            }
+        }
+
+    }
 
     @Override
     public void setPresenter(IDriverMapContract.IDriverMapPresenter iDriverMapPresenter) {
@@ -271,6 +286,7 @@ public class DriverMapActivity extends BaseGaodeActivity implements IDriverMapCo
     @Override
     public void onCameraChangeFinish(CameraPosition cameraPosition) {
         presenter.updateLocation(cameraPosition.target.longitude, cameraPosition.target.latitude);
+        mRecyclerView.scrollToPosition(0);
     }
 
     @Override

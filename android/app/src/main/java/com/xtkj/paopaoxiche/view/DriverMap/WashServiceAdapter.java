@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -45,26 +46,34 @@ public class WashServiceAdapter extends RecyclerView.Adapter<WashServiceAdapter.
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
 
-        viewHolder.name.setText(datas.getData().get(position).getName());
-        Glide.with(context).load(datas.getData().get(position).getImage()).into(viewHolder.image);
-        viewHolder.price.setText(String.format("￥%s", datas.getData().get(position).getPrice()));
-        int distance = (int) LocationUtils.getDistance(Double.parseDouble(MyLocation.lat),Double.parseDouble(MyLocation.lng),datas.getData().get(position).getLat(),datas.getData().get(position).getLng());
+        WashServicesBean.DataBean dataBean = datas.getData().get(position);
+
+        viewHolder.name.setText(dataBean.getName());
+        Glide.with(context).load(dataBean.getImage()).into(viewHolder.image);
+        viewHolder.price.setText(String.format("￥%s", dataBean.getPrice()));
+        int distance = (int) LocationUtils.getDistance(Double.parseDouble(MyLocation.lat),Double.parseDouble(MyLocation.lng),dataBean.getLat(),dataBean.getLng());
         if(distance > 1000){
             viewHolder.distance.setText(String.format("%skm", (distance * 1.0) / 1000));
         }else  viewHolder.distance.setText(String.format("%sm", distance));
-        viewHolder.location.setText(datas.getData().get(position).getName());
+        viewHolder.location.setText(dataBean.getName());
+        viewHolder.titleLinearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, WashServiceActivity.class);
+                intent.putExtra("washId", dataBean.getWashId());
+                context.startActivity(intent);
+            }
+        });
         viewHolder.navigation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mView.startNavigation(datas.getData().get(position).getLng(),datas.getData().get(position).getLat());
+                mView.startNavigation(dataBean.getLng(),dataBean.getLat());
             }
         });
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, WashServiceActivity.class);
-                intent.putExtra("washId", datas.getData().get(position).getWashId());
-                context.startActivity(intent);
+                mView.changeCamera(dataBean.getWashId(), dataBean.getLng(), dataBean.getLat());
             }
         });
     }
@@ -91,6 +100,8 @@ public class WashServiceAdapter extends RecyclerView.Adapter<WashServiceAdapter.
         TextView price;
         @BindView(R.id.distance)
         TextView distance;
+        @BindView(R.id.title_linear_layout)
+        LinearLayout titleLinearLayout;
         ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);

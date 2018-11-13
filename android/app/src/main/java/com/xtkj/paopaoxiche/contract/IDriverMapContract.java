@@ -21,5 +21,6 @@ public class IDriverMapContract {
         Context getContext();
         void upDateService(List<WashServicesBean.DataBean> dataBeanList);
         void startNavigation(double j, double w);
+        void changeCamera(int washId, double lon, double lat);
     }
 }
