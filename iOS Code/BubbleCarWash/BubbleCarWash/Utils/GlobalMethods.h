@@ -52,9 +52,9 @@
  *  转换日期字符串
  *
  *  @param dateString 日期字符串，格式yyyy-MM-dd
- *  @return 返回格式为MM-dd的日期字符串
+ *  @return 返回格式为MM/dd的日期字符串
  */
-+ (NSString *)convertDate:(NSString *)dateString;
++ (NSString *)convertDate:(NSString *)dateString outputFormat:(NSString *)outputFormat;
 /**
  *  根据日期字符串获取是周几
  *
@@ -62,5 +62,18 @@
  *  @return 返回是周几
  */
 + (NSString *)dayOfWeekByDateString:(NSString *)dateString;
+/**
+ *  获取当前年份
+ */
++ (NSInteger)currentYear;
+/**
+ *  获取当前月份
+ */
++ (NSInteger)currentMonth;
+
+/**
+ *  判断是否为浮点数
+ */
++ (BOOL)isFloat:(NSString *)string;
 
 @end

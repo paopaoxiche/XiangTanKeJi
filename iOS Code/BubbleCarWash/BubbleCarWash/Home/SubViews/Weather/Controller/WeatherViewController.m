@@ -27,6 +27,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *curWeatherStateLabel;
 @property (nonatomic, weak) IBOutlet UILabel *weatherDescLabel;
 @property (nonatomic, copy) NSArray *dataSource;
+@property (nonatomic, copy) NSArray *backgroundImageNames;
 @property (nonatomic, strong) WeatherRealTimeModel *realTimeModel;
 
 @end
@@ -39,16 +40,19 @@
     UITapGestureRecognizer *singleGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backToSuperView)];
     [_backView addGestureRecognizer:singleGesture];
     
-    [GlobalMethods setGradientColor:@[(id)[UIColor rgbByHexStr:@"5b779c"].CGColor, (id)[UIColor rgbByHexStr:@"cbbd9d"].CGColor]
+    self.realTimeModel = _weatherInfos[@"WeatherRealTimeModel"];
+    self.dataSource = [[NSArray alloc] initWithArray:_weatherInfos[@"WeatherForeCasts"]];
+    WeatherForeCastModel *model = _dataSource[0];
+    [GlobalMethods setGradientColor:[WeatherModel weatherBackgroundColor:model.skycon]
                          startPoint:CGPointMake(0, 0)
                            endPoint:CGPointMake(0, 1)
                                view:self.view];
-    
-    self.realTimeModel = _weatherInfos[@"WeatherRealTimeModel"];
-    self.dataSource = [[NSArray alloc] initWithArray:_weatherInfos[@"WeatherForeCasts"]];
+    self.weatherBgImgView.image = [UIImage imageNamed:self.backgroundImageNames[model.skycon]];
     
     [self setWeatherRealTimeInfo];
     self.locationLabel.text = [UserManager sharedInstance].address;
+    
+    _tableView.scrollEnabled = NO;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -84,6 +88,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     WeatherForeCastModel *model = _dataSource[indexPath.row];
     WeatherInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WeatherInfoIdentifier" forIndexPath:indexPath];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.date = model.date;
     cell.week = model.week;
     cell.maxTemperature = model.maxTemperature;
@@ -91,6 +96,16 @@
     cell.imgName = model.imageName;
     
     return cell;
+}
+
+#pragma mark - Lazy loading
+
+- (NSArray *)backgroundImageNames {
+    if (!_backgroundImageNames) {
+        _backgroundImageNames = @[@"SunnyDay_Bg", @"SunnyNight_Bg", @"PartlyCloudy_Bg", @"PartlyCloudy_Bg", @"", @"Rain_Bg", @"Snow_Bg", @"Wind_Bg", @""];
+    }
+    
+    return _backgroundImageNames;
 }
 
 @end

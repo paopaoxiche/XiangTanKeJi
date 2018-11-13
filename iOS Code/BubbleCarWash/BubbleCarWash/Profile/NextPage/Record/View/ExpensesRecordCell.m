@@ -27,15 +27,23 @@
 }
 
 - (void)setAvatarUrl:(NSString *)avatarUrl {
-    [_carWashAvatar sd_setImageWithURL:[NSURL URLWithString:avatarUrl]
-                      placeholderImage:[UIImage imageNamed:@"OwnerAvatar"]];
+    if ([avatarUrl isEqualToString:@""]) {
+        _avatarUrl = @"CarWashAvatar";
+        _carWashAvatar.image = [UIImage imageNamed:@"CarWashAvatar"];
+    } else {
+        _avatarUrl = avatarUrl;
+        [_carWashAvatar sd_setImageWithURL:[NSURL URLWithString:avatarUrl]
+                          placeholderImage:[UIImage imageNamed:@"OwnerAvatar"]];
+    }
 }
 
 - (void)setWashName:(NSString *)washName {
+    _washName = washName;
     _carWashName.text = washName;
 }
 
 - (void)setTime:(NSString *)time {
+    _time = time;
     _orderTime.text = time;
 }
 
@@ -60,26 +68,37 @@
 }
 
 - (void)setImageUrl:(NSString *)imageUrl {
-    [_proImgView sd_setImageWithURL:[NSURL URLWithString:imageUrl]];
+    if ([imageUrl isEqualToString:@""]) {
+        _imageUrl = @"ServiceDefault";
+        _proImgView.image = [UIImage imageNamed:@"ServiceDefault"];
+    } else {
+        _imageUrl = imageUrl;
+        [_proImgView sd_setImageWithURL:[NSURL URLWithString:imageUrl]];
+    }
 }
 
 - (void)setName:(NSString *)name {
+    _name = name;
     _proNameLabel.text = name;
 }
 
 - (void)setPrice:(NSString *)price {
+    _price = price;
     _proPriceLabel.text = price;
 }
 
 - (void)setCouponType:(NSString *)couponType {
+    _couponType = couponType;
     _couponTypeLabel.text = couponType;
 }
 
 - (void)setCouponPrice:(NSString *)couponPrice {
+    _couponPrice = couponPrice;
     _couponNumber.text = couponPrice;
 }
 
 - (void)setIsShowCoupon:(BOOL)isShowCoupon {
+    _isShowCoupon = isShowCoupon;
     _couponNumber.hidden = isShowCoupon;
     _couponTypeLabel.hidden = isShowCoupon;
 }
@@ -109,10 +128,12 @@
 }
 
 - (void)setTotalPrice:(NSString *)totalPrice {
+    _totalPrice = totalPrice;
     _expensesTotalLabel.text = totalPrice;
 }
 
 - (void)setIsEvaluation:(BOOL)isEvaluation {
+    _isEvaluation = isEvaluation;
     [_evaluationBtn setTitle:isEvaluation ? @"已评价" : @"未评价"
                     forState:UIControlStateNormal];
 }

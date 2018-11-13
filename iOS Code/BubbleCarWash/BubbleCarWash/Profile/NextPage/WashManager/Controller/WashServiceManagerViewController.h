@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ParentViewController.h"
 
-@interface WashServiceManagerViewController : UIViewController
+@interface WashServiceManagerViewController : ParentViewController
 
 @end

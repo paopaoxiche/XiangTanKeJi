@@ -29,6 +29,10 @@
 
 @implementation PersonalInfoViewController
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -66,7 +70,7 @@
     if (section == 0) {
         return 4;
     } else {
-        return 1;
+        return [UserManager sharedInstance].userType == UserTypeOwner ? 1 : 2;
     }
 }
 
@@ -100,28 +104,33 @@
                 break;
         }
     } else {
-        BOOL isOwner = [UserManager sharedInstance].userType == UserTypeOwner;
-        cell.cusTextLable.text = isOwner ? @"车型认证" : @"工商认证";
-        cell.cusDetailLabel.textColor = [UIColor rgbWithRed:248 green:10 blue:10];
-        
-        if (isOwner) {
-            cell.cusDetailLabel.text = self.modelCertificationList.count > 0 ? @"" : @"未认证";
-        } else {
-            CertificationState state = [UserManager sharedInstance].carWashInfo.authStatus;
-            switch (state) {
-                case CertificationStateIn:
-                    cell.cusDetailLabel.text = @"认证中";
-                    break;
-                case CertificationStateDone:
-                    cell.cusDetailLabel.text = @"已认证";
-                    break;
-                case CertificationStateFailed:
-                    cell.cusDetailLabel.text = @"认证失败";
-                    break;
-                default:
-                    cell.cusDetailLabel.text = @"未认证";
-                    break;
+        if (indexPath.row == 0) {
+            BOOL isOwner = [UserManager sharedInstance].userType == UserTypeOwner;
+            cell.cusTextLable.text = isOwner ? @"车型认证" : @"工商认证";
+            cell.cusDetailLabel.textColor = [UIColor rgbWithRed:248 green:10 blue:10];
+            
+            if (isOwner) {
+                cell.cusDetailLabel.text = self.modelCertificationList.count > 0 ? @"" : @"未认证";
+            } else {
+                CertificationState state = [UserManager sharedInstance].carWashInfo.authStatus;
+                switch (state) {
+                    case CertificationStateIn:
+                        cell.cusDetailLabel.text = @"认证中";
+                        break;
+                    case CertificationStateDone:
+                        cell.cusDetailLabel.text = @"已认证";
+                        break;
+                    case CertificationStateFailed:
+                        cell.cusDetailLabel.text = @"认证失败";
+                        break;
+                    default:
+                        cell.cusDetailLabel.text = @"未认证";
+                        break;
+                }
             }
+        } else {
+            cell.cusTextLable.text = @"更新地址";
+            cell.cusDetailLabel.hidden = YES;
         }
     }
     
@@ -141,10 +150,12 @@
         if (indexPath.row == 1) {
             [self presentImagePicker];
         }
+        
+        return;
     }
     
     BOOL isOwner = [UserManager sharedInstance].userType ==  UserTypeOwner;
-    if (indexPath.section == 1) {
+    if (indexPath.section == 1 && indexPath.row == 0) {
         if (isOwner) {
             ModelCertificationListViewController *vc = (ModelCertificationListViewController *)[GlobalMethods viewControllerWithBuddleName:@"Certification" vcIdentifier:@"ModeCertificationVC"];
             vc.modelCertificationList = self.modelCertificationList;
@@ -154,6 +165,11 @@
             vc.state = [UserManager sharedInstance].carWashInfo.authStatus;
             [self.navigationController pushViewController:vc animated:YES];
         }
+    }
+    
+    if (indexPath.section == 1 && indexPath.row == 1) {
+        UIViewController *vc = [GlobalMethods viewControllerWithBuddleName:@"PersonalInfo" vcIdentifier:@"UpdateAddressVC"];
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 

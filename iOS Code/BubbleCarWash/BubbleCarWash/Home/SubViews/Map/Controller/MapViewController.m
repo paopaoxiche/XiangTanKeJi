@@ -22,6 +22,7 @@
 @property (nonatomic, strong) MAMapView *mapView;
 @property (nonatomic, strong) CarWashListTableViewController *carWashListVC;
 @property (nonatomic, copy) NSArray *nearbyWashList;
+@property (nonatomic, strong) UIButton *fiveCarWashBtn;
 
 @end
 
@@ -31,6 +32,15 @@
     [super viewDidLoad];
     
     [self.navigationController.navigationBar setTranslucent:NO];
+    self.fiveCarWashBtn = [[UIButton alloc] init];
+    [self.fiveCarWashBtn setImage:[UIImage imageNamed:@"SingleSelection_Normal"]
+                         forState:UIControlStateNormal];
+    [self.fiveCarWashBtn setTitle:@"五元洗车" forState:UIControlStateNormal];
+    [self.fiveCarWashBtn addTarget:self
+                            action:@selector(filterCarWashList)
+                  forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *fiveCarWashItem = [[UIBarButtonItem alloc] initWithCustomView:self.fiveCarWashBtn];
+    self.navigationItem.rightBarButtonItem = fiveCarWashItem;
     
     _mapView = [[MAMapView alloc] initWithFrame:_containerView.frame];
     _mapView.delegate = self;
@@ -47,7 +57,7 @@
     [self addChildViewController:_carWashListVC];
     [_mapView addSubview:_carWashListVC.view];
     
-    [HomeDataModel loadNearbyWashList:[UserManager sharedInstance].location isMap:YES result:^(NSArray *result) {
+    [HomeDataModel loadNearbyWashList:[UserManager sharedInstance].location isMap:YES isSearch:NO result:^(NSArray *result) {
         self.nearbyWashList = [result copy];
         self.carWashListVC.dataSource = self.nearbyWashList;
         [self addPointAnnotation];
@@ -66,6 +76,22 @@
     _mapView.frame = CGRectMake(0, 0, _containerView.frame.size.width, _containerView.frame.size.height);
     _carWashListVC.view.frame = CGRectMake(12, _containerView.frame.size.height - 300, _mapView.frame.size.width - 24, 300);
 }
+
+#pragma mark - Action Methods
+
+- (void)filterCarWashList {
+    BOOL isSelected = !self.fiveCarWashBtn.selected;
+    self.fiveCarWashBtn.selected = isSelected;
+    [self.fiveCarWashBtn setImage:[UIImage imageNamed:(isSelected ? @"SingleSelection_Normal" : @"SingleSelection_Selected")]
+                         forState:UIControlStateNormal];
+    [HomeDataModel loadNearbyWashList:[UserManager sharedInstance].location isMap:YES isSearch:NO result:^(NSArray *result) {
+        self.nearbyWashList = [result copy];
+        self.carWashListVC.dataSource = self.nearbyWashList;
+        [self addPointAnnotation];
+    }];
+}
+
+#pragma mark - Map Methods
 
 - (void)addPointAnnotation {
     for (NearbyWashListModel *model in _nearbyWashList) {

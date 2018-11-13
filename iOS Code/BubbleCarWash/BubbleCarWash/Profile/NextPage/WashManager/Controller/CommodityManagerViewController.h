@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#include "ParentViewController.h"
 
-@interface CommodityManagerViewController : UIViewController
+@interface CommodityManagerViewController : ParentViewController
 
 @end

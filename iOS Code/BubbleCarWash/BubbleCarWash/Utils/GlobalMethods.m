@@ -126,13 +126,13 @@
     [view.layer setMask:layer];
 }
 
-+ (NSString *)convertDate:(NSString *)dateString {
++ (NSString *)convertDate:(NSString *)dateString outputFormat:(NSString *)outputFormat {
     NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
     [inputFormatter setDateFormat:@"yyyy-MM-dd"];
     NSDate *inputDate = [inputFormatter dateFromString:dateString];
     
     NSDateFormatter *outputFormatter = [[NSDateFormatter alloc] init];
-    [outputFormatter setDateFormat:@"MM/dd"];
+    [outputFormatter setDateFormat:outputFormat];
     NSString *date = [outputFormatter stringFromDate:inputDate];
     
     return date;
@@ -153,5 +153,30 @@
     return [weekdays objectAtIndex:([component weekday] - 1)];
 }
 
++ (NSInteger)currentYear {
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierChinese];
+    NSDate *date = [NSDate date];
+    NSCalendarUnit calendarUnit = NSCalendarUnitYear;
+    NSDateComponents *component = [calendar components:calendarUnit
+                                              fromDate:date];
+    
+    return component.year;
+}
+
++ (NSInteger)currentMonth {
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierChinese];
+    NSDate *date = [NSDate date];
+    NSCalendarUnit calendarUnit = NSCalendarUnitMonth;
+    NSDateComponents *component = [calendar components:calendarUnit
+                                              fromDate:date];
+    
+    return component.month;
+}
+
++ (BOOL)isFloat:(NSString *)string {
+    NSScanner *scan = [NSScanner scannerWithString:string];
+    float val;
+    return [scan scanFloat:&val] && [scan isAtEnd];
+}
 
 @end

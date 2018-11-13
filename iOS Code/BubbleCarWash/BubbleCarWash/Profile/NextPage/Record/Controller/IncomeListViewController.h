@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#include "ParentViewController.h"
 
-@interface IncomeListViewController : UIViewController
+@interface IncomeListViewController : ParentViewController
 
 @end

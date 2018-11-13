@@ -23,9 +23,10 @@
     [super awakeFromNib];
 }
 
-- (void)setDate:(NSString *)date dayIncome:(NSString *)dayIncome {
+- (void)setDate:(NSString *)date dayIncome:(CGFloat)dayIncome {
+    
     _dateLabel.text = date;
-    _curDayIncome.text = [NSString stringWithFormat:@"共计收入%@元", dayIncome];
+    _curDayIncome.text = [NSString stringWithFormat:@"共计收入%.2f元", dayIncome];
 }
 
 @end
@@ -46,10 +47,26 @@
     [super awakeFromNib];
 }
 
-- (void)setAvatar:(NSString *)name carWashType:(NSString *)type washFee:(NSString *)washFee {
-    _onwerAvatar.image = [UIImage imageNamed:name];
-    _carTypeLabel.text = type;
-    _washFeeLabel.text = washFee;
+- (void)setCarType:(NSString *)carType money:(CGFloat)money {
+    NSString *imageName = @"";
+    NSString *desc = @"";
+    switch ([carType integerValue]) {
+        case 0:
+            imageName = @"MediumCar_Income";
+            desc = @"中型车洗车";
+            break;
+        case 1:
+            imageName = @"LargeCar_Income";
+            desc = @"大型车洗车";
+            break;
+        default:
+            imageName = @"SmallCar_Income";
+            desc = @"小型车洗车";
+            break;
+    }
+    _onwerAvatar.image = [UIImage imageNamed:imageName];
+    _carTypeLabel.text = desc;
+    _washFeeLabel.text = [NSString stringWithFormat:@"%.2f", money];;
 }
 
 @end

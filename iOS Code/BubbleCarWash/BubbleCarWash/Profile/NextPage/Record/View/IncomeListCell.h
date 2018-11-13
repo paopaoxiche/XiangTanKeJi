@@ -10,12 +10,12 @@
 
 @interface IncomeListTitleCell : UITableViewCell
 
-- (void)setDate:(NSString *)date dayIncome:(NSString *)dayIncome;
+- (void)setDate:(NSString *)date dayIncome:(CGFloat)dayIncome;
 
 @end
 
 @interface IncomeListContentCell : UITableViewCell
 
-- (void)setAvatar:(NSString *)name carWashType:(NSString *)type washFee:(NSString *)washFee;
+- (void)setCarType:(NSString *)carType money:(CGFloat)money;
 
 @end

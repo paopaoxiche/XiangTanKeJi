@@ -24,6 +24,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [AMapServices sharedServices].apiKey = @"c1b284b5a52e845eb2fb14767208fbba";
     [WXApi registerApp:@"wx129f550ad02f9cd2"];
+    self.window.backgroundColor = [UIColor whiteColor];
     
     return YES;
 }

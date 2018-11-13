@@ -51,10 +51,37 @@
 @property (nonatomic, copy) NSString *address;          // 地址
 @property (nonatomic, copy) NSString *coordX;           // 纬度
 @property (nonatomic, copy) NSString *coordY;           // 经度
+@property (nonatomic, copy) NSString *province;         // 省
+@property (nonatomic, copy) NSString *city;            // 市
+@property (nonatomic, copy) NSString *district;         // 区
 @property (nonatomic, strong) UIImage *license;         // 营业执照文件
 @property (nonatomic, strong) UIImage *washCard;        // 洗车证
 @property (nonatomic, strong) UIImage *idCardPositive;  // 身份证正面
 @property (nonatomic, strong) UIImage *idCardBack;      // 身份证背面
+
+@end
+
+@interface CommodityParam : NSObject
+
+/// 0 - 新增商品，具体商品id - 修改商品
+@property (nonatomic, copy) NSString *commodityID;
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic, copy) NSString *currentPrice;
+@property (nonatomic, copy) NSString *originalPrice;
+@property (nonatomic, copy) NSString *describe;
+@property (nonatomic, strong) UIImage *commodityImg;
+
+@end
+
+@interface ServiceParam : NSObject
+
+@property (nonatomic, strong) NSNumber *washId;
+/// 0 - 新增服务，具体服务id - 修改服务
+@property (nonatomic, strong) NSNumber *serviceId;
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic, copy) NSString *describe;
+@property (nonatomic, copy) NSString *price;
+@property (nonatomic, copy) NSString *carModel;
 
 @end
 
@@ -207,7 +234,7 @@ typedef void(^FailedBlock)(NSError *error);
 /**
  *  获取近期洗车列表
  */
-- (void)obtainRecentCarWashList:(NSInteger)washID count:(NSInteger)count success:(SuccessBlock)success failed:(FailedBlock)failed;
+- (void)obtainRecentCarWashes:(NSInteger)washID count:(NSInteger)count success:(SuccessBlock)success failed:(FailedBlock)failed;
 
 #pragma mark - 洗车场我的
 
@@ -222,7 +249,12 @@ typedef void(^FailedBlock)(NSError *error);
 /**
  *  更新洗车场地址
  */
-
+- (void)updateCarWashAddress:(NSInteger)washID
+                     address:(NSString *)address
+                    latitude:(CGFloat)latitude
+                   longitude:(CGFloat)longitude
+                     success:(SuccessBlock)success
+                      failed:(FailedBlock)failed;
 /**
  *  获取工商认证状态
  */
@@ -232,48 +264,41 @@ typedef void(^FailedBlock)(NSError *error);
  */
 - (void)registerWash:(RegisterWashParam *)param success:(SuccessBlock)success failed:(FailedBlock)failed;
 /**
- *  获取近期洗车列表
- */
-- (void)obtainRecentCarWashes:(NSInteger)washID count:(NSInteger)count success:(SuccessBlock)success failed:(FailedBlock)failed;
-/**
  *  获取收入列表
  */
-
+- (void)obtainIncomeList:(NSInteger)washID month:(NSInteger)month success:(SuccessBlock)success failed:(FailedBlock)failed;
 /**
  *  获取洗车场评价列表
  */
-
+- (void)obtainCarWashComment:(NSInteger)washID pageIndex:(NSInteger)pageIndex pageSize:(NSInteger)pageSize success:(SuccessBlock)success failed:(FailedBlock)failed;
 /**
  *  更新洗车场营业状态
  */
-
+- (void)updateTradeState:(NSInteger)washID status:(NSString *)status success:(SuccessBlock)success failed:(FailedBlock)failed;
 /**
  *  发布洗车服务
  */
-
+- (void)addOrModifyService:(ServiceParam *)param success:(SuccessBlock)success failure:(FailedBlock)failed;
 /**
  *  删除洗车服务
  */
-
+- (void)deleteWashService:(NSInteger)washID serviceID:(NSInteger)serviceID success:(SuccessBlock)success failure:(FailedBlock)failed;
 /**
  *  增加/修改商品
  */
-
+- (void)addOrModifyCommodity:(CommodityParam *)param success:(SuccessBlock)success failure:(FailedBlock)failed;
 /**
  *  删除商品
  */
-
+- (void)deleteCommodity:(NSInteger)commodityID success:(SuccessBlock)success failure:(FailedBlock)failed;
 /**
  *  提取现金
  */
-
+- (void)extractCash:(NSInteger)washID money:(NSString *)money success:(SuccessBlock)success failure:(FailedBlock)failed;
 /**
  *  获取余额
  */
-
-#pragma mark - 天气
-
-#pragma mark - 地图
+- (void)obtainBalance:(NSInteger)washID success:(SuccessBlock)success failure:(FailedBlock)failed;
 
 - (void)GET:(NSString *)url parameters:(NSDictionary *)params success:(SuccessBlock)success failure:(FailedBlock)failed;
 - (void)POST:(NSString *)url parameters:(NSDictionary *)params success:(SuccessBlock)success failure:(FailedBlock)failed;

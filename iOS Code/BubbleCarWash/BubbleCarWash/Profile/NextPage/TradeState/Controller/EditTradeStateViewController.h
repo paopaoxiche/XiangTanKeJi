@@ -7,13 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseTableViewController.h"
 
-typedef NS_ENUM(NSUInteger, TradeState) {
-    TradeStateOperate,      // 营业
-    TradeStateRest,         // 歇业
-    TradeStateClosed        // 停业
-};
-
-@interface EditTradeStateViewController : UITableViewController
+@interface EditTradeStateViewController : BaseTableViewController
 
 @end

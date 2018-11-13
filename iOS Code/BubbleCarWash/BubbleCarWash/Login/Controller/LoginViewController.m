@@ -15,6 +15,8 @@
 #import "UserManager.h"
 #import "CertificationViewController.h"
 
+static const NSInteger kSeconds = 120;
+
 @interface LoginViewController () <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *phoneNumberTextField;
@@ -39,7 +41,7 @@
     _phoneNumberTextField.delegate = self;
     _verificationCodeTextField.delegate = self;
     _type = 0;
-    _seconds = 60;
+    _seconds = kSeconds;
     _verificationCodeButton.layer.borderColor = [UIColor rgbWithRed:248 green:155 blue:10].CGColor;
     
     UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"BackArrowBlack"] style:UIBarButtonItemStylePlain target:self action:@selector(backToSuperVC)];
@@ -106,8 +108,6 @@
             info.type = UserTypeCarWash;
             info.phoneNumber = self.phoneNumberTextField.text;
             info.code = self.verificationCodeTextField.text;
-//    info.phoneNumber = @"18883398513";
-//    info.code = @"123456";
             [UserManager sharedInstance].userInfo = info;
             [self presentViewController:vc animated:YES completion:nil];
         }
@@ -121,7 +121,7 @@
 }
 
 - (void)startCountingDown {
-    _seconds = 60;
+    _seconds = kSeconds;
     _verificationCodeButton.layer.borderColor = [UIColor rgbWithRed:217 green:227 blue:255].CGColor;
     _verificationCodeButton.backgroundColor = [UIColor rgbWithRed:217 green:227 blue:232];
     [_verificationCodeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];

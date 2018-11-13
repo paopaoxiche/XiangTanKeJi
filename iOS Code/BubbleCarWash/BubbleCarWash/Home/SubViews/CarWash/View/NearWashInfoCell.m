@@ -6,8 +6,9 @@
 //  Copyright © 2018年 Sunshine Girl. All rights reserved.
 //
 
-#import "NearWashInfoCell.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "NearWashInfoCell.h"
+#import "UIColor+Category.h"
 
 @interface NearWashInfoCell ()
 
@@ -24,6 +25,11 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    
+    _washAvatar.clipsToBounds = YES;
+    _washAvatar.layer.cornerRadius = 24;
+    _washAvatar.layer.borderWidth = 2;
+    _washAvatar.layer.borderColor = [UIColor rgbWithRed:229 green:229 blue:229].CGColor;
 }
 
 - (void)setAvatarUrl:(NSString *)avatarUrl {

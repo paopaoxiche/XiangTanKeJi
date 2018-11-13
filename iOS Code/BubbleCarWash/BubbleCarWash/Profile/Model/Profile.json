@@ -93,6 +93,11 @@
                           "nextPageID": "EditTradeStateVC"
                           },
                           {
+                          "text": "账户余额",
+                          "imageName": "Integral",
+                          "nextPageID": "ExtractCashVC"
+                          },
+                          {
                           "text": "升级提醒",
                           "imageName": "UpgradeReminder",
                           "nextPageID": "UpgradeReminderVC"

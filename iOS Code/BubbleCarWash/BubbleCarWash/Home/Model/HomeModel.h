@@ -13,7 +13,7 @@ typedef void(^HomeResultBlock)(NSArray *result);
 
 @interface HomeDataModel : NSObject
 
-+ (void)loadNearbyWashList:(Location)location isMap:(BOOL)isMap result:(HomeResultBlock)result;
++ (void)loadNearbyWashList:(Location)location isMap:(BOOL)isMap isSearch:(BOOL)isSearch result:(HomeResultBlock)result;
 + (void)loadRecommendWashCommodity:(HomeResultBlock)result;
 
 @end
