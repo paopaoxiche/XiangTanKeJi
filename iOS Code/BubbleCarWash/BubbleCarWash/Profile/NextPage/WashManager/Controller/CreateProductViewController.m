@@ -14,6 +14,7 @@
 #import "HomeModel.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "GlobalMethods.h"
+#import "UIApplication+HUD.h"
 
 @interface CreateProductViewController () <UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -73,6 +74,7 @@
         return;
     }
     
+    [UIApplication showBusyHUD];
     CommodityParam *param = [[CommodityParam alloc] init];
     param.name = _nameTextField.text;
     param.currentPrice = _currentPriceTextField.text;
@@ -86,6 +88,7 @@
     }
     
     [[NetworkTools sharedInstance] addOrModifyCommodity:param success:^(NSDictionary *response, BOOL isSuccess) {
+        [UIApplication stopBusyHUD];
         NSInteger code = [[response objectForKey:@"code"] integerValue];
         if (code == 200) {
             [self messageBox:isAdd ? @"新增商品成功" : @"修改商品成功" handle:^{
@@ -95,6 +98,7 @@
             [self messageBox:isAdd ? @"新增商品失败，请重试" : @"修改商品失败，请重试"];
         }
     } failure:^(NSError *error) {
+        [UIApplication stopBusyHUD];
         [self messageBox:isAdd ? @"新增商品失败，请重试" : @"修改商品失败，请重试"];
     }];
 }

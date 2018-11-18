@@ -15,6 +15,7 @@
 #include "CarWashInfoModel.h"
 #import "UIColor+Category.h"
 #import "GlobalMethods.h"
+#import "UIApplication+HUD.h"
 
 @interface CommodityManagerViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -41,7 +42,9 @@
 }
 
 - (void)loadCarWashCommodityList {
+    [UIApplication showBusyHUD];
     [[NetworkTools sharedInstance] obtainCarWashCommodityList:[UserManager sharedInstance].carWashInfo.washID success:^(NSDictionary *response, BOOL isSuccess) {
+        [UIApplication stopBusyHUD];
         NSInteger code = [[response objectForKey:@"code"] integerValue];
         if (code == 200 && [response objectForKey:@"data"] != [NSNull null]) {
             NSDictionary *dataArr = [response objectForKey:@"data"];
@@ -61,6 +64,7 @@
             [self messageBox:@"获取商品列表失败"];
         }
     } failed:^(NSError *error) {
+        [UIApplication stopBusyHUD];
         [self messageBox:@"获取商品列表失败"];
     }];
 }
@@ -101,7 +105,9 @@
     UITableViewRowAction *deleteRowAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"删除" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
         RecommendCommodityModel *model = self.dataSource[indexPath.row];
         
+        [UIApplication showBusyHUD];
         [[NetworkTools sharedInstance] deleteCommodity:model.dataID success:^(NSDictionary *response, BOOL isSuccess) {
+            [UIApplication stopBusyHUD];
             NSInteger code = [response[@"code"] integerValue];
             if (code == 200) {
                 [self.dataSource removeObjectAtIndex:indexPath.row];
@@ -111,6 +117,7 @@
                 [self messageBox:@"删除商品失败，请重试"];
             }
         } failure:^(NSError *error) {
+            [UIApplication stopBusyHUD];
             [self messageBox:@"删除商品失败，请重试"];
         }];
     }];

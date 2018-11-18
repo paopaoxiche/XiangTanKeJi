@@ -24,4 +24,6 @@
 // 是否是iPhone X
 #define IS_IPHONE_X (TARGET_IPHONE && ((fabs((double)[[UIScreen mainScreen] bounds].size.height - (double)812) < DBL_EPSILON) || (fabs((double)[[UIScreen mainScreen] bounds].size.width - (double)812) < DBL_EPSILON)))
 
+#define SAFE_RELEASE(p) do { if(p) {;p=nil; } } while (false)
+
 #endif /* FunctionMacro_h */

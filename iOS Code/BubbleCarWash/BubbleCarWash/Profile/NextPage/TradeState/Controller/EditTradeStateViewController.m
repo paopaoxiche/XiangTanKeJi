@@ -12,6 +12,7 @@
 #import "NetworkTools.h"
 #import "UserManager.h"
 #import "CarWashInfoModel.h"
+#import "UIApplication+HUD.h"
 
 @interface EditTradeStateViewController () <TradeStateCellDelegate>
 
@@ -38,8 +39,10 @@
         return;
     }
     
+    [UIApplication showBusyHUD];
     NSString *status = [NSString stringWithFormat:@"%li", state];
     [[NetworkTools sharedInstance] updateTradeState:[UserManager sharedInstance].carWashInfo.washID status:status success:^(NSDictionary *response, BOOL isSuccess) {
+        [UIApplication stopBusyHUD];
         NSInteger code = [[response objectForKey:@"code"] integerValue];
         if (code == 200) {
             [self messageBox:@"营业状态更新成功" handle:^{
@@ -50,6 +53,7 @@
             [self messageBox:@"营业状态更新失败"];
         }
     } failed:^(NSError *error) {
+        [UIApplication stopBusyHUD];
         [self messageBox:@"营业状态更新失败"];
     }];
 }

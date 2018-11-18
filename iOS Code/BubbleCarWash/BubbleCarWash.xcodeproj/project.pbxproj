@@ -122,6 +122,7 @@
 		65FC341A20E13B74006DE3F1 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65FC341920E13B74006DE3F1 /* MainViewController.m */; };
 		65FC341C20E13B83006DE3F1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65FC341B20E13B83006DE3F1 /* Main.storyboard */; };
 		65FD8FF421A1B5AE00E36153 /* CommodityInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65FD8FF321A1B5AE00E36153 /* CommodityInfoViewController.m */; };
+		65FD8FF921A1C2A300E36153 /* UIApplication+HUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 65FD8FF821A1C2A300E36153 /* UIApplication+HUD.m */; };
 		CC041A1121464CA600804FAD /* CertificationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC041A1021464CA500804FAD /* CertificationCell.xib */; };
 		CC5BF768213658900037DF66 /* NSObject+DictionaryFromModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC5BF767213658900037DF66 /* NSObject+DictionaryFromModel.m */; };
 		CCA16520213E413E001626C6 /* CustomerServicerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA1651F213E413E001626C6 /* CustomerServicerViewController.m */; };
@@ -335,6 +336,8 @@
 		65FC341B20E13B83006DE3F1 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		65FD8FF221A1B5AE00E36153 /* CommodityInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommodityInfoViewController.h; sourceTree = "<group>"; };
 		65FD8FF321A1B5AE00E36153 /* CommodityInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommodityInfoViewController.m; sourceTree = "<group>"; };
+		65FD8FF721A1C2A300E36153 /* UIApplication+HUD.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIApplication+HUD.h"; sourceTree = "<group>"; };
+		65FD8FF821A1C2A300E36153 /* UIApplication+HUD.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+HUD.m"; sourceTree = "<group>"; };
 		6922DD9F059ECB8EEB30484D /* Pods-BubbleCarWash.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BubbleCarWash.release.xcconfig"; path = "Pods/Target Support Files/Pods-BubbleCarWash/Pods-BubbleCarWash.release.xcconfig"; sourceTree = "<group>"; };
 		CC041A1021464CA500804FAD /* CertificationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CertificationCell.xib; sourceTree = "<group>"; };
 		CC5BF766213658900037DF66 /* NSObject+DictionaryFromModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+DictionaryFromModel.h"; sourceTree = "<group>"; };
@@ -801,6 +804,8 @@
 				CCA1652E213E48BB001626C6 /* UILabel+CreateLabel.m */,
 				6584AA9221401D2600DEA15F /* UIImage+ScaleImage.h */,
 				6584AA9321401D2600DEA15F /* UIImage+ScaleImage.m */,
+				65FD8FF721A1C2A300E36153 /* UIApplication+HUD.h */,
+				65FD8FF821A1C2A300E36153 /* UIApplication+HUD.m */,
 			);
 			name = Category;
 			path = BubbleCarWash/Category;
@@ -1306,6 +1311,7 @@
 				65C5B07A2135AA8100727122 /* PersonalInfoCell.m in Sources */,
 				65C5B0C02135AE6000727122 /* NSString+Category.m in Sources */,
 				CCA16520213E413E001626C6 /* CustomerServicerViewController.m in Sources */,
+				65FD8FF921A1C2A300E36153 /* UIApplication+HUD.m in Sources */,
 				65FC341A20E13B74006DE3F1 /* MainViewController.m in Sources */,
 				65D8D49E2146CF5800934589 /* PaymentViewController.m in Sources */,
 				65C5B0A52135AA8100727122 /* CommentViewController.m in Sources */,

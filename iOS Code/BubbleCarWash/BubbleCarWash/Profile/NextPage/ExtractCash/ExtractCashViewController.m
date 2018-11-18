@@ -11,6 +11,7 @@
 #import "UserManager.h"
 #import "CarWashInfoModel.h"
 #import "GlobalMethods.h"
+#import "UIApplication+HUD.h"
 
 @interface ExtractCashViewController ()
 
@@ -31,7 +32,9 @@
     _submitBarButtom.enabled = NO;
     _extractCashTextField.enabled = NO;
     
+    [UIApplication showBusyHUD];
     [[NetworkTools sharedInstance] obtainBalance:[UserManager sharedInstance].carWashInfo.washID success:^(NSDictionary *response, BOOL isSuccess) {
+        [UIApplication stopBusyHUD];
         NSInteger code = [response[@"code"] integerValue];
         if (code == 200) {
             [UserManager sharedInstance].carWashInfo.balance = [response[@"data"] floatValue];
@@ -42,7 +45,7 @@
             }
         }
     } failure:^(NSError *error) {
-        
+        [UIApplication stopBusyHUD];
     }];
 }
 
@@ -57,7 +60,9 @@
         return;
     }
     
+    [UIApplication showBusyHUD];
     [[NetworkTools sharedInstance] extractCash:[UserManager sharedInstance].carWashInfo.washID money:_extractCashTextField.text success:^(NSDictionary *response, BOOL isSuccess) {
+        [UIApplication stopBusyHUD];
         NSInteger code = [response[@"code"] integerValue];
         if (code == 200) {
             [self messageBox:@"提取成功" handle:^{
@@ -67,6 +72,7 @@
             [self messageBox:@"提取失败，请重试"];
         }
     } failure:^(NSError *error) {
+        [UIApplication stopBusyHUD];
         [self messageBox:@"提取失败，请重试"];
     }];
 }

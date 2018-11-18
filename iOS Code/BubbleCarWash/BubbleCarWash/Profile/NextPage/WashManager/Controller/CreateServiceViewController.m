@@ -13,6 +13,7 @@
 #import "UserManager.h"
 #import "CarWashInfoModel.h"
 #import "GlobalMethods.h"
+#import "UIApplication+HUD.h"
 
 @interface CreateServiceViewController () <UITextViewDelegate>
 
@@ -69,6 +70,7 @@
         return;
     }
     
+    [UIApplication showBusyHUD];
     ServiceParam *param = [[ServiceParam alloc] init];
     param.name = _nameTextField.text;
     param.describe = _textView.text;
@@ -81,6 +83,7 @@
     }
     
     [[NetworkTools sharedInstance] addOrModifyService:param success:^(NSDictionary *response, BOOL isSuccess) {
+        [UIApplication stopBusyHUD];
         NSInteger code = [[response objectForKey:@"code"] integerValue];
         if (code == 200) {
             [self messageBox:isAdd ? @"新增服务成功" : @"修改服务成功" handle:^{
@@ -92,6 +95,7 @@
             [self messageBox:isAdd ? @"新增服务失败，请重试" : @"修改服务失败，请重试"];
         }
     } failure:^(NSError *error) {
+        [UIApplication stopBusyHUD];
         [self messageBox:isAdd ? @"新增服务失败，请重试" : @"修改服务失败，请重试"];
     }];
 }

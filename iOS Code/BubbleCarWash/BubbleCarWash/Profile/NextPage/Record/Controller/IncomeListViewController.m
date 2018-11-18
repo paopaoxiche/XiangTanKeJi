@@ -13,6 +13,7 @@
 #include "UserManager.h"
 #include "CarWashInfoModel.h"
 #import "GlobalMethods.h"
+#import "UIApplication+HUD.h"
 
 @interface IncomeListViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -31,9 +32,11 @@
     
     _tableView.rowHeight = 52;
     
+    [UIApplication showBusyHUD];
     NSInteger washID = [UserManager sharedInstance].carWashInfo.washID;
     NSInteger month = [GlobalMethods currentMonth];
     [[NetworkTools sharedInstance] obtainIncomeList:washID month:month success:^(NSDictionary *response, BOOL isSuccess) {
+        [UIApplication stopBusyHUD];
         NSInteger code = [[response objectForKey:@"code"] integerValue];
         if (code == 200) {
             NSDictionary *dataArr = [response objectForKey:@"data"];
@@ -54,6 +57,7 @@
             [self messageBox:@"获取收入列表失败"];
         }
     } failed:^(NSError *error) {
+        [UIApplication stopBusyHUD];
         [self messageBox:@"获取收入列表失败"];
     }];
 }

@@ -14,6 +14,7 @@
 #import "GlobalMethods.h"
 #import "SeeLargePictureViewController.h"
 #import "UserInfoModel.h"
+#import "UIApplication+HUD.h"
 
 @interface CertificationViewController () <CertificationCellDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITableViewDelegate, UITableViewDataSource>
 
@@ -55,8 +56,10 @@
     _imagePicker.delegate = self;
     
     if (_userType == UserTypeOwner) {
+        [UIApplication showBusyHUD];
         if (_state == CertificationStateAdd) {
             [AuthenticationModel loadCarTypeList:^(NSArray *result) {
+                [UIApplication stopBusyHUD];
                 self.dataSource = result;
                 [self.tableView reloadData];
             }];
@@ -64,6 +67,7 @@
             self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"提交" style:UIBarButtonItemStylePlain target:self action:@selector(onSubmitBtnClicked:)];
         } else {
             [AuthenticationModel loadCarModelDetailList:_dataID result:^(CarModelDetailModel *result) {
+                [UIApplication stopBusyHUD];
                 self.modelDetail = result;
                 if (self.modelDetail) {
                     [self.tableView reloadData];
@@ -93,7 +97,9 @@
         } else {
             _tableViewTopConstraint.constant = 0;
             _headerView.hidden = YES;
+            [UIApplication showBusyHUD];
             [AuthenticationModel loadCarWashCertificationInfo:^(CarWashCertificationModel *model) {
+                [UIApplication stopBusyHUD];
                 self.carWashCertificationModel = model;
                 if (self.carWashCertificationModel) {
                     [self.tableView reloadData];
@@ -120,10 +126,12 @@
 }
 
 - (IBAction)onSubmitBtnClicked:(id)sender {
+    [UIApplication showBusyHUD];
     if (_userType == UserTypeOwner) {
         CarTypeModel *model = _dataSource[_carTypeIndexPath.row - 1];
         NSString *idStr = [NSString stringWithFormat:@"%li", model.dataID];
         [[NetworkTools sharedInstance] submitModelReview:idStr cover:_coverImage back:_backImage success:^(NSDictionary *response, BOOL isSuccess) {
+            [UIApplication stopBusyHUD];
             NSInteger code = [[response objectForKey:@"code"] integerValue];
             if (code == 200) {
                 [self messageBox:@"车型提交成功，请等待审核" handle:^{
@@ -133,6 +141,7 @@
                 [self messageBox:@"提交失败，请稍后重试"];
             }
         } failed:^(NSError *error) {
+            [UIApplication stopBusyHUD];
             [self messageBox:@"提交失败，请稍后重试"];
         }];
     } else {
@@ -146,6 +155,7 @@
         _registerWash.district = [UserManager sharedInstance].district;
         
         [[NetworkTools sharedInstance] registerWash:_registerWash success:^(NSDictionary *response, BOOL isSuccess) {
+            [UIApplication stopBusyHUD];
             NSInteger code = [[response objectForKey:@"code"] integerValue];
             if (code == 200) {
                 NSString *code = [UserManager sharedInstance].userInfo.code;
@@ -159,6 +169,7 @@
                 [self messageBox:@"提交失败，请稍后重试"];
             }
         } failed:^(NSError *error) {
+            [UIApplication stopBusyHUD];
             [self messageBox:@"提交失败，请稍后重试"];
         }];
     }

@@ -12,6 +12,7 @@
 #import "NetworkTools.h"
 #import "NSString+Category.h"
 #import "FunctionMacro.h"
+#import "UIApplication+HUD.h"
 
 @interface EditNicknameViewController ()
 
@@ -49,8 +50,10 @@
     
     [_nicknameTextField resignFirstResponder];
     
+    [UIApplication showBusyHUD];
     // 保存修改
     [[NetworkTools sharedInstance] updateUserNickName:_nicknameTextField.text success:^(NSDictionary *response, BOOL isSuccess) {
+        [UIApplication stopBusyHUD];
         [UserManager sharedInstance].isUpdateUserInfo = YES;
         [[UserManager sharedInstance] obtainUserInfo];
         // 提示，然后返回上级界面
@@ -58,6 +61,7 @@
             [self dismissViewControllerAnimated:YES completion:nil];
         }];
     } failed:^(NSError *error) {
+        [UIApplication stopBusyHUD];
         // 提示
         [self messageBox:@"修改昵称失败，请稍后重试"];
     }];

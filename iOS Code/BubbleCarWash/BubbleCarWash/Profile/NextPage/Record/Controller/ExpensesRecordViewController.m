@@ -11,6 +11,7 @@
 #import "ExpensesRecordListModel.h"
 #import "DiscussViewController.h"
 #import "GlobalMethods.h"
+#import "UIApplication+HUD.h"
 
 @interface ExpensesRecordViewController () <UITableViewDataSource, UITableViewDelegate, TotalConsumptionCellDelegate>
 
@@ -24,7 +25,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [UIApplication showBusyHUD];
     [ExpensesRecordListModel loadExpensesRecordList:^(NSArray *result) {
+        [UIApplication stopBusyHUD];
         self.recordList = result;
         [self.tableView reloadData];
     }];

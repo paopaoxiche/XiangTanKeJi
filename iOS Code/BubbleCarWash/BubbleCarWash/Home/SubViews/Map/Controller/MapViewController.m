@@ -15,6 +15,7 @@
 #import "CustomAnnotationView.h"
 #import "HomeModel.h"
 #import "UserManager.h"
+#import "UIApplication+HUD.h"
 
 @interface MapViewController () <MAMapViewDelegate>
 
@@ -57,7 +58,9 @@
     [self addChildViewController:_carWashListVC];
     [_mapView addSubview:_carWashListVC.view];
     
+    [UIApplication showBusyHUD];
     [HomeDataModel loadNearbyWashList:[UserManager sharedInstance].location isMap:YES isSearch:NO result:^(NSArray *result) {
+        [UIApplication stopBusyHUD];
         self.nearbyWashList = [result copy];
         self.carWashListVC.dataSource = self.nearbyWashList;
         [self addPointAnnotation];
@@ -84,7 +87,9 @@
     self.fiveCarWashBtn.selected = isSelected;
     [self.fiveCarWashBtn setImage:[UIImage imageNamed:(isSelected ? @"SingleSelection_Normal" : @"SingleSelection_Selected")]
                          forState:UIControlStateNormal];
+    [UIApplication showBusyHUD];
     [HomeDataModel loadNearbyWashList:[UserManager sharedInstance].location isMap:YES isSearch:NO result:^(NSArray *result) {
+        [UIApplication stopBusyHUD];
         self.nearbyWashList = [result copy];
         self.carWashListVC.dataSource = self.nearbyWashList;
         [self addPointAnnotation];

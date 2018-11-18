@@ -16,6 +16,7 @@
 #import "GlobalMethods.h"
 #import "UIColor+Category.h"
 #import "PaymentViewController.h"
+#import "UIApplication+HUD.h"
 
 @interface CarWashServiceViewController () <CarWashServiceCellDelegate, CommodityCellDelegate,
     CertificationCellDelegate, UITableViewDataSource, UITableViewDelegate>
@@ -54,6 +55,7 @@
 
 - (void)setWashID:(NSInteger)washID {
     _washID = washID;
+    [UIApplication showBusyHUD];
     [CarWashServiceModel loadCarWashServiceData:washID result:^(NSArray *result) {
         NSArray *modelCertificationList = [[NSArray alloc] init];
         modelCertificationList = result[1][@"ModelCertificationList"];
@@ -83,12 +85,14 @@
         }
         
         [self calculatePaymentAmount];
+        [UIApplication stopBusyHUD];
         [self.tableView reloadData];
     }];
 }
 
 - (IBAction)onPayButtonClicked:(id)sender {
     // loading提示创建订单，去支付（美团），然后跳转到支付选择界面
+    [UIApplication showBusyHUD:nil withTitle:@"创建订单中..."];
     
     ServiceModel *serviceModel = [_dataSource[0] objectAtIndex:_serviceSelectedIndexPath.row];
     
@@ -105,6 +109,7 @@
                                                                                                vcIdentifier:@"PaymentViC"];
     paymentVC.serviceID = [NSString stringWithFormat:@"%li", serviceModel.dataID];
     paymentVC.commoditys = commoditys;
+    [UIApplication stopBusyHUD];
     [self.navigationController pushViewController:paymentVC animated:YES];
 }
 

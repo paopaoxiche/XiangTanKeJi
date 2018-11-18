@@ -8,6 +8,7 @@
 
 #import "CommodityInfoViewController.h"
 #import "UIColor+Category.h"
+#import "UIApplication+HUD.h"
 
 @interface CommodityInfoViewController ()
 
@@ -27,6 +28,7 @@
 }
 
 - (void)loadCommodityInfo {
+    [UIApplication showBusyHUD];
     self.commodityImageView.image = [UIImage imageNamed:@"CarWashAvatar"];
     self.currentPriceLabel.text = [NSString stringWithFormat:@"¥%@", @"25.00"];
     NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"¥%@", @"30.00"]];
@@ -39,6 +41,7 @@
                                     }
                             range:NSMakeRange(0, attributedText.length)];
     self.orignalPriceLabel.attributedText = attributedText;
+    [UIApplication showBusyHUD];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

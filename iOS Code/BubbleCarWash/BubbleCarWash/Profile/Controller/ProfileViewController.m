@@ -98,7 +98,7 @@
     if ([UserManager sharedInstance].isLogin) {
         UIViewController *personalInfoVC = [GlobalMethods viewControllerWithBuddleName:@"PersonalInfo" vcIdentifier:@"PersonalInfoVC"];
         personalInfoVC.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:personalInfoVC animated:YES];
+        [self.navigationController pushViewController:personalInfoVC animated:NO];
     } else {
         UIViewController *loginVC = [GlobalMethods viewControllerWithBuddleName:@"Login" vcIdentifier:@"LoginVC"];
         [self presentViewController:loginVC animated:YES completion:nil];
@@ -152,7 +152,7 @@
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Profile" bundle:[NSBundle mainBundle]];
         UIViewController *nextPageVC = [storyboard instantiateViewControllerWithIdentifier:item.nextPageID];
         nextPageVC.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:nextPageVC animated:YES];
+        [self.navigationController pushViewController:nextPageVC animated:NO];
     }
 }
 

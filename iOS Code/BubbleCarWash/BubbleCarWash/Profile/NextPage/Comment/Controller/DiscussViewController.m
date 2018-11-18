@@ -9,6 +9,7 @@
 #import "DiscussViewController.h"
 #import "NetworkTools.h"
 #import "NSString+Category.h"
+#import "UIApplication+HUD.h"
 
 @interface DiscussViewController ()
 
@@ -62,7 +63,9 @@
         return;
     }
     
+    [UIApplication showBusyHUD];
     [[NetworkTools sharedInstance] submitEvaluate:_consumeID grade:grade - 2000 content:content success:^(NSDictionary *response, BOOL isSuccess) {
+        [UIApplication stopBusyHUD];
         NSInteger code = [[response objectForKey:@"code"] integerValue];
         if (code == 200) {
             [self messageBox:@"评价成功" handle:^{
@@ -72,6 +75,7 @@
             [self messageBox:@"评价失败，请稍后重试!"];
         }
     } failed:^(NSError *error) {
+        [UIApplication stopBusyHUD];
         [self messageBox:@"评价失败，请稍后重试!"];
     }];
 }

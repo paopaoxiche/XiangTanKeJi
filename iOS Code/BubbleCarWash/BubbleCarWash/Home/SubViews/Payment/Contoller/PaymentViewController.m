@@ -16,6 +16,7 @@
 #import "WXApi.h"
 #import "WXApiManager.h"
 #import "AlipayManager.h"
+#import "UIApplication+HUD.h"
 
 @interface PaymentViewController () <UITableViewDataSource, PaymentTypeCellDelegate>
 
@@ -36,11 +37,13 @@
 }
 
 - (IBAction)createOrder:(id)sender {
+    [UIApplication showBusyHUD:nil withTitle:@"重新生成订单中"];
     CreateOrderParam *params = [[CreateOrderParam alloc] init];
     params.washServiceId = _serviceID;
     params.commoditys = _commoditys;
     params.payType = [NSString stringWithFormat:@"%li", (_paymentTypeSelectedIndexPath.row + 1)];
     [[NetworkTools sharedInstance] createOrder:params success:^(NSDictionary *response, BOOL isSuccess) {
+        [UIApplication stopBusyHUD];
         NSInteger code = [[response objectForKey:@"code"] integerValue];
         if (code == 200 && [response objectForKey:@"data"] != [NSNull null]) {
             NSDictionary *data = [response objectForKey:@"data"];
@@ -66,6 +69,7 @@
             [self messageBox:@"创建订单失败，请稍后重试"];
         }
     } failed:^(NSError *error) {
+        [UIApplication stopBusyHUD];
         [self messageBox:@"创建订单失败，请稍后重试"];
     }];
 }

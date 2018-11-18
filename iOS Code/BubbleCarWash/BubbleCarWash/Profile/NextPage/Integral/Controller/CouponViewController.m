@@ -9,6 +9,7 @@
 #import "CouponViewController.h"
 #import "CouponCell.h"
 #import "CouponListModel.h"
+#import "UIApplication+HUD.h"
 
 @interface CouponViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -23,7 +24,9 @@
     [super viewDidLoad];
     
     self.title = @"优惠券";
+    [UIApplication showBusyHUD];
     [CouponListModel loadMyCouponList:^(NSArray *result) {
+        [UIApplication stopBusyHUD];
         self.myCouponList = [result copy];
         [self.tableView reloadData];
     }];

@@ -11,6 +11,7 @@
 #import "CommentListModel.h"
 #import "UserManager.h"
 #import "CarWashInfoModel.h"
+#import "UIApplication+HUD.h"
 
 @interface CommentViewController ()
 
@@ -29,9 +30,11 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    [UIApplication showBusyHUD];
     BOOL isOwner = [UserManager sharedInstance].userType == UserTypeOwner;
     if (isOwner) {
         [CommentListModel loadCommentList:0 pageSize:20 result:^(NSArray *result, BOOL isSuccess) {
+            [UIApplication stopBusyHUD];
             self.commentList = result;
             if (isSuccess) {
                 if (result.count > 0) {
@@ -48,6 +51,7 @@
     } else {
         NSInteger washID = [UserManager sharedInstance].carWashInfo.washID;
         [CommentListModel loadCommentList:washID pageIndex:0 pageSize:20 result:^(NSArray *result, BOOL isSuccess) {
+            [UIApplication stopBusyHUD];
             self.commentList = result;
             if (isSuccess) {
                 if (result.count > 0) {

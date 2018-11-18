@@ -8,6 +8,7 @@
 
 #import "UpgradeReminderViewController.h"
 #import "UpgradeReminderModel.h"
+#import "UIApplication+HUD.h"
 
 @interface UpgradeReminderViewController ()
 
@@ -21,7 +22,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [UIApplication showBusyHUD];
     [UpgradeReminderModel loadUpgradeInfo:^(id upgradeInfo, BOOL isSuccess) {
+        [UIApplication stopBusyHUD];
         UpgradeInfoModel *model = (UpgradeInfoModel *)upgradeInfo;
         if (isSuccess && model.hasNewVersion) {
             self.upgradeImageView.image = [UIImage imageNamed:@"NewVersion"];
@@ -31,6 +34,7 @@
             self.upgradeLabel.text = @"当前已是最新版本";
         }
     } failed:^(NSError *error) {
+        [UIApplication stopBusyHUD];
         self.upgradeImageView.image = [UIImage imageNamed:@"NoNewVersion"];
         self.upgradeLabel.text = @"当前已是最新版本";
     }];

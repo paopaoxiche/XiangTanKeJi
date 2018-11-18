@@ -9,6 +9,7 @@
 #import "IntegralConvertViewController.h"
 #import "IntegralConvertCell.h"
 #import "CouponListModel.h"
+#import "UIApplication+HUD.h"
 
 @interface IntegralConvertViewController () <UITableViewDataSource, UITableViewDelegate, IntegralConvertCellDelegate>
 
@@ -73,7 +74,9 @@
 
 - (void)onClickedConvertButtonnAtIndex:(NSInteger)index {
     RedeemableCouponModel *model = [_redeemableCouponList objectAtIndex:index];
+    [UIApplication showBusyHUD];
     [model convertIntegralToCoupon:^(NSInteger code) {
+        [UIApplication stopBusyHUD];
 //        if (code == -1) {
 //            <#statements#>
 //        }

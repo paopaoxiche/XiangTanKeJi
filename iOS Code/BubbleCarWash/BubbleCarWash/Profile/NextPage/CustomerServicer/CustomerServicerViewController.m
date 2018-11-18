@@ -11,6 +11,7 @@
 #import "UILabel+CreateLabel.h"
 #import "NSString+Category.h"
 #import "NetworkTools.h"
+#import "UIApplication+HUD.h"
 
 #define NUMBER @"1234567890"
 
@@ -47,7 +48,7 @@ static const NSUInteger kContactMinLenght = 4;
 
 #pragma mark -
 
--(void)send {
+- (void)send {
 //    CHECK_INTERNET();
     
     if (![self isValidTextFiledFormat]) {
@@ -58,11 +59,12 @@ static const NSUInteger kContactMinLenght = 4;
     [_sendBtn setEnabled:NO];
     [self hideKeyboard];
     // 开始loading
-//    [UIApplication showBusyHUD:nil withTitle:Localstring(@"sending")];
+    [UIApplication showBusyHUD];
     FeedBackParam *param = [[FeedBackParam alloc] init];
     param.content = _textView.text;
     param.contactInformation = _contactTextFiled.text;
     [[NetworkTools sharedInstance] submitFeedBackInfo:param success:^(NSDictionary *response, BOOL isSuccess) {
+        [UIApplication stopBusyHUD];
         if ([response[@"code"] integerValue] == 200) {
             [self messageBox:@"反馈成功" handle:^{
                 [self.navigationController popViewControllerAnimated:YES];
@@ -71,6 +73,7 @@ static const NSUInteger kContactMinLenght = 4;
             [self messageBox:@"反馈失败，请稍后重试"];
         }
     } failed:^(NSError *error) {
+        [UIApplication stopBusyHUD];
         [self messageBox:@"反馈失败，请稍后重试"];
     }];
 }
