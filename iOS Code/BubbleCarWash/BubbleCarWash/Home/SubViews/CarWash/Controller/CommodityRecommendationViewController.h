@@ -8,8 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol CommodityCellProtocol <NSObject>
+
+- (void)didSelectedCommodityCellWithIndex:(NSInteger)index;
+
+@end
+
 @interface CommodityRecommendationViewController : UIViewController
 
 @property (nonatomic, copy) NSArray *recommendWashCommodity;
+@property (nonatomic, weak) id<CommodityCellProtocol> delegate;
 
 @end

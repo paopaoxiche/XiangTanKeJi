@@ -25,8 +25,9 @@
 #import "ExpensesRecordListModel.h"
 #import "RecentWashRecordCell.h"
 #import "CarWashInfoModel.h"
+#import "CommodityInfoViewController.h"
 
-@interface HomeViewController () <UITableViewDataSource, UITableViewDelegate, AMapLocationManagerDelegate, AMapSearchDelegate>
+@interface HomeViewController () <UITableViewDataSource, UITableViewDelegate, AMapLocationManagerDelegate, AMapSearchDelegate, CommodityCellProtocol>
 
 @property (nonatomic, weak) IBOutlet UIView *weatherView;
 @property (weak, nonatomic) IBOutlet UIImageView *weatherBg;
@@ -73,6 +74,7 @@
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Home" bundle:[NSBundle mainBundle]];
     _commodityRecommendationVC = [storyboard instantiateViewControllerWithIdentifier:@"CommodityRecommendationVC"];
+    _commodityRecommendationVC.delegate = self;
     [self addChildViewController:_commodityRecommendationVC];
     [self.scrollSubView addSubview:_commodityRecommendationVC.view];
     
@@ -244,7 +246,8 @@
 }
 
 - (IBAction)push2Map:(id)sender {
-    NSString *identifier = [UserManager sharedInstance].userType == UserTypeOwner ? @"MapVC" : @"WashRecordVC";
+    BOOL isUserTypeOwner = [UserManager sharedInstance].userType == UserTypeOwner;
+    NSString *identifier = isUserTypeOwner ? @"MapVC" : @"WashRecordVC";
     UIViewController *vc = [GlobalMethods viewControllerWithBuddleName:@"Home" vcIdentifier:identifier];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:NO];
@@ -275,6 +278,16 @@
 //    cell.imageName =
     
     return cell;
+}
+
+#pragma mark - CommodityCellProtocol
+
+- (void)didSelectedCommodityCellWithIndex:(NSInteger)index {
+    RecommendCommodityModel *model = self.commodityRecommendationVC.recommendWashCommodity[index];
+    CommodityInfoViewController *infoVC = (CommodityInfoViewController *)[GlobalMethods viewControllerWithBuddleName:@"CarWash" vcIdentifier:@"CommodityInfoVC"];
+    infoVC.commodityID = model.dataID;
+    infoVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:infoVC animated:NO];
 }
 
 #pragma mark - AMapLocationManagerDelegate

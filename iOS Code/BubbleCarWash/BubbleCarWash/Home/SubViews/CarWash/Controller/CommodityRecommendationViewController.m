@@ -107,4 +107,16 @@
     return cell;
 }
 
+#pragma mark - UICollectionViewDelegate
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.item >= self.recommendWashCommodity.count) {
+        return;
+    }
+    
+    if (_delegate) {
+        [_delegate didSelectedCommodityCellWithIndex:indexPath.item];
+    }
+}
+
 @end
