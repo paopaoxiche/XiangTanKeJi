@@ -26,22 +26,23 @@
 #import "RecentWashRecordCell.h"
 #import "CarWashInfoModel.h"
 #import "CommodityInfoViewController.h"
+#import "TXScrollLabelView.h"
 
 @interface HomeViewController () <UITableViewDataSource, UITableViewDelegate, AMapLocationManagerDelegate, AMapSearchDelegate, CommodityCellProtocol>
 
 @property (nonatomic, weak) IBOutlet UIView *weatherView;
 @property (weak, nonatomic) IBOutlet UIImageView *weatherBg;
 @property (nonatomic, weak) IBOutlet UILabel *currentTemperatureLabel;
-@property (nonatomic, weak) IBOutlet UILabel *locationLabel;
 @property (nonatomic, weak) IBOutlet UILabel *maximumTemperature;
 @property (nonatomic, weak) IBOutlet UILabel *lowestTemperature;
 @property (nonatomic, weak) IBOutlet UILabel *windLevelLabel;
 @property (nonatomic, weak) IBOutlet UILabel *humidityLabel;
 @property (nonatomic, weak) IBOutlet UILabel *curWeatherStateLabel;
-@property (nonatomic, weak) IBOutlet UILabel *weatherDescLabel;
 @property (nonatomic, weak) IBOutlet UITableView *nearWashTableView;
 @property (nonatomic, weak) IBOutlet UIView *scrollSubView;
 @property (weak, nonatomic) IBOutlet UILabel *hintLabel;
+@property (weak, nonatomic) IBOutlet UIView *locationView;
+@property (weak, nonatomic) IBOutlet UIView *weatherDescView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *scrollViewHeightConstraint;
 @property (weak, nonatomic) IBOutlet UILabel *emptyLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *washViewHeightConstraint;
@@ -52,6 +53,8 @@
 @property (nonatomic, copy) NSArray *nearbyWashList;
 @property (nonatomic, copy) NSDictionary *weatherInfos;
 @property (nonatomic, copy) NSArray *backgroundImageNames;
+@property (nonatomic, strong) TXScrollLabelView *locationScrollView;
+@property (nonatomic, strong) TXScrollLabelView *weatherDescScrollView;
 
 @end
 
@@ -59,6 +62,16 @@
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    if (_locationScrollView) {
+        [_locationScrollView endScrolling];
+        _locationScrollView = nil;
+    }
+    
+    if (_weatherDescScrollView) {
+        [_weatherDescScrollView endScrolling];
+        _weatherDescScrollView = nil;
+    }
 }
 
 - (void)viewDidLoad {
@@ -68,6 +81,8 @@
     _nearWashTableView.layer.cornerRadius = 4;
     _isUpdateMearByWashList = YES;
     _nearWashTableView.rowHeight = 68;
+    
+    [self setScrollView];
     
     UITapGestureRecognizer *singleGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(touchWeatherView:)];
     [_weatherView addGestureRecognizer:singleGesture];
@@ -126,6 +141,8 @@
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
     
+    _locationScrollView.frame = CGRectMake(0, 0, self.locationView.frame.size.width, self.locationView.frame.size.height);
+    _weatherDescScrollView.frame = CGRectMake(0, 0, self.weatherDescView.frame.size.width, self.weatherDescView.frame.size.height);
     BOOL isOwner = [UserManager sharedInstance].userType == UserTypeOwner;
     
     // 根据数据个数设置列表高度
@@ -214,9 +231,9 @@
         NSArray *forecasts = result[@"WeatherForeCasts"];
         if (forecasts.count > 0) {
             WeatherForeCastModel *forecastModel = forecasts[0];
-            self.weatherDescLabel.text = forecastModel.hint;
             self.maximumTemperature.text = forecastModel.maxTemperature;
             self.lowestTemperature.text = forecastModel.minTemperature;
+            [self setWeather:forecastModel.hint];
             
             [GlobalMethods setGradientColor:[WeatherModel weatherBackgroundColor:forecastModel.skycon]
                                  startPoint:CGPointMake(0, 0)
@@ -251,6 +268,36 @@
     UIViewController *vc = [GlobalMethods viewControllerWithBuddleName:@"Home" vcIdentifier:identifier];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:NO];
+}
+
+- (void)setScrollView {
+    _locationScrollView = [TXScrollLabelView scrollWithTitle:@""
+                                                        type:TXScrollLabelViewTypeLeftRight
+                                                    velocity:1
+                                                     options:UIViewAnimationOptionCurveEaseInOut];
+    _locationScrollView.frame = CGRectMake(0, 0, self.locationView.frame.size.width, self.locationView.frame.size.height);
+    _locationScrollView.backgroundColor = [UIColor clearColor];
+    _locationScrollView.font = [UIFont systemFontOfSize:12];
+    [self.locationView addSubview:_locationScrollView];
+    
+    _weatherDescScrollView = [TXScrollLabelView scrollWithTitle:@""
+                                                           type:TXScrollLabelViewTypeLeftRight
+                                                       velocity:1
+                                                        options:UIViewAnimationOptionCurveEaseInOut];
+    _weatherDescScrollView.frame = CGRectMake(0, 0, self.weatherDescView.frame.size.width, self.weatherDescView.frame.size.height);
+    _weatherDescScrollView.backgroundColor = [UIColor clearColor];
+    _weatherDescScrollView.font = [UIFont systemFontOfSize:12];
+    [self.weatherDescView addSubview:_weatherDescScrollView];
+}
+
+- (void)setLocation {
+    self.locationScrollView.scrollTitle = [UserManager sharedInstance].address;
+    [self.locationScrollView beginScrolling];
+}
+
+- (void)setWeather:(NSString *)str {
+    self.weatherDescScrollView.scrollTitle = str;
+    [self.weatherDescScrollView beginScrolling];
 }
 
 #pragma mark - UITableViewDatasource
@@ -318,7 +365,7 @@
 - (void)onReGeocodeSearchDone:(AMapReGeocodeSearchRequest *)request response:(AMapReGeocodeSearchResponse *)response {
     if (response.regeocode) {
         [UserManager sharedInstance].address = [NSString stringWithFormat:@"%@%@", response.regeocode.formattedAddress, response.regeocode.pois.firstObject.name];
-        self.locationLabel.text = [UserManager sharedInstance].address;
+        [self setLocation];
         
         NSString *province = response.regeocode.addressComponent.province;
         NSString *city = response.regeocode.addressComponent.city;

@@ -12,30 +12,47 @@
 #import "GlobalMethods.h"
 #import "WeatherModel.h"
 #import "UserManager.h"
+#import "TXScrollLabelView.h"
 
 @interface WeatherViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, weak) IBOutlet UIImageView *weatherBgImgView;
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, weak) IBOutlet UIView *backView;
-@property (nonatomic, weak) IBOutlet UILabel *locationLabel;
 @property (nonatomic, weak) IBOutlet UILabel *curTemperature;
 @property (nonatomic, weak) IBOutlet UILabel *maximumTemperature;
 @property (nonatomic, weak) IBOutlet UILabel *lowestTemperature;
 @property (nonatomic, weak) IBOutlet UILabel *windLevelLabel;
 @property (nonatomic, weak) IBOutlet UILabel *humidityLabel;
 @property (nonatomic, weak) IBOutlet UILabel *curWeatherStateLabel;
-@property (nonatomic, weak) IBOutlet UILabel *weatherDescLabel;
+@property (nonatomic, weak) IBOutlet UIView *weatherDescView;
+@property (nonatomic, weak) IBOutlet UIView *locationView;
 @property (nonatomic, copy) NSArray *dataSource;
 @property (nonatomic, copy) NSArray *backgroundImageNames;
 @property (nonatomic, strong) WeatherRealTimeModel *realTimeModel;
+@property (nonatomic, strong) TXScrollLabelView *locationScrollView;
+@property (nonatomic, strong) TXScrollLabelView *weatherDescScrollView;
 
 @end
 
 @implementation WeatherViewController
 
+- (void)dealloc {
+    if (_locationScrollView) {
+        [_locationScrollView endScrolling];
+        _locationScrollView = nil;
+    }
+    
+    if (_weatherDescScrollView) {
+        [_weatherDescScrollView endScrolling];
+        _weatherDescScrollView = nil;
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self setScrollView];
     
     UITapGestureRecognizer *singleGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backToSuperView)];
     [_backView addGestureRecognizer:singleGesture];
@@ -50,7 +67,7 @@
     self.weatherBgImgView.image = [UIImage imageNamed:self.backgroundImageNames[model.skycon]];
     
     [self setWeatherRealTimeInfo];
-    self.locationLabel.text = [UserManager sharedInstance].address;
+    [self setLocation];
     
     _tableView.scrollEnabled = NO;
 }
@@ -73,10 +90,40 @@
     
     if (_dataSource.count > 0) {
         WeatherForeCastModel *forecastModel = _dataSource[0];
-        self.weatherDescLabel.text = forecastModel.hint;
+        [self setWeatherDesc:forecastModel.hint];
         self.maximumTemperature.text = [NSString stringWithFormat:@"%@˚", forecastModel.maxTemperature];
         self.lowestTemperature.text = [NSString stringWithFormat:@"%@˚", forecastModel.minTemperature];
     }
+}
+
+- (void)setScrollView {
+    _locationScrollView = [TXScrollLabelView scrollWithTitle:@""
+                                                        type:TXScrollLabelViewTypeLeftRight
+                                                    velocity:1
+                                                     options:UIViewAnimationOptionCurveEaseInOut];
+    _locationScrollView.frame = CGRectMake(0, 0, self.locationView.frame.size.width, self.locationView.frame.size.height);
+    _locationScrollView.backgroundColor = [UIColor clearColor];
+    _locationScrollView.font = [UIFont systemFontOfSize:18];
+    [self.locationView addSubview:_locationScrollView];
+    
+    _weatherDescScrollView = [TXScrollLabelView scrollWithTitle:@""
+                                                           type:TXScrollLabelViewTypeLeftRight
+                                                       velocity:1
+                                                        options:UIViewAnimationOptionCurveEaseInOut];
+    _weatherDescScrollView.frame = CGRectMake(0, 0, self.weatherDescView.frame.size.width, self.weatherDescView.frame.size.height);
+    _weatherDescScrollView.backgroundColor = [UIColor clearColor];
+    _weatherDescScrollView.font = [UIFont systemFontOfSize:16];
+    [self.weatherDescView addSubview:_weatherDescScrollView];
+}
+
+- (void)setLocation {
+    self.locationScrollView.scrollTitle = [UserManager sharedInstance].address;
+    [self.locationScrollView beginScrolling];
+}
+
+- (void)setWeatherDesc:(NSString *)str {
+    self.weatherDescScrollView.scrollTitle = str;
+    [self.weatherDescScrollView beginScrolling];
 }
 
 #pragma mark - UITableViewDatasource
