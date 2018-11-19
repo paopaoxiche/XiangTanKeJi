@@ -8,7 +8,8 @@
 
 #import "CommodityInfoViewController.h"
 #import "UIColor+Category.h"
-#import "UIApplication+HUD.h"
+#import "HomeModel.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface CommodityInfoViewController ()
 
@@ -24,14 +25,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self loadCommodityInfo];
-}
-
-- (void)loadCommodityInfo {
-    [UIApplication showBusyHUD];
-    self.commodityImageView.image = [UIImage imageNamed:@"CarWashAvatar"];
-    self.currentPriceLabel.text = [NSString stringWithFormat:@"¥%@", @"25.00"];
-    NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"¥%@", @"30.00"]];
+    if (self.model.imageUrl) {
+        [self.commodityImageView sd_setImageWithURL:[NSURL URLWithString:self.model.imageUrl]];
+    }
+    self.currentPriceLabel.text = [NSString stringWithFormat:@"¥%.2f", self.model.currentPrice];
+    NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"¥%.2f", self.model.originPrice]];
     UIColor *color = [UIColor rgbWithRed:169 green:177 blue:188];
     [attributedText addAttributes:@{
                                     NSFontAttributeName:[UIFont systemFontOfSize:13],
@@ -41,7 +39,7 @@
                                     }
                             range:NSMakeRange(0, attributedText.length)];
     self.orignalPriceLabel.attributedText = attributedText;
-    [UIApplication showBusyHUD];
+    self.nameLabel.text = [NSString stringWithFormat:@"%@ %@", self.model.commodityName, self.model.describe];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

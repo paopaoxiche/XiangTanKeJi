@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class RecommendCommodityModel;
+
 @interface CommodityInfoViewController : UIViewController
 
-@property (nonatomic, assign) NSInteger commodityID;
+@property (nonatomic, strong) RecommendCommodityModel *model;
 
 @end

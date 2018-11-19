@@ -285,7 +285,7 @@
 - (void)didSelectedCommodityCellWithIndex:(NSInteger)index {
     RecommendCommodityModel *model = self.commodityRecommendationVC.recommendWashCommodity[index];
     CommodityInfoViewController *infoVC = (CommodityInfoViewController *)[GlobalMethods viewControllerWithBuddleName:@"CarWash" vcIdentifier:@"CommodityInfoVC"];
-    infoVC.commodityID = model.dataID;
+    infoVC.model = model;
     infoVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:infoVC animated:NO];
 }
