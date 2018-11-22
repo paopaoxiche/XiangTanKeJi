@@ -16,7 +16,9 @@
 #import "UserInfoModel.h"
 #import "CarWashInfoModel.h"
 #import "GlobalMethods.h"
-#include "NetworkTools.h"
+#import "NetworkTools.h"
+#import "UIColor+Category.h"
+#import "UIImage+CreateByColor.h"
 
 @interface ProfileViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -49,7 +51,6 @@
     UITapGestureRecognizer *singleGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onHeaderViewClicked)];
     [_headerView addGestureRecognizer:singleGesture];
     
-    _tableView.tableFooterView = [[UIView alloc] init];
     [_tableView registerNib:[UINib nibWithNibName:@"ProfileCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"ProfileCellIdentifier"];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUserInfo:) name:@"UpdateUserInfo" object:nil];
@@ -144,6 +145,35 @@
     return cell;
 }
 
+- (UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    if (section == (self.dataSource.count - 1)) {
+        UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 240)];
+        UIButton *btnlogOut = [[UIButton alloc] initWithFrame:CGRectMake(0, 40, bottomView.frame.size.width, 40)];
+        btnlogOut.titleLabel.font = [UIFont systemFontOfSize:16];
+        [btnlogOut addTarget:self action:@selector(logOut) forControlEvents:UIControlEventTouchUpInside];
+        [btnlogOut setBackgroundImage:[UIImage fm_imageByColor:[UIColor whiteColor]] forState:UIControlStateNormal];
+        [btnlogOut setBackgroundImage:[UIImage fm_imageByColor:[UIColor rgbWithRed:246 green:247 blue:428]] forState:UIControlStateHighlighted];
+        [btnlogOut setTitle:@"退出" forState:UIControlStateNormal];
+        [btnlogOut.layer setMasksToBounds:YES];
+        [btnlogOut setTitleColor:[UIColor rgbWithRed:248 green:131 blue:131] forState:UIControlStateNormal];
+        [btnlogOut.layer setBorderWidth:0.5];
+        [btnlogOut.layer setBorderColor:[UIColor rgbWithRed:227 green:229 blue:233].CGColor];
+        [bottomView addSubview:btnlogOut];
+        
+        return bottomView;
+    }
+    
+    return [[UIView alloc] initWithFrame:CGRectZero];
+}
+
+- (void)logOut {
+    // 数据清除
+    [[UserManager sharedInstance] logout];
+    [UserManager sharedInstance].isLogin = NO;
+    // 跳转到登录界面
+    [self onHeaderViewClicked];
+}
+
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -166,7 +196,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     if (section == _dataSource.count - 1) {
-        return 20;
+        return 100;
     }
     
     return 0.1;

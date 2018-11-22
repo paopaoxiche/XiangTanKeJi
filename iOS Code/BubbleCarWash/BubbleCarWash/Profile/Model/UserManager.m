@@ -131,4 +131,13 @@
     }
 }
 
+- (void)logout {
+    _userInfo.type = UserTypeOwner;
+    _userInfo.code = @"";
+    _userInfo.token = @"";
+    _userInfo.regTime = @"";
+    _userInfo.userID = @"";
+    [self savaUserInfoWithPassword:@""];
+}
+
 @end

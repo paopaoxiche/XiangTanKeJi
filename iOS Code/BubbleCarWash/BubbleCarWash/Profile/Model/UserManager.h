@@ -48,5 +48,6 @@ typedef void(^CodeResultBlock)(NSInteger code);
 - (BOOL)isAutoLogin;
 - (void)autoLogin:(CodeResultBlock)block;
 - (void)obtainUserInfo;
+- (void)logout;
 
 @end

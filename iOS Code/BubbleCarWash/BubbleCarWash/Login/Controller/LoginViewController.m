@@ -40,7 +40,7 @@ static const NSInteger kSeconds = 120;
     
     _phoneNumberTextField.delegate = self;
     _verificationCodeTextField.delegate = self;
-    _type = 0;
+    _type = -1;
     _seconds = kSeconds;
     _verificationCodeButton.layer.borderColor = [UIColor rgbWithRed:248 green:155 blue:10].CGColor;
     
@@ -86,6 +86,10 @@ static const NSInteger kSeconds = 120;
     [self checkPhoneNumber];
     [self checkVerificationCode];
 
+    if (_type == -1) {
+        [self messageBox:@"请选择登录类型"];
+    }
+    
     [[NetworkTools sharedInstance] loginWithPhoneNumber:_phoneNumberTextField.text code:[_verificationCodeTextField.text integerValue] userType:_type success:^(NSDictionary *response, BOOL isSuccess) {
         long code = [response[@"code"] longValue];
         if (code == 200 || code == 10009) {

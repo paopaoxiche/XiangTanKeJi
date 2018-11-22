@@ -96,7 +96,7 @@
                                     <button opaque="NO" tag="10001" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y6x-U3-1Sr">
                                         <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Button" image="SingleSelection_Selected"/>
+                                        <state key="normal" title="Button" image="SingleSelection_Normal"/>
                                         <connections>
                                             <action selector="onSelectTypeBtnClicked:" destination="EO0-Dj-4ki" eventType="touchUpInside" id="ajw-5b-Qme"/>
                                         </connections>
@@ -237,6 +237,5 @@
     <resources>
         <image name="BackArrowBlack" width="9" height="16"/>
         <image name="SingleSelection_Normal" width="44" height="44"/>
-        <image name="SingleSelection_Selected" width="44" height="44"/>
     </resources>
 </document>
