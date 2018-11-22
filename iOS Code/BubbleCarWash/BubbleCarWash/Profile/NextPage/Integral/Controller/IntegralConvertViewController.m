@@ -77,9 +77,9 @@
     [UIApplication showBusyHUD];
     [model convertIntegralToCoupon:^(NSInteger code) {
         [UIApplication stopBusyHUD];
-//        if (code == -1) {
-//            <#statements#>
-//        }
+        if (code == -1) {
+            [self messageBox:@"兑换积分失败"];
+        }
     }];
 }
 

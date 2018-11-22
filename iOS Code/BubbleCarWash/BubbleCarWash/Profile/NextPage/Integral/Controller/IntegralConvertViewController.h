@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ParentViewController.h"
 
-@interface IntegralConvertViewController : UIViewController
+@interface IntegralConvertViewController : ParentViewController
 
 @end
