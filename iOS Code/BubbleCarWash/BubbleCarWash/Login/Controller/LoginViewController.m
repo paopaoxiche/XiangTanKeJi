@@ -44,8 +44,8 @@ static const NSInteger kSeconds = 120;
     _seconds = kSeconds;
     _verificationCodeButton.layer.borderColor = [UIColor rgbWithRed:248 green:155 blue:10].CGColor;
     
-    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"BackArrowBlack"] style:UIBarButtonItemStylePlain target:self action:@selector(backToSuperVC)];
-    self.navigationItem.leftBarButtonItem = backItem;
+    UITapGestureRecognizer *single = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backToSuperVC)];
+    [_backView addGestureRecognizer:single];
     
     NSString *phone = [UserManager sharedInstance].userInfo.phoneNumber;
     if (phone && ![phone isEqualToString:@""]) {

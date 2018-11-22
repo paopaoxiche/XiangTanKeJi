@@ -77,7 +77,8 @@
     [super viewWillLayoutSubviews];
     
     _mapView.frame = CGRectMake(0, 0, _containerView.frame.size.width, _containerView.frame.size.height);
-    _carWashListVC.view.frame = CGRectMake(12, _containerView.frame.size.height - 300, _mapView.frame.size.width - 24, 300);
+    CGFloat height = self.nearbyWashList.count < 3 ? 112 * self.nearbyWashList.count : 300;
+    self.carWashListVC.view.frame = CGRectMake(12, self.containerView.frame.size.height - height, self.mapView.frame.size.width - 24, height);
 }
 
 #pragma mark - Action Methods
@@ -93,6 +94,9 @@
         self.nearbyWashList = [result copy];
         self.carWashListVC.dataSource = self.nearbyWashList;
         [self addPointAnnotation];
+        
+        CGFloat height = self.nearbyWashList.count < 3 ? 112 * self.nearbyWashList.count : 300;
+        self.carWashListVC.view.frame = CGRectMake(12, self.containerView.frame.size.height - height, self.mapView.frame.size.width - 24, height);
     }];
 }
 

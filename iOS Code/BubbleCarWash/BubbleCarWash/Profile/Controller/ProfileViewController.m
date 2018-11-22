@@ -146,7 +146,7 @@
 }
 
 - (UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    if (section == (self.dataSource.count - 1)) {
+    if (section == (self.dataSource.count - 1) && [UserManager sharedInstance].isLogin) {
         UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 240)];
         UIButton *btnlogOut = [[UIButton alloc] initWithFrame:CGRectMake(0, 40, bottomView.frame.size.width, 40)];
         btnlogOut.titleLabel.font = [UIFont systemFontOfSize:16];
@@ -177,6 +177,10 @@
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (![UserManager sharedInstance].isLogin && indexPath.section == 0) {
+        [self messageBox:@"请先登录"];
+    }
+    
     ProfileItem *item = self.dataSource[indexPath.section][indexPath.row];
     if (![item.nextPageID isEqualToString:@""] && item.nextPageID) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Profile" bundle:[NSBundle mainBundle]];

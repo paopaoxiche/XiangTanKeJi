@@ -89,7 +89,9 @@
         } failed:^(NSError *error) {
             self.isLogin = NO;
         }]; // block
-    } // if
+    } else {
+        block(-1);
+    }
 } // func
 
 - (void)obtainUserInfo {

@@ -60,6 +60,7 @@
         NSArray *modelCertificationList = [[NSArray alloc] init];
         modelCertificationList = result[1][@"ModelCertificationList"];
         if (modelCertificationList.count <= 0) {
+            [UIApplication stopBusyHUD];
             [self messageBox:@"请先进行车型认证再进行下单" handle:^{
                 [self.navigationController popViewControllerAnimated:YES];
             }];
@@ -69,6 +70,7 @@
         NSArray *serviceList = [[NSArray alloc] init];
         serviceList = result[0][@"ServiceList"];
         if (serviceList.count <= 0) {
+            [UIApplication stopBusyHUD];
             [self messageBox:@"该洗车场无洗车服务" handle:^{
                 [self.navigationController popViewControllerAnimated:YES];
             }];

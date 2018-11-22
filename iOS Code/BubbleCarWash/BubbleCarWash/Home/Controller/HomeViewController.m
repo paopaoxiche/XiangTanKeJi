@@ -310,6 +310,7 @@
     if ([UserManager sharedInstance].userType == UserTypeOwner) {
         NearbyWashListModel *model = _nearbyWashList[indexPath.row];
         NearWashInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NearWashInfoIdentifier"];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.avatarUrl = model.avatarUrl;
         cell.name = model.carWashName;
         cell.lowestPrice = model.price;
@@ -322,17 +323,20 @@
     
 //    ExpensesRecordModel *model = _nearbyWashList[indexPath.row];
     RecentWashRecordCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RecentWashRecordIdentifier"];
-//    cell.imageName =
+//    cell.imageName = model.avatarUrl;
+//    cell.name = model.washName;
+//    cell.type =
     
     return cell;
 }
 
 #pragma mark - CommodityCellProtocol
 
-- (void)didSelectedCommodityCellWithIndex:(NSInteger)index {
-    RecommendCommodityModel *model = self.commodityRecommendationVC.recommendWashCommodity[index];
+- (void)didSelectedCommodityCellWithIndex:(NSInteger)index section:(NSInteger)section {
     CommodityInfoViewController *infoVC = (CommodityInfoViewController *)[GlobalMethods viewControllerWithBuddleName:@"CarWash" vcIdentifier:@"CommodityInfoVC"];
-    infoVC.model = model;
+    RecommendWashModel *washModel = self.commodityRecommendationVC.recommendWashCommodity[section];
+    RecommendCommodityModel *model = washModel.commodityList[index];
+        infoVC.model = model;
     infoVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:infoVC animated:NO];
 }

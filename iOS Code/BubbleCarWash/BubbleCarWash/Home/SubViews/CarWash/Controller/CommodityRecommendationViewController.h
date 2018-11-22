@@ -10,7 +10,7 @@
 
 @protocol CommodityCellProtocol <NSObject>
 
-- (void)didSelectedCommodityCellWithIndex:(NSInteger)index;
+- (void)didSelectedCommodityCellWithIndex:(NSInteger)index section:(NSInteger)section;
 
 @end
 

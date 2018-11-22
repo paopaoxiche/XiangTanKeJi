@@ -9,9 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @class RecommendCommodityModel;
+@class RecommendWashModel;
 
 @interface CommodityInfoViewController : UIViewController
 
 @property (nonatomic, strong) RecommendCommodityModel *model;
+@property (nonatomic, strong) RecommendWashModel *washModel;
 
 @end

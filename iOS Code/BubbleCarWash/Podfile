@@ -7,5 +7,4 @@ target 'BubbleCarWash' do
   pod 'SDWebImage'
   pod 'Masonry'
   pod 'MBProgressHUD'
-  pod 'TXScrollLabelView'
 end

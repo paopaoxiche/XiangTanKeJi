@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ParentViewController.h"
 
-@interface ProfileViewController : UIViewController
+@interface ProfileViewController : ParentViewController
 
 @end

@@ -19,7 +19,6 @@
 #import "CarWashInfoModel.h"
 #import "AuthenticationModel.h"
 #import "CertificationViewController.h"
-#import "UIApplication+HUD.h"
 
 @interface PersonalInfoViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -37,7 +36,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [UIApplication showBusyHUD];
     self.title = @"个人信息";
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setShadowImage:nil];
@@ -59,7 +57,6 @@
 }
 
 - (void)updateUserInfo:(NSNotification *)notification {
-    [UIApplication stopBusyHUD];
     [self.tableView reloadData];
 }
 

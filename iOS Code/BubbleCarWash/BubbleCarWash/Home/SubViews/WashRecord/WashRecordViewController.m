@@ -22,6 +22,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.title = @"洗车记录";
 }
 
 - (void)viewWillAppear:(BOOL)animated {

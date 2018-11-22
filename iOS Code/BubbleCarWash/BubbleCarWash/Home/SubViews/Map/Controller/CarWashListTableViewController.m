@@ -12,6 +12,7 @@
 #import "CarWashInfoViewController.h"
 #import "CarWashServiceViewController.h"
 #import "GlobalMethods.h"
+#import "UserManager.h"
 
 @interface CarWashListTableViewController () <CarWashListCellDelegate>
 
@@ -61,19 +62,30 @@
 #pragma mark - CarWashListCellDelegate
 
 - (void)titleViewCarWashListCell:(CarWashListCell *)cell {
-    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-    NearbyWashListModel *model = _dataSource[indexPath.section];
-    CarWashInfoViewController *vc = (CarWashInfoViewController *)[GlobalMethods viewControllerWithBuddleName:@"CarWash" vcIdentifier:@"CarWashInfoVC"];
-    vc.washID = model.washID;
-    [self.navigationController pushViewController:vc animated:YES];
+//    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+//    NearbyWashListModel *model = _dataSource[indexPath.section];
+//    CarWashInfoViewController *vc = (CarWashInfoViewController *)[GlobalMethods viewControllerWithBuddleName:@"CarWash" vcIdentifier:@"CarWashInfoVC"];
+//    vc.washID = model.washID;
+//    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)detailViewCarWashListCell:(CarWashListCell *)cell {
-    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-    NearbyWashListModel *model = _dataSource[indexPath.section];
-    CarWashServiceViewController *vc = (CarWashServiceViewController *)[GlobalMethods viewControllerWithBuddleName:@"CarWash" vcIdentifier:@"CarWashServiceVC"];
-    vc.washID = model.washID;
-    [self.navigationController pushViewController:vc animated:YES];
+    if ([UserManager sharedInstance].isLogin) {
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+        NearbyWashListModel *model = _dataSource[indexPath.section];
+        CarWashServiceViewController *vc = (CarWashServiceViewController *)[GlobalMethods viewControllerWithBuddleName:@"CarWash" vcIdentifier:@"CarWashServiceVC"];
+        vc.washID = model.washID;
+        [self.navigationController pushViewController:vc animated:YES];
+    } else {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示"
+                                                                       message:@"请先进行登录"
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *iKnow = [UIAlertAction actionWithTitle:@"我知道了"
+                                                        style:UIAlertActionStyleCancel
+                                                      handler:nil];
+        [alert addAction:iKnow];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
 }
 
 #pragma mark - UITableViewDelegate
