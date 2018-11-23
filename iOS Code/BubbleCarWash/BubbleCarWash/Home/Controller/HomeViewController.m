@@ -345,9 +345,14 @@
 
 - (void)didSelectedCommodityCellWithIndex:(NSInteger)index section:(NSInteger)section {
     CommodityInfoViewController *infoVC = (CommodityInfoViewController *)[GlobalMethods viewControllerWithBuddleName:@"CarWash" vcIdentifier:@"CommodityInfoVC"];
-    RecommendWashModel *washModel = self.commodityRecommendationVC.recommendWashCommodity[section];
-    RecommendCommodityModel *model = washModel.commodityList[index];
+    if ([UserManager sharedInstance].userType == UserTypeOwner) {
+        RecommendWashModel *washModel = self.commodityRecommendationVC.recommendWashCommodity[section];
+        RecommendCommodityModel *model = washModel.commodityList[index];
         infoVC.model = model;
+    } else {
+        RecommendCommodityModel *model = self.commodityRecommendationVC.recommendWashCommodity[index];
+        infoVC.model = model;
+    }
     infoVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:infoVC animated:NO];
 }

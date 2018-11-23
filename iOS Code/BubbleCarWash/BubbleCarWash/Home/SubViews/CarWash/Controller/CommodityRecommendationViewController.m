@@ -117,11 +117,16 @@
 #pragma mark - UICollectionViewDelegate
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    RecommendWashModel *model = self.recommendWashCommodity[indexPath.section];
-    if (indexPath.item >= model.commodityList.count) {
-        return;
+    if ([UserManager sharedInstance].userType == UserTypeOwner) {
+        RecommendWashModel *model = self.recommendWashCommodity[indexPath.section];
+        if (indexPath.item >= model.commodityList.count) {
+            return;
+        }
+    } else {
+        if (indexPath.item  >= self.recommendWashCommodity.count) {
+            return;
+        }
     }
-    
     if (_delegate) {
         [_delegate didSelectedCommodityCellWithIndex:indexPath.item section:indexPath.section];
     }
