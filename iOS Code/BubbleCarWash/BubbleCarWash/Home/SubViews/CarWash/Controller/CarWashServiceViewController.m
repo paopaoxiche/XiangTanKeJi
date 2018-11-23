@@ -17,6 +17,7 @@
 #import "UIColor+Category.h"
 #import "PaymentViewController.h"
 #import "UIApplication+HUD.h"
+#import "CouponListModel.h"
 
 @interface CarWashServiceViewController () <CarWashServiceCellDelegate, CommodityCellDelegate,
     CertificationCellDelegate, UITableViewDataSource, UITableViewDelegate>
@@ -29,6 +30,7 @@
 @property (nonatomic, strong) NSIndexPath *carTypeSelectedIndexPath;
 @property (nonatomic, assign) CGFloat totalAmount;
 @property (nonatomic, copy) NSMutableArray *commoditys;
+@property (nonatomic, strong) NSMutableArray *coupons;
 
 @end
 
@@ -46,7 +48,10 @@
     _commoditys = [[NSMutableArray alloc] initWithCapacity:0];
     _totalAmount = 0;
     
-    NSArray *colors = @[(id)[UIColor rgbByHexStr:@"ffffff" alpha:0.0].CGColor, (id)[UIColor rgbByHexStr:@"ffffff" alpha:1.0].CGColor];
+    NSArray *colors = @[
+                        (id)[UIColor rgbByHexStr:@"ffffff" alpha:0.0].CGColor,
+                        (id)[UIColor rgbByHexStr:@"ffffff" alpha:1.0].CGColor
+                        ];
     [GlobalMethods setTransparentGradientColor:colors
                                     startPoint:CGPointMake(0, 0)
                                       endPoint:CGPointMake(0, 1)
@@ -56,27 +61,31 @@
 - (void)setWashID:(NSInteger)washID {
     _washID = washID;
     [UIApplication showBusyHUD];
+    
+    dispatch_group_t group = dispatch_group_create();
+    dispatch_group_enter(group);
+    __block BOOL isSuccess = NO;
+    __block NSString *hint = @"";
     [CarWashServiceModel loadCarWashServiceData:washID result:^(NSArray *result) {
         NSArray *modelCertificationList = [[NSArray alloc] init];
         modelCertificationList = result[1][@"ModelCertificationList"];
         if (modelCertificationList.count <= 0) {
-            [UIApplication stopBusyHUD];
-            [self messageBox:@"请先进行车型认证再进行下单" handle:^{
-                [self.navigationController popViewControllerAnimated:YES];
-            }];
+            isSuccess = NO;
+            hint = @"请先进行车型认证再进行下单";
+            dispatch_group_leave(group);
             return;
         }
         
         NSArray *serviceList = [[NSArray alloc] init];
         serviceList = result[0][@"ServiceList"];
         if (serviceList.count <= 0) {
-            [UIApplication stopBusyHUD];
-            [self messageBox:@"该洗车场无洗车服务" handle:^{
-                [self.navigationController popViewControllerAnimated:YES];
-            }];
+            isSuccess = NO;
+            hint = @"该洗车场无洗车服务";
+            dispatch_group_leave(group);
             return;
         }
         
+        isSuccess = YES;
         [self.dataSource addObject:serviceList];
         [self.dataSource addObject:modelCertificationList];
         
@@ -87,9 +96,25 @@
         }
         
         [self calculatePaymentAmount];
-        [UIApplication stopBusyHUD];
-        [self.tableView reloadData];
+        dispatch_group_leave(group);
     }];
+    
+    dispatch_group_enter(group);
+    [CouponListModel loadMyCouponList:^(NSArray *result) {
+        self.coupons = [result copy];
+        dispatch_group_leave(group);
+    }];
+    
+    dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+        [UIApplication stopBusyHUD];
+        if (isSuccess) {
+            [self.tableView reloadData];
+        } else {
+            [self messageBox:hint handle:^{
+                [self.navigationController popViewControllerAnimated:YES];
+            }];
+        }
+    });
 }
 
 - (IBAction)onPayButtonClicked:(id)sender {

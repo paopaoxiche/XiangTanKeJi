@@ -37,6 +37,7 @@
     [self.fiveCarWashBtn setImage:[UIImage imageNamed:@"SingleSelection_Normal"]
                          forState:UIControlStateNormal];
     [self.fiveCarWashBtn setTitle:@"五元洗车" forState:UIControlStateNormal];
+    [self.fiveCarWashBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [self.fiveCarWashBtn addTarget:self
                             action:@selector(filterCarWashList)
                   forControlEvents:UIControlEventTouchUpInside];
@@ -63,7 +64,7 @@
         [UIApplication stopBusyHUD];
         self.nearbyWashList = [result copy];
         self.carWashListVC.dataSource = self.nearbyWashList;
-        [self addPointAnnotation];
+        [self addOrRemovePointAnnotation:YES];
     }];
 }
 
@@ -89,11 +90,14 @@
     [self.fiveCarWashBtn setImage:[UIImage imageNamed:(isSelected ? @"SingleSelection_Normal" : @"SingleSelection_Selected")]
                          forState:UIControlStateNormal];
     [UIApplication showBusyHUD];
-    [HomeDataModel loadNearbyWashList:[UserManager sharedInstance].location isMap:YES isSearch:NO result:^(NSArray *result) {
+    // 移除之前的Point
+    [self addOrRemovePointAnnotation:NO];
+    
+    [HomeDataModel loadNearbyWashList:[UserManager sharedInstance].location isMap:YES isSearch:YES result:^(NSArray *result) {
         [UIApplication stopBusyHUD];
         self.nearbyWashList = [result copy];
         self.carWashListVC.dataSource = self.nearbyWashList;
-        [self addPointAnnotation];
+        [self addOrRemovePointAnnotation:YES];
         
         CGFloat height = self.nearbyWashList.count < 3 ? 112 * self.nearbyWashList.count : 300;
         self.carWashListVC.view.frame = CGRectMake(12, self.containerView.frame.size.height - height, self.mapView.frame.size.width - 24, height);
@@ -102,11 +106,11 @@
 
 #pragma mark - Map Methods
 
-- (void)addPointAnnotation {
+- (void)addOrRemovePointAnnotation:(BOOL)isAdd {
     for (NearbyWashListModel *model in _nearbyWashList) {
         MAPointAnnotation *pointAnnotation = [[MAPointAnnotation alloc] init];
         pointAnnotation.coordinate = CLLocationCoordinate2DMake(model.location.lat, model.location.lng);
-        [_mapView addAnnotation:pointAnnotation];
+        isAdd ? [_mapView addAnnotation:pointAnnotation] : [_mapView removeAnnotation:pointAnnotation];
     }
 }
 

@@ -62,3 +62,17 @@ typedef void(^ResultBlock)(NSArray *result);
 - (instancetype)initWithDic:(NSDictionary *)dic;
 
 @end
+
+@interface CarWashRecordModel : NSObject
+
+@property (nonatomic, assign) NSInteger recordID;
+@property (nonatomic, copy) NSString *time;
+@property (nonatomic, copy) NSString *carType;
+@property (nonatomic, copy) NSString *avatarUrl;
+@property (nonatomic, copy) NSString *nickName;
+@property (nonatomic, copy) NSString *price;
+@property (nonatomic, copy) NSString *desc;
+
+- (instancetype)initWithDic:(NSDictionary *)dic;
+
+@end

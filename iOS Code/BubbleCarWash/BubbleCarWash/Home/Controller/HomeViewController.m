@@ -76,7 +76,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(loadRecentWashRecord)
+                                                 name:@"UpdateUserInfo"
+                                               object:nil];
     
     _nearWashTableView.layer.cornerRadius = 4;
     _isUpdateMearByWashList = YES;
@@ -97,12 +101,13 @@
         if (code == 401) {
             UIViewController *loginVC = [GlobalMethods viewControllerWithBuddleName:@"Login" vcIdentifier:@"LoginVC"];
             [self presentViewController:loginVC animated:YES completion:nil];
-        } else {
-            if ([UserManager sharedInstance].userType ==  UserTypeOwner) {
-                [HomeDataModel loadRecommendWashCommodity:^(NSArray *result) {
-                    self.commodityRecommendationVC.recommendWashCommodity = result;
-                }];
-            }
+        }
+        
+        if ([UserManager sharedInstance].userType == UserTypeOwner) {
+            [HomeDataModel loadRecommendWashCommodity:^(NSArray *result) {
+                self.commodityRecommendationVC.recommendWashCommodity = result;
+                [self.view layoutIfNeeded];
+            }];
         }
     }];
     
@@ -119,8 +124,6 @@
     self.extendedLayoutIncludesOpaqueBars = NO;
     self.modalPresentationCapturesStatusBarAppearance = NO;
     self.automaticallyAdjustsScrollViewInsets = NO;
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadRecentWashRecord) name:@"UpdateUserInfo" object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -181,6 +184,9 @@
 }
 
 - (void)loadRecentWashRecord {
+    if ([UserManager sharedInstance].userType == UserTypeOwner) {
+        return;
+    }
     _hintLabel.text = @"近期洗车列表";
     [self loadCarWashCommodityList];
     
@@ -213,8 +219,11 @@
         } else {
             self.commodityRecommendationVC.recommendWashCommodity = @[];
         }
+        
+        [self.view layoutIfNeeded];
     } failed:^(NSError *error) {
         self.commodityRecommendationVC.recommendWashCommodity = @[];
+        [self.view layoutIfNeeded];
     }];
 }
 
@@ -321,11 +330,13 @@
         return cell;
     }
     
-//    ExpensesRecordModel *model = _nearbyWashList[indexPath.row];
+    CarWashRecordModel *model = _nearbyWashList[indexPath.row];
     RecentWashRecordCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RecentWashRecordIdentifier"];
-//    cell.imageName = model.avatarUrl;
-//    cell.name = model.washName;
-//    cell.type =
+    cell.imageName = model.avatarUrl;
+    cell.name = model.nickName;
+    cell.type = model.carType;
+    cell.price = model.price;
+    cell.time = model.time;
     
     return cell;
 }

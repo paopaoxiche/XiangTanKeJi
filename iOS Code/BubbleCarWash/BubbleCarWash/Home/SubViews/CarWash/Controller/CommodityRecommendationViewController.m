@@ -58,6 +58,10 @@
 - (void)setRecommendWashCommodity:(NSArray *)recommendWashCommodity {
     _recommendWashCommodity = recommendWashCommodity;
     
+    if (_recommendWashCommodity.count <= 0) {
+        return;
+    }
+    
     BOOL isCarWash = [UserManager sharedInstance].userType == UserTypeCarWash;
     if (isCarWash) {
         _pageControl.hidden = YES;
@@ -68,6 +72,9 @@
         if (isEmpty) {
             _emptyLabel.text = @"暂无商品可展示，请添加商品";
         }
+    } else {
+        RecommendWashModel *model = _recommendWashCommodity[0];
+        _recommendNameLabel.text = [NSString stringWithFormat:@"%@商品推荐", model.carWashName];
     }
     
     _pageControl.numberOfPages = recommendWashCommodity.count;
@@ -118,6 +125,36 @@
     if (_delegate) {
         [_delegate didSelectedCommodityCellWithIndex:indexPath.item section:indexPath.section];
     }
+}
+
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    [self setScrollView];
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    [self setScrollView];
+}
+
+- (void)setScrollView {
+    CGFloat distance = self.collectionView.frame.size.width;
+    CGFloat offsetX = self.collectionView.contentOffset.x;
+    CGFloat width = self.collectionView.contentSize.width;
+    int offset = offsetX + distance * 0.5;
+    int viewIndex = offset / distance;              // viewIndex滑动后所处的第一个小视频索引
+    int totalIndex = width / distance;              // 计算总的店数
+    if (viewIndex < 0) {
+        viewIndex = 0;
+    }
+    if (viewIndex > totalIndex) {
+        viewIndex = totalIndex;
+    }
+    offset = viewIndex * distance;
+    [self.collectionView setContentOffset:CGPointMake(offset, 0) animated:YES];
+    self.pageControl.currentPage = viewIndex;
+    RecommendWashModel *model = _recommendWashCommodity[viewIndex];
+    _recommendNameLabel.text = [NSString stringWithFormat:@"%@商品推荐", model.carWashName];
 }
 
 @end

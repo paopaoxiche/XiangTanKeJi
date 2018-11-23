@@ -13,18 +13,18 @@ typedef NS_ENUM(NSInteger, CouponPlatformType) {
     CouponPlatformTypeMerchant      // 商家券
 };
 
-typedef void(^ResultBlock)(NSArray *result);
+typedef void(^CouponResultBlock)(NSArray *result);
 
 @interface CouponListModel : NSObject
 
 /**
  *  获取我的优惠券
  */
-+ (void)loadMyCouponList:(ResultBlock)result;
++ (void)loadMyCouponList:(CouponResultBlock)result;
 /**
  *  获取我可兑换的优惠券
  */
-+ (void)loadRedeemableCouponList:(ResultBlock)result;
++ (void)loadRedeemableCouponList:(CouponResultBlock)result;
 
 @end
 

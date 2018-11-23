@@ -18,16 +18,15 @@
 
 @implementation CouponListModel
 
-+ (void)loadMyCouponList:(ResultBlock)result {
++ (void)loadMyCouponList:(CouponResultBlock)result {
     [self loadCouponList:NO reslut:result];
 }
 
-+ (void)loadRedeemableCouponList:(ResultBlock)result {
++ (void)loadRedeemableCouponList:(CouponResultBlock)result {
     [self loadCouponList:YES reslut:result];
 }
 
-+ (void)loadCouponList:(BOOL)isRedeemable reslut:(ResultBlock)result {
-    ;
++ (void)loadCouponList:(BOOL)isRedeemable reslut:(CouponResultBlock)result {
     [[NetworkTools sharedInstance] obtainMyCouponList:isRedeemable success:^(NSDictionary *response, BOOL isSuccess) {
         NSInteger code = [[response objectForKey:@"code"] integerValue];
         if (code == 200 && [response objectForKey:@"data"] != [NSNull null]) {

@@ -56,6 +56,8 @@
     _imagePicker.delegate = self;
     
     if (_userType == UserTypeOwner) {
+        _headerView.hidden = YES;
+        _tableViewTopConstraint.constant = 0;
         [UIApplication showBusyHUD];
         if (_state == CertificationStateAdd) {
             [AuthenticationModel loadCarTypeList:^(NSArray *result) {

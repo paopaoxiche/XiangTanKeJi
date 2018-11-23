@@ -10,6 +10,7 @@
 #import "UserManager.h"
 #import "NetworkTools.h"
 #import "CarWashInfoModel.h"
+#import "GlobalMethods.h"
 
 @interface ExpensesRecordListModel ()
 
@@ -45,7 +46,7 @@
             NSDictionary *dataArr = [response objectForKey:@"data"];
             NSMutableArray *recordList = [NSMutableArray arrayWithCapacity:dataArr.count];
             for (NSDictionary *dic in dataArr) {
-                ExpensesRecordModel *model = [[ExpensesRecordModel alloc] initWithDic:dic];
+                CarWashRecordModel *model = [[CarWashRecordModel alloc] initWithDic:dic];
                 [recordList addObject:model];
             }
             
@@ -153,6 +154,29 @@
         _name = [dic objectForKey:@"commodityName"];
         _currentPrice = [dic objectForKey:@"price"];
         //_originalPrice = [dic objectForKey:@""];
+    }
+    
+    return self;
+}
+
+@end
+
+@interface CarWashRecordModel ()
+
+@end
+
+@implementation CarWashRecordModel
+
+- (instancetype)initWithDic:(NSDictionary *)dic {
+    self = [super init];
+    if (self) {
+        _recordID = [[dic objectForKey:@"id"] integerValue];
+        _time = [GlobalMethods convertDate:[dic objectForKey:@"time"] outputFormat:@"yyyy-MM-dd"];
+        _avatarUrl = [dic objectForKey:@"avatar"];
+        _carType = [dic objectForKey:@"carType"];
+        _nickName = [dic objectForKey:@"nickname"];
+        _price = [dic objectForKey:@"payPrice"];
+        _desc = [dic objectForKey:@"carDesc"];
     }
     
     return self;
