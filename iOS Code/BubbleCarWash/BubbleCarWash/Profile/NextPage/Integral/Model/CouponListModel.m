@@ -118,6 +118,7 @@
     if (self) {
         _couponType = [[dic objectForKey:@"couponType"] unsignedIntegerValue];
         _discount = [dic objectForKey:@"discount"];
+        _endTime = [[dic objectForKey:@"endDate"] longLongValue];
         _validityPeroid = [NSString stringWithFormat:@"有效期至%@", [dic objectForKey:@"endDate"]];
         _couponID = [[dic objectForKey:@"id"] unsignedIntegerValue];
         _price = [NSString stringWithFormat:@"%@", [dic objectForKey:@"price"]];
@@ -125,6 +126,14 @@
         _title = [dic objectForKey:@"title"];
         _avatarUrl = [dic objectForKey:@"washHeader"];
         _washName = [dic objectForKey:@"washName"];
+        
+        if (_title) {
+            NSRange startRange = [_title rangeOfString:@"满"];
+            NSRange endRange = [_title rangeOfString:@"减"];
+            NSRange range = NSMakeRange(startRange.location + startRange.length, endRange.location - startRange.location - startRange.length);
+            NSString *result = [_title substringWithRange:range];
+            _limitPrice = [result floatValue];
+        }
     }
     
     return self;

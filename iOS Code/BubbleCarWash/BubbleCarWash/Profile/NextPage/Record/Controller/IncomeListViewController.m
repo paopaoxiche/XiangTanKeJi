@@ -30,6 +30,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.title = @"收入列表";
     _tableView.rowHeight = 52;
     
     [UIApplication showBusyHUD];
@@ -60,6 +61,11 @@
         [UIApplication stopBusyHUD];
         [self messageBox:@"获取收入列表失败"];
     }];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 - (void)setupHeaderView {

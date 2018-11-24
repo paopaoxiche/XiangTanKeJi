@@ -1201,6 +1201,7 @@
 				65FC33E920E13577006DE3F1 /* Frameworks */,
 				65FC33EA20E13577006DE3F1 /* Resources */,
 				DB4C1590B13D23DE052B5284 /* [CP] Copy Pods Resources */,
+				D1BD9CDC3A6BD974EFA1760B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1271,6 +1272,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		D1BD9CDC3A6BD974EFA1760B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BubbleCarWash/Pods-BubbleCarWash-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		DB4C1590B13D23DE052B5284 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1282,7 +1298,7 @@
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AMap.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

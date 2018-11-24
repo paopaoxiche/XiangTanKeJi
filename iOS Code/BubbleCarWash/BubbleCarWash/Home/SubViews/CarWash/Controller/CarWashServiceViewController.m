@@ -31,6 +31,8 @@
 @property (nonatomic, assign) CGFloat totalAmount;
 @property (nonatomic, copy) NSMutableArray *commoditys;
 @property (nonatomic, strong) NSMutableArray *coupons;
+@property (nonatomic, assign) CGFloat newServicePrice;
+@property (nonatomic, assign) NSInteger couponIndex;
 
 @end
 
@@ -47,6 +49,8 @@
     _carTypeSelectedIndexPath = [NSIndexPath indexPathForRow:0 inSection:1];
     _commoditys = [[NSMutableArray alloc] initWithCapacity:0];
     _totalAmount = 0;
+    _newServicePrice = 0;
+    _couponIndex = -1;
     
     NSArray *colors = @[
                         (id)[UIColor rgbByHexStr:@"ffffff" alpha:0.0].CGColor,
@@ -95,7 +99,6 @@
             [self.dataSource addObject:commodityList];
         }
         
-        [self calculatePaymentAmount];
         dispatch_group_leave(group);
     }];
     
@@ -108,6 +111,7 @@
     dispatch_group_notify(group, dispatch_get_main_queue(), ^{
         [UIApplication stopBusyHUD];
         if (isSuccess) {
+            [self calculatePaymentAmount];
             [self.tableView reloadData];
         } else {
             [self messageBox:hint handle:^{
@@ -148,6 +152,39 @@
     NSArray *servicelist = _dataSource[0];
     ServiceModel *model =  servicelist[_serviceSelectedIndexPath.row];
     _totalAmount = model.price;
+    
+    // 判断是否能使用优惠券
+    NSInteger index = -1;
+    CGFloat value = 0;
+    NSTimeInterval interval = [[NSDate date] timeIntervalSince1970];
+    long long currrentTime = interval * 1000;
+    for (int i = 0; i < self.coupons.count; i++) {
+        CGFloat price = 0;
+        MyCouponModel *newModel = self.coupons[i];
+        // 在券有效的前提下，优先减最多的（开始时间小于当前时间，结束时间大于当前时间）
+        if (currrentTime < newModel.endTime && _totalAmount >= newModel.limitPrice) {
+            price = [newModel.price floatValue];
+        }
+        
+        // 券相等的情况下，时间小的先使用
+        if (price == value) {
+            MyCouponModel *oldModel = self.coupons[index];
+            if (oldModel.endTime < newModel.endTime) {
+                price = 0;
+            }
+        }
+        
+        if (price > 0) {
+            value = price;
+            index = i;
+        }
+    }
+    
+    if (value > 0) {
+        _totalAmount -= value;
+        _couponIndex = index;
+    }
+    
     if (_dataSource.count > 2 && _commoditys.count > 0) {
         for (RecommendCommodityModel *model in _commoditys) {
             _totalAmount += model.currentPrice;
@@ -172,13 +209,20 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSArray *list = _dataSource[indexPath.section];
     if (indexPath.section == 0) {
+        BOOL hasCoupon = _couponIndex >= 0;
         ServiceModel *model =  list[indexPath.row];
         CarWashServiceCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CarWashServiceIdentifier" forIndexPath:indexPath];
         cell.delegate = self;
         cell.name = model.carWashName;
         cell.desc = model.desc;
-        cell.couponPrice = model.price;
-        cell.hasCoupon = NO;
+        if (hasCoupon) {
+            MyCouponModel *couponModel = _coupons[_couponIndex];
+            cell.originalPrice = model.price;
+            cell.couponPrice = model.price - [couponModel.price floatValue];
+        } else {
+            cell.couponPrice = model.price;
+        }
+        cell.hasCoupon = hasCoupon;
         cell.selectBtnImageName =  indexPath.row == 0 ? @"SingleSelection_Selected" : @"SingleSelection_Normal";
         
         return cell;

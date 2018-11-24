@@ -46,6 +46,11 @@ static const NSUInteger kContactMinLenght = 4;
     [self.view addGestureRecognizer:tap];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+}
+
 #pragma mark -
 
 - (void)send {

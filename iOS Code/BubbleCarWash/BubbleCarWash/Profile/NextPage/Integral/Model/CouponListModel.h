@@ -6,7 +6,7 @@
 //  Copyright © 2018年 Sunshine Girl. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 typedef NS_ENUM(NSInteger, CouponPlatformType) {
     CouponPlatformTypeGeneral,      // 平台通用券
@@ -57,6 +57,10 @@ typedef void(^CodeResultBlock)(NSInteger code);
 
 @interface MyCouponModel : NSObject
 
+/// 优惠券条件值
+@property (nonatomic, assign) CGFloat limitPrice;
+/// 结束时间
+@property (nonatomic, assign) long long endTime;
 /// 有效期
 @property (nonatomic, copy) NSString *validityPeroid;
 /// 优惠券金额

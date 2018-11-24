@@ -26,6 +26,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.title = @"修改昵称";
     _nicknameTextField.text = [UserManager sharedInstance].userInfo.nickName;
     if (IS_IPHONE_X) {
         _navigationHeightConstraint.constant = 64 + 24;

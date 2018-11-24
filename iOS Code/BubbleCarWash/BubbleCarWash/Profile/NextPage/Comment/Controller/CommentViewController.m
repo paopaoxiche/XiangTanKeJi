@@ -24,11 +24,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.title = @"评价";
     _commentList = [[NSArray alloc] init];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
     
     [UIApplication showBusyHUD];
     BOOL isOwner = [UserManager sharedInstance].userType == UserTypeOwner;

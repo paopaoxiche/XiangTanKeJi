@@ -21,6 +21,12 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="axy-m2-SgP">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="184"/>
                                 <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="个人" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7UZ-ZD-mCx">
+                                        <rect key="frame" x="169.5" y="40" width="35" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="HeaderBg" translatesAutoresizingMaskIntoConstraints="NO" id="4Bu-pO-YPe">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="184"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -69,11 +75,13 @@
                                     <constraint firstItem="s2R-7J-mmM" firstAttribute="leading" secondItem="8EL-2U-kuA" secondAttribute="trailing" constant="20" id="RBf-HR-uVs"/>
                                     <constraint firstItem="4Bu-pO-YPe" firstAttribute="leading" secondItem="axy-m2-SgP" secondAttribute="leading" id="X8I-q8-j1V"/>
                                     <constraint firstItem="umX-yz-836" firstAttribute="top" secondItem="axy-m2-SgP" secondAttribute="top" constant="86" id="aaf-IY-afI"/>
+                                    <constraint firstItem="7UZ-ZD-mCx" firstAttribute="top" secondItem="axy-m2-SgP" secondAttribute="top" constant="40" id="drj-Gl-vYv"/>
                                     <constraint firstItem="umX-yz-836" firstAttribute="leading" secondItem="8EL-2U-kuA" secondAttribute="trailing" constant="20" id="fSN-i9-oxC"/>
                                     <constraint firstItem="4Bu-pO-YPe" firstAttribute="top" secondItem="axy-m2-SgP" secondAttribute="top" id="g48-4w-fiY"/>
                                     <constraint firstAttribute="bottom" secondItem="4Bu-pO-YPe" secondAttribute="bottom" id="iiO-IJ-61y"/>
                                     <constraint firstAttribute="height" constant="184" id="nJU-kK-NG6"/>
                                     <constraint firstItem="8EL-2U-kuA" firstAttribute="top" secondItem="axy-m2-SgP" secondAttribute="top" constant="72" id="sF6-fh-jCD"/>
+                                    <constraint firstItem="7UZ-ZD-mCx" firstAttribute="centerX" secondItem="axy-m2-SgP" secondAttribute="centerX" id="u36-dN-F7B"/>
                                     <constraint firstItem="hHh-cw-0v5" firstAttribute="centerY" secondItem="s2R-7J-mmM" secondAttribute="centerY" id="vc2-eH-aEL"/>
                                     <constraint firstItem="hHh-cw-0v5" firstAttribute="leading" secondItem="s2R-7J-mmM" secondAttribute="trailing" constant="6" id="wHc-bU-8NN"/>
                                 </constraints>

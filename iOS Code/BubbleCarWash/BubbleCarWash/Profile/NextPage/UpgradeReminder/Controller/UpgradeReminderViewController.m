@@ -22,6 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.title = @"升级提醒";
     [UIApplication showBusyHUD];
     [UpgradeReminderModel loadUpgradeInfo:^(id upgradeInfo, BOOL isSuccess) {
         [UIApplication stopBusyHUD];
@@ -38,6 +39,11 @@
         self.upgradeImageView.image = [UIImage imageNamed:@"NoNewVersion"];
         self.upgradeLabel.text = @"当前已是最新版本";
     }];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 @end

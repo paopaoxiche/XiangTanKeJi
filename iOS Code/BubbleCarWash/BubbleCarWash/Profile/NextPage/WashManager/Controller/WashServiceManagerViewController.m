@@ -41,6 +41,11 @@
     [self loadCarWashService];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+}
+
 - (void)loadCarWashService {
     [UIApplication showBusyHUD];
     [[NetworkTools sharedInstance] obtainCarWashServiceList:[UserManager sharedInstance].carWashInfo.washID success:^(NSDictionary *response, BOOL isSuccess) {

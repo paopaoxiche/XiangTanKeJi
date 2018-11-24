@@ -29,6 +29,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     
+    self.title = @"创建服务";
     self.model = nil;
 }
 

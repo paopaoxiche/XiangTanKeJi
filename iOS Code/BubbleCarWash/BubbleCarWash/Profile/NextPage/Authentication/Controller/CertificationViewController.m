@@ -60,6 +60,7 @@
         _tableViewTopConstraint.constant = 0;
         [UIApplication showBusyHUD];
         if (_state == CertificationStateAdd) {
+            self.title = @"新增车型";
             [AuthenticationModel loadCarTypeList:^(NSArray *result) {
                 [UIApplication stopBusyHUD];
                 self.dataSource = result;
@@ -68,6 +69,7 @@
             self.carTypeIndexPath = [NSIndexPath indexPathForRow:1 inSection:0];
             self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"提交" style:UIBarButtonItemStylePlain target:self action:@selector(onSubmitBtnClicked:)];
         } else {
+            self.title = @"车型";
             [AuthenticationModel loadCarModelDetailList:_dataID result:^(CarModelDetailModel *result) {
                 [UIApplication stopBusyHUD];
                 self.modelDetail = result;
@@ -80,6 +82,7 @@
         } // else
     } else {
         if (_state == CertificationStateAdd) {
+            self.title = @"新增工商认证";
             _tableViewTopConstraint.constant = 135;
             _headerView.hidden = NO;
             _registerWash = [[RegisterWashParam alloc] init];
@@ -97,6 +100,7 @@
                 [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateLocation:) name:@"UpdateLocation" object:nil];
             }
         } else {
+            self.title = @"工商认证";
             _tableViewTopConstraint.constant = 0;
             _headerView.hidden = YES;
             [UIApplication showBusyHUD];

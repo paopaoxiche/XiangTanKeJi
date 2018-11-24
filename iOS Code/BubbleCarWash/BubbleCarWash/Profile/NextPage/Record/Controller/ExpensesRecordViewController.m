@@ -25,12 +25,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.title = @"消费记录";
     [UIApplication showBusyHUD];
     [ExpensesRecordListModel loadExpensesRecordList:^(NSArray *result) {
         [UIApplication stopBusyHUD];
         self.recordList = result;
         [self.tableView reloadData];
     }];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 #pragma mark - UITableViewDatasource

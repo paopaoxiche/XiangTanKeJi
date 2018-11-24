@@ -25,11 +25,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.title = @"编辑运营状态";
     self.indexPath = [NSIndexPath indexPathForRow:[self selectedIndex] inSection:0];
     self.tableView.backgroundColor = [UIColor rgbWithRed:244 green:244 blue:244];
     self.tableView.tableFooterView = [[UIView alloc] init];
     self.tableView.bounces = NO;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"确定" style:UIBarButtonItemStylePlain target:self action:@selector(updateTradeState)];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 - (void)updateTradeState {

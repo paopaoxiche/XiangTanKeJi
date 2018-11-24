@@ -25,6 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.title = @"商品详情";
     if (self.model.imageUrl) {
         [self.commodityImageView sd_setImageWithURL:[NSURL URLWithString:self.model.imageUrl]];
     }

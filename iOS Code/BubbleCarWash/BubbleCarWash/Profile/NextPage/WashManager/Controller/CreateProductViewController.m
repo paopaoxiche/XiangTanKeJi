@@ -34,6 +34,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     
+    self.title = @"创建商品";
     self.model = nil;
 }
 

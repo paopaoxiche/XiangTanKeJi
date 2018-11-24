@@ -22,6 +22,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"评价";
 }
 
 - (IBAction)onStartBtnClicked:(id)sender {
