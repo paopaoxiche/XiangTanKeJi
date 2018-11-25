@@ -24,7 +24,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"评价";
+    self.title = [UserManager sharedInstance].userType == UserTypeOwner ? @"我的评价" : @"评价";
     self.tableView.tableFooterView = [[UIView alloc] init];
     _commentList = [[NSArray alloc] init];
     

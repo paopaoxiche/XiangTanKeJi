@@ -19,7 +19,7 @@
     param.lat = [NSNumber numberWithFloat:location.lat];
     
     if (isMap) {
-        param.count = 0;
+        param.count = 100;
         param.showAll = 1;
         param.radius = 2;
     }

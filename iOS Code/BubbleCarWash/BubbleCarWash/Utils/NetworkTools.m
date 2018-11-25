@@ -140,8 +140,8 @@ static const NSTimeInterval kTimeOutInterval = 6.0f;
                      success:(SuccessBlock)success
                       failed:(FailedBlock)failed {
     NSDictionary *params = @{@"phone": phoneNumber,
-                             @"code": [NSNumber numberWithUnsignedInteger:code],
-                             @"type": [NSNumber numberWithUnsignedInteger:type]};
+                             @"code": [NSString stringWithFormat:@"%li", code],
+                             @"type": [NSString stringWithFormat:@"%li", type]};
     [self GET:@"user/login" parameters:params success:success failure:failed];
 }
 

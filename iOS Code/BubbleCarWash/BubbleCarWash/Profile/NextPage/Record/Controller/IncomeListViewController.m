@@ -10,10 +10,11 @@
 #import "IncomeListCell.h"
 #import "NetworkTools.h"
 #import "IncomeListModel.h"
-#include "UserManager.h"
-#include "CarWashInfoModel.h"
+#import "UserManager.h"
+#import "CarWashInfoModel.h"
 #import "GlobalMethods.h"
 #import "UIApplication+HUD.h"
+#import "UIColor+Category.h"
 
 @interface IncomeListViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -32,9 +33,13 @@
     
     self.title = @"收入列表";
     _tableView.rowHeight = 52;
-    
+    _tableView.tableFooterView = [[UIView alloc] init];
+    _tableView.bounces = NO;
     [UIApplication showBusyHUD];
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor blackColor]}];
+    [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
+    self.navigationController.navigationBar.barTintColor = [UIColor rgbWithRed:248 green:157 blue:14];
+    self.navigationController.navigationBar.subviews[0].subviews[0].hidden = YES;
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
     NSInteger washID = [UserManager sharedInstance].carWashInfo.washID;
     NSInteger month = [GlobalMethods currentMonth];
     [[NetworkTools sharedInstance] obtainIncomeList:washID month:month success:^(NSDictionary *response, BOOL isSuccess) {
@@ -67,6 +72,15 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [self.navigationController.navigationBar setTintColor:[UIColor blackColor]];
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.subviews[0].subviews[0].hidden = NO;
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor blackColor]}];
 }
 
 - (void)setupHeaderView {

@@ -193,7 +193,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     if (section == _dataSource.count - 1) {
-        return 100;
+        return 140;
     }
     
     return 0.1;

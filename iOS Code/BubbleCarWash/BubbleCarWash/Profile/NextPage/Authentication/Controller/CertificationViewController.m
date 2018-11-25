@@ -150,6 +150,16 @@
             [self messageBox:@"提交失败，请稍后重试"];
         }];
     } else {
+        if (!_registerWash.license) {
+            [self messageBox:@"请上传营业执照"];
+            return;
+        }
+        
+        if (!_registerWash.washCard) {
+            [self messageBox:@"请上传洗车证"];
+            return;
+        }
+        
         _registerWash.phone = [UserManager sharedInstance].userInfo.phoneNumber;
         _registerWash.name = self.washNameTextField.text;
         _registerWash.address = [UserManager sharedInstance].address;

@@ -12,6 +12,7 @@
 #import "CarWashInfoModel.h"
 #import "GlobalMethods.h"
 #import "UIApplication+HUD.h"
+#import "UIColor+Category.h"
 
 @interface ExtractCashViewController ()
 
@@ -27,6 +28,10 @@
     [super viewDidLoad];
     
     self.title = @"提取现金";
+    [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
+    self.navigationController.navigationBar.barTintColor = [UIColor rgbWithRed:248 green:157 blue:14];
+    self.navigationController.navigationBar.subviews[0].subviews[0].hidden = YES;
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
     self.balanceLabel.text = [NSString stringWithFormat:@"%.2f", [UserManager sharedInstance].carWashInfo.balance];
     _submitBarButtom = [[UIBarButtonItem alloc] initWithTitle:@"提交" style:UIBarButtonItemStylePlain target:self action:@selector(onSubmitBarButtonClicked)];
     self.navigationItem.rightBarButtonItem = _submitBarButtom;
@@ -53,6 +58,15 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [self.navigationController.navigationBar setTintColor:[UIColor blackColor]];
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.subviews[0].subviews[0].hidden = NO;
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor blackColor]}];
 }
 
 - (void)onSubmitBarButtonClicked {

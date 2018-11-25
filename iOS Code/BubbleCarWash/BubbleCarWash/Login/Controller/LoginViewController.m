@@ -99,6 +99,10 @@ static const NSInteger kSeconds = 120;
             [UserManager sharedInstance].userInfo = userInfo;
             [UserManager sharedInstance].isLogin = YES;
             [[UserManager sharedInstance] savaUserInfoWithPassword:self.verificationCodeTextField.text];
+            if (self.type == 1 && ![UserManager sharedInstance].carWashInfo) {
+                [UserManager sharedInstance].isUpdateUserInfo = YES;
+                [[UserManager sharedInstance] obtainUserInfo];
+            }
             UIViewController *mainVC = [GlobalMethods viewControllerWithBuddleName:@"Main" vcIdentifier:@"MainVC"];
             [self presentViewController:mainVC animated:YES completion:nil];
         } else if (code == 10008 && self.type == 1) {
