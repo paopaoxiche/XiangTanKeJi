@@ -92,7 +92,7 @@ static const NSInteger kSeconds = 120;
     
     [[NetworkTools sharedInstance] loginWithPhoneNumber:_phoneNumberTextField.text code:[_verificationCodeTextField.text integerValue] userType:_type success:^(NSDictionary *response, BOOL isSuccess) {
         long code = [response[@"code"] longValue];
-        if (code == 200 || code == 10009) {
+        if (code == 200) {
             [self stopCountingDown];
             // 登录成功
             UserInfoModel *userInfo = [[UserInfoModel alloc] initWithDic:response[@"data"]];
@@ -101,9 +101,7 @@ static const NSInteger kSeconds = 120;
             [[UserManager sharedInstance] savaUserInfoWithPassword:self.verificationCodeTextField.text];
             UIViewController *mainVC = [GlobalMethods viewControllerWithBuddleName:@"Main" vcIdentifier:@"MainVC"];
             [self presentViewController:mainVC animated:YES completion:nil];
-        } else if (code == 10007) {
-            [self messageBox:@"验证码错误"];
-        } else if (code == 10008) {
+        } else if (code == 10008 && self.type == 1) {
             [self stopCountingDown];
             // 洗车场认证
             CertificationViewController *vc = (CertificationViewController *)[GlobalMethods viewControllerWithBuddleName:@"Certification" vcIdentifier:@"CertificationVC"];
@@ -114,6 +112,41 @@ static const NSInteger kSeconds = 120;
             info.code = self.verificationCodeTextField.text;
             [UserManager sharedInstance].userInfo = info;
             [self presentViewController:vc animated:YES completion:nil];
+        } else {
+            NSString *hint = @"";
+            switch (code) {
+                case 10001:
+                    hint = @"用户已存在";
+                    break;
+                case 10002:
+                    hint = @"登录手机号错误";
+                    break;
+                case 10003:
+                    hint = @"登录验证码错误";
+                    break;
+                case 10004:
+                    hint = @"用户不存在";
+                    break;
+                case 10005:
+                    hint = @"用户类型错误";
+                    break;
+                case 10007:
+                    hint = @"短信验证码错误";
+                    break;
+                case 10008:
+                    hint = @"当前用户未注册洗车场";
+                    break;
+                case 10009:
+                    hint = @"当前用户洗车场正在审核中";
+                    break;
+                case 10011:
+                    hint = @"密码错误";
+                    break;
+                default:
+                    break;
+            }
+            
+            [self messageBox:hint];
         }
     } failed:^(NSError *error) {
         [UserManager sharedInstance].isLogin = NO;

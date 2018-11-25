@@ -66,7 +66,8 @@
                 }];
             }
         } else {
-            [self messageBox:@"创建订单失败，请稍后重试"];
+            NSString *hint = (code == 60002) ? @"创建订单失败" : (code == 60001 ? @"支付类型错误" : @"创建订单失败");
+            [self messageBox:hint];
         }
     } failed:^(NSError *error) {
         [UIApplication stopBusyHUD];
