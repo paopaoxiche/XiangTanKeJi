@@ -16,6 +16,7 @@
 #import "HomeModel.h"
 #import "UserManager.h"
 #import "UIApplication+HUD.h"
+#import "UIColor+Category.h"
 
 @interface MapViewController () <MAMapViewDelegate>
 
@@ -107,12 +108,13 @@
 #pragma mark - Map Methods
 
 - (void)addOrRemovePointAnnotation:(BOOL)isAdd {
-    for (NearbyWashListModel *model in _nearbyWashList) {
+    for (int i = 0; i < _nearbyWashList.count; i++) {
+        NearbyWashListModel *model = _nearbyWashList[i];
         MAPointAnnotation *pointAnnotation = [[MAPointAnnotation alloc] init];
         pointAnnotation.coordinate = CLLocationCoordinate2DMake(model.location.lat, model.location.lng);
-        pointAnnotation.title = model.carWashName;
-        pointAnnotation.subtitle = [NSString stringWithFormat:@"%.2f", model.price];
+        pointAnnotation.title = [NSString stringWithFormat:@"%li", i];
         isAdd ? [_mapView addAnnotation:pointAnnotation] : [_mapView removeAnnotation:pointAnnotation];
+        
     }
 }
 
@@ -128,10 +130,25 @@
             poiAnnotationView.canShowCallout = NO;
         }
         
-        poiAnnotationView.tradeStateColor = [UIColor brownColor];
-        poiAnnotationView.tradeStateImgName = @"TradeStateOperate";
-        poiAnnotationView.lowestServicePrice = annotation.subtitle;
-        poiAnnotationView.carWashName = annotation.title;
+        NSInteger index = [annotation.title integerValue];
+        NearbyWashListModel *model = _nearbyWashList[index];
+        
+        switch (model.tradeState) {
+            case -1:
+                poiAnnotationView.tradeStateColor = [UIColor rgbWithRed:183 green:196 blue:203];
+                poiAnnotationView.tradeStateImgName = @"TradeStateClosed";
+                break;
+            case 0:
+                poiAnnotationView.tradeStateColor = [UIColor rgbWithRed:248 green:155 blue:10];
+                poiAnnotationView.tradeStateImgName = @"TradeStateRest";
+                break;
+            case 1:
+                poiAnnotationView.tradeStateColor = [UIColor rgbWithRed:17 green:176 blue:242];
+                poiAnnotationView.tradeStateImgName = @"TradeStateOperate";
+                break;
+        }
+        poiAnnotationView.lowestServicePrice = [NSString stringWithFormat:@"%.2f", model.price];
+        poiAnnotationView.carWashName = model.carWashName;
         
         return poiAnnotationView;
     }
