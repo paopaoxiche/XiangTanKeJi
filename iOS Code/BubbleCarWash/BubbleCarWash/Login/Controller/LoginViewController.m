@@ -166,11 +166,6 @@ static const NSInteger kSeconds = 120;
         [self messageBox:@"手机号不能为空"];
         return;
     }
-    
-    if (![GlobalMethods checkPhoneNumberValid:_phoneNumberTextField.text]) {
-        [self messageBox:@"请输入有效的手机号"];
-        return;
-    }
 }
 
 - (void)checkVerificationCode {
@@ -184,13 +179,12 @@ static const NSInteger kSeconds = 120;
 #pragma mark - UITextFiledDelegate
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    if (textField == _phoneNumberTextField) {
-        if ([_phoneNumberTextField.text length] >= 11) {
-            return NO;
-        }
-    }
+    // 限制只能输入数字
+    [_phoneNumberTextField.undoManager disableUndoRegistration];
+    NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:@"1234567890"] invertedSet];
+    NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
     
-    return YES;
+    return [string isEqualToString:filtered] && [_phoneNumberTextField.text length] < 11;
 }
 
 @end
