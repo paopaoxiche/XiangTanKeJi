@@ -110,6 +110,8 @@
     for (NearbyWashListModel *model in _nearbyWashList) {
         MAPointAnnotation *pointAnnotation = [[MAPointAnnotation alloc] init];
         pointAnnotation.coordinate = CLLocationCoordinate2DMake(model.location.lat, model.location.lng);
+        pointAnnotation.title = model.carWashName;
+        pointAnnotation.subtitle = [NSString stringWithFormat:@"%.2f", model.price];
         isAdd ? [_mapView addAnnotation:pointAnnotation] : [_mapView removeAnnotation:pointAnnotation];
     }
 }
@@ -128,8 +130,8 @@
         
         poiAnnotationView.tradeStateColor = [UIColor brownColor];
         poiAnnotationView.tradeStateImgName = @"TradeStateOperate";
-        poiAnnotationView.lowestServicePrice = @"¥20.00";
-        poiAnnotationView.carWashName = @"宝安中心洗车场";
+        poiAnnotationView.lowestServicePrice = annotation.subtitle;
+        poiAnnotationView.carWashName = annotation.title;
         
         return poiAnnotationView;
     }

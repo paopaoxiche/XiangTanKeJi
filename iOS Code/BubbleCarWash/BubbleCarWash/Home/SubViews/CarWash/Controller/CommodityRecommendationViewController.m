@@ -14,6 +14,8 @@
 #import "UserManager.h"
 #import "NetworkTools.h"
 #import "CarWashInfoModel.h"
+#import "UserInfoModel.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface CommodityRecommendationViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 
@@ -66,6 +68,8 @@
     if (isCarWash) {
         _pageControl.hidden = YES;
         _recommendNameLabel.text = @"商品展示";
+        [_washAvatar sd_setImageWithURL:[NSURL URLWithString:[UserManager sharedInstance].userInfo.avatarUrl]
+                       placeholderImage:[UIImage imageNamed:@"CarWashAvatar"]];
         BOOL isEmpty = _recommendWashCommodity.count == 0;
         _collectionView.hidden = isEmpty;
         _emptyLabel.hidden = !isEmpty;
@@ -75,6 +79,8 @@
     } else {
         RecommendWashModel *model = _recommendWashCommodity[0];
         _recommendNameLabel.text = [NSString stringWithFormat:@"%@商品推荐", model.carWashName];
+        [_washAvatar sd_setImageWithURL:[NSURL URLWithString:model.avatarUrl]
+                       placeholderImage:[UIImage imageNamed:@"CarWashAvatar"]];
     }
     
     _pageControl.numberOfPages = recommendWashCommodity.count;
@@ -160,6 +166,8 @@
     self.pageControl.currentPage = viewIndex;
     RecommendWashModel *model = _recommendWashCommodity[viewIndex];
     _recommendNameLabel.text = [NSString stringWithFormat:@"%@商品推荐", model.carWashName];
+    [_washAvatar sd_setImageWithURL:[NSURL URLWithString:model.avatarUrl]
+                   placeholderImage:[UIImage imageNamed:@"CarWashAvatar"]];
 }
 
 @end
