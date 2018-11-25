@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ParentViewController.h"
 
 @class RecommendCommodityModel;
 @class RecommendWashModel;
 
-@interface CommodityInfoViewController : UIViewController
+@interface CommodityInfoViewController : ParentViewController
 
 @property (nonatomic, strong) RecommendCommodityModel *model;
 @property (nonatomic, strong) RecommendWashModel *washModel;

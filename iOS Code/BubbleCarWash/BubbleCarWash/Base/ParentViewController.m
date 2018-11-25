@@ -16,6 +16,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"BackArrowBlack"] style:UIBarButtonItemStylePlain target:self action:@selector(backToSuperVC)];
+    [self.navigationController.navigationBar setTintColor:[UIColor blackColor]];
+}
+
+- (void)backToSuperVC {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)dealloc {

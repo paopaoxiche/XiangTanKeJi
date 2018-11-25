@@ -21,23 +21,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"车型认证";
     
+    self.title = @"车型认证";
     self.tableView.rowHeight = 80;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"BackArrowBlack"] style:UIBarButtonItemStylePlain target:self action:@selector(backToSuperVC)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(pushToNewCarModelVC)];
+    [self.navigationController.navigationBar setTintColor:[UIColor blackColor]];
     
     if (_modelCertificationList.count > 0) {
         self.carNumberLabel.text = [NSString stringWithFormat:@"名下车辆数:%li", _modelCertificationList.count];
     } else {
         self.carNumberLabel.text = @"暂无车型认证，请添加";
     }
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)backToSuperVC {

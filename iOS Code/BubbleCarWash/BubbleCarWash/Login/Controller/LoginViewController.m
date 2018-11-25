@@ -179,12 +179,16 @@ static const NSInteger kSeconds = 120;
 #pragma mark - UITextFiledDelegate
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    // 限制只能输入数字
-    [_phoneNumberTextField.undoManager disableUndoRegistration];
-    NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:@"1234567890"] invertedSet];
-    NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+    if (textField == _phoneNumberTextField) {
+        // 限制只能输入数字
+        [_phoneNumberTextField.undoManager disableUndoRegistration];
+        NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:@"1234567890"] invertedSet];
+        NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+        
+        return [string isEqualToString:filtered] && [_phoneNumberTextField.text length] < 11;
+    }
     
-    return [string isEqualToString:filtered] && [_phoneNumberTextField.text length] < 11;
+    return YES;
 }
 
 @end

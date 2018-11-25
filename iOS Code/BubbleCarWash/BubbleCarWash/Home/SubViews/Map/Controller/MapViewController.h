@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ParentViewController.h"
 
-@interface MapViewController : UIViewController
+@interface MapViewController : ParentViewController
 
 @end

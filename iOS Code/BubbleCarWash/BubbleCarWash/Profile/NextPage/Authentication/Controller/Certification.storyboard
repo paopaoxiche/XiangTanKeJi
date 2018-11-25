@@ -347,12 +347,12 @@
                         <color key="backgroundColor" red="0.95686274509803915" green="0.95686274509803915" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="SAg-RW-8Qo" firstAttribute="top" secondItem="TM2-EJ-06i" secondAttribute="top" id="08W-RD-gGt"/>
-                            <constraint firstItem="7JY-ZV-brY" firstAttribute="leading" secondItem="TM2-EJ-06i" secondAttribute="leading" id="3to-pz-rij"/>
-                            <constraint firstItem="7JY-ZV-brY" firstAttribute="trailing" secondItem="TM2-EJ-06i" secondAttribute="trailing" id="MzF-vs-cyE"/>
+                            <constraint firstItem="7JY-ZV-brY" firstAttribute="leading" secondItem="s5h-rO-3Nq" secondAttribute="leading" id="3to-pz-rij"/>
+                            <constraint firstItem="7JY-ZV-brY" firstAttribute="trailing" secondItem="s5h-rO-3Nq" secondAttribute="trailing" id="MzF-vs-cyE"/>
                             <constraint firstItem="SAg-RW-8Qo" firstAttribute="trailing" secondItem="TM2-EJ-06i" secondAttribute="trailing" id="hiH-sE-fae"/>
-                            <constraint firstItem="7JY-ZV-brY" firstAttribute="bottom" secondItem="TM2-EJ-06i" secondAttribute="bottom" id="iJc-mA-AMM"/>
+                            <constraint firstItem="7JY-ZV-brY" firstAttribute="bottom" secondItem="s5h-rO-3Nq" secondAttribute="bottom" id="iJc-mA-AMM"/>
                             <constraint firstItem="SAg-RW-8Qo" firstAttribute="leading" secondItem="TM2-EJ-06i" secondAttribute="leading" id="lKm-Yt-c3g"/>
-                            <constraint firstItem="7JY-ZV-brY" firstAttribute="top" secondItem="TM2-EJ-06i" secondAttribute="top" id="wo1-OQ-akb"/>
+                            <constraint firstItem="7JY-ZV-brY" firstAttribute="top" secondItem="s5h-rO-3Nq" secondAttribute="top" constant="20" id="wo1-OQ-akb"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="TM2-EJ-06i"/>
                     </view>

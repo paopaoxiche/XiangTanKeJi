@@ -33,6 +33,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.title = @"附近洗车场";
     [self.navigationController.navigationBar setTranslucent:NO];
     self.fiveCarWashBtn = [[UIButton alloc] init];
     [self.fiveCarWashBtn setImage:[UIImage imageNamed:@"SingleSelection_Normal"]
@@ -152,8 +153,6 @@
         
         return poiAnnotationView;
     }
-    
-    return nil;
     
     return nil;
 }

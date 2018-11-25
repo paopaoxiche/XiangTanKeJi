@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ParentViewController.h"
 
-@interface ExpensesRecordViewController : UIViewController
+@interface ExpensesRecordViewController : ParentViewController
 
 @end

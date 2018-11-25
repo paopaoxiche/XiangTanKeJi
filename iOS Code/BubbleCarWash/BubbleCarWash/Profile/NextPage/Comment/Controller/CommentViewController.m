@@ -25,7 +25,15 @@
     [super viewDidLoad];
     
     self.title = @"评价";
+    self.tableView.tableFooterView = [[UIView alloc] init];
     _commentList = [[NSArray alloc] init];
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"BackArrowBlack"] style:UIBarButtonItemStylePlain target:self action:@selector(backToSuperVC)];
+    [self.navigationController.navigationBar setTintColor:[UIColor blackColor]];
+}
+
+- (void)backToSuperVC {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

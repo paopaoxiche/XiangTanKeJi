@@ -37,9 +37,8 @@
     [super viewDidLoad];
     
     self.title = @"个人信息";
-    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
-    [self.navigationController.navigationBar setShadowImage:nil];
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor]}];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"BackArrowBlack"] style:UIBarButtonItemStylePlain target:self action:@selector(backToSuperVC)];
+    [self.navigationController.navigationBar setTintColor:[UIColor blackColor]];
     self.tableView.rowHeight = 50;
     self.tableView.separatorColor = [UIColor rgbWithRed:235 green:235 blue:241];
     
@@ -63,6 +62,10 @@
 
 - (void)updateUserInfo:(NSNotification *)notification {
     [self.tableView reloadData];
+}
+
+- (void)backToSuperVC {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - UITableViewDatasource
