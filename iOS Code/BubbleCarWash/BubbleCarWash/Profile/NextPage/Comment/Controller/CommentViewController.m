@@ -30,6 +30,7 @@
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"BackArrowBlack"] style:UIBarButtonItemStylePlain target:self action:@selector(backToSuperVC)];
     [self.navigationController.navigationBar setTintColor:[UIColor blackColor]];
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor blackColor]}];
 }
 
 - (void)backToSuperVC {
@@ -51,7 +52,7 @@
                 if (result.count > 0) {
                     [self.tableView reloadData];
                 } else {
-                    // 提示无评价
+                    [self messageBox:@"暂无评价"];
                 }
             }
             
@@ -68,7 +69,7 @@
                 if (result.count > 0) {
                     [self.tableView reloadData];
                 } else {
-                    // 提示无评价
+                    [self messageBox:@"暂无评价"];
                 }
             }
             

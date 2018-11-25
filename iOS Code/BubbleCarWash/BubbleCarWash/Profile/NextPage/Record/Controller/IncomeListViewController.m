@@ -34,6 +34,7 @@
     _tableView.rowHeight = 52;
     
     [UIApplication showBusyHUD];
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor blackColor]}];
     NSInteger washID = [UserManager sharedInstance].carWashInfo.washID;
     NSInteger month = [GlobalMethods currentMonth];
     [[NetworkTools sharedInstance] obtainIncomeList:washID month:month success:^(NSDictionary *response, BOOL isSuccess) {

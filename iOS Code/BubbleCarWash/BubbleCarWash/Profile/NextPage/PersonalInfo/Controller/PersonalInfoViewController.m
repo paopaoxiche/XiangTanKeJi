@@ -38,6 +38,7 @@
     
     self.title = @"个人信息";
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"BackArrowBlack"] style:UIBarButtonItemStylePlain target:self action:@selector(backToSuperVC)];
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor blackColor]}];
     [self.navigationController.navigationBar setTintColor:[UIColor blackColor]];
     self.tableView.rowHeight = 50;
     self.tableView.separatorColor = [UIColor rgbWithRed:235 green:235 blue:241];

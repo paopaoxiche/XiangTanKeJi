@@ -30,6 +30,7 @@
     self.tableView.backgroundColor = [UIColor rgbWithRed:244 green:244 blue:244];
     self.tableView.tableFooterView = [[UIView alloc] init];
     self.tableView.bounces = NO;
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor blackColor]}];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"确定" style:UIBarButtonItemStylePlain target:self action:@selector(updateTradeState)];
 }
 

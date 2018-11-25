@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ParentViewController.h"
 
-@interface UpgradeReminderViewController : UIViewController
+@interface UpgradeReminderViewController : ParentViewController
 
 @end

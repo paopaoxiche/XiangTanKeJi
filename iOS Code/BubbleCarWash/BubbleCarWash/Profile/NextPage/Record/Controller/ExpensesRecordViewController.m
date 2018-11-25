@@ -26,6 +26,7 @@
     [super viewDidLoad];
     
     self.title = @"消费记录";
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor blackColor]}];
     [UIApplication showBusyHUD];
     [ExpensesRecordListModel loadExpensesRecordList:^(NSArray *result) {
         [UIApplication stopBusyHUD];

@@ -24,6 +24,7 @@
     [super viewDidLoad];
     
     self.title = @"优惠券";
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor blackColor]}];
     [UIApplication showBusyHUD];
     [CouponListModel loadMyCouponList:^(NSArray *result) {
         [UIApplication stopBusyHUD];

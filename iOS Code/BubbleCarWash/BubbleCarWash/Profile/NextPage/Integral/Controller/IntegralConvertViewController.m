@@ -10,6 +10,8 @@
 #import "IntegralConvertCell.h"
 #import "CouponListModel.h"
 #import "UIApplication+HUD.h"
+#import "UserManager.h"
+#import "UserInfoModel.h"
 
 @interface IntegralConvertViewController () <UITableViewDataSource, UITableViewDelegate, IntegralConvertCellDelegate>
 
@@ -28,11 +30,14 @@
     [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
     
     // 保证视图从界面顶部开始布局
     self.extendedLayoutIncludesOpaqueBars = NO;
     self.modalPresentationCapturesStatusBarAppearance = NO;
     self.automaticallyAdjustsScrollViewInsets = NO;
+    
+    self.currentIntegralLabel.text = [NSString stringWithFormat:@"%li", [UserManager sharedInstance].userInfo.score];
     
     [CouponListModel loadRedeemableCouponList:^(NSArray *result) {
         self.redeemableCouponList = [result copy];
