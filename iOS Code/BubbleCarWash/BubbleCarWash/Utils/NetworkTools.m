@@ -327,11 +327,6 @@ static const NSTimeInterval kTimeOutInterval = 6.0f;
 
 #pragma mark - 洗车场我的
 
-//- (void)obtainCarWashDetail:(NSInteger)washID success:(SuccessBlock)success failed:(FailedBlock)failed {
-//    NSDictionary *params = @{@"washId":[NSNumber numberWithInteger:washID]};
-//    [self GET:@"wash/getCarWashDetail" parameters:params success:success failure:failed];
-//}
-
 - (void)obtainCarWashInfo:(SuccessBlock)success failed:(FailedBlock)failed {
     [self GET:@"wash/getWashInfo" parameters:nil success:success failure:failed];
 }
@@ -342,12 +337,12 @@ static const NSTimeInterval kTimeOutInterval = 6.0f;
                    longitude:(CGFloat)longitude
                      success:(SuccessBlock)success
                       failed:(FailedBlock)failed {
-    NSMutableDictionary *params = @{
-                                    @"washId":[NSNumber numberWithInteger:washID],
-                                    @"address":address,
-                                    @"lat":[NSString stringWithFormat:@"%.6f", latitude],
-                                    @"lng":[NSString stringWithFormat:@"%.6f", longitude]
-                                    };
+    NSDictionary *params = @{
+                             @"washId":[NSNumber numberWithInteger:washID],
+                             @"address":address,
+                             @"lat":[NSString stringWithFormat:@"%.6f", latitude],
+                             @"lng":[NSString stringWithFormat:@"%.6f", longitude]
+                             };
     [self POST:@"wash/updataWashAddress" parameters:params success:success failure:failed];
 }
 
