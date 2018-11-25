@@ -35,11 +35,6 @@
                           "text": "客服中心",
                           "imageName": "CustomerServicer",
                           "nextPageID": "CustomerServicerVC"
-                          },
-                          {
-                          "text": "推广",
-                          "imageName": "Promotion",
-                          "nextPageID": ""
                           }
                           ]
                  }
@@ -106,11 +101,6 @@
                           "text": "客服中心",
                           "imageName": "CustomerServicer",
                           "nextPageID": "CustomerServicerVC"
-                          },
-                          {
-                          "text": "推广",
-                          "imageName": "Promotion",
-                          "nextPageID": ""
                           }
                           ]
                  }
