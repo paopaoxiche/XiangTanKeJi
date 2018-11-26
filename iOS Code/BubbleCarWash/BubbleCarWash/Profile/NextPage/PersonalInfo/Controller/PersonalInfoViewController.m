@@ -234,7 +234,7 @@
     UIImage *image = [[info objectForKey:UIImagePickerControllerOriginalImage] imageWithScale:320];
     
     // 上传头像
-    [[NetworkTools sharedInstance] updateUserAvatar:image success:^(NSDictionary *response, BOOL isSuccess) {
+    [NetworkTools updateUserAvatar:image success:^(NSDictionary *response, BOOL isSuccess) {
         if ([[response objectForKey:@"code"] integerValue] == 200) {
             // 更新头像
             PersonalInfoCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];

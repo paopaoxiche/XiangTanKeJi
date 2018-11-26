@@ -65,7 +65,7 @@
     }
     
     [UIApplication showBusyHUD];
-    [[NetworkTools sharedInstance] submitEvaluate:_consumeID grade:grade - 2000 content:content success:^(NSDictionary *response, BOOL isSuccess) {
+    [NetworkTools submitEvaluate:_consumeID grade:grade - 2000 content:content success:^(NSDictionary *response, BOOL isSuccess) {
         [UIApplication stopBusyHUD];
         NSInteger code = [[response objectForKey:@"code"] integerValue];
         if (code == 200) {

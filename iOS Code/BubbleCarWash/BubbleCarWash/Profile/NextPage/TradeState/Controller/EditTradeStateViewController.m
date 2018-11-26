@@ -53,7 +53,7 @@
     
     [UIApplication showBusyHUD];
     NSString *status = [NSString stringWithFormat:@"%li", state];
-    [[NetworkTools sharedInstance] updateTradeState:[UserManager sharedInstance].carWashInfo.washID status:status success:^(NSDictionary *response, BOOL isSuccess) {
+    [NetworkTools updateTradeState:[UserManager sharedInstance].carWashInfo.washID status:status success:^(NSDictionary *response, BOOL isSuccess) {
         [UIApplication stopBusyHUD];
         NSInteger code = [[response objectForKey:@"code"] integerValue];
         if (code == 200) {

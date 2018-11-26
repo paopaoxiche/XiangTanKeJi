@@ -205,7 +205,7 @@
 }
 
 - (void)loadCarWashCommodityList {
-    [[NetworkTools sharedInstance] obtainCarWashCommodityList:[UserManager sharedInstance].carWashInfo.washID success:^(NSDictionary *response, BOOL isSuccess) {
+    [NetworkTools obtainCarWashCommodityList:[UserManager sharedInstance].carWashInfo.washID success:^(NSDictionary *response, BOOL isSuccess) {
         NSInteger code = [[response objectForKey:@"code"] integerValue];
         if (code == 200 && [response objectForKey:@"data"] != [NSNull null]) {
             NSDictionary *dataArr = [response objectForKey:@"data"];

@@ -53,7 +53,7 @@
     
     [UIApplication showBusyHUD];
     // 保存修改
-    [[NetworkTools sharedInstance] updateUserNickName:_nicknameTextField.text success:^(NSDictionary *response, BOOL isSuccess) {
+    [NetworkTools updateUserNickName:_nicknameTextField.text success:^(NSDictionary *response, BOOL isSuccess) {
         [UIApplication stopBusyHUD];
         [UserManager sharedInstance].isUpdateUserInfo = YES;
         [[UserManager sharedInstance] obtainUserInfo];

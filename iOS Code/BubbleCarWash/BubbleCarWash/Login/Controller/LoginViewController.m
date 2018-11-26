@@ -60,7 +60,7 @@ static const NSInteger kSeconds = 120;
 - (IBAction)onVerificationCodeBtnClicked:(id)sender {
     [self checkPhoneNumber];
     
-    [[NetworkTools sharedInstance] obtainVerificationCodeWithPhoneNumber:_phoneNumberTextField.text success:^(NSDictionary *response, BOOL isSuccess) {
+    [NetworkTools obtainVerificationCodeWithPhoneNumber:_phoneNumberTextField.text success:^(NSDictionary *response, BOOL isSuccess) {
         NSInteger code = [[response objectForKey:@"code"] integerValue];
         if (isSuccess && code == 200) {
             // 倒计时
@@ -90,7 +90,7 @@ static const NSInteger kSeconds = 120;
         [self messageBox:@"请选择登录类型"];
     }
     
-    [[NetworkTools sharedInstance] loginWithPhoneNumber:_phoneNumberTextField.text code:[_verificationCodeTextField.text integerValue] userType:_type success:^(NSDictionary *response, BOOL isSuccess) {
+    [NetworkTools loginWithPhoneNumber:_phoneNumberTextField.text code:[_verificationCodeTextField.text integerValue] userType:_type success:^(NSDictionary *response, BOOL isSuccess) {
         long code = [response[@"code"] longValue];
         if (code == 200) {
             [self stopCountingDown];

@@ -48,7 +48,7 @@
 
 - (void)loadCarWashService {
     [UIApplication showBusyHUD];
-    [[NetworkTools sharedInstance] obtainCarWashServiceList:[UserManager sharedInstance].carWashInfo.washID success:^(NSDictionary *response, BOOL isSuccess) {
+    [NetworkTools obtainCarWashServiceList:[UserManager sharedInstance].carWashInfo.washID success:^(NSDictionary *response, BOOL isSuccess) {
         [UIApplication stopBusyHUD];
         NSInteger code = [[response objectForKey:@"code"] integerValue];
         if (code == 200 && [response objectForKey:@"data"] != [NSNull null]) {
@@ -111,7 +111,7 @@
         ServiceModel *model = self.dataSource[indexPath.row];
         
         [UIApplication showBusyHUD];
-        [[NetworkTools sharedInstance] deleteWashService:[UserManager sharedInstance].carWashInfo.washID serviceID:model.dataID success:^(NSDictionary *response, BOOL isSuccess) {
+        [NetworkTools deleteWashService:[UserManager sharedInstance].carWashInfo.washID serviceID:model.dataID success:^(NSDictionary *response, BOOL isSuccess) {
             [UIApplication stopBusyHUD];
             NSInteger code = [response[@"code"] integerValue];
             if (code == 200) {

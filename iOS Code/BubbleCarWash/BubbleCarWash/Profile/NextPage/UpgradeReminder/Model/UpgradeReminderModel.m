@@ -12,7 +12,7 @@
 @implementation UpgradeReminderModel
 
 + (void)loadUpgradeInfo:(Success)success failed:(Failed)failed {
-    [[NetworkTools sharedInstance] obtainUpgradeInfo:^(NSDictionary *response, BOOL isSuccess) {
+    [NetworkTools obtainUpgradeInfo:^(NSDictionary *response, BOOL isSuccess) {
         if ([response[@"code"] integerValue] == 200) {
             UpgradeInfoModel *model = [[UpgradeInfoModel alloc] initWithDic:response[@"data"]];
             success(model, YES);

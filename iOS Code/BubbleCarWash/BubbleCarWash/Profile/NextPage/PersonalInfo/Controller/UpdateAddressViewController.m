@@ -31,7 +31,7 @@
 
 - (void)updateAddress {
     [UIApplication showBusyHUD];
-    [[NetworkTools sharedInstance] updateCarWashAddress:[UserManager sharedInstance].carWashInfo.washID address:[UserManager sharedInstance].address latitude:[UserManager sharedInstance].location.lat longitude:[UserManager sharedInstance].location.lng success:^(NSDictionary *response, BOOL isSuccess) {
+    [NetworkTools updateCarWashAddress:[UserManager sharedInstance].carWashInfo.washID address:[UserManager sharedInstance].address latitude:[UserManager sharedInstance].location.lat longitude:[UserManager sharedInstance].location.lng success:^(NSDictionary *response, BOOL isSuccess) {
         [UIApplication stopBusyHUD];
         NSInteger code = [response[@"code"] integerValue];
         if (code == 200) {

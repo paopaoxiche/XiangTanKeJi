@@ -154,7 +154,7 @@
 }
 
 + (NSInteger)currentYear {
-    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierChinese];
+    NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDate *date = [NSDate date];
     NSCalendarUnit calendarUnit = NSCalendarUnitYear;
     NSDateComponents *component = [calendar components:calendarUnit
@@ -164,7 +164,7 @@
 }
 
 + (NSInteger)currentMonth {
-    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierChinese];
+    NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDate *date = [NSDate date];
     NSCalendarUnit calendarUnit = NSCalendarUnitMonth;
     NSDateComponents *component = [calendar components:calendarUnit

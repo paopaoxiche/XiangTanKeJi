@@ -80,7 +80,7 @@
 
 - (void)autoLogin:(CodeResultBlock)block {
     if (!_isLogin && [self isAutoLogin]) {
-        [[NetworkTools sharedInstance] checkToken:_userInfo.token userID:_userInfo.userID isOwner:_userInfo.type == UserTypeOwner success:^(NSDictionary *response, BOOL isSuccess) {
+        [NetworkTools checkToken:_userInfo.token userID:_userInfo.userID isOwner:_userInfo.type == UserTypeOwner success:^(NSDictionary *response, BOOL isSuccess) {
             NSInteger code = [response[@"code"] integerValue];
             self.isLogin = code == 200 ? YES : NO;
             self.isUpdateUserInfo = self.isLogin;
@@ -100,7 +100,7 @@
         self.isUpdateUserInfo = NO;
         
         if (_userInfo.type == UserTypeOwner) {
-            [[NetworkTools sharedInstance] obtainUserInfoWithUserID:_userInfo.userID success:^(NSDictionary *response, BOOL isSuccess) {
+            [NetworkTools obtainUserInfoWithUserID:_userInfo.userID success:^(NSDictionary *response, BOOL isSuccess) {
                 NSInteger code = [response[@"code"] integerValue];
                 if (code == 200) {
                     UserInfoModel *model = [[UserInfoModel alloc] initWithDic:response[@"data"]];
@@ -118,14 +118,14 @@
                 
             }];
         } else {
-            [[NetworkTools sharedInstance] obtainCarWashInfo:^(NSDictionary *response, BOOL isSuccess) {
+            self.authentication = [NSString stringWithFormat:@"user_id=%@,token=%@", self.userInfo.userID, self.userInfo.token];
+            [NetworkTools obtainCarWashInfo:^(NSDictionary *response, BOOL isSuccess) {
                 NSInteger code = [response[@"code"] integerValue];
                 if (code == 200) {
                     CarWashInfoModel *model = [[CarWashInfoModel alloc] initWithDic:response[@"data"]];
                     self.carWashInfo = model;
                     self.userInfo.nickName = model.nickName;
                     self.userInfo.avatarUrl = model.avatarUrl;
-                    self.authentication = [NSString stringWithFormat:@"user_id=%@,token=%@", self.userInfo.userID, self.userInfo.token];
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateUserInfo" object:nil];
                 }
             } failed:^(NSError *error) {

@@ -68,7 +68,7 @@ static const NSUInteger kContactMinLenght = 4;
     FeedBackParam *param = [[FeedBackParam alloc] init];
     param.content = _textView.text;
     param.contactInformation = _contactTextFiled.text;
-    [[NetworkTools sharedInstance] submitFeedBackInfo:param success:^(NSDictionary *response, BOOL isSuccess) {
+    [NetworkTools submitFeedBackInfo:param success:^(NSDictionary *response, BOOL isSuccess) {
         [UIApplication stopBusyHUD];
         if ([response[@"code"] integerValue] == 200) {
             [self messageBox:@"反馈成功" handle:^{

@@ -28,7 +28,7 @@
         param.priceLimit = 5;
     }
     
-    [[NetworkTools sharedInstance] obtainNearbyWashList:param success:^(NSDictionary *response, BOOL isSuccess) {
+    [NetworkTools obtainNearbyWashList:param success:^(NSDictionary *response, BOOL isSuccess) {
         if ([response objectForKey:@"data"] == [NSNull null]) {
             return result(@[]);
         }
@@ -50,7 +50,7 @@
 }
 
 + (void)loadRecommendWashCommodity:(HomeResultBlock)result {
-    [[NetworkTools sharedInstance] obtainRecommendCommodity:6 longitude:[NSNumber numberWithFloat:113.89] latitude:[NSNumber numberWithFloat:22.567] success:^(NSDictionary *response, BOOL isSuccess) {
+    [NetworkTools  obtainRecommendCommodity:6 longitude:[NSNumber numberWithFloat:113.89] latitude:[NSNumber numberWithFloat:22.567] success:^(NSDictionary *response, BOOL isSuccess) {
         if ([response objectForKey:@"data"] == [NSNull null]) {
             return result(@[]);
         }

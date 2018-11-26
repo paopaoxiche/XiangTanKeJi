@@ -48,7 +48,7 @@
 
 - (void)loadCarWashCommodityList {
     [UIApplication showBusyHUD];
-    [[NetworkTools sharedInstance] obtainCarWashCommodityList:[UserManager sharedInstance].carWashInfo.washID success:^(NSDictionary *response, BOOL isSuccess) {
+    [NetworkTools obtainCarWashCommodityList:[UserManager sharedInstance].carWashInfo.washID success:^(NSDictionary *response, BOOL isSuccess) {
         [UIApplication stopBusyHUD];
         NSInteger code = [[response objectForKey:@"code"] integerValue];
         if (code == 200 && [response objectForKey:@"data"] != [NSNull null]) {
@@ -111,7 +111,7 @@
         RecommendCommodityModel *model = self.dataSource[indexPath.row];
         
         [UIApplication showBusyHUD];
-        [[NetworkTools sharedInstance] deleteCommodity:model.dataID success:^(NSDictionary *response, BOOL isSuccess) {
+        [NetworkTools deleteCommodity:model.dataID success:^(NSDictionary *response, BOOL isSuccess) {
             [UIApplication stopBusyHUD];
             NSInteger code = [response[@"code"] integerValue];
             if (code == 200) {

@@ -18,7 +18,7 @@
 @implementation CommentListModel
 
 + (void)loadCommentList:(NSInteger)pageIndex pageSize:(NSInteger)pageSize result:(ResultBlock)block {
-    [[NetworkTools sharedInstance] obtainEvaluateListWithPageIndex:pageIndex pageSize:pageSize success:^(NSDictionary *response, BOOL isSuccess) {
+    [NetworkTools obtainEvaluateListWithPageIndex:pageIndex pageSize:pageSize success:^(NSDictionary *response, BOOL isSuccess) {
         NSInteger code = [[response objectForKey:@"code"] integerValue];
         if (code == 200) {
             if ([response objectForKey:@"data"] != [NSNull null]) {
@@ -42,7 +42,7 @@
 }
 
 + (void)loadCommentList:(NSInteger)washID pageIndex:(NSInteger)pageIndex pageSize:(NSInteger)pageSize result:(ResultBlock)block {
-    [[NetworkTools sharedInstance] obtainCarWashComment:washID pageIndex:pageIndex pageSize:pageSize success:^(NSDictionary *response, BOOL isSuccess) {
+    [NetworkTools obtainCarWashComment:washID pageIndex:pageIndex pageSize:pageSize success:^(NSDictionary *response, BOOL isSuccess) {
         NSInteger code = [[response objectForKey:@"code"] integerValue];
         if (code == 200) {
             if ([response objectForKey:@"data"] != [NSNull null]) {

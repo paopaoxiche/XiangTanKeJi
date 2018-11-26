@@ -19,7 +19,7 @@
 @implementation ExpensesRecordListModel
 
 + (void)loadExpensesRecordList:(ResultBlock)block {
-    [[NetworkTools sharedInstance] obtainExpensesRecord:^(NSDictionary *response, BOOL isSuccess) {
+    [NetworkTools obtainExpensesRecord:^(NSDictionary *response, BOOL isSuccess) {
         NSInteger code = [[response objectForKey:@"code"] integerValue];
         if (code == 200 && [response objectForKey:@"data"] != [NSNull null]) {
             NSDictionary *dataArr = [response objectForKey:@"data"];
@@ -39,7 +39,7 @@
 }
 
 + (void)loadRecentCarWashList:(NSInteger)count result:(ResultBlock)result {
-    [[NetworkTools sharedInstance] obtainRecentCarWashes:[UserManager sharedInstance].carWashInfo.washID count:count success:^(NSDictionary *response, BOOL isSuccess) {
+    [NetworkTools obtainRecentCarWashes:[UserManager sharedInstance].carWashInfo.washID count:count success:^(NSDictionary *response, BOOL isSuccess) {
         NSLog(@"respons = %@", response);
         NSInteger code = [[response objectForKey:@"code"] integerValue];
         if (code == 200 && [response objectForKey:@"data"] != [NSNull null]) {

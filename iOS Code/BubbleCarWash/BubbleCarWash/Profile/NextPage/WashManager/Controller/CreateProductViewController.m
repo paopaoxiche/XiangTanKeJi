@@ -88,7 +88,7 @@
         param.commodityID = [NSString stringWithFormat:@"%li", _model.dataID];
     }
     
-    [[NetworkTools sharedInstance] addOrModifyCommodity:param success:^(NSDictionary *response, BOOL isSuccess) {
+    [NetworkTools addOrModifyCommodity:param success:^(NSDictionary *response, BOOL isSuccess) {
         [UIApplication stopBusyHUD];
         NSInteger code = [[response objectForKey:@"code"] integerValue];
         if (code == 200) {

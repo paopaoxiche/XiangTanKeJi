@@ -42,7 +42,7 @@
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
     NSInteger washID = [UserManager sharedInstance].carWashInfo.washID;
     NSInteger month = [GlobalMethods currentMonth];
-    [[NetworkTools sharedInstance] obtainIncomeList:washID month:month success:^(NSDictionary *response, BOOL isSuccess) {
+    [NetworkTools obtainIncomeList:washID month:month success:^(NSDictionary *response, BOOL isSuccess) {
         [UIApplication stopBusyHUD];
         NSInteger code = [[response objectForKey:@"code"] integerValue];
         if (code == 200) {
@@ -56,16 +56,18 @@
             self.dataSource = recordList;
             if (recordList.count > 0) {
                 [self.tableView reloadData];
-                [self setupHeaderView];
             } else {
                 //   提示无数据
             }
+            [self setupHeaderView];
         } else {
             [self messageBox:@"获取收入列表失败"];
+            [self setupHeaderView];
         }
     } failed:^(NSError *error) {
         [UIApplication stopBusyHUD];
         [self messageBox:@"获取收入列表失败"];
+        [self setupHeaderView];
     }];
 }
 
@@ -85,7 +87,7 @@
 
 - (void)setupHeaderView {
     self.yearLabel.text = [NSString stringWithFormat:@"%li年", [GlobalMethods currentYear]];
-    self.monthLabel.text = [NSString stringWithFormat:@"%li月", [GlobalMethods currentMonth]];
+    self.monthLabel.text = [NSString stringWithFormat:@"%li", [GlobalMethods currentMonth]];
     
     CGFloat total = 0;
     for (IncomeModel *model in _dataSource) {

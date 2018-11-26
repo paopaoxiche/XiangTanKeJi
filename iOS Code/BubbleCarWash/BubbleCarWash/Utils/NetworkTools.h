@@ -88,22 +88,22 @@
 typedef void(^SuccessBlock)(NSDictionary *response, BOOL isSuccess);
 typedef void(^FailedBlock)(NSError *error);
 
-@interface NetworkTools : AFHTTPSessionManager
+@interface NetworkTools : NSObject
 
-+ (NetworkTools *)sharedInstance;
+//+ (NetworkTools *)sharedInstance;
 
 #pragma mark - 公告接口
 
 /**
  *  获取验证码
  */
-- (void)obtainVerificationCodeWithPhoneNumber:(NSString *)phoneNumber
++ (void)obtainVerificationCodeWithPhoneNumber:(NSString *)phoneNumber
                                       success:(SuccessBlock)success
                                        failed:(FailedBlock)failed;
 /**
  *  登录
  */
-- (void)loginWithPhoneNumber:(NSString *)phoneNumber
++ (void)loginWithPhoneNumber:(NSString *)phoneNumber
                         code:(NSUInteger)code
                     userType:(NSUInteger)type
                      success:(SuccessBlock)success
@@ -111,7 +111,7 @@ typedef void(^FailedBlock)(NSError *error);
 /**
  *  验证token
  */
-- (void)checkToken:(NSString *)token
++ (void)checkToken:(NSString *)token
             userID:(NSString *)userID
            isOwner:(BOOL)isOwner
            success:(SuccessBlock)success
@@ -119,37 +119,37 @@ typedef void(^FailedBlock)(NSError *error);
 /**
  *  获取用户信息
  */
-- (void)obtainUserInfoWithUserID:(NSString *)userID success:(SuccessBlock)success failed:(FailedBlock)failed;
++ (void)obtainUserInfoWithUserID:(NSString *)userID success:(SuccessBlock)success failed:(FailedBlock)failed;
 /**
  *  更新用户昵称
  */
-- (void)updateUserNickName:(NSString *)nickName success:(SuccessBlock)success failed:(FailedBlock)failed;
++ (void)updateUserNickName:(NSString *)nickName success:(SuccessBlock)success failed:(FailedBlock)failed;
 /**
  *  更新用户头像
  */
-- (void)updateUserAvatar:(UIImage *)image success:(SuccessBlock)success failed:(FailedBlock)failed;
++ (void)updateUserAvatar:(UIImage *)image success:(SuccessBlock)success failed:(FailedBlock)failed;
 /**
  *  获取升级
  */
-- (void)obtainUpgradeInfo:(SuccessBlock)success failed:(FailedBlock)failed;
++ (void)obtainUpgradeInfo:(SuccessBlock)success failed:(FailedBlock)failed;
 
 /**
  *  上传反馈信息
  */
-- (void)submitFeedBackInfo:(FeedBackParam *)param success:(SuccessBlock)success failed:(FailedBlock)failed;
++ (void)submitFeedBackInfo:(FeedBackParam *)param success:(SuccessBlock)success failed:(FailedBlock)failed;
 
 #pragma mark - 车主首页
 
 /**
  *  获取附近洗车场
  */
-- (void)obtainNearbyWashList:(NearbyWashListParam *)param
++ (void)obtainNearbyWashList:(NearbyWashListParam *)param
                      success:(SuccessBlock)success
                       failed:(FailedBlock)failed;
 /**
  *  获取推荐商品
  */
-- (void)obtainRecommendCommodity:(NSInteger)count
++ (void)obtainRecommendCommodity:(NSInteger)count
                        longitude:(NSNumber *)longitude
                         latitude:(NSNumber *)latitude
                          success:(SuccessBlock)success
@@ -157,15 +157,15 @@ typedef void(^FailedBlock)(NSError *error);
 /**
  *  获取洗车场信息
  */
-- (void)obtainCarWashInfo:(NSInteger)washID success:(SuccessBlock)success failed:(FailedBlock)failed;
++ (void)obtainCarWashInfo:(NSInteger)washID success:(SuccessBlock)success failed:(FailedBlock)failed;
 /**
  *  获取洗车场服务列表
  */
-- (void)obtainCarWashServiceList:(NSInteger)washID success:(SuccessBlock)success failed:(FailedBlock)failed;
++ (void)obtainCarWashServiceList:(NSInteger)washID success:(SuccessBlock)success failed:(FailedBlock)failed;
 /**
  *  获取洗车场商品列表
  */
-- (void)obtainCarWashCommodityList:(NSInteger)washID success:(SuccessBlock)success failed:(FailedBlock)failed;
++ (void)obtainCarWashCommodityList:(NSInteger)washID success:(SuccessBlock)success failed:(FailedBlock)failed;
 
 #pragma mark - 车主我的
 
@@ -173,24 +173,24 @@ typedef void(^FailedBlock)(NSError *error);
  *  获取优惠券列表
  *  @param isRedeemable 1-获取我可兑换的优惠券列表 0-获取我已兑换的优惠券列表
  */
-- (void)obtainMyCouponList:(BOOL)isRedeemable success:(SuccessBlock)success failed:(FailedBlock)failed;
++ (void)obtainMyCouponList:(BOOL)isRedeemable success:(SuccessBlock)success failed:(FailedBlock)failed;
 
 /**
  *  获取消费记录
  */
-- (void)obtainExpensesRecord:(SuccessBlock)success failed:(FailedBlock)failed;
++ (void)obtainExpensesRecord:(SuccessBlock)success failed:(FailedBlock)failed;
 
 /**
  *  获取评价列表
  */
-- (void)obtainEvaluateListWithPageIndex:(NSInteger)pageIndex
++ (void)obtainEvaluateListWithPageIndex:(NSInteger)pageIndex
                                pageSize:(NSInteger)pageSize
                                 success:(SuccessBlock)success
                                  failed:(FailedBlock)failed;
 /**
  *  提交评价
  */
-- (void)submitEvaluate:(NSUInteger)consumeID
++ (void)submitEvaluate:(NSUInteger)consumeID
                  grade:(NSInteger)grade
                content:(NSString *)content
                success:(SuccessBlock)success
@@ -198,21 +198,21 @@ typedef void(^FailedBlock)(NSError *error);
 /**
  *  兑换优惠券
  */
-- (void)convertIntegralToCouponWithCouponID:(NSString *)couponID
++ (void)convertIntegralToCouponWithCouponID:(NSString *)couponID
                                     success:(SuccessBlock)success
                                      failed:(FailedBlock)failed;
 /**
  *  获取车型列表
  */
-- (void)obtainCarTypeList:(SuccessBlock)success failed:(FailedBlock)failed;
++ (void)obtainCarTypeList:(SuccessBlock)success failed:(FailedBlock)failed;
 /**
  *  获取车型审核列表
  */
-- (void)obtainModelReviewList:(NSInteger)status success:(SuccessBlock)success failed:(FailedBlock)failed;
++ (void)obtainModelReviewList:(NSInteger)status success:(SuccessBlock)success failed:(FailedBlock)failed;
 /**
  *  提交车型审核
  */
-- (void)submitModelReview:(NSString *)modelID
++ (void)submitModelReview:(NSString *)modelID
                     cover:(UIImage *)cover
                      back:(UIImage *)back
                   success:(SuccessBlock)success
@@ -220,21 +220,21 @@ typedef void(^FailedBlock)(NSError *error);
 /**
  *  获取车型登记详情
  */
-- (void)obtainModelDetail:(NSInteger)modelID success:(SuccessBlock)success failed:(FailedBlock)failed;
++ (void)obtainModelDetail:(NSInteger)modelID success:(SuccessBlock)success failed:(FailedBlock)failed;
 
 #pragma mark - 车主支付
 
 /**
  *  创建订单
  */
-- (void)createOrder:(CreateOrderParam *)param success:(SuccessBlock)success failed:(FailedBlock)failed;
++ (void)createOrder:(CreateOrderParam *)param success:(SuccessBlock)success failed:(FailedBlock)failed;
 
 #pragma mark - 洗车场首页
 
 /**
  *  获取近期洗车列表
  */
-- (void)obtainRecentCarWashes:(NSInteger)washID count:(NSInteger)count success:(SuccessBlock)success failed:(FailedBlock)failed;
++ (void)obtainRecentCarWashes:(NSInteger)washID count:(NSInteger)count success:(SuccessBlock)success failed:(FailedBlock)failed;
 
 #pragma mark - 洗车场我的
 
@@ -245,11 +245,11 @@ typedef void(^FailedBlock)(NSError *error);
 /**
  *  获取洗车场信息
  */
-- (void)obtainCarWashInfo:(SuccessBlock)success failed:(FailedBlock)failed;
++ (void)obtainCarWashInfo:(SuccessBlock)success failed:(FailedBlock)failed;
 /**
  *  更新洗车场地址
  */
-- (void)updateCarWashAddress:(NSInteger)washID
++ (void)updateCarWashAddress:(NSInteger)washID
                      address:(NSString *)address
                     latitude:(CGFloat)latitude
                    longitude:(CGFloat)longitude
@@ -258,49 +258,50 @@ typedef void(^FailedBlock)(NSError *error);
 /**
  *  获取工商认证状态
  */
-- (void)obtainCarWashCertificationInfo:(SuccessBlock)success failed:(FailedBlock)failed;
++ (void)obtainCarWashCertificationInfo:(SuccessBlock)success failed:(FailedBlock)failed;
 /**
  *  提交工商认证(洗车场注册)
  */
-- (void)registerWash:(RegisterWashParam *)param success:(SuccessBlock)success failed:(FailedBlock)failed;
++ (void)registerWash:(RegisterWashParam *)param success:(SuccessBlock)success failed:(FailedBlock)failed;
 /**
  *  获取收入列表
  */
-- (void)obtainIncomeList:(NSInteger)washID month:(NSInteger)month success:(SuccessBlock)success failed:(FailedBlock)failed;
++ (void)obtainIncomeList:(NSInteger)washID month:(NSInteger)month success:(SuccessBlock)success failed:(FailedBlock)failed;
 /**
  *  获取洗车场评价列表
  */
-- (void)obtainCarWashComment:(NSInteger)washID pageIndex:(NSInteger)pageIndex pageSize:(NSInteger)pageSize success:(SuccessBlock)success failed:(FailedBlock)failed;
++ (void)obtainCarWashComment:(NSInteger)washID pageIndex:(NSInteger)pageIndex pageSize:(NSInteger)pageSize success:(SuccessBlock)success failed:(FailedBlock)failed;
 /**
  *  更新洗车场营业状态
  */
-- (void)updateTradeState:(NSInteger)washID status:(NSString *)status success:(SuccessBlock)success failed:(FailedBlock)failed;
++ (void)updateTradeState:(NSInteger)washID status:(NSString *)status success:(SuccessBlock)success failed:(FailedBlock)failed;
 /**
  *  发布洗车服务
  */
-- (void)addOrModifyService:(ServiceParam *)param success:(SuccessBlock)success failure:(FailedBlock)failed;
++ (void)addOrModifyService:(ServiceParam *)param success:(SuccessBlock)success failure:(FailedBlock)failed;
 /**
  *  删除洗车服务
  */
-- (void)deleteWashService:(NSInteger)washID serviceID:(NSInteger)serviceID success:(SuccessBlock)success failure:(FailedBlock)failed;
++ (void)deleteWashService:(NSInteger)washID serviceID:(NSInteger)serviceID success:(SuccessBlock)success failure:(FailedBlock)failed;
 /**
  *  增加/修改商品
  */
-- (void)addOrModifyCommodity:(CommodityParam *)param success:(SuccessBlock)success failure:(FailedBlock)failed;
++ (void)addOrModifyCommodity:(CommodityParam *)param success:(SuccessBlock)success failure:(FailedBlock)failed;
 /**
  *  删除商品
  */
-- (void)deleteCommodity:(NSInteger)commodityID success:(SuccessBlock)success failure:(FailedBlock)failed;
++ (void)deleteCommodity:(NSInteger)commodityID success:(SuccessBlock)success failure:(FailedBlock)failed;
 /**
  *  提取现金
  */
-- (void)extractCash:(NSInteger)washID money:(NSString *)money success:(SuccessBlock)success failure:(FailedBlock)failed;
++ (void)extractCash:(NSInteger)washID money:(NSString *)money success:(SuccessBlock)success failure:(FailedBlock)failed;
 /**
  *  获取余额
  */
-- (void)obtainBalance:(NSInteger)washID success:(SuccessBlock)success failure:(FailedBlock)failed;
++ (void)obtainBalance:(NSInteger)washID success:(SuccessBlock)success failure:(FailedBlock)failed;
 
-- (void)GET:(NSString *)url parameters:(NSDictionary *)params success:(SuccessBlock)success failure:(FailedBlock)failed;
-- (void)POST:(NSString *)url parameters:(NSDictionary *)params success:(SuccessBlock)success failure:(FailedBlock)failed;
++ (void)GET:(AFHTTPSessionManager *)manager url:(NSString *)url parameters:(NSDictionary *)params success:(SuccessBlock)success failure:(FailedBlock)failed;
++ (void)POST:(AFHTTPSessionManager *)manager url:(NSString *)url parameters:(NSDictionary *)params success:(SuccessBlock)success failure:(FailedBlock)failed;
++ (void)POST:(AFHTTPSessionManager *)manager url:(NSString *)url parameters:(NSDictionary *)params images:(NSArray <NSDictionary <NSString *, UIImage *>*>*)images success:(SuccessBlock)success failure:(FailedBlock)failed;
 
 @end

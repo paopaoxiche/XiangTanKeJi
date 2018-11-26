@@ -29,7 +29,7 @@
     
     dispatch_group_enter(group);
     __block NSArray *commodityList = @[];
-    [[NetworkTools sharedInstance] obtainCarWashCommodityList:washID success:^(NSDictionary *response, BOOL isSuccess) {
+    [NetworkTools obtainCarWashCommodityList:washID success:^(NSDictionary *response, BOOL isSuccess) {
         NSInteger code = [[response objectForKey:@"code"] integerValue];
         if (code == 200 && [response objectForKey:@"data"] != [NSNull null]) {
             NSDictionary *dataArr = [response objectForKey:@"data"];
@@ -50,7 +50,7 @@
     
     dispatch_group_enter(group);
     __block NSArray *serviceList = @[];
-    [[NetworkTools sharedInstance] obtainCarWashServiceList:washID success:^(NSDictionary *response, BOOL isSuccess) {
+    [NetworkTools obtainCarWashServiceList:washID success:^(NSDictionary *response, BOOL isSuccess) {
         NSInteger code = [[response objectForKey:@"code"] integerValue];
         if (code == 200 && [response objectForKey:@"data"] != [NSNull null]) {
             NSDictionary *dataArr = [response objectForKey:@"data"];

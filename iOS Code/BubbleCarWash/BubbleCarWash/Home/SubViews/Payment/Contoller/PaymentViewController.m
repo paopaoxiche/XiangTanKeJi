@@ -42,7 +42,7 @@
     params.washServiceId = _serviceID;
     params.commoditys = _commoditys;
     params.payType = [NSString stringWithFormat:@"%li", (_paymentTypeSelectedIndexPath.row + 1)];
-    [[NetworkTools sharedInstance] createOrder:params success:^(NSDictionary *response, BOOL isSuccess) {
+    [NetworkTools createOrder:params success:^(NSDictionary *response, BOOL isSuccess) {
         [UIApplication stopBusyHUD];
         NSInteger code = [[response objectForKey:@"code"] integerValue];
         if (code == 200 && [response objectForKey:@"data"] != [NSNull null]) {

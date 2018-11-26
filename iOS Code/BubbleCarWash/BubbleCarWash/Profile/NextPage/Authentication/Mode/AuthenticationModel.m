@@ -12,7 +12,7 @@
 @implementation AuthenticationModel
 
 + (void)loadCarTypeList:(ResultBlock)result {
-    [[NetworkTools sharedInstance] obtainCarTypeList:^(NSDictionary *response, BOOL isSuccess) {
+    [NetworkTools obtainCarTypeList:^(NSDictionary *response, BOOL isSuccess) {
         NSInteger code = [[response objectForKey:@"code"] integerValue];
         if (code == 200 && [response objectForKey:@"data"] != [NSNull null]) {
             NSArray *dataArr = [response objectForKey:@"data"];
@@ -32,7 +32,7 @@
 }
 
 + (void)loadModelCertificationList:(NSInteger)status result:(ResultBlock)result {
-    [[NetworkTools sharedInstance] obtainModelReviewList:status success:^(NSDictionary *response, BOOL isSuccess) {
+    [NetworkTools obtainModelReviewList:status success:^(NSDictionary *response, BOOL isSuccess) {
         NSInteger code = [[response objectForKey:@"code"] integerValue];
         if (code == 200 && [response objectForKey:@"data"] != [NSNull null]) {
             NSArray *dataArr = [response objectForKey:@"data"];
@@ -52,7 +52,7 @@
 }
 
 + (void)loadCarModelDetailList:(NSInteger)dateID result:(ResultBlock)result {
-    [[NetworkTools sharedInstance] obtainModelDetail:dateID success:^(NSDictionary *response, BOOL isSuccess) {
+    [NetworkTools obtainModelDetail:dateID success:^(NSDictionary *response, BOOL isSuccess) {
         NSInteger code = [[response objectForKey:@"code"] integerValue];
         if (code == 200 && [response objectForKey:@"data"] != [NSNull null]) {
             NSDictionary *dataDic = [response objectForKey:@"data"];
@@ -68,7 +68,7 @@
 }
 
 + (void)loadCarWashCertificationInfo:(ResultBlock)result {
-    [[NetworkTools sharedInstance] obtainCarWashCertificationInfo:^(NSDictionary *response, BOOL isSuccess) {
+    [NetworkTools obtainCarWashCertificationInfo:^(NSDictionary *response, BOOL isSuccess) {
         NSInteger code = [[response objectForKey:@"code"] integerValue];
         if (code == 200 && [response objectForKey:@"data"] != [NSNull null]) {
             NSDictionary *dataDic = [response objectForKey:@"data"];

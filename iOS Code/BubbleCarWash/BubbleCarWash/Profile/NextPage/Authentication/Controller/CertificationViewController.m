@@ -135,7 +135,7 @@
     if (_userType == UserTypeOwner) {
         CarTypeModel *model = _dataSource[_carTypeIndexPath.row - 1];
         NSString *idStr = [NSString stringWithFormat:@"%li", model.dataID];
-        [[NetworkTools sharedInstance] submitModelReview:idStr cover:_coverImage back:_backImage success:^(NSDictionary *response, BOOL isSuccess) {
+        [NetworkTools submitModelReview:idStr cover:_coverImage back:_backImage success:^(NSDictionary *response, BOOL isSuccess) {
             [UIApplication stopBusyHUD];
             NSInteger code = [[response objectForKey:@"code"] integerValue];
             if (code == 200) {
@@ -169,7 +169,7 @@
         _registerWash.city = [UserManager sharedInstance].city;
         _registerWash.district = [UserManager sharedInstance].district;
         
-        [[NetworkTools sharedInstance] registerWash:_registerWash success:^(NSDictionary *response, BOOL isSuccess) {
+        [NetworkTools registerWash:_registerWash success:^(NSDictionary *response, BOOL isSuccess) {
             [UIApplication stopBusyHUD];
             NSInteger code = [[response objectForKey:@"code"] integerValue];
             if (code == 200) {

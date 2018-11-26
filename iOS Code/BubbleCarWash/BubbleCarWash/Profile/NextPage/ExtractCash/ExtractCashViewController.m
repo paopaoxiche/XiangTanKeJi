@@ -39,7 +39,7 @@
     _extractCashTextField.enabled = NO;
     
     [UIApplication showBusyHUD];
-    [[NetworkTools sharedInstance] obtainBalance:[UserManager sharedInstance].carWashInfo.washID success:^(NSDictionary *response, BOOL isSuccess) {
+    [NetworkTools obtainBalance:[UserManager sharedInstance].carWashInfo.washID success:^(NSDictionary *response, BOOL isSuccess) {
         [UIApplication stopBusyHUD];
         NSInteger code = [response[@"code"] integerValue];
         if (code == 200) {
@@ -81,7 +81,7 @@
     }
     
     [UIApplication showBusyHUD];
-    [[NetworkTools sharedInstance] extractCash:[UserManager sharedInstance].carWashInfo.washID money:_extractCashTextField.text success:^(NSDictionary *response, BOOL isSuccess) {
+    [NetworkTools extractCash:[UserManager sharedInstance].carWashInfo.washID money:_extractCashTextField.text success:^(NSDictionary *response, BOOL isSuccess) {
         [UIApplication stopBusyHUD];
         NSInteger code = [response[@"code"] integerValue];
         if (code == 200) {

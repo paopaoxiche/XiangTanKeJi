@@ -83,7 +83,7 @@
         param.serviceId = [NSNumber numberWithInteger:_model.dataID];
     }
     
-    [[NetworkTools sharedInstance] addOrModifyService:param success:^(NSDictionary *response, BOOL isSuccess) {
+    [NetworkTools addOrModifyService:param success:^(NSDictionary *response, BOOL isSuccess) {
         [UIApplication stopBusyHUD];
         NSInteger code = [[response objectForKey:@"code"] integerValue];
         if (code == 200) {
