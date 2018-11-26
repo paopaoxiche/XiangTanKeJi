@@ -233,6 +233,70 @@
             </objects>
             <point key="canvasLocation" x="124" y="203.74812593703149"/>
         </scene>
+        <!--Web View Controller-->
+        <scene sceneID="CEv-Ry-YlD">
+            <objects>
+                <viewController storyboardIdentifier="WebVC" id="KmY-ng-5zF" customClass="WebViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gDr-jK-MOl">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4dh-jV-za2">
+                                <rect key="frame" x="0.0" y="26" width="375" height="32"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZH1-aW-4ge">
+                                        <rect key="frame" x="12" y="0.0" width="50" height="38"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BackArrowBlack" translatesAutoresizingMaskIntoConstraints="NO" id="2Ls-K3-7vr">
+                                                <rect key="frame" x="5" y="10" width="10" height="18"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="10" id="8ql-yV-Vgh"/>
+                                                    <constraint firstAttribute="height" constant="18" id="DAU-5a-nkn"/>
+                                                </constraints>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="2Ls-K3-7vr" firstAttribute="centerY" secondItem="ZH1-aW-4ge" secondAttribute="centerY" id="B9N-pA-kXo"/>
+                                            <constraint firstAttribute="width" constant="50" id="Xct-gw-a16"/>
+                                            <constraint firstItem="2Ls-K3-7vr" firstAttribute="leading" secondItem="ZH1-aW-4ge" secondAttribute="leading" constant="5" id="ZTp-Ih-90d"/>
+                                            <constraint firstAttribute="height" constant="38" id="lV2-oq-ACq"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="ZH1-aW-4ge" firstAttribute="leading" secondItem="4dh-jV-za2" secondAttribute="leading" constant="12" id="fbX-UM-zOW"/>
+                                    <constraint firstItem="ZH1-aW-4ge" firstAttribute="top" secondItem="4dh-jV-za2" secondAttribute="top" id="krP-6g-xIA"/>
+                                </constraints>
+                            </view>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DPv-3z-Uz0">
+                                <rect key="frame" x="0.0" y="68" width="375" height="599"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="DPv-3z-Uz0" secondAttribute="bottom" id="2gY-Td-1KK"/>
+                            <constraint firstItem="Gj3-ZF-1PI" firstAttribute="trailing" secondItem="4dh-jV-za2" secondAttribute="trailing" id="HNH-Yp-dFV"/>
+                            <constraint firstItem="4dh-jV-za2" firstAttribute="leading" secondItem="Gj3-ZF-1PI" secondAttribute="leading" id="HsH-5g-j0e"/>
+                            <constraint firstAttribute="trailing" secondItem="DPv-3z-Uz0" secondAttribute="trailing" id="UEe-N5-KjK"/>
+                            <constraint firstItem="DPv-3z-Uz0" firstAttribute="top" secondItem="gDr-jK-MOl" secondAttribute="top" constant="68" id="def-Ra-iRM"/>
+                            <constraint firstItem="DPv-3z-Uz0" firstAttribute="top" secondItem="4dh-jV-za2" secondAttribute="bottom" constant="10" id="gVB-fk-dEf"/>
+                            <constraint firstItem="4dh-jV-za2" firstAttribute="top" secondItem="gDr-jK-MOl" secondAttribute="top" constant="26" id="jLU-Ah-xC3"/>
+                            <constraint firstItem="DPv-3z-Uz0" firstAttribute="leading" secondItem="gDr-jK-MOl" secondAttribute="leading" id="pW5-wp-w0H"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Gj3-ZF-1PI"/>
+                    </view>
+                    <connections>
+                        <outlet property="backView" destination="ZH1-aW-4ge" id="vsE-cq-pOp"/>
+                        <outlet property="webView" destination="DPv-3z-Uz0" id="Ik6-MA-aT1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="o4M-5O-9n2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="861.60000000000002" y="197.45127436281859"/>
+        </scene>
     </scenes>
     <resources>
         <image name="BackArrowBlack" width="9" height="16"/>

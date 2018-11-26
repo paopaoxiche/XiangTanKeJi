@@ -154,11 +154,13 @@ static const NSInteger kSeconds = 120;
         }
     } failed:^(NSError *error) {
         [UserManager sharedInstance].isLogin = NO;
+        [self messageBox:@"登录失败"];
     }];
 }
 
 - (IBAction)onServiceTermsBtnClicked:(id)sender {
-    
+    UIViewController *vc = [GlobalMethods viewControllerWithBuddleName:@"Login" vcIdentifier:@"WebVC"];
+    [self presentViewController:vc animated:YES completion:nil];
 }
 
 - (void)startCountingDown {
