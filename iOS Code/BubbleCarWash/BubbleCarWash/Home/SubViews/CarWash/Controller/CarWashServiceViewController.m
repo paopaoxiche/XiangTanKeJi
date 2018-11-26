@@ -27,7 +27,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *payButton;
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) NSIndexPath *serviceSelectedIndexPath;
-@property (nonatomic, strong) NSIndexPath *carTypeSelectedIndexPath;
+//@property (nonatomic, strong) NSIndexPath *carTypeSelectedIndexPath;
 @property (nonatomic, assign) CGFloat totalAmount;
 @property (nonatomic, copy) NSMutableArray *commoditys;
 @property (nonatomic, strong) NSMutableArray *coupons;
@@ -46,7 +46,7 @@
      forCellReuseIdentifier:@"CarTypeIdentifier"];
     
     _serviceSelectedIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    _carTypeSelectedIndexPath = [NSIndexPath indexPathForRow:0 inSection:1];
+//    _carTypeSelectedIndexPath = [NSIndexPath indexPathForRow:0 inSection:1];
     _commoditys = [[NSMutableArray alloc] initWithCapacity:0];
     _totalAmount = 0;
     _newServicePrice = 0;
@@ -71,14 +71,14 @@
     __block BOOL isSuccess = NO;
     __block NSString *hint = @"";
     [CarWashServiceModel loadCarWashServiceData:washID result:^(NSArray *result) {
-        NSArray *modelCertificationList = [[NSArray alloc] init];
-        modelCertificationList = result[1][@"ModelCertificationList"];
-        if (modelCertificationList.count <= 0) {
-            isSuccess = NO;
-            hint = @"请先进行车型认证再进行下单";
-            dispatch_group_leave(group);
-            return;
-        }
+//        NSArray *modelCertificationList = [[NSArray alloc] init];
+//        modelCertificationList = result[1][@"ModelCertificationList"];
+//        if (modelCertificationList.count <= 0) {
+//            isSuccess = NO;
+//            hint = @"请先进行车型认证再进行下单";
+//            dispatch_group_leave(group);
+//            return;
+//        }
         
         NSArray *serviceList = [[NSArray alloc] init];
         serviceList = result[0][@"ServiceList"];
@@ -91,7 +91,7 @@
         
         isSuccess = YES;
         [self.dataSource addObject:serviceList];
-        [self.dataSource addObject:modelCertificationList];
+//        [self.dataSource addObject:modelCertificationList];
         
         NSArray *commodityList = [[NSArray alloc] init];
         commodityList = result[2][@"CommodityList"];
@@ -226,16 +226,16 @@
         cell.selectBtnImageName =  indexPath.row == 0 ? @"SingleSelection_Selected" : @"SingleSelection_Normal";
         
         return cell;
-    } else if (indexPath.section == 1) {
-        ModelCertificationModel *model = list[indexPath.row];
-        CertificationCarTypeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CarTypeIdentifier" forIndexPath:indexPath];
-        cell.delegate = self;
-        cell.carImgName = model.imageName;
-        cell.carDesc = [NSString stringWithFormat:@"%@(%@)", model.model, model.desc];
-        cell.selectImgName =  indexPath.row == 0 ? @"SingleSelection_Selected" : @"SingleSelection_Normal";
-        cell.btnLeadingConstraint = 0;
-
-        return cell;
+//    } else if (indexPath.section == 1) {
+//        ModelCertificationModel *model = list[indexPath.row];
+//        CertificationCarTypeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CarTypeIdentifier" forIndexPath:indexPath];
+//        cell.delegate = self;
+//        cell.carImgName = model.imageName;
+//        cell.carDesc = [NSString stringWithFormat:@"%@(%@)", model.model, model.desc];
+//        cell.selectImgName =  indexPath.row == 0 ? @"SingleSelection_Selected" : @"SingleSelection_Normal";
+//        cell.btnLeadingConstraint = 0;
+//
+//        return cell;
     } else {
         RecommendCommodityModel *model = list[indexPath.row];
         CommodityCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommodityIdentifier" forIndexPath:indexPath];
@@ -312,7 +312,8 @@
     headerLabel.backgroundColor = [UIColor clearColor];
     headerLabel.font = [UIFont systemFontOfSize:15];
     headerLabel.textColor = [UIColor rgbWithRed:153 green:153 blue:153];
-    headerLabel.text = (section == 0 ? @"洗车服务" : (section == 1 ? @"选择你要洗的车型" : @"商品"));
+//    headerLabel.text = (section == 0 ? @"洗车服务" : (section == 1 ? @"选择你要洗的车型" : @"商品"));
+    headerLabel.text = (section == 0 ? @"洗车服务" : @"商品");
     [headerView addSubview:headerLabel];
     
     return headerView;
@@ -378,12 +379,12 @@
 #pragma mark - CertificationCellDelegate
 
 - (void)onSelectedBtnClicked:(CertificationCarTypeCell *)cell {
-    cell.selectImgName = @"SingleSelection_Selected";
-    
-    CertificationCarTypeCell *selectedCell = [self.tableView cellForRowAtIndexPath:_carTypeSelectedIndexPath];
-    selectedCell.selectImgName = @"SingleSelection_Normal";
-    
-    _carTypeSelectedIndexPath = [self.tableView indexPathForCell:cell];
+//    cell.selectImgName = @"SingleSelection_Selected";
+//
+//    CertificationCarTypeCell *selectedCell = [self.tableView cellForRowAtIndexPath:_carTypeSelectedIndexPath];
+//    selectedCell.selectImgName = @"SingleSelection_Normal";
+//
+//    _carTypeSelectedIndexPath = [self.tableView indexPathForCell:cell];
 }
 
 @end
