@@ -88,6 +88,7 @@
             [self obtainUserInfo];
         } failed:^(NSError *error) {
             self.isLogin = NO;
+            block(-1);
         }]; // block
     } else {
         block(-1);
@@ -124,6 +125,7 @@
                     self.carWashInfo = model;
                     self.userInfo.nickName = model.nickName;
                     self.userInfo.avatarUrl = model.avatarUrl;
+                    self.authentication = [NSString stringWithFormat:@"user_id=%@,token=%@", self.userInfo.userID, self.userInfo.token];
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateUserInfo" object:nil];
                 }
             } failed:^(NSError *error) {
