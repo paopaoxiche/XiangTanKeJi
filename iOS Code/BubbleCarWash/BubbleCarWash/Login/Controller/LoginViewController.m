@@ -99,6 +99,7 @@ static const NSInteger kSeconds = 120;
             [UserManager sharedInstance].userInfo = userInfo;
             [UserManager sharedInstance].isLogin = YES;
             [[UserManager sharedInstance] savaUserInfoWithPassword:self.verificationCodeTextField.text];
+            [UserManager sharedInstance].authentication = [NSString stringWithFormat:@"user_id=%@,token=%@", userInfo.userID, userInfo.token];
             if (self.type == 1 && ![UserManager sharedInstance].carWashInfo) {
                 [UserManager sharedInstance].isUpdateUserInfo = YES;
                 [[UserManager sharedInstance] obtainUserInfo];

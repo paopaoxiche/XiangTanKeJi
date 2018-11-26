@@ -13,11 +13,14 @@
 #import "GlobalMethods.h"
 #import "UIApplication+HUD.h"
 #import "UIColor+Category.h"
+#import "FunctionMacro.h"
 
 @interface ExtractCashViewController ()
 
 @property (nonatomic, weak) IBOutlet UILabel *balanceLabel;
 @property (nonatomic, weak) IBOutlet UITextField *extractCashTextField;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *balanceTopConstraint;
 @property (nonatomic, strong) UIBarButtonItem *submitBarButtom;
 
 @end
@@ -28,10 +31,15 @@
     [super viewDidLoad];
     
     self.title = @"提取现金";
+    
+    if (IS_IPHONE_X) {
+        _topConstraint.constant = 200;
+        _balanceTopConstraint.constant = 86;
+    }
+    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
-    self.navigationController.navigationBar.barTintColor = [UIColor rgbWithRed:248 green:157 blue:14];
-    self.navigationController.navigationBar.subviews[0].subviews[0].hidden = YES;
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
     self.balanceLabel.text = [NSString stringWithFormat:@"%.2f", [UserManager sharedInstance].carWashInfo.balance];
     _submitBarButtom = [[UIBarButtonItem alloc] initWithTitle:@"提交" style:UIBarButtonItemStylePlain target:self action:@selector(onSubmitBarButtonClicked)];
     self.navigationItem.rightBarButtonItem = _submitBarButtom;

@@ -12,11 +12,15 @@
 #import "UIApplication+HUD.h"
 #import "UserManager.h"
 #import "UserInfoModel.h"
+#import "FunctionMacro.h"
 
 @interface IntegralConvertViewController () <UITableViewDataSource, UITableViewDelegate, IntegralConvertCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UILabel *currentIntegralLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *headerHeightConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *integralTopConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewTopConstraint;
 @property (nonatomic, copy) NSArray *redeemableCouponList;
 
 @end
@@ -43,6 +47,12 @@
         self.redeemableCouponList = [result copy];
         [self.tableView reloadData];
     }];
+    
+    if (IS_IPHONE_X) {
+        _headerHeightConstraint.constant = 200;
+        _integralTopConstraint.constant = 86;
+        _tableViewTopConstraint.constant = 170;
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
