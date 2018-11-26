@@ -22,7 +22,11 @@
                                 <rect key="frame" x="10" y="26" width="50" height="36"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BackArrowBlack" translatesAutoresizingMaskIntoConstraints="NO" id="XgX-uD-Isc">
-                                        <rect key="frame" x="10" y="10" width="9" height="16"/>
+                                        <rect key="frame" x="10" y="9" width="10" height="18"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="10" id="Kxz-G9-t9a"/>
+                                            <constraint firstAttribute="height" constant="18" id="Rtv-So-nVf"/>
+                                        </constraints>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -263,9 +267,17 @@
                                             <constraint firstAttribute="height" constant="38" id="lV2-oq-ACq"/>
                                         </constraints>
                                     </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="服务协议" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="giB-z2-xCP">
+                                        <rect key="frame" x="152.5" y="6" width="69.5" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="giB-z2-xCP" firstAttribute="centerY" secondItem="4dh-jV-za2" secondAttribute="centerY" id="Bh9-Ue-olM"/>
+                                    <constraint firstItem="giB-z2-xCP" firstAttribute="centerX" secondItem="4dh-jV-za2" secondAttribute="centerX" id="JZ1-4h-QCU"/>
                                     <constraint firstItem="ZH1-aW-4ge" firstAttribute="leading" secondItem="4dh-jV-za2" secondAttribute="leading" constant="12" id="fbX-UM-zOW"/>
                                     <constraint firstItem="ZH1-aW-4ge" firstAttribute="top" secondItem="4dh-jV-za2" secondAttribute="top" id="krP-6g-xIA"/>
                                 </constraints>
@@ -295,7 +307,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o4M-5O-9n2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="861.60000000000002" y="197.45127436281859"/>
+            <point key="canvasLocation" x="778" y="204"/>
         </scene>
     </scenes>
     <resources>

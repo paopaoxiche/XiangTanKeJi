@@ -131,8 +131,8 @@ static const NSTimeInterval kTimeOutInterval = 6.0f;
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer.timeoutInterval = kTimeOutInterval;
     NSDictionary *params = @{@"phone": phoneNumber,
-                             @"code": [NSString stringWithFormat:@"%li", code],
-                             @"type": [NSString stringWithFormat:@"%li", type]};
+                             @"code": [NSString stringWithFormat:@"%lu", code],
+                             @"type": [NSString stringWithFormat:@"%lu", type]};
     [self GET:manager
           url:@"http://101.200.63.245:8080/user/login"
    parameters:params

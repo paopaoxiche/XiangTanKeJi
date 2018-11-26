@@ -45,6 +45,8 @@
 		6580E8312157C2DB00C5B5FA /* CarWashInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6580E8302157C2DB00C5B5FA /* CarWashInfoModel.m */; };
 		6584AA9421401D2600DEA15F /* UIImage+ScaleImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6584AA9321401D2600DEA15F /* UIImage+ScaleImage.m */; };
 		6593AB85212942AA002F92F6 /* NetworkTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 6593AB84212942AA002F92F6 /* NetworkTools.m */; };
+		65B3522A21AC1792001D339F /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B3522821AC1792001D339F /* WebViewController.m */; };
+		65B3522B21AC1792001D339F /* Privacy.html in Resources */ = {isa = PBXBuildFile; fileRef = 65B3522921AC1792001D339F /* Privacy.html */; };
 		65BCC85321529611009EC365 /* AMapSearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65BCC85221529611009EC365 /* AMapSearchKit.framework */; };
 		65C5AF582135A32900727122 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5AF522135A32900727122 /* LoginViewController.m */; };
 		65C5AF592135A32900727122 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65C5AF532135A32900727122 /* Login.storyboard */; };
@@ -197,6 +199,9 @@
 		6593AB83212942AA002F92F6 /* NetworkTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkTools.h; sourceTree = "<group>"; };
 		6593AB84212942AA002F92F6 /* NetworkTools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NetworkTools.m; sourceTree = "<group>"; };
 		6593AB9221297FCD002F92F6 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		65B3522721AC1792001D339F /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
+		65B3522821AC1792001D339F /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
+		65B3522921AC1792001D339F /* Privacy.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Privacy.html; sourceTree = "<group>"; };
 		65B7FC1821046E5700FC56A1 /* FunctionMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FunctionMacro.h; sourceTree = "<group>"; };
 		65BCC850215295B7009EC365 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		65BCC85221529611009EC365 /* AMapSearchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMapSearchKit.framework; path = Pods/AMapSearch/AMapSearchKit.framework; sourceTree = "<group>"; };
@@ -520,6 +525,9 @@
 				65C5AF542135A32900727122 /* LoginViewController.h */,
 				65C5AF522135A32900727122 /* LoginViewController.m */,
 				65C5AF532135A32900727122 /* Login.storyboard */,
+				65B3522921AC1792001D339F /* Privacy.html */,
+				65B3522721AC1792001D339F /* WebViewController.h */,
+				65B3522821AC1792001D339F /* WebViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1201,7 +1209,6 @@
 				65FC33E920E13577006DE3F1 /* Frameworks */,
 				65FC33EA20E13577006DE3F1 /* Resources */,
 				DB4C1590B13D23DE052B5284 /* [CP] Copy Pods Resources */,
-				D1BD9CDC3A6BD974EFA1760B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1264,6 +1271,7 @@
 				65C5B0912135AA8100727122 /* WashManager.storyboard in Resources */,
 				65C5B0B62135AA8200727122 /* Certification.storyboard in Resources */,
 				65C5AFC42135A45100727122 /* ProfileCell.xib in Resources */,
+				65B3522B21AC1792001D339F /* Privacy.html in Resources */,
 				65C5AFC92135A45100727122 /* Profile.storyboard in Resources */,
 				65C5B10A2135B0F800727122 /* Map.storyboard in Resources */,
 			);
@@ -1272,21 +1280,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		D1BD9CDC3A6BD974EFA1760B /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BubbleCarWash/Pods-BubbleCarWash-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		DB4C1590B13D23DE052B5284 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1298,7 +1291,7 @@
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AMap.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1349,6 +1342,7 @@
 				65FD8FF421A1B5AE00E36153 /* CommodityInfoViewController.m in Sources */,
 				65C5B07A2135AA8100727122 /* PersonalInfoCell.m in Sources */,
 				65C5B0C02135AE6000727122 /* NSString+Category.m in Sources */,
+				65B3522A21AC1792001D339F /* WebViewController.m in Sources */,
 				CCA16520213E413E001626C6 /* CustomerServicerViewController.m in Sources */,
 				65FD8FF921A1C2A300E36153 /* UIApplication+HUD.m in Sources */,
 				6513930D21A6FCBE0011689D /* UIView+TXFrame.m in Sources */,
