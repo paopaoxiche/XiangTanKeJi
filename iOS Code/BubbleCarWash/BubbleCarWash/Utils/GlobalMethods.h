@@ -76,4 +76,6 @@
  */
 + (BOOL)isFloat:(NSString *)string;
 
++ (BOOL)isiPhoneX;
+
 @end

@@ -13,6 +13,7 @@
 #import "UserManager.h"
 #import "UserInfoModel.h"
 #import "FunctionMacro.h"
+#import "GlobalMethods.h"
 
 @interface IntegralConvertViewController () <UITableViewDataSource, UITableViewDelegate, IntegralConvertCellDelegate>
 
@@ -48,7 +49,7 @@
         [self.tableView reloadData];
     }];
     
-    if (IS_IPHONE_X) {
+    if ([GlobalMethods isiPhoneX]) {
         _headerHeightConstraint.constant = 200;
         _integralTopConstraint.constant = 86;
         _tableViewTopConstraint.constant = 170;

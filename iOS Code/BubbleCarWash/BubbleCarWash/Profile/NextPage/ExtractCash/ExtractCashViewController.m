@@ -32,7 +32,7 @@
     
     self.title = @"提取现金";
     
-    if (IS_IPHONE_X) {
+    if ([GlobalMethods isiPhoneX]) {
         _topConstraint.constant = 200;
         _balanceTopConstraint.constant = 86;
     }
