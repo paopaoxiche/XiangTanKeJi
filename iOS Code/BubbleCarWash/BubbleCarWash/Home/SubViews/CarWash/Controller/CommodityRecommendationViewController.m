@@ -60,9 +60,6 @@
 - (void)setRecommendWashCommodity:(NSArray *)recommendWashCommodity {
     _recommendWashCommodity = recommendWashCommodity;
     
-    if (_recommendWashCommodity.count <= 0) {
-        return;
-    }
     
     BOOL isCarWash = [UserManager sharedInstance].userType == UserTypeCarWash;
     if (isCarWash) {
@@ -81,6 +78,10 @@
         _recommendNameLabel.text = [NSString stringWithFormat:@"%@商品推荐", model.carWashName];
         [_washAvatar sd_setImageWithURL:[NSURL URLWithString:model.avatarUrl]
                        placeholderImage:[UIImage imageNamed:@"CarWashAvatar"]];
+    }
+    
+    if (_recommendWashCommodity.count <= 0) {
+        return;
     }
     
     _pageControl.numberOfPages = recommendWashCommodity.count;

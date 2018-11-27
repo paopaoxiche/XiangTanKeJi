@@ -40,6 +40,8 @@
     [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
+    self.navigationController.navigationBar.backgroundColor= [UIColor clearColor];
+    
     self.balanceLabel.text = [NSString stringWithFormat:@"%.2f", [UserManager sharedInstance].carWashInfo.balance];
     _submitBarButtom = [[UIBarButtonItem alloc] initWithTitle:@"提交" style:UIBarButtonItemStylePlain target:self action:@selector(onSubmitBarButtonClicked)];
     self.navigationItem.rightBarButtonItem = _submitBarButtom;
@@ -75,6 +77,7 @@
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.subviews[0].subviews[0].hidden = NO;
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor blackColor]}];
+    self.navigationController.navigationBar.backgroundColor= [UIColor whiteColor];
 }
 
 - (void)onSubmitBarButtonClicked {

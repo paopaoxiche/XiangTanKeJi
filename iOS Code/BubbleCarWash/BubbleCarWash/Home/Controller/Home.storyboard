@@ -275,7 +275,7 @@
                                                                             <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¥15.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pev-OG-URZ">
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¥15.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pev-OG-URZ">
                                                                             <rect key="frame" x="158" y="8" width="177" height="24"/>
                                                                             <fontDescription key="fontDescription" name="PingFangSC-Semibold" family="PingFang SC" pointSize="17"/>
                                                                             <nil key="textColor"/>
@@ -451,15 +451,15 @@
                                         <color key="textColor" red="0.66274509800000003" green="0.69411764710000001" blue="0.73725490199999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Comment" translatesAutoresizingMaskIntoConstraints="NO" id="bLY-fR-mOR">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CarWashAvatar" translatesAutoresizingMaskIntoConstraints="NO" id="bLY-fR-mOR">
                                         <rect key="frame" x="16" y="16" width="18" height="18"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="18" id="7Ph-JS-8Bv"/>
                                             <constraint firstAttribute="height" constant="18" id="9nF-1O-UlG"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="仁和洗车商品推荐" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KR1-GJ-qW2">
-                                        <rect key="frame" x="42" y="12" width="144.5" height="26"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="商品" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KR1-GJ-qW2">
+                                        <rect key="frame" x="42" y="12" width="36.5" height="26"/>
                                         <fontDescription key="fontDescription" name="PingFangSC-Semibold" family="PingFang SC" pointSize="18"/>
                                         <color key="textColor" red="0.97254901959999995" green="0.60784313729999995" blue="0.039215686270000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1007,7 +1007,6 @@
     <resources>
         <image name="BackArrowWhite" width="9" height="16"/>
         <image name="CarWashAvatar" width="400" height="400"/>
-        <image name="Comment" width="44" height="44"/>
         <image name="Home_Normal" width="24" height="24"/>
         <image name="Humidity_Home" width="11" height="10"/>
         <image name="Humidity_Weather" width="16" height="14"/>

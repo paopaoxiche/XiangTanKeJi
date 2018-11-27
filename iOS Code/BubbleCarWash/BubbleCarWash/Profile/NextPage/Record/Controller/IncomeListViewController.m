@@ -40,6 +40,7 @@
     self.navigationController.navigationBar.barTintColor = [UIColor rgbWithRed:248 green:157 blue:14];
     self.navigationController.navigationBar.subviews[0].subviews[0].hidden = YES;
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+    self.navigationController.navigationBar.backgroundColor= [UIColor clearColor];
     NSInteger washID = [UserManager sharedInstance].carWashInfo.washID;
     NSInteger month = [GlobalMethods currentMonth];
     [NetworkTools obtainIncomeList:washID month:month success:^(NSDictionary *response, BOOL isSuccess) {
@@ -83,6 +84,7 @@
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.subviews[0].subviews[0].hidden = NO;
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor blackColor]}];
+    self.navigationController.navigationBar.backgroundColor= [UIColor whiteColor];
 }
 
 - (void)setupHeaderView {
@@ -105,7 +107,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     IncomeModel *model = _dataSource[section];
-    return model.dayIncomeList.count;
+    return model.dayIncomeList.count + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -117,7 +119,7 @@
         return cell;
     }
     
-    IncomeRecordModel *record = model.dayIncomeList[indexPath.row];
+    IncomeRecordModel *record = model.dayIncomeList[indexPath.row - 1];
     IncomeListContentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"IncomeListContentCell" forIndexPath:indexPath];
     [cell setCarType:record.carType money:record.money];
     

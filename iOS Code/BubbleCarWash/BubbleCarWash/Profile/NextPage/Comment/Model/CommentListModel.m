@@ -79,7 +79,7 @@
         _avatarUrl = [dic objectForKey:@"avatar"];
         _content = [dic objectForKey:@"content"];
         _nickName = [dic objectForKey:@"nickname"];
-        _time = [GlobalMethods conversionTimestampToStr:[dic objectForKey:@"time"]
+        _time = [GlobalMethods conversionTimestampToStr:[[dic objectForKey:@"time"] longValue]
                                              dateFormat:@"yyyy.MM.dd"];
         _commentID = [[dic objectForKey:@"id"] integerValue];
         _score = [[dic objectForKey:@"rating"] integerValue];

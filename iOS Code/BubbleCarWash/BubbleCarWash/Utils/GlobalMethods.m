@@ -44,8 +44,8 @@
     return NO;
 }
 
-+ (NSString *)conversionTimestampToStr:(NSString *)timestamp dateFormat:(NSString *)dateFormat {
-    long long time = [timestamp longLongValue] / 1000;
++ (NSString *)conversionTimestampToStr:(long)timestamp dateFormat:(NSString *)dateFormat {
+    long time = timestamp / 1000;
     NSDate *date = [[NSDate alloc] initWithTimeIntervalSince1970:time];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = dateFormat;
@@ -128,14 +128,14 @@
 
 + (NSString *)convertDate:(NSString *)dateString outputFormat:(NSString *)outputFormat {
     NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
-    [inputFormatter setDateFormat:@"yyyy-MM-dd"];
+    [inputFormatter setDateFormat:@"YYYY-MM-dd"];
     NSDate *inputDate = [inputFormatter dateFromString:dateString];
     
     NSDateFormatter *outputFormatter = [[NSDateFormatter alloc] init];
     [outputFormatter setDateFormat:outputFormat];
     NSString *date = [outputFormatter stringFromDate:inputDate];
     
-    return date;
+    return date ?: @"";
 }
 
 + (NSString *)dayOfWeekByDateString:(NSString *)dateString {

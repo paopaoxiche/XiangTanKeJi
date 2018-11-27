@@ -20,7 +20,7 @@
  */
 + (BOOL)checkPhoneNumberValid:(NSString *)phoneNumberString;
 
-+ (NSString *)conversionTimestampToStr:(NSString *)timestamp dateFormat:(NSString *)dateFormat;
++ (NSString *)conversionTimestampToStr:(long)timestamp dateFormat:(NSString *)dateFormat;
 
 /**
  *  求两经纬度间距离

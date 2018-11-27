@@ -14,7 +14,7 @@
 - (instancetype)initWithDic:(NSDictionary *)dic {
     self = [super init];
     if (self) {
-        _date = [GlobalMethods convertDate:dic[@"time"] outputFormat:@"MM月dd日"];
+        _date = [GlobalMethods conversionTimestampToStr:[[dic objectForKey:@"time"] longValue] dateFormat:@"MM月dd日"];
         _totalMoney = [dic[@"totalMoney"] floatValue];
         
         NSMutableArray *list = [[NSMutableArray alloc] init];

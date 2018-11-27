@@ -78,7 +78,6 @@
         _carType = [[dic objectForKey:@"carType"] integerValue];
         _serviceName = [dic objectForKey:@"serviceName"];
         _servicePrice = [dic objectForKey:@"payment"];
-        _time = [dic objectForKey:@"time"];
         _totalPrice = [dic objectForKey:@"totalPrice"];
         _isEvaluation = [[dic objectForKey:@"isEvaluation"] integerValue];
         
@@ -171,11 +170,11 @@
     self = [super init];
     if (self) {
         _recordID = [[dic objectForKey:@"id"] integerValue];
-        _time = [GlobalMethods convertDate:[dic objectForKey:@"time"] outputFormat:@"yyyy-MM-dd"];
+        _time = [GlobalMethods conversionTimestampToStr:[[dic objectForKey:@"time"] longValue] dateFormat:@"yyyy-MM-dd"];
         _avatarUrl = [dic objectForKey:@"avatar"];
         _carType = [dic objectForKey:@"carType"];
         _nickName = [dic objectForKey:@"nickname"];
-        _price = [dic objectForKey:@"payPrice"];
+        _price = [NSString stringWithFormat:@"%lu", [[dic objectForKey:@"payPrice"] longValue]];;
         _desc = [dic objectForKey:@"carDesc"];
     }
     
