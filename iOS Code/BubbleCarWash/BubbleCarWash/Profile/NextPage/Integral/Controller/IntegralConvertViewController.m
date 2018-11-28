@@ -36,6 +36,8 @@
     [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
+    self.navigationController.navigationBar.barTintColor = [UIColor clearColor];
+    self.navigationController.navigationBar.backgroundColor= [UIColor clearColor];
     
     // 保证视图从界面顶部开始布局
     self.extendedLayoutIncludesOpaqueBars = NO;

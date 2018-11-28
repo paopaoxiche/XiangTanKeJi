@@ -48,7 +48,7 @@
 
 - (void)setPrice:(NSString *)price {
     _price = price;
-    _priceLabel.text = [NSString stringWithFormat:@"￥%.2f", [price floatValue]];
+    _priceLabel.text = price;
 }
 
 - (void)setTime:(NSString *)time {

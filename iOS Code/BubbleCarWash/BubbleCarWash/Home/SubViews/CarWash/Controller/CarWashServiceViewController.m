@@ -327,9 +327,9 @@
         return 78;
     }
     
-    if (indexPath.section == 1) {
-        return 44;
-    }
+//    if (indexPath.section == 1) {
+//        return 44;
+//    }
     
     return 75;
 }
