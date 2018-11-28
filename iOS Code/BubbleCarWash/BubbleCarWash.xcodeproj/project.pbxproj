@@ -10,6 +10,7 @@
 		0603802FA5429C61B55F5DF8 /* libPods-BubbleCarWash.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29174BA4C402F267A6E8611C /* libPods-BubbleCarWash.a */; };
 		6513930C21A6FCBE0011689D /* TXScrollLabelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6513930A21A6FCBE0011689D /* TXScrollLabelView.m */; };
 		6513930D21A6FCBE0011689D /* UIView+TXFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 6513930B21A6FCBE0011689D /* UIView+TXFrame.m */; };
+		651A5FE321AED7C800379D91 /* RecentWashRecordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 651A5FE221AED7C800379D91 /* RecentWashRecordCell.xib */; };
 		653E3BCA2147F7F400FD08BE /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 653E3BC92147F7F400FD08BE /* libWeChatSDK.a */; };
 		653E3BCC2147F9F100FD08BE /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 653E3BCB2147F9F100FD08BE /* SystemConfiguration.framework */; };
 		653E3BCE2147FA0500FD08BE /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 653E3BCD2147FA0500FD08BE /* libz.tbd */; };
@@ -143,6 +144,7 @@
 		6513930921A6FCBE0011689D /* UIView+TXFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+TXFrame.h"; sourceTree = "<group>"; };
 		6513930A21A6FCBE0011689D /* TXScrollLabelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXScrollLabelView.m; sourceTree = "<group>"; };
 		6513930B21A6FCBE0011689D /* UIView+TXFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+TXFrame.m"; sourceTree = "<group>"; };
+		651A5FE221AED7C800379D91 /* RecentWashRecordCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecentWashRecordCell.xib; sourceTree = "<group>"; };
 		653E3BC62147F7F400FD08BE /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
 		653E3BC72147F7F400FD08BE /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		653E3BC92147F7F400FD08BE /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
@@ -924,6 +926,7 @@
 		65C5B0EC2135B0F800727122 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				651A5FE221AED7C800379D91 /* RecentWashRecordCell.xib */,
 				65C5B0F02135B0F800727122 /* CommodityHorizontalFlowLayout.h */,
 				65C5B0EE2135B0F800727122 /* CommodityHorizontalFlowLayout.m */,
 				65C5B0F12135B0F800727122 /* CommodityRecommendationCell.h */,
@@ -1274,6 +1277,7 @@
 				65B3522B21AC1792001D339F /* Privacy.html in Resources */,
 				65C5AFC92135A45100727122 /* Profile.storyboard in Resources */,
 				65C5B10A2135B0F800727122 /* Map.storyboard in Resources */,
+				651A5FE321AED7C800379D91 /* RecentWashRecordCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

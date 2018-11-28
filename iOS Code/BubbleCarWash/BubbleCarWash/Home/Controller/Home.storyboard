@@ -524,69 +524,8 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RecentWashRecordID" rowHeight="68" id="JuO-dy-4hs" customClass="RecentWashRecordCell">
-                                        <rect key="frame" x="0.0" y="55.5" width="375" height="68"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JuO-dy-4hs" id="uIy-e2-iez">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="67.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="车主名称" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sjD-be-Pl3">
-                                                    <rect key="frame" x="82" y="10" width="66" height="20"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¥15.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CRD-8p-KaG">
-                                                    <rect key="frame" x="158" y="8" width="201" height="24"/>
-                                                    <fontDescription key="fontDescription" name="PingFangSC-Semibold" family="PingFang SC" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="OwnerAvatar" translatesAutoresizingMaskIntoConstraints="NO" id="UBz-mb-RLR">
-                                                    <rect key="frame" x="16" y="10" width="48" height="48"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="48" id="LBe-IM-McK"/>
-                                                        <constraint firstAttribute="width" constant="48" id="QpC-qo-9Vf"/>
-                                                    </constraints>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2018-09-20" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vQX-4Y-jzC">
-                                                    <rect key="frame" x="279" y="39" width="80" height="17"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="小型车" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vXS-G0-GOp">
-                                                    <rect key="frame" x="82" y="39" width="43" height="17"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="sjD-be-Pl3" firstAttribute="top" secondItem="UBz-mb-RLR" secondAttribute="top" id="7Jz-LE-Rvt"/>
-                                                <constraint firstItem="sjD-be-Pl3" firstAttribute="leading" secondItem="UBz-mb-RLR" secondAttribute="trailing" constant="18" id="91T-Ys-yOg"/>
-                                                <constraint firstItem="UBz-mb-RLR" firstAttribute="leading" secondItem="uIy-e2-iez" secondAttribute="leading" constant="16" id="GcG-zu-y7P"/>
-                                                <constraint firstItem="CRD-8p-KaG" firstAttribute="baseline" secondItem="sjD-be-Pl3" secondAttribute="baseline" id="T7x-fb-vRm"/>
-                                                <constraint firstItem="vQX-4Y-jzC" firstAttribute="trailing" secondItem="CRD-8p-KaG" secondAttribute="trailing" id="UAi-td-Pea"/>
-                                                <constraint firstAttribute="trailing" secondItem="CRD-8p-KaG" secondAttribute="trailing" constant="16" id="Y66-dv-mN2"/>
-                                                <constraint firstItem="UBz-mb-RLR" firstAttribute="centerY" secondItem="uIy-e2-iez" secondAttribute="centerY" id="fSd-Sm-jB3"/>
-                                                <constraint firstItem="vQX-4Y-jzC" firstAttribute="centerY" secondItem="vXS-G0-GOp" secondAttribute="centerY" id="izL-TP-blQ"/>
-                                                <constraint firstItem="vXS-G0-GOp" firstAttribute="top" secondItem="sjD-be-Pl3" secondAttribute="bottom" constant="9" id="jI6-H3-R5E"/>
-                                                <constraint firstItem="CRD-8p-KaG" firstAttribute="leading" secondItem="sjD-be-Pl3" secondAttribute="trailing" constant="10" id="tw1-rI-s8d"/>
-                                                <constraint firstItem="vXS-G0-GOp" firstAttribute="leading" secondItem="sjD-be-Pl3" secondAttribute="leading" id="z9Z-5K-90a"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="ownerAvatarImageView" destination="UBz-mb-RLR" id="Ymm-un-Pap"/>
-                                            <outlet property="ownerNameLabel" destination="sjD-be-Pl3" id="KAN-Cy-xWR"/>
-                                            <outlet property="priceLabel" destination="CRD-8p-KaG" id="vfT-L1-HY9"/>
-                                            <outlet property="timeLabel" destination="vQX-4Y-jzC" id="apE-VU-0dz"/>
-                                            <outlet property="typeLabel" destination="vXS-G0-GOp" id="XZd-0Z-C7q"/>
-                                        </connections>
-                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="WashRecordContentCell" rowHeight="92" id="hby-Pq-Hq6" customClass="WashRecordContentCell">
-                                        <rect key="frame" x="0.0" y="123.5" width="375" height="92"/>
+                                        <rect key="frame" x="0.0" y="55.5" width="375" height="92"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hby-Pq-Hq6" id="n4c-Cr-gTu">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="91.5"/>
@@ -660,7 +599,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="WashRecordTotalCell" rowHeight="48" id="EVm-o0-2HO" customClass="WashRecordTotalCell">
-                                        <rect key="frame" x="0.0" y="215.5" width="375" height="48"/>
+                                        <rect key="frame" x="0.0" y="147.5" width="375" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="EVm-o0-2HO" id="Lba-gF-D4B">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="47.5"/>
