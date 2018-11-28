@@ -140,6 +140,7 @@
                                                                                                vcIdentifier:@"PaymentViC"];
     paymentVC.serviceID = [NSString stringWithFormat:@"%li", serviceModel.dataID];
     paymentVC.commoditys = commoditys;
+    paymentVC.totalAmount = [NSString stringWithFormat:@"%@", _totalAmount];
     [UIApplication stopBusyHUD];
     [self.navigationController pushViewController:paymentVC animated:YES];
 }

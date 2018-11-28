@@ -11,7 +11,7 @@
 #import "NSString+Category.h"
 #import "UIApplication+HUD.h"
 
-@interface DiscussViewController ()
+@interface DiscussViewController () <UITextViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *placeholderLabel;
 @property (weak, nonatomic) IBOutlet UITextView *discussTextView;
@@ -23,6 +23,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"评价";
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
+    [self.view addGestureRecognizer:tap];
+}
+
+- (void)hideKeyboard {
+    [_discussTextView resignFirstResponder];
 }
 
 - (IBAction)onStartBtnClicked:(id)sender {
@@ -79,6 +86,10 @@
         [UIApplication stopBusyHUD];
         [self messageBox:@"评价失败，请稍后重试!"];
     }];
+}
+
+- (void)textViewDidChange:(UITextView *)textView {
+    _placeholderLabel.hidden = textView.hasText;
 }
 
 @end

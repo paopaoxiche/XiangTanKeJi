@@ -174,7 +174,7 @@
         _avatarUrl = [dic objectForKey:@"avatar"];
         _carType = [dic objectForKey:@"carType"];
         _nickName = [dic objectForKey:@"nickname"];
-        _price = [NSString stringWithFormat:@"%lu", [[dic objectForKey:@"payPrice"] longValue]];;
+        _price = [NSString stringWithFormat:@"%.2f", [[dic objectForKey:@"payPrice"] floatValue]];;
         _desc = [dic objectForKey:@"carDesc"];
     }
     

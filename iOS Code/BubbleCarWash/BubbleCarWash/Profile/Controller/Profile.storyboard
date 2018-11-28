@@ -1311,6 +1311,9 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="kIp-Mt-ta2" id="AOR-PB-yUM"/>
+                                        </connections>
                                     </textView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="亲，对本次洗车服务还满意嘛？请进行简要描述！" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q67-O4-uRq">
                                         <rect key="frame" x="16" y="8" width="303" height="43"/>

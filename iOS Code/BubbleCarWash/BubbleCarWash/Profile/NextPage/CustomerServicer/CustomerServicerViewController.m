@@ -42,7 +42,7 @@ static const NSUInteger kContactMinLenght = 4;
     
     [_contactTextFiled addTarget:self action:@selector(textChange) forControlEvents:UIControlEventEditingChanged];
     
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hideKeyboard)];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
     [self.view addGestureRecognizer:tap];
 }
 

@@ -34,6 +34,7 @@
     [super viewDidLoad];
     
     _paymentTypeSelectedIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    _totalAmountLabel.text = self.totalAmount;
 }
 
 - (IBAction)createOrder:(id)sender {

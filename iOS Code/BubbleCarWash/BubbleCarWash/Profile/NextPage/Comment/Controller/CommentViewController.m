@@ -80,6 +80,16 @@
     }
 }
 
+- (CGSize)contentSize:(NSString *)content {
+    UILabel *contentLabel = [[UILabel alloc] init];
+    contentLabel.font = [UIFont systemFontOfSize:16];
+    contentLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    contentLabel.numberOfLines = 0;
+    contentLabel.text = content;
+    
+    return [contentLabel sizeThatFits:CGSizeMake(self.tableView.frame.size.width - 100, 1000)];
+}
+
 #pragma mark - UITableViewDatasource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -89,6 +99,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     CommentModel *model = [_commentList objectAtIndex:indexPath.row];
     CommentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommentCell"];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.avatarUrl = model.avatarUrl;
     cell.nickName = model.nickName;
     cell.commentTime = model.time;
@@ -101,7 +112,9 @@
 #pragma mark - UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 140;
+    CommentModel *model = [_commentList objectAtIndex:indexPath.row];
+    CGSize size = [self contentSize:model.content];
+    return 80 + size.height + 16;
 }
 
 @end

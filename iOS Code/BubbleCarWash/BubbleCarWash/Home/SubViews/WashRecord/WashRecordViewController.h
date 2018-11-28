@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ParentViewController.h"
 
-@interface WashRecordViewController : UIViewController
+@interface WashRecordViewController : ParentViewController
 
 @end

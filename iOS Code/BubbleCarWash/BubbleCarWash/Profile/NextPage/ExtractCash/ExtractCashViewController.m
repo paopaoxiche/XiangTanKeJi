@@ -73,9 +73,11 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
+    // 不透明
+    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:0];
+    [self.navigationController.navigationBar setShadowImage:nil];
     [self.navigationController.navigationBar setTintColor:[UIColor blackColor]];
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
-    self.navigationController.navigationBar.subviews[0].subviews[0].hidden = NO;
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor blackColor]}];
     self.navigationController.navigationBar.backgroundColor= [UIColor whiteColor];
 }
