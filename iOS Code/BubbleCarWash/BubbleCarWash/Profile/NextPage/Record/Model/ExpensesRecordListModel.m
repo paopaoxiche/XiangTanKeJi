@@ -77,8 +77,8 @@
         _recordID = [[dic objectForKey:@"id"] integerValue];
         _carType = [[dic objectForKey:@"carType"] integerValue];
         _serviceName = [dic objectForKey:@"serviceName"];
-        _servicePrice = [dic objectForKey:@"payment"];
-        _totalPrice = [dic objectForKey:@"totalPrice"];
+        _servicePrice = [NSString stringWithFormat:@"￥%.2f", [[dic objectForKey:@"payment"] floatValue]];
+        _totalPrice = [NSString stringWithFormat:@"￥%.2f", [[dic objectForKey:@"totalPrice"] floatValue]];
         _isEvaluation = [[dic objectForKey:@"isEvaluation"] integerValue];
         
         NSString *avatarUrl = [dic objectForKey:@"carWashImg"];
@@ -89,13 +89,13 @@
         if (washName) {
             _washName = washName;
         }
-        NSString *time = [dic objectForKey:@"time"];
+        long time = [[dic objectForKey:@"time"] longValue];
         if (time) {
-            _time = time;
+            _time = [GlobalMethods conversionTimestampToStr:time dateFormat:@"MM.dd HH:mm"];
         }
         
-        NSDictionary *coupons = [dic objectForKey:@"coupons"];
-        _coupon = (coupons && coupons != [NSNull null]) ? [[ExpensesCouponModel alloc] initWithDic:coupons] : nil;
+        NSArray *coupons = [dic objectForKey:@"coupons"];
+        _coupon = (coupons && coupons != [NSNull null] && coupons.count > 0) ? [[ExpensesCouponModel alloc] initWithDic:coupons] : nil;
         
         NSArray *dataArr = [dic objectForKey:@"commodities"];
         NSMutableArray *commodities = [NSMutableArray arrayWithCapacity:dataArr.count];
@@ -127,7 +127,7 @@
         _couponID = [[dic objectForKey:@"couponId"] unsignedIntegerValue];
         _couponName = [dic objectForKey:@"couponName"];
         _couponType = [[dic objectForKey:@"couponType"] integerValue] == 0 ? @"通用券" : @"商家券";
-        _price = [dic objectForKey:@"couponPrice"];
+        _price = [NSString stringWithFormat:@"￥%.2f", [[dic objectForKey:@"couponPrice"] floatValue]];
     }
     
     return self;
@@ -151,7 +151,7 @@
         _commodityID = [[dic objectForKey:@"commodityId"] unsignedIntegerValue];
         _imageUrl = [dic objectForKey:@"commodityImg"];
         _name = [dic objectForKey:@"commodityName"];
-        _currentPrice = [dic objectForKey:@"price"];
+        _currentPrice = [NSString stringWithFormat:@"￥%.2f", [[dic objectForKey:@"price"] floatValue]];
         //_originalPrice = [dic objectForKey:@""];
     }
     
@@ -174,7 +174,7 @@
         _avatarUrl = [dic objectForKey:@"avatar"];
         _carType = [dic objectForKey:@"carType"];
         _nickName = [dic objectForKey:@"nickname"];
-        _price = [NSString stringWithFormat:@"%.2f", [[dic objectForKey:@"payPrice"] floatValue]];;
+        _price = [NSString stringWithFormat:@"￥%.2f", [[dic objectForKey:@"payPrice"] floatValue]];;
         _desc = [dic objectForKey:@"carDesc"];
     }
     

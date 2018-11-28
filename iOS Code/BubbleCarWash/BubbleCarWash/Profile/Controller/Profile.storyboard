@@ -778,13 +778,13 @@
                                                         <constraint firstAttribute="width" constant="18" id="t9X-9C-yhR"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="新乡车爵仕汽车服务" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9xV-Fp-Tfo">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="新乡车爵仕汽车服务" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9xV-Fp-Tfo">
                                                     <rect key="frame" x="48" y="9" width="147" height="20"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="08.18 21:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NSs-aX-yeJ">
-                                                    <rect key="frame" x="270" y="9" width="85" height="20"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="08.18 21:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NSs-aX-yeJ">
+                                                    <rect key="frame" x="201" y="9" width="154" height="20"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.71764705882352942" green="0.76862745098039209" blue="0.79607843137254897" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -797,6 +797,7 @@
                                                 <constraint firstItem="MSg-L1-08L" firstAttribute="centerY" secondItem="FA2-iH-fok" secondAttribute="centerY" id="ITo-O9-O5F"/>
                                                 <constraint firstItem="9xV-Fp-Tfo" firstAttribute="leading" secondItem="MSg-L1-08L" secondAttribute="trailing" constant="10" id="Qls-yS-Zok"/>
                                                 <constraint firstAttribute="trailing" secondItem="NSs-aX-yeJ" secondAttribute="trailing" constant="20" id="se4-HK-Nn1"/>
+                                                <constraint firstItem="NSs-aX-yeJ" firstAttribute="leading" secondItem="9xV-Fp-Tfo" secondAttribute="trailing" constant="6" id="v60-Fr-uya"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -820,11 +821,11 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A洗车服务" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bMc-Ee-klb">
-                                                    <rect key="frame" x="90" y="12" width="76" height="20"/>
+                                                    <rect key="frame" x="90" y="12" width="207" height="20"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¥20.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IbC-by-ek2">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="¥20.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IbC-by-ek2">
                                                     <rect key="frame" x="303" y="12" width="52" height="20"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <nil key="highlightedColor"/>
@@ -852,6 +853,7 @@
                                                 <constraint firstItem="1a0-zp-6qe" firstAttribute="centerY" secondItem="aUA-Wh-vsV" secondAttribute="centerY" id="dkF-W9-g7m"/>
                                                 <constraint firstItem="IbC-by-ek2" firstAttribute="centerY" secondItem="bMc-Ee-klb" secondAttribute="centerY" id="e3l-dW-b0F"/>
                                                 <constraint firstItem="bMc-Ee-klb" firstAttribute="leading" secondItem="2KY-TA-8AC" secondAttribute="trailing" constant="10" id="fu2-Zf-Y0p"/>
+                                                <constraint firstItem="IbC-by-ek2" firstAttribute="leading" secondItem="bMc-Ee-klb" secondAttribute="trailing" constant="6" id="lrz-j9-5NK"/>
                                                 <constraint firstItem="2KY-TA-8AC" firstAttribute="leading" secondItem="JT5-0U-APT" secondAttribute="leading" constant="20" id="pi6-sT-Goe"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -944,6 +946,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="5rF-qK-QCm"/>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="pSC-Yu-gc2" id="zN4-VO-WLb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zfA-Zh-83K" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

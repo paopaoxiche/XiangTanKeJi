@@ -30,7 +30,7 @@
     [UIApplication showBusyHUD];
     [ExpensesRecordListModel loadExpensesRecordList:^(NSArray *result) {
         [UIApplication stopBusyHUD];
-        self.recordList = result;
+        self.recordList = [result copy];
         [self.tableView reloadData];
     }];
 }
@@ -55,6 +55,7 @@
     ExpensesRecordModel *model = [_recordList objectAtIndex:indexPath.section];
     if (indexPath.row == 0) {
         ExpensesRecordTitleCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ExpensesRecordTitleCell" forIndexPath:indexPath];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.avatarUrl = model.avatarUrl;
         cell.washName = model.washName;
         cell.time = model.time;
@@ -64,6 +65,7 @@
     
     if (indexPath.row == (model.commodities.count + 2)) {
         TotalConsumptionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TotalConsumptionCell" forIndexPath:indexPath];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.totalPrice = model.totalPrice;
         cell.isEvaluation = model.isEvaluation == ExpensesRecordEvaluationStatusOn;
         cell.delegate = self;
@@ -72,15 +74,18 @@
     }
     
     ExpensesRecordContentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ExpensesRecordContentCell" forIndexPath:indexPath];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     if (indexPath.row == 1) {
         cell.imageUrl = @"";
         cell.name = model.serviceName;
+        cell.price = model.servicePrice;
         cell.couponType = model.coupon ? model.coupon.couponType : @"";
-        cell.price =  model.coupon ? model.servicePrice : @"";
-        cell.isShowCoupon = YES;
+        cell.couponPrice =  model.coupon ? model.coupon.price : @"";
+        cell.isShowCoupon = model.coupon ? YES : NO;
     } else {
         CommodityExpensesModel *commodity = model.commodities[indexPath.row - 2];
         cell.imageUrl = commodity.imageUrl;
+        cell.price = commodity.currentPrice;
         cell.name = commodity.name;
         cell.isShowCoupon = NO;
     }
@@ -90,16 +95,13 @@
 
 #pragma mark - UITableViewDelegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-}
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
         return 40;
     }
     
-    if ((indexPath.section == 0 && indexPath.row == 4) || (indexPath.section == 1 && indexPath.row == 2)) {
+    ExpensesRecordModel *model = [_recordList objectAtIndex:indexPath.section];
+    if (indexPath.row == (model.commodities.count + 2)) {
         return 96;
     }
     
