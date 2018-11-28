@@ -60,7 +60,6 @@
 - (void)setRecommendWashCommodity:(NSArray *)recommendWashCommodity {
     _recommendWashCommodity = recommendWashCommodity;
     
-    
     BOOL isCarWash = [UserManager sharedInstance].userType == UserTypeCarWash;
     if (isCarWash) {
         _pageControl.hidden = YES;
@@ -74,10 +73,15 @@
             _emptyLabel.text = @"暂无商品可展示，请添加商品";
         }
     } else {
-        RecommendWashModel *model = _recommendWashCommodity[0];
-        _recommendNameLabel.text = [NSString stringWithFormat:@"%@商品推荐", model.carWashName];
-        [_washAvatar sd_setImageWithURL:[NSURL URLWithString:model.avatarUrl]
-                       placeholderImage:[UIImage imageNamed:@"CarWashAvatar"]];
+        if (_recommendWashCommodity.count <= 0) {
+            _recommendNameLabel.text = @"商品推荐";
+            [_washAvatar setImage:[UIImage imageNamed:@"CarWashAvatar"]];
+        } else {
+            RecommendWashModel *model = _recommendWashCommodity[0];
+            _recommendNameLabel.text = [NSString stringWithFormat:@"%@商品推荐", model.carWashName];
+            [_washAvatar sd_setImageWithURL:[NSURL URLWithString:model.avatarUrl]
+                           placeholderImage:[UIImage imageNamed:@"CarWashAvatar"]];
+        }
     }
     
     if (_recommendWashCommodity.count <= 0) {
