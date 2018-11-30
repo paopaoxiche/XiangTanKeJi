@@ -229,7 +229,7 @@ static const NSTimeInterval kTimeOutInterval = 6.0f;
     manager.requestSerializer.timeoutInterval = kTimeOutInterval;
     NSDictionary *params = @{@"washId": [NSNumber numberWithInteger:washID],
                              @"pageIndex": [NSNumber numberWithInteger:0],
-                             @"pageSize": [NSNumber numberWithInteger:20]};
+                             @"pageSize": [NSNumber numberWithInteger:200]};
     NSString *url = @"http://101.200.63.245:8080/wash/getServiceList";
     [self GET:manager url:url parameters:params success:success failure:failed];
 }
@@ -239,7 +239,7 @@ static const NSTimeInterval kTimeOutInterval = 6.0f;
     manager.requestSerializer.timeoutInterval = kTimeOutInterval;
     NSDictionary *params = @{@"washId": [NSNumber numberWithInteger:washID],
                              @"pageIndex": [NSNumber numberWithInteger:0],
-                             @"pageSize": [NSNumber numberWithInteger:20]};
+                             @"pageSize": [NSNumber numberWithInteger:200]};
     NSString *url = @"http://101.200.63.245:8080/wash/getCommodityList";
     [self GET:manager url:url parameters:params success:success failure:failed];
 }

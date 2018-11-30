@@ -96,6 +96,7 @@
         _carWashName = [dic objectForKey:@"name"];
         _desc = [dic objectForKey:@"describe"];
         _price = [[dic objectForKey:@"price"] floatValue];
+        _truePrice = [[dic objectForKey:@"truePrice"] floatValue];
         _carModel = [[dic objectForKey:@"carModel"] integerValue];
         _carWashID = [[dic objectForKey:@"carWashId"] integerValue];
         _dataID = [[dic objectForKey:@"id"] integerValue];

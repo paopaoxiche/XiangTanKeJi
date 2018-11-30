@@ -170,6 +170,10 @@
 }
 
 - (void)loadNearByWashList {
+    if ([UserManager sharedInstance].userType == UserTypeCarWash) {
+        return;
+    }
+    
     [HomeDataModel loadNearbyWashList:[UserManager sharedInstance].location isMap:NO isSearch:NO result:^(NSArray *result) {
         self.nearbyWashList = [result copy];
         if (result.count > 0) {

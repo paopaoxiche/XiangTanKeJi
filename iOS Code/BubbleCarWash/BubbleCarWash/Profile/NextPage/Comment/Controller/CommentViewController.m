@@ -45,7 +45,7 @@
     [UIApplication showBusyHUD];
     BOOL isOwner = [UserManager sharedInstance].userType == UserTypeOwner;
     if (isOwner) {
-        [CommentListModel loadCommentList:0 pageSize:20 result:^(NSArray *result, BOOL isSuccess) {
+        [CommentListModel loadCommentList:0 pageSize:200 result:^(NSArray *result, BOOL isSuccess) {
             [UIApplication stopBusyHUD];
             self.commentList = result;
             if (isSuccess) {
@@ -62,7 +62,7 @@
         }];
     } else {
         NSInteger washID = [UserManager sharedInstance].carWashInfo.washID;
-        [CommentListModel loadCommentList:washID pageIndex:0 pageSize:20 result:^(NSArray *result, BOOL isSuccess) {
+        [CommentListModel loadCommentList:washID pageIndex:0 pageSize:200 result:^(NSArray *result, BOOL isSuccess) {
             [UIApplication stopBusyHUD];
             self.commentList = result;
             if (isSuccess) {

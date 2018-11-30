@@ -90,7 +90,7 @@
     ServiceModel *model = _dataSource[indexPath.row];
     WashManagerCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WashManagerCell" forIndexPath:indexPath];
     cell.imageUrl = avatarUrl;
-    cell.currentPrice = model.price;
+    cell.currentPrice = model.truePrice;
     cell.name = model.carWashName;
     cell.desc = model.desc;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;

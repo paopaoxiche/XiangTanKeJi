@@ -21,6 +21,7 @@ typedef void(^ServiceResultBlock)(NSArray *result);
 @property (nonatomic, copy) NSString *carWashName;
 @property (nonatomic, copy) NSString *desc;
 @property (nonatomic, assign) CGFloat price;
+@property (nonatomic, assign) CGFloat truePrice;
 @property (nonatomic, assign) NSInteger dataID;
 
 - (instancetype)initWithDic:(NSDictionary *)dic;
