@@ -7,12 +7,12 @@
 //
 
 #import "CarWashServiceCell.h"
+#import "UIColor+Category.h"
 
 @interface CarWashServiceCell ()
 
 @property (weak, nonatomic) IBOutlet UIButton *selectedBtn;
 @property (weak, nonatomic) IBOutlet UILabel *serviceNameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *serviceDescLabel;
 @property (weak, nonatomic) IBOutlet UILabel *originalPriceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *couponPriceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *couponHintLabel;
@@ -34,12 +34,16 @@
 
 - (void)setName:(NSString *)name {
     _name = name;
-    _serviceNameLabel.text = name;
-}
-
-- (void)setDesc:(NSString *)desc {
-    _desc = desc;
-    _serviceDescLabel.text = desc;
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%@", _name, _desc]];
+    [attributedString addAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:18],
+                                      NSForegroundColorAttributeName: [UIColor rgbByHexStr:@"333333"]
+                                      }
+                              range:NSMakeRange(0, _name.length)];
+    [attributedString addAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:15],
+                                      NSForegroundColorAttributeName: [UIColor rgbByHexStr:@"B7C4CB"]
+                                      }
+                              range:NSMakeRange(_name.length, _desc.length)];
+    _serviceNameLabel.attributedText = [[NSAttributedString alloc] initWithAttributedString:attributedString];
 }
 
 - (void)setSelectBtnImageName:(NSString *)selectBtnImageName {

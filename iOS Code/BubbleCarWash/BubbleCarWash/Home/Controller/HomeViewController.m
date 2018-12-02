@@ -389,7 +389,7 @@
  */
 - (void)onReGeocodeSearchDone:(AMapReGeocodeSearchRequest *)request response:(AMapReGeocodeSearchResponse *)response {
     if (response.regeocode) {
-        [UserManager sharedInstance].address = [NSString stringWithFormat:@"%@%@", response.regeocode.formattedAddress, response.regeocode.pois.firstObject.name];
+        [UserManager sharedInstance].address = [NSString stringWithFormat:@"%@", response.regeocode.formattedAddress];
         [self setLocation];
         
         NSString *province = response.regeocode.addressComponent.province;

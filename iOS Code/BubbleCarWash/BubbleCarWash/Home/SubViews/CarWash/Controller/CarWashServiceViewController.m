@@ -140,13 +140,13 @@
                                                                                                vcIdentifier:@"PaymentViC"];
     paymentVC.serviceID = [NSString stringWithFormat:@"%li", serviceModel.dataID];
     paymentVC.commoditys = commoditys;
-    paymentVC.totalAmount = [NSString stringWithFormat:@"%@", _totalAmount];
+    paymentVC.totalAmount = [NSString stringWithFormat:@"%.2f", _totalAmount];
     [UIApplication stopBusyHUD];
     [self.navigationController pushViewController:paymentVC animated:YES];
 }
 
 - (void)calculatePaymentAmount {
-    if (_dataSource.count < 2) {
+    if (_dataSource.count < 1) {
         return;
     }
     
@@ -186,7 +186,7 @@
         _couponIndex = index;
     }
     
-    if (_dataSource.count > 2 && _commoditys.count > 0) {
+    if (_dataSource.count > 1 && _commoditys.count > 0) {
         for (RecommendCommodityModel *model in _commoditys) {
             _totalAmount += model.currentPrice;
         }
@@ -213,9 +213,10 @@
         BOOL hasCoupon = _couponIndex >= 0;
         ServiceModel *model =  list[indexPath.row];
         CarWashServiceCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CarWashServiceIdentifier" forIndexPath:indexPath];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.delegate = self;
-        cell.name = model.carWashName;
         cell.desc = model.desc;
+        cell.name = model.carWashName;
         if (hasCoupon) {
             MyCouponModel *couponModel = _coupons[_couponIndex];
             cell.originalPrice = model.price;
@@ -240,6 +241,7 @@
     } else {
         RecommendCommodityModel *model = list[indexPath.row];
         CommodityCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommodityIdentifier" forIndexPath:indexPath];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.delegate = self;
         cell.avatarUrl = model.imageUrl;
         cell.name = model.commodityName;
@@ -349,12 +351,17 @@
 #pragma mark - CarWashServiceCellDelegate
 
 - (void)selectedServiceCell:(CarWashServiceCell *)cell {
+    NSIndexPath *temp = [self.tableView indexPathForCell:cell];
+    if (temp.row == _serviceSelectedIndexPath.row) {
+        return;
+    }
+    
     cell.selectBtnImageName = @"SingleSelection_Selected";
     
     CarWashServiceCell *serviceCell = [self.tableView cellForRowAtIndexPath:_serviceSelectedIndexPath];
     serviceCell.selectBtnImageName = @"SingleSelection_Normal";
     
-    _serviceSelectedIndexPath = [self.tableView indexPathForCell:cell];
+    _serviceSelectedIndexPath = temp;
     
     [self calculatePaymentAmount];
 }

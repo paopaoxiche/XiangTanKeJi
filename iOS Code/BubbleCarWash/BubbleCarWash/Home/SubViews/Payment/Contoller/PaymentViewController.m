@@ -33,8 +33,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    _tableView.tableFooterView = [[UIView alloc] init];
     _paymentTypeSelectedIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    _totalAmountLabel.text = self.totalAmount;
+    _totalAmountLabel.text = [NSString stringWithFormat:@"¥%@", self.totalAmount];
+    [self.paymentBtn setTitle:[NSString stringWithFormat:@"确认支付 ¥%@", self.totalAmount]
+                     forState:UIControlStateNormal];
 }
 
 - (IBAction)createOrder:(id)sender {
@@ -89,6 +92,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     PaymentTypeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PaymentTypeIdentifier" forIndexPath:indexPath];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.delegate = self;
     if (indexPath.row == 0) {
         cell.typeImageName = @"WeiXin";
