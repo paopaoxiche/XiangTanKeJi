@@ -112,7 +112,11 @@
     [UIApplication showBusyHUD];
     [model convertIntegralToCoupon:^(NSInteger code) {
         [UIApplication stopBusyHUD];
-        if (code == -1) {
+        if (code == 200) {
+            [self messageBox:@"积分兑换成功" handle:^{
+                [self.navigationController popViewControllerAnimated:YES];
+            }];
+        } else {
             [self messageBox:@"兑换积分失败"];
         }
     }];

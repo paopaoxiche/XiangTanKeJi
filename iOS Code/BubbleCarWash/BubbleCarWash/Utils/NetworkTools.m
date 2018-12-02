@@ -299,7 +299,7 @@ static const NSTimeInterval kTimeOutInterval = 6.0f;
     NSString *url = @"http://101.200.63.245:8080/carOwner/exchangePoint";
     [manager.requestSerializer setValue:[UserManager sharedInstance].authentication
                      forHTTPHeaderField:@"authentication"];
-    [self GET:manager url:url parameters:params success:success failure:failed];
+    [self POST:manager url:url parameters:params success:success failure:failed];
 }
 
 + (void)obtainCarTypeList:(SuccessBlock)success failed:(FailedBlock)failed {
