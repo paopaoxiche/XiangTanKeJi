@@ -99,7 +99,7 @@
     cell.couponDesc = model.name;
     cell.validityPeroid = model.validityPeroid;
     cell.integral = model.integral;
-    cell.index = indexPath.row;
+    cell.index = indexPath.section;
     cell.delegate = self;
     
     return cell;
