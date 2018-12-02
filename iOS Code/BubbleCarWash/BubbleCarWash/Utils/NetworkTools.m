@@ -48,7 +48,7 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        _couponId = @"0";
+        _couponId = @"-1";
         _payType = @"1";
     }
     

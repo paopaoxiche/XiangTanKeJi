@@ -14,6 +14,7 @@
 @property (nonatomic, copy) NSString *serviceID;
 @property (nonatomic, copy) NSString *commoditys;
 @property (nonatomic, copy) NSString *totalAmount;
+@property (nonatomic, assign) NSInteger couponID;
 
 - (void)paymentSuccess;
 

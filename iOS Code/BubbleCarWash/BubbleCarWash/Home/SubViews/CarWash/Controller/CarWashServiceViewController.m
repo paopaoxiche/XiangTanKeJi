@@ -143,6 +143,7 @@
     paymentVC.serviceID = [NSString stringWithFormat:@"%li", serviceModel.dataID];
     paymentVC.commoditys = commoditys;
     paymentVC.totalAmount = [NSString stringWithFormat:@"%.2f", _totalAmount];
+    paymentVC.couponID = [self checkCoupons:_serviceSelectedIndexPath.row];
     [UIApplication stopBusyHUD];
     [self.navigationController pushViewController:paymentVC animated:YES];
 }

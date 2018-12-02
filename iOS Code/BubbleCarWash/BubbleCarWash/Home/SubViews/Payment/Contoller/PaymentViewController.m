@@ -46,6 +46,11 @@
     params.washServiceId = _serviceID;
     params.commoditys = _commoditys;
     params.payType = [NSString stringWithFormat:@"%li", (_paymentTypeSelectedIndexPath.row + 1)];
+    
+    if (self.couponID != -1) {
+        params.couponId = [NSString stringWithFormat:@"%li", self.couponID];
+    }
+    
     [NetworkTools createOrder:params success:^(NSDictionary *response, BOOL isSuccess) {
         [UIApplication stopBusyHUD];
         NSInteger code = [[response objectForKey:@"code"] integerValue];
