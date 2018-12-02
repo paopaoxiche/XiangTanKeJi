@@ -57,6 +57,8 @@ typedef void(^CodeResultBlock)(NSInteger code);
 
 @interface MyCouponModel : NSObject
 
+/// 优惠券id
+@property (nonatomic, assign) NSUInteger couponID;
 /// 优惠券条件值
 @property (nonatomic, assign) CGFloat limitPrice;
 /// 结束时间

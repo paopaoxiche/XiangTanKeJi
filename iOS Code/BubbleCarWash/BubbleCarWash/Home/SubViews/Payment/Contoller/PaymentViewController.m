@@ -30,6 +30,15 @@
 
 @implementation PaymentViewController
 
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        _couponID = -1;
+    }
+    
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     

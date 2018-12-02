@@ -100,8 +100,6 @@
 
 @interface MyCouponModel ()
 
-/// 优惠券id
-@property (nonatomic, assign) NSUInteger couponID;
 /// 优惠券类型 1减免 2折扣
 @property (nonatomic, assign) NSUInteger couponType;
 /// 状态 1有效 2失效 3过期
