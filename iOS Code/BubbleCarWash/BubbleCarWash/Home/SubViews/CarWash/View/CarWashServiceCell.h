@@ -24,7 +24,7 @@
 @property (nonatomic, copy) NSString *selectBtnImageName;
 @property (nonatomic, assign) CGFloat originalPrice;
 @property (nonatomic, assign) CGFloat couponPrice;
-@property (nonatomic, assign) NSInteger couponNumber;
+@property (nonatomic, copy) NSString *couponNumber;
 @property (nonatomic, assign) BOOL hasCoupon;
 
 @end

@@ -53,20 +53,30 @@
 
 - (void)setOriginalPrice:(CGFloat)originalPrice {
     _originalPrice = originalPrice;
-    _originalPriceLabel.text = [NSString stringWithFormat:@"%.2f", originalPrice];
+    NSString *price = [NSString stringWithFormat:@"¥%.2f", originalPrice];
+    NSAttributedString *attrStr = [[NSAttributedString alloc] initWithString:price attributes:@{
+                                                                                                NSFontAttributeName:[UIFont systemFontOfSize:15],
+                                                                                                NSForegroundColorAttributeName:[UIColor rgbWithRed:183 green:196 blue:203],
+                                                                                               NSStrikethroughColorAttributeName:[UIColor rgbWithRed:183 green:196 blue:203], NSStrikethroughStyleAttributeName:@(NSUnderlineStyleSingle)}];
+    _originalPriceLabel.attributedText = attrStr;
 }
 
 - (void)setCouponPrice:(CGFloat)couponPrice {
     _couponPrice = couponPrice;
-    _couponPriceLabel.text = [NSString stringWithFormat:@"%.2f", couponPrice];
+    if (_hasCoupon) {
+        _couponPriceLabel.text = [NSString stringWithFormat:@"券后价%.2f", couponPrice];
+    } else {
+        _couponPriceLabel.text = [NSString stringWithFormat:@"¥%.2f", couponPrice];
+    }
 }
 
-- (void)setCouponNumber:(NSInteger)couponNumber {
+- (void)setCouponNumber:(NSString *)couponNumber {
     _couponNumber = couponNumber;
-    _couponHintLabel.text = [NSString stringWithFormat:@"%li", couponNumber];
+    _couponHintLabel.text = [NSString stringWithFormat:@"%@元优惠券", couponNumber];
 }
 
 - (void)setHasCoupon:(BOOL)hasCoupon {
+    _hasCoupon = hasCoupon;
     if (hasCoupon) {
         _originalPriceLabel.hidden = NO;
         _couponHintLabel.hidden = NO;

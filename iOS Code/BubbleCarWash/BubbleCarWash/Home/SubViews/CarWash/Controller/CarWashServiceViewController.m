@@ -33,6 +33,7 @@
 @property (nonatomic, strong) NSMutableArray *coupons;
 @property (nonatomic, assign) CGFloat newServicePrice;
 @property (nonatomic, assign) NSInteger couponIndex;
+@property (nonatomic, strong) NSMutableDictionary *couponsDic;
 
 @end
 
@@ -51,6 +52,7 @@
     _totalAmount = 0;
     _newServicePrice = 0;
     _couponIndex = -1;
+    _couponsDic = [[NSMutableDictionary alloc] initWithCapacity:0];
     
     NSArray *colors = @[
                         (id)[UIColor rgbByHexStr:@"ffffff" alpha:0.0].CGColor,
@@ -151,7 +153,7 @@
     }
     
     NSArray *servicelist = _dataSource[0];
-    ServiceModel *model =  servicelist[_serviceSelectedIndexPath.row];
+    ServiceModel *model = servicelist[_serviceSelectedIndexPath.row];
     _totalAmount = model.price;
     
     // 判断是否能使用优惠券
@@ -168,7 +170,7 @@
         }
         
         // 券相等的情况下，时间小的先使用
-        if (price == value) {
+        if (price == value && index != -1) {
             MyCouponModel *oldModel = self.coupons[index];
             if (oldModel.endTime < newModel.endTime) {
                 price = 0;
@@ -196,6 +198,45 @@
                 forState:UIControlStateNormal];
 }
 
+- (NSInteger)checkCoupons:(NSInteger)row {
+    NSArray *servicelist = _dataSource[0];
+    ServiceModel *model = servicelist[row];
+    CGFloat amount = model.price;
+    
+    // 判断是否能使用优惠券
+    NSInteger index = -1;
+    CGFloat value = 0;
+    NSTimeInterval interval = [[NSDate date] timeIntervalSince1970];
+    long long currrentTime = interval * 1000;
+    for (int i = 0; i < self.coupons.count; i++) {
+        CGFloat price = 0;
+        MyCouponModel *newModel = self.coupons[i];
+        // 在券有效的前提下，优先减最多的（开始时间小于当前时间，结束时间大于当前时间）
+        if (currrentTime < newModel.endTime && amount >= newModel.limitPrice) {
+            price = [newModel.price floatValue];
+        }
+        
+        // 券相等的情况下，时间小的先使用
+        if (price == value && index != -1) {
+            MyCouponModel *oldModel = self.coupons[index];
+            if (oldModel.endTime < newModel.endTime) {
+                price = 0;
+            }
+        }
+        
+        if (price > 0) {
+            value = price;
+            index = i;
+        }
+    }
+    
+    if (value > 0) {
+        return index;
+    }
+    
+    return -1;
+}
+
 #pragma mark - UITableViewDatasource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -210,21 +251,23 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSArray *list = _dataSource[indexPath.section];
     if (indexPath.section == 0) {
-        BOOL hasCoupon = _couponIndex >= 0;
+        NSInteger index = [self checkCoupons:indexPath.row];
+        BOOL hasCoupon = index != -1;
         ServiceModel *model =  list[indexPath.row];
         CarWashServiceCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CarWashServiceIdentifier" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.delegate = self;
         cell.desc = model.desc;
         cell.name = model.carWashName;
+        cell.hasCoupon = hasCoupon;
         if (hasCoupon) {
-            MyCouponModel *couponModel = _coupons[_couponIndex];
+            MyCouponModel *couponModel = _coupons[index];
             cell.originalPrice = model.price;
             cell.couponPrice = model.price - [couponModel.price floatValue];
+            cell.couponNumber = couponModel.price;
         } else {
             cell.couponPrice = model.price;
         }
-        cell.hasCoupon = hasCoupon;
         cell.selectBtnImageName =  indexPath.row == 0 ? @"SingleSelection_Selected" : @"SingleSelection_Normal";
         
         return cell;
@@ -326,7 +369,9 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        return 78;
+        NSInteger index = [self checkCoupons:indexPath.row];
+        BOOL hasCoupon = index != -1;
+        return hasCoupon ? 92 : 74;
     }
     
 //    if (indexPath.section == 1) {

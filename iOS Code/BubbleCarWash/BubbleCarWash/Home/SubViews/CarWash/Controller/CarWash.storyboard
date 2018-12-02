@@ -203,7 +203,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5元优惠券" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="70R-cb-EMm">
-                                                    <rect key="frame" x="256" y="68" width="71" height="18"/>
+                                                    <rect key="frame" x="256" y="64" width="71" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.97254901960784312" green="0.039215686274509803" blue="0.039215686274509803" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -227,7 +227,7 @@
                                                 <constraint firstItem="TOY-LG-kiO" firstAttribute="leading" secondItem="p2w-mj-0RJ" secondAttribute="leading" id="KAs-i4-5EU"/>
                                                 <constraint firstItem="wWH-qZ-R8Z" firstAttribute="leading" secondItem="p2w-mj-0RJ" secondAttribute="leading" id="Kpy-iZ-p5H"/>
                                                 <constraint firstItem="TOY-LG-kiO" firstAttribute="top" secondItem="p2w-mj-0RJ" secondAttribute="bottom" constant="6" id="WdP-Bp-6ve"/>
-                                                <constraint firstItem="70R-cb-EMm" firstAttribute="top" secondItem="TOY-LG-kiO" secondAttribute="bottom" constant="8" id="ZVw-IG-amw"/>
+                                                <constraint firstItem="70R-cb-EMm" firstAttribute="top" secondItem="TOY-LG-kiO" secondAttribute="bottom" constant="4" id="ZVw-IG-amw"/>
                                                 <constraint firstItem="vl2-QJ-NTO" firstAttribute="leading" secondItem="BpS-tm-p6H" secondAttribute="leading" id="cMS-6Z-JrM"/>
                                                 <constraint firstItem="vl2-QJ-NTO" firstAttribute="top" secondItem="BpS-tm-p6H" secondAttribute="top" constant="20" id="kFD-Qh-FJd"/>
                                                 <constraint firstAttribute="trailing" secondItem="70R-cb-EMm" secondAttribute="trailing" constant="16" id="oSF-1M-RVo"/>

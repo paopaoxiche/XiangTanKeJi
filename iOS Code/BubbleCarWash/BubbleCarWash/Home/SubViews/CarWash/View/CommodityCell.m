@@ -47,7 +47,7 @@
 
 - (void)setPrice:(CGFloat)price {
     _price = price;
-    _priceLabel.text = [NSString stringWithFormat:@"%.2f", price];
+    _priceLabel.text = [NSString stringWithFormat:@"¥%.2f", price];
 }
 
 @end
