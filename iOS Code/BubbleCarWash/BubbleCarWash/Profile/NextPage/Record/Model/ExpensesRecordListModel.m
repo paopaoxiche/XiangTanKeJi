@@ -95,7 +95,7 @@
         }
         
         NSArray *coupons = [dic objectForKey:@"coupons"];
-        _coupon = (coupons && coupons != [NSNull null] && coupons.count > 0) ? [[ExpensesCouponModel alloc] initWithDic:coupons] : nil;
+        _coupon = (coupons && coupons != [NSNull null] && coupons.count > 0) ? [[ExpensesCouponModel alloc] initWithDic:coupons.firstObject] : nil;
         
         NSArray *dataArr = [dic objectForKey:@"commodities"];
         NSMutableArray *commodities = [NSMutableArray arrayWithCapacity:dataArr.count];
@@ -124,7 +124,7 @@
 - (instancetype)initWithDic:(NSDictionary *)dic {
     self = [super init];
     if (self) {
-        _couponID = [[dic objectForKey:@"couponId"] unsignedIntegerValue];
+        _couponID = [[dic objectForKey:@"couponId"] integerValue];
         _couponName = [dic objectForKey:@"couponName"];
         _couponType = [[dic objectForKey:@"couponType"] integerValue] == 0 ? @"通用券" : @"商家券";
         _price = [NSString stringWithFormat:@"￥%.2f", [[dic objectForKey:@"couponPrice"] floatValue]];
