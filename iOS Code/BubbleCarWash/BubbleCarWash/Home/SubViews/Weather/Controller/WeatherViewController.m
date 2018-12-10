@@ -59,12 +59,15 @@
     
     self.realTimeModel = _weatherInfos[@"WeatherRealTimeModel"];
     self.dataSource = [[NSArray alloc] initWithArray:_weatherInfos[@"WeatherForeCasts"]];
-    WeatherForeCastModel *model = _dataSource[0];
-    [GlobalMethods setGradientColor:[WeatherModel weatherBackgroundColor:model.skycon]
-                         startPoint:CGPointMake(0, 0)
-                           endPoint:CGPointMake(0, 1)
-                               view:self.view];
-    self.weatherBgImgView.image = [UIImage imageNamed:self.backgroundImageNames[model.skycon]];
+    
+    if (self.dataSource.count > 0) {
+        WeatherForeCastModel *model = _dataSource[0];
+        [GlobalMethods setGradientColor:[WeatherModel weatherBackgroundColor:model.skycon]
+                             startPoint:CGPointMake(0, 0)
+                               endPoint:CGPointMake(0, 1)
+                                   view:self.view];
+        self.weatherBgImgView.image = [UIImage imageNamed:self.backgroundImageNames[model.skycon]];
+    }
     
     [self setWeatherRealTimeInfo];
     [self setLocation];

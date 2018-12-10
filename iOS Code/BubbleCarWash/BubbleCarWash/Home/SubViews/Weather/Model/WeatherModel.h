@@ -50,6 +50,8 @@ typedef void(^WeatherBlock)(NSDictionary *result);
 @property (nonatomic, copy) NSString *currentwindSpeed;
 /// 当前天气状况
 @property (nonatomic, copy) NSString *currentWeatherState;
+/// 天气概况
+@property (nonatomic, assign) WeatherSkycon skycon;
 
 - (instancetype)initWithDic:(NSDictionary *)dic;
 

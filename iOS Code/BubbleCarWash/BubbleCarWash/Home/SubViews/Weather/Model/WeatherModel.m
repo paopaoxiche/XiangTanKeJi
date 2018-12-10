@@ -162,6 +162,39 @@
     }
 }
 
++ (NSString *)weatherState:(WeatherSkycon)skycon {
+    NSString *state = @"";
+    switch (skycon) {
+        case WeatherSkyconClearDay:
+        case WeatherSkyconClearNight:
+            state = @"晴";
+            break;
+        case WeatherSkyconPartlyCloudyDay:
+        case WeatherSkyconPartlyCloudyNight:
+            state = @"多云";
+            break;
+        case WeatherSkyconCloudy:
+            state = @"阴";
+            break;
+        case WeatherSkyconRain:
+            state = @"雨";
+            break;
+        case WeatherSkyconSnow:
+            state = @"雪";
+            break;
+        case WeatherSkyconWind:
+            state = @"风";
+            break;
+        case WeatherSkyconHaze:
+            state = @"霾";
+            break;
+        default:
+            break;
+    }
+    
+    return state;
+}
+
 @end
 
 /// 实时天气
@@ -174,10 +207,11 @@
 - (instancetype)initWithDic:(NSDictionary *)dic {
     self = [super init];
     if (self) {
-        _currentTemperature = [NSString stringWithFormat:@"%li˚", [[dic objectForKey:@"temperature"] integerValue]];
+        _currentTemperature = [NSString stringWithFormat:@"%i˚", [[dic objectForKey:@"temperature"] intValue]];
         _currentHumidity = [NSString stringWithFormat:@"湿度%.f%%", [[dic objectForKey:@"humidity"] floatValue] * 100];
         _currentwindSpeed = [NSString stringWithFormat:@"风%.fkm/h", [[[dic objectForKey:@"wind"] objectForKey:@"speed"] floatValue]];
-        _currentWeatherState = [NSString stringWithFormat:@"%@", [[dic objectForKey:@"comfort"] objectForKey:@"desc"]];
+        _skycon = [WeatherModel weatherSkycon:[dic objectForKey:@"skycon"]];
+        _currentWeatherState = [WeatherModel weatherState:_skycon];
     }
     
     return self;
