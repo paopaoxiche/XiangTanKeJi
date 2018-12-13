@@ -186,7 +186,7 @@
             state = @"风";
             break;
         case WeatherSkyconHaze:
-            state = @"霾";
+            state = @"雾霾";
             break;
         default:
             break;

@@ -26,12 +26,16 @@ static NSString *token = @"kIoCAW4NzT21BFHQ";
 }
 
 - (void)obtainRealTimeWeather:(Location)location success:(SuccessBlock)success failed:(FailedBlock)failed {
-    NSString *url = [NSString stringWithFormat:@"%@/%@,%@/realtime.json", token, [NSNumber numberWithFloat:location.lng], [NSNumber numberWithFloat:location.lat]];
+    NSString *lng = [NSString stringWithFormat:@"%.8f", location.lng];
+    NSString *lat = [NSString stringWithFormat:@"%.8f", location.lat];
+    NSString *url = [NSString stringWithFormat:@"%@/%@,%@/realtime.json", token, lng, lat];
     [self GET:url parameters:nil success:success failure:failed];
 }
 
 - (void)obtainForeCastWeather:(Location)location success:(SuccessBlock)success failed:(FailedBlock)failed {
-    NSString *url = [NSString stringWithFormat:@"%@/%@,%@/forecast.json", token, [NSNumber numberWithFloat:location.lng], [NSNumber numberWithFloat:location.lat]];
+    NSString *lng = [NSString stringWithFormat:@"%.8f", location.lng];
+    NSString *lat = [NSString stringWithFormat:@"%.8f", location.lat];
+    NSString *url = [NSString stringWithFormat:@"%@/%@,%@/forecast.json", token, lng, lat];
     [self GET:url parameters:nil success:success failure:failed];
 }
 

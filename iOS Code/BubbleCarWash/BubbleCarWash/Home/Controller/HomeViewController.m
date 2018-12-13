@@ -375,10 +375,10 @@
         if ([UserManager sharedInstance].userType ==  UserTypeOwner) {
             [self loadNearByWashList];
         }
-        
-        [self loadWeatherInfos];
     }
     
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateWeatherInfo" object:nil];
+    [self loadWeatherInfos];
     [self searchReGeocode];
 }
 
