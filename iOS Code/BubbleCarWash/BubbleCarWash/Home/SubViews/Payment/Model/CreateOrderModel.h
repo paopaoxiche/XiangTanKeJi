@@ -12,6 +12,7 @@
 
 @interface CreateOrderModel : NSObject
 
+@property (nonatomic, assign) NSInteger consumeId;
 /// 微信调起支付参数
 @property (nonatomic, strong) WeiXinPaymentModel *wxPay;
 /// 支付宝调起支付参数

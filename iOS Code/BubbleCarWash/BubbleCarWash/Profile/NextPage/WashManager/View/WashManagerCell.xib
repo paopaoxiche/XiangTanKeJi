@@ -27,7 +27,7 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="商品简要描述" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g01-Iv-bDa">
-                        <rect key="frame" x="74" y="37" width="98" height="20"/>
+                        <rect key="frame" x="74" y="37" width="146" height="20"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <color key="textColor" red="0.66274509803921566" green="0.69411764705882351" blue="0.73725490196078436" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -56,6 +56,7 @@
                     <constraint firstItem="46z-nP-QSA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="C18-uP-1Of"/>
                     <constraint firstAttribute="bottom" secondItem="g01-Iv-bDa" secondAttribute="bottom" constant="10" id="E7V-Un-Z3O"/>
                     <constraint firstItem="g01-Iv-bDa" firstAttribute="leading" secondItem="46z-nP-QSA" secondAttribute="trailing" constant="14" id="G7p-zY-30a"/>
+                    <constraint firstAttribute="trailing" secondItem="g01-Iv-bDa" secondAttribute="trailing" constant="100" id="Up2-Lx-JaJ"/>
                     <constraint firstItem="twf-ch-ndB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="VzL-E6-2dr"/>
                     <constraint firstItem="SEW-PR-zwR" firstAttribute="centerY" secondItem="g01-Iv-bDa" secondAttribute="centerY" id="d6p-Xw-YvZ"/>
                     <constraint firstItem="twf-ch-ndB" firstAttribute="leading" secondItem="46z-nP-QSA" secondAttribute="trailing" constant="14" id="jlh-S5-Mey"/>

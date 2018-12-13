@@ -13,6 +13,7 @@
 - (instancetype)initWithDic:(NSDictionary *)dic {
     self = [super init];
     if (self) {
+        _consumeId = [[dic objectForKey:@"consumeId"] integerValue];
         _aliPay = [dic objectForKey:@"aliPay"];
         _payType = [[dic objectForKey:@"payType"] integerValue];
         NSDictionary *wxpay = [dic objectForKey:@"wxPay"];

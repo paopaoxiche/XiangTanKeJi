@@ -10,4 +10,6 @@
 
 @interface PaymentSuccessViewController : UIViewController
 
+@property (nonatomic, assign) NSInteger consumeID;
+
 @end

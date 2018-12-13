@@ -17,6 +17,7 @@
 #import "WXApiManager.h"
 #import "AlipayManager.h"
 #import "UIApplication+HUD.h"
+#import "PaymentSuccessViewController.h"
 
 @interface PaymentViewController () <UITableViewDataSource, PaymentTypeCellDelegate>
 
@@ -94,7 +95,8 @@
 }
 
 - (void)paymentSuccess {
-    UIViewController *vc = [GlobalMethods viewControllerWithBuddleName:@"Payment" vcIdentifier:@"PaymentSuccessVC"];
+    PaymentSuccessViewController *vc = (PaymentSuccessViewController *)[GlobalMethods viewControllerWithBuddleName:@"Payment" vcIdentifier:@"PaymentSuccessVC"];
+    vc.consumeID = self.orderModel.consumeId;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

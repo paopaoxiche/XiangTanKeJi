@@ -23,6 +23,7 @@
 - (IBAction)go2Evaluation:(id)sender {
     DiscussViewController *discussVC = (DiscussViewController *)[GlobalMethods viewControllerWithBuddleName:@"Profile"
                                                                       vcIdentifier:@"DiscussVC"];
+    discussVC.consumeID = self.consumeID;
     [self.navigationController pushViewController:discussVC animated:YES];
 }
 
