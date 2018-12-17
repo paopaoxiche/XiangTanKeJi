@@ -359,6 +359,15 @@ static const NSTimeInterval kTimeOutInterval = 6.0f;
     [self POST:manager url:@"http://101.200.63.245:8080/carOwner/createConsume" parameters:params success:success failure:failed];
 }
 
++ (void)obtainComsumeStatus:(NSString *)comsumedID success:(SuccessBlock)success failed:(FailedBlock)failed {
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.requestSerializer.timeoutInterval = kTimeOutInterval;
+    [manager.requestSerializer setValue:[UserManager sharedInstance].authentication
+                     forHTTPHeaderField:@"authentication"];
+    NSDictionary *params = @{@"comsumeId" : comsumedID};
+    [self POST:manager url:@"http://101.200.63.245:8080/carOwner/getConsumeStatus" parameters:params success:success failure:failed];
+}
+
 #pragma mark - 洗车场首页
 
 + (void)obtainRecentCarWashes:(NSInteger)washID count:(NSInteger)count success:(SuccessBlock)success failed:(FailedBlock)failed {

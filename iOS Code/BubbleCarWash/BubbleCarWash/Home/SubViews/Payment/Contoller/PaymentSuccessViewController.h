@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ParentViewController.h"
 
-@interface PaymentSuccessViewController : UIViewController
+@interface PaymentSuccessViewController : ParentViewController
 
 @property (nonatomic, assign) NSInteger consumeID;
 

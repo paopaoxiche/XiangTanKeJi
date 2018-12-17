@@ -228,6 +228,7 @@ typedef void(^FailedBlock)(NSError *error);
  *  创建订单
  */
 + (void)createOrder:(CreateOrderParam *)param success:(SuccessBlock)success failed:(FailedBlock)failed;
++ (void)obtainComsumeStatus:(NSString *)comsumedID success:(SuccessBlock)success failed:(FailedBlock)failed;
 
 #pragma mark - 洗车场首页
 
