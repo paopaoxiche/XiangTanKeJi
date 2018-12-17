@@ -35,16 +35,16 @@
     
     self.title = @"附近洗车场";
     [self.navigationController.navigationBar setTranslucent:NO];
-    self.fiveCarWashBtn = [[UIButton alloc] init];
-    [self.fiveCarWashBtn setImage:[UIImage imageNamed:@"SingleSelection_Normal"]
-                         forState:UIControlStateNormal];
-    [self.fiveCarWashBtn setTitle:@"五元洗车" forState:UIControlStateNormal];
-    [self.fiveCarWashBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [self.fiveCarWashBtn addTarget:self
-                            action:@selector(filterCarWashList)
-                  forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *fiveCarWashItem = [[UIBarButtonItem alloc] initWithCustomView:self.fiveCarWashBtn];
-    self.navigationItem.rightBarButtonItem = fiveCarWashItem;
+//    self.fiveCarWashBtn = [[UIButton alloc] init];
+//    [self.fiveCarWashBtn setImage:[UIImage imageNamed:@"SingleSelection_Normal"]
+//                         forState:UIControlStateNormal];
+//    [self.fiveCarWashBtn setTitle:@"五元洗车" forState:UIControlStateNormal];
+//    [self.fiveCarWashBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//    [self.fiveCarWashBtn addTarget:self
+//                            action:@selector(filterCarWashList)
+//                  forControlEvents:UIControlEventTouchUpInside];
+//    UIBarButtonItem *fiveCarWashItem = [[UIBarButtonItem alloc] initWithCustomView:self.fiveCarWashBtn];
+//    self.navigationItem.rightBarButtonItem = fiveCarWashItem;
     
     _mapView = [[MAMapView alloc] initWithFrame:_containerView.frame];
     _mapView.delegate = self;

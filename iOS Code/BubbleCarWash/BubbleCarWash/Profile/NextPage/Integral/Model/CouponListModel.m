@@ -72,9 +72,9 @@
         _name = [dic objectForKey:@"couponName"];
         _price = [NSString stringWithFormat:@"%@", [dic objectForKey:@"denomination"]];
         _detail = [dic objectForKey:@"detail"];
-        _startTime = [GlobalMethods conversionTimestampToStr:[dic objectForKey:@"startTime"]
+        _startTime = [GlobalMethods conversionTimestampToStr:[[dic objectForKey:@"startTime"] longValue]
                                                   dateFormat:@"yyyy.MM.dd"];
-        _endTime = [GlobalMethods conversionTimestampToStr:[dic objectForKey:@"endTime"]
+        _endTime = [GlobalMethods conversionTimestampToStr:[[dic objectForKey:@"endTime"] longValue]
                                                 dateFormat:@"yyyy.MM.dd"];
         _couponID = [[dic objectForKey:@"id"] unsignedIntegerValue];
         _type = [[dic objectForKey:@"issuer"] integerValue];

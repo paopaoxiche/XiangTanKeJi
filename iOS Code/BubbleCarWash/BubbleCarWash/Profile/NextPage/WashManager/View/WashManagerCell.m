@@ -48,12 +48,12 @@
 
 - (void)setCurrentPrice:(CGFloat)currentPrice {
     _currentPrice = currentPrice;
-    _proCurrentPriceLabel.text = [NSString stringWithFormat:@"%.2f", currentPrice];
+    _proCurrentPriceLabel.text = [NSString stringWithFormat:@"¥%.2f", currentPrice];
 }
 
 - (void)setOriginalPrice:(CGFloat)originalPrice {
     _originalPrice = originalPrice;
-    NSString *original = [NSString stringWithFormat:@"%.2f", originalPrice];
+    NSString *original = [NSString stringWithFormat:@"¥%.2f", originalPrice];
     NSMutableAttributedString *price = [[NSMutableAttributedString alloc] initWithString:original];
     [price addAttribute:NSStrikethroughStyleAttributeName
                   value:@(NSUnderlineStyleSingle)

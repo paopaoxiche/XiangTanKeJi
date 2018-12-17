@@ -19,7 +19,7 @@
         _nickName = [dic objectForKey:@"nickName"];
         _avatarUrl = [dic objectForKey:@"avatar"];
         _token = [dic objectForKey:@"token"];
-        _regTime = [GlobalMethods conversionTimestampToStr:[dic objectForKey:@"regTime"]
+        _regTime = [GlobalMethods conversionTimestampToStr:[[dic objectForKey:@"regTime"] longValue]
                                                 dateFormat:@"yyyy-MM-dd"];
         _type = [[dic objectForKey:@"type"] unsignedIntegerValue];
         _score = [[dic objectForKey:@"score"] unsignedIntegerValue];
