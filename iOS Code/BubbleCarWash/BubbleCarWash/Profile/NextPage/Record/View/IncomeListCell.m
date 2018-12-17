@@ -26,7 +26,7 @@
 - (void)setDate:(NSString *)date dayIncome:(CGFloat)dayIncome {
     
     _dateLabel.text = date;
-    _curDayIncome.text = [NSString stringWithFormat:@"共计收入%.2f元", dayIncome];
+    _curDayIncome.text = [NSString stringWithFormat:@"共计收入¥%.2f元", dayIncome];
 }
 
 @end
@@ -66,7 +66,7 @@
     }
     _onwerAvatar.image = [UIImage imageNamed:imageName];
     _carTypeLabel.text = desc;
-    _washFeeLabel.text = [NSString stringWithFormat:@"%.2f", money];;
+    _washFeeLabel.text = [NSString stringWithFormat:@"¥%.2f", money];;
 }
 
 @end

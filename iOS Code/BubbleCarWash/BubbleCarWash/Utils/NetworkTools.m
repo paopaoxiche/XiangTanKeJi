@@ -393,8 +393,8 @@ static const NSTimeInterval kTimeOutInterval = 6.0f;
     NSDictionary *params = @{
                              @"washId":[NSNumber numberWithInteger:washID],
                              @"address":address,
-                             @"lat":[NSString stringWithFormat:@"%.6f", latitude],
-                             @"lng":[NSString stringWithFormat:@"%.6f", longitude]
+                             @"lat":[NSString stringWithFormat:@"%.8f", latitude],
+                             @"lng":[NSString stringWithFormat:@"%.8f", longitude]
                              };
     [self POST:manager url:@"http://101.200.63.245:8080/wash/updataWashAddress" parameters:params success:success failure:failed];
 }
