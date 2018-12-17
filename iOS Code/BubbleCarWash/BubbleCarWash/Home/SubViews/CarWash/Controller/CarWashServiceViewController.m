@@ -218,7 +218,7 @@
         CGFloat price = 0;
         MyCouponModel *newModel = self.coupons[i];
         // 在券有效的前提下，优先减最多的（开始时间小于当前时间，结束时间大于当前时间）
-        if (currrentTime < newModel.endTime && amount > newModel.limitPrice) {
+        if (currrentTime < newModel.endTime && amount >= newModel.limitPrice) {
             price = [newModel.price floatValue];
         }
         
