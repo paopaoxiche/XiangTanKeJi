@@ -229,7 +229,7 @@ static const NSTimeInterval kTimeOutInterval = 6.0f;
     manager.requestSerializer.timeoutInterval = kTimeOutInterval;
     NSDictionary *params = @{@"washId": [NSNumber numberWithInteger:washID],
                              @"pageIndex": [NSNumber numberWithInteger:0],
-                             @"pageSize": [NSNumber numberWithInteger:200]};
+                             @"pageSize": [NSNumber numberWithInteger:1000]};
     NSString *url = @"http://101.200.63.245:8080/wash/getServiceList";
     [self GET:manager url:url parameters:params success:success failure:failed];
 }
@@ -239,7 +239,7 @@ static const NSTimeInterval kTimeOutInterval = 6.0f;
     manager.requestSerializer.timeoutInterval = kTimeOutInterval;
     NSDictionary *params = @{@"washId": [NSNumber numberWithInteger:washID],
                              @"pageIndex": [NSNumber numberWithInteger:0],
-                             @"pageSize": [NSNumber numberWithInteger:200]};
+                             @"pageSize": [NSNumber numberWithInteger:1000]};
     NSString *url = @"http://101.200.63.245:8080/wash/getCommodityList";
     [self GET:manager url:url parameters:params success:success failure:failed];
 }
@@ -365,7 +365,7 @@ static const NSTimeInterval kTimeOutInterval = 6.0f;
     [manager.requestSerializer setValue:[UserManager sharedInstance].authentication
                      forHTTPHeaderField:@"authentication"];
     NSDictionary *params = @{@"comsumeId" : comsumedID};
-    [self POST:manager url:@"http://101.200.63.245:8080/carOwner/getConsumeStatus" parameters:params success:success failure:failed];
+    [self GET:manager url:@"http://101.200.63.245:8080/carOwner/getConsumeStatus" parameters:params success:success failure:failed];
 }
 
 #pragma mark - 洗车场首页

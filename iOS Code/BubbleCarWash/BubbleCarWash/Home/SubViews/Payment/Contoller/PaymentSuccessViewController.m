@@ -27,7 +27,7 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [NetworkTools obtainComsumeStatus:[NSString stringWithFormat:@"%li", self.consumeID] success:^(NSDictionary *response, BOOL isSuccess) {
             [UIApplication stopBusyHUD];
-            NSInteger data = [response objectForKey:@"data"];
+            NSInteger data = [[response objectForKey:@"data"] integerValue];
             if (data == 2) {
                 DiscussViewController *discussVC = (DiscussViewController *)[GlobalMethods viewControllerWithBuddleName:@"Profile"
                                                                                                            vcIdentifier:@"DiscussVC"];

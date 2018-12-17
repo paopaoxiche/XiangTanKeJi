@@ -141,6 +141,9 @@
     _userInfo.token = @"";
     _userInfo.regTime = @"";
     _userInfo.userID = @"";
+    _userInfo.avatarUrl = @"";
+    _carWashInfo = nil;
+    _authentication = @"";
     [self savaUserInfoWithPassword:@""];
 }
 
