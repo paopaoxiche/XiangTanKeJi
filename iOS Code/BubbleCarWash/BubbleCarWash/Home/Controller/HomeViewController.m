@@ -27,6 +27,7 @@
 #import "CarWashInfoModel.h"
 #import "CommodityInfoViewController.h"
 #import "TXScrollLabelView.h"
+#import "FunctionMacro.h"
 
 @interface HomeViewController () <UITableViewDataSource, UITableViewDelegate, AMapLocationManagerDelegate, AMapSearchDelegate, CommodityCellProtocol>
 
@@ -104,12 +105,7 @@
             [self presentViewController:loginVC animated:YES completion:nil];
         }
         
-        if ([UserManager sharedInstance].userType == UserTypeOwner) {
-            [HomeDataModel loadRecommendWashCommodity:^(NSArray *result) {
-                self.commodityRecommendationVC.recommendWashCommodity = result;
-                [self.view layoutIfNeeded];
-            }];
-        }
+        [self loadRecommendWashCommodity];
     }];
     
     self.locationManager = [[AMapLocationManager alloc] init];
@@ -154,19 +150,43 @@
         _washViewHeightConstraint.constant = 322 - (4 - self.nearbyWashList.count) * 68;
     }
     
-    CGFloat heigth = isOwner ? 410 : 370;
+    CGFloat itemWidth = (kScreenWidth - 2 * 16 - (3 - 1) * 18) / 3;
+    CGFloat itemHeight = itemWidth + 50;
+    CGFloat height = 18 * 3 + itemHeight * 2;
+    CGFloat viewHeigth = isOwner ? height + 40 : height;
     NSInteger count = self.commodityRecommendationVC.recommendWashCommodity.count;
     if (count > 0 && count < 4 && !isOwner) {
-        heigth -= 160;
+        viewHeigth -= height * 0.5;
     }
     if (count == 0 && isOwner) {
-        heigth = 0;
+        viewHeigth = 0;
         _commodityRecommendationVC.view.hidden = YES;
     } else {
         _commodityRecommendationVC.view.hidden = NO;
-        _commodityRecommendationVC.view.frame = CGRectMake(0, 120 + _washViewHeightConstraint.constant + 16, [UIScreen mainScreen].bounds.size.width, heigth);
+        _commodityRecommendationVC.view.frame = CGRectMake(0, 120 + _washViewHeightConstraint.constant + 16, [UIScreen mainScreen].bounds.size.width, viewHeigth);
     }
-    _scrollViewHeightConstraint.constant = heigth + 472 + 10;
+    _scrollViewHeightConstraint.constant = viewHeigth + 472 + 10;
+}
+
+- (void)loadRecommendWashCommodity {
+    if ([UserManager sharedInstance].userType == UserTypeOwner) {
+        [HomeDataModel loadRecommendWashCommodity:^(NSArray *result) {
+            self.commodityRecommendationVC.recommendWashCommodity = result;
+            CGFloat itemWidth = (kScreenWidth - 2 * 16 - (3 - 1) * 18) / 3;
+            CGFloat itemHeight = itemWidth + 50;
+            CGFloat height = 18 * 3 + itemHeight * 2;
+            CGFloat viewHeigth = height + 40;
+            NSInteger count = self.commodityRecommendationVC.recommendWashCommodity.count;
+            if (count == 0) {
+                viewHeigth = 0;
+                self.commodityRecommendationVC.view.hidden = YES;
+            } else {
+                self.commodityRecommendationVC.view.hidden = NO;
+                self.commodityRecommendationVC.view.frame = CGRectMake(0, 120 + self.washViewHeightConstraint.constant + 16, [UIScreen mainScreen].bounds.size.width, viewHeigth);
+            }
+            self.scrollViewHeightConstraint.constant = viewHeigth + 472 + 10;
+        }];
+    }
 }
 
 - (void)loadNearByWashList {
@@ -374,6 +394,7 @@
         _isUpdateMearByWashList = NO;
         if ([UserManager sharedInstance].userType ==  UserTypeOwner) {
             [self loadNearByWashList];
+            [self loadRecommendWashCommodity];
         }
     }
     

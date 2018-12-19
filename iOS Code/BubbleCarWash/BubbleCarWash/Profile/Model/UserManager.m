@@ -79,6 +79,10 @@
 }
 
 - (void)autoLogin:(CodeResultBlock)block {
+    if (!_isLogin && ![self isAutoLogin]) {
+        block(401);
+    }
+    
     if (!_isLogin && [self isAutoLogin]) {
         [NetworkTools checkToken:_userInfo.token userID:_userInfo.userID isOwner:_userInfo.type == UserTypeOwner success:^(NSDictionary *response, BOOL isSuccess) {
             NSInteger code = [response[@"code"] integerValue];

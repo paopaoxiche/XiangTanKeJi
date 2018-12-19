@@ -37,13 +37,12 @@
     _tableView.rowHeight = 68;
     _tableView.tableFooterView = [[UIView alloc] init];
     [_tableView registerNib:[UINib nibWithNibName:@"WashManagerCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"WashManagerCell"];
-    
-    [self loadCarWashCommodityList];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [self loadCarWashCommodityList];
 }
 
 - (void)loadCarWashCommodityList {

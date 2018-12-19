@@ -170,6 +170,7 @@
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (![UserManager sharedInstance].isLogin && indexPath.section == 0) {
         [self messageBox:@"请先登录"];
     }

@@ -50,7 +50,8 @@
 }
 
 + (void)loadRecommendWashCommodity:(HomeResultBlock)result {
-    [NetworkTools  obtainRecommendCommodity:6 longitude:[NSNumber numberWithFloat:113.89] latitude:[NSNumber numberWithFloat:22.567] success:^(NSDictionary *response, BOOL isSuccess) {
+    Location location = [UserManager sharedInstance].location;
+    [NetworkTools  obtainRecommendCommodity:6 longitude:[NSNumber numberWithFloat:location.lng] latitude:[NSNumber numberWithFloat:location.lat] success:^(NSDictionary *response, BOOL isSuccess) {
         if ([response objectForKey:@"data"] == [NSNull null]) {
             return result(@[]);
         }
