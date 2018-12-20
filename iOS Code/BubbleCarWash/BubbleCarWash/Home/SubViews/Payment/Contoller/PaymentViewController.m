@@ -80,7 +80,7 @@
                 [WXApi sendReq:request];
             } else {
                 [AlipayManager sharedManager].paymentVC = self;
-                [[AlipaySDK defaultService] payOrder:self.orderModel.aliPay fromScheme:@"2018072560779353" callback:^(NSDictionary *resultDic) {
+                [[AlipaySDK defaultService] payOrder:self.orderModel.aliPay fromScheme:@"xiangtan2018072560779353" callback:^(NSDictionary *resultDic) {
                     NSLog(@"resultDic = %@", resultDic);
                 }];
             }
