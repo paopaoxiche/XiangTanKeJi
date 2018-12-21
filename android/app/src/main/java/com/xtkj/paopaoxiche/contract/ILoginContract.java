@@ -10,7 +10,7 @@ public class ILoginContract {
 
     public interface ILoginPresenter extends IBasePresenter {
         void getMessageCode(String phone);
-        void doLogin(String name,int roleType, long code);
+        void doLogin(String name,int roleType, String code);
     }
 
     public interface ILoginView extends IBaseView<ILoginPresenter> {

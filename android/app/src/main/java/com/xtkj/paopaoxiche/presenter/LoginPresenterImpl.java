@@ -42,7 +42,7 @@ public class LoginPresenterImpl implements ILoginContract.ILoginPresenter, UserM
     }
 
     @Override
-    public void doLogin(String account, int roleType, long code) {
+    public void doLogin(String account, int roleType, String code) {
         int type = 1;
         if (UserInfo.isDriver()) type = 0;
 

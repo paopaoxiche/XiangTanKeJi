@@ -220,11 +220,10 @@ public class LoginActivity extends BaseActivity implements RadioGroup.OnCheckedC
                 if (roletype < 0) {
                     showToast("请选择用户类型");
                 }
-                Long code = Long.valueOf(codeText.getEditableText().toString() + "");
 
                 loadingDialog.show();
 
-                loginPresenter.doLogin(account, roletype, code);
+                loginPresenter.doLogin(account, roletype, codeText.getEditableText().toString());
 
                 break;
         }

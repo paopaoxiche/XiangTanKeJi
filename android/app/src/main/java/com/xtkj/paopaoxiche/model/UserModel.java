@@ -223,10 +223,10 @@ public class UserModel {
                 });
     }
 
-    public void doLogin(String account, long code, int type) {
+    public void doLogin(String account, String code, int type) {
         RetrofitClient.newInstance(ApiField.BASEURL)
                 .create(UserService.class)
-                .Login(account, code + "", type)
+                .Login(account, code, type)
                 .enqueue(new Callback<LoginBean>() {
                     @Override
                     public void onResponse(Call<LoginBean> call, Response<LoginBean> response) {
