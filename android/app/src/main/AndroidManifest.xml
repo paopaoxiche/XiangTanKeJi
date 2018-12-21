@@ -28,6 +28,7 @@
     <!-- 用于申请获取蓝牙信息进行室内定位 -->
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
     <application
         android:name=".application.BaseApplication"
@@ -46,7 +47,7 @@
 
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="net.csdn.blog.ruancoder.fileprovider"
+            android:authorities="${applicationId}.provider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

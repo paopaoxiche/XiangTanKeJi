@@ -12,6 +12,8 @@
     <dimen name="login_text_size">20sp</dimen>
     <dimen name="login_radio_text_size">16sp</dimen>
 
+    <dimen name="main_user_count_image_size">44dp</dimen>
+
     <dimen name="dp20">20dp</dimen>
     <dimen name="dp16">16dp</dimen>
     <dimen name="dp112">112dp</dimen>

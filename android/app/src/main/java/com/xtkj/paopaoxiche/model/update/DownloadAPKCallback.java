@@ -120,7 +120,7 @@ public class DownloadAPKCallback {
             Uri data;
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 // "net.csdn.blog.ruancoder.fileprovider"即是在清单文件中配置的authorities
-                data = FileProvider.getUriForFile(activity, "net.csdn.blog.ruancoder.fileprovider", file);
+                data = FileProvider.getUriForFile(activity, activity.getApplicationContext().getPackageName() + ".provider", file);
                 // 给目标应用一个临时授权
                 intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             } else {

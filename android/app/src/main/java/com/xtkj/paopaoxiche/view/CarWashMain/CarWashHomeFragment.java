@@ -89,6 +89,10 @@ public class CarWashHomeFragment extends BaseFragmemt implements ICarWashContrac
     RelativeLayout carWashHomeBackground;
     @BindView(R.id.goods_recycler)
     RecyclerView goodsRecylerView;
+    @BindView(R.id.count_wash_text_view)
+    TextView washCountTextView;
+    @BindView(R.id.count_user_text_view)
+    TextView userCountTextView;
 
     Unbinder unbinder;
     private CarWashHomeFragment.ShopItemsAdapter shopItemsAdapter = null;
@@ -108,8 +112,14 @@ public class CarWashHomeFragment extends BaseFragmemt implements ICarWashContrac
         }
 
         getWashList();
+        initValue();
 
         return carWashView;
+    }
+
+    void initValue() {
+        userCountTextView.setText(UserInfo.getCountUser() + "");
+        washCountTextView.setText(UserInfo.getCountWash() + "");
     }
 
     @Override

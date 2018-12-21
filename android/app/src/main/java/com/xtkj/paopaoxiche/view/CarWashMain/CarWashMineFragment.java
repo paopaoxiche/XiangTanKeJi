@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -24,7 +23,6 @@ import com.xtkj.paopaoxiche.bean.UpdateBean;
 import com.xtkj.paopaoxiche.contract.ICarWashContract;
 import com.xtkj.paopaoxiche.http.ApiField;
 import com.xtkj.paopaoxiche.http.RetrofitClient;
-import com.xtkj.paopaoxiche.model.DriverHomeModel;
 import com.xtkj.paopaoxiche.model.UserInfo;
 import com.xtkj.paopaoxiche.model.update.DownloadAPKCallback;
 import com.xtkj.paopaoxiche.model.update.DownloadManager;
@@ -123,7 +121,7 @@ public class CarWashMineFragment extends BaseFragmemt implements ICarWashContrac
     private void initView(View view) {
         phoneNumberTextView.setText(UserInfo.getUserPhone());
         usernameTextView.setText(UserInfo.getNickName());
-        washCountTextView.setText(UserInfo.getWashCount() + "次");
+        washCountTextView.setText(UserInfo.getWashCarCount() + "次");
         myHonorTextView.setText(UserInfo.getHonor());
         if (UserInfo.avatarNotNull()) {
             Glide.with(getContext()).load(UserInfo.getAvatar()).into(portraitImageView);

@@ -26,6 +26,7 @@ import com.xtkj.paopaoxiche.bean.WeatherForecastBean;
 import com.xtkj.paopaoxiche.bean.WeatherRealTimeBean;
 import com.xtkj.paopaoxiche.contract.IDriverContract;
 import com.xtkj.paopaoxiche.model.DriverHomeModel;
+import com.xtkj.paopaoxiche.model.UserInfo;
 import com.xtkj.paopaoxiche.view.DriverMap.DriverMapActivity;
 import com.xtkj.paopaoxiche.view.WeatherForecast.WeatherForecastActivity;
 
@@ -89,6 +90,10 @@ public class HomeFragment extends BaseFragmemt implements IDriverContract.IHomeV
     LinearLayout weatherDetails2;
     @BindView(R.id.indicator)
     LinearLayout indicator;
+    @BindView(R.id.count_wash_text_view)
+    TextView washCountTextView;
+    @BindView(R.id.count_user_text_view)
+    TextView userCountTextView;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -114,11 +119,17 @@ public class HomeFragment extends BaseFragmemt implements IDriverContract.IHomeV
         unbinder = ButterKnife.bind(this, view);
 
         initView();
+        initValue();
         return view;
     }
 
     void initView() {
         washServiceRecyclerView.setLayoutManager(new LinearLayoutManager(getActivityContext()));
+    }
+
+    void initValue() {
+        userCountTextView.setText(UserInfo.getCountUser() + "");
+        washCountTextView.setText(UserInfo.getCountWash() + "");
     }
 
     @Override

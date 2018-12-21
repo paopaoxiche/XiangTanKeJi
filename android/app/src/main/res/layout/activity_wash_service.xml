@@ -131,7 +131,7 @@
                                     android:layout_marginLeft="12dp"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="中型车（七座以上九座及以下）"/>
+                                    android:text="中型车（SUV、商务车）"/>
                             </LinearLayout>
                             <LinearLayout
                                 android:gravity="center"
@@ -145,7 +145,7 @@
                                     android:layout_marginLeft="12dp"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="小型车（七座及以下）"/>
+                                    android:text="小型车"/>
                             </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>

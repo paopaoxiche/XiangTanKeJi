@@ -2,6 +2,7 @@ package com.xtkj.paopaoxiche.model;
 
 import android.widget.Toast;
 
+import com.tencent.mm.opensdk.utils.Log;
 import com.xtkj.paopaoxiche.application.AppConstant;
 import com.xtkj.paopaoxiche.application.Authentication;
 import com.xtkj.paopaoxiche.application.BaseApplication;
@@ -66,11 +67,17 @@ public class UserModel {
 
     public interface LoginListener {
         void getCodeSuccess();
+
         void getCodeFail();
+
         void loginSuccess(LoginBean.DataBean dataBean);
+
         void loginFail(int code);
+
         void timeOut();
+
         void checkTokenSuccess();
+
         void checkTokenFailed();
 
         void getCarWashInfoSuccess();
@@ -84,25 +91,26 @@ public class UserModel {
         void timeOut(String modifyType);
     }
 
-    public void checkCarWashToken(){
+    public void checkCarWashToken() {
+        Log.i("UserModel", "userType:car washer, token:" + Authentication.getAuthentication());
         RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
                 .create(UserService.class)
                 .checkCarWash()
                 .enqueue(new Callback<NoDataBean>() {
                     @Override
                     public void onResponse(Call<NoDataBean> call, Response<NoDataBean> response) {
-                            if (loginListenerList == null) {
-                                return;
+                        if (loginListenerList == null) {
+                            return;
+                        }
+                        if (response.body().getCode() == 200) {
+                            for (LoginListener loginListener : loginListenerList) {
+                                loginListener.checkTokenSuccess();
                             }
-                            if (response.body().getCode() == 200) {
-                                for (LoginListener loginListener : loginListenerList) {
-                                    loginListener.checkTokenSuccess();
-                                }
-                            } else {
-                                for (LoginListener loginListener : loginListenerList) {
-                                    loginListener.checkTokenFailed();
-                                }
+                        } else {
+                            for (LoginListener loginListener : loginListenerList) {
+                                loginListener.checkTokenFailed();
                             }
+                        }
                     }
 
                     @Override
@@ -117,7 +125,7 @@ public class UserModel {
                 });
     }
 
-    public void checkUpdate(String version){
+    public void checkUpdate(String version) {
         RetrofitClient.newInstance(ApiField.BASEURL)
                 .create(UserService.class)
                 .checkUpdate("0", version)
@@ -147,7 +155,8 @@ public class UserModel {
                 });
     }
 
-    public void checkDriverToken(){
+    public void checkDriverToken() {
+        Log.i("UserModel", "userType:driver, token:" + Authentication.getAuthentication());
         RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
                 .create(UserService.class)
                 .checkCarOwner()
@@ -217,7 +226,7 @@ public class UserModel {
     public void doLogin(String account, long code, int type) {
         RetrofitClient.newInstance(ApiField.BASEURL)
                 .create(UserService.class)
-                .Login(account, code, type)
+                .Login(account, code + "", type)
                 .enqueue(new Callback<LoginBean>() {
                     @Override
                     public void onResponse(Call<LoginBean> call, Response<LoginBean> response) {
@@ -344,7 +353,7 @@ public class UserModel {
                             CarWashInfoBean carWashInfoBean = response.body();
                             UserInfo.setAuthStatus(carWashInfoBean.getData().getAuthStatus());
                             UserInfo.setWashId(carWashInfoBean.getData().getId());
-                            UserInfo.setWashCount(carWashInfoBean.getData().getWashCount());
+                            UserInfo.setWashCarCount(carWashInfoBean.getData().getWashCount());
                             UserInfo.setHonor(carWashInfoBean.getData().getHonor());
                             for (LoginListener loginListener : loginListenerList) {
                                 loginListener.getCarWashInfoSuccess();
@@ -369,7 +378,7 @@ public class UserModel {
     }
 
     public void getUserInfo(String id) {
-        RetrofitClient.newInstance(ApiField.BASEURL)
+        RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
                 .create(UserService.class)
                 .getUserInfo(id)
                 .enqueue(new Callback<LoginBean>() {
@@ -377,7 +386,7 @@ public class UserModel {
                     public void onResponse(Call<LoginBean> call, Response<LoginBean> response) {
                         LoginBean.DataBean data = response.body().getData();
                         if (response.body().getCode() == 200) {
-                            saveData(data,false);
+                            saveData(data, false);
                             initData();
                         }
                     }
@@ -388,7 +397,7 @@ public class UserModel {
                     }
                 });
     }
-    
+
     private void saveData(LoginBean.DataBean data, boolean saveToken) {
         if (saveToken) {
             preferUtils.putString(AppConstant.TOKEN, data.getToken());
@@ -404,17 +413,21 @@ public class UserModel {
         preferUtils.putString(AppConstant.PHONE, data.getUserPhone());
         preferUtils.putInt(AppConstant.SCORE, data.getScore());
         preferUtils.putLong(AppConstant.REGISTER_TIME, data.getRegTime());
+        preferUtils.putInt(AppConstant.COUNT_WASH, data.getWashCount());
+        preferUtils.putInt(AppConstant.COUNT_USER, data.getUserCount());
     }
 
     public void initData() {
         UserInfo.setToken(preferUtils.getString(AppConstant.TOKEN));
         UserInfo.setId(preferUtils.getInt(AppConstant.USER_ID));
-        UserInfo.setDriver(preferUtils.getBoolean(AppConstant.IS_DRIVER,true));
+        UserInfo.setDriver(preferUtils.getBoolean(AppConstant.IS_DRIVER, true));
         UserInfo.setAvatar(preferUtils.getString(AppConstant.AVATAR));
         UserInfo.setNickName(preferUtils.getString(AppConstant.NICK_NAME));
         UserInfo.setUserPhone(preferUtils.getString(AppConstant.PHONE));
         UserInfo.setScore(preferUtils.getInt(AppConstant.SCORE));
         UserInfo.setRegTime(preferUtils.getLong(AppConstant.REGISTER_TIME, 0));
+        UserInfo.setCountWash(preferUtils.getInt(AppConstant.COUNT_WASH));
+        UserInfo.setCountUser(preferUtils.getInt(AppConstant.COUNT_USER));
         Authentication.setUser_id(UserInfo.getId());
         Authentication.setToken(UserInfo.getToken());
     }

@@ -11,6 +11,8 @@ public class AppConstant {
     public final static String SCORE = "SCORE";
     public final static String AVATAR = "AVATAR";
     public final static String REGISTER_TIME = "REGISTER_TIME";
+    public final static String COUNT_WASH = "COUNT_WASH";
+    public final static String COUNT_USER = "COUNT_USER";
 
     public final static String NET_ERROR = "网络连接失败！";
 

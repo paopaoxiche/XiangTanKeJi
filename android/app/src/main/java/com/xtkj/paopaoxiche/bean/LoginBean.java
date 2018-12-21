@@ -56,6 +56,8 @@ public class LoginBean {
         private String token;
         private int type;
         private String userPhone;
+        private int washCount;
+        private int userCount;
 
         public String getAvatar() {
             return avatar;
@@ -119,6 +121,22 @@ public class LoginBean {
 
         public void setUserPhone(String userPhone) {
             this.userPhone = userPhone;
+        }
+
+        public int getWashCount() {
+            return washCount;
+        }
+
+        public void setWashCount(int washCount) {
+            this.washCount = washCount;
+        }
+
+        public int getUserCount() {
+            return userCount;
+        }
+
+        public void setUserCount(int userCount) {
+            this.userCount = userCount;
         }
     }
 }

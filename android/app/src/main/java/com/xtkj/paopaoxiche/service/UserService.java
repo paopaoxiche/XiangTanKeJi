@@ -23,7 +23,7 @@ public interface UserService {
      * @param type
      * */
     @GET("user/login")
-    Call<LoginBean> Login(@Query("phone") String phone, @Query("code") long code, @Query("type") int type ) ;
+    Call<LoginBean> Login(@Query("phone") String phone, @Query("code") String code, @Query("type") int type ) ;
 
 
     /**

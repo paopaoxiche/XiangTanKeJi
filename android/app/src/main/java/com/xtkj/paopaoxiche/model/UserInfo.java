@@ -15,13 +15,16 @@ public class UserInfo {
 
     private static int authStatus;
     private static int washId;
-    private static int washCount;
+    private static int washCarCount;
     private static String honor;
 
     private static UpdateBean updateBean;
     private static boolean isCheckWuYuanXiChe = false;
 
     private static boolean driver = true;
+
+    private static int countWash;
+    private static int countUser;
 
     public static boolean isDriver() {
         return driver;
@@ -111,12 +114,12 @@ public class UserInfo {
         UserInfo.washId = washId;
     }
 
-    public static int getWashCount() {
-        return washCount;
+    public static int getWashCarCount() {
+        return washCarCount;
     }
 
-    public static void setWashCount(int washCount) {
-        UserInfo.washCount = washCount;
+    public static void setWashCarCount(int washCarCount) {
+        UserInfo.washCarCount = washCarCount;
     }
 
     public static boolean avatarNotNull() {
@@ -145,6 +148,22 @@ public class UserInfo {
 
     public static void setIsCheckWuYuanXiChe(boolean isCheckWuYuanXiChe) {
         UserInfo.isCheckWuYuanXiChe = isCheckWuYuanXiChe;
+    }
+
+    public static int getCountWash() {
+        return countWash;
+    }
+
+    public static void setCountWash(int countWash) {
+        UserInfo.countWash = countWash;
+    }
+
+    public static int getCountUser() {
+        return countUser;
+    }
+
+    public static void setCountUser(int countUser) {
+        UserInfo.countUser = countUser;
     }
 }
 

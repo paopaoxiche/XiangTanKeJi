@@ -106,12 +106,12 @@ public class GuidePresenterImpl implements IGuideContract.IGuidePresenter, UserM
         checkTokenComplete = true;
         init();
         if (UserInfo.isDriver()) {
-            UserModel.getInstance().getUserInfo(UserInfo.getId() + "");
             clazz = DriverMainActivity.class;
         } else {
             UserModel.getInstance().getCarWashInfo();
             clazz = CarWashMainActivity.class;
         }
+        UserModel.getInstance().getUserInfo(UserInfo.getId() + "");
     }
 
     @Override
