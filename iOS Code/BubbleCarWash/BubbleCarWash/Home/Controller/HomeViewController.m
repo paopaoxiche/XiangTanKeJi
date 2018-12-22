@@ -51,7 +51,7 @@
 @property (nonatomic, strong) AMapLocationManager *locationManager;
 @property (nonatomic, strong) AMapSearchAPI *search;
 @property (nonatomic, assign) BOOL isUpdateMearByWashList;
-@property (nonatomic, copy) NSArray *nearbyWashList;
+@property (nonatomic, strong) NSMutableArray *nearbyWashList;
 @property (nonatomic, copy) NSDictionary *weatherInfos;
 @property (nonatomic, copy) NSArray *backgroundImageNames;
 @property (nonatomic, strong) TXScrollLabelView *locationScrollView;
@@ -86,6 +86,7 @@
     _nearWashTableView.layer.cornerRadius = 4;
     _isUpdateMearByWashList = YES;
     _nearWashTableView.rowHeight = 68;
+    _nearbyWashList = [[NSMutableArray alloc] initWithCapacity:0];
     
     [self setScrollView];
     [self.nearWashTableView registerNib:[UINib nibWithNibName:@"RecentWashRecordCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"RecentWashRecordIdentifier"];
@@ -194,8 +195,9 @@
         return;
     }
     
+    [self.nearbyWashList removeAllObjects];
     [HomeDataModel loadNearbyWashList:[UserManager sharedInstance].location isMap:NO isSearch:NO result:^(NSArray *result) {
-        self.nearbyWashList = [result copy];
+        self.nearbyWashList = result;
         if (result.count > 0) {
             [self.nearWashTableView reloadData];
             self.nearWashTableView.hidden = NO;
@@ -215,8 +217,9 @@
     _hintLabel.text = @"近期洗车列表";
     [self loadCarWashCommodityList];
     
+    [self.nearbyWashList removeAllObjects];
     [ExpensesRecordListModel loadRecentCarWashList:4 result:^(NSArray *result) {
-        self.nearbyWashList = [result copy];
+        self.nearbyWashList = result;
         if (result.count > 0) {
             [self.nearWashTableView reloadData];
             self.nearWashTableView.hidden = NO;
