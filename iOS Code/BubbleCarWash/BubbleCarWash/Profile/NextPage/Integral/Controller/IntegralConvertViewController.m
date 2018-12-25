@@ -28,6 +28,10 @@
 
 @implementation IntegralConvertViewController
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -44,6 +48,10 @@
     self.modalPresentationCapturesStatusBarAppearance = NO;
     self.automaticallyAdjustsScrollViewInsets = NO;
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateScore) name:@"UpdateUserInfo" object:nil];
+    
+    [UserManager sharedInstance].isUpdateUserInfo = YES;
+    [[UserManager sharedInstance] obtainUserInfo];
     self.currentIntegralLabel.text = [NSString stringWithFormat:@"%li", [UserManager sharedInstance].userInfo.score];
     
     [CouponListModel loadRedeemableCouponList:^(NSArray *result) {
@@ -78,6 +86,10 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)updateScore {
+    self.currentIntegralLabel.text = [NSString stringWithFormat:@"%li", [UserManager sharedInstance].userInfo.score];
 }
 
 #pragma mark - UITableViewDatasource

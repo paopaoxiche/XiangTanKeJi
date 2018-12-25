@@ -47,6 +47,10 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (_dataSource.count <= indexPath.section) {
+        return nil;
+    }
+    
     NearbyWashListModel *model = _dataSource[indexPath.section];
     CarWashListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CarWashListIdentifier" forIndexPath:indexPath];
     cell.delegate = self;

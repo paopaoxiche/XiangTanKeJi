@@ -90,7 +90,6 @@
     if (self) {
         _address = [dic objectForKey:@"address"];
         _tradeState = [[dic objectForKey:@"businessStatus"] integerValue];
-        _distance = [[dic objectForKey:@"distance"] integerValue];
         _honor = [[dic objectForKey:@"honor"] integerValue];
         _dataID = [[dic objectForKey:@"id"] integerValue];
         _avatarUrl = [dic objectForKey:@"image"];
@@ -100,13 +99,24 @@
         _price = [[dic objectForKey:@"price"] floatValue];
         _washCount = [[dic objectForKey:@"washCount"] integerValue];
         _washID = [[dic objectForKey:@"washId"] integerValue];
+        
+        NSInteger dis = [GlobalMethods calculateDistanceWithLocation:_location
+                                                       localLocation:[UserManager sharedInstance].location];
+        if (dis > 1000) {
+            CGFloat distance = dis * 0.001;
+            if (fmodf(distance, 1) == 0) {
+                _distance = [NSString stringWithFormat:@"%.1fkm", distance];
+            } else if (fmodf(distance * 10, 1) == 0) {
+                _distance = [NSString stringWithFormat:@"%.2fkm", distance];
+            } else {
+                _distance = [NSString stringWithFormat:@"%.3fkm", distance];
+            }
+        } else {
+            _distance = [NSString stringWithFormat:@"%lim", dis];
+        }
     }
     
     return self;
-}
-
-- (NSUInteger)distance {
-    return [GlobalMethods calculateDistanceWithLocation:_location localLocation:[UserManager sharedInstance].location];
 }
 
 @end

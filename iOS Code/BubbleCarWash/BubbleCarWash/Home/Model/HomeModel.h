@@ -35,7 +35,7 @@ typedef void(^HomeResultBlock)(NSArray *result);
 /// 接洗次数
 @property (nonatomic, assign) NSInteger washCount;
 /// 与洗车场间距离
-@property (nonatomic, assign) NSUInteger distance;
+@property (nonatomic, copy) NSString *distance;
 /// 洗车场位置
 @property (nonatomic, assign) Location location;
 /// 洗车场id

@@ -15,6 +15,6 @@
 @property (nonatomic, assign) CGFloat lowestPrice;
 @property (nonatomic, assign) NSInteger honor;
 @property (nonatomic, assign) NSInteger washNumber;
-@property (nonatomic, assign) NSInteger distance;
+@property (nonatomic, copy) NSString *distance;
 
 @end

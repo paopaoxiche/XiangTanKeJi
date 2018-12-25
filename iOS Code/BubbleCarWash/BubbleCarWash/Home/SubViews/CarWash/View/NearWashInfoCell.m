@@ -38,23 +38,28 @@
 }
 
 - (void)setName:(NSString *)name {
+    _name = name;
     _washNameLabel.text = name;
 }
 
 - (void)setLowestPrice:(CGFloat)lowestPrice {
+    _lowestPrice = lowestPrice;
     _lowestPriceLabel.text = [NSString stringWithFormat:@"¥%.2f", lowestPrice];
 }
 
 - (void)setHonor:(NSInteger)honor {
+    _honor = _honor;
     _honorLabel.text = [NSString stringWithFormat:@"%li", honor];
 }
 
 - (void)setWashNumber:(NSInteger)washNumber {
+    _washNumber = washNumber;
     _washNumberLabel.text = [NSString stringWithFormat:@"%li", washNumber];
 }
 
-- (void)setDistance:(NSInteger)distance {
-    _distanceLabel.text = [NSString stringWithFormat:@"%li", distance];
+- (void)setDistance:(NSString *)distance {
+    _distance = distance;
+    _distanceLabel.text = distance;
 }
 
 @end

@@ -255,6 +255,10 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (_dataSource.count <= indexPath.section) {
+        return nil;
+    }
+    
     NSArray *list = _dataSource[indexPath.section];
     if (indexPath.section == 0) {
         NSInteger index = [self checkCoupons:indexPath.row];

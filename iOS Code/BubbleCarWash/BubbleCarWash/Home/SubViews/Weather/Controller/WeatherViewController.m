@@ -37,6 +37,8 @@
 @implementation WeatherViewController
 
 - (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
     if (_locationScrollView) {
         [_locationScrollView endScrolling];
         _locationScrollView = nil;

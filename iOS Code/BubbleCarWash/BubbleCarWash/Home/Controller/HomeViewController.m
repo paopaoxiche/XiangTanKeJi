@@ -344,6 +344,10 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (_nearbyWashList.count <= indexPath.row) {
+        return nil;
+    }
+    
     if ([UserManager sharedInstance].userType == UserTypeOwner) {
         NearbyWashListModel *model = _nearbyWashList[indexPath.row];
         NearWashInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NearWashInfoIdentifier"];

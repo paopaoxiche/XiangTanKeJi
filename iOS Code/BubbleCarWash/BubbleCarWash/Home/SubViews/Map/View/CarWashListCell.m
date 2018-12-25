@@ -66,9 +66,9 @@
     _priceLabel.text = [NSString stringWithFormat:@"¥%.2f", price];
 }
 
-- (void)setDistance:(NSUInteger)distance {
+- (void)setDistance:(NSString *)distance {
     _distance = distance;
-    _distanceLabel.text = [NSString stringWithFormat:@"%lum", distance];
+    _distanceLabel.text = distance;
 }
 
 @end

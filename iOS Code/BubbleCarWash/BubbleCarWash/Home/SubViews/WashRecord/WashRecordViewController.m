@@ -53,6 +53,10 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (_dataSource.count <= indexPath.row) {
+        return nil;
+    }
+    
     CarWashRecordModel *model = _dataSource[indexPath.row];
     RecentWashRecordCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RecentWashRecordIdentifier"];
     cell.imageName = model.avatarUrl;

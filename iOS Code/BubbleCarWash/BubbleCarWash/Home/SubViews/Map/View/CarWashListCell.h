@@ -24,6 +24,6 @@
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *address;
 @property (nonatomic, assign) CGFloat price;
-@property (nonatomic, assign) NSUInteger distance;
+@property (nonatomic, copy) NSString *distance;
 
 @end
