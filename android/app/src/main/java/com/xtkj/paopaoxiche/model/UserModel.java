@@ -349,9 +349,11 @@ public class UserModel {
                         if (loginListenerList == null) {
                             return;
                         }
+                        Log.e("aaa", Authentication.getAuthentication());
                         if (response.body().getCode() == 200) {
                             CarWashInfoBean carWashInfoBean = response.body();
                             UserInfo.setAuthStatus(carWashInfoBean.getData().getAuthStatus());
+                            UserInfo.setBusinessState(carWashInfoBean.getData().getBusinessState());
                             UserInfo.setWashId(carWashInfoBean.getData().getId());
                             UserInfo.setWashCarCount(carWashInfoBean.getData().getWashCount());
                             UserInfo.setHonor(carWashInfoBean.getData().getHonor());

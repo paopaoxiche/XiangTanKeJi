@@ -64,8 +64,10 @@ import retrofit2.Response;
 
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.xtkj.paopaoxiche.utils.DensityUtil;
+import com.xtkj.paopaoxiche.view.view.CommitEvaluationDialog;
+import com.xtkj.paopaoxiche.view.view.MyCustomDialog;
 
-public class WashServiceActivity extends BaseActivity implements IWashServiceContract.IWashServiceView, IWXAPIEventHandler, RadioGroup.OnCheckedChangeListener {
+public class WashServiceActivity extends BaseActivity implements IWashServiceContract.IWashServiceView, IWXAPIEventHandler, RadioGroup.OnCheckedChangeListener,CommitEvaluationDialog.EvaluateCallback {
 
     @BindView(R.id.back_button)
     ImageView backButton;
@@ -305,7 +307,7 @@ public class WashServiceActivity extends BaseActivity implements IWashServiceCon
                                         @Override
                                         public void run() {
                                             Toast.makeText(getActivityContext(), "支付成功", Toast.LENGTH_LONG).show();
-                                            finish();
+                                            new CommitEvaluationDialog(postWashServiceBean.getWashServiceId(), (CommitEvaluationDialog.EvaluateCallback) getActivityContext(), getActivityContext()).show();
                                         }
                                     });
                                 } else {
@@ -342,8 +344,8 @@ public class WashServiceActivity extends BaseActivity implements IWashServiceCon
     @Override
     public void onReq(BaseReq baseReq) {
         Log.i("支付反馈", "onPayFinish, reqType = " + baseReq.getType());
-        Toast.makeText(this, "openid = " + baseReq.openId, Toast.LENGTH_SHORT).show();
-
+        //Toast.makeText(this, "openid = " + baseReq.openId, Toast.LENGTH_SHORT).show();
+       // new CommitEvaluationDialog(postWashServiceBean.getWashServiceId(), this, this).show();
         switch (baseReq.getType()) {
             case ConstantsAPI.COMMAND_GETMESSAGE_FROM_WX:
                 //goToGetMsg();
@@ -362,8 +364,8 @@ public class WashServiceActivity extends BaseActivity implements IWashServiceCon
     @Override
     public void onResp(BaseResp resp) {
         Log.i("支付反馈", "onPayFinish, respType = " + resp.getType());
-        Toast.makeText(this, "openid = " + resp.openId, Toast.LENGTH_SHORT).show();
-
+        //Toast.makeText(this, "openid = " + resp.openId, Toast.LENGTH_SHORT).show();
+        new CommitEvaluationDialog(postWashServiceBean.getWashServiceId(), this, this).show();
         if (resp.getType() == ConstantsAPI.COMMAND_SENDAUTH) {
             Toast.makeText(this, "code = " + ((SendAuth.Resp) resp).code, Toast.LENGTH_SHORT).show();
 
@@ -407,5 +409,10 @@ public class WashServiceActivity extends BaseActivity implements IWashServiceCon
 
                     }
                 });
+    }
+
+    @Override
+    public void success(int serviceId) {
+        finish();
     }
 }

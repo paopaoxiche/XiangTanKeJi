@@ -14,6 +14,7 @@ public class UserInfo {
     private static String userPhone;
 
     private static int authStatus;
+    private static int businessState;
     private static int washId;
     private static int washCarCount;
     private static String honor;
@@ -148,6 +149,14 @@ public class UserInfo {
 
     public static void setIsCheckWuYuanXiChe(boolean isCheckWuYuanXiChe) {
         UserInfo.isCheckWuYuanXiChe = isCheckWuYuanXiChe;
+    }
+
+    public static int getBusinessState() {
+        return businessState;
+    }
+
+    public static void setBusinessState(int businessState) {
+        UserInfo.businessState = businessState;
     }
 
     public static int getCountWash() {

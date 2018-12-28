@@ -126,7 +126,7 @@ public class CarWashMineFragment extends BaseFragmemt implements ICarWashContrac
         if (UserInfo.avatarNotNull()) {
             Glide.with(getContext()).load(UserInfo.getAvatar()).into(portraitImageView);
         }
-        switch (UserInfo.getAuthStatus()) {
+        switch (UserInfo.getBusinessState()) {
             case -1:
                 stateTextView.setText("停业");
                 break;

@@ -32,9 +32,18 @@ public class CarWashInfoBean {
 
     public class DataBean {
         private int authStatus;
+        private int businessState;
         private int id;
         private int washCount;
         private String honor;
+
+        public int getBusinessState() {
+            return businessState;
+        }
+
+        public void setBusinessState(int businessState) {
+            this.businessState = businessState;
+        }
 
         public int getAuthStatus() {
             return authStatus;
