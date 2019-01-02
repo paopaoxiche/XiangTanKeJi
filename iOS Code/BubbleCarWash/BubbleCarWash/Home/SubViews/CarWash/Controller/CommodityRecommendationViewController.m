@@ -46,14 +46,17 @@
     [super viewWillLayoutSubviews];
     
     _flowLayout.column = 3;
+    
+    CGFloat height = self.view.frame.size.height;
     if ([UserManager sharedInstance].userType == UserTypeOwner) {
         _flowLayout.row = 2;
         _flowLayout.total = _recommendWashCommodity.count * 6;
+        _viewHeightConstraint.constant = height - 30;
     } else {
         _flowLayout.row = _recommendWashCommodity.count < 4 ? 1 : 2;
         _flowLayout.total = _flowLayout.row * 3;
         _commodityViewTopConstraint.constant = 0;
-        _viewHeightConstraint.constant = _recommendWashCommodity.count < 4 ? 210 : 370;
+        _viewHeightConstraint.constant = _recommendWashCommodity.count < 4 ? (height * 0.5 + 50) : height;
     }
 }
 
