@@ -104,6 +104,7 @@
 		65C5B10E2135B0F800727122 /* CarWashListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5B0FD2135B0F800727122 /* CarWashListCell.m */; };
 		65C5B10F2135B0F800727122 /* WeatherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5B1022135B0F800727122 /* WeatherViewController.m */; };
 		65C5B1102135B0F800727122 /* WeatherInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5B1052135B0F800727122 /* WeatherInfoCell.m */; };
+		65D31A1421DD104700106D53 /* NearWashInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65D31A1321DD104700106D53 /* NearWashInfoCell.xib */; };
 		65D8D49C2146CF5800934589 /* PaymentSuccessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D8D4972146CF5800934589 /* PaymentSuccessViewController.m */; };
 		65D8D49D2146CF5800934589 /* Payment.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65D8D49A2146CF5800934589 /* Payment.storyboard */; };
 		65D8D49E2146CF5800934589 /* PaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D8D49B2146CF5800934589 /* PaymentViewController.m */; };
@@ -307,6 +308,7 @@
 		65C5B1022135B0F800727122 /* WeatherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherViewController.m; sourceTree = "<group>"; };
 		65C5B1042135B0F800727122 /* WeatherInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherInfoCell.h; sourceTree = "<group>"; };
 		65C5B1052135B0F800727122 /* WeatherInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherInfoCell.m; sourceTree = "<group>"; };
+		65D31A1321DD104700106D53 /* NearWashInfoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NearWashInfoCell.xib; sourceTree = "<group>"; };
 		65D8D4972146CF5800934589 /* PaymentSuccessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentSuccessViewController.m; sourceTree = "<group>"; };
 		65D8D4982146CF5800934589 /* PaymentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentViewController.h; sourceTree = "<group>"; };
 		65D8D4992146CF5800934589 /* PaymentSuccessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentSuccessViewController.h; sourceTree = "<group>"; };
@@ -939,6 +941,7 @@
 				65FA51652145719100F9D08C /* CommodityCell.m */,
 				65551C76216A22890045F30B /* RecentWashRecordCell.h */,
 				65551C77216A22890045F30B /* RecentWashRecordCell.m */,
+				65D31A1321DD104700106D53 /* NearWashInfoCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1265,6 +1268,7 @@
 				65C5B0E42135AFC900727122 /* Home.storyboard in Resources */,
 				65C5B0752135AA8100727122 /* PersonalInfo.storyboard in Resources */,
 				65C5AF592135A32900727122 /* Login.storyboard in Resources */,
+				65D31A1421DD104700106D53 /* NearWashInfoCell.xib in Resources */,
 				653E3BE021480F9100FD08BE /* AlipaySDK.bundle in Resources */,
 				65FC341C20E13B83006DE3F1 /* Main.storyboard in Resources */,
 				65D8D49D2146CF5800934589 /* Payment.storyboard in Resources */,

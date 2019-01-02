@@ -90,6 +90,7 @@
     
     [self setScrollView];
     [self.nearWashTableView registerNib:[UINib nibWithNibName:@"RecentWashRecordCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"RecentWashRecordIdentifier"];
+    [self.nearWashTableView registerNib:[UINib nibWithNibName:@"NearWashInfoCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"NearWashInfoIdentifier"];
     
     UITapGestureRecognizer *singleGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(touchWeatherView:)];
     [_weatherView addGestureRecognizer:singleGesture];

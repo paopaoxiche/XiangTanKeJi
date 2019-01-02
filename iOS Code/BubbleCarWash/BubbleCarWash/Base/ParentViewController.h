@@ -15,4 +15,6 @@ typedef void(^ActionHandle)(void);
 - (void)messageBox:(NSString *)lpszMessage;
 - (void)messageBox:(NSString *)lpszMessage handle:(ActionHandle)handle;
 
+- (void)backToSuperVC;
+
 @end

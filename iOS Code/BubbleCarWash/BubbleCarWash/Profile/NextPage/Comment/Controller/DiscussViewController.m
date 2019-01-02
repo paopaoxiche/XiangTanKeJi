@@ -10,6 +10,7 @@
 #import "NetworkTools.h"
 #import "NSString+Category.h"
 #import "UIApplication+HUD.h"
+#import "MapViewController.h"
 
 @interface DiscussViewController () <UITextViewDelegate>
 
@@ -30,6 +31,20 @@
 
 - (void)hideKeyboard {
     [_discussTextView resignFirstResponder];
+}
+
+- (void)backToSuperVC {
+    BOOL isPay = NO;
+    for (UIViewController *vc in self.navigationController.viewControllers) {
+        if ([vc isKindOfClass:[MapViewController class]]) {
+            isPay = YES;
+            [self.navigationController popToViewController:vc animated:YES];
+        }
+    }
+    
+    if (!isPay) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 - (IBAction)onStartBtnClicked:(id)sender {

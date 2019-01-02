@@ -48,7 +48,7 @@
 }
 
 - (void)setHonor:(NSInteger)honor {
-    _honor = _honor;
+    _honor = honor;
     _honorLabel.text = [NSString stringWithFormat:@"%li", honor];
 }
 
