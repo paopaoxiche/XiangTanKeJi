@@ -89,11 +89,13 @@
 }
 
 - (IBAction)createOrder:(id)sender {
+    PayTypeModel *model = _dataSource[_paymentTypeSelectedIndexPath.row];
+    BOOL isWeiXin = model.isShowRecommend;
     [UIApplication showBusyHUD:nil withTitle:@"重新生成订单中"];
     CreateOrderParam *params = [[CreateOrderParam alloc] init];
     params.washServiceId = _serviceID;
     params.commoditys = _commoditys;
-    params.payType = [NSString stringWithFormat:@"%li", (_paymentTypeSelectedIndexPath.row + 1)];
+    params.payType = [NSString stringWithFormat:@"%i", (isWeiXin ? 1 : 2)];
     
     if (self.couponID != -1) {
         params.couponId = [NSString stringWithFormat:@"%li", self.couponID];
@@ -106,7 +108,7 @@
             NSDictionary *data = [response objectForKey:@"data"];
             self.orderModel = [[CreateOrderModel alloc] initWithDic:data];
             
-            if (self.paymentTypeSelectedIndexPath.row == 0) {
+            if (isWeiXin) {
                 PayReq *request = [[PayReq alloc] init];
                 request.partnerId = self.orderModel.wxPay.partnerid;
                 request.prepayId = self.orderModel.wxPay.prepayid;
@@ -163,12 +165,16 @@
 #pragma mark - PaymentTypeCellDelegate
 
 - (void)selectedPaymentTypeCell:(PaymentTypeCell *)cell {
-    cell.selectImageName = @"SingleSelection_Selected";
+    NSIndexPath *currentIndexPath = [self.tableView indexPathForCell:cell];
+    if (currentIndexPath.row == _paymentTypeSelectedIndexPath.row) {
+        return;
+    }
     
+    cell.selectImageName = @"SingleSelection_Selected";
     PaymentTypeCell *selectedCell = [self.tableView cellForRowAtIndexPath:_paymentTypeSelectedIndexPath];
     selectedCell.selectImageName = @"SingleSelection_Normal";
     
-    _paymentTypeSelectedIndexPath = [self.tableView indexPathForCell:cell];
+    _paymentTypeSelectedIndexPath = currentIndexPath;
 }
 
 @end
