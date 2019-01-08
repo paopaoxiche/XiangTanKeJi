@@ -9,6 +9,16 @@
 #import <UIKit/UIKit.h>
 #import "ParentViewController.h"
 
+@interface PayTypeModel : NSObject
+
+@property (nonatomic, copy) NSString *typeImageName;
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic, assign) BOOL isShowRecommend;
+
+- (instancetype)initWithDic:(NSDictionary *)dic;
+
+@end
+
 @interface PaymentViewController : ParentViewController
 
 @property (nonatomic, copy) NSString *serviceID;

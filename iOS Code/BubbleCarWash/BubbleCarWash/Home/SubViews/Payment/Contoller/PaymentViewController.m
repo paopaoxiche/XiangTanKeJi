@@ -19,6 +19,21 @@
 #import "UIApplication+HUD.h"
 #import "PaymentSuccessViewController.h"
 
+@implementation PayTypeModel
+
+- (instancetype)initWithDic:(NSDictionary *)dic {
+    self = [super init];
+    if (self) {
+        _typeImageName = [dic objectForKey:@"typeImageName"];
+        _name = [dic objectForKey:@"name"];
+        _isShowRecommend = [[dic objectForKey:@"isShowRecommend"] boolValue];
+    }
+    
+    return self;
+}
+
+@end
+
 @interface PaymentViewController () <UITableViewDataSource, PaymentTypeCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -26,6 +41,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *paymentBtn;
 @property (nonatomic, strong) NSIndexPath *paymentTypeSelectedIndexPath;
 @property (nonatomic, strong) CreateOrderModel *orderModel;
+@property (nonatomic, strong) NSMutableArray *dataSource;
 
 @end
 
@@ -46,8 +62,30 @@
     _tableView.tableFooterView = [[UIView alloc] init];
     _paymentTypeSelectedIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     _totalAmountLabel.text = [NSString stringWithFormat:@"¥%@", self.totalAmount];
-    [self.paymentBtn setTitle:[NSString stringWithFormat:@"确认支付 ¥%@", self.totalAmount]
-                     forState:UIControlStateNormal];
+    _dataSource = [[NSMutableArray alloc] initWithCapacity:0];
+    
+    // 判断是否安装微信
+    if ([WXApi isWXAppInstalled]) {
+        PayTypeModel *model = [[PayTypeModel alloc] initWithDic:@{@"typeImageName": @"WeiXin", @"name": @"微信", @"isShowRecommend": @1}];
+        [_dataSource addObject:model];
+    }
+    
+    // 判断是否安装支付宝
+    NSURL *url = [NSURL URLWithString:@"alipay:"];
+    if ([[UIApplication sharedApplication] canOpenURL:url]) {
+        PayTypeModel *model = [[PayTypeModel alloc] initWithDic:@{@"typeImageName": @"Alipay", @"name": @"支付宝", @"isShowRecommend": @0}];
+        [_dataSource addObject:model];
+    }
+    
+    if (_dataSource.count < 1) {
+        self.paymentBtn.enabled = NO;
+        [self.paymentBtn setTitle:@"未下载支付软件，不能进行支付"
+                         forState:UIControlStateNormal];
+    } else {
+        self.paymentBtn.enabled = YES;
+        [self.paymentBtn setTitle:[NSString stringWithFormat:@"确认支付 ¥%@", self.totalAmount]
+                         forState:UIControlStateNormal];
+    }
 }
 
 - (IBAction)createOrder:(id)sender {
@@ -103,22 +141,20 @@
 #pragma mark - UITableViewDatasource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 2;
+    return _dataSource.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     PaymentTypeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PaymentTypeIdentifier" forIndexPath:indexPath];
+    PayTypeModel *model = _dataSource[indexPath.row];
+    cell.typeImageName = model.typeImageName;
+    cell.name = model.name;
+    cell.isShowRecommend = model.isShowRecommend;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.delegate = self;
     if (indexPath.row == 0) {
-        cell.typeImageName = @"WeiXin";
-        cell.name = @"微信";
-        cell.isShowRecommend = YES;
         cell.selectImageName = @"SingleSelection_Selected";
     } else {
-        cell.typeImageName = @"Alipay";
-        cell.name = @"支付宝";
-        cell.isShowRecommend = NO;
         cell.selectImageName = @"SingleSelection_Normal";
     }
     return cell;

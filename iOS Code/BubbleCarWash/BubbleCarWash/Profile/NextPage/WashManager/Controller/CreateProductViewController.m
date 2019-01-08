@@ -134,6 +134,7 @@
         _currentPriceTextField.text = [NSString stringWithFormat:@"%.2f", _model.currentPrice];
         _originalPriceTextField.text = [NSString stringWithFormat:@"%.2f", _model.originPrice];
         _descTextView.text = _model.describe;
+        _placeholderLabel.hidden = _descTextView.hasText;
         
         if (_model.imageUrl && ![_model.imageUrl isEqualToString:@""]) {
             [_imageView sd_setImageWithURL:[NSURL URLWithString:_model.imageUrl]];

@@ -47,6 +47,7 @@
         _nameTextField.text = _model.carWashName;
         _priceTextField.text = [NSString stringWithFormat:@"%.2f", _model.price];
         _textView.text = _model.desc;
+        _placeholderLabel.hidden = _textView.hasText;
     }
 }
 
