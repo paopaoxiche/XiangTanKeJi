@@ -67,6 +67,7 @@
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     ModelCertificationModel *model = [_modelCertificationList objectAtIndex:indexPath.row];
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Certification" bundle:[NSBundle mainBundle]];
     CertificationViewController *certificationVC = [storyboard instantiateViewControllerWithIdentifier:@"CertificationVC"];
