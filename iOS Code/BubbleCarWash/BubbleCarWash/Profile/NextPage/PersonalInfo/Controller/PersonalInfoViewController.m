@@ -218,7 +218,7 @@
         self.imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
         [self presentViewController:self.imagePicker animated:YES completion:nil];
     }];
-    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"" style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
     
     [actionSheet addAction:photoAction];
     [actionSheet addAction:cameraAction];
