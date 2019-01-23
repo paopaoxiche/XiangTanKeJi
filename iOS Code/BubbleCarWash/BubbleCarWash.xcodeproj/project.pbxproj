@@ -48,7 +48,6 @@
 		6593AB85212942AA002F92F6 /* NetworkTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 6593AB84212942AA002F92F6 /* NetworkTools.m */; };
 		65B3522A21AC1792001D339F /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B3522821AC1792001D339F /* WebViewController.m */; };
 		65B3522B21AC1792001D339F /* Privacy.html in Resources */ = {isa = PBXBuildFile; fileRef = 65B3522921AC1792001D339F /* Privacy.html */; };
-		65BCC85321529611009EC365 /* AMapSearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65BCC85221529611009EC365 /* AMapSearchKit.framework */; };
 		65C5AF582135A32900727122 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5AF522135A32900727122 /* LoginViewController.m */; };
 		65C5AF592135A32900727122 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65C5AF532135A32900727122 /* Login.storyboard */; };
 		65C5AFC42135A45100727122 /* ProfileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65C5AF9B2135A45100727122 /* ProfileCell.xib */; };
@@ -132,6 +131,14 @@
 		CC041A1121464CA600804FAD /* CertificationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC041A1021464CA500804FAD /* CertificationCell.xib */; };
 		CC2A07A921A6B9B100EDC797 /* UIImage+CreateByColor.m in Sources */ = {isa = PBXBuildFile; fileRef = CC2A07A721A6B9B100EDC797 /* UIImage+CreateByColor.m */; };
 		CC5BF768213658900037DF66 /* NSObject+DictionaryFromModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC5BF767213658900037DF66 /* NSObject+DictionaryFromModel.m */; };
+		CC995FA721F80899006902D5 /* MAMapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC995FA321F80899006902D5 /* MAMapKit.framework */; };
+		CC995FA821F80899006902D5 /* AMapFoundationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC995FA421F80899006902D5 /* AMapFoundationKit.framework */; };
+		CC995FA921F80899006902D5 /* AMapLocationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC995FA521F80899006902D5 /* AMapLocationKit.framework */; };
+		CC995FAA21F80899006902D5 /* AMapSearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC995FA621F80899006902D5 /* AMapSearchKit.framework */; };
+		CC995FAC21F808DC006902D5 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC995FAB21F808DC006902D5 /* CoreLocation.framework */; };
+		CC995FAE21F80930006902D5 /* AMap.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CC995FAD21F80930006902D5 /* AMap.bundle */; };
+		CC995FB021F80989006902D5 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC995FAF21F80989006902D5 /* ExternalAccessory.framework */; };
+		CC995FB221F809A2006902D5 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC995FB121F809A2006902D5 /* GLKit.framework */; };
 		CCA16520213E413E001626C6 /* CustomerServicerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA1651F213E413E001626C6 /* CustomerServicerViewController.m */; };
 		CCA16526213E41B9001626C6 /* UpgradeReminderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA16525213E41B9001626C6 /* UpgradeReminderViewController.m */; };
 		CCA1652F213E48BB001626C6 /* UILabel+CreateLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA1652E213E48BB001626C6 /* UILabel+CreateLabel.m */; };
@@ -207,7 +214,6 @@
 		65B3522921AC1792001D339F /* Privacy.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Privacy.html; sourceTree = "<group>"; };
 		65B7FC1821046E5700FC56A1 /* FunctionMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FunctionMacro.h; sourceTree = "<group>"; };
 		65BCC850215295B7009EC365 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
-		65BCC85221529611009EC365 /* AMapSearchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMapSearchKit.framework; path = Pods/AMapSearch/AMapSearchKit.framework; sourceTree = "<group>"; };
 		65C5AF522135A32900727122 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		65C5AF532135A32900727122 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		65C5AF542135A32900727122 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
@@ -360,6 +366,14 @@
 		CC2A07A821A6B9B100EDC797 /* UIImage+CreateByColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+CreateByColor.h"; sourceTree = "<group>"; };
 		CC5BF766213658900037DF66 /* NSObject+DictionaryFromModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+DictionaryFromModel.h"; sourceTree = "<group>"; };
 		CC5BF767213658900037DF66 /* NSObject+DictionaryFromModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+DictionaryFromModel.m"; sourceTree = "<group>"; };
+		CC995FA321F80899006902D5 /* MAMapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MAMapKit.framework; path = BubbleCarWash/Vendor/Map/MAMapKit.framework; sourceTree = "<group>"; };
+		CC995FA421F80899006902D5 /* AMapFoundationKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMapFoundationKit.framework; path = BubbleCarWash/Vendor/Map/AMapFoundationKit.framework; sourceTree = "<group>"; };
+		CC995FA521F80899006902D5 /* AMapLocationKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMapLocationKit.framework; path = BubbleCarWash/Vendor/Map/AMapLocationKit.framework; sourceTree = "<group>"; };
+		CC995FA621F80899006902D5 /* AMapSearchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMapSearchKit.framework; path = BubbleCarWash/Vendor/Map/AMapSearchKit.framework; sourceTree = "<group>"; };
+		CC995FAB21F808DC006902D5 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		CC995FAD21F80930006902D5 /* AMap.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = AMap.bundle; path = BubbleCarWash/Vendor/Map/MAMapKit.framework/AMap.bundle; sourceTree = "<group>"; };
+		CC995FAF21F80989006902D5 /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
+		CC995FB121F809A2006902D5 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		CCA1651E213E413E001626C6 /* CustomerServicerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomerServicerViewController.h; sourceTree = "<group>"; };
 		CCA1651F213E413E001626C6 /* CustomerServicerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomerServicerViewController.m; sourceTree = "<group>"; };
 		CCA16524213E41B9001626C6 /* UpgradeReminderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UpgradeReminderViewController.h; sourceTree = "<group>"; };
@@ -375,7 +389,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				65BCC85321529611009EC365 /* AMapSearchKit.framework in Frameworks */,
+				CC995FB221F809A2006902D5 /* GLKit.framework in Frameworks */,
+				CC995FB021F80989006902D5 /* ExternalAccessory.framework in Frameworks */,
+				CC995FAC21F808DC006902D5 /* CoreLocation.framework in Frameworks */,
+				CC995FA721F80899006902D5 /* MAMapKit.framework in Frameworks */,
+				CC995FA821F80899006902D5 /* AMapFoundationKit.framework in Frameworks */,
+				CC995FA921F80899006902D5 /* AMapLocationKit.framework in Frameworks */,
+				CC995FAA21F80899006902D5 /* AMapSearchKit.framework in Frameworks */,
 				653E3BE121480F9100FD08BE /* AlipaySDK.framework in Frameworks */,
 				653E3BED21480FF300FD08BE /* CoreMotion.framework in Frameworks */,
 				653E3BEB21480FE500FD08BE /* Foundation.framework in Frameworks */,
@@ -1058,6 +1078,7 @@
 		65FC33E320E13576006DE3F1 = {
 			isa = PBXGroup;
 			children = (
+				CC995FAD21F80930006902D5 /* AMap.bundle */,
 				65FC33EE20E13577006DE3F1 /* BubbleCarWash */,
 				65FC33ED20E13577006DE3F1 /* Products */,
 				D2DA8B02A49A21B970AAC972 /* Pods */,
@@ -1138,7 +1159,13 @@
 		7A3C8B637EAA8F8B98C5119D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				65BCC85221529611009EC365 /* AMapSearchKit.framework */,
+				CC995FB121F809A2006902D5 /* GLKit.framework */,
+				CC995FAF21F80989006902D5 /* ExternalAccessory.framework */,
+				CC995FAB21F808DC006902D5 /* CoreLocation.framework */,
+				CC995FA421F80899006902D5 /* AMapFoundationKit.framework */,
+				CC995FA521F80899006902D5 /* AMapLocationKit.framework */,
+				CC995FA621F80899006902D5 /* AMapSearchKit.framework */,
+				CC995FA321F80899006902D5 /* MAMapKit.framework */,
 				65BCC850215295B7009EC365 /* Podfile */,
 				653E3BEC21480FF300FD08BE /* CoreMotion.framework */,
 				653E3BEA21480FE500FD08BE /* Foundation.framework */,
@@ -1215,6 +1242,7 @@
 				65FC33E920E13577006DE3F1 /* Frameworks */,
 				65FC33EA20E13577006DE3F1 /* Resources */,
 				DB4C1590B13D23DE052B5284 /* [CP] Copy Pods Resources */,
+				C2878C702CCF053A5E3C3508 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1280,6 +1308,7 @@
 				65C5AFC42135A45100727122 /* ProfileCell.xib in Resources */,
 				65B3522B21AC1792001D339F /* Privacy.html in Resources */,
 				65C5AFC92135A45100727122 /* Profile.storyboard in Resources */,
+				CC995FAE21F80930006902D5 /* AMap.bundle in Resources */,
 				65C5B10A2135B0F800727122 /* Map.storyboard in Resources */,
 				651A5FE321AED7C800379D91 /* RecentWashRecordCell.xib in Resources */,
 			);
@@ -1288,6 +1317,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		C2878C702CCF053A5E3C3508 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BubbleCarWash/Pods-BubbleCarWash-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		DB4C1590B13D23DE052B5284 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1563,6 +1607,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/BubbleCarWash/Vendor/Apliay",
 					"$(PROJECT_DIR)/Pods/AMapSearch",
+					"$(PROJECT_DIR)/BubbleCarWash/Vendor/Map",
 				);
 				INFOPLIST_FILE = BubbleCarWash/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1629,6 +1674,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/BubbleCarWash/Vendor/Apliay",
 					"$(PROJECT_DIR)/Pods/AMapSearch",
+					"$(PROJECT_DIR)/BubbleCarWash/Vendor/Map",
 				);
 				INFOPLIST_FILE = BubbleCarWash/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
