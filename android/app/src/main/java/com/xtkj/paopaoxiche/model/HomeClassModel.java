@@ -1,5 +1,6 @@
 package com.xtkj.paopaoxiche.model;
 
+import com.xtkj.paopaoxiche.application.AppConstant;
 import com.xtkj.paopaoxiche.application.Authentication;
 import com.xtkj.paopaoxiche.bean.ClassificationCommodityBean;
 import com.xtkj.paopaoxiche.http.ApiField;
@@ -20,7 +21,9 @@ public class HomeClassModel {
     private List<HomeClassListener> homeClassListeners = null;
 
     private ClassificationCommodityBean classificationCommodityBean = null;
-    private String type;
+    private String title = AppConstant.HOME_CLASS_1;
+    private String type = "";
+    private ClassificationCommodityBean.DataBean detailsData = null;
 
 
     public HomeClassModel(){
@@ -88,5 +91,21 @@ public class HomeClassModel {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public ClassificationCommodityBean.DataBean getDetailsData() {
+        return detailsData;
+    }
+
+    public void setDetailsData(ClassificationCommodityBean.DataBean detailsData) {
+        this.detailsData = detailsData;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

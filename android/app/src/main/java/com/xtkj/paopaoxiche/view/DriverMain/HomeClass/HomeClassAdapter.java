@@ -2,6 +2,7 @@ package com.xtkj.paopaoxiche.view.DriverMain.HomeClass;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Paint;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.xtkj.paopaoxiche.R;
 import com.xtkj.paopaoxiche.bean.ClassificationCommodityBean;
+import com.xtkj.paopaoxiche.model.HomeClassModel;
 
 import java.util.ArrayList;
 
@@ -44,12 +46,20 @@ public class HomeClassAdapter extends RecyclerView.Adapter<HomeClassAdapter.View
 
         Glide.with(mContext).load(dataBeans.get(position).getImg()).into(holder.itemClassImg);
         holder.itemClassText.setText(dataBeans.get(position).getDetail());
-        holder.classPrice1.setText(dataBeans.get(position).getDiscountPrice());
+        holder.classPrice1.setText(String.format("￥%s", dataBeans.get(position).getDiscountPrice()));
         if(dataBeans.get(position).getOriginalPrice()!=null && !dataBeans.get(position).getOriginalPrice().equals("")){
-            holder.classPrice2.setText(dataBeans.get(position).getOriginalPrice());
+            holder.classPrice2.setText(String.format("￥%s", dataBeans.get(position).getOriginalPrice()));
             holder.classPrice2.setPaintFlags(holder.classPrice2.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         }else holder.classPrice2.setVisibility(View.GONE);
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                HomeClassModel.getInstance().setDetailsData(dataBeans.get(position));
+                Intent intent = new Intent(mContext,HomeClassDetailsActivity.class);
+                mContext.startActivity(intent);
+            }
+        });
     }
 
 

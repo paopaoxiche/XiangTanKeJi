@@ -57,7 +57,7 @@ public class HomeClassActivity extends BaseActivity implements IHomeClassContrac
         Intent intent = getIntent();
         String intentData = intent.getStringExtra("title");
         title.setText(String.format("%s", intentData));
-
+        HomeClassModel.getInstance().setTitle(intentData);
         switch (intentData) {
             case AppConstant.HOME_CLASS_1:
                 HomeClassModel.getInstance().setType(AppConstant.HOME_CLASS_1_QUERY);
