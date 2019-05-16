@@ -1,12 +1,10 @@
 package com.xtkj.paopaoxiche.view.DriverMain;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -19,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.xtkj.paopaoxiche.R;
+import com.xtkj.paopaoxiche.application.AppConstant;
 import com.xtkj.paopaoxiche.application.SkyconValues;
 import com.xtkj.paopaoxiche.base.BaseFragmemt;
 import com.xtkj.paopaoxiche.bean.WashShopBean;
@@ -27,6 +26,7 @@ import com.xtkj.paopaoxiche.bean.WeatherRealTimeBean;
 import com.xtkj.paopaoxiche.contract.IDriverContract;
 import com.xtkj.paopaoxiche.model.DriverHomeModel;
 import com.xtkj.paopaoxiche.model.UserInfo;
+import com.xtkj.paopaoxiche.view.DriverMain.HomeClass.HomeClassActivity;
 import com.xtkj.paopaoxiche.view.DriverMap.DriverMapActivity;
 import com.xtkj.paopaoxiche.view.WeatherForecast.WeatherForecastActivity;
 
@@ -94,6 +94,16 @@ public class HomeFragment extends BaseFragmemt implements IDriverContract.IHomeV
     TextView washCountTextView;
     @BindView(R.id.count_user_text_view)
     TextView userCountTextView;
+    @BindView(R.id.home_class_button_1)
+    TextView homeClassButton1;
+    @BindView(R.id.home_class_button_2)
+    TextView homeClassButton2;
+    @BindView(R.id.home_class_button_3)
+    TextView homeClassButton3;
+    @BindView(R.id.home_class_button_4)
+    TextView homeClassButton4;
+    @BindView(R.id.home_class_button_5)
+    TextView homeClassButton5;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -125,6 +135,12 @@ public class HomeFragment extends BaseFragmemt implements IDriverContract.IHomeV
 
     void initView() {
         washServiceRecyclerView.setLayoutManager(new LinearLayoutManager(getActivityContext()));
+
+        homeClassButton1.setText(AppConstant.HOME_CLASS_1);
+        homeClassButton2.setText(AppConstant.HOME_CLASS_2);
+        homeClassButton3.setText(AppConstant.HOME_CLASS_3);
+        homeClassButton4.setText(AppConstant.HOME_CLASS_4);
+        homeClassButton5.setText(AppConstant.HOME_CLASS_5);
     }
 
     void initValue() {
@@ -187,7 +203,7 @@ public class HomeFragment extends BaseFragmemt implements IDriverContract.IHomeV
     public void updateCommodity() {
         // 此处可能为null 需要定位为什么为null
         WashShopBean bean = DriverHomeModel.getInstance().getWashShopBean();
-        if(bean == null){
+        if (bean == null) {
             return;
         }
         int num = bean.getData().size();
@@ -238,7 +254,7 @@ public class HomeFragment extends BaseFragmemt implements IDriverContract.IHomeV
         }
     }
 
-    @OnClick({R.id.location, R.id.more_wash_yard, R.id.weather_details1, R.id.weather_details2})
+    @OnClick({R.id.location, R.id.more_wash_yard, R.id.weather_details1, R.id.weather_details2,R.id.home_class_button_1,R.id.home_class_button_2,R.id.home_class_button_3,R.id.home_class_button_4,R.id.home_class_button_5})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.location:
@@ -252,6 +268,31 @@ public class HomeFragment extends BaseFragmemt implements IDriverContract.IHomeV
             case R.id.weather_details2:
                 Intent intent2 = new Intent(getActivity(), WeatherForecastActivity.class);
                 startActivity(intent2);
+                break;
+            case R.id.home_class_button_1:
+                Intent intent3 = new Intent(getActivity(), HomeClassActivity.class);
+                intent3.putExtra("title",AppConstant.HOME_CLASS_1);
+                startActivity(intent3);
+                break;
+            case R.id.home_class_button_2:
+                Intent intent4 = new Intent(getActivity(), HomeClassActivity.class);
+                intent4.putExtra("title",AppConstant.HOME_CLASS_2);
+                startActivity(intent4);
+                break;
+            case R.id.home_class_button_3:
+                Intent intent5 = new Intent(getActivity(), HomeClassActivity.class);
+                intent5.putExtra("title",AppConstant.HOME_CLASS_3);
+                startActivity(intent5);
+                break;
+            case R.id.home_class_button_4:
+                Intent intent6 = new Intent(getActivity(), HomeClassActivity.class);
+                intent6.putExtra("title",AppConstant.HOME_CLASS_4);
+                startActivity(intent6);
+                break;
+            case R.id.home_class_button_5:
+                Intent intent7 = new Intent(getActivity(), HomeClassActivity.class);
+                intent7.putExtra("title",AppConstant.HOME_CLASS_5);
+                startActivity(intent7);
                 break;
         }
     }
