@@ -44,7 +44,6 @@
 
         <service android:name="com.amap.api.location.APSService" />
 
-
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="${applicationId}.provider"
@@ -55,9 +54,9 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-
-        <activity android:name=".view.GuideActivity"
-            android:screenOrientation="portrait" >
+        <activity
+            android:name=".view.GuideActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -66,51 +65,56 @@
         </activity>
         <activity
             android:name=".view.LoginActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_login" />
-        <activity android:name=".view.DriverMain.DriverMainActivity"
+            android:label="@string/title_activity_login"
             android:screenOrientation="portrait" />
-        <activity android:name=".view.WeatherForecast.WeatherForecastActivity"
+        <activity
+            android:name=".view.DriverMain.DriverMainActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".view.DriverMap.DriverMapActivity"
+        <activity
+            android:name=".view.WeatherForecast.WeatherForecastActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".view.CarWashMain.CarWashMainActivity"
+        <activity
+            android:name=".view.DriverMap.DriverMapActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".view.WashService.WashServiceActivity"
-            android:screenOrientation="portrait"
+        <activity
+            android:name=".view.CarWashMain.CarWashMainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.WashService.WashServiceActivity"
             android:exported="true"
-            android:launchMode="singleTop">
-
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <data android:scheme="wx129f550ad02f9cd2"/>
-            </intent-filter>
+                <action android:name="android.intent.action.VIEW" />
 
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:scheme="wx129f550ad02f9cd2" />
+            </intent-filter>
         </activity>
 
-        <!--<activity-->
-            <!--android:name=".wxapi.WXPayEntryActivity"-->
-            <!--android:exported="true"-->
-            <!--android:launchMode="singleTop"/>-->
+        <!-- <activity -->
+        <!-- android:name=".wxapi.WXPayEntryActivity" -->
+        <!-- android:exported="true" -->
+        <!-- android:launchMode="singleTop"/> -->
 
-        <activity android:name=".view.RegisterWashActivity"
-            android:screenOrientation="portrait" ></activity>
-
+        <activity
+            android:name=".view.RegisterWashActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.alipay.sdk.app.H5PayActivity"
             android:configChanges="orientation|keyboardHidden|navigation|screenSize"
             android:exported="false"
             android:screenOrientation="behind"
-            android:windowSoftInputMode="adjustResize|stateHidden" >
-        </activity>
+            android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
             android:name="com.alipay.sdk.app.H5AuthActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
             android:screenOrientation="behind"
-            android:windowSoftInputMode="adjustResize|stateHidden" >
-        </activity>
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity android:name=".view.DriverMain.HomeClass.HomeClassActivity" />
+        <activity android:name=".view.DriverMain.HomeClass.HomeClassDetailsActivity"></activity>
     </application>
 
 </manifest>

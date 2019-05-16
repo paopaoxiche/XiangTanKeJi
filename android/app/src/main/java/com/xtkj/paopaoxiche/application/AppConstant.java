@@ -24,4 +24,18 @@ public class AppConstant {
     public final static int PAY_WX = 1;
     public final static int PAY_ZFB = 2;
 
+    public final static String HOME_CLASS_1 = "机油保养";
+    public final static String HOME_CLASS_1_QUERY = "1";
+    public final static String HOME_CLASS_2 = "轮胎";
+    public final static String HOME_CLASS_2_QUERY = "2";
+    public final static String HOME_CLASS_3 = "车饰品";
+    public final static String HOME_CLASS_3_QUERY = "3";
+    public final static String HOME_CLASS_4 = "保险业务";
+    public final static String HOME_CLASS_4_QUERY = "4";
+    public final static String HOME_CLASS_5 = "泡泡社区";
+    public final static String HOME_CLASS_5_QUERY = "5";
+
+
+
+
 }
