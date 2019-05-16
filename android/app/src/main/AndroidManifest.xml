@@ -114,7 +114,8 @@
             android:screenOrientation="behind"
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity android:name=".view.DriverMain.HomeClass.HomeClassActivity" />
-        <activity android:name=".view.DriverMain.HomeClass.HomeClassDetailsActivity"></activity>
+        <activity android:name=".view.DriverMain.HomeClass.HomeClassDetailsActivity" />
+        <activity android:name=".view.DriverMain.Ad.AdActivity"></activity>
     </application>
 
 </manifest>

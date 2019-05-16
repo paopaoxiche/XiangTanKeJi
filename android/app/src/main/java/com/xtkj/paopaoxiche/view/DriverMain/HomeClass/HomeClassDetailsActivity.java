@@ -65,7 +65,7 @@ public class HomeClassDetailsActivity extends BaseActivity {
         classDetailsName.setText("你的名字");
         classDetailsLocation.setText(dataBean.getAddress());
         classDetailsPhone.setText(String.format("服务热线：%s", dataBean.getPhone()));
-
+        classDetailsName.setText(dataBean.getName());
         classDetailsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

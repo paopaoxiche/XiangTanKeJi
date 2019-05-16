@@ -1,8 +1,11 @@
 package com.xtkj.paopaoxiche.view.DriverMain;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,11 +13,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.xtkj.paopaoxiche.R;
 import com.xtkj.paopaoxiche.application.AppConstant;
@@ -26,11 +29,16 @@ import com.xtkj.paopaoxiche.bean.WeatherRealTimeBean;
 import com.xtkj.paopaoxiche.contract.IDriverContract;
 import com.xtkj.paopaoxiche.model.DriverHomeModel;
 import com.xtkj.paopaoxiche.model.UserInfo;
+import com.xtkj.paopaoxiche.service.AdService;
+import com.xtkj.paopaoxiche.view.DriverMain.Ad.AdActivity;
 import com.xtkj.paopaoxiche.view.DriverMain.HomeClass.HomeClassActivity;
 import com.xtkj.paopaoxiche.view.DriverMap.DriverMapActivity;
 import com.xtkj.paopaoxiche.view.WeatherForecast.WeatherForecastActivity;
+import com.xtkj.paopaoxiche.widget.MarqueeTextView;
 
 import java.text.DecimalFormat;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -52,6 +60,10 @@ public class HomeFragment extends BaseFragmemt implements IDriverContract.IHomeV
     HomeWashServiceAdapter homeWashServiceAdapter = null;
     HomeShopFragmentAdapter homeShopFragmentAdapter = null;
     int viewpager_index = 0;
+    Handler handler;
+    int ad_index = 0;
+
+    int SIGN =101;
 
     Unbinder unbinder;
     @BindView(R.id.temperature)
@@ -104,6 +116,10 @@ public class HomeFragment extends BaseFragmemt implements IDriverContract.IHomeV
     TextView homeClassButton4;
     @BindView(R.id.home_class_button_5)
     TextView homeClassButton5;
+    @BindView(R.id.ad_text)
+    MarqueeTextView adText;
+    @BindView(R.id.ad_more)
+    Button adMore;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -133,6 +149,7 @@ public class HomeFragment extends BaseFragmemt implements IDriverContract.IHomeV
         return view;
     }
 
+    @SuppressLint("HandlerLeak")
     void initView() {
         washServiceRecyclerView.setLayoutManager(new LinearLayoutManager(getActivityContext()));
 
@@ -141,6 +158,20 @@ public class HomeFragment extends BaseFragmemt implements IDriverContract.IHomeV
         homeClassButton3.setText(AppConstant.HOME_CLASS_3);
         homeClassButton4.setText(AppConstant.HOME_CLASS_4);
         homeClassButton5.setText(AppConstant.HOME_CLASS_5);
+
+
+        handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                if (msg.what == SIGN) {
+                    adText.setText(DriverHomeModel.getInstance().getAdStrings().get(ad_index));
+                    ad_index ++;
+                    if(ad_index >= DriverHomeModel.getInstance().getAdStrings().size())
+                        ad_index=0;
+                }
+            }
+        };
     }
 
     void initValue() {
@@ -246,15 +277,28 @@ public class HomeFragment extends BaseFragmemt implements IDriverContract.IHomeV
     }
 
     @Override
+    public void startAd() {
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Message msg = new Message();
+                msg.what = SIGN;
+                handler.sendMessage(msg);
+            }
+        }, 0, 10000);
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         homePresenter.onDestroy();
         if (unbinder != null) {
             unbinder.unbind();
         }
+        //null.unbind();
     }
 
-    @OnClick({R.id.location, R.id.more_wash_yard, R.id.weather_details1, R.id.weather_details2,R.id.home_class_button_1,R.id.home_class_button_2,R.id.home_class_button_3,R.id.home_class_button_4,R.id.home_class_button_5})
+    @OnClick({R.id.ad_more,R.id.location, R.id.more_wash_yard, R.id.weather_details1, R.id.weather_details2, R.id.home_class_button_1, R.id.home_class_button_2, R.id.home_class_button_3, R.id.home_class_button_4, R.id.home_class_button_5})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.location:
@@ -271,28 +315,32 @@ public class HomeFragment extends BaseFragmemt implements IDriverContract.IHomeV
                 break;
             case R.id.home_class_button_1:
                 Intent intent3 = new Intent(getActivity(), HomeClassActivity.class);
-                intent3.putExtra("title",AppConstant.HOME_CLASS_1);
+                intent3.putExtra("title", AppConstant.HOME_CLASS_1);
                 startActivity(intent3);
                 break;
             case R.id.home_class_button_2:
                 Intent intent4 = new Intent(getActivity(), HomeClassActivity.class);
-                intent4.putExtra("title",AppConstant.HOME_CLASS_2);
+                intent4.putExtra("title", AppConstant.HOME_CLASS_2);
                 startActivity(intent4);
                 break;
             case R.id.home_class_button_3:
                 Intent intent5 = new Intent(getActivity(), HomeClassActivity.class);
-                intent5.putExtra("title",AppConstant.HOME_CLASS_3);
+                intent5.putExtra("title", AppConstant.HOME_CLASS_3);
                 startActivity(intent5);
                 break;
             case R.id.home_class_button_4:
                 Intent intent6 = new Intent(getActivity(), HomeClassActivity.class);
-                intent6.putExtra("title",AppConstant.HOME_CLASS_4);
+                intent6.putExtra("title", AppConstant.HOME_CLASS_4);
                 startActivity(intent6);
                 break;
             case R.id.home_class_button_5:
                 Intent intent7 = new Intent(getActivity(), HomeClassActivity.class);
-                intent7.putExtra("title",AppConstant.HOME_CLASS_5);
+                intent7.putExtra("title", AppConstant.HOME_CLASS_5);
                 startActivity(intent7);
+                break;
+            case R.id.ad_more:
+                Intent intent8 = new Intent(getActivity(), AdActivity.class);
+                startActivity(intent8);
                 break;
         }
     }

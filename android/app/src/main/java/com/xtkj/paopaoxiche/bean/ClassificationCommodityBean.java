@@ -58,6 +58,7 @@ public class ClassificationCommodityBean {
         private String phone;
         private String type;
         private String url;
+        private String name;
 
         public String getAddress() {
             return address;
@@ -121,6 +122,14 @@ public class ClassificationCommodityBean {
 
         public void setUrl(String url) {
             this.url = url;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
         }
     }
 }

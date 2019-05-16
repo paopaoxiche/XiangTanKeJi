@@ -39,6 +39,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -171,6 +172,16 @@ public class RegisterWashActivity extends BaseGaodeActivity implements DriverHom
 
     @Override
     public void getCommodityFailed() {
+
+    }
+
+    @Override
+    public void getTextAdSuccess(List<String> strings) {
+
+    }
+
+    @Override
+    public void getTextAdFail() {
 
     }
 

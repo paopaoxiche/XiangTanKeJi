@@ -10,6 +10,8 @@ import com.xtkj.paopaoxiche.model.DriverHomeModel;
 import com.xtkj.paopaoxiche.model.GoodsModel;
 import com.xtkj.paopaoxiche.model.UserInfo;
 
+import java.util.List;
+
 public class CarWashInfoPresenterImpl implements ICarWashContract.IInfoPresenter,
         DriverHomeModel.DriverHomeListener, GoodsModel.GoodsListener {
 
@@ -95,6 +97,16 @@ public class CarWashInfoPresenterImpl implements ICarWashContract.IInfoPresenter
 
     @Override
     public void getCommodityFailed() {
+
+    }
+
+    @Override
+    public void getTextAdSuccess(List<String> strings) {
+
+    }
+
+    @Override
+    public void getTextAdFail() {
 
     }
 

@@ -52,6 +52,7 @@ public class HomeClassAdapter extends RecyclerView.Adapter<HomeClassAdapter.View
             holder.classPrice2.setPaintFlags(holder.classPrice2.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         }else holder.classPrice2.setVisibility(View.GONE);
 
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

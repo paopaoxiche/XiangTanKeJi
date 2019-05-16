@@ -29,6 +29,7 @@ public class IDriverContract {
         void setForecastWeather(WeatherForecastBean weatherForecastBean);
         void updateWashServicesBean();
         void updateCommodity();
+        void startAd();
 
     }
 

@@ -8,6 +8,7 @@ import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.xtkj.paopaoxiche.application.Authentication;
 import com.xtkj.paopaoxiche.application.MyLocation;
+import com.xtkj.paopaoxiche.bean.TextAdBean;
 import com.xtkj.paopaoxiche.bean.WashCommodityBean;
 import com.xtkj.paopaoxiche.bean.WashServicesBean;
 import com.xtkj.paopaoxiche.bean.WashShopBean;
@@ -15,6 +16,7 @@ import com.xtkj.paopaoxiche.bean.WeatherForecastBean;
 import com.xtkj.paopaoxiche.bean.WeatherRealTimeBean;
 import com.xtkj.paopaoxiche.http.ApiField;
 import com.xtkj.paopaoxiche.http.RetrofitClient;
+import com.xtkj.paopaoxiche.service.AdService;
 import com.xtkj.paopaoxiche.service.WashService;
 import com.xtkj.paopaoxiche.service.WeatherService;
 import com.xtkj.paopaoxiche.view.DriverMain.ShopFragment;
@@ -39,6 +41,7 @@ public class DriverHomeModel {
     private WeatherRealTimeBean weatherRealTimeBean = null;
     private WeatherForecastBean weatherForecastBean = null;
     private WashShopBean washShopBean = null;
+    private ArrayList<String> adStrings;
 
     private DriverHomeModel(){
         driverHomeListenerList = new ArrayList<>();
@@ -69,6 +72,35 @@ public class DriverHomeModel {
         void getForecastWeatherFailed();
         void getCommoditySuccess(WashShopBean washShopBean);
         void getCommodityFailed();
+        void getTextAdSuccess(List<String> strings);
+        void getTextAdFail();
+    }
+
+
+
+
+    public void getTextAd(){
+
+        RetrofitClient.newInstance(ApiField.BASEURL)
+                .create(AdService.class)
+                .getTextAd()
+                .enqueue(new Callback<TextAdBean>() {
+                    @Override
+                    public void onResponse(Call<TextAdBean> call, Response<TextAdBean> response) {
+                        adStrings = (ArrayList<String>) response.body().getData();
+                        for (DriverHomeListener driverHomeListener : driverHomeListenerList) {
+                            driverHomeListener.getTextAdSuccess(response.body().getData());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<TextAdBean> call, Throwable t) {
+                        for (DriverHomeListener driverHomeListener : driverHomeListenerList) {
+                            driverHomeListener.getTextAdFail();
+                        }
+                    }
+                });
+
     }
 
     public void getNearWashServices(){
@@ -239,4 +271,11 @@ public class DriverHomeModel {
         instance = null;
     }
 
+    public ArrayList<String> getAdStrings() {
+        return adStrings;
+    }
+
+    public void setAdStrings(ArrayList<String> adStrings) {
+        this.adStrings = adStrings;
+    }
 }

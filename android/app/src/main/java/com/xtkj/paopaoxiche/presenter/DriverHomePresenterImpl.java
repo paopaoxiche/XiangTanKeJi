@@ -11,6 +11,8 @@ import com.xtkj.paopaoxiche.bean.WeatherRealTimeBean;
 import com.xtkj.paopaoxiche.contract.IDriverContract;
 import com.xtkj.paopaoxiche.model.DriverHomeModel;
 
+import java.util.List;
+
 public class DriverHomePresenterImpl implements IDriverContract.IHomePresenter,DriverHomeModel.DriverHomeListener {
 
     private IDriverContract.IHomeView homeView;
@@ -29,6 +31,8 @@ public class DriverHomePresenterImpl implements IDriverContract.IHomePresenter,D
         viewModel = DriverHomeModel.getInstance();
         initLocation();
         viewModel.addListener(this);
+        viewModel.getTextAd();
+
     }
 
     @Override
@@ -91,6 +95,16 @@ public class DriverHomePresenterImpl implements IDriverContract.IHomePresenter,D
 
     @Override
     public void getCommodityFailed() {
+
+    }
+
+    @Override
+    public void getTextAdSuccess(List<String> strings) {
+            homeView.startAd();
+    }
+
+    @Override
+    public void getTextAdFail() {
 
     }
 }
