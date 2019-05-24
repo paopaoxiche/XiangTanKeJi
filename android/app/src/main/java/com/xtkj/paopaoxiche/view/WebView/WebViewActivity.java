@@ -20,7 +20,7 @@ import butterknife.OnClick;
 public class WebViewActivity extends AppCompatActivity {
 
 
-    private String url = "https://www.baidu.com";
+    private String url ;
 
     @BindView(R.id.back_button)
     ImageView backButton;
@@ -69,7 +69,7 @@ public class WebViewActivity extends AppCompatActivity {
                 webview.reload();
                 break;
             case R.id.open_browser:
-                Uri uri = Uri.parse("https://www.baidu.com");
+                Uri uri = Uri.parse(url);
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(intent);
                 break;
