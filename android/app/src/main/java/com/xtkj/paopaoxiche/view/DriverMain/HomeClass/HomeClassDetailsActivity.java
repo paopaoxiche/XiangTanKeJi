@@ -1,5 +1,6 @@
 package com.xtkj.paopaoxiche.view.DriverMain.HomeClass;
 
+import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
@@ -10,9 +11,11 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.xtkj.paopaoxiche.R;
+import com.xtkj.paopaoxiche.application.AppConstant;
 import com.xtkj.paopaoxiche.base.BaseActivity;
 import com.xtkj.paopaoxiche.bean.ClassificationCommodityBean;
 import com.xtkj.paopaoxiche.model.HomeClassModel;
+import com.xtkj.paopaoxiche.view.WebView.WebViewActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -62,7 +65,7 @@ public class HomeClassDetailsActivity extends BaseActivity {
             classPrice2.setText(String.format("￥%s", dataBean.getOriginalPrice()));
             classPrice2.setPaintFlags(classPrice2.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         }else classPrice2.setVisibility(View.GONE);
-        classDetailsName.setText("你的名字");
+        classDetailsName.setText(dataBean.getName());
         classDetailsLocation.setText(dataBean.getAddress());
         classDetailsPhone.setText(String.format("服务热线：%s", dataBean.getPhone()));
         classDetailsName.setText(dataBean.getName());
@@ -71,6 +74,10 @@ public class HomeClassDetailsActivity extends BaseActivity {
             public void onClick(View view) {
                 if(dataBean.getUrl()==null){
                     Toast.makeText(getApplicationContext(),"商品没有上线，敬请期待！",Toast.LENGTH_LONG).show();
+                }else {
+                        Intent intent = new Intent(getApplicationContext(), WebViewActivity.class);
+                    intent.putExtra(AppConstant.WEB_NTENT_URL,dataBean.getUrl());
+                    startActivity(intent);
                 }
             }
         });

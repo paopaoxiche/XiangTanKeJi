@@ -13,6 +13,7 @@ import com.xtkj.paopaoxiche.model.DriverHomeModel;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class AdActivity extends BaseActivity {
 
@@ -32,14 +33,9 @@ public class AdActivity extends BaseActivity {
         ButterKnife.bind(this);
 
         adRecycler.setLayoutManager(new LinearLayoutManager(this));
-        adAdpter = new AdAdpter(DriverHomeModel.getInstance().getAdStrings(),this);
+        adAdpter = new AdAdpter(DriverHomeModel.getInstance().getAdStrings(), this);
         adRecycler.setAdapter(adAdpter);
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+
     }
 
     @Override
@@ -56,5 +52,16 @@ public class AdActivity extends BaseActivity {
     protected void initListeners() {
 
 
+    }
+
+    @OnClick({R.id.back_button, R.id.title})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.back_button:
+                finish();
+                break;
+            case R.id.title:
+                break;
+        }
     }
 }

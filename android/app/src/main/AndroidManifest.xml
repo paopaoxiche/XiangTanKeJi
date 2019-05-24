@@ -115,7 +115,8 @@
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity android:name=".view.DriverMain.HomeClass.HomeClassActivity" />
         <activity android:name=".view.DriverMain.HomeClass.HomeClassDetailsActivity" />
-        <activity android:name=".view.DriverMain.Ad.AdActivity"></activity>
+        <activity android:name=".view.DriverMain.Ad.AdActivity" />
+        <activity android:name=".view.WebView.WebViewActivity"></activity>
     </application>
 
 </manifest>

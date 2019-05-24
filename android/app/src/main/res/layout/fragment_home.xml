@@ -285,6 +285,13 @@
 
             </LinearLayout>
 
+            <View
+                android:background="#efefef"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"/>
+
             <LinearLayout
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"

@@ -36,6 +36,9 @@ public class AppConstant {
     public final static String HOME_CLASS_5_QUERY = "5";
 
 
+    public final static String WEB_NTENT_URL = "WEB_NTENT_URL";
+
+
 
 
 }
