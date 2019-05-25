@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <TextView
+        android:id="@+id/please_choose_time_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="请选择开始时间"
+        android:textColor="@color/black"
+        android:layout_marginTop="13dp"
+        android:layout_marginLeft="12dp"
+        android:textSize="18sp"/>
+
+    <TextView
+        android:id="@+id/choose_time_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="结束时间"
+        android:textColor="@color/orange"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="13dp"
+        android:layout_marginRight="12dp"
+        android:textSize="18sp"/>
+
+    <TimePicker
+        android:id="@+id/wash_time_picker"
+        android:layout_width="match_parent"
+        android:timePickerMode="spinner"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/please_choose_time_text_view"
+        android:layout_marginTop="40dp"
+        android:layout_centerInParent="true">
+
+    </TimePicker>
+
+    <Button
+        android:id="@+id/time_confirm_button"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/login_view_height"
+        android:background="@drawable/background_orange_full"
+        android:layout_below="@id/wash_time_picker"
+        android:layout_marginTop="28dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:text="确定"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"/>
+
+</RelativeLayout>
