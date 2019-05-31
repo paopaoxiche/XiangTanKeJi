@@ -1,5 +1,7 @@
 package com.xtkj.paopaoxiche.service;
 
+import com.xtkj.paopaoxiche.bean.ADBean;
+import com.xtkj.paopaoxiche.bean.BannerAdBean;
 import com.xtkj.paopaoxiche.bean.ClassificationCommodityBean;
 import com.xtkj.paopaoxiche.bean.TextAdBean;
 
@@ -16,5 +18,9 @@ public interface  AdService {
     @GET("ad/getTextAd")
     Call<TextAdBean> getTextAd();
 
+    @GET("ad/getGuideAd")
+    Call<ADBean> getGuideAd(@Query("device") String device ) ;
 
+    @GET("ad/getWheelAd")
+    Call<BannerAdBean> getBannerAd() ;
 }

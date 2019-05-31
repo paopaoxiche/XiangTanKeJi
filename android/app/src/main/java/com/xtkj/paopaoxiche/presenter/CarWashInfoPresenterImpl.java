@@ -32,6 +32,7 @@ public class CarWashInfoPresenterImpl implements ICarWashContract.IInfoPresenter
         driverHomeModel.addListener(this);
         goodsModel.addListener(this);
         initLocation();
+        driverHomeModel.getTextAd();
 
         goodsModel.getCarWashGoods(UserInfo.getWashId(), 0, 20);
     }
@@ -102,7 +103,7 @@ public class CarWashInfoPresenterImpl implements ICarWashContract.IInfoPresenter
 
     @Override
     public void getTextAdSuccess(List<String> strings) {
-
+        infoView.startAd();
     }
 
     @Override

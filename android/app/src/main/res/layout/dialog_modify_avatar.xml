@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/dark_white">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbarHeight"
+        android:background="@color/white">
+
+        <ImageButton
+            android:id="@+id/back_arrow_image_button"
+            android:layout_width="wrap_content"
+            android:background="@android:color/transparent"
+            android:layout_height="match_parent"
+            android:scaleType="center"
+            android:paddingLeft="16dp"
+            android:src="@drawable/arrow" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="我的头像"
+            android:textSize="24sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/avatar_choose_user_image_view"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="40dp"
+        android:layout_gravity="center_horizontal"
+        app:civ_border_color="@color/white"
+        app:civ_border_width="4dp"
+        android:src="@drawable/extension"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/choose_avatar_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/black"
+            android:text="选择头像"
+            android:textSize="18sp"
+            />
+
+        <Button
+            android:id="@+id/avatar_confirm_button"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/login_view_height"
+            android:background="@drawable/background_orange_full"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="28dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:text="提交"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"/>
+
+        <LinearLayout
+            android:id="@+id/choose_picture_linear_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="20dp"
+            android:layout_above="@id/avatar_confirm_button">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/img_photo_alb"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="从相册中选择"
+                android:textSize="18sp"
+                android:layout_marginLeft="8dp"
+                android:textColor="@color/orange"/>
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginLeft="8dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/img_select_pic"/>
+
+
+        </LinearLayout>
+
+        <GridView
+            android:id="@+id/avatar_grid_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/choose_picture_linear_layout"
+            android:layout_below="@id/choose_avatar_text_view"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="20dp"
+            android:verticalSpacing="8dp"
+            android:numColumns="3"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

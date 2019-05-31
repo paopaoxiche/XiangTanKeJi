@@ -23,20 +23,32 @@ import com.xtkj.paopaoxiche.R;
 import com.xtkj.paopaoxiche.application.AppConstant;
 import com.xtkj.paopaoxiche.application.SkyconValues;
 import com.xtkj.paopaoxiche.base.BaseFragmemt;
+import com.xtkj.paopaoxiche.bean.ADBean;
+import com.xtkj.paopaoxiche.bean.BannerAdBean;
 import com.xtkj.paopaoxiche.bean.WashShopBean;
 import com.xtkj.paopaoxiche.bean.WeatherForecastBean;
 import com.xtkj.paopaoxiche.bean.WeatherRealTimeBean;
 import com.xtkj.paopaoxiche.contract.IDriverContract;
+import com.xtkj.paopaoxiche.http.ApiField;
+import com.xtkj.paopaoxiche.http.RetrofitClient;
 import com.xtkj.paopaoxiche.model.DriverHomeModel;
 import com.xtkj.paopaoxiche.model.UserInfo;
 import com.xtkj.paopaoxiche.service.AdService;
+import com.xtkj.paopaoxiche.utils.PreferUtils;
 import com.xtkj.paopaoxiche.view.DriverMain.Ad.AdActivity;
 import com.xtkj.paopaoxiche.view.DriverMain.HomeClass.HomeClassActivity;
 import com.xtkj.paopaoxiche.view.DriverMap.DriverMapActivity;
 import com.xtkj.paopaoxiche.view.WeatherForecast.WeatherForecastActivity;
+import com.xtkj.paopaoxiche.view.WebView.WebViewActivity;
+import com.xtkj.paopaoxiche.widget.GlideImageLoader;
 import com.xtkj.paopaoxiche.widget.MarqueeTextView;
+import com.youth.banner.Banner;
+import com.youth.banner.BannerConfig;
+import com.youth.banner.listener.OnBannerListener;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -44,6 +56,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -63,7 +78,7 @@ public class HomeFragment extends BaseFragmemt implements IDriverContract.IHomeV
     Handler handler;
     int ad_index = 0;
 
-    int SIGN =101;
+    int SIGN = 101;
 
     Unbinder unbinder;
     @BindView(R.id.temperature)
@@ -120,6 +135,8 @@ public class HomeFragment extends BaseFragmemt implements IDriverContract.IHomeV
     MarqueeTextView adText;
     @BindView(R.id.ad_more)
     Button adMore;
+    @BindView(R.id.my_banner)
+    Banner myBanner;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -164,14 +181,23 @@ public class HomeFragment extends BaseFragmemt implements IDriverContract.IHomeV
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
+                //临时方案，可能造成activity不能回收，后面需要改一下
+                if (adText == null) {
+                    handler.sendEmptyMessageDelayed(msg.what, 500);
+                    return;
+                }
                 if (msg.what == SIGN) {
-                    adText.setText(DriverHomeModel.getInstance().getAdStrings().get(ad_index));
-                    ad_index ++;
-                    if(ad_index >= DriverHomeModel.getInstance().getAdStrings().size())
-                        ad_index=0;
+                    if (ad_index < DriverHomeModel.getInstance().getAdStrings().size()) {
+                        adText.setText(DriverHomeModel.getInstance().getAdStrings().get(ad_index));
+                    }
+                    ad_index++;
+                    if (ad_index >= DriverHomeModel.getInstance().getAdStrings().size())
+                        ad_index = 0;
                 }
             }
         };
+
+        checkBannerAd();
     }
 
     void initValue() {
@@ -296,9 +322,10 @@ public class HomeFragment extends BaseFragmemt implements IDriverContract.IHomeV
             unbinder.unbind();
         }
         //null.unbind();
+        //null.unbind();
     }
 
-    @OnClick({R.id.ad_more,R.id.location, R.id.more_wash_yard, R.id.weather_details1, R.id.weather_details2, R.id.home_class_button_1, R.id.home_class_button_2, R.id.home_class_button_3, R.id.home_class_button_4, R.id.home_class_button_5})
+    @OnClick({R.id.ad_more, R.id.location, R.id.more_wash_yard, R.id.weather_details1, R.id.weather_details2, R.id.home_class_button_1, R.id.home_class_button_2, R.id.home_class_button_3, R.id.home_class_button_4, R.id.home_class_button_5})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.location:
@@ -345,5 +372,50 @@ public class HomeFragment extends BaseFragmemt implements IDriverContract.IHomeV
         }
     }
 
+
+    private void checkBannerAd() {
+        RetrofitClient.newInstance(ApiField.BASEURL)
+                .create(AdService.class)
+                .getBannerAd()
+                .enqueue(new Callback<BannerAdBean>() {
+                    @Override
+                    public void onResponse(Call<BannerAdBean> call, Response<BannerAdBean> response) {
+                        if (response.body().getCode() != 200) {
+                            return;
+                        }
+                        List<BannerAdBean.DataBean> dataBean = response.body().getData();
+                        if (dataBean == null || dataBean.size() == 0) {
+                            return;
+                        }
+
+                        myBanner.setImageLoader(new GlideImageLoader());
+                        myBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
+                        //设置图片集合
+                        List<String> urls = new ArrayList<>();
+                        for (BannerAdBean.DataBean bean : dataBean) {
+                            urls.add(bean.getImg());
+                        }
+                        myBanner.setImages(urls);
+                        myBanner.setDelayTime(4000);
+                        myBanner.setOnBannerListener(new OnBannerListener() {
+                            @Override
+                            public void OnBannerClick(int position) {
+                                if (position < dataBean.size()) {
+                                    Intent intent = new Intent(HomeFragment.this.getContext(), WebViewActivity.class);
+                                    intent.putExtra(AppConstant.WEB_NTENT_URL, dataBean.get(position).getUrl());
+                                    startActivity(intent);
+                                }
+                            }
+                        });
+                        //banner设置方法全部调用完毕时最后调用
+                        myBanner.start();
+                    }
+
+                    @Override
+                    public void onFailure(Call<BannerAdBean> call, Throwable t) {
+
+                    }
+                });
+    }
 
 }

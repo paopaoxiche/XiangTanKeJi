@@ -54,6 +54,7 @@ public class LoginPresenterImpl implements ILoginContract.ILoginPresenter, UserM
     private void login() {
         Intent intent;
         if (UserInfo.isDriver()) {
+            loginView.showToast("登陆成功");
             intent = new Intent(loginView.getContext(), DriverMainActivity.class);
             loginView.login(intent);
         } else {
@@ -75,7 +76,6 @@ public class LoginPresenterImpl implements ILoginContract.ILoginPresenter, UserM
 
     @Override
     public void loginSuccess(LoginBean.DataBean dataBean) {
-        loginView.showToast("登陆成功");
         login();
     }
 
@@ -107,6 +107,7 @@ public class LoginPresenterImpl implements ILoginContract.ILoginPresenter, UserM
 
     @Override
     public void getCarWashInfoSuccess() {
+        loginView.showToast("登陆成功");
         Intent intent = new Intent(loginView.getContext(), CarWashMainActivity.class);
         loginView.login(intent);
     }

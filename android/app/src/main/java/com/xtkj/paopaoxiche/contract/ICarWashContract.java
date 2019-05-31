@@ -30,6 +30,7 @@ public class ICarWashContract {
         void setForecastWeather(WeatherForecastBean weatherForecastBean);
 
         void setGoodsInfoList(WashCommodityBean washShopBean);
+        void startAd();
     }
 
     public interface IMinePresenter extends IBasePresenter {

@@ -4,6 +4,7 @@
     android:id="@+id/home_weather_bg"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingBottom="48dp"
     android:background="@drawable/bg_weather_good_day"
     tools:context=".view.DriverMain.HomeFragment">
 
@@ -485,12 +486,20 @@
 
         </LinearLayout>
 
+        <com.youth.banner.Banner
+            android:id="@+id/my_banner"
+            android:layout_width="match_parent"
+            android:layout_margin="12dp"
+            android:layout_height="200dp"/>
+
         <LinearLayout
             android:layout_marginTop="12dp"
             android:id="@+id/indicator"
             android:layout_gravity="center"
             android:gravity="center"
             android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone"
             android:layout_height="wrap_content">
 
         </LinearLayout>
@@ -504,6 +513,7 @@
             android:layout_marginBottom="70dp"
             android:id="@+id/shop_viewpager"
             android:layout_width="match_parent"
+            android:visibility="gone"
             android:layout_height="300dp"
             android:background="@drawable/background_white_radius4dp" />
     </LinearLayout>

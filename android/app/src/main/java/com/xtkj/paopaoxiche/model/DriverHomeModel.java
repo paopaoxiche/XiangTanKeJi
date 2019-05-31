@@ -41,7 +41,7 @@ public class DriverHomeModel {
     private WeatherRealTimeBean weatherRealTimeBean = null;
     private WeatherForecastBean weatherForecastBean = null;
     private WashShopBean washShopBean = null;
-    private ArrayList<String> adStrings;
+    private ArrayList<String> adStrings = new ArrayList<>();
 
     private DriverHomeModel(){
         driverHomeListenerList = new ArrayList<>();

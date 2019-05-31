@@ -25,13 +25,22 @@ public class GuidePresenterImpl implements IGuideContract.IGuidePresenter, UserM
 
     Handler handler = new Handler();
 
+    int i = 5;
+
     Runnable runnable = new Runnable() {
         @Override
         public void run() {
-            if (checkTokenComplete) {
-                guideView.startActivityForIntent(new Intent(), clazz);
+            i--;
+//            if (checkTokenComplete) {
+//                guideView.startActivityForIntent(new Intent(), clazz);
+//            } else {
+//                handler.postDelayed(this, 1000);
+//            }
+            if (i > 0) {
+                guideView.setCountDownText(i + "秒");
+                handler.postDelayed(this, 1000);
             } else {
-                handler.postDelayed(this, 2000);
+                guideView.startActivityForIntent(new Intent(), clazz);
             }
         }
     };
@@ -73,7 +82,7 @@ public class GuidePresenterImpl implements IGuideContract.IGuidePresenter, UserM
     @Override
     public void autoLogin() {
         // TODO 这里需要http去判断TOKEN是否生效
-        handler.postDelayed(runnable, 2000);
+        handler.postDelayed(runnable, 1000);
     }
 
     @Override
