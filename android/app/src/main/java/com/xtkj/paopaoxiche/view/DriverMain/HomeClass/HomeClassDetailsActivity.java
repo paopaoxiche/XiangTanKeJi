@@ -75,7 +75,7 @@ public class HomeClassDetailsActivity extends BaseActivity {
                 if(dataBean.getUrl()==null){
                     Toast.makeText(getApplicationContext(),"商品没有上线，敬请期待！",Toast.LENGTH_LONG).show();
                 }else {
-                        Intent intent = new Intent(getApplicationContext(), WebViewActivity.class);
+                        Intent intent = new Intent(HomeClassDetailsActivity.this, WebViewActivity.class);
                     intent.putExtra(AppConstant.WEB_NTENT_URL,dataBean.getUrl());
                     startActivity(intent);
                 }

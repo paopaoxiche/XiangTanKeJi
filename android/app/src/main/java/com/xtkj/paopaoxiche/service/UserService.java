@@ -95,4 +95,11 @@ public interface UserService {
 
     @GET("user/getAppVersion")
     Call<UpdateBean> checkUpdate(@Query("systemType") String systemType, @Query("version") String version) ;
+
+    @GET("user/getDefaultHeader")
+    Call<AvatarBean> getAvatarList();
+
+    @FormUrlEncoded
+    @POST("user/updateDefaultHeader")
+    Call<NoDataBean> submitAvatar(@Field("headerId") String headerId);
 }

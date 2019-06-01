@@ -314,12 +314,12 @@ public class UserModel {
                         if (response.body().getCode() == 200) {
                             preferUtils.putString(AppConstant.AVATAR, response.body().getData().toString());
                             UserInfo.setAvatar(preferUtils.getString(AppConstant.AVATAR));
-                            Toast.makeText(BaseApplication.getContext(), "修改头像成功", Toast.LENGTH_SHORT);
+                            Toast.makeText(BaseApplication.getContext(), "修改头像成功", Toast.LENGTH_SHORT).show();
                             for (UserInfoListener userInfoListener : userInfoListenerList) {
                                 userInfoListener.modifyUserInfo(AppConstant.AVATAR);
                             }
                         } else {
-                            Toast.makeText(BaseApplication.getContext(), "修改头像失败,请重新登录", Toast.LENGTH_SHORT);
+                            Toast.makeText(BaseApplication.getContext(), "修改头像失败,请重新登录", Toast.LENGTH_SHORT).show();
                             for (UserInfoListener userInfoListener : userInfoListenerList) {
                                 userInfoListener.timeOut(AppConstant.AVATAR);
                             }
@@ -328,13 +328,39 @@ public class UserModel {
 
                     @Override
                     public void onFailure(Call<NoDataBean> call, Throwable t) {
-                        Toast.makeText(BaseApplication.getContext(), "修改头像失败", Toast.LENGTH_SHORT);
+                        Toast.makeText(BaseApplication.getContext(), "修改头像失败", Toast.LENGTH_SHORT).show();
                         if (loginListenerList == null) {
                             return;
                         }
                         for (UserInfoListener userInfoListener : userInfoListenerList) {
                             userInfoListener.timeOut(AppConstant.AVATAR);
                         }
+                    }
+                });
+    }
+
+    public void updateDefaultAvatar(int avatarId, final String img) {
+        RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
+                .create(UserService.class)
+                .submitAvatar(avatarId + "")
+                .enqueue(new Callback<NoDataBean>() {
+                    @Override
+                    public void onResponse(Call<NoDataBean> call, Response<NoDataBean> response) {
+                        if (response.body().getCode() == 200) {
+                            PreferUtils.getInstance().putString(AppConstant.AVATAR, img);
+                            UserInfo.setAvatar(PreferUtils.getInstance().getString(AppConstant.AVATAR));
+                            Toast.makeText(BaseApplication.getContext(), "修改头像成功", Toast.LENGTH_SHORT).show();
+                            for (UserInfoListener userInfoListener : userInfoListenerList) {
+                                userInfoListener.modifyUserInfo(AppConstant.AVATAR);
+                            }
+                        } else {
+                            Toast.makeText(BaseApplication.getContext(), "修改头像失败", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<NoDataBean> call, Throwable t) {
+                        Toast.makeText(BaseApplication.getContext(), "修改头像失败", Toast.LENGTH_SHORT).show();
                     }
                 });
     }

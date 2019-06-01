@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/car_wash_home_background"
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray">
+    android:background="@color/gray"
+    android:paddingBottom="48dp">
 
     <ScrollView
-        android:background="@android:color/transparent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
+        android:background="@android:color/transparent"
         android:scrollbars="none">
 
         <LinearLayout
@@ -189,6 +190,7 @@
                                 android:text="近期无雨"
                                 android:textColor="#fff"
                                 android:textSize="12sp" />
+
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -203,95 +205,155 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_white_radius4dp"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <LinearLayout
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:orientation="horizontal">
 
-                    <ImageView
-                        android:layout_width="@dimen/main_user_count_image_size"
-                        android:layout_height="@dimen/main_user_count_image_size"
-                        android:layout_marginLeft="20dp"
-                        android:layout_gravity="center_vertical"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/ic_chezhu"/>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/main_user_count_image_size"
+                            android:layout_height="@dimen/main_user_count_image_size"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="20dp"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/ic_chezhu" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="12dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/count_user_text_view"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="16dp"
+                                android:text="9999"
+                                android:textColor="@color/orange"
+                                android:textSize="20sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="3dp"
+                                android:layout_marginBottom="16dp"
+                                android:text="注册会员"
+                                android:textColor="@color/grey"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+                    </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_marginLeft="12dp">
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
 
-                        <TextView
-                            android:id="@+id/count_user_text_view"
+                        <ImageView
+                            android:layout_width="@dimen/main_user_count_image_size"
+                            android:layout_height="@dimen/main_user_count_image_size"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="20dp"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/ic_xichechang" />
+
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
-                            android:textSize="20sp"
-                            android:text="9999"
-                            android:textColor="@color/orange"/>
+                            android:layout_marginLeft="12dp"
+                            android:orientation="vertical">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="3dp"
-                            android:layout_marginBottom="16dp"
-                            android:textSize="12sp"
-                            android:textColor="@color/grey"
-                            android:text="注册会员"/>
+                            <TextView
+                                android:id="@+id/count_wash_text_view"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="16dp"
+                                android:text="12345"
+                                android:textColor="@color/blue_wash_count"
+                                android:textSize="20sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="3dp"
+                                android:layout_marginBottom="16dp"
+                                android:text="在线洗车场"
+                                android:textColor="@color/grey"
+                                android:textSize="12sp" />
+                        </LinearLayout>
                     </LinearLayout>
+
+
                 </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:background="#efefef" />
 
                 <LinearLayout
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingLeft="16dp"
+                    android:paddingTop="8dp"
+                    android:paddingRight="16dp"
+                    android:paddingBottom="8dp">
 
                     <ImageView
-                        android:layout_width="@dimen/main_user_count_image_size"
-                        android:layout_height="@dimen/main_user_count_image_size"
-                        android:layout_marginLeft="20dp"
-                        android:layout_gravity="center_vertical"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/ic_xichechang"/>
-
-                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_marginLeft="12dp">
+                        android:src="@drawable/img_kuaibao" />
 
-                        <TextView
-                            android:id="@+id/count_wash_text_view"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
-                            android:textSize="20sp"
-                            android:text="12345"
-                            android:textColor="@color/blue_wash_count"/>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:src="@drawable/img_bulletin" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="3dp"
-                            android:layout_marginBottom="16dp"
-                            android:textSize="12sp"
-                            android:textColor="@color/grey"
-                            android:text="在线洗车场"/>
-                    </LinearLayout>
+                    <com.xtkj.paopaoxiche.widget.MarqueeTextView
+                        android:id="@+id/ad_text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:ellipsize="marquee"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:singleLine="true"
+                        android:textColor="#333333"
+                        android:textSize="12sp" />
+
+                    <Button
+                        android:id="@+id/ad_more"
+                        android:layout_width="28dp"
+                        android:layout_height="14dp"
+                        android:background="#00A0E9"
+                        android:gravity="center"
+                        android:text="更多"
+                        android:textColor="@color/white"
+                        android:textSize="8sp" />
                 </LinearLayout>
-
             </LinearLayout>
 
+
             <LinearLayout
-                android:background="@drawable/background_white_radius4dp"
-                android:layout_marginTop="12dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/background_white_radius4dp"
                 android:orientation="vertical">
 
                 <RelativeLayout
@@ -327,51 +389,134 @@
 
             </LinearLayout>
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="32dp"
-                android:background="@android:color/transparent"
-                />
-
             <LinearLayout
-                android:background="@drawable/background_white_radius4dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_marginTop="12dp"
+                android:orientation="horizontal">
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp">
+                <TextView
+                    android:id="@+id/home_class_button_1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="12dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/background_whit_4dp_alpha02"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:textColor="@color/white"
+                    android:textSize="10sp" />
 
-                    <ImageView
-                        android:id="@+id/goods_wash_icon_image_view"
-                        android:layout_marginLeft="16dp"
-                        android:layout_width="18dp"
-                        android:layout_height="18dp"
-                        android:src="@drawable/logo"
-                        android:layout_centerVertical="true"/>
+                <TextView
+                    android:id="@+id/home_class_button_2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="12dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/background_whit_4dp_alpha02"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:textColor="@color/white"
+                    android:textSize="10sp" />
 
-                    <TextView
-                        android:id="@+id/goods_wash_name_text_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:textSize="12sp"
-                        android:layout_toRightOf="@id/goods_wash_icon_image_view"
-                        android:layout_marginLeft="18dp"
-                        android:textColor="@color/orange"
-                        android:text="商品推荐"
-                        />
-                </RelativeLayout>
+                <TextView
+                    android:id="@+id/home_class_button_3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="12dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/background_whit_4dp_alpha02"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:textColor="@color/white"
+                    android:textSize="10sp" />
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/goods_recycler"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/home_class_button_4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="12dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/background_whit_4dp_alpha02"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:textColor="@color/white"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:id="@+id/home_class_button_5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/background_whit_4dp_alpha02"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:textColor="@color/white"
+                    android:textSize="10sp" />
 
             </LinearLayout>
+
+
+            <com.youth.banner.Banner
+                android:id="@+id/my_banner"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="12dp" />
+
+            <!--<LinearLayout-->
+            <!--android:background="@drawable/background_white_radius4dp"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="vertical">-->
+
+            <!--<RelativeLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="48dp">-->
+
+            <!--<ImageView-->
+            <!--android:id="@+id/goods_wash_icon_image_view"-->
+            <!--android:layout_marginLeft="16dp"-->
+            <!--android:layout_width="18dp"-->
+            <!--android:layout_height="18dp"-->
+            <!--android:src="@drawable/logo"-->
+            <!--android:layout_centerVertical="true"/>-->
+
+            <!--<TextView-->
+            <!--android:id="@+id/goods_wash_name_text_view"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:textSize="12sp"-->
+            <!--android:layout_toRightOf="@id/goods_wash_icon_image_view"-->
+            <!--android:layout_marginLeft="18dp"-->
+            <!--android:textColor="@color/orange"-->
+            <!--android:text="商品推荐"-->
+            <!--/>-->
+            <!--</RelativeLayout>-->
+
+            <!--<android.support.v7.widget.RecyclerView-->
+            <!--android:id="@+id/goods_recycler"-->
+            <!--android:layout_marginStart="16dp"-->
+            <!--android:layout_marginEnd="16dp"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"/>-->
+
+            <!--</LinearLayout>-->
 
         </LinearLayout>
 

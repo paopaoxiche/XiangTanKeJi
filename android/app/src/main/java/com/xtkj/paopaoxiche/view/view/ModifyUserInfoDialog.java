@@ -108,7 +108,7 @@ public class ModifyUserInfoDialog extends FullScreenWithStatusBarDialog implemen
                 new ModifyNickNameDialog(getContext(), true).show();
                 break;
             case R.id.modify_avatar_image_button:
-                EventBus.getDefault().post(new BaseEvent(BaseEvent.CAR_WASH_PICK_AVATAR));
+                new AvatarChoiceDialog(getContext(), true).show();
                 break;
             case R.id.ib_enter_car_type_list:
                 new MyCarListDialog(getContext()).show();

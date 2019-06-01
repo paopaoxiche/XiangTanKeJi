@@ -83,4 +83,5 @@ dependencies {
     implementation 'com.qq.mta:mta:3.4.2'
     //MID基础包
     implementation 'com.tencent.mid:mid:3.73-release'
+    implementation 'com.youth.banner:banner:1.4.9'
 }

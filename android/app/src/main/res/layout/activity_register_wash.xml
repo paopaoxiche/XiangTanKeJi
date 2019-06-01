@@ -55,13 +55,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="12dp"
+        android:background="@color/white"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="洗车场地址:"/>
+            android:text="洗车场地址"/>
 
         <TextView
             android:id="@+id/address_marquee_text_view"
@@ -74,17 +75,23 @@
 
     </LinearLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/gray"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="12dp"
+        android:background="@color/white"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="洗车场名称:"/>
+            android:text="洗车场名称"/>
 
         <EditText
             android:id="@+id/wash_name_edit_text"
@@ -92,15 +99,49 @@
             android:layout_height="wrap_content"
             android:textColor="@color/black"
             android:textSize="16sp"
+            android:background="@color/transparent"
             android:layout_marginLeft="4dp"
             android:layout_marginRight="12dp"/>
 
     </LinearLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/gray"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="12dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="营业时间"/>
+
+        <TextView
+            android:id="@+id/wash_time_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:text="8:00 - 22:00"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="12dp"/>
+
+    </RelativeLayout>
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:background="@color/white"
+        android:layout_marginTop="8dp"
         android:padding="12dp">
 
         <TextView
@@ -133,6 +174,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_marginTop="8dp"
+        android:background="@color/white"
         android:padding="12dp">
 
         <TextView
@@ -165,6 +208,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_marginTop="8dp"
+        android:background="@color/white"
         android:padding="12dp">
 
         <TextView

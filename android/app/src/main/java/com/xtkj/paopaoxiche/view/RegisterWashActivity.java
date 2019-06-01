@@ -1,6 +1,9 @@
 package com.xtkj.paopaoxiche.view;
 
 import android.Manifest;
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -17,6 +20,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.xtkj.paopaoxiche.R;
@@ -25,8 +29,10 @@ import com.xtkj.paopaoxiche.base.BaseGaodeActivity;
 import com.xtkj.paopaoxiche.bean.NoDataBean;
 import com.xtkj.paopaoxiche.bean.WashServicesBean;
 import com.xtkj.paopaoxiche.bean.WashShopBean;
+import com.xtkj.paopaoxiche.bean.WashTimeBean;
 import com.xtkj.paopaoxiche.bean.WeatherForecastBean;
 import com.xtkj.paopaoxiche.bean.WeatherRealTimeBean;
+import com.xtkj.paopaoxiche.callback.WashTimeCallback;
 import com.xtkj.paopaoxiche.http.ApiField;
 import com.xtkj.paopaoxiche.http.RetrofitClient;
 import com.xtkj.paopaoxiche.model.DriverHomeModel;
@@ -34,9 +40,11 @@ import com.xtkj.paopaoxiche.service.WashService;
 import com.xtkj.paopaoxiche.utils.BitmapUtil;
 import com.xtkj.paopaoxiche.utils.UriUtils;
 import com.xtkj.paopaoxiche.widget.MarqueeTextView;
+import com.xtkj.paopaoxiche.widget.WashDatePickerDialog;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -51,7 +59,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RegisterWashActivity extends BaseGaodeActivity implements DriverHomeModel.DriverHomeListener {
+public class RegisterWashActivity extends BaseGaodeActivity implements DriverHomeModel.DriverHomeListener, WashTimeCallback {
 
     @BindView(R.id.back_arrow_image_button)
     ImageButton backArrowImageButton;
@@ -77,6 +85,8 @@ public class RegisterWashActivity extends BaseGaodeActivity implements DriverHom
     ImageView fanmianImageButton;
     @BindView(R.id.wash_name_edit_text)
     EditText washNameEditText;
+    @BindView(R.id.wash_time_text_view)
+    TextView washTimeTextView;
 
     final int yingyezhizhaoType = 1;
     final int xichezhengType = 2;
@@ -90,6 +100,9 @@ public class RegisterWashActivity extends BaseGaodeActivity implements DriverHom
 
     String phone;
     String address;
+
+    WashTimeBean startTime = new WashTimeBean();
+    WashTimeBean endTime = new WashTimeBean();
 
     int getAddressCount = 1;
 
@@ -115,6 +128,10 @@ public class RegisterWashActivity extends BaseGaodeActivity implements DriverHom
         DriverHomeModel.getInstance().initLocation(this);
 
         phone = getIntent().getExtras().getString("phone");
+        startTime.hour = 8;
+        startTime.minute = 0;
+        endTime.hour = 22;
+        endTime.minute = 0;
     }
 
     @Override
@@ -191,7 +208,8 @@ public class RegisterWashActivity extends BaseGaodeActivity implements DriverHom
         DriverHomeModel.getInstance().removeListener(this);
     }
 
-    @OnClick({R.id.back_arrow_image_button, R.id.complete_button, R.id.upload_yingyezhizhao_button, R.id.upload_xichezheng_button, R.id.upload_zhengmian_button, R.id.upload_fanmian_button})
+    @OnClick({R.id.back_arrow_image_button, R.id.complete_button, R.id.upload_yingyezhizhao_button, R.id.upload_xichezheng_button,
+            R.id.upload_zhengmian_button, R.id.upload_fanmian_button, R.id.wash_time_text_view})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.back_arrow_image_button:
@@ -222,6 +240,9 @@ public class RegisterWashActivity extends BaseGaodeActivity implements DriverHom
                 break;
             case R.id.upload_fanmian_button:
                 pickImage(shenfenzhenghoumianType);
+                break;
+            case R.id.wash_time_text_view:
+                new WashDatePickerDialog(this, startTime, endTime, this).show();
                 break;
         }
     }
@@ -348,13 +369,14 @@ public class RegisterWashActivity extends BaseGaodeActivity implements DriverHom
                 RequestBody.create(MediaType.parse("multipart/form-data"), MyLocation.city);
         RequestBody districtBody =
                 RequestBody.create(MediaType.parse("multipart/form-data"), MyLocation.district);
-
+        RequestBody washTimeBody =
+                RequestBody.create(MediaType.parse("multipart/form-data"), washTimeTextView.getText().toString());
 
 
         RetrofitClient.newInstance(ApiField.BASEURL)
                 .create(WashService.class)
                 .certification(phoneBody, nameBody, addressBody, xBody, yBody, license, washCard, idCardPositive, idCardBack,
-                        provinceBody, cityBody, districtBody)
+                        provinceBody, cityBody, districtBody, washTimeBody)
                 .enqueue(new Callback<NoDataBean>() {
                     @Override
                     public void onResponse(Call<NoDataBean> call, Response<NoDataBean> response) {
@@ -371,5 +393,14 @@ public class RegisterWashActivity extends BaseGaodeActivity implements DriverHom
                         Toast.makeText(RegisterWashActivity.this, "网络连接失败，请稍后再试", Toast.LENGTH_LONG).show();
                     }
                 });
+    }
+
+    @Override
+    public void confirmWashTime(WashTimeBean startTime, WashTimeBean endTime) {
+        this.startTime = startTime;
+        this.endTime = endTime;
+        String startMinute = startTime.minute >= 10 ? startTime.minute + "" : "0" + startTime.minute;
+        String endMinute = endTime.minute >= 10 ? endTime.minute + "" : "0" + endTime.minute;
+        washTimeTextView.setText(startTime.hour + ":" + startMinute + " - " + endTime.hour + ":" + endMinute);
     }
 }

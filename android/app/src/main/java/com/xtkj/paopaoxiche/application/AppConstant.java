@@ -14,6 +14,10 @@ public class AppConstant {
     public final static String COUNT_WASH = "COUNT_WASH";
     public final static String COUNT_USER = "COUNT_USER";
 
+    public final static String GUIDE_AD_URL = "guide_ad_url";
+    public final static String GUIDE_AD_MD5 = "guide_ad_md5";
+    public final static String GUIDE_AD_FILE_PATH = "guide_ad_file_path";
+
     public final static String NET_ERROR = "网络连接失败！";
 
 

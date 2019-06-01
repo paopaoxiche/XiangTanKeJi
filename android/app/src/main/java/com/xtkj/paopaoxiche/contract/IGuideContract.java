@@ -15,5 +15,7 @@ public class IGuideContract {
     public interface IGuideView extends IBaseView<IGuidePresenter> {
         void startActivityForIntent(Intent intent, Class clazz);
         Context getContext();
+
+        void setCountDownText(String text);
     }
 }

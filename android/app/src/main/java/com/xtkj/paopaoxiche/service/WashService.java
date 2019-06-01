@@ -104,7 +104,7 @@ public interface WashService {
     Call<NoDataBean> certification(@Part("phone") RequestBody phone, @Part("name") RequestBody name, @Part("address") RequestBody address,
                               @Part("coordX") RequestBody coordX, @Part("coordY") RequestBody coordY,
                                    @Part MultipartBody.Part license, @Part MultipartBody.Part washCard, @Part MultipartBody.Part idCardPositive, @Part MultipartBody.Part idCardBack,
-                                   @Part("province") RequestBody province, @Part("city") RequestBody city, @Part("district") RequestBody district);
+                                   @Part("province") RequestBody province, @Part("city") RequestBody city, @Part("district") RequestBody district, @Part("worktime") RequestBody washTime);
 
     @GET("wash/getEarningsList")
     Call<IncomeBean> getIncome(@Query("washId") int washId, @Query("month") int month);
