@@ -2,9 +2,13 @@ package com.xtkj.paopaoxiche.view.WebView;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.net.http.SslError;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.webkit.SslErrorHandler;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
@@ -45,13 +49,26 @@ public class WebViewActivity extends AppCompatActivity {
         Intent intent = getIntent();
         url = intent.getStringExtra(AppConstant.WEB_NTENT_URL);
 
+//        webview.setWebViewClient(new WebViewClient(){
+//            @Override
+//            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+//                view.loadUrl(url);
+//                return super.shouldOverrideUrlLoading(view, url);
+//            }
+//        });
+
         webview.setWebViewClient(new WebViewClient(){
             @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                view.loadUrl(url);
-                return super.shouldOverrideUrlLoading(view, url);
+            public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    webview.getSettings()
+                            .setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+                }
             }
         });
+
+        webview.loadUrl(url);
+
 
         webview.loadUrl(url);
     }
