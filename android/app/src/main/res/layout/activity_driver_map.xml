@@ -86,7 +86,28 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/white"
                 android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/title_linear_layout"
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_marginLeft="16dp"
+                    android:layout_height="32dp">
+                    <ImageView
+                        android:id="@+id/wash_avatar_image_view"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp" />
+                    <TextView
+                        android:layout_marginStart="8dp"
+                        android:id="@+id/wash_name_text_view"
+                        android:textSize="15sp"
+                        android:textColor="#F89B0A"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
 
                 <include layout="@layout/view_payment" />
 

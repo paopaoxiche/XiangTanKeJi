@@ -42,6 +42,9 @@ public class GuideActivity extends BaseActivity implements IGuideContract.IGuide
 //    @BindView(R.id.guide_button)
 //    Button guideButton;
 
+    boolean isFrontApp = true;
+    Class aClass = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,9 +82,27 @@ public class GuideActivity extends BaseActivity implements IGuideContract.IGuide
     }
 
     @Override
-    public void startActivityForIntent(Intent intent, Class clazz) {
-        intent.setClass(this, clazz);
-//        intent.setClass(this, CarWashMainActivity.class);
+    protected void onStart() {
+        super.onStart();
+        isFrontApp = true;
+        if (aClass != null) {
+            startActivityForIntent(aClass);
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        isFrontApp = false;
+    }
+
+    @Override
+    public void startActivityForIntent(Class clazz) {
+        if (!isFrontApp) {
+            aClass = clazz;
+            return;
+        }
+        Intent intent = new Intent(this, clazz);
         startActivity(intent);
         finish();
     }

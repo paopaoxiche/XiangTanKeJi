@@ -1,5 +1,6 @@
 package com.xtkj.paopaoxiche.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class WashServicesBean {
@@ -38,7 +39,7 @@ public class WashServicesBean {
         this.data = data;
     }
 
-    public static class DataBean {
+    public static class DataBean implements Serializable {
         /**
          * businessStatus : 1
          * distance : 25
@@ -62,6 +63,8 @@ public class WashServicesBean {
         private double lat;
         private double lng;
         private String name;
+        private  String worktime;
+        private  String facadeImg;
         private double price;
         private int washCount;
         private int washId;
@@ -160,6 +163,22 @@ public class WashServicesBean {
 
         public void setAddress(String address) {
             this.address = address;
+        }
+
+        public String getWorktime() {
+            return worktime;
+        }
+
+        public void setWorktime(String worktime) {
+            this.worktime = worktime;
+        }
+
+        public String getFacadeImg() {
+            return facadeImg;
+        }
+
+        public void setFacadeImg(String facadeImg) {
+            this.facadeImg = facadeImg;
         }
     }
 }

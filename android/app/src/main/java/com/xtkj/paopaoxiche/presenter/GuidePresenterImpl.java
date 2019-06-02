@@ -40,7 +40,7 @@ public class GuidePresenterImpl implements IGuideContract.IGuidePresenter, UserM
                 guideView.setCountDownText(i + "秒");
                 handler.postDelayed(this, 1000);
             } else {
-                guideView.startActivityForIntent(new Intent(), clazz);
+                guideView.startActivityForIntent(clazz);
             }
         }
     };

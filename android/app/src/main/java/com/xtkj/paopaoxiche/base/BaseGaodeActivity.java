@@ -178,12 +178,12 @@ public abstract class BaseGaodeActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if(keyCode == KeyEvent.KEYCODE_BACK){
-            this.finish();
-            return true;
-        }
-        return super.onKeyDown(keyCode, event);
-    }
+//    @Override
+//    public boolean onKeyDown(int keyCode, KeyEvent event) {
+//        if(keyCode == KeyEvent.KEYCODE_BACK){
+//            this.finish();
+//            return true;
+//        }
+//        return super.onKeyDown(keyCode, event);
+//    }
 }

@@ -13,6 +13,7 @@ import android.os.Looper;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -129,6 +130,10 @@ public class DriverMapActivity extends BaseGaodeActivity implements IDriverMapCo
     Button payButton;
     @BindView(R.id.wash_car_service_payment_view)
     ScrollView washCarServicePaymentView;
+    @BindView(R.id.wash_avatar_image_view)
+    ImageView washAvatarImageView;
+    @BindView(R.id.wash_name_text_view)
+    TextView washNameTextView;
 
     private boolean isDetailShow = false;
 
@@ -261,7 +266,7 @@ public class DriverMapActivity extends BaseGaodeActivity implements IDriverMapCo
         washServiceAdapter.setListener(new WashServiceAdapter.RequestPaymentListener() {
             @Override
             public void requestPayment(WashServicesBean.DataBean dataBean) {
-                requestPaymentPage(dataBean.getWashId());
+                requestPaymentPage(dataBean);
             }
         });
     }
@@ -527,16 +532,22 @@ public class DriverMapActivity extends BaseGaodeActivity implements IDriverMapCo
         shopList.addView(linearLayout, layoutParams);
     }
 
-    private void requestPaymentPage(int washId) {
+    private void requestPaymentPage(WashServicesBean.DataBean dataBean) {
 
         isDetailShow = true;
 
         mRecyclerView.setVisibility(View.GONE);
         washCarServicePaymentView.setVisibility(View.VISIBLE);
 
+        washNameTextView.setText(dataBean.getName());
+        Glide.with(this).load(dataBean.getImage()).into(washAvatarImageView);
+        carWashTimeTextView.setText(dataBean.getWorktime());
+        carWashAddressTextView.setText(dataBean.getAddress());
+        Glide.with(this).load(dataBean.getFacadeImg()).into(carWashMainImageView);
+
         RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
                 .create(WashService.class)
-                .getServiceList(washId)
+                .getServiceList(dataBean.getWashId())
                 .enqueue(new Callback<SellingServicesBean>() {
                     @Override
                     public void onResponse(Call<SellingServicesBean> call, Response<SellingServicesBean> response) {
@@ -556,7 +567,7 @@ public class DriverMapActivity extends BaseGaodeActivity implements IDriverMapCo
 
         RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
                 .create(WashService.class)
-                .getGoodsList(washId, 0, 20)
+                .getGoodsList(dataBean.getWashId(), 0, 20)
                 .enqueue(new Callback<WashCommodityBean>() {
                     @Override
                     public void onResponse(Call<WashCommodityBean> call, Response<WashCommodityBean> response) {
@@ -708,5 +719,20 @@ public class DriverMapActivity extends BaseGaodeActivity implements IDriverMapCo
     @Override
     public void success(int serviceId) {
         finish();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (isDetailShow) {
+                isDetailShow = false;
+                mRecyclerView.setVisibility(View.VISIBLE);
+                washCarServicePaymentView.setVisibility(View.GONE);
+            } else {
+                this.finish();
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

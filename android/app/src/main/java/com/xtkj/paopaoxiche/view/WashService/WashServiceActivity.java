@@ -40,6 +40,7 @@ import com.xtkj.paopaoxiche.bean.MyCouponListBean;
 import com.xtkj.paopaoxiche.bean.PostWashServiceBean;
 import com.xtkj.paopaoxiche.bean.SellingServicesBean;
 import com.xtkj.paopaoxiche.bean.WashCommodityBean;
+import com.xtkj.paopaoxiche.bean.WashServicesBean;
 import com.xtkj.paopaoxiche.contract.IWashServiceContract;
 import com.xtkj.paopaoxiche.http.ApiField;
 import com.xtkj.paopaoxiche.http.RetrofitClient;
@@ -91,7 +92,7 @@ public class WashServiceActivity extends BaseActivity implements IWashServiceCon
     private List<MyCouponListBean.DataBean> couponList = new ArrayList<>();
 
     IWashServiceContract.IWashServicePresenter presenter;
-    int washId;
+    WashServicesBean.DataBean dataBean;
 
     Set<WashCommodityBean.DataBean> goodsBeanList = new HashSet<>();
 
@@ -105,7 +106,7 @@ public class WashServiceActivity extends BaseActivity implements IWashServiceCon
         setContentView(R.layout.activity_wash_service);
         unbinder = ButterKnife.bind(this);
         Intent i = getIntent();
-        washId = i.getIntExtra("washId", 0);
+        dataBean = (WashServicesBean.DataBean) i.getSerializableExtra("washId");
 
         new WashServicePresenterImpl(this);
         presenter.onCreate();
@@ -215,8 +216,9 @@ public class WashServiceActivity extends BaseActivity implements IWashServiceCon
 
     @Override
     protected void initViews() {
-
-
+        carWashTimeTextView.setText(dataBean.getWorktime());
+        carWashAddressTextView.setText(dataBean.getAddress());
+        Glide.with(this).load(dataBean.getFacadeImg()).into(carWashMainImageView);
     }
 
     @Override
@@ -234,7 +236,7 @@ public class WashServiceActivity extends BaseActivity implements IWashServiceCon
 
         RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
                 .create(WashService.class)
-                .getServiceList(washId)
+                .getServiceList(dataBean.getWashId())
                 .enqueue(new Callback<SellingServicesBean>() {
                     @Override
                     public void onResponse(Call<SellingServicesBean> call, Response<SellingServicesBean> response) {
@@ -254,7 +256,7 @@ public class WashServiceActivity extends BaseActivity implements IWashServiceCon
 
         RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
                 .create(WashService.class)
-                .getGoodsList(washId, 0, 20)
+                .getGoodsList(dataBean.getWashId(), 0, 20)
                 .enqueue(new Callback<WashCommodityBean>() {
                     @Override
                     public void onResponse(Call<WashCommodityBean> call, Response<WashCommodityBean> response) {

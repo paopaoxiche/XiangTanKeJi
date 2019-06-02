@@ -60,7 +60,7 @@ public class WashServiceAdapter extends RecyclerView.Adapter<WashServiceAdapter.
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, WashServiceActivity.class);
-                intent.putExtra("washId", dataBean.getWashId());
+                intent.putExtra("washId", dataBean);
                 context.startActivity(intent);
             }
         });

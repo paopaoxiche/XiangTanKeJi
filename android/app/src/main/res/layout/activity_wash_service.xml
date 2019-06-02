@@ -47,11 +47,18 @@
                 android:layout_weight="1"
                 android:background="#f4f4f4"
                 android:padding="16dp"
-                android:paddingBottom="72dp"
                 android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="72dp"
+                    android:orientation="vertical">
 
             <include
                 layout="@layout/view_payment"/>
+
+                </LinearLayout>
 
             </ScrollView>
 
