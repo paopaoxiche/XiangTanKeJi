@@ -1,6 +1,5 @@
 package com.xtkj.paopaoxiche.view.WashService;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
@@ -20,7 +19,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import com.alipay.sdk.app.PayTask;
 import com.bingo.wxpay.Constants;
 import com.bumptech.glide.Glide;
@@ -28,8 +26,8 @@ import com.tencent.mm.opensdk.constants.ConstantsAPI;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
 import com.tencent.mm.opensdk.modelmsg.SendAuth;
-import com.tencent.mm.opensdk.modelmsg.ShowMessageFromWX;
 import com.tencent.mm.opensdk.modelpay.PayReq;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.xtkj.paopaoxiche.R;
@@ -49,6 +47,8 @@ import com.xtkj.paopaoxiche.presenter.WashServicePresenterImpl;
 import com.xtkj.paopaoxiche.service.CarOwnerService;
 import com.xtkj.paopaoxiche.service.UserService;
 import com.xtkj.paopaoxiche.service.WashService;
+import com.xtkj.paopaoxiche.utils.DensityUtil;
+import com.xtkj.paopaoxiche.view.view.CommitEvaluationDialog;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -58,16 +58,12 @@ import java.util.Set;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import com.tencent.mm.opensdk.openapi.IWXAPI;
-import com.xtkj.paopaoxiche.utils.DensityUtil;
-import com.xtkj.paopaoxiche.view.view.CommitEvaluationDialog;
-import com.xtkj.paopaoxiche.view.view.MyCustomDialog;
-
-public class WashServiceActivity extends BaseActivity implements IWashServiceContract.IWashServiceView, IWXAPIEventHandler, RadioGroup.OnCheckedChangeListener,CommitEvaluationDialog.EvaluateCallback {
+public class WashServiceActivity extends BaseActivity implements IWashServiceContract.IWashServiceView, IWXAPIEventHandler, RadioGroup.OnCheckedChangeListener, CommitEvaluationDialog.EvaluateCallback {
 
     @BindView(R.id.back_button)
     ImageView backButton;
@@ -81,6 +77,14 @@ public class WashServiceActivity extends BaseActivity implements IWashServiceCon
     Button payButton;
     @BindView(R.id.pay_radio_group)
     RadioGroup payRadioGroup;
+    @BindView(R.id.car_wash_main_image_view)
+    ImageView carWashMainImageView;
+    @BindView(R.id.car_wash_address_text_view)
+    TextView carWashAddressTextView;
+    @BindView(R.id.car_wash_phone_text_view)
+    TextView carWashPhoneTextView;
+    @BindView(R.id.car_wash_time_text_view)
+    TextView carWashTimeTextView;
 
 
     private IWXAPI api;
@@ -93,11 +97,13 @@ public class WashServiceActivity extends BaseActivity implements IWashServiceCon
 
     private PostWashServiceBean postWashServiceBean;
 
+    Unbinder unbinder = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wash_service);
-        ButterKnife.bind(this);
+        unbinder = ButterKnife.bind(this);
         Intent i = getIntent();
         washId = i.getIntExtra("washId", 0);
 
@@ -109,11 +115,20 @@ public class WashServiceActivity extends BaseActivity implements IWashServiceCon
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (unbinder != null) {
+            unbinder.unbind();
+        }
+    }
+
+    @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         setIntent(intent);
         api.handleIntent(intent, this);
     }
+
     private void buildServiceLayout(SellingServicesBean.DataBean d, int index) {
         LinearLayout linearLayout = (LinearLayout) View.inflate(this, R.layout.item_wash_service_details, null);
         TextView service_name = linearLayout.findViewById(R.id.service_name);
@@ -345,13 +360,13 @@ public class WashServiceActivity extends BaseActivity implements IWashServiceCon
     public void onReq(BaseReq baseReq) {
         Log.i("支付反馈", "onPayFinish, reqType = " + baseReq.getType());
         //Toast.makeText(this, "openid = " + baseReq.openId, Toast.LENGTH_SHORT).show();
-       // new CommitEvaluationDialog(postWashServiceBean.getWashServiceId(), this, this).show();
+        // new CommitEvaluationDialog(postWashServiceBean.getWashServiceId(), this, this).show();
         switch (baseReq.getType()) {
             case ConstantsAPI.COMMAND_GETMESSAGE_FROM_WX:
                 //goToGetMsg();
                 break;
             case ConstantsAPI.COMMAND_SHOWMESSAGE_FROM_WX:
-               // goToShowMsg((ShowMessageFromWX.Req) req);
+                // goToShowMsg((ShowMessageFromWX.Req) req);
                 break;
             case ConstantsAPI.COMMAND_LAUNCH_BY_WX:
                 Toast.makeText(this, com.bingo.wxpay.R.string.launch_from_wx, Toast.LENGTH_SHORT).show();

@@ -32,7 +32,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:textSize="24sp"/>
+                    android:textSize="18sp"/>
                 <ImageView
                     android:visibility="invisible"
                     android:src="@drawable/ic_keyboard_arrow_left_black_36dp"
@@ -40,176 +40,18 @@
                     android:layout_height="wrap_content" />
             </LinearLayout>
 
+
             <ScrollView
-                android:padding="16dp"
-                android:background="#f4f4f4"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
+                android:background="#f4f4f4"
+                android:padding="16dp"
+                android:paddingBottom="72dp"
                 android:scrollbars="none">
 
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:textSize="15sp"
-                        android:text="洗车服务"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <LinearLayout
-                        android:id="@+id/service_items"
-                        android:layout_marginTop="12dp"
-                        android:background="#fff"
-                        android:orientation="vertical"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_marginTop="16dp"
-                        android:textSize="15sp"
-                        android:text="请选择你要洗的车型"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <LinearLayout
-                        android:layout_marginTop="16dp"
-                        android:background="#fff"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <RadioGroup
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent">
-                            <RadioButton
-                                android:layout_width="wrap_content"
-                                android:layout_height="44dp" />
-                            <RadioButton
-                                android:layout_width="wrap_content"
-                                android:layout_height="44dp" />
-                            <RadioButton
-                                android:layout_width="wrap_content"
-                                android:layout_height="44dp" />
-                        </RadioGroup>
-
-                        <LinearLayout
-                            android:layout_marginStart="10dp"
-                            android:orientation="vertical"
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="match_parent">
-                            <LinearLayout
-                                android:gravity="center"
-                                android:layout_width="wrap_content"
-                                android:layout_height="44dp">
-                                <ImageView
-                                    android:src="@drawable/img_car3"
-                                    android:layout_width="28dp"
-                                    android:layout_height="13dp" />
-                                <TextView
-                                    android:layout_marginLeft="12dp"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="大型车（九座以上）"/>
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:gravity="center"
-                                android:layout_width="wrap_content"
-                                android:layout_height="44dp">
-
-                                <ImageView
-                                    android:layout_width="24dp"
-                                    android:layout_height="13dp"
-                                    android:src="@drawable/img_car2" />
-                                <TextView
-                                    android:layout_marginLeft="12dp"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="中型车（SUV、商务车）"/>
-                            </LinearLayout>
-                            <LinearLayout
-                                android:gravity="center"
-                                android:layout_width="wrap_content"
-                                android:layout_height="44dp">
-                                <ImageView
-                                    android:src="@drawable/img_car1"
-                                    android:layout_width="28dp"
-                                    android:layout_height="13dp" />
-                                <TextView
-                                    android:layout_marginLeft="12dp"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="小型车"/>
-                            </LinearLayout>
-                        </LinearLayout>
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_marginTop="16dp"
-                        android:textSize="15sp"
-                        android:text="支付方式"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <RadioGroup
-                        android:id="@+id/pay_radio_group"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:background="@color/white"
-                        android:orientation="horizontal">
-
-                        <RadioButton
-                            android:id="@+id/wx_radio_button"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:checked="true"
-                            android:text="微信"
-                            android:textSize="16sp"
-                            android:textColor="@color/black"/>
-
-                        <RadioButton
-                            android:id="@+id/alipay_radio_button"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="支付宝"
-                            android:textSize="16sp"
-                            android:textColor="@color/black"/>
-
-                    </RadioGroup>
-
-                    <TextView
-                        android:layout_marginTop="16dp"
-                        android:textSize="15sp"
-                        android:text="商品"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:id="@+id/shop_list"
-                        android:layout_marginTop="16dp"
-                        android:background="#fff"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-
-                    </LinearLayout>
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:background="@android:color/transparent"/>
-
-                </LinearLayout>
+            <include
+                layout="@layout/view_payment"/>
 
             </ScrollView>
 

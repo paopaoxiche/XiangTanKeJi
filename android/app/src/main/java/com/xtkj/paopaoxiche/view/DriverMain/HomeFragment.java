@@ -75,10 +75,6 @@ public class HomeFragment extends BaseFragmemt implements IDriverContract.IHomeV
     HomeWashServiceAdapter homeWashServiceAdapter = null;
     HomeShopFragmentAdapter homeShopFragmentAdapter = null;
     int viewpager_index = 0;
-    Handler handler;
-    int ad_index = 0;
-
-//    int SIGN = 101;
 
     Unbinder unbinder;
     @BindView(R.id.temperature)
@@ -175,27 +171,6 @@ public class HomeFragment extends BaseFragmemt implements IDriverContract.IHomeV
         homeClassButton3.setText(AppConstant.HOME_CLASS_3);
         homeClassButton4.setText(AppConstant.HOME_CLASS_4);
         homeClassButton5.setText(AppConstant.HOME_CLASS_5);
-
-
-//        handler = new Handler() {
-//            @Override
-//            public void handleMessage(Message msg) {
-//                super.handleMessage(msg);
-//                //临时方案，可能造成activity不能回收，后面需要改一下
-//                if (adText == null) {
-//                    handler.sendEmptyMessageDelayed(msg.what, 500);
-//                    return;
-//                }
-//                if (msg.what == SIGN) {
-//                    if (ad_index < DriverHomeModel.getInstance().getAdStrings().size()) {
-//                        adText.setText(DriverHomeModel.getInstance().getAdStrings().get(ad_index));
-//                    }
-//                    ad_index++;
-//                    if (ad_index >= DriverHomeModel.getInstance().getAdStrings().size())
-//                        ad_index = 0;
-//                }
-//            }
-//        };
 
         checkBannerAd();
     }

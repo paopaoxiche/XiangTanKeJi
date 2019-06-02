@@ -73,7 +73,9 @@ public class WashServiceAdapter extends RecyclerView.Adapter<WashServiceAdapter.
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mView.changeCamera(dataBean.getWashId(), dataBean.getLng(), dataBean.getLat());
+                if (listener != null) {
+                    listener.requestPayment(dataBean);
+                }
             }
         });
     }
@@ -108,5 +110,14 @@ public class WashServiceAdapter extends RecyclerView.Adapter<WashServiceAdapter.
         }
     }
 
+    public interface RequestPaymentListener {
+        void requestPayment(WashServicesBean.DataBean dataBean);
+    }
+
+    private RequestPaymentListener listener;
+
+    public void setListener(RequestPaymentListener listener) {
+        this.listener = listener;
+    }
 
 }

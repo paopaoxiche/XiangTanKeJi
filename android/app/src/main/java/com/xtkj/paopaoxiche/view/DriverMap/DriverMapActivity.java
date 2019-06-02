@@ -1,20 +1,34 @@
 package com.xtkj.paopaoxiche.view.DriverMap;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.alipay.sdk.app.PayTask;
 import com.amap.api.maps2d.AMap;
 import com.amap.api.maps2d.CameraUpdateFactory;
 import com.amap.api.maps2d.MapView;
@@ -25,36 +39,66 @@ import com.amap.api.maps2d.model.Marker;
 import com.amap.api.maps2d.model.MarkerOptions;
 import com.amap.api.maps2d.model.MyLocationStyle;
 import com.amap.api.maps2d.overlay.DrivingRouteOverlay;
-import com.amap.api.services.core.AMapException;
 import com.amap.api.services.core.LatLonPoint;
 import com.amap.api.services.route.BusRouteResult;
 import com.amap.api.services.route.DrivePath;
 import com.amap.api.services.route.DriveRouteResult;
-import com.amap.api.services.route.DriveStep;
 import com.amap.api.services.route.RideRouteResult;
 import com.amap.api.services.route.RouteSearch;
 import com.amap.api.services.route.WalkRouteResult;
+import com.bingo.wxpay.Constants;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
+import com.tencent.mm.opensdk.constants.ConstantsAPI;
+import com.tencent.mm.opensdk.modelbase.BaseReq;
+import com.tencent.mm.opensdk.modelbase.BaseResp;
+import com.tencent.mm.opensdk.modelmsg.SendAuth;
+import com.tencent.mm.opensdk.modelpay.PayReq;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.xtkj.paopaoxiche.R;
 import com.xtkj.paopaoxiche.application.AppConstant;
+import com.xtkj.paopaoxiche.application.Authentication;
+import com.xtkj.paopaoxiche.application.BaseApplication;
 import com.xtkj.paopaoxiche.application.MyLocation;
-import com.xtkj.paopaoxiche.base.BaseActivity;
 import com.xtkj.paopaoxiche.base.BaseGaodeActivity;
+import com.xtkj.paopaoxiche.bean.CreateConsumeBean;
+import com.xtkj.paopaoxiche.bean.MyCouponListBean;
+import com.xtkj.paopaoxiche.bean.PostWashServiceBean;
+import com.xtkj.paopaoxiche.bean.SellingServicesBean;
+import com.xtkj.paopaoxiche.bean.WashCommodityBean;
 import com.xtkj.paopaoxiche.bean.WashServicesBean;
 import com.xtkj.paopaoxiche.contract.IDriverMapContract;
+import com.xtkj.paopaoxiche.http.ApiField;
+import com.xtkj.paopaoxiche.http.RetrofitClient;
 import com.xtkj.paopaoxiche.model.DriverMapModel;
 import com.xtkj.paopaoxiche.model.UserInfo;
 import com.xtkj.paopaoxiche.presenter.DriverMapPresenterImpl;
+import com.xtkj.paopaoxiche.service.CarOwnerService;
+import com.xtkj.paopaoxiche.service.UserService;
+import com.xtkj.paopaoxiche.service.WashService;
 import com.xtkj.paopaoxiche.utils.BitmapUtil;
 import com.xtkj.paopaoxiche.utils.DensityUtil;
+import com.xtkj.paopaoxiche.view.view.CommitEvaluationDialog;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class DriverMapActivity extends BaseGaodeActivity implements IDriverMapContract.IDriverMapView, AMap.OnMyLocationChangeListener,
-        AMap.OnCameraChangeListener, RouteSearch.OnRouteSearchListener, View.OnClickListener {
+        AMap.OnCameraChangeListener, RouteSearch.OnRouteSearchListener, View.OnClickListener, IWXAPIEventHandler, RadioGroup.OnCheckedChangeListener, CommitEvaluationDialog.EvaluateCallback {
 
     RecyclerView mRecyclerView;
     WashServiceAdapter washServiceAdapter;
@@ -66,12 +110,42 @@ public class DriverMapActivity extends BaseGaodeActivity implements IDriverMapCo
     AMap.InfoWindowAdapter infoWindowAdapter;
     ImageButton wuyuanxicheImageButton;
 
+    Unbinder unbinder = null;
+    @BindView(R.id.car_wash_main_image_view)
+    ImageView carWashMainImageView;
+    @BindView(R.id.car_wash_address_text_view)
+    TextView carWashAddressTextView;
+    @BindView(R.id.car_wash_phone_text_view)
+    TextView carWashPhoneTextView;
+    @BindView(R.id.car_wash_time_text_view)
+    TextView carWashTimeTextView;
+    @BindView(R.id.service_items)
+    LinearLayout serviceItems;
+    @BindView(R.id.shop_list)
+    LinearLayout shopList;
+    @BindView(R.id.pay_radio_group)
+    RadioGroup payRadioGroup;
+    @BindView(R.id.pay_button)
+    Button payButton;
+    @BindView(R.id.wash_car_service_payment_view)
+    ScrollView washCarServicePaymentView;
+
+    private boolean isDetailShow = false;
+
+    private IWXAPI api;
+    private List<MyCouponListBean.DataBean> couponList = new ArrayList<>();
+
+    Set<WashCommodityBean.DataBean> goodsBeanList = new HashSet<>();
+
+    private PostWashServiceBean postWashServiceBean;
+
     private IDriverMapContract.IDriverMapPresenter presenter = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver_map);
+        unbinder = ButterKnife.bind(this);
 
         mMapView = (MapView) findViewById(R.id.map);
         //在activity执行onCreate时执行mMapView.onCreate(savedInstanceState)，创建地图
@@ -159,6 +233,16 @@ public class DriverMapActivity extends BaseGaodeActivity implements IDriverMapCo
     protected void initValues() {
         washServiceAdapter = new WashServiceAdapter(DriverMapModel.getInstance().getWashServicesBean(), this);
         mRecyclerView.setAdapter(washServiceAdapter);
+
+        getMyCoupons();
+        api = WXAPIFactory.createWXAPI(this, Constants.APP_ID, true);
+        api.registerApp(Constants.APP_ID);
+        api.handleIntent(getIntent(), this);
+        postWashServiceBean = new PostWashServiceBean();
+        postWashServiceBean.setCommoditys("");
+        postWashServiceBean.setCouponId(0);
+        postWashServiceBean.setPayType(AppConstant.PAY_WX);
+        postWashServiceBean.setWashServiceId(0);
     }
 
     @Override
@@ -167,6 +251,19 @@ public class DriverMapActivity extends BaseGaodeActivity implements IDriverMapCo
             finish();
         });
         wuyuanxicheImageButton.setOnClickListener(this);
+
+        backButton.setOnClickListener(view -> finish());
+        payButton.setOnClickListener(e -> {
+            callPay();
+        });
+        payRadioGroup.setOnCheckedChangeListener(this);
+
+        washServiceAdapter.setListener(new WashServiceAdapter.RequestPaymentListener() {
+            @Override
+            public void requestPayment(WashServicesBean.DataBean dataBean) {
+                requestPaymentPage(dataBean.getWashId());
+            }
+        });
     }
 
     @Override
@@ -175,6 +272,7 @@ public class DriverMapActivity extends BaseGaodeActivity implements IDriverMapCo
         presenter.onDestroy();
         //在activity执行onDestroy时执行mMapView.onDestroy()，销毁地图
         mMapView.onDestroy();
+        unbinder.unbind();
     }
 
     @Override
@@ -232,9 +330,7 @@ public class DriverMapActivity extends BaseGaodeActivity implements IDriverMapCo
                     marker.setObject(dataBeanList.get(finalI));
                 }
             });
-
         }
-
     }
 
     @Override
@@ -251,6 +347,7 @@ public class DriverMapActivity extends BaseGaodeActivity implements IDriverMapCo
 
 
     }
+
     @Override
     public void changeCamera(int washId, double lon, double lat) {
         mMapView.getMap().moveCamera(CameraUpdateFactory.changeLatLng(new LatLng(lat, lon)));
@@ -337,5 +434,279 @@ public class DriverMapActivity extends BaseGaodeActivity implements IDriverMapCo
                 presenter.checkWuYuanXiChe();
             }
         }
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        api.handleIntent(intent, this);
+    }
+
+    private void buildServiceLayout(SellingServicesBean.DataBean d, int index) {
+        LinearLayout linearLayout = (LinearLayout) View.inflate(this, R.layout.item_wash_service_details, null);
+        TextView service_name = linearLayout.findViewById(R.id.service_name);
+        service_name.setText(d.getName());
+        TextView describe = linearLayout.findViewById(R.id.describe);
+        describe.setText(d.getDescribe());
+        TextView old_price = linearLayout.findViewById(R.id.old_price);
+
+        old_price.setText(String.format("￥%s", d.getPrice()));
+        old_price.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+
+        TextView price = linearLayout.findViewById(R.id.price);
+        price.setText(String.format("￥%s", d.getPrice()));
+
+        RadioButton radio = linearLayout.findViewById(R.id.radio);
+
+        radio.setOnCheckedChangeListener((compoundButton, b) -> {
+            if (b) {
+                int count = serviceItems.getChildCount();
+                for (int j = 0; j < count; j++) {
+                    if (index == j) {
+                        postWashServiceBean.setWashServiceId(d.getId());
+                        double max = 0;
+                        for (MyCouponListBean.DataBean dataBean : couponList) {
+                            if (Double.valueOf(d.getPrice()) > Double.valueOf(dataBean.getPrice()) && Double.valueOf(dataBean.getPrice()) > max) {
+                                max = Double.valueOf(dataBean.getPrice());
+                                postWashServiceBean.setCouponId(dataBean.getId());
+                            }
+                        }
+                        if (max > 0) {
+                            price.setText(String.format("￥%s - ￥%s", d.getPrice(), String.valueOf(max)));
+                        } else {
+                            postWashServiceBean.setCouponId(0);
+                        }
+                        continue;
+                    }
+                    RadioButton r = serviceItems.getChildAt(j).findViewById(R.id.radio);
+                    r.setChecked(false);
+                }
+            }
+        });
+
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        layoutParams.setMargins(0, 16, 0, 16);
+        serviceItems.addView(linearLayout, layoutParams);
+    }
+
+    private void buildGoodsLayout(WashCommodityBean.DataBean dataBean, int index) {
+        RelativeLayout linearLayout = (RelativeLayout) View.inflate(this, R.layout.item_wash_service_shop, null);
+
+        TextView shop_name = linearLayout.findViewById(R.id.shop_name);
+        shop_name.setText(dataBean.getName());
+
+        TextView price = linearLayout.findViewById(R.id.price);
+        price.setText(String.format("￥%s", dataBean.getCurrentPrice()));
+        CheckBox radio = linearLayout.findViewById(R.id.radio);
+
+        ImageView goodsImageView = linearLayout.findViewById(R.id.shop_img);
+        Glide.with(this)
+                .load(dataBean.getImage())
+                .into(goodsImageView);
+        radio.setOnCheckedChangeListener((compoundButton, b) -> {
+            if (b) {
+                goodsBeanList.add(dataBean);
+            } else {
+                goodsBeanList.remove(dataBean);
+            }
+            String goodsIds = new String("");
+            boolean isFirst = true;
+            for (WashCommodityBean.DataBean data : goodsBeanList) {
+                if (isFirst) {
+                    goodsIds = goodsIds + data.getId();
+                    isFirst = false;
+                } else {
+                    goodsIds = goodsIds + "," + data.getId();
+                }
+            }
+            postWashServiceBean.setCommoditys(goodsIds);
+        });
+        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DensityUtil.dip2px(this, 75));
+        layoutParams.setMargins(0, 16, 0, 16);
+        shopList.addView(linearLayout, layoutParams);
+    }
+
+    private void requestPaymentPage(int washId) {
+
+        isDetailShow = true;
+
+        mRecyclerView.setVisibility(View.GONE);
+        washCarServicePaymentView.setVisibility(View.VISIBLE);
+
+        RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
+                .create(WashService.class)
+                .getServiceList(washId)
+                .enqueue(new Callback<SellingServicesBean>() {
+                    @Override
+                    public void onResponse(Call<SellingServicesBean> call, Response<SellingServicesBean> response) {
+                        if (response.body() == null) return;
+                        ArrayList<SellingServicesBean.DataBean> dataBeans = (ArrayList<SellingServicesBean.DataBean>) response.body().getData();
+                        if (dataBeans == null) return;
+                        for (int i = 0; i < dataBeans.size(); i++) {
+                            buildServiceLayout(dataBeans.get(i), i);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<SellingServicesBean> call, Throwable t) {
+
+                    }
+                });
+
+        RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
+                .create(WashService.class)
+                .getGoodsList(washId, 0, 20)
+                .enqueue(new Callback<WashCommodityBean>() {
+                    @Override
+                    public void onResponse(Call<WashCommodityBean> call, Response<WashCommodityBean> response) {
+                        if (response.body() == null) return;
+                        ArrayList<WashCommodityBean.DataBean> dataBeans = (ArrayList<WashCommodityBean.DataBean>) response.body().getData();
+                        if (dataBeans == null) return;
+                        for (int i = 0; i < dataBeans.size(); i++) {
+                            buildGoodsLayout(dataBeans.get(i), i);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<WashCommodityBean> call, Throwable t) {
+
+                    }
+                });
+    }
+
+
+    private void callPay() {
+        RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
+                .create(CarOwnerService.class)
+                .createConsume(postWashServiceBean.getWashServiceId(), postWashServiceBean.getCommoditys(), postWashServiceBean.getCouponId(), postWashServiceBean.getPayType())
+                .enqueue(new Callback<CreateConsumeBean>() {
+                    @Override
+                    public void onResponse(Call<CreateConsumeBean> call, Response<CreateConsumeBean> response) {
+
+                        if (response.body() == null || response.body().getCode() != 200) {
+                            Toast.makeText(DriverMapActivity.this, "调起支付失败, 请检查选项", Toast.LENGTH_LONG).show();
+                            return;
+                        }
+
+                        if (postWashServiceBean.getPayType() == 1) {
+                            PayReq req = new PayReq();
+                            req.appId = response.body().getData().getWxPay().getAppid();
+                            req.partnerId = response.body().getData().getWxPay().getPartnerid();
+                            req.prepayId = response.body().getData().getWxPay().getPrepayid();
+                            req.nonceStr = response.body().getData().getWxPay().getNoncestr();
+                            req.timeStamp = response.body().getData().getWxPay().getTimestamp();
+                            req.packageValue = response.body().getData().getWxPay().getPackageX();
+                            req.sign = response.body().getData().getWxPay().getSign();
+                            req.extData = "app data"; // optional
+                            // 在支付之前，如果应用没有注册到微信，应该先调用IWXMsg.registerApp将应用注册到微信
+                            boolean isSuccess = api.sendReq(req);
+                        }
+                        if (postWashServiceBean.getPayType() == 2) {
+
+                            new Thread(() -> {
+                                PayTask payTask = new PayTask(DriverMapActivity.this);
+                                Map<String, String> result = payTask.payV2(response.body().getData().getAliPay(), true);
+                                if (result != null && result.get("resultStatus") != null && result.get("resultStatus").equals("9000")) {
+                                    new Handler(Looper.getMainLooper()).post(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(DriverMapActivity.this, "支付成功", Toast.LENGTH_LONG).show();
+                                            new CommitEvaluationDialog(postWashServiceBean.getWashServiceId(), (CommitEvaluationDialog.EvaluateCallback) DriverMapActivity.this, DriverMapActivity.this).show();
+                                        }
+                                    });
+                                } else {
+                                    new Handler(Looper.getMainLooper()).post(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(DriverMapActivity.this, "支付失败", Toast.LENGTH_LONG).show();
+                                        }
+                                    });
+                                }
+                            }).start();
+//                        Toast.makeText(getActivityContext(), "调起阿里支付成功", Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<CreateConsumeBean> call, Throwable t) {
+                        Toast.makeText(DriverMapActivity.this, "调起阿里支付失败", Toast.LENGTH_LONG).show();
+                    }
+                });
+    }
+
+    @Override
+    public void onReq(BaseReq baseReq) {
+        Log.i("支付反馈", "onPayFinish, reqType = " + baseReq.getType());
+        //Toast.makeText(this, "openid = " + baseReq.openId, Toast.LENGTH_SHORT).show();
+        // new CommitEvaluationDialog(postWashServiceBean.getWashServiceId(), this, this).show();
+        switch (baseReq.getType()) {
+            case ConstantsAPI.COMMAND_GETMESSAGE_FROM_WX:
+                //goToGetMsg();
+                break;
+            case ConstantsAPI.COMMAND_SHOWMESSAGE_FROM_WX:
+                // goToShowMsg((ShowMessageFromWX.Req) req);
+                break;
+            case ConstantsAPI.COMMAND_LAUNCH_BY_WX:
+                Toast.makeText(this, com.bingo.wxpay.R.string.launch_from_wx, Toast.LENGTH_SHORT).show();
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Override
+    public void onResp(BaseResp resp) {
+        Log.i("支付反馈", "onPayFinish, respType = " + resp.getType());
+        //Toast.makeText(this, "openid = " + resp.openId, Toast.LENGTH_SHORT).show();
+        new CommitEvaluationDialog(postWashServiceBean.getWashServiceId(), this, this).show();
+        if (resp.getType() == ConstantsAPI.COMMAND_SENDAUTH) {
+            Toast.makeText(this, "code = " + ((SendAuth.Resp) resp).code, Toast.LENGTH_SHORT).show();
+
+        }
+    }
+
+    @Override
+    public void onCheckedChanged(RadioGroup group, int checkedId) {
+        switch (checkedId) {
+            case R.id.wx_radio_button:
+                postWashServiceBean.setPayType(1);
+                break;
+            case R.id.alipay_radio_button:
+                postWashServiceBean.setPayType(2);
+                break;
+        }
+    }
+
+    private void getMyCoupons() {
+        RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
+                .create(UserService.class)
+                .getMyCoupon()
+                .enqueue(new Callback<MyCouponListBean>() {
+                    @Override
+                    public void onResponse(Call<MyCouponListBean> call, Response<MyCouponListBean> response) {
+                        MyCouponListBean bean = response.body();
+                        if (bean.getCode() != 200) {
+                            Toast.makeText(BaseApplication.getContext(),
+                                    "获取个人优惠劵数据失败！", Toast.LENGTH_LONG).show();
+                            return;
+                        }
+
+                        List<MyCouponListBean.DataBean> dataBeans = bean.getData();
+                        if (dataBeans != null) {
+                            couponList.addAll(dataBeans);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<MyCouponListBean> call, Throwable t) {
+
+                    }
+                });
+    }
+
+    @Override
+    public void success(int serviceId) {
+        finish();
     }
 }
