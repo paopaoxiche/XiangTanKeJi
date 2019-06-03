@@ -51,18 +51,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <TextView
+                <com.xtkj.paopaoxiche.widget.MarqueeTextView
                     android:id="@+id/class_details_text"
                     android:layout_weight="1"
                     android:layout_width="0dp"
+                    android:ellipsize="marquee"
+                    android:singleLine="true"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:marqueeRepeatLimit="marquee_forever"
                     android:layout_height="wrap_content">
 
-                </TextView>
+                </com.xtkj.paopaoxiche.widget.MarqueeTextView>
                 <LinearLayout
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:orientation="vertical"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
                     <TextView
                         android:id="@+id/class_price1"
