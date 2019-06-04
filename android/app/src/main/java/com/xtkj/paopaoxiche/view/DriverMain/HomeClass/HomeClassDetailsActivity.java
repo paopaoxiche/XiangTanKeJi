@@ -3,6 +3,7 @@ package com.xtkj.paopaoxiche.view.DriverMain.HomeClass;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -72,7 +73,7 @@ public class HomeClassDetailsActivity extends BaseActivity {
         classDetailsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(dataBean.getUrl()==null){
+                if(TextUtils.isEmpty(dataBean.getUrl())){
                     Toast.makeText(getApplicationContext(),"商品没有上线，敬请期待！",Toast.LENGTH_LONG).show();
                 }else {
                         Intent intent = new Intent(HomeClassDetailsActivity.this, WebViewActivity.class);

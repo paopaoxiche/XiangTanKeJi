@@ -48,7 +48,7 @@ public class HomeWashServiceAdapter extends RecyclerView.Adapter<HomeWashService
         viewHolder.yardDistance.setText(String.format("%sm", dataList.get(position).getDistance()));
         viewHolder.itemView.setOnClickListener(view1 -> {
             Intent intent = new Intent(mContext, WashServiceActivity.class);
-            intent.putExtra("washId", dataList.get(position).getWashId());
+            intent.putExtra("washId", dataList.get(position));
             mContext.startActivity(intent);
         });
 

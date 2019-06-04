@@ -82,6 +82,7 @@ import com.xtkj.paopaoxiche.service.UserService;
 import com.xtkj.paopaoxiche.service.WashService;
 import com.xtkj.paopaoxiche.utils.BitmapUtil;
 import com.xtkj.paopaoxiche.utils.DensityUtil;
+import com.xtkj.paopaoxiche.view.WashService.WashServiceActivity;
 import com.xtkj.paopaoxiche.view.view.CommitEvaluationDialog;
 
 import java.util.ArrayList;
@@ -120,12 +121,12 @@ public class DriverMapActivity extends BaseGaodeActivity implements IDriverMapCo
     TextView carWashPhoneTextView;
     @BindView(R.id.car_wash_time_text_view)
     TextView carWashTimeTextView;
-    @BindView(R.id.service_items)
-    LinearLayout serviceItems;
-    @BindView(R.id.shop_list)
-    LinearLayout shopList;
-    @BindView(R.id.pay_radio_group)
-    RadioGroup payRadioGroup;
+//    @BindView(R.id.service_items)
+//    LinearLayout serviceItems;
+//    @BindView(R.id.shop_list)
+//    LinearLayout shopList;
+//    @BindView(R.id.pay_radio_group)
+//    RadioGroup payRadioGroup;
     @BindView(R.id.pay_button)
     Button payButton;
     @BindView(R.id.wash_car_service_payment_view)
@@ -136,6 +137,7 @@ public class DriverMapActivity extends BaseGaodeActivity implements IDriverMapCo
     TextView washNameTextView;
 
     private boolean isDetailShow = false;
+    private boolean needToRefrashDetail  = false;
 
     private IWXAPI api;
     private List<MyCouponListBean.DataBean> couponList = new ArrayList<>();
@@ -219,6 +221,9 @@ public class DriverMapActivity extends BaseGaodeActivity implements IDriverMapCo
                     img.setImageResource(R.drawable.img_operation);
                     img.setBackgroundColor(Color.rgb(17, 176, 242));
                 }
+                if (isDetailShow) {
+                    needToRefrashDetail = true;
+                }
             }
 
         };
@@ -252,21 +257,28 @@ public class DriverMapActivity extends BaseGaodeActivity implements IDriverMapCo
 
     @Override
     protected void initListeners() {
+
+        findViewById(R.id.back_to_list_image_view).setOnClickListener(this);
+        findViewById(R.id.back_to_list_text_view).setOnClickListener(this);
         backButton.setOnClickListener(view -> {
             finish();
         });
         wuyuanxicheImageButton.setOnClickListener(this);
 
         backButton.setOnClickListener(view -> finish());
-        payButton.setOnClickListener(e -> {
-            callPay();
-        });
-        payRadioGroup.setOnCheckedChangeListener(this);
+//        payRadioGroup.setOnCheckedChangeListener(this);
 
         washServiceAdapter.setListener(new WashServiceAdapter.RequestPaymentListener() {
             @Override
             public void requestPayment(WashServicesBean.DataBean dataBean) {
                 requestPaymentPage(dataBean);
+                payButton.setOnClickListener(e -> {
+                    //callPay();
+                    Intent intent = new Intent(getContext(), WashServiceActivity.class);
+                    intent.putExtra("washId", dataBean);
+                    getContext().startActivity(intent);
+
+                });
             }
         });
     }
@@ -335,6 +347,12 @@ public class DriverMapActivity extends BaseGaodeActivity implements IDriverMapCo
                     marker.setObject(dataBeanList.get(finalI));
                 }
             });
+        }
+        if (needToRefrashDetail) {
+            needToRefrashDetail = false;
+            if (dataBeanList.size() > 0) {
+                requestPaymentPage(dataBeanList.get(0));
+            }
         }
     }
 
@@ -438,99 +456,106 @@ public class DriverMapActivity extends BaseGaodeActivity implements IDriverMapCo
                 UserInfo.setIsCheckWuYuanXiChe(true);
                 presenter.checkWuYuanXiChe();
             }
+        } else if (v.getId() == R.id.back_to_list_image_view
+                || v.getId() == R.id.back_to_list_text_view) {
+            if (isDetailShow) {
+                isDetailShow = false;
+                mRecyclerView.setVisibility(View.VISIBLE);
+                washCarServicePaymentView.setVisibility(View.GONE);
+            }
         }
     }
 
-    @Override
-    protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
-        setIntent(intent);
-        api.handleIntent(intent, this);
-    }
-
-    private void buildServiceLayout(SellingServicesBean.DataBean d, int index) {
-        LinearLayout linearLayout = (LinearLayout) View.inflate(this, R.layout.item_wash_service_details, null);
-        TextView service_name = linearLayout.findViewById(R.id.service_name);
-        service_name.setText(d.getName());
-        TextView describe = linearLayout.findViewById(R.id.describe);
-        describe.setText(d.getDescribe());
-        TextView old_price = linearLayout.findViewById(R.id.old_price);
-
-        old_price.setText(String.format("￥%s", d.getPrice()));
-        old_price.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
-
-        TextView price = linearLayout.findViewById(R.id.price);
-        price.setText(String.format("￥%s", d.getPrice()));
-
-        RadioButton radio = linearLayout.findViewById(R.id.radio);
-
-        radio.setOnCheckedChangeListener((compoundButton, b) -> {
-            if (b) {
-                int count = serviceItems.getChildCount();
-                for (int j = 0; j < count; j++) {
-                    if (index == j) {
-                        postWashServiceBean.setWashServiceId(d.getId());
-                        double max = 0;
-                        for (MyCouponListBean.DataBean dataBean : couponList) {
-                            if (Double.valueOf(d.getPrice()) > Double.valueOf(dataBean.getPrice()) && Double.valueOf(dataBean.getPrice()) > max) {
-                                max = Double.valueOf(dataBean.getPrice());
-                                postWashServiceBean.setCouponId(dataBean.getId());
-                            }
-                        }
-                        if (max > 0) {
-                            price.setText(String.format("￥%s - ￥%s", d.getPrice(), String.valueOf(max)));
-                        } else {
-                            postWashServiceBean.setCouponId(0);
-                        }
-                        continue;
-                    }
-                    RadioButton r = serviceItems.getChildAt(j).findViewById(R.id.radio);
-                    r.setChecked(false);
-                }
-            }
-        });
-
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        layoutParams.setMargins(0, 16, 0, 16);
-        serviceItems.addView(linearLayout, layoutParams);
-    }
-
-    private void buildGoodsLayout(WashCommodityBean.DataBean dataBean, int index) {
-        RelativeLayout linearLayout = (RelativeLayout) View.inflate(this, R.layout.item_wash_service_shop, null);
-
-        TextView shop_name = linearLayout.findViewById(R.id.shop_name);
-        shop_name.setText(dataBean.getName());
-
-        TextView price = linearLayout.findViewById(R.id.price);
-        price.setText(String.format("￥%s", dataBean.getCurrentPrice()));
-        CheckBox radio = linearLayout.findViewById(R.id.radio);
-
-        ImageView goodsImageView = linearLayout.findViewById(R.id.shop_img);
-        Glide.with(this)
-                .load(dataBean.getImage())
-                .into(goodsImageView);
-        radio.setOnCheckedChangeListener((compoundButton, b) -> {
-            if (b) {
-                goodsBeanList.add(dataBean);
-            } else {
-                goodsBeanList.remove(dataBean);
-            }
-            String goodsIds = new String("");
-            boolean isFirst = true;
-            for (WashCommodityBean.DataBean data : goodsBeanList) {
-                if (isFirst) {
-                    goodsIds = goodsIds + data.getId();
-                    isFirst = false;
-                } else {
-                    goodsIds = goodsIds + "," + data.getId();
-                }
-            }
-            postWashServiceBean.setCommoditys(goodsIds);
-        });
-        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DensityUtil.dip2px(this, 75));
-        layoutParams.setMargins(0, 16, 0, 16);
-        shopList.addView(linearLayout, layoutParams);
-    }
+//    @Override
+//    protected void onNewIntent(Intent intent) {
+//        super.onNewIntent(intent);
+//        setIntent(intent);
+//        api.handleIntent(intent, this);
+//    }
+//
+//    private void buildServiceLayout(SellingServicesBean.DataBean d, int index) {
+//        LinearLayout linearLayout = (LinearLayout) View.inflate(this, R.layout.item_wash_service_details, null);
+//        TextView service_name = linearLayout.findViewById(R.id.service_name);
+//        service_name.setText(d.getName());
+//        TextView describe = linearLayout.findViewById(R.id.describe);
+//        describe.setText(d.getDescribe());
+//        TextView old_price = linearLayout.findViewById(R.id.old_price);
+//
+//        old_price.setText(String.format("￥%s", d.getPrice()));
+//        old_price.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+//
+//        TextView price = linearLayout.findViewById(R.id.price);
+//        price.setText(String.format("￥%s", d.getPrice()));
+//
+//        RadioButton radio = linearLayout.findViewById(R.id.radio);
+//
+//        radio.setOnCheckedChangeListener((compoundButton, b) -> {
+//            if (b) {
+//                int count = serviceItems.getChildCount();
+//                for (int j = 0; j < count; j++) {
+//                    if (index == j) {
+//                        postWashServiceBean.setWashServiceId(d.getId());
+//                        double max = 0;
+//                        for (MyCouponListBean.DataBean dataBean : couponList) {
+//                            if (Double.valueOf(d.getPrice()) > Double.valueOf(dataBean.getPrice()) && Double.valueOf(dataBean.getPrice()) > max) {
+//                                max = Double.valueOf(dataBean.getPrice());
+//                                postWashServiceBean.setCouponId(dataBean.getId());
+//                            }
+//                        }
+//                        if (max > 0) {
+//                            price.setText(String.format("￥%s - ￥%s", d.getPrice(), String.valueOf(max)));
+//                        } else {
+//                            postWashServiceBean.setCouponId(0);
+//                        }
+//                        continue;
+//                    }
+//                    RadioButton r = serviceItems.getChildAt(j).findViewById(R.id.radio);
+//                    r.setChecked(false);
+//                }
+//            }
+//        });
+//
+//        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//        layoutParams.setMargins(0, 16, 0, 16);
+//        serviceItems.addView(linearLayout, layoutParams);
+//    }
+//
+//    private void buildGoodsLayout(WashCommodityBean.DataBean dataBean, int index) {
+//        RelativeLayout linearLayout = (RelativeLayout) View.inflate(this, R.layout.item_wash_service_shop, null);
+//
+//        TextView shop_name = linearLayout.findViewById(R.id.shop_name);
+//        shop_name.setText(dataBean.getName());
+//
+//        TextView price = linearLayout.findViewById(R.id.price);
+//        price.setText(String.format("￥%s", dataBean.getCurrentPrice()));
+//        CheckBox radio = linearLayout.findViewById(R.id.radio);
+//
+//        ImageView goodsImageView = linearLayout.findViewById(R.id.shop_img);
+//        Glide.with(this)
+//                .load(dataBean.getImage())
+//                .into(goodsImageView);
+//        radio.setOnCheckedChangeListener((compoundButton, b) -> {
+//            if (b) {
+//                goodsBeanList.add(dataBean);
+//            } else {
+//                goodsBeanList.remove(dataBean);
+//            }
+//            String goodsIds = new String("");
+//            boolean isFirst = true;
+//            for (WashCommodityBean.DataBean data : goodsBeanList) {
+//                if (isFirst) {
+//                    goodsIds = goodsIds + data.getId();
+//                    isFirst = false;
+//                } else {
+//                    goodsIds = goodsIds + "," + data.getId();
+//                }
+//            }
+//            postWashServiceBean.setCommoditys(goodsIds);
+//        });
+//        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DensityUtil.dip2px(this, 75));
+//        layoutParams.setMargins(0, 16, 0, 16);
+//        shopList.addView(linearLayout, layoutParams);
+//    }
 
     private void requestPaymentPage(WashServicesBean.DataBean dataBean) {
 
@@ -545,45 +570,45 @@ public class DriverMapActivity extends BaseGaodeActivity implements IDriverMapCo
         carWashAddressTextView.setText(dataBean.getAddress());
         Glide.with(this).load(dataBean.getFacadeImg()).into(carWashMainImageView);
 
-        RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
-                .create(WashService.class)
-                .getServiceList(dataBean.getWashId())
-                .enqueue(new Callback<SellingServicesBean>() {
-                    @Override
-                    public void onResponse(Call<SellingServicesBean> call, Response<SellingServicesBean> response) {
-                        if (response.body() == null) return;
-                        ArrayList<SellingServicesBean.DataBean> dataBeans = (ArrayList<SellingServicesBean.DataBean>) response.body().getData();
-                        if (dataBeans == null) return;
-                        for (int i = 0; i < dataBeans.size(); i++) {
-                            buildServiceLayout(dataBeans.get(i), i);
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<SellingServicesBean> call, Throwable t) {
-
-                    }
-                });
-
-        RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
-                .create(WashService.class)
-                .getGoodsList(dataBean.getWashId(), 0, 20)
-                .enqueue(new Callback<WashCommodityBean>() {
-                    @Override
-                    public void onResponse(Call<WashCommodityBean> call, Response<WashCommodityBean> response) {
-                        if (response.body() == null) return;
-                        ArrayList<WashCommodityBean.DataBean> dataBeans = (ArrayList<WashCommodityBean.DataBean>) response.body().getData();
-                        if (dataBeans == null) return;
-                        for (int i = 0; i < dataBeans.size(); i++) {
-                            buildGoodsLayout(dataBeans.get(i), i);
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<WashCommodityBean> call, Throwable t) {
-
-                    }
-                });
+//        RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
+//                .create(WashService.class)
+//                .getServiceList(dataBean.getWashId())
+//                .enqueue(new Callback<SellingServicesBean>() {
+//                    @Override
+//                    public void onResponse(Call<SellingServicesBean> call, Response<SellingServicesBean> response) {
+//                        if (response.body() == null) return;
+//                        ArrayList<SellingServicesBean.DataBean> dataBeans = (ArrayList<SellingServicesBean.DataBean>) response.body().getData();
+//                        if (dataBeans == null) return;
+//                        for (int i = 0; i < dataBeans.size(); i++) {
+//                            buildServiceLayout(dataBeans.get(i), i);
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<SellingServicesBean> call, Throwable t) {
+//
+//                    }
+//                });
+//
+//        RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
+//                .create(WashService.class)
+//                .getGoodsList(dataBean.getWashId(), 0, 20)
+//                .enqueue(new Callback<WashCommodityBean>() {
+//                    @Override
+//                    public void onResponse(Call<WashCommodityBean> call, Response<WashCommodityBean> response) {
+//                        if (response.body() == null) return;
+//                        ArrayList<WashCommodityBean.DataBean> dataBeans = (ArrayList<WashCommodityBean.DataBean>) response.body().getData();
+//                        if (dataBeans == null) return;
+//                        for (int i = 0; i < dataBeans.size(); i++) {
+//                            buildGoodsLayout(dataBeans.get(i), i);
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<WashCommodityBean> call, Throwable t) {
+//
+//                    }
+//                });
     }
 
 

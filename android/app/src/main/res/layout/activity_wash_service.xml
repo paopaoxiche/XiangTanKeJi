@@ -73,7 +73,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_width="match_parent"
-            android:text="支付"
+            android:text="去支付"
             android:textColor="#fff"
             android:textSize="20sp"
             android:layout_height="52dp" />

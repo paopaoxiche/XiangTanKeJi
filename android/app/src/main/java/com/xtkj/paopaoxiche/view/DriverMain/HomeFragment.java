@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -378,7 +379,7 @@ public class HomeFragment extends BaseFragmemt implements IDriverContract.IHomeV
                         myBanner.setOnBannerListener(new OnBannerListener() {
                             @Override
                             public void OnBannerClick(int position) {
-                                if (position < dataBean.size()) {
+                                if (position < dataBean.size() && !TextUtils.isEmpty(dataBean.get(position).getUrl())) {
                                     Intent intent = new Intent(HomeFragment.this.getContext(), WebViewActivity.class);
                                     intent.putExtra(AppConstant.WEB_NTENT_URL, dataBean.get(position).getUrl());
                                     startActivity(intent);

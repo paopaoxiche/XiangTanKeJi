@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -362,9 +363,9 @@ public class CarWashHomeFragment extends BaseFragmemt implements ICarWashContrac
                         myBanner.setOnBannerListener(new OnBannerListener() {
                             @Override
                             public void OnBannerClick(int position) {
-                                if (position < dataBean.size()) {
+                                if (position < dataBean.size() && !TextUtils.isEmpty(urls.get(position))) {
                                     Intent intent = new Intent(CarWashHomeFragment.this.getContext(), WebViewActivity.class);
-                                    intent.putExtra(AppConstant.WEB_NTENT_URL, "https://baidu.com");
+                                    intent.putExtra(AppConstant.WEB_NTENT_URL, urls.get(position));
                                     startActivity(intent);
                                 }
                             }
