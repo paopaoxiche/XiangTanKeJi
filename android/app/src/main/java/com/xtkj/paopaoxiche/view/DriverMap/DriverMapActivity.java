@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Bundle;
@@ -18,13 +17,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -68,7 +64,6 @@ import com.xtkj.paopaoxiche.base.BaseGaodeActivity;
 import com.xtkj.paopaoxiche.bean.CreateConsumeBean;
 import com.xtkj.paopaoxiche.bean.MyCouponListBean;
 import com.xtkj.paopaoxiche.bean.PostWashServiceBean;
-import com.xtkj.paopaoxiche.bean.SellingServicesBean;
 import com.xtkj.paopaoxiche.bean.WashCommodityBean;
 import com.xtkj.paopaoxiche.bean.WashServicesBean;
 import com.xtkj.paopaoxiche.contract.IDriverMapContract;
@@ -79,7 +74,6 @@ import com.xtkj.paopaoxiche.model.UserInfo;
 import com.xtkj.paopaoxiche.presenter.DriverMapPresenterImpl;
 import com.xtkj.paopaoxiche.service.CarOwnerService;
 import com.xtkj.paopaoxiche.service.UserService;
-import com.xtkj.paopaoxiche.service.WashService;
 import com.xtkj.paopaoxiche.utils.BitmapUtil;
 import com.xtkj.paopaoxiche.utils.DensityUtil;
 import com.xtkj.paopaoxiche.view.WashService.WashServiceActivity;
@@ -93,6 +87,7 @@ import java.util.Set;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -121,7 +116,7 @@ public class DriverMapActivity extends BaseGaodeActivity implements IDriverMapCo
     TextView carWashPhoneTextView;
     @BindView(R.id.car_wash_time_text_view)
     TextView carWashTimeTextView;
-//    @BindView(R.id.service_items)
+    //    @BindView(R.id.service_items)
 //    LinearLayout serviceItems;
 //    @BindView(R.id.shop_list)
 //    LinearLayout shopList;
@@ -135,9 +130,14 @@ public class DriverMapActivity extends BaseGaodeActivity implements IDriverMapCo
     ImageView washAvatarImageView;
     @BindView(R.id.wash_name_text_view)
     TextView washNameTextView;
+    @BindView(R.id.show_wash_yard_recyclerView)
+    LinearLayout showWashYardRecyclerView;
+    @BindView(R.id.ll_wash_yard_recyclerView)
+    LinearLayout llWashYardRecyclerView;
 
     private boolean isDetailShow = false;
-    private boolean needToRefrashDetail  = false;
+    private boolean isListShow = true;
+    private boolean needToRefrashDetail = false;
 
     private IWXAPI api;
     private List<MyCouponListBean.DataBean> couponList = new ArrayList<>();
@@ -460,7 +460,7 @@ public class DriverMapActivity extends BaseGaodeActivity implements IDriverMapCo
                 || v.getId() == R.id.back_to_list_text_view) {
             if (isDetailShow) {
                 isDetailShow = false;
-                mRecyclerView.setVisibility(View.VISIBLE);
+                llWashYardRecyclerView.setVisibility(View.VISIBLE);
                 washCarServicePaymentView.setVisibility(View.GONE);
             }
         }
@@ -561,7 +561,7 @@ public class DriverMapActivity extends BaseGaodeActivity implements IDriverMapCo
 
         isDetailShow = true;
 
-        mRecyclerView.setVisibility(View.GONE);
+        llWashYardRecyclerView.setVisibility(View.GONE);
         washCarServicePaymentView.setVisibility(View.VISIBLE);
 
         washNameTextView.setText(dataBean.getName());
@@ -752,12 +752,26 @@ public class DriverMapActivity extends BaseGaodeActivity implements IDriverMapCo
             if (isDetailShow) {
                 isDetailShow = false;
                 mRecyclerView.setVisibility(View.VISIBLE);
-                washCarServicePaymentView.setVisibility(View.GONE);
+                llWashYardRecyclerView.setVisibility(View.GONE);
             } else {
                 this.finish();
             }
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    @OnClick(R.id.show_wash_yard_recyclerView)
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.show_wash_yard_recyclerView:
+                    if(isListShow)
+                        mRecyclerView.setVisibility(View.GONE);
+                    else
+                        mRecyclerView.setVisibility(View.VISIBLE);
+                    isListShow = !isListShow;
+                break;
+
+        }
     }
 }
