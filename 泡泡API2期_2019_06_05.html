@@ -375,6 +375,10 @@ pre code{
 
                             <ul class="nav list-group">
                                 <li>
+                                        <a href="#6e68dc6dcce1416aaad3fe3a2d9f5b2f">提交洗车场认证</a>
+                                    </li><li>
+                                        <a href="#fc0a7d92fd6b42b3aa470d2361fb179b">获取附近洗车场服务列表</a>
+                                    </li><li>
                                         <a href="#74ae1f15d8494b489a15332e3e48cc48">获取洗车场信息</a>
                                     </li>                                   
                             </ul>
@@ -424,6 +428,411 @@ pre code{
                 <h1>wash</h1>
                     
                     <div class="api-one">
+                            <h3 id="6e68dc6dcce1416aaad3fe3a2d9f5b2f">提交洗车场认证</h3>
+                            <p>
+                                <a target="_blank"
+                                   href="https://apizza.net/pro/#/project/3ba8dced80588c442a0f25c694c98560/browse?api=6e68dc6dcce1416aaad3fe3a2d9f5b2f"
+                                   class="label label-warning">在线测试</a>
+                                <a target="_blank"
+                                   href="https://apizza.net/pro/#/project/3ba8dced80588c442a0f25c694c98560/browse?api=6e68dc6dcce1416aaad3fe3a2d9f5b2f"
+                                   class="label label-warning">在线浏览</a>
+                            </p>
+                            <p>请求方式：POST</p>
+                            <p>
+                                请求地址：http://101.200.63.245:8080/wash/registerWash                            </p>
+
+                            
+                            
+
+                                                                <table class="table table-hover">
+                                            <colgroup>
+                                                <col class="col-xs-2">
+                                                <col class="col-xs-1">
+                                                <col class="col-xs-1">
+                                                <col class="col-xs-7">
+                                                <col class="col-xs-2">
+                                            </colgroup>
+                                            <thead>
+                                            <tr>
+                                                <th><span class="label label-success">Body参数名</span></th>
+                                                <th>类型</th>
+                                                <th>必需</th>
+                                                <th>描述</th>
+                                                <th>示例 e.g.</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                    <td>phone</td>
+                                                    <td>string</td>
+                                                    <td>
+                                                        是
+                                                                                                                </td>
+                                                    <td>手机号码</td>
+                                                    <td>13800138000</td>
+                                                </tr><tr>
+                                                    <td>name</td>
+                                                    <td>string</td>
+                                                    <td>
+                                                        是
+                                                                                                                </td>
+                                                    <td>洗车场名称</td>
+                                                    <td>啊啊洗车场</td>
+                                                </tr><tr>
+                                                    <td>address</td>
+                                                    <td>string</td>
+                                                    <td>
+                                                        是
+                                                                                                                </td>
+                                                    <td>地址</td>
+                                                    <td>深圳市</td>
+                                                </tr><tr>
+                                                    <td>coordX</td>
+                                                    <td>string</td>
+                                                    <td>
+                                                        是
+                                                                                                                </td>
+                                                    <td>X坐标</td>
+                                                    <td>22.000</td>
+                                                </tr><tr>
+                                                    <td>coordY</td>
+                                                    <td>string</td>
+                                                    <td>
+                                                        是
+                                                                                                                </td>
+                                                    <td>Y坐标</td>
+                                                    <td>144.000</td>
+                                                </tr><tr>
+                                                    <td>license</td>
+                                                    <td>file</td>
+                                                    <td>
+                                                        是
+                                                                                                                </td>
+                                                    <td>营业执照文件</td>
+                                                    <td></td>
+                                                </tr><tr>
+                                                    <td>washCard</td>
+                                                    <td>file</td>
+                                                    <td>
+                                                        是
+                                                                                                                </td>
+                                                    <td>洗车证</td>
+                                                    <td></td>
+                                                </tr><tr>
+                                                    <td>idCardPositive</td>
+                                                    <td>file</td>
+                                                    <td>
+                                                        是
+                                                                                                                </td>
+                                                    <td>身份证正面</td>
+                                                    <td></td>
+                                                </tr><tr>
+                                                    <td>idCardBack</td>
+                                                    <td>file</td>
+                                                    <td>
+                                                        是
+                                                                                                                </td>
+                                                    <td>身份证背面</td>
+                                                    <td></td>
+                                                </tr><tr>
+                                                    <td>province</td>
+                                                    <td>string</td>
+                                                    <td>
+                                                        是
+                                                                                                                </td>
+                                                    <td>省</td>
+                                                    <td>广东省</td>
+                                                </tr><tr>
+                                                    <td>city</td>
+                                                    <td>string</td>
+                                                    <td>
+                                                        是
+                                                                                                                </td>
+                                                    <td>市</td>
+                                                    <td>深圳市</td>
+                                                </tr><tr>
+                                                    <td>district</td>
+                                                    <td>string</td>
+                                                    <td>
+                                                        是
+                                                                                                                </td>
+                                                    <td>区</td>
+                                                    <td>南山区</td>
+                                                </tr><tr>
+                                                    <td>worktime</td>
+                                                    <td>string</td>
+                                                    <td>
+                                                        是
+                                                                                                                </td>
+                                                    <td>营业时间</td>
+                                                    <td>10:00-20:00</td>
+                                                </tr><tr>
+                                                    <td>phoneNum</td>
+                                                    <td>string</td>
+                                                    <td>
+                                                        是
+                                                                                                                </td>
+                                                    <td>联系电话</td>
+                                                    <td>13800138000</td>
+                                                </tr>                                            </tbody>
+                                        </table>
+                            
+                            <p>返回示例：</p>
+                                <div class="highlight">
+                            <pre>
+                                <code class="json hljs">{
+    "code": 200,
+    "data": {
+        "avatar": "http://101.200.63.245:8080/avatars/avatars/2018/07/15/c5fcaae570fa4114b809f2c66b5b510f.jpg?1531586659992",
+        "id": 100000020,
+        "nickName": "酷酷酷",
+        "regTime": 1531526400000,
+        "score": 0,
+        "token": "e79f31a6950444b1869a7f4cd247d783",
+        "type": 1,
+        "userPhone": "15814496601"
+    },
+    "msg": "请求成功"
+}</code>
+                            </pre>
+                                </div>
+                            <table class="table table-hover" style="margin-top: 7px;">
+                                    <colgroup>
+                                        <col class="col-xs-4">
+                                        <col class="col-xs-8">
+                                    </colgroup>
+                                    <thead>
+                                    <tr>
+                                        <th style="padding-left: 0px;"><span class="label label-success">参数名</span></th>
+                                        <th>描述</th>
+                                        <th>类型</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                            <td>avatar</td>
+                                            <td>头像</td>
+                                            <th>string</th>
+                                        </tr><tr>
+                                            <td>id</td>
+                                            <td>用户ID</td>
+                                            <th>string</th>
+                                        </tr><tr>
+                                            <td>nickName</td>
+                                            <td>昵称</td>
+                                            <th>string</th>
+                                        </tr><tr>
+                                            <td>regTime</td>
+                                            <td>注册时间</td>
+                                            <th>string</th>
+                                        </tr><tr>
+                                            <td>score</td>
+                                            <td>积分</td>
+                                            <th>string</th>
+                                        </tr><tr>
+                                            <td>token</td>
+                                            <td>用户token 鉴权头使用</td>
+                                            <th>string</th>
+                                        </tr><tr>
+                                            <td>type</td>
+                                            <td>类型 0车主 1洗车场</td>
+                                            <th>string</th>
+                                        </tr><tr>
+                                            <td>userPhone</td>
+                                            <td>手机号码</td>
+                                            <th>string</th>
+                                        </tr>                                    </tbody>
+                                </table>
+                        </div><div class="api-one">
+                            <h3 id="fc0a7d92fd6b42b3aa470d2361fb179b">获取附近洗车场服务列表</h3>
+                            <p>
+                                <a target="_blank"
+                                   href="https://apizza.net/pro/#/project/3ba8dced80588c442a0f25c694c98560/browse?api=fc0a7d92fd6b42b3aa470d2361fb179b"
+                                   class="label label-warning">在线测试</a>
+                                <a target="_blank"
+                                   href="https://apizza.net/pro/#/project/3ba8dced80588c442a0f25c694c98560/browse?api=fc0a7d92fd6b42b3aa470d2361fb179b"
+                                   class="label label-warning">在线浏览</a>
+                            </p>
+                            <p>请求方式：POST</p>
+                            <p>
+                                请求地址：http://101.200.63.245:8080/wash/getNearbyWashServiceList                            </p>
+
+                            
+                            
+
+                                                                <table class="table table-hover">
+                                            <colgroup>
+                                                <col class="col-xs-2">
+                                                <col class="col-xs-1">
+                                                <col class="col-xs-1">
+                                                <col class="col-xs-7">
+                                                <col class="col-xs-2">
+                                            </colgroup>
+                                            <thead>
+                                            <tr>
+                                                <th><span class="label label-success">Body参数名</span></th>
+                                                <th>类型</th>
+                                                <th>必需</th>
+                                                <th>描述</th>
+                                                <th>示例 e.g.</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                    <td>lng</td>
+                                                    <td>string</td>
+                                                    <td>
+                                                        是
+                                                                                                                </td>
+                                                    <td>经度</td>
+                                                    <td>114.0311</td>
+                                                </tr><tr>
+                                                    <td>lat</td>
+                                                    <td>string</td>
+                                                    <td>
+                                                        是
+                                                                                                                </td>
+                                                    <td>纬度</td>
+                                                    <td>22.3622</td>
+                                                </tr><tr>
+                                                    <td>count</td>
+                                                    <td>string</td>
+                                                    <td>
+                                                        是
+                                                                                                                </td>
+                                                    <td>个数</td>
+                                                    <td>4</td>
+                                                </tr><tr>
+                                                    <td>showAll</td>
+                                                    <td>string</td>
+                                                    <td>
+                                                        是
+                                                                                                                </td>
+                                                    <td>是否显示未营业的洗车场（0 - 否，1 - 是）</td>
+                                                    <td>0</td>
+                                                </tr><tr>
+                                                    <td>priceLimit</td>
+                                                    <td>string</td>
+                                                    <td>
+                                                        是
+                                                                                                                </td>
+                                                    <td>价格限制（传0不限制）</td>
+                                                    <td>5.0</td>
+                                                </tr><tr>
+                                                    <td>radius</td>
+                                                    <td>string</td>
+                                                    <td>
+                                                        是
+                                                                                                                </td>
+                                                    <td>距离限制(km)，<0不做距离限制</td>
+                                                    <td>-1</td>
+                                                </tr>                                            </tbody>
+                                        </table>
+                            
+                            <p>返回示例：</p>
+                                <div class="highlight">
+                            <pre>
+                                <code class="json hljs">{
+    "code": 200,
+    "data": [
+        {
+            "address": "洗车场的地址",
+            "businessStatus": 1,
+            "distance": 25,
+            "honor": 3,
+            "id": 6,
+            "image": "http://localhost:8080/avatars/2018/07/15/c5fcaae570fa4114b809f2c66b5b510f.jpg",
+            "lat": 22.38,
+            "lng": 114.05,
+            "name": "林的洗车场",
+            "price": 23.49,
+            "washCount": 0,
+            "washId": 4,
+            "facadeImg": "http://localhost:8080/avatars/2018/07/15/c5fcaae570fa4114b809f2c66b5b510f.jpg", 
+"worktime": "10:00-20:00", 
+"phoneNum": "13800138000" 
+        }
+    ],
+    "msg": "请求成功"
+}</code>
+                            </pre>
+                                </div>
+                            <table class="table table-hover" style="margin-top: 7px;">
+                                    <colgroup>
+                                        <col class="col-xs-4">
+                                        <col class="col-xs-8">
+                                    </colgroup>
+                                    <thead>
+                                    <tr>
+                                        <th style="padding-left: 0px;"><span class="label label-success">参数名</span></th>
+                                        <th>描述</th>
+                                        <th>类型</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                            <td>data.address</td>
+                                            <td>洗车场地址</td>
+                                            <th>string</th>
+                                        </tr><tr>
+                                            <td>data.businessStatus</td>
+                                            <td>营业状态</td>
+                                            <th>number</th>
+                                        </tr><tr>
+                                            <td>data.distance</td>
+                                            <td>距离</td>
+                                            <th>number</th>
+                                        </tr><tr>
+                                            <td>data.facadeImg</td>
+                                            <td>门面图片</td>
+                                            <th>string</th>
+                                        </tr><tr>
+                                            <td>data.worktime</td>
+                                            <td>营业时间</td>
+                                            <th>string</th>
+                                        </tr><tr>
+                                            <td>data.phoneNum</td>
+                                            <td>联系电话</td>
+                                            <th>string</th>
+                                        </tr><tr>
+                                            <td>data.washId</td>
+                                            <td>洗车场ID</td>
+                                            <th>number</th>
+                                        </tr><tr>
+                                            <td>data.washCount</td>
+                                            <td>洗车次数</td>
+                                            <th>number</th>
+                                        </tr><tr>
+                                            <td>data.price</td>
+                                            <td>价格</td>
+                                            <th>number</th>
+                                        </tr><tr>
+                                            <td>data.name</td>
+                                            <td>洗车场名称</td>
+                                            <th>string</th>
+                                        </tr><tr>
+                                            <td>data.lng</td>
+                                            <td>经度</td>
+                                            <th>number</th>
+                                        </tr><tr>
+                                            <td>data.lat</td>
+                                            <td>纬度</td>
+                                            <th>number</th>
+                                        </tr><tr>
+                                            <td>data.image</td>
+                                            <td>图片</td>
+                                            <th>string</th>
+                                        </tr><tr>
+                                            <td>data.id</td>
+                                            <td>服务ID</td>
+                                            <th>number</th>
+                                        </tr><tr>
+                                            <td>data.honor</td>
+                                            <td>荣誉</td>
+                                            <th>number</th>
+                                        </tr>                                    </tbody>
+                                </table>
+                        </div><div class="api-one">
                             <h3 id="74ae1f15d8494b489a15332e3e48cc48">获取洗车场信息</h3>
                             <p>
                                 <a target="_blank"
@@ -771,6 +1180,10 @@ pre code{
                                             <td>data.url</td>
                                             <td>跳转链接</td>
                                             <th>string</th>
+                                        </tr><tr>
+                                            <td>code</td>
+                                            <td>当CODE为70001时表示无广告</td>
+                                            <th>number</th>
                                         </tr>                                    </tbody>
                                 </table>
                         </div><div class="api-one">
