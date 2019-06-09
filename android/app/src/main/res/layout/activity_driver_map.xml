@@ -171,18 +171,26 @@
                     android:background="#f0f0f0"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                <include layout="@layout/view_wash_car_detail" />
+                <include
+                    android:id="@+id/detail_include" layout="@layout/view_wash_car_detail" />
 
                 <Button
                     android:id="@+id/pay_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="52dp"
-                    android:layout_margin="20dp"
+                    android:layout_width="64dp"
+                    android:layout_height="36dp"
                     android:background="@drawable/background_button_corner"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="16dp"
+                    android:layout_below="@id/detail_include"
+                    android:layout_marginTop="-52dp"
                     android:text="去支付"
                     android:textColor="#fff"
-                    android:textSize="20sp" />
+                    android:textSize="12sp" />
+                </RelativeLayout>
 
             </LinearLayout>
 

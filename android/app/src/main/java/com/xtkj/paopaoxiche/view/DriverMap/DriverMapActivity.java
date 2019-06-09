@@ -568,6 +568,7 @@ public class DriverMapActivity extends BaseGaodeActivity implements IDriverMapCo
         Glide.with(this).load(dataBean.getImage()).into(washAvatarImageView);
         carWashTimeTextView.setText(dataBean.getWorktime());
         carWashAddressTextView.setText(dataBean.getAddress());
+        carWashPhoneTextView.setText(dataBean.getPhoneNum());
         Glide.with(this).load(dataBean.getFacadeImg()).into(carWashMainImageView);
 
 //        RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())

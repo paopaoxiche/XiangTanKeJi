@@ -31,7 +31,7 @@ public class SkyconValues {
         homeIconMap.put("CLEAR_NIGHT", R.drawable.bg_goodnight);
         homeIconMap.put("PARTLY_CLOUDY_DAY", R.drawable.bg_cloudy);
         homeIconMap.put("PARTLY_CLOUDY_NIGHT", R.drawable.bg_cloudy);
-        homeIconMap.put("CLOUDY", R.drawable.bg_nothing);
+        homeIconMap.put("CLOUDY", R.drawable.bg_cloudy);
         homeIconMap.put("RAIN", R.drawable.bg_rainy);
         homeIconMap.put("SNOW", R.drawable.bg_snow);
         homeIconMap.put("WIND", R.drawable.bg_windy);

@@ -68,6 +68,7 @@ public class WashServicesBean {
         private double price;
         private int washCount;
         private int washId;
+        private String phoneNum;
 
         public int getBusinessStatus() {
             return businessStatus;
@@ -179,6 +180,14 @@ public class WashServicesBean {
 
         public void setFacadeImg(String facadeImg) {
             this.facadeImg = facadeImg;
+        }
+
+        public String getPhoneNum() {
+            return phoneNum;
+        }
+
+        public void setPhoneNum(String phoneNum) {
+            this.phoneNum = phoneNum;
         }
     }
 }

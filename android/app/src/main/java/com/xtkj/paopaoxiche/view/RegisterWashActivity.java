@@ -1,9 +1,6 @@
 package com.xtkj.paopaoxiche.view;
 
 import android.Manifest;
-import android.app.AlertDialog;
-import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -13,14 +10,12 @@ import android.os.Environment;
 import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.xtkj.paopaoxiche.R;
@@ -39,12 +34,10 @@ import com.xtkj.paopaoxiche.model.DriverHomeModel;
 import com.xtkj.paopaoxiche.service.WashService;
 import com.xtkj.paopaoxiche.utils.BitmapUtil;
 import com.xtkj.paopaoxiche.utils.UriUtils;
-import com.xtkj.paopaoxiche.widget.MarqueeTextView;
 import com.xtkj.paopaoxiche.widget.WashDatePickerDialog;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -105,6 +98,8 @@ public class RegisterWashActivity extends BaseGaodeActivity implements DriverHom
     WashTimeBean endTime = new WashTimeBean();
 
     int getAddressCount = 1;
+    @BindView(R.id.wash_phone_text_view)
+    TextView washPhoneTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -371,12 +366,15 @@ public class RegisterWashActivity extends BaseGaodeActivity implements DriverHom
                 RequestBody.create(MediaType.parse("multipart/form-data"), MyLocation.district);
         RequestBody washTimeBody =
                 RequestBody.create(MediaType.parse("multipart/form-data"), washTimeTextView.getText().toString());
+        RequestBody phoneNumBody =
+                RequestBody.create(MediaType.parse("multipart/form-data"), washPhoneTextView.getText().toString());
+
 
 
         RetrofitClient.newInstance(ApiField.BASEURL)
                 .create(WashService.class)
                 .certification(phoneBody, nameBody, addressBody, xBody, yBody, license, washCard, idCardPositive, idCardBack,
-                        provinceBody, cityBody, districtBody, washTimeBody)
+                        provinceBody, cityBody, districtBody, washTimeBody, phoneNumBody)
                 .enqueue(new Callback<NoDataBean>() {
                     @Override
                     public void onResponse(Call<NoDataBean> call, Response<NoDataBean> response) {

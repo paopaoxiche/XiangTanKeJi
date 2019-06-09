@@ -218,6 +218,7 @@ public class WashServiceActivity extends BaseActivity implements IWashServiceCon
     protected void initViews() {
         carWashTimeTextView.setText(dataBean.getWorktime());
         carWashAddressTextView.setText(dataBean.getAddress());
+        carWashPhoneTextView.setText(dataBean.getPhoneNum());
         Glide.with(this).load(dataBean.getFacadeImg()).into(carWashMainImageView);
     }
 
