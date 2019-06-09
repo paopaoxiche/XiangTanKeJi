@@ -40,6 +40,7 @@ import com.xtkj.paopaoxiche.view.DriverMain.Ad.AdActivity;
 import com.xtkj.paopaoxiche.view.DriverMain.HomeClass.HomeClassActivity;
 import com.xtkj.paopaoxiche.view.WeatherForecast.WeatherForecastActivity;
 import com.xtkj.paopaoxiche.view.WebView.WebViewActivity;
+import com.xtkj.paopaoxiche.view.view.ImageAdDialog;
 import com.xtkj.paopaoxiche.view.view.WashCarListDialog;
 import com.xtkj.paopaoxiche.widget.GlideImageLoader;
 import com.xtkj.paopaoxiche.widget.MarqueeTextView;
@@ -364,9 +365,9 @@ public class CarWashHomeFragment extends BaseFragmemt implements ICarWashContrac
                             @Override
                             public void OnBannerClick(int position) {
                                 if (position < dataBean.size() && !TextUtils.isEmpty(urls.get(position))) {
-                                    Intent intent = new Intent(CarWashHomeFragment.this.getContext(), WebViewActivity.class);
-                                    intent.putExtra(AppConstant.WEB_NTENT_URL, urls.get(position));
-                                    startActivity(intent);
+                                    new ImageAdDialog(getActivity(), true,
+                                            dataBean.get(position).getImg(),
+                                            dataBean.get(position).getUrl()).show();
                                 }
                             }
                         });

@@ -136,6 +136,11 @@ public class GuideActivity extends BaseActivity implements IGuideContract.IGuide
                     @Override
                     public void onResponse(Call<ADBean> call, Response<ADBean> response) {
                         if (response.body().getCode() != 200) {
+                            if (response.body().getCode() == 70001) {
+                                PreferUtils.getInstance().putString(AppConstant.GUIDE_AD_MD5, "");
+                                PreferUtils.getInstance().putString(AppConstant.GUIDE_AD_FILE_PATH, "");
+                                PreferUtils.getInstance().putString(AppConstant.GUIDE_AD_URL, "");
+                            }
                             return;
                         }
                         ADBean.DataBean dataBean = response.body().getData();

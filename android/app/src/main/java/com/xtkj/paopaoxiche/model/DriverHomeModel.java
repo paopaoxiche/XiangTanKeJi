@@ -111,8 +111,10 @@ public class DriverHomeModel {
                     @Override
                     public void onResponse(Call<WashServicesBean> call, Response<WashServicesBean> response) {
                         washServicesBean.setData(new ArrayList<>());
-                        for(int i = 0 ; i < response.body().getData().size() ; i ++){
-                            washServicesBean.getData().add(response.body().getData().get(i));
+                        if (response.body().getData() != null) {
+                            for (int i = 0; i < response.body().getData().size(); i++) {
+                                washServicesBean.getData().add(response.body().getData().get(i));
+                            }
                         }
                         for (DriverHomeListener driverHomeListener : driverHomeListenerList) {
                             driverHomeListener.getWashServicesSuccess(response.body());
