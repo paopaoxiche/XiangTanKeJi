@@ -22,6 +22,8 @@ import android.widget.Toast;
 import com.alipay.sdk.app.PayTask;
 import com.bingo.wxpay.Constants;
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.tencent.mm.opensdk.constants.ConstantsAPI;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
@@ -51,6 +53,7 @@ import com.xtkj.paopaoxiche.service.WashService;
 import com.xtkj.paopaoxiche.utils.DensityUtil;
 import com.xtkj.paopaoxiche.view.view.CommitEvaluationDialog;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -60,6 +63,8 @@ import java.util.Set;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import okhttp3.Request;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -242,7 +247,7 @@ public class WashServiceActivity extends BaseActivity implements IWashServiceCon
     @Override
     protected void initValues() {
 
-        getMyCoupons();
+//        getMyCoupons();
         api = WXAPIFactory.createWXAPI(this, Constants.APP_ID, true);
         api.registerApp(Constants.APP_ID);
         api.handleIntent(getIntent(), this);
@@ -258,12 +263,45 @@ public class WashServiceActivity extends BaseActivity implements IWashServiceCon
                 .enqueue(new Callback<SellingServicesBean>() {
                     @Override
                     public void onResponse(Call<SellingServicesBean> call, Response<SellingServicesBean> response) {
+
+
                         if (response.body() == null) return;
-                        ArrayList<SellingServicesBean.DataBean> dataBeans = (ArrayList<SellingServicesBean.DataBean>) response.body().getData();
-                        if (dataBeans == null) return;
-                        for (int i = 0; i < dataBeans.size(); i++) {
-                            buildServiceLayout(dataBeans.get(i), i);
-                        }
+                        ArrayList<SellingServicesBean.DataBean> arrayList = (ArrayList<SellingServicesBean.DataBean>) response.body().getData();
+                        if (arrayList == null) return;
+
+
+                        RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
+                                .create(UserService.class)
+                                .getMyCoupon()
+                                .enqueue(new Callback<MyCouponListBean>() {
+                                    @Override
+                                    public void onResponse(Call<MyCouponListBean> call, Response<MyCouponListBean> response) {
+                                        MyCouponListBean bean = response.body();
+                                        if (bean.getCode() != 200) {
+                                            Toast.makeText(BaseApplication.getContext(),
+                                                    "获取个人优惠劵数据失败！", Toast.LENGTH_LONG).show();
+                                        }
+
+                                        List<MyCouponListBean.DataBean> dataBeans = bean.getData();
+                                        if (dataBeans != null) {
+                                            couponList.addAll(dataBeans);
+                                        }
+
+                                        for (int i = 0; i < arrayList.size(); i++) {
+                                            buildServiceLayout(arrayList.get(i), i);
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<MyCouponListBean> call, Throwable t) {
+
+                                    }
+
+                                });
+
+
+
+
                     }
 
                     @Override
@@ -420,30 +458,14 @@ public class WashServiceActivity extends BaseActivity implements IWashServiceCon
     }
 
     private void getMyCoupons() {
-        RetrofitClient.newInstance(ApiField.BASEURL, Authentication.getAuthentication())
-                .create(UserService.class)
-                .getMyCoupon()
-                .enqueue(new Callback<MyCouponListBean>() {
-                    @Override
-                    public void onResponse(Call<MyCouponListBean> call, Response<MyCouponListBean> response) {
-                        MyCouponListBean bean = response.body();
-                        if (bean.getCode() != 200) {
-                            Toast.makeText(BaseApplication.getContext(),
-                                    "获取个人优惠劵数据失败！", Toast.LENGTH_LONG).show();
-                            return;
-                        }
 
-                        List<MyCouponListBean.DataBean> dataBeans = bean.getData();
-                        if (dataBeans != null) {
-                            couponList.addAll(dataBeans);
-                        }
-                    }
 
-                    @Override
-                    public void onFailure(Call<MyCouponListBean> call, Throwable t) {
 
-                    }
-                });
+
+
+
+
+
     }
 
     @Override
