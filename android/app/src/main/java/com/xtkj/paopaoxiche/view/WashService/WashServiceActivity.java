@@ -138,8 +138,12 @@ public class WashServiceActivity extends BaseActivity implements IWashServiceCon
         describe.setText(d.getDescribe());
         TextView old_price = linearLayout.findViewById(R.id.old_price);
 
+        TextView coupons = linearLayout.findViewById(R.id.coupons);
+        coupons.setVisibility(View.GONE);
+
         old_price.setText(String.format("￥%s", d.getPrice()));
         old_price.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+        old_price.setVisibility(View.GONE);
 
         TextView price = linearLayout.findViewById(R.id.price);
         price.setText(String.format("￥%s", d.getPrice()));
@@ -160,7 +164,10 @@ public class WashServiceActivity extends BaseActivity implements IWashServiceCon
                             }
                         }
                         if (max > 0) {
-                            price.setText(String.format("￥%s - ￥%s", d.getPrice(), String.valueOf(max)));
+                            coupons.setVisibility(View.VISIBLE);
+                            old_price.setVisibility(View.VISIBLE);
+                            coupons.setText(String.format("%s元优惠券", max));
+                            price.setText(String.format("券后价%s", String.valueOf(d.getPrice() - max)));
                         } else {
                             postWashServiceBean.setCouponId(0);
                         }
@@ -183,7 +190,17 @@ public class WashServiceActivity extends BaseActivity implements IWashServiceCon
         TextView shop_name = linearLayout.findViewById(R.id.shop_name);
         shop_name.setText(dataBean.getName());
 
+        TextView old_price = linearLayout.findViewById(R.id.old_price);
+
+        if(dataBean.getOriginPrice() > 0){
+            old_price.setText(String.format("￥%s", dataBean.getOriginPrice()));
+            old_price.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+        }else {
+            old_price.setVisibility(View.GONE);
+        }
+
         TextView price = linearLayout.findViewById(R.id.price);
+
         price.setText(String.format("￥%s", dataBean.getCurrentPrice()));
         CheckBox radio = linearLayout.findViewById(R.id.radio);
 

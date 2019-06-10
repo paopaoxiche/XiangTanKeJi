@@ -8,44 +8,63 @@
 
 
     <CheckBox
-        android:gravity="center_vertical"
+        android:layout_centerVertical="true"
         android:id="@+id/radio"
+        android:layout_alignParentStart="true"
         android:layout_width="44dp"
         android:layout_height="56dp" />
-    
+
     <ImageView
         android:src="@drawable/comm_demo"
         android:id="@+id/shop_img"
         android:layout_width="52dp"
         android:layout_height="52dp"
-        android:layout_centerVertical="true"
-        android:layout_toRightOf="@id/radio"/>
+        android:layout_marginStart="44dp"
+        android:layout_centerVertical="true"/>
 
-    <TextView
-        android:id="@+id/price"
-        android:textColor="@color/black"
+    <LinearLayout
+        android:id="@+id/ll_price"
+        android:orientation="vertical"
         android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:textSize="24sp"/>
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/old_price"
+            android:textColor="@color/yellow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"/>
+
+        <TextView
+            android:id="@+id/price"
+            android:textColor="#b7c4cb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"/>
+
+
+    </LinearLayout>
+
+
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="4dp"
-        android:layout_toRightOf="@id/shop_img"
-        android:layout_toLeftOf="@id/price">
-            <TextView
-                android:textSize="18sp"
-                android:text="商品名"
-                android:textColor="#333"
-                android:id="@+id/shop_name"
-                android:layout_width="match_parent"
-                android:gravity="center_vertical"
-                android:layout_height="0dp"
-                android:layout_weight="1"/>
+        android:layout_toEndOf="@id/shop_img"
+        android:layout_toStartOf="@id/ll_price">
+        <TextView
+            android:textSize="18sp"
+            android:text="商品名"
+            android:textColor="#333"
+            android:id="@+id/shop_name"
+            android:layout_width="match_parent"
+            android:gravity="center_vertical"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
     </LinearLayout>
 
 </RelativeLayout>
