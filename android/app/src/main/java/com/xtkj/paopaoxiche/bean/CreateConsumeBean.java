@@ -49,6 +49,15 @@ public class CreateConsumeBean {
         private String aliPay;
         private WxPayBean wxPay;
         private int payType;
+        private int consumeId;
+
+        public int getConsumeId() {
+            return consumeId;
+        }
+
+        public void setConsumeId(int consumeId) {
+            this.consumeId = consumeId;
+        }
 
         public String getAliPay() {
             return aliPay;
