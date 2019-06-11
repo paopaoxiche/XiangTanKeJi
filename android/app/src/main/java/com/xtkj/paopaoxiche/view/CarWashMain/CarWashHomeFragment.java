@@ -183,7 +183,7 @@ public class CarWashHomeFragment extends BaseFragmemt implements ICarWashContrac
 //        }, 0, 10000);
 
         ArrayList<String> arrayList = DriverHomeModel.getInstance().getAdStrings();
-        adText.setText(arrayList.get(arrayList.size() - 1));
+        adText.setText(arrayList.get(0));
     }
 
     @Override

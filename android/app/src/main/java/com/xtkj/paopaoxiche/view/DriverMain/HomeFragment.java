@@ -291,7 +291,7 @@ public class HomeFragment extends BaseFragmemt implements IDriverContract.IHomeV
 //        }, 0, 10000);
 
         ArrayList<String> arrayList = DriverHomeModel.getInstance().getAdStrings();
-        adText.setText(arrayList.get(arrayList.size() - 1));
+        adText.setText(arrayList.get(0));
     }
 
     @Override
