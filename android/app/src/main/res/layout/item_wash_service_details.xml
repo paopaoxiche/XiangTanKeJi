@@ -45,25 +45,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <com.xtkj.paopaoxiche.widget.MarqueeTextView
-                    android:ellipsize="marquee"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true"
-                    android:marqueeRepeatLimit="marquee_forever"
-                    android:singleLine="true"
-                    android:layout_marginLeft="4dp"
-                    android:id="@+id/describe"
-                    android:textColor="#b7c4cb"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content" />
-
 
                 <LinearLayout
                     android:layout_gravity="center"
                     android:orientation="vertical"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
                     <TextView
@@ -92,6 +78,20 @@
                     </LinearLayout>
 
                 </LinearLayout>
+
+                <com.xtkj.paopaoxiche.widget.MarqueeTextView
+                    android:layout_marginStart="8dp"
+                    android:ellipsize="marquee"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:singleLine="true"
+                    android:layout_marginLeft="4dp"
+                    android:id="@+id/describe"
+                    android:textColor="#b7c4cb"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content" />
             </LinearLayout>
 
 
