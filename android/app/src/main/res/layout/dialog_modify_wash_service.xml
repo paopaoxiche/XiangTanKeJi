@@ -29,17 +29,7 @@
             android:textColor="@color/black"
             android:textSize="24sp"/>
 
-        <Button
-            android:id="@+id/complete_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="8dp"
-            android:background="@android:color/transparent"
-            android:text="完成"
-            android:textColor="@color/orange"
-            android:textSize="18dp" />
+
 
     </RelativeLayout>
 
@@ -140,6 +130,7 @@
             android:textSize="16sp"/>
 
         <RadioGroup
+            android:visibility="gone"
             android:layout_marginRight="24dp"
             android:layout_marginLeft="24dp"
             android:id="@+id/car_model_radio_group"
@@ -179,12 +170,21 @@
                 />
         </RadioGroup>
 
+        <Button
+            android:layout_marginTop="20dp"
+            android:id="@+id/complete_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#f0f0f0"
+            android:text="完成"
+            android:textColor="@color/orange"
+            android:textSize="18dp" />
+
         <LinearLayout
+            android:layout_marginTop="10dp"
             android:id="@+id/auto_wash_linear_layout"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="20dp">
-
+            android:layout_height="50dp">
             <Button
                 android:id="@+id/auto_wash_image_button"
                 android:layout_width="match_parent"

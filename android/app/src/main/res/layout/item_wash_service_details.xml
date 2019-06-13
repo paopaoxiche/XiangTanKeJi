@@ -29,13 +29,7 @@
                 android:id="@+id/service_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-            <TextView
-                android:layout_marginLeft="4dp"
-                android:id="@+id/describe"
-                android:textColor="#b7c4cb"
-                android:textSize="15dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+
 
         </LinearLayout>
 
@@ -43,36 +37,63 @@
             android:layout_marginTop="9dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
+
             <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/old_price"
+                <com.xtkj.paopaoxiche.widget.MarqueeTextView
+                    android:ellipsize="marquee"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:singleLine="true"
+                    android:layout_marginLeft="4dp"
+                    android:id="@+id/describe"
                     android:textColor="#b7c4cb"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content" />
+
+
                 <LinearLayout
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:orientation="horizontal"
-                    android:layout_width="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content">
+
                     <TextView
-                        android:id="@+id/price"
+                        android:layout_marginBottom="8dp"
+                        android:id="@+id/old_price"
                         android:textColor="#b7c4cb"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
-                    <TextView
-                        android:layout_marginStart="12dp"
-                        android:id="@+id/coupons"
-                        android:textColor="@color/red"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
+                    <LinearLayout
 
+                        android:layout_marginBottom="8dp"
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/price"
+                            android:textColor="#b7c4cb"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:layout_marginStart="12dp"
+                            android:id="@+id/coupons"
+                            android:textColor="@color/red"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+
+                </LinearLayout>
             </LinearLayout>
+
 
 
             <TextView

@@ -180,6 +180,8 @@ public class WashServiceActivity extends BaseActivity implements IWashServiceCon
                         }
                         continue;
                     }
+                    coupons.setVisibility(View.GONE);
+                    old_price.setVisibility(View.GONE);
                     RadioButton r = serviceItems.getChildAt(j).findViewById(R.id.radio);
                     r.setChecked(false);
                 }
