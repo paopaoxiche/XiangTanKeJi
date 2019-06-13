@@ -80,7 +80,7 @@
                 </LinearLayout>
 
                 <com.xtkj.paopaoxiche.widget.MarqueeTextView
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="25dp"
                     android:ellipsize="marquee"
                     android:focusable="true"
                     android:focusableInTouchMode="true"
